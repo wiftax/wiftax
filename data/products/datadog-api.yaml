@@ -1,0 +1,152 @@
+id: datadog-api
+vendor: Datadog
+product: API (API keys + application keys)
+website: https://www.datadoghq.com
+docs: https://docs.datadoghq.com/account_management/api-app-keys/
+category: observability
+status: listed
+summary: >-
+  API and application keys never expire, but Datadog now lets an AWS-identified workload skip
+  them entirely (Terraform provider for everyone, the Agent on Enterprise). Into your clouds it is
+  keyless almost everywhere; AWS China and GovCloud-on-a-commercial-site still want access keys.
+
+surfaces:
+  inbound:
+    grade: B
+    mechanism: >-
+      Workload Identity Federation maps an AWS identity (proved via a signed STS GetCallerIdentity
+      request) to a Datadog service account and issues a temporary JWT; every other client uses a
+      static API key plus a static application key.
+    issuers: ["AWS IAM (STS GetCallerIdentity)"]
+    evidence:
+      - url: https://docs.datadoghq.com/account_management/workload_identity_federation/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Workload Identity Federation lets you authenticate the Datadog Terraform provider and the Datadog Agent using cloud credentials instead of static API and application keys."
+      - url: https://docs.datadoghq.com/account_management/workload_identity_federation/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "AWS is the only supported cloud provider."
+      - url: https://docs.datadoghq.com/account_management/workload_identity_federation/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "If validation succeeds, Datadog issues a temporary JWT token for API access."
+      - url: https://docs.datadoghq.com/account_management/api-app-keys/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Application keys, in conjunction with your organization's API key, give users access to Datadog's programmatic API."
+      - url: https://docs.datadoghq.com/developers/integrations/oauth_for_integrations/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "OAuth is available only to approved Technology Partners developing official Datadog integrations."
+    notes: >-
+      WIF is documented for exactly two clients: the Terraform provider ("Available for all
+      customers" on commercial and government sites) and the Agent ("Available for Enterprise plans
+      only", not on government sites). The token-exchange endpoint is not documented for arbitrary
+      clients, so a custom workload cannot yet obviously use it; if that is what you need, you are
+      back on static keys. Custom OIDC issuers, GitHub Actions, GCP and Azure identities are not
+      accepted. OAuth2 exists but is partner-only ("Standalone OAuth clients are not supported") and
+      bootstraps from a client secret, so it does not raise the grade.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cross-account IAM role with External ID (AWS commercial), service account impersonation
+      (GCP), and a federated credential / OIDC workload identity on an app registration or the
+      Azure Native managed identity (Azure); AWS China and GovCloud-on-commercial still require
+      static access keys and Azure still offers a client-secret path.
+    evidence:
+      - url: https://docs.datadoghq.com/integrations/guide/aws-manual-setup/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account."
+      - url: https://docs.datadoghq.com/integrations/guide/aws-manual-setup/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Access keys authentication is supported only for AWS accounts in the aws-us-gov (GovCloud) and aws-cn (China) partitions."
+      - url: https://docs.datadoghq.com/integrations/amazon_web_services/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Access keys are required for AWS China* accounts and for AWS GovCloud accounts on a Datadog commercial site."
+      - url: https://docs.datadoghq.com/integrations/google_cloud_platform/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Assign the role of Service Account Token Creator"
+      - url: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Datadog and Azure establish a trusted identity relationship using an Azure federated credential and OpenID Connect (OIDC) workload identity federation."
+      - url: https://docs.datadoghq.com/integrations/guide/azure-manual-setup/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Datadog stores and authenticates with a client secret from your app registration."
+      - url: https://docs.datadoghq.com/integrations/guide/azure-native-manual-setup/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: 'identity { type = "SystemAssigned" }'
+    notes: >-
+      Keyless on AWS commercial, GCP (impersonation; the GCP page no longer mentions JSON keys)
+      and Azure (Datadog's "Secretless Auth" federated credential is the recommended path, client
+      secret is optional). Graded B rather than A only because the AWS China and
+      GovCloud-on-commercial-site cases still require a static access key. A strict reader may
+      call that a partition edge case; the rubric says at least one integration wanting a static
+      key is a B. Non-cloud SaaS integrations (Slack, GitHub, etc.) were not assessed.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.datadoghq.com/account_management/api-app-keys/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Because API keys and application keys are long-lived and have no built-in expiration, store them in a secrets manager, such as AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault, instead of in source code or environment files."
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.datadoghq.com/api/latest/key-management/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Manage your Datadog API and application keys. You need an API key and an application key for a user with the required permissions to interact with these endpoints."
+    notes: Create, edit, and delete endpoints exist for both API keys and application keys.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.datadoghq.com/account_management/api-app-keys/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "You can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data."
+      - url: https://docs.datadoghq.com/api/latest/scopes/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Scoped application keys → Can be assigned any Datadog permission."
+    notes: Application keys can be scoped; API keys (intake) cannot be scoped at all.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.datadoghq.com/account_management/api-app-keys/
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "The Last used timestamp is visible to all customers. Audit Trail extends how far back this information is available."
+      - url: https://raw.githubusercontent.com/DataDog/datadog-api-client-python/master/.generator/schemas/v2/openapi.yaml
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "last_used_at: description: Last usage timestamp of the application key."
+    notes: >-
+      Application keys expose last_used_at in the API and UI. The public OpenAPI spec shows no
+      last-used field on API keys, so dead intake keys are harder to find.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Datadog Application Key"
+    notes: >-
+      Datadog is a GitHub partner for Application Keys, Service Account Tokens and Personal Access
+      Tokens. The plain "Datadog API Key" pattern is a non-partner (user) pattern only, so a leaked
+      API key is detected but not reported to Datadog for automatic revocation.
+
+notes: >-
+  Datadog also issues Personal Access Tokens and service-account tokens; the OpenAPI spec shows
+  those carry an expiration date and last_used_at, which is better hygiene than the API/app keys
+  most integrations still require. Grade only moves if the WIF token exchange becomes usable by
+  any client or accepts non-AWS issuers.

@@ -1,0 +1,168 @@
+id: google-cloud-iam
+vendor: Google Cloud
+product: IAM / Workload Identity Federation
+website: https://cloud.google.com/iam
+docs: https://docs.cloud.google.com/iam/docs/workload-identity-federation
+category: cloud
+status: listed
+summary: >-
+  Workload identity pools take tokens from any OIDC or SAML issuer and CEL conditions decide who gets in,
+  and every service account can mint a Google-signed ID token from the metadata server. Service account
+  JSON keys never expire by default, but an org policy can force them to, and Google disables the ones it
+  finds on GitHub.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Workload identity pool with an OIDC (or SAML 2.0) provider for any issuer URL; attribute mappings
+      set google.subject from the token and CEL attribute conditions constrain issuer, subject, audience
+      and any other claim before the Security Token Service issues a short-lived federated token.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Using Workload Identity Federation, you can provide on-premises or multicloud workloads with access to Google Cloud resources by using federated identities instead of a service account key."
+      - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "any identity provider (IdP) that supports OpenID Connect (OIDC) or Security Assertion Markup Language (SAML) V2.0."
+      - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "If the attribute condition evaluates to true for a given credential, the credential is accepted. Otherwise, the credential is rejected."
+      - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-providers
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "You must map one of these claims to google.subject to uniquely identify the user."
+      - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-providers
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "In Issuer URL, enter the issuer URL of your IdP. The URL must start with https://"
+    notes: >-
+      Any https issuer with OIDC discovery works. By default the token's aud must equal the provider's
+      full resource name (https://iam.googleapis.com/projects/.../providers/...), or you list allowed
+      audiences explicitly. Attribute mappings are CEL expressions (for example google.subject=assertion.sub)
+      and attribute conditions are CEL predicates over any claim, so issuer, subject and audience
+      constraints are all expressible. AWS and Azure workloads get dedicated provider types (AWS via a
+      signed GetCallerIdentity request, Azure via managed-identity access tokens). The federated token can
+      be used directly with resources that support principal:// identifiers or exchanged for a service
+      account access token via impersonation. Ambient identity inside Google Cloud (metadata server on
+      GCE, GKE Workload Identity, Cloud Run) is table stakes and does not earn the A on its own. The IAM
+      quotas page lists no cap on workload identity pools or providers per pool, only read/write request
+      rates; we did not find a hard object limit to record.
+  outbound:
+    grade: A
+    mechanism: >-
+      Any workload with an attached service account requests a Google-signed OIDC ID token for an
+      arbitrary audience from the metadata server identity endpoint, or via the IAM Credentials API
+      generateIdToken; tokens live at most one hour and verify against Google's public JWKS.
+    evidence:
+      - url: https://docs.cloud.google.com/docs/authentication/get-id-token
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "To retrieve an ID token from the metadata server, you query the identity endpoint for the service account"
+      - url: https://docs.cloud.google.com/iam/docs/create-short-lived-credentials-direct
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "OIDC ID tokens are valid for 1 hour (3,600 seconds)."
+      - url: https://docs.cloud.google.com/docs/authentication/token-types
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "short-lived and expire after at most one hour"
+      - url: https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "For Google Cloud, the issuer is https://accounts.google.com."
+    notes: >-
+      The metadata identity endpoint takes an audience query parameter, so the token can be aimed at any
+      relying party (AWS IAM OIDC provider, Entra federated credential, Vault, SaaS). The issuer is
+      https://accounts.google.com and the subject is the service account's unique ID, which is what Entra's
+      own docs tell you to put in the federated credential. generateIdToken lets a workload mint a token as
+      an impersonated service account without holding its key. No static credential is involved on any
+      path. Google Cloud to Google Cloud cross-project access uses IAM role grants on the service account
+      directly and needs no token exchange at all.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://docs.cloud.google.com/iam/docs/keys-create-delete
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "By default, service account keys never expire."
+      - url: https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "specify the number of hours for which a newly created key is valid. After this amount of time, the service account key expires, and you can no longer use it."
+      - url: https://docs.cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "By default, service account keys that you create and download from IAM don't have an expiry time and stay valid until you delete them."
+    notes: >-
+      The default is never, which is bad, but the org policy constraint iam.serviceAccountKeyExpiryHours
+      (1 hour to 90 days) forces an expiry on every new user-managed key in scope, and
+      iam.managed.disableServiceAccountKeyCreation can ban new keys outright. Enforceable by policy, so it
+      passes.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.cloud.google.com/iam/docs/keys-create-delete
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "A service account can have up to 10 keys."
+    notes: >-
+      gcloud iam service-accounts keys create / delete / disable map to the REST
+      projects.serviceAccounts.keys.create, delete and disable methods, so overlap-and-cut-over rotation is
+      scriptable without a browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.cloud.google.com/iam/docs/overview
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "To give the principal permission to access the resource, you grant them a role on the resource."
+      - url: https://docs.cloud.google.com/iam/docs/overview
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Principal types that represent workloads include service accounts and federated identities in a workload identity pool."
+    notes: >-
+      A key carries exactly its service account's roles, and those roles are granted per resource
+      (organization, folder, project or individual resource) with optional IAM conditions. Same
+      reasoning as AWS: the key is bound to a purpose-built machine principal, not a human's permissions.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.cloud.google.com/policy-intelligence/docs/activity-analyzer-service-account-authentication
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "The results might not include very recent authentication events. Check the observationPeriod to see the exact date range used during the analysis."
+      - url: https://docs.cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "By monitoring the Key Authentication Events metric, you can find out when a service account key was last used and how often it was used to authenticate."
+    notes: >-
+      Policy Analyzer's serviceAccountKeyLastAuthentication activity type returns a last-authenticated
+      timestamp per key (day granularity, with some lag; keys never used are simply absent), and the Key
+      Authentication Events Cloud Monitoring metric gives the time series.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-09-16
+        checked_by: tehreet
+      - url: https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "If Google Cloud detects an exposed key, it will automatically disable the key. It also creates a Cloud Audit Logs event and sends a notification about the exposed key to project owners"
+    notes: >-
+      GitHub lists Google Cloud Service Account Credentials as a partner pattern with push protection and
+      validity checks. On Google's side the org policy constraint iam.serviceAccountKeyExposureResponse
+      set to DISABLE_KEY makes exposed keys stop working automatically; the alternative WAIT_FOR_ABUSE
+      only acts once the key is misused. Set the constraint; do not rely on the default.
+
+notes: >-
+  Graded on machine access to Google Cloud APIs through IAM. Google API keys and OAuth client secrets for
+  Google Workspace or consumer Google APIs are different credentials and are not graded here. Google's
+  documentation moved from cloud.google.com to docs.cloud.google.com in 2026; the old URLs redirect.

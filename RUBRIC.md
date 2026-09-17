@@ -71,7 +71,7 @@ vendor stuck at D or F still has something to fix this quarter.
 |---|---|
 | `expiry` | Keys can be given an expiry, **and** the default or an org policy can enforce one. A field that defaults to "never" and cannot be forced counts as a fail. |
 | `rotation_api` | A key can be created and revoked through the API, so rotation can be automated without a browser. |
-| `scoping` | A key can be limited to a subset of permissions or resources, not just "everything the owner can do". |
+| `scoping` | A key can be limited to a subset of permissions or resources, not just "everything the owner can do". A purpose-built machine principal with its own least-privilege policy (IAM user, service account, app registration) counts; a key that inherits a human's full permissions does not. |
 | `last_used` | The vendor shows when a key was last used, so dead keys can be found and killed. |
 | `leak_revocation` | The vendor participates in a secret-scanning partner program (GitHub's, at minimum) so a key leaked to a public repo is revoked automatically. |
 
