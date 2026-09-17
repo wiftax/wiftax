@@ -1,0 +1,43 @@
+# Copy to data/products/<id>.yaml. Read RUBRIC.md first. Every grade needs a receipt.
+id: vendor-product
+vendor: Vendor
+product: Product
+website: https://example.com
+docs: https://docs.example.com/auth
+category: saas            # cloud | saas | devtools | data | security | observability | comms | identity | other
+status: listed            # listed | graduated | disputed
+summary: >-
+  One or two sentences a buyer can read in five seconds.
+
+surfaces:
+  inbound:                # how my workload authenticates to the product
+    grade: F              # A | B | C | D | F
+    mechanism: Static API key created in the web console.
+    issuers: []           # grade B only: the fixed allowlist. grade A: ["any"]
+    # tier_gated: Enterprise
+    evidence:
+      - url: https://docs.example.com/auth/api-keys
+        checked_on: 2026-09-16
+        checked_by: your-github-handle
+        quote: "API keys do not expire."
+  outbound:               # how the product reaches into my cloud / repos / SaaS
+    grade: N/A            # A | B | C | D | F | N/A
+    mechanism: Product never needs access to customer infrastructure.
+    evidence:
+      - url: https://docs.example.com/integrations
+        checked_on: 2026-09-16
+
+hygiene:                  # for any long-lived credential the product still issues. pass: null = no static cred exists
+  expiry:          { pass: false, evidence: [{ url: https://docs.example.com/auth/api-keys, checked_on: 2026-09-16 }] }
+  rotation_api:    { pass: false, evidence: [{ url: https://docs.example.com/auth/api-keys, checked_on: 2026-09-16 }] }
+  scoping:         { pass: false, evidence: [{ url: https://docs.example.com/auth/api-keys, checked_on: 2026-09-16 }] }
+  last_used:       { pass: false, evidence: [{ url: https://docs.example.com/auth/api-keys, checked_on: 2026-09-16 }] }
+  leak_revocation: { pass: false, evidence: [{ url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns, checked_on: 2026-09-16 }] }
+
+# vendor_statement:
+#   url: https://community.example.com/t/oidc-support/123
+#   date: 2025-03-01
+#   quote: "We have no plans to support OIDC at this time."
+
+notes: >-
+  Anything that does not fit above.

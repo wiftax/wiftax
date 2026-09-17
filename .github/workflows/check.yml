@@ -1,0 +1,14 @@
+name: check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run render && git diff --exit-code SCOREBOARD.md || (echo "SCOREBOARD.md is out of date: run npm run render" && exit 1)
