@@ -11,4 +11,7 @@ jobs:
         with: { node-version: 22 }
       - run: npm ci
       - run: npm run validate
-      - run: npm run render && git diff --exit-code SCOREBOARD.md || (echo "SCOREBOARD.md is out of date: run npm run render" && exit 1)
+      - name: scoreboard is current
+        run: |
+          npm run render
+          git diff --exit-code SCOREBOARD.md || { echo "SCOREBOARD.md is out of date. Run npm run render and commit."; exit 1; }
