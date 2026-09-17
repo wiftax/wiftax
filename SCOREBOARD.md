@@ -6,7 +6,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 
 | Grade | Vendor | Product | Inbound | Outbound | Hygiene | Status | Checked |
 |---|---|---|---|---|---|---|---|
-| **💀 F** | CoreWeave | [Control-plane API (api.coreweave.com, Terraform provider, kubeconfigs)](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-09-16 |
+| **💀 F** | CoreWeave | [Control-plane API (api.coreweave.com, Terraform provider, kubeconfigs)](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-09-17 |
 | **🔴 D** | Cloudflare | [API / API tokens](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
 | **🔴 D** | Twilio | [REST API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-09-16 |
 | **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-09-17 |
