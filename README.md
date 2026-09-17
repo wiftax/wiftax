@@ -17,6 +17,10 @@ See [SCOREBOARD.md](SCOREBOARD.md) for the current list.
 
 Vendors: if you fixed it, open a PR setting `status: graduated`. You get a permanent gold star.
 
+## Licenses
+
+Code: Apache-2.0 (`LICENSE`). Data in `data/`: CC BY 4.0 (`LICENSE-DATA`). Reuse the grades, credit wif.tax.
+
 ## Layout
 
 ```
