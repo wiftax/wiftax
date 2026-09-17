@@ -1,0 +1,217 @@
+{
+  "id": "aws-iam",
+  "vendor": "Amazon Web Services",
+  "product": "IAM / STS",
+  "website": "https://aws.amazon.com/iam/",
+  "docs": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html",
+  "category": "cloud",
+  "status": "listed",
+  "summary": "Register any OIDC issuer as an IAM identity provider and AssumeRoleWithWebIdentity trades its token for an hour of credentials with no key on disk; since outbound identity federation shipped, your roles can mint JWTs for everyone else too. IAM user access keys still never expire, so try not to make any.",
+  "surfaces": {
+    "inbound": {
+      "grade": "A",
+      "mechanism": "IAM OIDC identity provider (any issuer with an OIDC discovery document and JWKS) plus sts:AssumeRoleWithWebIdentity; the role trust policy pins issuer, audience (aud/azp) and subject with <issuer>:aud and <issuer>:sub condition keys.",
+      "issuers": [
+        "any"
+      ],
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "IAM OIDC identity providers are entities in IAM that describe an external identity provider (IdP) service that supports the OpenID Connect (OIDC) standard, such as Google or Salesforce. You use an IAM OIDC identity provider when you want to establish trust between an OIDC-compatible IdP and your AWS account."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "You can use AWS OIDC condition context keys to write policies that limit the access of federated principals to resources that are associated with a specific provider, app, or user. These keys are typically used in the trust policy for a role."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Calling AssumeRoleWithWebIdentity does not require the use of AWS security credentials. Therefore, you can distribute an application (for example, on mobile devices) that requests temporary security credentials without including long-term AWS credentials in the application."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "OpenId connect providers per account | 100 | 700"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "An IAM OIDC identity provider must have at least one and can have a maximum of 100 audiences."
+        }
+      ],
+      "notes": "Bring-your-own issuer: the provider URL must be https with a /.well-known/openid-configuration document exposing issuer and jwks_uri; tokens must be signed RS256/384/512 or ES256/384/512, and a JWKS may hold at most 100 RSA and 100 EC keys. Trust is constrained per role with <issuer>:aud and <issuer>:sub condition keys. Limits: 100 OIDC providers per account by default (raisable to 700), 100 audiences and 5 thumbprints per provider, each provider URL unique per account, and the provider must live in the same account as the role that trusts it. Role sessions run 15 minutes to 12 hours. Ambient identity inside AWS (EC2 instance roles, ECS task roles, Lambda execution roles, EKS Pod Identity) is table stakes and does not earn the A on its own; the A is for workloads anywhere. IAM Roles Anywhere covers the X.509 case (your own CA as a trust anchor) for workloads with certificates but no OIDC issuer."
+    },
+    "outbound": {
+      "grade": "A",
+      "mechanism": "IAM outbound identity federation: any IAM principal with sts:GetWebIdentityToken permission gets a short-lived (60-3600 s) STS-signed JWT with a chosen audience, verifiable at an account-specific OIDC issuer URL with discovery and JWKS endpoints.",
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "IAM outbound identity federation enables your AWS workloads to securely access external services without storing long-term credentials. Your AWS workloads can request short-lived JSON Web Tokens (JWTs) from AWS Security Token Service (AWS STS) by calling the GetWebIdentityToken API."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetWebIdentityToken.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Returns a signed JSON Web Token (JWT) that represents the calling AWS identity. The returned JWT can be used to authenticate with external services that support OIDC discovery. The token is signed by AWS STS and can be publicly verified using the verification keys published at the issuer's JWKS endpoint."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound_getting_started.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "You must enable outbound identity federation before you can request tokens. You can enable the feature using the AWS Management Console or programmatically using the EnableOutboundWebIdentityFederation API."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound_token_claims.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "The ARN of the IAM principal that requested the token."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Workloads running in Amazon Web Services (AWS). First, configure a trust relationship between your user-assigned managed identity or app in Microsoft Entra ID and your AWS account using IAM Outbound Identity Federation."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Your cluster has an OpenID Connect (OIDC) issuer URL associated with it."
+        },
+        {
+          "url": "https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Create a JSON document that contains the information that you would normally include in a request to the AWS GetCallerIdentity() endpoint, including a valid request signature."
+        }
+      ],
+      "notes": "Until recently AWS had no general way for a role to prove itself to a third party with an OIDC JWT; only EKS pods (cluster OIDC issuer) had one, and Vault, GCP and others worked around it by accepting a SigV4-signed sts:GetCallerIdentity request. IAM outbound identity federation changes that: it is off by default and must be enabled per account, GetWebIdentityToken is only served by regional STS endpoints (not the global one), tokens last 60-3600 s (default 300), signing is ES384 or RS256, sub is the principal ARN, and the issuer URL is per account, so a relying party trusts accounts one at a time. IAM policy conditions (sts:IdentityTokenAudience, sts:DurationSeconds) let you constrain what a principal may mint. Microsoft's own Entra docs list this as a supported federation source. Cross-account IAM roles with an external ID remain the keyless path for AWS-to-AWS. We could not find a stated principal-type restriction in the docs; the examples use roles. If it turns out IAM users cannot call it, that does not change the grade because users should not exist for workloads anyway."
+    }
+  },
+  "hygiene": {
+    "expiry": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/securing_access-keys.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Long-term access keys, such as those associated with IAM users and the root user, remain valid until you manually revoke them."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-keys_inline-policy.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "In this situation you can either create a time-bound policy that expires the credentials after the specified time or, if you are running a workload from a secure network, you can use an IP restriction policy."
+        }
+      ],
+      "notes": "Access keys have no expiry field at all. AWS's documented workaround is a hand-written Deny statement with a DateGreaterThan condition on the IAM user, which is a policy you must remember to attach, not a key property, and nothing at the org level forces it. Access Analyzer unused-access findings and the credential report tell you a key is old; they do not make it stop working."
+    },
+    "rotation_api": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is Active."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Deletes the access key pair associated with the specified IAM user."
+        }
+      ],
+      "notes": "Two keys per user, so you can create the new one before deleting the old one; UpdateAccessKey can deactivate without deleting."
+    },
+    "scoping": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/securing_access-keys.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "If you must create access keys for programmatic access to AWS, create them for IAM users, granting the users only the permissions they require."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-keys_inline-policy.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "IAM users with access keys should be assigned least privilege access and have multi-factor authentication (MFA) enabled."
+        }
+      ],
+      "notes": "A key cannot be scoped narrower than its IAM user, but the user is a purpose-built machine identity whose policies can be limited to specific actions, resources, source IPs and time windows. We count that as scoping; it is not a personal token that inherits a human's permissions."
+    },
+    "last_used": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccessKeyLastUsed.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Retrieves information about when the specified access key was last used. The information includes the date and time of last use, along with the AWS service and Region that were specified in the last request made with that key."
+        },
+        {
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "When an access key is used more than once in a 15-minute span, only the first use is recorded in this field. Applies to both account root user and IAM users."
+        }
+      ],
+      "notes": "Per-key last-used date, service and region via API, console and the account credential report; Access Analyzer unused-access analyzers add findings for a fee."
+    },
+    "leak_revocation": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        },
+        {
+          "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSCompromisedKeyQuarantineV3.html",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Denies access to certain actions, applied by AWS in the event that an IAM user's credentials have been compromised or exposed publicly. The policy aims to limit the potential damage that may be caused by fraud-related activity leading to unauthorized charges, while not impacting the existing resources."
+        }
+      ],
+      "notes": "GitHub's pattern list marks Amazon AWS Access Key ID as a partner pattern with push protection and validity checks. AWS's response is quarantine, not revocation: it attaches the AWSCompromisedKeyQuarantineV3 deny policy to the user and opens a support case, and the key keeps working for everything the policy does not list until you delete it."
+    }
+  },
+  "notes": "Graded on machine access to the AWS API via IAM/STS. Amazon Cognito identity pools, IAM Identity Center and service-specific long-term credentials (CodeCommit, Bedrock and CloudWatch Logs API keys) are separate products and are not graded here. The outbound grade relies on IAM outbound identity federation, which is new; re-check the regional and enablement caveats if the docs move.",
+  "headline": "A",
+  "checked": "2026-09-16",
+  "receipts": [
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html",
+    "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound.html",
+    "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetWebIdentityToken.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound_getting_started.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound_token_claims.html",
+    "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+    "https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html",
+    "https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/securing_access-keys.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-keys_inline-policy.html",
+    "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html",
+    "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html",
+    "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccessKeyLastUsed.html",
+    "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html",
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+    "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSCompromisedKeyQuarantineV3.html"
+  ],
+  "url": "https://wif.tax/p/aws-iam/"
+}

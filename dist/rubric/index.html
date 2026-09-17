@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rubric — wif.tax</title><meta name="description" content="How wif.tax grades machine authentication.">
+<link rel="canonical" href="https://wif.tax/rubric/"><link rel="stylesheet" href="/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Rubric — wif.tax"><meta property="og:description" content="How wif.tax grades machine authentication."><meta property="og:url" content="https://wif.tax/rubric/"><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+</head><body><header class="top"><div class="wrap"><a class="brand" href="/">wif<span>.tax</span></a><nav><a href="/">Scoreboard</a><a href="/rubric/">Rubric</a><a href="/policy/">Disputes</a><a href="/our-own-tax/">Our own tax</a><a href="https://github.com/wiftax/wiftax">GitHub</a></nav></div></header>
+<main class="wrap"><article class="prose"><h1>The wif.tax Rubric (v0)</h1>
+<p>wif.tax grades <strong>how a product lets machines authenticate</strong>. Humans logging in with
+SSO is <a href="https://sso.tax">sso.tax</a>&#39;s problem. We only care about workloads: CI jobs,
+services, agents, cron, anything that is not a person at a keyboard.</p>
+<p>The question for every product is the same: <strong>can I use this without holding a
+long-lived secret?</strong> If the answer is no, the product is charging you a tax. You pay
+it in rotation toil, in vault sprawl, and eventually in an incident.</p>
+<h2>Unit of assessment</h2>
+<p>One YAML file per <strong>product</strong>, not per vendor. AWS is two hundred products. Datadog
+is one product with a hundred integrations. Where a vendor&#39;s products differ
+materially in auth, they get separate files. &quot;Our other API supports OIDC&quot; is not a
+defense for the one that does not.</p>
+<p>Each product is graded on two <strong>surfaces</strong>. Each surface gets its own letter. The
+product&#39;s headline grade is the <strong>lower</strong> of the two, because the weakest link is
+the one that leaks.</p>
+<p><strong>Tier gates, both surfaces.</strong> If the graded mechanism requires a paid or enterprise
+tier, grade at that mechanism anyway and record the tier in <code>tier_gated</code>. The
+scoreboard shows the gate. Charging extra for security is sso.tax&#39;s beat, but we
+will point at it.</p>
+<h2>Surface 1: Inbound</h2>
+<p><em>How my workload authenticates to the product&#39;s API or control plane.</em></p>
+<table>
+<thead>
+<tr>
+<th>Grade</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A</strong></td>
+<td><strong>Bring-your-own-issuer federation.</strong> The product accepts a short-lived token from any OIDC issuer I configure, and lets me constrain trust by issuer, subject, and audience. No long-lived secret exists anywhere in the path.</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td><strong>Allowlisted federation.</strong> Federation works, but only from a fixed list of issuers the vendor chose (typically GitHub Actions, GitLab, and the big three clouds). I cannot bring my own issuer.</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td><strong>Short-lived from a static root.</strong> The product issues short-lived tokens, but bootstrapping them requires a long-lived static secret (OAuth2 client secret, service account private key, static mTLS client cert with no federation). Better than raw keys, still a secret to rotate.</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td><strong>Static keys, decent hygiene.</strong> Only long-lived keys are available, but the vendor passes at least 3 of the 5 hygiene checks below.</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td><strong>Static keys, no hygiene.</strong> Long-lived keys, and fewer than 3 hygiene checks pass. The key you create today will work in 2031 unless someone remembers.</td>
+</tr>
+</tbody></table>
+<p>Notes:</p>
+<ul>
+<li>Ambient identity for workloads running <em>inside</em> the vendor&#39;s own platform (EC2
+instance roles, GCE metadata, Azure managed identity, Kubernetes projected tokens)
+is table stakes and does <strong>not</strong> by itself earn an A. The inbound grade is about
+workloads running anywhere.</li>
+<li>Personal access tokens, &quot;app passwords&quot;, and &quot;auth tokens&quot; are static keys no
+matter what the vendor calls them.</li>
+</ul>
+<h2>Surface 2: Outbound</h2>
+<p><em>How the product reaches into <strong>my</strong> infrastructure (cloud accounts, repos, other
+SaaS) on my behalf.</em></p>
+<table>
+<thead>
+<tr>
+<th>Grade</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>A</strong></td>
+<td><strong>Keyless into every cloud it supports.</strong> Cross-account IAM role with external ID (AWS), service account impersonation or federation (GCP), federated credential on a multi-tenant app (Azure), or the product is itself an OIDC issuer I can trust. No long-lived secret is exchanged.</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td><strong>Keyless for some, keys for others.</strong> Keyless on at least one supported cloud, but at least one integration still wants a static key.</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td><strong>Short-lived from a static root.</strong> Access is via short-lived tokens, but the setup requires me to hand over a long-lived secret (for example, an OAuth refresh token minted from a client secret I manage).</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td><strong>Static keys with guidance.</strong> The integration wants a static key, but the vendor documents least-privilege policy, supports scoped keys, and explains rotation.</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td><strong>&quot;Paste your access key here.&quot;</strong> The integration wants a long-lived, broadly scoped credential, with no least-privilege guidance.</td>
+</tr>
+<tr>
+<td><strong>N/A</strong></td>
+<td>The product never needs access into my infrastructure.</td>
+</tr>
+</tbody></table>
+<p>A product with an N/A outbound surface is graded on inbound alone.</p>
+<h2>Hygiene checks</h2>
+<p>Applied to any long-lived credential the product still issues. Each is a yes/no
+with a citation. They decide D versus F, and they are shown on every card so a
+vendor stuck at D or F still has something to fix this quarter.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Passes when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>expiry</code></td>
+<td>Keys can be given an expiry, <strong>and</strong> the default or an org policy can enforce one. A field that defaults to &quot;never&quot; and cannot be forced counts as a fail.</td>
+</tr>
+<tr>
+<td><code>rotation_api</code></td>
+<td>A key can be created and revoked through the API, so rotation can be automated without a browser.</td>
+</tr>
+<tr>
+<td><code>scoping</code></td>
+<td>A key can be limited to a subset of permissions or resources, not just &quot;everything the owner can do&quot;. A purpose-built machine principal with its own least-privilege policy (IAM user, service account, app registration) counts; a key that inherits a human&#39;s full permissions does not.</td>
+</tr>
+<tr>
+<td><code>last_used</code></td>
+<td>The vendor shows when a key was last used, so dead keys can be found and killed.</td>
+</tr>
+<tr>
+<td><code>leak_revocation</code></td>
+<td>The vendor participates in a secret-scanning partner program (GitHub&#39;s, at minimum) so a key leaked to a public repo is revoked automatically.</td>
+</tr>
+</tbody></table>
+<h2>Evidence</h2>
+<p>Every grade and every hygiene check needs a receipt: a URL to vendor documentation
+or a vendor statement, and the date it was checked. No receipt, no grade. A grade
+only changes when the receipts change. This is the rule that keeps us factual, and
+it is exactly the input the crawler agent produces.</p>
+<p><code>checked_on</code> must be within the last 12 months or the card is flagged <strong>stale</strong>.</p>
+<h2>Status</h2>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>listed</code></td>
+<td>Graded and current.</td>
+</tr>
+<tr>
+<td><code>graduated</code></td>
+<td>Was D or F, now A or B, with the date. Vendors that fix it get a permanent gold star. Exit paths make shame lists work.</td>
+</tr>
+<tr>
+<td><code>disputed</code></td>
+<td>The vendor has contested the grade and we are re-checking. Shown, with the vendor&#39;s statement.</td>
+</tr>
+</tbody></table>
+<h2>What we do not grade (yet)</h2>
+<ul>
+<li>Human login. See sso.tax.</li>
+<li>Price. See sso.tax again.</li>
+<li>Whether the federation implementation is any good (audience validation, key
+rotation on the issuer side). v1 problem.</li>
+<li>A single &quot;tax&quot; number in the style of sso.tax&#39;s percentage. We have not found one
+that is not made up. Open question in <code>README.md</code>.</li>
+</ul>
+</article></main>
+<footer><div class="wrap">wif.tax grades how machines authenticate. Humans are <a href="https://sso.tax">sso.tax</a>'s problem. Data is CC BY 4.0, code is Apache-2.0, every grade has a receipt. Wrong about something? <a href="/policy/">Dispute it</a>. Built 2026-09-17.</div></footer>
+</body></html>

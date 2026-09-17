@@ -1,0 +1,247 @@
+{
+  "generated": "2026-09-17",
+  "license": "CC-BY-4.0",
+  "rubric": "https://wif.tax/rubric/",
+  "products": [
+    {
+      "id": "coreweave-api",
+      "vendor": "CoreWeave",
+      "product": "Control-plane API (api.coreweave.com, Terraform provider, kubeconfigs)",
+      "headline": "F",
+      "inbound": "F",
+      "outbound": "N/A",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": false,
+        "scoping": false,
+        "last_used": false,
+        "leak_revocation": false
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "This card is the control plane only: the API that creates CKS clusters and VPCs, the Terraform provider, and managed-auth kubeconfigs. Its one credential is a static, user-scoped API Access Token minted by hand in the Cloud Console, with almost no hygiene around it. CoreWeave's CKS and AI Object Storage cards grade very differently; see those.",
+      "url": "https://wif.tax/p/coreweave-api/",
+      "badge": "https://wif.tax/badge/coreweave-api.svg"
+    },
+    {
+      "id": "cloudflare-api",
+      "vendor": "Cloudflare",
+      "product": "API / API tokens",
+      "headline": "D",
+      "inbound": "D",
+      "outbound": "B",
+      "hygiene": {
+        "expiry": false,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "The Cloudflare API runs on static bearer tokens that, by default, never expire. They are at least well scoped, fully manageable over the API, show last use, and get revoked when they leak to GitHub. Logpush writes to your S3 or GCS bucket without a key, but the R2 migration tools still ask you to paste AWS access keys.",
+      "url": "https://wif.tax/p/cloudflare-api/",
+      "badge": "https://wif.tax/badge/cloudflare-api.svg"
+    },
+    {
+      "id": "twilio-api",
+      "vendor": "Twilio",
+      "product": "REST API",
+      "headline": "D",
+      "inbound": "C",
+      "outbound": "D",
+      "hygiene": {
+        "expiry": false,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": false,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "No federation: the best you get is an OAuth client-credentials flow (public beta) that still starts from a client secret, or API keys that never expire. Twilio itself is a good citizen about scoping and secret scanning. Sending recordings to your S3 bucket means handing it an IAM user's access key.",
+      "url": "https://wif.tax/p/twilio-api/",
+      "badge": "https://wif.tax/badge/twilio-api.svg"
+    },
+    {
+      "id": "github-api",
+      "vendor": "GitHub",
+      "product": "REST/GraphQL API and Actions",
+      "headline": "C",
+      "inbound": "C",
+      "outbound": "A",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": false,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "Nothing outside GitHub can federate into the GitHub API: you hold a personal access token or a GitHub App private key, and the App key at least buys you one-hour installation tokens. In the other direction GitHub Actions is a proper OIDC issuer, so your workflows reach AWS, GCP, Azure and Vault without a single stored key.",
+      "url": "https://wif.tax/p/github-api/",
+      "badge": "https://wif.tax/badge/github-api.svg"
+    },
+    {
+      "id": "datadog-api",
+      "vendor": "Datadog",
+      "product": "API (API keys + application keys)",
+      "headline": "B",
+      "inbound": "B",
+      "outbound": "B",
+      "hygiene": {
+        "expiry": false,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "API and application keys never expire, but Datadog now lets an AWS-identified workload skip them entirely (Terraform provider for everyone, the Agent on Enterprise). Into your clouds it is keyless almost everywhere; AWS China and GovCloud-on-a-commercial-site still want access keys.",
+      "url": "https://wif.tax/p/datadog-api/",
+      "badge": "https://wif.tax/badge/datadog-api.svg"
+    },
+    {
+      "id": "hashicorp-vault",
+      "vendor": "HashiCorp",
+      "product": "Vault (self-managed and HCP Vault Dedicated)",
+      "headline": "B",
+      "inbound": "A",
+      "outbound": "B",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": false,
+        "leak_revocation": false
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "Vault's JWT/OIDC auth method trusts any issuer you configure, so nothing needs a static Vault credential to get in. Going out, the AWS, GCP and Azure secrets engines can run keyless via plugin workload identity federation, but only on Vault Enterprise or HCP, and the remaining engines still want a static (rotatable) root credential.",
+      "url": "https://wif.tax/p/hashicorp-vault/",
+      "badge": "https://wif.tax/badge/hashicorp-vault.svg"
+    },
+    {
+      "id": "aws-iam",
+      "vendor": "Amazon Web Services",
+      "product": "IAM / STS",
+      "headline": "A",
+      "inbound": "A",
+      "outbound": "A",
+      "hygiene": {
+        "expiry": false,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "Register any OIDC issuer as an IAM identity provider and AssumeRoleWithWebIdentity trades its token for an hour of credentials with no key on disk; since outbound identity federation shipped, your roles can mint JWTs for everyone else too. IAM user access keys still never expire, so try not to make any.",
+      "url": "https://wif.tax/p/aws-iam/",
+      "badge": "https://wif.tax/badge/aws-iam.svg"
+    },
+    {
+      "id": "coreweave-object-storage",
+      "vendor": "CoreWeave",
+      "product": "AI Object Storage",
+      "headline": "A",
+      "inbound": "A",
+      "outbound": "N/A",
+      "hygiene": {
+        "expiry": false,
+        "rotation_api": true,
+        "scoping": false,
+        "last_used": false,
+        "leak_revocation": false
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "This card is object storage only. Any OIDC issuer with a discovery document can be exchanged for 30-minute S3-compatible keys (SAML gets up to 12 hours), and CoreWeave recommends exactly that for production. The permanent access keys that still exist have poor hygiene, and creating them requires the static control-plane token graded F on the coreweave-api card.",
+      "url": "https://wif.tax/p/coreweave-object-storage/",
+      "badge": "https://wif.tax/badge/coreweave-object-storage.svg"
+    },
+    {
+      "id": "coreweave-cks",
+      "vendor": "CoreWeave",
+      "product": "CKS (Kubernetes Service)",
+      "headline": "A",
+      "inbound": "A",
+      "outbound": "A",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": false,
+        "scoping": false,
+        "last_used": false,
+        "leak_revocation": false
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "This card is the cluster API server, not the control plane that creates clusters. Under \"unmanaged auth\" a cluster trusts whatever OIDC issuer you configure, and every cluster is itself a public OIDC issuer your other clouds can trust. The default \"managed auth\" mode instead rides on the static control-plane token graded F on the coreweave-api card.",
+      "url": "https://wif.tax/p/coreweave-cks/",
+      "badge": "https://wif.tax/badge/coreweave-cks.svg"
+    },
+    {
+      "id": "google-cloud-iam",
+      "vendor": "Google Cloud",
+      "product": "IAM / Workload Identity Federation",
+      "headline": "A",
+      "inbound": "A",
+      "outbound": "A",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "Workload identity pools take tokens from any OIDC or SAML issuer and CEL conditions decide who gets in, and every service account can mint a Google-signed ID token from the metadata server. Service account JSON keys never expire by default, but an org policy can force them to, and Google disables the ones it finds on GitHub.",
+      "url": "https://wif.tax/p/google-cloud-iam/",
+      "badge": "https://wif.tax/badge/google-cloud-iam.svg"
+    },
+    {
+      "id": "azure-entra-workload-identity",
+      "vendor": "Microsoft Azure",
+      "product": "Entra ID workload identities",
+      "headline": "A",
+      "inbound": "A",
+      "outbound": "A",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "A federated identity credential lets any OIDC issuer stand in for a client secret, and managed identities hand out Entra-signed JWTs on demand. Client secrets cap at two years and tenant policy can shorten or ban them; you get 20 federated credentials per app, exact-match only.",
+      "url": "https://wif.tax/p/azure-entra-workload-identity/",
+      "badge": "https://wif.tax/badge/azure-entra-workload-identity.svg"
+    },
+    {
+      "id": "snowflake",
+      "vendor": "Snowflake",
+      "product": "Data Cloud",
+      "headline": "A",
+      "inbound": "A",
+      "outbound": "A",
+      "hygiene": {
+        "expiry": true,
+        "rotation_api": true,
+        "scoping": true,
+        "last_used": true,
+        "leak_revocation": true
+      },
+      "status": "listed",
+      "checked": "2026-09-16",
+      "summary": "A service user can log in with a token from AWS, Azure, GCP, or any OIDC issuer with a public discovery document; no secret on either side. Storage integrations reach into S3, GCS and Azure with identities, not keys. The static options that remain (key pairs, PATs) are unusually well behaved.",
+      "url": "https://wif.tax/p/snowflake/",
+      "badge": "https://wif.tax/badge/snowflake.svg"
+    }
+  ]
+}

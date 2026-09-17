@@ -1,0 +1,149 @@
+{
+  "id": "github-api",
+  "vendor": "GitHub",
+  "product": "REST/GraphQL API and Actions",
+  "website": "https://github.com",
+  "docs": "https://docs.github.com/en/rest/authentication",
+  "category": "devtools",
+  "status": "listed",
+  "summary": "Nothing outside GitHub can federate into the GitHub API: you hold a personal access token or a GitHub App private key, and the App key at least buys you one-hour installation tokens. In the other direction GitHub Actions is a proper OIDC issuer, so your workflows reach AWS, GCP, Azure and Vault without a single stored key.",
+  "surfaces": {
+    "inbound": {
+      "grade": "C",
+      "mechanism": "GitHub App: a JWT signed with a long-lived private key is exchanged for a one-hour installation access token. Personal access tokens (classic and fine-grained) are static keys.",
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "The installation access token will expire after 1 hour."
+        },
+        {
+          "url": "https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Private keys do not expire and instead need to be manually revoked. You should use multiple keys in order to rotate keys without downtime in the event of a key compromise."
+        },
+        {
+          "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Infinite lifetimes are allowed but may be blocked by a maximum lifetime policy set by your organization or enterprise owner."
+        }
+      ],
+      "notes": "We found no documented way to exchange an external OIDC token (from a cloud, a CI system, or SPIFFE) for GitHub API access; the only federation GitHub documents runs the other way, from Actions out to clouds. The GITHUB_TOKEN inside an Actions job is ambient identity on GitHub's own platform and does not count. If GitHub ships inbound OIDC we will happily re-grade."
+    },
+    "outbound": {
+      "grade": "A",
+      "mechanism": "GitHub Actions is an OIDC issuer (https://token.actions.githubusercontent.com); AWS, GCP, Azure, Vault and any other OIDC-aware target trust it by sub and aud claims and hand back a short-lived credential, so no cloud secret is stored in GitHub.",
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "No cloud secrets: You won't need to duplicate your cloud credentials as long-lived GitHub secrets."
+        },
+        {
+          "url": "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "With OIDC, your cloud provider issues a short-lived access token that is only valid for a single job, and then automatically expires."
+        }
+      ],
+      "notes": "Outbound here means Actions workflows deploying into your infrastructure. The sub claim (repo:org/repo:environment:prod and similar) is the trust boundary on the cloud side."
+    }
+  },
+  "hygiene": {
+    "expiry": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Organization owners can set maximum lifetime allowances for both fine-grained personal access tokens and personal access tokens (classic)."
+        },
+        {
+          "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "If not provided, the default is 30 days, or less if the target has a token lifetime policy set."
+        }
+      ],
+      "notes": "Passes for PATs: fine-grained tokens default to 30 days and org/enterprise owners can cap lifetime for both token types. GitHub App private keys are the exception: they never expire and no policy can force them to."
+    },
+    "rotation_api": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/rest/orgs/personal-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Limited to revoking a token's existing access."
+        },
+        {
+          "url": "https://docs.github.com/en/rest/credentials/revoke",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Any authenticated requests will return a 403."
+        }
+      ],
+      "notes": "Revocation is possible via the API (org endpoints for fine-grained PATs, and an unauthenticated POST /credentials/revoke for any leaked token), but there is no API to create a PAT or a GitHub App private key; both are minted in the browser. Half a rotation loop is not a loop."
+    },
+    "scoping": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Each token can be further limited to only access specific repositories for that user or organization."
+        }
+      ]
+    },
+    "last_used": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/rest/orgs/personal-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "token_last_used_at"
+        }
+      ],
+      "notes": "The org fine-grained PAT endpoints return token_last_used_at, and the personal settings UI shows last use per token. GitHub also auto-revokes tokens unused for a year."
+    },
+    "leak_revocation": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/token-expiration-and-revocation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "If a valid OAuth token, GitHub App token, or personal access token is pushed to a public repository or public gist, the token will be automatically revoked."
+        },
+        {
+          "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "GitHub Personal Access Token"
+        }
+      ]
+    }
+  },
+  "notes": "Headline C is driven entirely by the inbound surface. A GitHub App is the right way to run a machine against the API and its installation tokens are short-lived, but the root of trust is a PEM file that never expires. Fine-grained PATs are well-scoped and policy-capped but still static.",
+  "headline": "C",
+  "checked": "2026-09-16",
+  "receipts": [
+    "https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app",
+    "https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps",
+    "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens",
+    "https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect",
+    "https://docs.github.com/en/organizations/managing-programmatic-access-to-your-organization/setting-a-personal-access-token-policy-for-your-organization",
+    "https://docs.github.com/en/rest/orgs/personal-access-tokens",
+    "https://docs.github.com/en/rest/credentials/revoke",
+    "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/token-expiration-and-revocation",
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns"
+  ],
+  "url": "https://wif.tax/p/github-api/"
+}

@@ -24,9 +24,9 @@ surfaces:
         checked_by: tehreet
         quote: "API Access Tokens are user-scoped tokens that grant users permission to access API endpoints. They gate the ability to deploy CKS Clusters, VPCs, and to manage and access cluster metrics."
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens
-        checked_on: 2026-09-16
+        checked_on: 2026-09-17
         checked_by: tehreet
-        quote: "API Access Tokens are generated through the Cloud Console and automatically embedded in Kubeconfig files scoped to the designated CKS Cluster."
+        quote: "This page explains how to create, use, and manage API Access Tokens and the kubeconfig files generated alongside them, so you can authenticate kubectl to CKS clusters and keep credentials secure."
       - url: https://docs.coreweave.com/support/cks/articles/what-is-the-difference-between-managed-auth-and-unmanaged-auth.md
         checked_on: 2026-09-16
         checked_by: tehreet
