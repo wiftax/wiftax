@@ -1,0 +1,201 @@
+{
+  "id": "azure-entra-workload-identity",
+  "vendor": "Microsoft Azure",
+  "product": "Entra ID workload identities",
+  "website": "https://learn.microsoft.com/en-us/entra/workload-id/",
+  "docs": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+  "category": "cloud",
+  "status": "listed",
+  "summary": "A federated identity credential lets any OIDC issuer stand in for a client secret, and managed identities hand out Entra-signed JWTs on demand. Client secrets cap at two years and tenant policy can shorten or ban them; you get 20 federated credentials per app, exact-match only.",
+  "surfaces": {
+    "inbound": {
+      "grade": "A",
+      "mechanism": "Federated identity credential on an app registration or user-assigned managed identity that trusts an external OIDC issuer URL with an exact issuer, subject and audience match; the workload presents the external JWT as a client_assertion in the client credentials flow and gets an Entra access token for Azure Resource Manager or any Entra-protected API.",
+      "issuers": [
+        "any"
+      ],
+      "evidence": [
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "You use workload identity federation to configure a user-assigned managed identity or app registration in Microsoft Entra ID to trust tokens from an external identity provider (IdP), such as GitHub or Google."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "The Federated Identity Credential issuer, subject, and audience values must case-sensitively match the corresponding issuer, subject and audience values contained in the token being sent to Microsoft Entra ID by the external IdP in order for the scenario to be authorized."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Issuer: must match the iss claim in the token issued by the external identity provider. A URL that complies with the OIDC Discovery spec. Microsoft Entra ID uses this issuer URL to fetch the keys that are necessary to validate the token."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "A maximum of 20 federated identity credentials can be added to an application or user-assigned managed identity."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Only issuers that provide tokens signed using the RS256 algorithm are supported for token exchange using workload identity federation."
+        }
+      ],
+      "notes": "Bring-your-own issuer via the \"Other issuer\" scenario: any OIDC-discoverable https issuer. Limits worth knowing: 20 federated identity credentials per app or user-assigned managed identity; issuer plus subject must be unique per app; exactly one audience per credential (recommended api://AzureADTokenExchange); no wildcards in any field, so one credential per branch, environment or service account, though a \"flexible federated identity credential\" with claim-matching expressions is in preview; RS256 signing only; Entra stores at most 100 signing keys from the issuer's JWKS; issuer and subject fields are capped at 600 characters. Entra-issued tokens cannot themselves be used as the external token, except through the managed-identity-as-credential path within the same tenant. Misconfigured credentials are created silently and only fail at exchange time. Ambient identity inside Azure (system- or user-assigned managed identity via IMDS) is table stakes and does not earn the A on its own."
+    },
+    "outbound": {
+      "grade": "A",
+      "mechanism": "Managed identities obtain Entra-signed JWT access tokens from the Azure Instance Metadata Service for a chosen resource/audience, verifiable at the tenant's OIDC discovery endpoint; a managed identity token can also serve as the federated credential for an app registration, so no client secret is needed anywhere.",
+      "evidence": [
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-use-vm-token",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Managed identities for Azure resources provide Azure services with an automatically managed identity in Microsoft Entra ID. You can use this identity to authenticate to any service that supports Microsoft Entra authentication, without having credentials in your code."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-use-vm-token",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "A query string parameter, indicating the App ID URI of the target resource. It also appears in the aud (audience) claim of the issued token."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-config-app-trust-managed-identity",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "You can then exchange the managed identity token for an access token that can access Microsoft Entra protected resources without needing to use or manage App secrets."
+        },
+        {
+          "url": "https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "can use managed identities to obtain Azure access tokens."
+        }
+      ],
+      "notes": "The IMDS token endpoint returns a standard Entra JWT whose aud is the resource you ask for, and Google Cloud's workload identity federation accepts exactly these tokens; AWS accepts them through a generic IAM OIDC provider pointed at the tenant's v2.0 issuer. Two caveats that keep this from being effortless: the resource must be an App ID URI registered in the tenant (IMDS returns invalid_resource otherwise), so you typically register an app to represent the third party; and cross-cloud (public to US Government or China) token exchange is not supported. Managed identities exist only on Azure compute that supports them; an app registration running elsewhere in Azure without a managed identity is back to certificates, secrets or a federated credential."
+    }
+  },
+  "hygiene": {
+    "expiry": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Client secret lifetime is limited to two years (24 months) or less. You can't specify a custom lifetime longer than 24 months."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/graph/api/application-addpassword",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Optional. The default value is \"startDateTime + 2 years\"."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/graph/api/resources/applicationauthenticationmethodpolicy",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "passwordLifetime | Enforce a max lifetime range for a password secret. | Restrict all new password secrets to a maximum of 30 days for applications created after 01/01/2015."
+        }
+      ],
+      "notes": "Every client secret has an end date (default and portal maximum two years). The tenant default app management policy can enforce a shorter passwordLifetime, or block passwordAddition entirely, for all apps and service principals. Note the policy only blocks creating or updating non-compliant credentials; it does not stop token issuance for credentials that already exist."
+    },
+    "rotation_api": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://learn.microsoft.com/en-us/graph/api/application-addpassword",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Adds a strong password or secret to an application."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/graph/api/application-removepassword",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Remove a password from an application."
+        }
+      ],
+      "notes": "Microsoft Graph addPassword / removePassword (and addKey / removeKey for certificates) with startDateTime and endDateTime, so overlap-and-cut-over rotation is fully scriptable."
+    },
+    "scoping": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "A security principal is an object that represents a user, group, service principal, or managed identity that is requesting access to Azure resources. You can assign a role to any of these security principals."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "In Azure, you can specify a scope at four levels: management group, subscription, resource group, or resource."
+        }
+      ],
+      "notes": "A secret carries its service principal's Azure RBAC role assignments (built-in or custom, at any scope) and Graph app permissions, nothing more. Same reasoning as the other clouds: bound to a machine principal, not a human's rights."
+    },
+    "last_used": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://learn.microsoft.com/en-us/graph/api/resources/signin?view=graph-rest-beta",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "servicePrincipalCredentialKeyId | String | The unique identifier of the key credential used by the service principal to authenticate."
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/recommendation-remove-unused-credential-from-apps",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Your tenant has applications with credentials which have not been used in more than 30 days."
+        }
+      ],
+      "notes": "Service principal sign-in logs record which credential key ID (or certificate thumbprint) was used, and the \"Remove unused credentials from applications\" recommendation lists credentials idle for 30 days. Caveats: the per-credential fields are on the beta Graph signIn resource (v1.0 lacks them), downloading sign-in logs via Graph needs Entra ID P1/P2, and the recommendation reports requiredLicenses microsoftEntraWorkloadId. Still a pass: the vendor does show it."
+    },
+    "leak_revocation": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        },
+        {
+          "url": "https://learn.microsoft.com/en-us/entra/id-protection/concept-workload-identity-risk",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "This risk detection indicates that the account's valid credentials leaked. This leak can occur when someone checks in the credentials in public code artifact on GitHub, or when the credentials are leaked through a data breach."
+        }
+      ],
+      "notes": "GitHub lists Azure Active Directory Application Secret as a partner pattern with push protection. On Microsoft's side the leak surfaces as an ID Protection \"Leaked Credentials\" risk on the service principal; blocking it automatically needs a risk-based Conditional Access policy for workload identities, which requires Workload Identities Premium, and managed identities are out of scope. The secret is not revoked for you."
+    }
+  },
+  "notes": "Graded on machine access to Azure Resource Manager and other Entra-protected APIs using app registrations and managed identities. Azure DevOps PATs, storage account keys, SAS tokens and other per-service keys are separate products and are not graded here. Certificates on app registrations are long-lived credentials too and the same hygiene checks apply to them (asymmetricKeyLifetime policy, addKey / removeKey, thumbprint in sign-in logs).",
+  "headline": "A",
+  "checked": "2026-09-16",
+  "receipts": [
+    "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation",
+    "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-create-trust",
+    "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations",
+    "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-use-vm-token",
+    "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-config-app-trust-managed-identity",
+    "https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds",
+    "https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials",
+    "https://learn.microsoft.com/en-us/graph/api/application-addpassword",
+    "https://learn.microsoft.com/en-us/graph/api/resources/applicationauthenticationmethodpolicy",
+    "https://learn.microsoft.com/en-us/graph/api/application-removepassword",
+    "https://learn.microsoft.com/en-us/azure/role-based-access-control/overview",
+    "https://learn.microsoft.com/en-us/graph/api/resources/signin?view=graph-rest-beta",
+    "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/recommendation-remove-unused-credential-from-apps",
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+    "https://learn.microsoft.com/en-us/entra/id-protection/concept-workload-identity-risk"
+  ],
+  "url": "https://wif.tax/p/azure-entra-workload-identity/"
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Disputes and policy — wif.tax</title><meta name="description" content="How to dispute a grade, and what we will and will not change.">
+<link rel="canonical" href="https://wif.tax/policy/"><link rel="stylesheet" href="/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Disputes and policy — wif.tax"><meta property="og:description" content="How to dispute a grade, and what we will and will not change."><meta property="og:url" content="https://wif.tax/policy/"><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+</head><body><header class="top"><div class="wrap"><a class="brand" href="/">wif<span>.tax</span></a><nav><a href="/">Scoreboard</a><a href="/rubric/">Rubric</a><a href="/policy/">Disputes</a><a href="/our-own-tax/">Our own tax</a><a href="https://github.com/wiftax/wiftax">GitHub</a></nav></div></header>
+<main class="wrap"><article class="prose"><h1>Disputes and policy</h1>
+<h2>What a grade is</h2>
+<p>A grade is a reading of the vendor&#39;s own public documentation against the <a href="/rubric/">rubric</a>. It is not a review of the product, a comment on the people who build it, or legal advice. Every grade carries the URL we read and the date we read it.</p>
+<h2>How to dispute a grade</h2>
+<ol>
+<li><strong>Open a pull request</strong> on <a href="https://github.com/wiftax/wiftax">github.com/wiftax/wiftax</a> changing the card. Change the receipts, not just the letter. If the docs say something different from what we quoted, link the page that says it.</li>
+<li><strong>Or email</strong> <a href="mailto:disputes@wif.tax">disputes@wif.tax</a> with the product, the claim you dispute, and the URL that contradicts it. We will open the PR for you.</li>
+<li>While a dispute is open the card shows <code>disputed</code>, with the vendor&#39;s statement verbatim.</li>
+</ol>
+<p>We do not require you to prove you work for the vendor. Receipts are receipts.</p>
+<h2>Graduation</h2>
+<p>If your product moves from D or F to A or B, open a PR setting <code>status: graduated</code>. The card keeps a permanent gold star and a date. We would rather have an empty list than a long one.</p>
+<h2>What we will change</h2>
+<ul>
+<li>A factual error with a receipt. Same day, usually.</li>
+<li>A stale card, when the docs have changed. Our crawler tries to catch these first.</li>
+<li>Anything about a person. There should be nothing about a person on this site. If there is, it goes.</li>
+</ul>
+<h2>What we will not change</h2>
+<ul>
+<li>A grade because the vendor would prefer a different one.</li>
+<li>A grade because the mechanism exists in a private beta, a roadmap, or a sales call. Documented and available is the bar. Tier gates are recorded, not excused.</li>
+<li>The rubric, for one vendor. Rubric changes apply to everyone and go through a PR on <code>RUBRIC.md</code>.</li>
+</ul>
+<h2>Automated changes</h2>
+<p>Sisyphus, our crawler, re-reads receipts and opens PRs when they drift. It does not merge. A person reads the receipts first.</p>
+<h2>Contact</h2>
+<p><a href="mailto:hello@wif.tax">hello@wif.tax</a> for everything else. <a href="mailto:security@wif.tax">security@wif.tax</a> for problems with this site, see <code>/.well-known/security.txt</code>.</p>
+</article></main>
+<footer><div class="wrap">wif.tax grades how machines authenticate. Humans are <a href="https://sso.tax">sso.tax</a>'s problem. Data is CC BY 4.0, code is Apache-2.0, every grade has a receipt. Wrong about something? <a href="/policy/">Dispute it</a>. Built 2026-09-17.</div></footer>
+</body></html>

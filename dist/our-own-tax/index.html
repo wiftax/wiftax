@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our own tax — wif.tax</title><meta name="description" content="The static credentials wif.tax itself is forced to hold.">
+<link rel="canonical" href="https://wif.tax/our-own-tax/"><link rel="stylesheet" href="/style.css"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Our own tax — wif.tax"><meta property="og:description" content="The static credentials wif.tax itself is forced to hold."><meta property="og:url" content="https://wif.tax/our-own-tax/"><meta property="og:type" content="website"><meta name="twitter:card" content="summary">
+</head><body><header class="top"><div class="wrap"><a class="brand" href="/">wif<span>.tax</span></a><nav><a href="/">Scoreboard</a><a href="/rubric/">Rubric</a><a href="/policy/">Disputes</a><a href="/our-own-tax/">Our own tax</a><a href="https://github.com/wiftax/wiftax">GitHub</a></nav></div></header>
+<main class="wrap"><article class="prose"><h1>Our own tax</h1>
+<p>A site that grades other people&#39;s authentication should publish its own. This page lists every long-lived credential wif.tax is forced to hold, and who is forcing us. The target number is zero.</p>
+<table>
+<thead>
+<tr>
+<th>Credential</th>
+<th>Held because</th>
+<th>Grade we would give ourselves</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GitHub App private key for Sisyphus</td>
+<td>GitHub Apps authenticate with a static RSA key that never expires. There is no federated path for an App to mint its own installation tokens.</td>
+<td>C, same as the <a href="/p/github-api/">GitHub card</a></td>
+</tr>
+</tbody></table>
+<h2>What we got to zero</h2>
+<ul>
+<li><strong>Anthropic API.</strong> Sisyphus authenticates with workload identity federation from GitHub Actions&#39; OIDC issuer. No API key exists.</li>
+<li><strong>Cloudflare.</strong> The site deploys through Cloudflare&#39;s GitHub integration. We hold no Cloudflare API token. DNS is edited by a human in a browser with a passkey, because a Terraform pipeline would need a static token.</li>
+<li><strong>GitHub Actions.</strong> The CI on the data repo runs on the default <code>GITHUB_TOKEN</code>, which lives for one job.</li>
+</ul>
+<h2>Human logins</h2>
+<p>Humans log in to GitHub, Cloudflare, the registrar, and email with passkeys or hardware keys, and 2FA is required on the GitHub org. Humans are sso.tax&#39;s department, but we mention it because you would ask.</p>
+<p>This page is updated whenever the list above changes. If you spot a credential we forgot, that is a valid dispute.</p>
+</article></main>
+<footer><div class="wrap">wif.tax grades how machines authenticate. Humans are <a href="https://sso.tax">sso.tax</a>'s problem. Data is CC BY 4.0, code is Apache-2.0, every grade has a receipt. Wrong about something? <a href="/policy/">Dispute it</a>. Built 2026-09-17.</div></footer>
+</body></html>

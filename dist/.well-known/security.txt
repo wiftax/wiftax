@@ -1,0 +1,5 @@
+Contact: mailto:security@wif.tax
+Expires: 2027-09-17T14:04:33.709Z
+Preferred-Languages: en
+Canonical: https://wif.tax/.well-known/security.txt
+Policy: https://github.com/wiftax/wiftax/blob/main/SECURITY.md

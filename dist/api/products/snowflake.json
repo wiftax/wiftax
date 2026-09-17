@@ -1,0 +1,165 @@
+{
+  "id": "snowflake",
+  "vendor": "Snowflake",
+  "product": "Data Cloud",
+  "website": "https://www.snowflake.com",
+  "docs": "https://docs.snowflake.com/en/user-guide/workload-identity-federation",
+  "category": "data",
+  "status": "listed",
+  "summary": "A service user can log in with a token from AWS, Azure, GCP, or any OIDC issuer with a public discovery document; no secret on either side. Storage integrations reach into S3, GCS and Azure with identities, not keys. The static options that remain (key pairs, PATs) are unusually well behaved.",
+  "surfaces": {
+    "inbound": {
+      "grade": "A",
+      "mechanism": "Workload identity federation on a SERVICE user (WORKLOAD_IDENTITY TYPE = AWS | AZURE | GCP | OIDC) with ISSUER, SUBJECT and an optional OIDC_AUDIENCE_LIST; any OIDC provider with a publicly reachable discovery document and JWKS is accepted.",
+      "issuers": [
+        "any"
+      ],
+      "evidence": [
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Workload identity federation (WIF) is a service-to-service authentication method that lets workloads, such as applications, services, or containers, authenticate with Snowflake using their cloud provider's native identity system."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Complete the steps in each section listed below to use WIF to authenticate to Snowflake from a custom OIDC Provider"
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Ensure that your OIDC Provider supports the OpenID Configuration as specified within the Discovery specification. Both the configuration and the configuration's jwks_uri endpoint must be publicly accessible."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "If you omit this parameter, the audience defaults to snowflakecomputing.com, which is shared across all Snowflake accounts."
+        }
+      ],
+      "notes": "Restrictions: the user must be TYPE = SERVICE or SERVICE_AGENT; the issuer's discovery doc and JWKS must be public (no private-network issuers); tokens must carry an iat claim; only RS256/384/512 and ES256/384/512 signatures; issuer up to 2048 chars, subject up to 255. Trust is pinned per user to one issuer+subject, so a fleet needs one service user per identity or a shared subject. Key-pair auth (static RSA private key) and Snowflake OAuth (client secret) remain available and would be C-grade on their own."
+    },
+    "outbound": {
+      "grade": "A",
+      "mechanism": "Storage integrations use an IAM role with an external ID (S3), a Snowflake-provisioned service account you grant bucket roles to (GCS), or a Snowflake multi-tenant app you consent to (Azure); no cloud key is handed to Snowflake.",
+      "evidence": [
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "An external ID is used to grant access to your AWS resources (such as S3 buckets) to a third party like Snowflake."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/data-load-gcs-config",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Snowflake automatically associates the storage integration with a Cloud Storage service account created for your account."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/data-load-gcs-config",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "avoid the need for passing explicit cloud provider credentials such as secret keys or access tokens; instead, integration objects reference a Cloud Storage service account."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/data-load-azure-config",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "A storage integration is a Snowflake object that stores a generated service principal for your Azure cloud storage, along with an optional set of allowed or blocked storage locations."
+        }
+      ],
+      "notes": "Assessed the core storage integrations for the three clouds. Marketplace/native connectors (ServiceNow, Google Analytics, etc.) and customer-managed SECRET objects for external network access are separate features and were not graded here."
+    }
+  },
+  "hygiene": {
+    "expiry": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/programmatic-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "By default, a programmatic access token expires after 15 days."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/key-pair-auth",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "By default, the prior key remains valid for 24 hours. To change the grace period, set EXPIRE_ROTATED_KEY_PAIR_AFTER_HOURS."
+        }
+      ],
+      "notes": "Programmatic access tokens expire by default and an authentication policy (PAT_POLICY with MAX_EXPIRY_IN_DAYS / DEFAULT_EXPIRY_IN_DAYS, 1-365 days) can force it. RSA key pairs have no expiry of their own; only the rotated-out key gets a timed grace period."
+    },
+    "rotation_api": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.snowflake.com/en/sql-reference/sql/alter-user-rotate-key-pair",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Rotates a key pair by replacing the stored public key with a new public key supplied by the user."
+        },
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/programmatic-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "ALTER USER IF EXISTS example_user ROTATE PROGRAMMATIC ACCESS TOKEN example_token;"
+        }
+      ],
+      "notes": "ALTER USER ... ADD / ROTATE / REMOVE PROGRAMMATIC ACCESS TOKEN and ROTATE KEY PAIR are SQL, which runs over the SQL REST API."
+    },
+    "scoping": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.snowflake.com/en/user-guide/programmatic-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "If you are generating a token for a service user (a user with TYPE=SERVICE, TYPE=SERVICE_AGENT, or TYPE=LEGACY_SERVICE), you must specify the ROLE_RESTRICTION parameter"
+        }
+      ]
+    },
+    "last_used": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.snowflake.com/en/sql-reference/account-usage/login_history",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "ID of the credential used to authenticate the user (the first factor in multi-factor authentication, if used)."
+        }
+      ],
+      "notes": "LOGIN_HISTORY (365 days) records EVENT_TIMESTAMP, FIRST_AUTHENTICATION_FACTOR and FIRST_AUTHENTICATION_FACTOR_ID per login, so an unused credential can be found by query rather than a column on the key."
+    },
+    "leak_revocation": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Snowflake Programmatic Access Token"
+        }
+      ],
+      "notes": "Partner pattern for programmatic access tokens (and SFPG connection strings). Raw RSA private keys are caught by GitHub's generic private-key pattern, not a Snowflake partner one."
+    }
+  },
+  "notes": "Grade A requires nothing beyond a SERVICE user and an issuer with a public JWKS; there is no tier gate. A private-network OIDC issuer is not usable because Snowflake must fetch the discovery document.",
+  "headline": "A",
+  "checked": "2026-09-16",
+  "receipts": [
+    "https://docs.snowflake.com/en/user-guide/workload-identity-federation",
+    "https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration",
+    "https://docs.snowflake.com/en/user-guide/data-load-gcs-config",
+    "https://docs.snowflake.com/en/user-guide/data-load-azure-config",
+    "https://docs.snowflake.com/en/user-guide/programmatic-access-tokens",
+    "https://docs.snowflake.com/en/user-guide/key-pair-auth",
+    "https://docs.snowflake.com/en/sql-reference/sql/alter-user-rotate-key-pair",
+    "https://docs.snowflake.com/en/sql-reference/account-usage/login_history",
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns"
+  ],
+  "url": "https://wif.tax/p/snowflake/"
+}

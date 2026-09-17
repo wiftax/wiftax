@@ -1,0 +1,154 @@
+{
+  "id": "coreweave-object-storage",
+  "vendor": "CoreWeave",
+  "product": "AI Object Storage",
+  "website": "https://www.coreweave.com",
+  "docs": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about",
+  "category": "cloud",
+  "status": "listed",
+  "summary": "This card is object storage only. Any OIDC issuer with a discovery document can be exchanged for 30-minute S3-compatible keys (SAML gets up to 12 hours), and CoreWeave recommends exactly that for production. The permanent access keys that still exist have poor hygiene, and creating them requires the static control-plane token graded F on the coreweave-api card.",
+  "surfaces": {
+    "inbound": {
+      "grade": "A",
+      "mechanism": "Workload Identity Federation: POST a JWT from any OIDC provider that implements OIDC Discovery (issuer URL configured per org) to api.coreweave.com/v1/cwobject/temporary-credentials/oidc/[ORG-ID] and receive a 30-minute AccessKeyId/SecretAccessKey; SAML assertions yield keys up to 12h.",
+      "issuers": [
+        "any"
+      ],
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/configure-wif-for-object-storage",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Exchange OIDC tokens for temporary AI Object Storage credentials using Workload Identity Federation"
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/configure-wif-for-object-storage",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Issuer URL: Your OIDC provider's identifier URL, such as https://your-domain.okta.com or https://accounts.google.com."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "It exchanges short-lived OIDC tokens for temporary credentials, which eliminates the need to store or rotate long-lived static keys."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "30-minute lifespan, automatically refreshed"
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/saml-workload-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "up to a maximum of 12 hours"
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/changelog/release-notes/oidc-workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Works with existing identity providers including AWS IAM, GCP Workload Identity, Azure Managed Identities, and custom OIDC providers."
+        }
+      ],
+      "notes": "Documented tutorials cover GitHub Actions and non-CKS Kubernetes clusters; the provider must implement OIDC Discovery and standard claims. WIF only mints credentials; org and bucket access policies (which can reference OIDC group claims) still have to be written separately. Shipped 2025-11-20. A direct exchange of a control-plane API token for 30-minute keys also exists, but that is a static root and would be C on its own."
+    },
+    "outbound": {
+      "grade": "N/A",
+      "mechanism": "Object storage never needs access to customer infrastructure.",
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        }
+      ]
+    }
+  },
+  "hygiene": {
+    "expiry": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Don't expire. Require manual rotation."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/create-keys",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        }
+      ],
+      "notes": "Static keys created via CreateAccessKeyFromJWT take durationSeconds; 0 means permanent, otherwise up to 12 hours. No documented default and no org policy to forbid permanent keys, so the \"cannot be forced\" clause of the rubric applies. Graded conservatively."
+    },
+    "rotation_api": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/create-keys",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "POST https://api.coreweave.com/v1/cwobject/access-key"
+        },
+        {
+          "url": "https://docs.coreweave.com/llms.txt",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Revoke access keys: Revoke Object Storage access keys using the Cloud Console or the Object Storage API"
+        }
+      ],
+      "notes": "Keys can be created and revoked through the Object Storage API, but the create call itself authenticates with the static control-plane API Access Token."
+    },
+    "scoping": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/create-keys",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "the Object Storage Admin role or an organization access policy that grants cwobject:CreateAccessKey"
+        }
+      ],
+      "notes": "Access is governed by organization and bucket policies attached to the principal, not to the key; nothing documented lets one key carry fewer permissions than its owner. The quoted policy governs who may create keys, not what a key may do. Graded conservatively."
+    },
+    "last_used": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        }
+      ],
+      "notes": "No last-used field is documented on access keys. Audit logging exists for object operations but was not assessed as a per-key last-used signal."
+    },
+    "leak_revocation": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        }
+      ],
+      "notes": "CoreWeave is not on GitHub's secret-scanning list."
+    }
+  },
+  "notes": "Home team, graded on the same rubric as everyone else. The A is real and the docs push production users toward it; the remaining tax is that permanent keys are still one API call away, and that call runs on the control-plane token.",
+  "headline": "A",
+  "checked": "2026-09-16",
+  "receipts": [
+    "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/configure-wif-for-object-storage",
+    "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about",
+    "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about",
+    "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/saml-workload-federation",
+    "https://docs.coreweave.com/docs/changelog/release-notes/oidc-workload-identity-federation",
+    "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/create-keys",
+    "https://docs.coreweave.com/llms.txt",
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns"
+  ],
+  "url": "https://wif.tax/p/coreweave-object-storage/"
+}

@@ -1,0 +1,12 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'
+/api/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+/badge/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600

@@ -1,0 +1,171 @@
+{
+  "id": "coreweave-cks",
+  "vendor": "CoreWeave",
+  "product": "CKS (Kubernetes Service)",
+  "website": "https://www.coreweave.com",
+  "docs": "https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction",
+  "category": "cloud",
+  "status": "listed",
+  "summary": "This card is the cluster API server, not the control plane that creates clusters. Under \"unmanaged auth\" a cluster trusts whatever OIDC issuer you configure, and every cluster is itself a public OIDC issuer your other clouds can trust. The default \"managed auth\" mode instead rides on the static control-plane token graded F on the coreweave-api card.",
+  "surfaces": {
+    "inbound": {
+      "grade": "A",
+      "mechanism": "Unmanaged auth lets a cluster's api-server trust a customer-configured OIDC issuer (issuerUrl, clientId, usernameClaim, groupsClaim, requiredClaim, signingAlgorithms) or Kubernetes service-account tokens; managed auth (the default) uses a Cloud Console API Access Token embedded in a kubeconfig.",
+      "issuers": [
+        "any"
+      ],
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/reference/cks-api",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "OpenID Connect (OIDC) configuration for authentication to the cluster's api-server."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/reference/cks-api",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "The whole object is optional on the cluster, but when supplied, issuerUrl and clientId are required within it."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/reference/cks-api",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "A claim that must be present on every token for authentication to succeed."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/clusters/create",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "To enable OIDC, the Issuer URL and Client ID fields are required. All other fields are optional."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/changelog/release-notes/unmanaged-auth",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Unmanaged authentication API for CKS clusters, enabling OIDC, Service Account, and Webhook authentication"
+        },
+        {
+          "url": "https://docs.coreweave.com/support/cks/articles/what-is-the-difference-between-managed-auth-and-unmanaged-auth.md",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Managed auth is the default."
+        }
+      ],
+      "notes": "The OIDC object maps to kube-apiserver's OIDC authenticator: any issuer with a discovery document, audience pinned by clientId, subject/claims constrained via requiredClaim and the username/groups claims. Shipped 2025-07-07 as an additive change that can be enabled on existing clusters. Two caveats: managed auth is the default and routes through the static control-plane token, so the A requires opting in to unmanaged auth; and turning the feature on (creating or updating the cluster) is itself a control-plane call that needs that static token. Private clusters are not self-service (\"contact CoreWeave Support\")."
+    },
+    "outbound": {
+      "grade": "A",
+      "mechanism": "Every CKS cluster is an OIDC issuer with a public discovery document and JWKS at oidc.cks.coreweave.com/id/[CLUSTER-ID]; workloads present projected service-account tokens to AWS, GCP or any other OIDC-trusting service, so no CoreWeave-held cloud credential exists.",
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Each CKS cluster acts as an OIDC identity provider (IdP) that issues secure tokens to workloads running under specific Kubernetes Service Accounts."
+        },
+        {
+          "url": "https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "CKS publishes a public OIDC Document Discovery URL even for clusters whose API endpoints aren't exposed to the internet."
+        },
+        {
+          "url": "https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "OIDC Workload Identity is generally available and enabled by default on every CKS cluster, including sandbox clusters. No action is required to turn it on, and it can't be disabled."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/changelog/release-notes/oidc-workload-identity-federation",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Multi-cloud authentication: Authenticate CKS workloads to AWS, GCP, and other OIDC-compatible services."
+        }
+      ],
+      "notes": "CKS has no managed integrations that pull from a customer's cloud; the outbound story is \"the product is itself an OIDC issuer I can trust\", which the rubric scores A. AWS and GCP have guides; Azure federated credentials accept any public OIDC issuer but no CoreWeave guide was found. Shipped 2025-11-20."
+    }
+  },
+  "hygiene": {
+    "expiry": {
+      "pass": true,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/kubeconfig",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Tokens have an expiration date, so a token that worked previously can expire between sessions."
+        },
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "Expiration How long the token remains valid."
+        }
+      ],
+      "notes": "Hygiene here is graded on the managed-auth kubeconfig, which embeds a static API Access Token in users.user.token; the unmanaged-auth OIDC path has no CoreWeave-issued static credential. Default, maximum, and org enforcement of the expiry are undocumented."
+    },
+    "rotation_api": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "You can view or delete Access Tokens on the Access Tokens dashboard"
+        }
+      ],
+      "notes": "Tokens and kubeconfigs are minted and revoked only in the Cloud Console."
+    },
+    "scoping": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet",
+          "quote": "user-scoped and grant permissions to deploy CKS clusters and VPCs, access cluster metrics, and authenticate against the managed-auth endpoint."
+        }
+      ],
+      "notes": "The kubeconfig is scoped to a cluster, but the embedded token is the user's full control-plane token, so a leaked kubeconfig leaks more than cluster access."
+    },
+    "last_used": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        }
+      ],
+      "notes": "No last-used timestamp is documented for API Access Tokens or kubeconfigs. Graded conservatively."
+    },
+    "leak_revocation": {
+      "pass": false,
+      "evidence": [
+        {
+          "url": "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns",
+          "checked_on": "2026-09-16",
+          "checked_by": "tehreet"
+        }
+      ],
+      "notes": "CoreWeave is not on GitHub's secret-scanning list."
+    }
+  },
+  "notes": "Home team, graded on the same rubric as everyone else. The A holds only if you switch the cluster to unmanaged auth; the managed-auth default is the control-plane token in a kubeconfig, and its hygiene is what the checks above show.",
+  "headline": "A",
+  "checked": "2026-09-16",
+  "receipts": [
+    "https://docs.coreweave.com/docs/products/cks/reference/cks-api",
+    "https://docs.coreweave.com/docs/products/cks/clusters/create",
+    "https://docs.coreweave.com/docs/changelog/release-notes/unmanaged-auth",
+    "https://docs.coreweave.com/support/cks/articles/what-is-the-difference-between-managed-auth-and-unmanaged-auth.md",
+    "https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction",
+    "https://docs.coreweave.com/docs/changelog/release-notes/oidc-workload-identity-federation",
+    "https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/kubeconfig",
+    "https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens",
+    "https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md",
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns"
+  ],
+  "url": "https://wif.tax/p/coreweave-cks/"
+}
