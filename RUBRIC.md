@@ -19,6 +19,11 @@ Each product is graded on two **surfaces**. Each surface gets its own letter. Th
 product's headline grade is the **lower** of the two, because the weakest link is
 the one that leaks.
 
+**Tier gates, both surfaces.** If the graded mechanism requires a paid or enterprise
+tier, grade at that mechanism anyway and record the tier in `tier_gated`. The
+scoreboard shows the gate. Charging extra for security is sso.tax's beat, but we
+will point at it.
+
 ## Surface 1: Inbound
 
 *How my workload authenticates to the product's API or control plane.*
@@ -39,9 +44,6 @@ Notes:
   workloads running anywhere.
 - Personal access tokens, "app passwords", and "auth tokens" are static keys no
   matter what the vendor calls them.
-- If the top grade requires an enterprise tier, record it in `tier_gated` and grade
-  the product at the top grade anyway. The scoreboard shows the gate. Charging for
-  security is sso.tax's beat, but we will point at it.
 
 ## Surface 2: Outbound
 

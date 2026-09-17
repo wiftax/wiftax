@@ -1,0 +1,136 @@
+id: hashicorp-vault
+vendor: HashiCorp
+product: Vault (self-managed and HCP Vault Dedicated)
+website: https://www.hashicorp.com/products/vault
+docs: https://developer.hashicorp.com/vault/docs/auth
+category: security
+status: listed
+summary: >-
+  Vault's JWT/OIDC auth method trusts any issuer you configure, so nothing needs a static Vault
+  credential to get in. Going out, the AWS, GCP and Azure secrets engines can run keyless via plugin
+  workload identity federation, but only on Vault Enterprise or HCP, and the remaining engines still
+  want a static (rotatable) root credential.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      The JWT/OIDC auth method validates tokens from any issuer (OIDC discovery URL, JWKS URL or
+      static public keys) with bound_audiences, bound_subject and bound_claims per role; native
+      AWS, GCP, Azure and Kubernetes auth methods cover platform identities.
+    issuers: ["any"]
+    evidence:
+      - url: https://developer.hashicorp.com/vault/docs/auth/jwt
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "An OIDC Discovery URL and optional certificate chain is configured. Keys will be fetched from this URL during authentication."
+      - url: https://developer.hashicorp.com/vault/docs/auth/jwt
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "If the JWT in the authentication request contains an aud claim, the associated bound_audiences for the role must exactly match at least one of the aud claims declared for the JWT."
+      - url: https://developer.hashicorp.com/vault/docs/auth/aws
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "The aws auth method provides an automated mechanism to retrieve a Vault token for IAM principals and AWS EC2 instances."
+    notes: >-
+      Available in Community Edition, Enterprise and HCP Vault Dedicated. AppRole (RoleID +
+      SecretID) is the static fallback for platforms with no identity; it is optional, not required.
+  outbound:
+    grade: B
+    tier_gated: Vault Enterprise 1.16+ (premium license) or HCP Vault Dedicated, for plugin WIF
+    mechanism: >-
+      Plugin workload identity federation: Vault acts as an OIDC issuer and the AWS, GCP and Azure
+      secrets engines exchange its identity token for cloud credentials with no static root key.
+      Other engines (AliCloud, databases, and everything on Community Edition) still need a static
+      root credential that Vault can rotate.
+    evidence:
+      - url: https://developer.hashicorp.com/vault/docs/secrets/aws
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "The AWS secrets engine supports the Plugin WIF workflow, and has a source of identity called a plugin identity token."
+      - url: https://developer.hashicorp.com/vault/docs/secrets/gcp
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Exchanging identity tokens for access tokens lets the GCP secrets engine operate without configuring explicit access to sensitive IAM security credentials."
+      - url: https://developer.hashicorp.com/vault/docs/secrets/azure
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Configure the audience claim value and the Client, Tenant and Subscription IDs for plugin workload identity federation"
+      - url: https://developer.hashicorp.com/vault/tutorials/enterprise/plugin-workload-identity-federation
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Vault Enterprise version 1.16 or later with premium license."
+      - url: https://developer.hashicorp.com/hcp/docs/vault
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "HCP Vault Dedicated is a hosted version of Vault Enterprise operated by HashiCorp"
+      - url: https://developer.hashicorp.com/vault/docs/secrets/alicloud
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Configure that access key as the credentials that Vault will use to communicate with AliCloud to generate credentials"
+      - url: https://developer.hashicorp.com/vault/docs/secrets/databases
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "All plugins except MongoDB Atlas support rotating the root user's credentials."
+    notes: >-
+      Graded at the top tier per the rubric and gated. On Community Edition every cloud secrets
+      engine is configured with a static root access key or service-account key, which Vault can
+      rotate on a schedule (rotate-root), so the un-gated grade would be C. Plugin WIF also requires
+      the cloud to reach Vault's /.well-known/openid-configuration, so an air-gapped Vault cannot use
+      it. AliCloud has no WIF option at all, which keeps the surface at B rather than A.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://developer.hashicorp.com/vault/docs/concepts/tokens
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "The system max TTL, which is 32 days but can be changed in Vault's configuration file."
+    notes: >-
+      Every Vault token is capped by the system max TTL unless it is a root token (TTL 0 allowed)
+      or a periodic token that keeps being renewed. AppRole SecretIDs take secret_id_ttl and
+      secret_id_num_uses.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developer.hashicorp.com/vault/api-docs/auth/token
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "/auth/token/create"
+      - url: https://developer.hashicorp.com/vault/api-docs/auth/token
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "/auth/token/revoke"
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.hashicorp.com/vault/docs/concepts/policies
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "Policies are deny by default, so an empty policy grants no permission in the system."
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.hashicorp.com/vault/api-docs/auth/token
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "creation_time"
+    notes: >-
+      Token lookup returns creation_time, issue_time, expire_time, ttl and num_uses but no
+      last-used timestamp; finding dead tokens means grepping the audit log.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-09-16
+        checked_by: tehreet
+        quote: "HashiCorp Vault Service Token"
+    notes: >-
+      Vault service, batch and root tokens are on GitHub's pattern list for user alerts and push
+      protection, but not as partner patterns, and HashiCorp cannot revoke a token on a Vault it
+      does not run. You get an alert, not a revocation.
+
+notes: >-
+  Hygiene is graded against the credentials Vault itself issues (tokens, AppRole SecretIDs). The
+  static root credentials for secrets engines belong to the target cloud, not to Vault.
