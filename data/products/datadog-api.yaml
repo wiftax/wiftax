@@ -129,7 +129,7 @@ hygiene:
       - url: https://raw.githubusercontent.com/DataDog/datadog-api-client-python/master/.generator/schemas/v2/openapi.yaml
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "last_used_at: description: Last usage timestamp of the application key."
+        quote: "Last usage timestamp of the application key."
     notes: >-
       Application keys expose last_used_at in the API and UI. The public OpenAPI spec shows no
       last-used field on API keys, so dead intake keys are harder to find.
