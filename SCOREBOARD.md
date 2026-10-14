@@ -8,7 +8,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 |---|---|---|---|---|---|---|---|
 | **💀 F** | CoreWeave | [Control-plane API (api.coreweave.com, Terraform provider, kubeconfigs)](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **🔴 D** | Cloudflare | [API / API tokens](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🔴 D** | Twilio | [REST API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-09-16 |
+| **🔴 D** | Twilio | [REST API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-10-12 |
 | **🟠 C** | GitHub | [REST/GraphQL API and Actions](data/products/github-api.yaml) | 🟠 C | 🟢 A | `✓ ✗ ✓ ✓ ✓` | listed | 2026-09-16 |
 | **🟡 B** | Datadog | [API (API keys + application keys)](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |

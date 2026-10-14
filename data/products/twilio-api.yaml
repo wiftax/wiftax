@@ -10,7 +10,6 @@ summary: >-
   starts from a client secret, or API keys that never expire. Twilio itself is a good citizen about
   scoping and secret scanning. Sending recordings to your S3 bucket means handing it an IAM user's
   access key.
-
 surfaces:
   inbound:
     grade: C
@@ -23,25 +22,29 @@ surfaces:
       - url: https://www.twilio.com/en-us/changelog/oauth-public-beta
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "We support the Client Credentials grant type of OAuth 2.0 as defined in RFC 6749, section 4.4."
+        quote: >-
+          We support the Client Credentials grant type of OAuth 2.0 as defined in RFC 6749, section
+          4.4.
       - url: https://www.twilio.com/docs/iam/oauth-apps/overview
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Twilio generates a Client ID and Client Secret"
+        quote: Twilio generates a Client ID and Client Secret
       - url: https://www.twilio.com/docs/iam/oauth-apps/overview
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "OAuth credentials generate tokens with a limited lifespan, reducing the risk of credential leaks."
+        quote: >-
+          OAuth credentials generate tokens with a limited lifespan, reducing the risk of credential
+          leaks.
       - url: https://www.twilio.com/docs/iam/api-keys
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "API keys are the preferred way to authenticate with Twilio's REST APIs."
+        quote: API keys are the preferred way to authenticate with Twilio's REST APIs.
     notes: >-
-      No OIDC or cloud-identity federation of any kind was found in the IAM docs. Public Key
-      Client Validation (a customer-held private key that signs requests) is the other
-      "no shared secret" option and is equally C-grade: a static private key with no federation.
-      OAuth for Twilio APIs was announced as public beta on 2025-11-06; the overview page carries
-      no status label. Access-token lifetime is not stated in the docs fetched.
+      No OIDC or cloud-identity federation of any kind was found in the IAM docs. Public Key Client
+      Validation (a customer-held private key that signs requests) is the other "no shared secret"
+      option and is equally C-grade: a static private key with no federation. OAuth for Twilio APIs
+      was announced as public beta on 2025-11-06; the overview page carries no status label.
+      Access-token lifetime is not stated in the docs fetched.
   outbound:
     grade: D
     mechanism: >-
@@ -52,24 +55,28 @@ surfaces:
       - url: https://www.twilio.com/docs/voice/recording-settings
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "An AWS IAM user with permission to write objects to that bucket. You'll need the IAM user's access key ID and secret access key."
+        quote: >-
+          An AWS IAM user with permission to write objects to that bucket. You'll need the IAM
+          user's access key ID and secret access key.
       - url: https://www.twilio.com/docs/iam/credentialaws-resource
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Twilio can store video and voice recordings on AWS Simple Storage Service (S3). To access S3, Twilio uses AWS credentials."
+        quote: >-
+          Twilio can store video and voice recordings on AWS Simple Storage Service (S3). To access
+          S3, Twilio uses AWS credentials.
       - url: https://www.twilio.com/docs/video/tutorials/storing-aws-s3
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "The AWS credentials: The access key ID and secret access key for an AWS Identity and Access Management (IAM) user with write access to the bucket."
+        quote: >-
+          The AWS credentials: The access key ID and secret access key for an AWS Identity and
+          Access Management (IAM) user with write access to the bucket.
     notes: >-
-      This is the only place the core REST API reaches into a customer cloud that we found;
-      Segment, SendGrid and Flex are separate products. The Video tutorial's example policy
-      denies everything except s3:PutObject on a single prefix, which is real least-privilege
-      guidance, so this is D rather than F. No IAM-role/external-ID option exists for the core
-      recording integration (Segment's S3 destination has one; not graded here). The
-      CredentialAWS resource can be updated by API, but the docs do not explain a rotation
-      procedure.
-
+      This is the only place the core REST API reaches into a customer cloud that we found; Segment,
+      SendGrid and Flex are separate products. The Video tutorial's example policy denies everything
+      except s3:PutObject on a single prefix, which is real least-privilege guidance, so this is D
+      rather than F. No IAM-role/external-ID option exists for the core recording integration
+      (Segment's S3 destination has one; not graded here). The CredentialAWS resource can be updated
+      by API, but the docs do not explain a rotation procedure.
 hygiene:
   expiry:
     pass: false
@@ -78,16 +85,23 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
       - url: https://www.twilio.com/docs/iam/api-keys/keys-in-console
-        checked_on: 2026-09-16
-        checked_by: tehreet
-    notes: The documented Key resource properties are only sid, friendly_name, date_created, date_updated and secret. No expiry field on the Key resource and no expiration option in the Console creation flow. Keys live until deleted.
+        checked_on: 2026-10-05
+        checked_by: sisyphus
+        quote: >-
+          For Standard and Main API keys, you can update only the API key name. For Restricted keys,
+          you can update the API key name and the permissions.
+    notes: >-
+      The documented Key resource properties are only sid, friendly_name, date_created, date_updated
+      and secret. No expiry field on the Key resource. The Console page was rewritten on 2026-09-21
+      with separate Twilio Console and Legacy Console flows; neither creation flow offers an
+      expiration, and the update flow edits only name and permissions. Keys live until deleted.
   rotation_api:
     pass: true
     evidence:
       - url: https://www.twilio.com/docs/usage/api/keys
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "POST https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Keys.json"
+        quote: POST https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/Keys.json
     notes: Create and DELETE endpoints exist on both the v2010 Keys resource and the v1 Keys resource.
   scoping:
     pass: true
@@ -95,12 +109,14 @@ hygiene:
       - url: https://www.twilio.com/en-us/changelog/restricted-api-keys-ga
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Restricted API Keys is now Generally Available (GA)."
+        quote: Restricted API Keys is now Generally Available (GA).
       - url: https://www.twilio.com/docs/iam/api-keys/restricted-api-keys
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Restricted API keys have a limit of 100 permissions that can be associated with each key."
-    notes: Restricted API keys went GA on 2025-12-10 (public beta since 2024-02-14). Main and Standard keys are all-or-nearly-all access.
+        quote: Restricted API keys have a limit of 100 permissions that can be associated with each key.
+    notes: >-
+      Restricted API keys went GA on 2025-12-10 (public beta since 2024-02-14). Main and Standard
+      keys are all-or-nearly-all access.
   last_used:
     pass: false
     evidence:
@@ -108,19 +124,23 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
       - url: https://www.twilio.com/docs/iam/api-keys/keys-in-console
-        checked_on: 2026-09-16
-        checked_by: tehreet
-    notes: The Key resource exposes only sid, friendly_name, date_created, date_updated and secret. Neither the Key resource nor the Console docs expose a last-used timestamp. Graded conservatively; if Twilio shows one somewhere undocumented, send a receipt.
+        checked_on: 2026-10-05
+        checked_by: sisyphus
+    notes: >-
+      The Key resource exposes only sid, friendly_name, date_created, date_updated and secret. The
+      rewritten Console page lists the fields shown on the API key details page and a last-used
+      timestamp is not among them. Graded conservatively; if Twilio shows one somewhere
+      undocumented, send a receipt.
   leak_revocation:
     pass: true
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Twilio API Key"
+        quote: Twilio API Key
     notes: Partner pattern for API keys and Account String Identifiers; also push-protected.
-
 notes: >-
-  Headline is D because of the outbound surface; the inbound API alone would be C. Twilio moves
-  to B or A only if it accepts OIDC tokens (GitHub Actions, cloud identities, or a custom issuer)
-  for its token endpoint.
+  Headline is D because of the outbound surface; the inbound API alone would be C. Twilio moves to B
+  or A only if it accepts OIDC tokens (GitHub Actions, cloud identities, or a custom issuer) for its
+  token endpoint.
