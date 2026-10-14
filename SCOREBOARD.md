@@ -13,7 +13,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | GitHub | [REST/GraphQL API and Actions](data/products/github-api.yaml) | 🟠 C | 🟢 A | `✓ ✗ ✓ ✓ ✓` | listed | 2026-09-16 |
 | **🟡 B** | Datadog | [API (API keys + application keys)](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
 | **🟡 B** | HashiCorp | [Vault (self-managed and HCP Vault Dedicated)](data/products/hashicorp-vault.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-09-16 |
-| **🟢 A** | Amazon Web Services | [IAM / STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
+| **🟢 A** | Amazon Web Services | [IAM / STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
 | **🟢 A** | CoreWeave | [CKS (Kubernetes Service)](data/products/coreweave-cks.yaml) | 🟢 A | 🟢 A | `✓ ✗ ✗ ✗ ✗` | listed | 2026-09-16 |
 | **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-09-16 |
 | **🟢 A** | Google Cloud | [IAM / Workload Identity Federation](data/products/google-cloud-iam.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
