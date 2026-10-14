@@ -1,0 +1,186 @@
+id: lumos-identity-platform
+vendor: Lumos
+product: Lumos Identity Platform (API, Terraform provider, on-prem agent)
+website: https://www.lumos.com
+docs: https://developers.lumos.com/docs/quick-start.md
+category: identity
+status: listed
+summary: >-
+  Automation against the Lumos API needs a static lsk_ token that never expires and carries the
+  full permissions of the user who created it. Into your tenants Lumos is mostly keyless (AWS
+  role with External ID, GCP and Google Workspace delegation, OAuth consent for Microsoft 365,
+  GitHub, Slack and Salesforce), but Okta's documented default is a pasted API token.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static `lsk_` API token created in the Lumos UI, sent as a Bearer token, inheriting the
+      creating user's permissions; the on-prem agent uses a separate static On Prem Agent token.
+    issuers: []
+    evidence:
+      - url: https://developers.lumos.com/docs/quick-start.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Lumos authenticates API requests using API keys."
+      - url: https://developers.lumos.com/docs/quick-start.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API Tokens inherit & retain the permissions of the user that created them."
+      - url: https://developers.lumos.com/docs/cli-authentication.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API Tokens last indefinitely. OAuth 2.0 tokens last for 12 hours."
+      - url: https://developers.lumos.com/docs/mcp-authsecurity-for-iam.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "OAuth 2.1 Authorization Code grant with PKCE (RFC 7636). PKCE is required, and only the S256 challenge method is accepted."
+      - url: https://developers.lumos.com/docs/managing-integrations-via-terraform.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The provider reads it from the `LUMOS_ACCESS_TOKEN` environment variable."
+      - url: https://developers.lumos.com/docs/quick-start-guide.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "3. Copy the token and set it as the environment variable `LUMOS_ON_PREMISE_AGENT_API_KEY` on the agent host."
+    notes: >-
+      No workload federation of any kind is documented: no OIDC token exchange, no cloud-identity
+      login, no client-credentials grant for the platform API. The OAuth that exists (Lumos CLI
+      login, the MCP servers) is an interactive authorization-code + PKCE flow for a human user,
+      with 12-hour CLI tokens and 1-hour MCP access tokens; it does not help an unattended
+      workload. The Terraform provider and the REST API both take the same static user-bound API
+      token. The on-prem agent (for AD, LDAP, JDBC and flat-file connectors) authenticates back to
+      Lumos with a static "On Prem Agent Token" (also `lsk_`-prefixed) held in an environment
+      variable on the host. That token type is limited to the agent surface ("it does not grant
+      Lumos admin access") and Lumos recommends one token per agent and documents a manual
+      create-swap-delete rotation, but it is still a long-lived secret with no documented expiry.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cross-account IAM role with External ID (AWS), domain-wide delegation to Lumos's own
+      service account (GCP, Google Workspace), and OAuth consent to Lumos's apps (Microsoft 365 /
+      Entra ID, GitHub, Slack, Salesforce); Okta's default path and AWS IAM Identity Center's
+      SCIM leg take a customer-generated static token.
+    evidence:
+      - url: https://support.lumos.com/articles/5045479970-connecting-aws-nhi
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You're creating a read-only IAM role in your AWS account that Lumos assumes via AWS STS using an External-ID-gated trust policy."
+      - url: https://support.lumos.com/articles/2659423923-connecting-aws-iam-single-account
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Lumos connects to an individual AWS account by assuming a cross-account IAM role."
+      - url: https://support.lumos.com/articles/2270985801-connecting-lumos-to-google-cloud-platform-gcp
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Assign the custom role to Lumos’s service account: googlecloudintegration@lumos-gcloud-integration-prod.iam.gserviceaccount.com"
+      - url: https://support.lumos.com/articles/1877502581-connecting-google-workspace
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Access to scopes is granted via domain-wide delegation by a Google Workspace administrator."
+      - url: https://support.lumos.com/articles/8716465475-connecting-office365
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You'll be prompted to Accept scopes via OAuth:"
+      - url: https://support.lumos.com/articles/9692042005-connecting-github
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "When connecting GitHub, we ask for the following scopes via OAuth."
+      - url: https://support.lumos.com/articles/4590658080-connecting-okta
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In the API key field, enter your API token from Okta."
+      - url: https://support.lumos.com/articles/4484298688-okta-integration-requirements
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "If you choose to connect to Okta via an API token, it's important to note that an Okta API token inherits the permissions of the Okta user account that creates it."
+      - url: https://support.lumos.com/articles/4484298688-okta-integration-requirements
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This version can be connected to by selecting the API Services version of the integration."
+      - url: https://support.lumos.com/articles/4808482208-aws-iam-identity-center
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Click Generate token → copy to the API Key field."
+      - url: https://developers.lumos.com/docs/managing-integrations-via-api.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Keys depend on the app (for example `api_key`, or `client_id` and `client_secret`); the connection schema lists them."
+    notes: >-
+      Checked: AWS IAM (single account) and AWS NHI (cross-account role + External ID, keyless);
+      AWS IAM Identity Center (role is keyless, but the SCIM leg wants an AWS-generated SCIM
+      bearer token pasted into Lumos); GCP (Lumos's service account granted a custom role plus
+      domain-wide delegation, keyless, though it also asks for an org-admin user email to
+      impersonate); Google Workspace (domain-wide delegation to a Lumos-generated client ID,
+      keyless); Microsoft 365 / Entra ID (OAuth consent by a Global Administrator, keyless, but
+      requested scopes are broad, e.g. Directory.AccessAsUser.All); GitHub (OAuth with admin:org
+      and repo; only the archived pre-September-2025 article is public, the current connector's
+      setup page was not found); Slack and Salesforce (OAuth install/consent, keyless); Okta
+      (documented default is a pasted Okta API token that inherits its creator's permissions,
+      with least-privilege custom-role guidance; an "API Services" OAuth variant exists and is
+      counted as keyless, but the public page does not say whether it is Lumos's OIN app or a
+      customer-created app). No Azure-subscription connector was found. Graded B: keyless for the
+      clouds and most major SaaS, static tokens still requested for Okta (default) and the long
+      tail of `api_key` connectors. The on-prem connectors (AD, LDAP, JDBC) run inside the
+      customer network via the agent and use credentials the customer configures locally.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.lumos.com/docs/cli-authentication.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API Tokens last indefinitely."
+    notes: The token creation steps take only a name and description; no expiry option or org policy is documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.lumos.com/docs/quick-start.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Go to the [API Tokens page](https://app.lumosidentity.com/settings/api_tokens) in the Lumos settings."
+      - url: https://developers.lumos.com/docs/quick-start-guide.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "**To rotate a token:** create a new On Prem Agent Token → update that agent's `LUMOS_ON_PREMISE_AGENT_API_KEY` → restart the agent → delete the old token."
+    notes: >-
+      Tokens are created in the settings UI. The public API reference index
+      (developers.lumos.com/llms.txt) lists no endpoint to create or revoke Lumos API tokens, so
+      rotation cannot be automated without a browser.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://developers.lumos.com/docs/quick-start.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API Tokens inherit & retain the permissions of the user that created them."
+      - url: https://developers.lumos.com/docs/managing-integrations-via-terraform.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The token acts as the user who created it, so that user must be an admin with permission to connect and remove integrations."
+    notes: >-
+      No per-token scopes and no documented service-account principal for the API. The On Prem
+      Agent token type is restricted to the agent surface, but that does not help API automation.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.lumos.com/docs/quick-start.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Store your API token carefully! We take security seriously so we can only show you the API Token at creation time."
+    notes: No last-used timestamp for API tokens is documented in the public developer docs or help center.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Lumos does not appear in GitHub's secret scanning partner list, despite a distinctive `lsk_` prefix.
+
+notes: >-
+  Lumos's developer docs and help center are public; the in-app API Tokens settings page is not,
+  so a last-used column or expiry option could exist in the UI without being documented. The
+  MCP servers use a well-built OAuth 2.1 + PKCE flow with 1-hour access tokens and rotating
+  refresh tokens, but it is for human users, not workloads. The grade moves off F if tokens gain
+  an expiry policy and a management API, or if Lumos adds service-account tokens or federation.

@@ -1,0 +1,179 @@
+id: keycard-agent-identity
+vendor: Keycard
+product: Keycard (identity and access for AI agents)
+website: https://www.keycard.ai
+docs: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
+category: identity
+status: listed
+summary: >-
+  A deployed agent can authenticate to a Keycard zone with a token from any OIDC issuer, pinned
+  by issuer and subject, and the zone is itself an issuer that Snowflake and Anthropic can trust.
+  The management API that Terraform uses still needs an Admin-level client secret. Many SaaS
+  connectors need your own OAuth app secret, a PAT or an API key.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Workload Identity credential on an Application: register any OIDC issuer that publishes a
+      discovery document as a Provider, pin the credential to that issuer and an exact (or
+      trailing-wildcard) subject, and the SDK presents the platform's token as a jwt-bearer
+      client assertion on each token exchange at the zone.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Register the platform as a Provider, pin a Workload Identity credential on your Application to the token's issuer and subject, and the SDK presents the platform's token instead. The steps are the same on every platform that publishes an OpenID Connect discovery document for its tokens."
+      - url: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Leave Client ID and Client Secret empty. Keycard discovers the issuer's signing keys from its OpenID Connect discovery document."
+      - url: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A trailing * matches every subject that starts with the text before it, so workspace:<workspace-id>:* trusts every service in a Render workspace at the cost of looser pinning."
+      - url: https://docs.keycard.ai/use-cases/agent-with-its-own-identity/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Because the trust is expressed as an issuer and a subject rather than as a platform integration, anything that publishes an OpenID Connect discovery document and a key set can be an identity source."
+      - url: https://docs.keycard.ai/reference/standards/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Every protocol listed here is available on every plan. Nothing is gated by tier."
+      - url: https://docs.keycard.ai/admin/service-accounts/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A service account authenticates with a client ID and client secret. An account can hold several credentials, so you can rotate one without touching the others."
+    notes: >-
+      Graded on the zone token endpoint, which is where agents, MCP servers and other workloads
+      authenticate at runtime and the core of the product. Worked guides exist for Render and
+      Fly.io; the SDKs also read EKS, AWS web-identity, Azure federated and GCP metadata tokens,
+      and the Providers page names AWS, Azure, Google Cloud, Vercel and GitHub Actions. Trust is
+      pinned by issuer and subject only: no audience or extra-claim constraint is documented, and
+      the Render walkthrough reuses the token Render mints for AWS, so Keycard does not appear to
+      require its own audience. That is the weak part of this A. The management API (Terraform
+      provider, admin scripts) is a separate plane and accepts only service-account OAuth2 client
+      credentials (client ID + secret exchanged at /service-account-token for a short-lived
+      token), which on its own would be a C; those secrets carry the full organization Admin role.
+      Applications can also use client ID + secret (Keycard recommends against it) or URL/CIMD
+      key-based assertions. No on-prem collector to grade; the Keycard CLI and SDKs authenticate
+      the same way as Applications.
+  outbound:
+    grade: B
+    mechanism: >-
+      The zone is an OIDC issuer that downstream providers can trust (Snowflake External OAuth,
+      Anthropic WIF, any service that verifies zone JWTs), and AWS audit-log export uses a
+      cross-account IAM role with an External ID; most SaaS catalog entries need a client
+      ID/secret from an OAuth app the customer registers, and others take a PAT or vendor API key
+      stored in Keycard Vault.
+    evidence:
+      - url: https://docs.keycard.ai/admin/configure-provider-apis/overview/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Keycard issues short-lived, scoped credentials that external providers accept via Workload Identity Federation (WIF). Your application authenticates to Keycard, requests a token for a specific provider, and uses that token directly with the provider's API. No API keys stored anywhere."
+      - url: https://docs.keycard.ai/guides/access-snowflake/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Snowflake needs to trust Keycard as an OAuth authorization server."
+      - url: https://docs.keycard.ai/admin/audit-log-export/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You'll need to generate an External ID - a secret credential for the IAM trust policy."
+      - url: https://docs.keycard.ai/admin/catalog/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Most API entries, and some MCP servers, need an OAuth app you register with the vendor the first time. Console shows the vendor's setup steps, including the callback URL to paste into their form. Enter the app's Client ID and Client Secret"
+      - url: https://docs.keycard.ai/admin/catalog/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Some MCP servers take a vendor API key instead of OAuth, and GitHub API accepts a personal access token instead of an OAuth app."
+      - url: https://docs.keycard.ai/guides/delegated-access/github/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In GitHub Developer Settings, create a new OAuth App and set the Redirect URI (older forms call it Authorization callback URL) to the redirect URL you copied from Keycard. Once created, note the Client ID and generate a Client Secret."
+      - url: https://docs.keycard.ai/guides/delegated-access/google/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Enter the Client ID and Client Secret from step 2. This creates the Google OAuth provider and API resources."
+      - url: https://docs.keycard.ai/guides/add-custom-resource/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The service only takes a static API key or a username and password"
+    notes: >-
+      Connectors checked: Anthropic and Snowflake (keyless, they trust the zone as issuer; any
+      custom API built with a Keycard SDK likewise); AWS (audit-log export to S3 via cross-account
+      AssumeRole with External ID and an aws:PrincipalOrgPaths condition, keyless); catalog
+      one-click entries such as Linear MCP where Keycard sets up trust itself (keyless); GitHub API
+      (customer's own OAuth App client secret, or a PAT); Google Workspace Calendar/Drive
+      (customer's own Google OAuth client secret; no domain-wide delegation to a Keycard service
+      account); API-key MCP servers and anything else via Keycard Vault (static key). Autonomous
+      agents acting as themselves through a Gateway can only reach vaulted static-key upstreams.
+      Okta, Entra ID, Auth0, Ping and Google appear only as user sign-in IdPs (customer pastes an
+      OIDC client secret), which is human SSO and out of scope. No GCP or Azure connectors and no
+      Slack or M365 data connectors were documented beyond OAuth app setups. Graded B: keyless for
+      some connectors, static keys or customer-managed secrets for many others.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.keycard.ai/admin/service-accounts/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Console shows the Client ID and Client Secret once. Copy both into your automation's secret store now. The secret cannot be retrieved later; if you lose it, delete the credential and create a new one."
+    notes: >-
+      No expiry field or org policy is documented for service-account or Application client
+      secrets; they live until deleted.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.keycard.ai/admin/service-accounts/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "With an Admin token you can automate the steps above."
+      - url: https://docs.keycard.ai/admin/service-accounts/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The client_secret is returned only by the POST that creates the credential; later reads return metadata only."
+    notes: Credentials are created with POST and deleted with DELETE under /service-accounts/<id>/credentials.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.keycard.ai/concepts/applications/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Dependencies only permit access when an application is acting on its own behalf."
+      - url: https://docs.keycard.ai/admin/service-accounts/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Tokens issued to a service account carry the organization Admin Role. There is no per-account Admin, Manager, or Viewer selector."
+    notes: >-
+      Split result. An Application's client secret belongs to a purpose-built machine principal
+      limited by its declared dependencies and Cedar policies, which passes. Service-account
+      secrets for the management API are always full organization Admin and cannot be scoped.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.keycard.ai/admin/service-accounts/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The credentials table shows each credential's Client ID, when it was Created, and Last Active At: the last time the credential authenticated at the token endpoint."
+    notes: >-
+      Documented for service-account credentials. Application credential activity is visible via
+      the Application's Activity feed and the Audit Log.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Keycard does not appear on GitHub's secret scanning partner list.
+
+notes: >-
+  Docs are public, with an llms.txt index; nothing was gated. Keycard also brokers user-delegated
+  OAuth tokens and vaulted static keys for downstream tools; tokens it issues live 24 hours by
+  default unless a Resource sets a shorter lifetime. The grade would hold firmer if workload
+  identity credentials could pin an audience, and the management API would stop being the weak
+  spot if service accounts accepted the same workload identity credentials or could take a role
+  narrower than Admin.

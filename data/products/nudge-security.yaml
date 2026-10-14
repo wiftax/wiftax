@@ -1,0 +1,168 @@
+id: nudge-security
+vendor: Nudge Security
+product: Nudge Security
+website: https://www.nudgesecurity.com
+docs: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+category: security
+status: listed
+summary: >-
+  The Nudge Security API takes only a static bearer token, made in the UI, with no documented
+  scopes, rotation API or partner leak revocation; it expires only after four weeks without use.
+  Into your SaaS it connects through its own Google Workspace, Microsoft Entra and Slack apps,
+  but the Okta connector wants a pasted Okta API token.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API token created by an administrator under Settings > API Tokens in the web UI and
+      sent as "Authorization: Bearer <token>". No federation, OAuth client-credentials or
+      short-lived token path is documented.
+    evidence:
+      - url: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Under Settings , navigate to API Tokens. Click Create API Token. Give the token a descriptive name and click Create ."
+      - url: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Note: You will need to use the following syntax when using the API key in requests: Authorization: Bearer <token>"
+      - url: https://nudgesecurity.readme.io/reference/post_api-1-0-apps-search.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: '"description": "Authorization header containing the Nudge API Token", "scheme": "bearer", "type": "http"'
+    notes: >-
+      The OpenAPI security scheme on the public API reference is a single bearer token; no other
+      auth scheme is listed. The browser extension (Nudge's endpoint-deployed component)
+      authenticates back to Nudge with a tenant-wide static "deployment key" pushed via MDM, which
+      the backend exchanges for a per-browser-profile API key once a user is identified ("anyone
+      with it can register devices to your tenant"). That is another long-lived shared secret
+      in the inbound story, though it is not what a customer automates against.
+  outbound:
+    grade: B
+    mechanism: >-
+      Admin install / consent of Nudge's own apps for Google Workspace (Marketplace app), Microsoft
+      Entra ID / M365 (enterprise app admin consent) and Slack (app install); Jira, ServiceNow and
+      GitHub connect by OAuth authorization. The Okta connector requires the customer to create an
+      Okta API token and paste it, and the vendor says most connected apps need either an API key
+      or an OAuth authorization.
+    evidence:
+      - url: https://help.nudgesecurity.com/en/articles/7153593-configure-access-to-google-workspace
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "As instructed in the onboarding process, your Google Workspace super admin will need to install Nudge Security as a Google Workspace app."
+      - url: https://help.nudgesecurity.com/en/articles/7135200-configure-access-to-microsoft-entra-id
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Step 3: Click on the big blue button \"Grant admin consent for\" This will grant the necessary permissions for Nudge Security to do the analysis."
+      - url: https://help.nudgesecurity.com/en/articles/8312724-configuring-nudge-integration-for-slack
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Select Connect Slack > Connect to Slack and a window will pop up asking you to connect to your Slack workspace."
+      - url: https://help.nudgesecurity.com/en/articles/10088118-configure-the-okta-connected-app
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To enable the Okta connected app, you'll need to create an API token in Okta and configure it in Nudge Security."
+      - url: https://help.nudgesecurity.com/en/articles/10088118-configure-the-okta-connected-app
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In Okta, API tokens inherit the permissions of the user who creates them, rather than allowing fully customized permissions. To generate a token with restricted access, we must ensure the creating user has only the minimum necessary permissions."
+      - url: https://help.nudgesecurity.com/en/articles/7257318-configure-okta-sso-analysis-in-nudge-security
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "By connecting your organization’s Okta account to Nudge Security with a read-only and application administrator API token"
+      - url: https://help.nudgesecurity.com/en/articles/14710380-connect-your-apps-and-configure-settings
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Follow the setup instructions for each app. Most require generating an API key or authorizing an OAuth connection in the target app."
+      - url: https://www.nudgesecurity.com/connected-app/github
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Integration method OAuth"
+      - url: https://help.nudgesecurity.com/en/articles/15519903-configure-the-jira-integration
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Select Connect Jira and authorize Nudge to access your Jira Cloud site."
+    notes: >-
+      Checked: Google Workspace (Marketplace app install, keyless), Microsoft Entra ID / M365
+      (admin consent to Nudge's gallery app, keyless), Slack (app install, keyless), Jira and
+      ServiceNow (OAuth authorization, keyless), GitHub (marketing page lists "OAuth" as the
+      integration method; no public setup article, so whether it is Nudge's own GitHub/OAuth app
+      is not verified), Okta (pasted Okta API token, static; Nudge documents a least-privilege
+      custom-role recipe, and the Okta marketing page lists "API, OAuth", but only the token
+      path is documented publicly). Nudge has no AWS, GCP or Azure subscription connectors; its
+      cloud-ish connected apps (Oracle Cloud, Linode, Snowflake and 100+ others) have marketing
+      pages only, and the vendor says most need an API key or OAuth authorization, so other
+      static-key connectors are likely. Setup docs for the 100+ connected apps live inside the
+      product and were not publicly verifiable.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API tokens will not expire if used.  However, tokens will automatically expire after 4 weeks of no use."
+    notes: >-
+      Inactivity expiry kills abandoned tokens, which is better than nothing, but a token in
+      active use never expires and no expiry date or org policy can be set. Fails the check as
+      written.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Setting up an API key in Nudge Security is easy and is done from the UI ."
+      - url: https://nudgesecurity.readme.io/llms.txt
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "# Nudge Security Public API Documentation"
+    notes: >-
+      Tokens are created and revoked in the UI only. The public API reference index (apps,
+      accounts, OAuth grants, events, users, groups, fields, labels, findings, playbooks, TPRM,
+      AI, browser extension) has no endpoint for creating or revoking API tokens.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Note: You will need to have the \"administrator\" role in order to create API keys in Nudge Security."
+      - url: https://help.nudgesecurity.com/en/articles/15182243-manage-users-and-roles
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "manage users and roles (invite users, assign roles, configure Okta SSO for Nudge Security login), generate API keys"
+    notes: >-
+      Token creation takes only a name; no scopes, read-only option or service-account principal
+      is documented. Only Administrators can create tokens, and the API includes write and
+      destructive actions (labels, fields, offboarding playbook), so a token appears to carry
+      broad tenant access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To revoke a token, find the token name and click Revoke."
+    notes: >-
+      No public doc mentions a last-used timestamp for API tokens. The 4-week inactivity expiry
+      implies Nudge tracks usage internally, but it is not shown as a receipt. Graded
+      conservatively; a screenshot or doc of a last-used column would flip this.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Nudge Security does not appear anywhere in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Graded the Nudge Security platform API (the only public API). Public docs are the Intercom help
+  center and a readme.io API reference; per-connector setup instructions for most of the 100+
+  connected apps sit inside the product and could not be verified, so the outbound list above is
+  what is public. Discovery itself rides on Google Workspace / Microsoft 365 email and OAuth data
+  via Nudge's own apps, which is keyless. The inbound grade moves off F with any three of:
+  settable expiry, a token-management API, scoped or read-only tokens, a last-used column, or
+  joining GitHub's partner program.

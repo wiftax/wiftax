@@ -1,0 +1,189 @@
+id: defakto-mint
+vendor: Defakto (formerly SPIRL)
+product: Mint (SPIFFE workload identity control plane)
+website: https://www.defakto.security
+docs: https://d.defakto.security/iam/service-accounts
+category: identity
+status: listed
+summary: >-
+  Defakto service accounts can skip keys entirely by exchanging a short-lived OIDC token from any
+  issuer the org admin registers, with exact claim matching; the fallback is a non-expiring Ed25519
+  private key. Mint reaches into your clouds by being an OIDC issuer you trust, so nothing is
+  handed over.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Workload Identity Federation: an org admin registers any HTTPS OIDC issuer (auto-discovered,
+      custom JWKS URL, inline JWKS or uploaded PEM keys for air-gapped IdPs), a WIF Configuration
+      binds a service account to that issuer with exact-match claims, and the caller exchanges its
+      OIDC token for a session that cannot outlive the token; the alternative is an Ed25519 key pair.
+    issuers: ["any"]
+    evidence:
+      - url: https://d.defakto.security/iam/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Workload Identity Federation (WIF) — the service account is bound to an external OIDC identity by presenting a short-lived platform-issued OIDC token (from Terraform Cloud, GitHub Actions, etc.) and receiving a session in exchange. No long-lived secret is stored."
+      - url: https://d.defakto.security/iam/wif-issuers
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A WIF issuer is an organization-wide record that registers an external OIDC identity provider (IdP) the organization trusts."
+      - url: https://d.defakto.security/iam/wif-issuers
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "PEM ( --jwks-pem-file ) Private or air-gapped IdPs whose JWKS endpoint is unreachable by the control plane You upload PEM-encoded public keys."
+      - url: https://d.defakto.security/iam/terraform-wif
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The control plane fetches the JWKS from the OIDC issuer, verifies the token signature, audience, and expiry. On success, the control plane returns a standard service account session token."
+      - url: https://d.defakto.security/iam/terraform-wif
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The session will always have an expiration less than or equal to the expiration of the OIDC token."
+      - url: https://d.defakto.security/cli/spirlctl/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Either at least one --claim or --allow-any-bearer is required — they are mutually exclusive. Every listed claim must match exactly."
+      - url: https://d.defakto.security/cli/spirlctl/login-logout
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Instead of storing a long-lived private key, the OIDC token is exchanged for a Defakto session token on each login."
+      - url: https://d.defakto.security/mint/configuration/server-configuration/trust-domain-server-attestation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Kubernetes ServiceAccount token No long-lived private key. Kubernetes issues a fresh, short-lived token at each login. Recommended Deployment key ( tdk-* ) A long-lived private key you generate, store, and ship to the cluster. Supported, not recommended"
+    notes: >-
+      Graded A because the issuer list is customer-defined, not a vendor allowlist: any HTTPS OIDC
+      issuer works, and PEM/inline-JWKS modes cover private IdPs. Trust is constrained by issuer plus
+      arbitrary exact-match claims (sub, repository, workspace, etc.); the control plane also checks
+      audience, but the docs do not say which audience value is expected or whether it is
+      configurable. Footgun: --allow-any-bearer skips claim matching, which the docs warn means any
+      GitHub Actions workflow anywhere could log in. WIF is usable from spirlctl (0.36.0+) and the
+      Terraform provider, so arbitrary scripts can use it, not only Terraform. The fallback is an
+      Ed25519 private key held by the caller, which is a long-lived static secret (no expiry). How
+      deployed components authenticate back: self-hosted Trust Domain Servers can log in keylessly
+      with a Kubernetes ServiceAccount token (recommended, but off by default in the Helm chart), or
+      with a long-lived Ed25519 "deployment key" (tdk-*) that remains supported; agents attest to
+      Trust Domain Servers with platform evidence (k8s token, AWS IID, GCP IIT, Azure MSI, TPM,
+      Kerberos, SSH/X.509 PoP, custom JWT), with no static agent token documented. No plan or tier
+      gating for WIF was found in public docs.
+  outbound:
+    grade: A
+    mechanism: >-
+      Mint is itself an OIDC issuer: each trust domain publishes an OIDC discovery document and
+      JWKS, and customers configure AWS IAM OIDC providers, GCP Workload Identity Pools and Azure
+      federated credentials to trust Defakto-issued JWT-SVIDs; no customer secret is handed to
+      Defakto.
+    evidence:
+      - url: https://d.defakto.security/mint/integration/tutorial-aws-federation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A Defakto-issued JSON Web Token-SPIFFE Verifiable Identity Document (JWT-SVID) can be used to authenticate to Amazon Web Services (AWS) APIs and assume an AWS IAM role. This is done by setting up an AWS Identity Provider that supports OpenID Connect (OIDC)."
+      - url: https://d.defakto.security/mint/integration/gcp/tutorial-gcp-federation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This is done by setting up a Workload Identity Pool that supports OpenID Connect (OIDC). Defakto makes this process easier by automatically providing an OIDC Discovery document endpoint for your trust domain(s)."
+      - url: https://d.defakto.security/mint/integration/azure/tutorial-azure-federation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This is done by setting up an Azure User-Assigned Managed Identity with Workload Identity Federation that supports OpenID Connect (OIDC)."
+      - url: https://d.defakto.security/mint/configuration/svid-issuance/key-manager/key-manager-aws-kms
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "For other EKS clusters, use IRSA (IAM Roles for Service Accounts) to associate this role with the Trust Domain Server's Kubernetes service account."
+      - url: https://d.defakto.security/ledger/integrations/openai
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Setup is a one-time configuration using a single Admin API key with an sk-admin- prefix. Defakto stores this onboarding key encrypted and uses it to scan the OpenAI organization remotely."
+    notes: >-
+      Mint connectors checked: AWS, GCP, Azure, OpenAI and Anthropic federation (all via Mint as an
+      OIDC issuer the customer trusts), CI/CD (GitHub, GitLab, Jenkins), Envoy, Istio, Kubernetes,
+      Venafi Firefly. Cloud KMS key managers and AWS Private CA are called by customer-run Trust
+      Domain Servers using IRSA / pod identity, not by Defakto with a handed-over key. No Mint
+      connector asks the customer for a static secret. The sister product Ledger (secret discovery,
+      same console) is a different story and would grade B on its own: AWS (OIDC provider + IAM
+      role via CloudFormation), Entra/Azure (service principal with federated identity credential +
+      admin consent) and Gemini EAP on GCP (Workload Identity Federation, "no service account key is
+      created") are keyless, but the OpenAI and Anthropic integrations require pasting an
+      organization Admin API key (sk-admin- / sk-ant-admin) that Defakto stores. Okta, Google
+      Workspace, GitHub, Salesforce and Slack connectors are not documented for either product.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://d.defakto.security/cli/spirlctl/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Initial key added successfully ID: sak-je6ybhhp53 Public Key: MCowBQYDK2VwAyEAmw4KSHa9tuYg8LhL/akNtl5PF6DgEYmgPjT/Cx25HLg= Enabled: true Created At: 2025-11-03T19:54:48Z"
+      - url: https://d.defakto.security/cli/spirlctl/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Rotate keys regularly - Rotate service account keys every 90-180 days"
+    notes: >-
+      Service account keys have no expiry field in the CLI output or docs, and no org policy to force
+      one; rotation is a recommendation only. Deployment keys (tdk-*) are likewise long-lived until
+      disabled.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://d.defakto.security/iam/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Multiple keys per service account are supported to enable zero-downtime rotation: Once a new key is deployed and verified, the previous key can be disabled and deleted."
+      - url: https://d.defakto.security/cli/spirlctl/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "spirlctl iam service-account key add --service-account ci-pipeline"
+    notes: >-
+      Keys are added, disabled, enabled and removed non-interactively via spirlctl (a service
+      account can itself log in to do it). No public REST/gRPC API reference was found, but the CLI
+      and Terraform provider cover automation.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://d.defakto.security/iam/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Any Defakto user can create a service account with a role no greater than their own."
+      - url: https://d.defakto.security/iam/roles
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Organization roles grant permissions across all trust domains and realms. Realm-specific roles (like Realm Admin) grant permissions only within assigned realms."
+    notes: >-
+      Keys belong to a purpose-built service account with its own role (Auditor through Owner) and
+      realm assignments. Roles are coarse and hierarchical; there are no per-key scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://d.defakto.security/cli/spirlctl/service-accounts
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Service account Keys: ID Public Key Enabled Created At"
+    notes: >-
+      The key listing shows only ID, public key, enabled and created-at. The rotation guide says to
+      verify a new key "by checking authentication logs", so usage is only traceable through audit
+      logs, not a last-used field. Ironically, Defakto's Ledger product computes last-used for other
+      vendors' keys.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
+    notes: >-
+      Neither Defakto nor SPIRL appears in GitHub's supported-pattern list (partner or user). Keys
+      are plain PKCS#8 Ed25519 PEMs with no identifying prefix, so they are hard to attribute if leaked.
+
+notes: >-
+  Defakto was formerly SPIRL; the rename is only partly through. Docs moved from doc.spirl.com to
+  d.defakto.security, but the CLI is still spirlctl, Terraform resources are spirl_*, agent
+  endpoints are *.spirl.com, and there is a spirlctl migrate-to-defakto page. Mint is the flagship
+  (SPIFFE trust domains, agents, Trust Domain Servers, JWT/X.509/WIT-SVIDs, RFC 8693 token
+  exchange). Ledger (static-secret discovery and migration) shares the control plane and the same
+  service-account auth, so the inbound grade applies to both; its outbound story is described in
+  the outbound notes. What keeps this card from being clean: Ed25519 service-account keys and
+  deployment keys still exist, never expire, show no last-used, and are not in any leak-revocation
+  program, and keyless Trust Domain Server login is opt-in (off by default).

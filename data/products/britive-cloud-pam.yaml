@@ -1,0 +1,215 @@
+id: britive-cloud-pam
+vendor: Britive
+product: Cloud PAM (JIT / zero standing privilege) API
+website: https://www.britive.com
+docs: https://docs.britive.com/docs/service-identities
+category: identity
+status: listed
+summary: >-
+  Britive service identities can authenticate with an ID token from any OIDC issuer you register
+  (plus AWS STS and SPIFFE), so automation needs no static Britive token. Into your clouds it is
+  keyless on AWS, GCP WIF, Azure WIF and OCI WIF, but Okta, Salesforce, Snowflake, Google Workspace
+  and ServiceNow connectors still want a pasted token, password or key.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Federated service identities: the tenant trusts an OIDC identity provider you configure by
+      issuer URL with allowed audiences and exact/regex claim-to-attribute mapping, and the workload
+      sends its ID token as "Authorization: OIDC::<token>"; AWS STS (GetCallerIdentity) and SPIFFE
+      JWT-SVID providers are also accepted. Static API tokens (1-90 days) remain available.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.britive.com/docs/service-identities
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Service identities are non-human identities used for non-interactive use cases like automation, scripting, etc."
+      - url: https://docs.britive.com/docs/service-identities
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "**Issuer Url**: This needs to be unique within a tenant."
+      - url: https://docs.britive.com/docs/service-identities
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "When calling Britive APIs with OIDC providers, make sure to use the OIDC token prefix in the authorization header **Authorization: OIDC::****{{****ID Token****}}.**"
+      - url: https://docs.britive.com/docs/identity-providers
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "**OIDC**: Enter **Name, Issuer Url,** and **Description**."
+      - url: https://docs.britive.com/docs/identity-providers
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "**Allowed Audiences:** Edit a list of allowed audiences."
+      - url: https://docs.britive.com/docs/identity-providers
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "**Regex**: The stored value is a regular expression, and the claim must match it."
+      - url: https://docs.britive.com/docs/britive-cli
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "It includes support for workload federation, approvals, Britive administration, and many other features."
+    notes: >-
+      Issuers are bring-your-own: any OIDC issuer URL (the docs use GitHub repo/branch claims as the
+      example), plus one AWS STS provider and SPIFFE/SPIRE trust domains. Trust is constrained by
+      issuer, allowed audience, a configurable iat validation window (default 30 seconds) and
+      claim-to-attribute mapping (e.g. sub), and the effective token lifetime is the lesser of the
+      ID token's exp and the service identity's configured validity. The older API prerequisites
+      page still describes only static API tokens created by an admin in the UI. On-prem Access
+      Broker agents register with a broker-pool authentication token (static, up to three per
+      pool, two active), or an authentication_token_generator script that can fetch one
+      dynamically; the docs do not describe federating the broker itself.
+  outbound:
+    grade: B
+    mechanism: >-
+      Britive is a SAML IdP trusted by an AWS IAM role (AssumeRoleWithSAML) and an OIDC issuer
+      trusted by GCP Workload Identity Federation, an Azure app-registration federated credential,
+      OCI and EKS; Okta (super-admin API token), Salesforce (password + security token), Snowflake
+      (key pair), Google Workspace (service-account JSON key), ServiceNow (password) and the legacy
+      GCP/Azure connectors (JSON key / client secret) still take static credentials.
+    evidence:
+      - url: https://docs.britive.com/docs/configuring-identity-provider
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Britive uses the SAML protocol as the authentication mechanism to connect to AWS."
+      - url: https://docs.britive.com/docs/configuring-iam-roles
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Only read-only access is needed here as the role is mainly used for scanning in Britive. Hence, write access is not required for the role."
+      - url: https://docs.britive.com/docs/gcp-workload-identity-pool-and-provider
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Britive tenant’s OAuth URL, for example: *https://<TENANT_BASE_URL>/api/auth/sso/oauth2.*This field can be copied from the onboarded Britive GCP WIF app→**Settings**→**Britive Issuer URL**."
+      - url: https://docs.britive.com/docs/configuring-federated-credentials
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "For a federated credential scenario, select **Other Issuer** in the dropdown menu."
+      - url: https://docs.britive.com/docs/onboarding-an-eks-cluster
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "On the **Settings** tab, Britive automatically creates OIDC attributes to use when setting up the federation trust with the EKS cluster."
+      - url: https://docs.britive.com/docs/britive-okta-integration-guide
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Britive needs an API token with super administrator privileges that provides access to connect to Okta to read roles, users, and role assignments."
+      - url: https://docs.britive.com/docs/pre
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Britive needs a service account that provides access to connect to Google Workspace to read roles, users, and IAM policies. After creating an account, the following items are required:"
+      - url: https://docs.britive.com/docs/onboarding-gws
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Copy and paste the JSON of the service account key (credentials) that was generated when the service account was created"
+      - url: https://docs.britive.com/docs/salesforce-onboarding-guide
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Britive needs the following to onboard a Salesforce application:"
+      - url: https://docs.britive.com/docs/configuring-salesforce-application
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Provide the user's email address, password, and security token to the Britive administrator to complete the Salesforce configuration in Britive."
+      - url: https://docs.britive.com/docs/britive-snowflake-integration-guide
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Private and Public keys to connect to Snowflake REST APIs"
+      - url: https://docs.britive.com/docs/britive-configuration
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Copy and paste the JSON of the service account key (credentials) generated when the service account was created."
+      - url: https://docs.britive.com/docs/generating-client-secret
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "If you select Never, the client secret never expires."
+    notes: >-
+      Connectors checked: AWS (SAML IdP + IAM role, keyless), AWS Identity Center and AWS account
+      access (same Britive SAML IdP pattern), GCP WIF (Britive is the OIDC issuer, keyless), GCP
+      legacy (service-account JSON key), Azure WIF (federated credential, keyless), Azure legacy
+      (client secret, docs mention a "Never" expiry option), OCI WIF (Britive issuer + confidential
+      app; still asks for a confidential-app client ID), OCI 1.0/2.0 (user API signing key, plus
+      client secret for provisioning), EKS (Britive OIDC issuer, keyless), Okta (API token with
+      Super Administrator), Google Workspace (service-account JSON key with domain-wide delegation),
+      Salesforce (user password + security token with Modify All Data), Snowflake (key pair for a
+      user with MANAGE GRANTS / ORGADMIN), ServiceNow (user password). Every major cloud has a
+      keyless option, which is better than most of the cohort, but every SaaS/IdP connector checked
+      wants a static credential, so B. No GitHub or Microsoft 365 connector is documented; Entra ID
+      appears only as an SSO/SCIM identity provider.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.britive.com/apidocs/create-an-api-token-with-full-administrator-privileges
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Any value between 1 and 90 days."
+      - url: https://docs.britive.com/docs/api-tokens-1
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Enter the name and validity of the API token. Click **Save**. The validity counter is refreshed with every use of a token."
+    notes: >-
+      Judgment call. Every API token and static service-identity token must carry a 1-90 day
+      validity, which looks like an enforced ceiling, but the counter resets on every use, so it
+      is an inactivity timeout rather than an expiry: a token that is used regularly (including by
+      whoever stole it) never expires. Short-lived temporary tokens (POST /api/tokens/temp, 24-hour
+      platform cap, lower tenant maximum) exist but must themselves be minted by an authenticated
+      caller.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.britive.com/apidocs/create-a-token-for-a-specified-identity
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "When this token is created, the old token associated with the identity provider is removed."
+      - url: https://docs.britive.com/apidocs/revoke-a-token-for-a-specific-token-id
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Use the Get tokens API call to retrieve the id of the token that should be revoked."
+    notes: >-
+      POST /api/token creates, DELETE /api/token/{tokenId} revokes, and POST/PATCH
+      /api/users/{targetUserId}/tokens replaces or re-dates a service identity's token.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.britive.com/apidocs/create-a-token-for-a-specified-identity
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The token has the same privileges assigned to the identity."
+      - url: https://docs.britive.com/docs/service-identities
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Service identities are non-human identities used for non-interactive use cases like automation, scripting, etc."
+      - url: https://docs.britive.com/apidocs/api-prerequisites
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API tokens inherit the same privileges as the user who created the tokens."
+    notes: >-
+      Passes via service identities, which are purpose-built machine principals whose static token
+      carries only the policies/profiles assigned to that identity. Plain admin API tokens do not
+      scope: they inherit the creator's privileges, and POST /api/token is documented as creating
+      "an API token with full administrator privileges".
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.britive.com/apidocs/get-all-api-tokens-in-the-system
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Get all API tokens in the system"
+    notes: >-
+      The ApiTokenBean returned by GET /api/token includes a lastAccessed date-time field alongside
+      createdOn, expiresOn, createdBy and type (DEFAULT, SCIM, ServiceIdentity). The field carries
+      no description in the spec, and no UI documentation of it was found.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Britive does not appear anywhere on GitHub's supported secret scanning patterns page.
+
+notes: >-
+  Graded the Britive Cloud PAM tenant API ({tenant}.britive-app.com/api), which the PyBritive CLI,
+  Terraform provider and Access Broker all use. Docs are public at docs.britive.com, including a
+  per-endpoint OpenAPI reference. The same tenant also runs Britive's secrets manager and an MCP
+  gateway; they use the same token and service-identity model. The lastAccessed field and the
+  1-90 day validity range come from the published OpenAPI schema; behaviour was not tested
+  against a live tenant.

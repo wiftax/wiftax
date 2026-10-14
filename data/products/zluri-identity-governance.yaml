@@ -1,0 +1,186 @@
+id: zluri-identity-governance
+vendor: Zluri
+product: Zluri Identity Governance (public API + integrations)
+website: https://www.zluri.com
+docs: https://developers.zluri.com/reference/authentication-1
+category: identity
+status: listed
+summary: >-
+  The Zluri public API takes one static api-key header, obtained by asking Zluri Support, with no
+  documented expiry, scoping, rotation API or last-used view. Into your tenants it is keyless for
+  AWS, GCP, Entra, Google Workspace, GitHub, Slack and Salesforce, but Okta and GitHub Enterprise
+  only connect with a pasted token or key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API key sent in an `api-key` request header on every call to api-ext.zluri.com; the
+      key is requested from Zluri Support. No OAuth, token exchange or federation is documented.
+    issuers: []
+    evidence:
+      - url: https://developers.zluri.com/reference/authentication-1
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Zluri APIs use API Key–based authentication to secure all requests. You must include your API key in every request to successfully access Zluri endpoints."
+      - url: https://developers.zluri.com/reference/authentication-1
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This key will be used in the header of all future requests."
+      - url: https://developers.zluri.com/reference/introduction
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "All requests must include the following headers:"
+      - url: https://developers.zluri.com/docs/prerequisites
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Admin Privileges: Only admins can generate and manage API keys."
+      - url: https://help.zluri.com/docs/connect-microsoft-active-directory-to-zluri
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "zluri-agent-prod.us.auth0.com — OAuth2 token issuance and refresh"
+      - url: https://help.zluri.com/docs/windows-agent-deployment-manual
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Refer to the email from your IT department prompting you to install the Zluri desktop agent and note down the Organization token."
+    notes: >-
+      The same api-key authenticates both the Zluri REST API and the custom-integration SDK
+      endpoints. The auth page says keys come from Support while the SDK prerequisites page says
+      admins "generate and manage" them; neither page documents expiry, scopes, rotation or
+      revocation, and the API reference has no key-management endpoints. On-prem agents: the
+      Active Directory connector (Docker or MSI) registers with a one-time installation JWT
+      ("Token expires in 30 minutes") and then gets OAuth2 tokens from Zluri's Auth0 tenant, which
+      is the best-behaved credential in the product. The desktop agent logs in either by an
+      emailed validation code or by a shared static Organization token followed by admin device
+      approval. The browser extension's auth is not documented publicly.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS cross-account IAM role with External ID; OAuth consent to Zluri's own apps for GCP,
+      Entra ID, Microsoft 365, Google Workspace, GitHub (ZluriHQ app), Slack and Salesforce V2.
+      Okta (API token or customer-created service app private key), GitHub Enterprise (classic
+      PAT), Entra M2M (customer app client secret) and Salesforce client-credentials connectors
+      require a customer-managed long-lived credential.
+    evidence:
+      - url: https://help.zluri.com/docs/aws-management-console-connect
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Enable Require External ID and paste the External ID provided by Zluri."
+      - url: https://help.zluri.com/docs/aws-identity-center-connect
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This guide explains how to connect an AWS account to Zluri using a custom IAM role and secure access delegation."
+      - url: https://help.zluri.com/docs/gcp-connect
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Log in to your GCP account and grant the required permissions."
+      - url: https://help.zluri.com/docs/connect-azure-ad-to-zluri-oauth
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You will now see a popup window asking you to authorize the request on Azure AD’s end. Accept the request."
+      - url: https://help.zluri.com/docs/connect-azure-ad-m2m
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Copy and securely store the string under the Value column. We will later use this string as the Client Secret while connecting."
+      - url: https://help.zluri.com/docs/connect-google-workspace-to-zluri-oauth
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In the popup window, choose the account that you wish to connect to Zluri."
+      - url: https://help.zluri.com/docs/connect-github-to-zluri
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In the popup window, click Grant for the organization(s) that you wish to connect to Zluri, then click Authorize ZluriHQ."
+      - url: https://help.zluri.com/docs/connect-github-enterprise
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This guide walks you through connecting your GitHub Enterprise account to Zluri using a Personal Access Token (classic)."
+      - url: https://help.zluri.com/docs/connecting-okta-to-zluri
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Click Create token, and give it a name. Copy the generated token."
+      - url: https://help.zluri.com/docs/connect-okta-m2m
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Under the Private key section, click on PEM, then Copy to clipboard and securely save the key."
+      - url: https://help.zluri.com/docs/connect-salesforce-form-based-new
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You create your own Connected App, enable the Client Credentials Flow, and assign a Run-As user."
+      - url: https://help.zluri.com/docs/connecting-slack-to-zluri
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This is expected because the Zluri Slack app is a custom/private app built by Zluri and not listed in the official Slack App Directory."
+    notes: >-
+      Connectors checked: AWS IAM and AWS Identity Center (role + External ID, keyless); GCP
+      (OAuth authorize, keyless); Entra ID OAuth and Microsoft 365 (admin consent popup, keyless);
+      Entra ID M2M, which Zluri labels "Recommended" (customer app registration + client secret);
+      Google Workspace OAuth and custom-admin-role (consent, keyless); GitHub (ZluriHQ OAuth app,
+      keyless); GitHub Enterprise (classic PAT with an expiration the customer sets); Okta, all
+      three documented paths static: super-admin API token, custom-admin-role API token (inherits
+      the creating user's permissions), and an M2M service app whose private key is pasted into
+      Zluri; Salesforce V2 (login-and-authorize flow, read as Zluri's connected app, keyless),
+      the legacy Salesforce OAuth connector (customer connected app plus a user security token)
+      and the client-credentials connector (customer connected app); Slack (Zluri's app,
+      keyless). B because keyless paths exist for the clouds and most SaaS, but Okta has no keyless
+      option at all and the vendor recommends static-secret M2M paths for Okta and Entra. Hundreds
+      of long-tail connectors (e.g. Snyk) take pasted API keys and were not individually graded.
+      Least-privilege guidance is good throughout (read-only policies, minimum Okta/Google admin
+      roles, Run-As user advice).
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.zluri.com/reference/authentication-1
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This key will be used in the header of all future requests."
+    notes: >-
+      No expiry, TTL or org policy is documented for the API key. "All future requests" with no
+      lifetime stated; fail for lack of any public evidence.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.zluri.com/reference/authentication-1
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Request a secure API key from Zluri Support."
+    notes: >-
+      The API reference (Users, Application, Optimization, Organization, Settings, Contracts,
+      Audit Logs, Workflows, SDK) has no endpoint to create or revoke API keys; issuance is
+      through Support or the admin UI.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://developers.zluri.com/docs/prerequisites
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API Key: A valid API key is required to authenticate requests."
+    notes: >-
+      No scopes, roles or per-key permissions are documented; the key appears to be an
+      org-level credential valid for every endpoint, including user updates and workflow runs.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.zluri.com/reference/rate-limits
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To ensure fair usage and protect platform stability, Zluri APIs enforce rate limits on all API keys."
+    notes: No last-used timestamp or key inventory view is documented publicly.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: >-
+      Zluri does not appear anywhere on GitHub's supported secret scanning patterns page (partner
+      or user patterns).
+
+notes: >-
+  Zluri's public docs (developers.zluri.com, help.zluri.com) are not gated, but they say very little
+  about the API key itself, so the hygiene fails are fails for absence of evidence; Zluri may have
+  admin-console key management that is not documented. Zluri's human session tokens are short-lived
+  (access token 7200 seconds per the Login and Logout Settings page), which does not help
+  machines. The grade moves off F only with documented key expiry, scoping and a management API,
+  or with OAuth/federation for the public API.

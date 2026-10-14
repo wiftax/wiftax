@@ -1,0 +1,153 @@
+id: nightfall-dlp
+vendor: Nightfall AI
+product: Nightfall DLP (Developer API + SaaS/cloud connectors)
+website: https://www.nightfall.ai
+docs: https://help.nightfall.ai/developer-api/introduction/authentication_security
+category: security
+status: listed
+summary: >-
+  The Nightfall API takes only a static bearer API key with no documented expiry, scoping,
+  last-used data or API for rotation, and the endpoint agent is installed with that same kind of key.
+  Into your clouds and most SaaS it is keyless (IAM role, impersonation, federation, app installs),
+  but Claude Enterprise wants a pasted static key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API key created in the Nightfall console and sent as an Authorization Bearer header.
+      No OAuth, service-account token exchange or workload identity federation is documented.
+    issuers: []
+    evidence:
+      - url: https://help.nightfall.ai/developer-api/introduction/authentication_security
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The Nightfall API uses API keys to authenticate requests. You can create and view your API keys in the Nightfall app on the Manage API Keys page."
+      - url: https://help.nightfall.ai/developer-api/key-concepts/setup/api_key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The API expects an API Key to be passed via the `Authorization: Bearer <key>` HTTP header."
+      - url: https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/install-nightfall-ai-agent-for-windows-os/nightfall-windows-agent-deployment-msi
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This guide explains multiple ways to deploy the Nightfall Agent (NightfallAgent.msi) with the required API_KEY and COMPANY_ID parameters."
+    notes: >-
+      The only documented machine credential is the console-created API key. The Windows endpoint
+      agent is deployed with a static API_KEY and COMPANY_ID passed as MSI properties (baked into
+      Intune/SCCM/GPO scripts or MST transforms), so the agent fleet also rests on a long-lived
+      secret. The macOS manual-install page does not say how the downloaded package authenticates
+      back to the tenant. No federation, OIDC, or short-lived token exchange was found in the public
+      help center (help.nightfall.ai, which is public, not gated).
+  outbound:
+    grade: B
+    mechanism: >-
+      Cross-account IAM role with external ID (AWS S3), service account impersonation (GCS),
+      federated credential (Azure Blob) for Bring Your Own Bucket; vendor app installs / admin consent
+      for Google Workspace (DWD), Microsoft 365 and Entra ID, GitHub App, Slack, Notion, Salesforce,
+      Zendesk and Atlassian Marketplace apps. Claude Enterprise requires a pasted Compliance Access Key.
+    evidence:
+      - url: https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/policies/advanced_settings/automated_action/session-replay-and-bring-your-own-bucket
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Nightfall accesses the bucket with a cross-account IAM role. No long-lived access keys are stored."
+      - url: https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/policies/advanced_settings/automated_action/session-replay-and-bring-your-own-bucket
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Nightfall accesses the bucket by impersonating a service account in your Google Cloud project."
+      - url: https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/policies/advanced_settings/automated_action/session-replay-and-bring-your-own-bucket
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Nightfall accesses the container with federated identity. No long-lived secrets are exchanged."
+      - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Nightfall connects to Google Workspace using a Google service account with Domain-Wide Delegation (DWD) — not an ordinary user OAuth grant."
+      - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Nightfall uses that one-time consent to create dedicated Entra ID (Azure AD) app registrations inside your tenant — one per workload you enable (Teams, OneDrive, SharePoint, and exfiltration monitoring if applicable) — each with its own client secret and the Microsoft Graph application permissions it needs."
+      - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "All ongoing scanning authenticates with short-lived installation access tokens that Nightfall mints from the app's credentials"
+      - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Nightfall for Slack is installed via Slack OAuth. Two tokens are issued and stored:"
+      - url: https://help.nightfall.ai/nightfall_settings/directory_sync/okta
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In this document you are basically authorizing the Nightfall application in Okta. The authorization process involves two steps. In the first step, you authorize the Nightfall app in the Okta console. This process generates an Okta domain, client ID and client secret."
+      - url: https://help.nightfall.ai/nightfall-for-anthropic-claude/install-nightfall-for-claude-enterprise
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Paste your Compliance Access Key from the Claude admin console."
+    notes: >-
+      Checked: AWS S3, GCS and Azure Blob (Bring Your Own Bucket, all keyless); Google Workspace /
+      Google Drive (DWD to Nightfall's client ID); Microsoft 365 (Teams, OneDrive, SharePoint) and
+      Entra ID directory sync (admin consent); GitHub (GitHub App); Slack (OAuth install); Notion
+      (public OAuth); Salesforce (Nightfall connected app, OAuth + PKCE); Zendesk (OAuth sign-in);
+      Jira and Confluence (Atlassian Marketplace Connect app); Okta directory sync (OIN API Service
+      Integration); Gmail/Exchange inline DLP (mail routing, no stored credential); Claude Enterprise
+      (static key). Static keys handed over: Claude Enterprise Compliance Access Key. Judgment calls:
+      Okta is counted keyless per cohort rule as an OIN service app, but the customer copies the
+      Okta-generated client secret into Nightfall. Microsoft 365 is counted keyless because the
+      customer only grants admin consent, but Nightfall then creates per-tenant app registrations
+      with client secrets that expire and must be renewed by an admin, so long-lived Nightfall-held
+      secrets do exist in your tenant. Salesforce refresh tokens are long-lived and bound to the
+      authorizing user.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://help.nightfall.ai/developer-api/key-concepts/setup/api_key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Enter a name for the API key and click Create."
+    notes: >-
+      Key creation asks only for a name; no expiry field, default lifetime, or org policy is
+      documented anywhere in the public help center.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://help.nightfall.ai/developer-api/introduction/authentication_security
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "If you believe one of your API Keys has been compromised, you should delete it through the Dashboard."
+      - url: https://help.nightfall.ai/developer-api/key-concepts/setup/api_key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You can click the Delete icon against an API key to delete the key."
+    notes: Creation and deletion are documented only in the console; no key-management API endpoint was found.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://help.nightfall.ai/developer-api/introduction/authentication_security
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Your API keys carry many privileges, so be sure to keep them secure."
+    notes: No per-key permissions, scopes, or resource restrictions are documented.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://help.nightfall.ai/developer-api/key-concepts/setup/api_key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Once you close the window, the Your API Keys section will display your newly generated key, with the majority of the Key redacted."
+    notes: The key list is documented as showing the redacted key only; no last-used timestamp is mentioned.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Nightfall does not appear on GitHub's supported secret scanning patterns page, partner or otherwise.
+
+notes: >-
+  Graded the Nightfall Developer API (the surface a customer automates against) plus the connectors
+  behind Nightfall's SaaS DLP, exfiltration prevention and posture products, which all share one
+  console. The help center is public; nothing was gated. Absence-based hygiene fails (expiry,
+  rotation API, scoping, last used) reflect that the public docs describe none of these; the
+  console may show more than is documented. Grade moves to D with three of those documented, and
+  higher only with short-lived or federated auth for the API and endpoint agent.
