@@ -1,0 +1,184 @@
+id: akeyless-platform
+vendor: Akeyless
+product: Akeyless Identity Security Platform (Secrets Management API)
+website: https://www.akeyless.io
+docs: https://docs.akeyless.io/docs/access-and-authentication-methods
+category: identity
+status: listed
+summary: >-
+  Akeyless's OAuth2.0/JWT auth method trusts any JWKS URL you give it, with issuer, audience and
+  sub-claim checks, so workloads never need a static Access Key to get in. Outbound runs from a
+  Gateway you host: AWS, GCP and Azure targets can use that Gateway's cloud identity, but Okta,
+  GitHub, Salesforce and most databases want a pasted token, private key or password.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      OAuth2.0/JWT auth method validates tokens against any configured JWKS URL (or inline JWKS),
+      with optional issuer and audience checks and per-role sub-claim matching that can be made
+      mandatory (--force-sub-claims). Native AWS IAM, Azure AD, GCP, OCI, Kubernetes, certificate
+      and Universal Identity methods cover platform identities; API Key (Access ID + Access Key)
+      is the static fallback.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.akeyless.io/docs/auth-with-oauth-jwt
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "jwks-uri: The URL to the JSON Web Key Set (JWKS) that contains the public keys that should be used to verify any JSON Web Token (JWT) issued by the authorization server."
+      - url: https://docs.akeyless.io/docs/cli-ref-auth
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "--force-sub-claims: enforce role-association must include sub-claims"
+      - url: https://docs.akeyless.io/docs/cli-ref-auth
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "--audience: The audience in the JWT"
+      - url: https://docs.akeyless.io/docs/sub-claims
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In other words, only clients whose tokens contain these sub-claims (in the case of JWT/OIDC) or attributes (in the case of SAML) will be allowed to access the rules defined in the role."
+      - url: https://docs.akeyless.io/docs/github-action
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The default usage relies on using the GitHub JWT (JSON Web Token) to authenticate to Akeyless."
+      - url: https://docs.akeyless.io/docs/access-and-authentication-methods
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Cloud identities (CSP IAM)"
+    notes: >-
+      The JWT method is generic: any issuer that publishes a JWKS works, and the GitHub Actions
+      plugin is documented as one instance of it (--jwks-uri
+      https://token.actions.githubusercontent.com/.well-known/jwks with --force-sub-claims).
+      Issuer and audience are optional fields, so trust is only as tight as the sub-claims you
+      bind; without sub-claims any token signed by that JWKS gets in. Universal Identity covers
+      on-prem hosts with a self-rotating token, though it still starts from an admin-issued token.
+      The self-hosted Akeyless Gateway authenticates back to the SaaS with one of access_key,
+      aws_iam, azure_ad, gcp, cert or uid (Helm gatewayAccessType), so a Gateway in a cloud can
+      run with no static credential; the docs still lead with API key in several quickstarts.
+      Akeyless itself labels API Key auth "not recommended for production use."
+  outbound:
+    grade: B
+    mechanism: >-
+      Targets are used by the customer-hosted Gateway. AWS, GCP and Azure targets offer "Use
+      Gateway's Cloud Identity" (the Gateway's own IAM role / service account / service
+      principal, with optional AWS role assumption via External ID); Okta, GitHub, Salesforce,
+      database and most other targets take a pasted API token, app private key, client secret or
+      password.
+    evidence:
+      - url: https://docs.akeyless.io/docs/aws-targets
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The best practice for using IAM roles in AWS is to leverage them for granting temporary, least-privilege access to resources, rather than relying on long-term access keys for users. Use your Gateway cloud ID to use IAM roles."
+      - url: https://docs.akeyless.io/docs/aws-targets
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "External ID: Optional, A unique auto-generated value used in your AWS account when configuring your AWS IAM role to securely delegate access to Akeyless"
+      - url: https://docs.akeyless.io/docs/gcp-targets
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Check the Use Gateway's Cloud Identity radio button to authenticate with the Gateway's Cloud IAM."
+      - url: https://docs.akeyless.io/docs/azure-targets
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Use Gateway's Cloud Identity is relevant for cases where your Gateway uses Azure service principal to authenticate against Akeyless."
+      - url: https://docs.akeyless.io/docs/okta-target
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "api-token: The Okta API token."
+      - url: https://docs.akeyless.io/docs/github-target
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "github-app-private-key: The GitHub application private key."
+      - url: https://docs.akeyless.io/docs/salesforce-target
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "auth-flow: The type of the auth flow, either jwt or user-password."
+      - url: https://docs.akeyless.io/docs/database-targets
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "DB Password: Password of the database privilege user name."
+    notes: >-
+      Checked AWS, GCP, Azure AD, Okta, GitHub, Salesforce and Database targets. Keyless: AWS,
+      GCP and Azure via the Gateway's cloud identity, which is ambient identity of a Gateway the
+      customer runs in their own cloud rather than a cross-tenant trust to Akeyless SaaS; it only
+      works when the Gateway is hosted in that cloud. Static: Okta (API token), GitHub (private
+      key of a customer-created GitHub App, not an Akeyless-owned app install), Salesforce
+      (connected-app private key or client secret + password + security token), Azure AD
+      explicit mode (client secret), GCP explicit mode (service account JSON key), AWS explicit
+      mode (admin access key), databases (passwords; some DBs offer cloud identity). Akeyless
+      mitigates the static ones by letting the target point at an Akeyless rotated secret, and
+      AWS docs push rotation of explicit keys. Remaining targets (Kubernetes, SSH, LDAP, Splunk,
+      OpenAI, Claude, Cloudflare, etc.) were not individually checked.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.akeyless.io/docs/cli-ref-auth
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "--access-expires[=0]: Access expiration date in Unix timestamp (select 0 for access without expiry date)"
+      - url: https://docs.akeyless.io/docs/account-settings
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Users can set the default length of time Authentication Methods in the account will last. At the maximum time set, the user will be logged out of Akeyless."
+    notes: >-
+      Every auth method, API Key included, can carry an access-expires date with expiry
+      notifications, but it defaults to 0 (never). The account-level "Authentication Methods TTL"
+      and jwt-ttl-max settings bound the session token issued after login, not the Access Key
+      itself. No account policy forcing an Access Key expiry was found.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.akeyless.io/docs/auth-with-api-key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The Access Key is displayed only once. Store it securely. However, you can reset the access key at any time."
+      - url: https://docs.akeyless.io/docs/auth-with-api-key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To reset the Access Key with the CLI, run the Akeyless reset-access-key command"
+    notes: Create (auth-method create api-key), reset and delete are all CLI/API operations.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.akeyless.io/docs/auth-with-api-key
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "After creating the authentication method, associate it with one or more Access Roles so authenticated identities can perform actions in Akeyless."
+      - url: https://docs.akeyless.io/docs/cli-ref-auth
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "--bound-ips: A comma-separated CIDR block list to allow client access"
+    notes: Each API Key is its own auth method bound to RBAC Access Roles and optional CIDR limits.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.akeyless.io/docs/account-settings
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Set a global event for Auth methods that have not been used or changed within the usage interval, the minimum is 90 days."
+      - url: https://raw.githubusercontent.com/akeylesslabs/akeyless-go/master/docs/AuthMethod.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "**AccessDate** | Pointer to [**time.Time**](time.Time.md) |  | [optional]"
+    notes: >-
+      Judgment call. Akeyless can alert on auth methods unused for 90+ days, which is the purpose
+      of this check, and the SDK's AuthMethod object carries an undocumented AccessDate field.
+      No public doc page explicitly shows a "last used" timestamp for an Access Key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
+    notes: Akeyless does not appear anywhere on GitHub's supported patterns list, partner or user.
+
+notes: >-
+  Graded the SaaS secrets-management API that customers automate against. The same platform also
+  covers Secure Remote Access, Password Manager and Certificate Lifecycle (auth-method
+  --product-type sra/pm/ca), all on the same auth methods. Docs are public (docs.akeyless.io, with Markdown
+  exports); nothing material was gated. Hygiene is graded against the API Key auth method, the
+  only long-lived Akeyless-issued credential in the inbound path.

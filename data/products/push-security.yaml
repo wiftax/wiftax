@@ -1,0 +1,156 @@
+id: push-security
+vendor: Push Security
+product: Push browser identity security platform (REST API v1)
+website: https://pushsecurity.com
+docs: https://pushsecurity.com/help/audience/engineering/rest-v1/
+category: security
+status: listed
+summary: >-
+  The Push REST API takes only a static x-api-key header, with no federation and no documented
+  expiry, key-management API or last-used date. Into your identity providers it uses admin consent
+  (Microsoft 365, Google Workspace) and an Okta-issued client secret, while the SIEM connectors
+  want pasted API keys, HEC tokens and Entra client secrets.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API key created in the Push admin console (Read only or Full access), sent in an
+      x-api-key header; no OAuth, no token exchange, no workload identity federation.
+    evidence:
+      - url: https://pushsecurity.com/help/audience/engineering/rest-v1/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To interact with the Push Security API, you'll need an API key for authentication."
+      - url: https://pushsecurity.com/help/audience/engineering/rest-v1/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To authenticate your API requests, include a header named x-api-key and set its value to your API key."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/install-the-browser-extension/managed-deployment-using-microsoft-group-policy
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "set the Value data field to the value provided in the token.txt file generated in the Push app"
+      - url: https://pushsecurity.com/help/audience/administrators/docs/install-the-browser-extension/managed-deployment-using-google-admin-console
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Download the provided config file, which is specific to your team."
+    notes: >-
+      The OpenAPI description (rest-v1.yaml) defines only the x-api-key scheme and one EU server.
+      The browser extension enrolls to a tenant through a team-specific "token" value that the
+      admin generates in the console and pushes to every managed browser as extension policy
+      (Chrome/Edge/Firefox registry or policy.txt via Google Admin). In effect this is a
+      tenant-wide static enrollment secret that sits in the clear in browser policy on every
+      device, and the public docs say nothing about rotating or expiring it. With the automatic
+      licensing option on, the extension then identifies the user from an open Gmail or Outlook
+      tab. No federation option exists for API clients, so the hygiene count decides the grade.
+      With 1 of 5 checks passing, that grade is F.
+  outbound:
+    grade: B
+    mechanism: >-
+      Admin consent to Push's multi-tenant OAuth app for Microsoft 365 and domain-wide delegation
+      for Google Workspace (keyless); Okta via an OIN "Install & Authorize" integration whose
+      client secret is copied into Push; SIEM destinations need pasted static credentials
+      (Datadog API key, Splunk HEC token, Entra app client secret for Sentinel).
+    evidence:
+      - url: https://pushsecurity.com/help/audience/administrators/docs/add-employees
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You can integrate Push with Microsoft 365 or Google Workspace via an API integration that uses OAuth."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/add-employees
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Consent to the OAuth integration screen. For Google Workspace, you'll also need to give permission to Push through domain-wide delegation."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/add-employees
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To integrate with Okta, you'll use a client secret, your Okta domain, and your client ID to complete the integration configuration."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/add-employees
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "In Okta, select Install & Authorize to install the integration and generate your client secret."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/connect-to-siem-or-soar/ingesting-events-using-datadog
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Input your Datadog API key and URL into the API key and Site fields."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/connect-to-siem-or-soar/ingesting-events-using-splunk-cloud
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Input the Token Value and your Splunk Cloud HTTP Event Collector URL."
+      - url: https://pushsecurity.com/help/audience/administrators/docs/connect-to-siem-or-soar/ingesting-events-using-azure-monitor-and-microsoft-sentinel
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Note your client secret's expiry date and set a reminder to rotate it before then."
+    notes: >-
+      Push does not connect to AWS, GCP, Azure subscriptions, GitHub, Slack or Salesforce. Most of
+      its telemetry comes from the browser extension. Connectors checked: Microsoft 365 (admin
+      consent, keyless, with per-scope opt-out that includes write scopes such as
+      Application.ReadWrite.All and MailboxSettings.ReadWrite), Google Workspace (OAuth plus
+      domain-wide delegation, keyless), and Okta (Push's OIN API service integration). Okta is
+      counted as keyless under the cohort rule for vendor-owned OIN service apps, but the
+      customer still copies an Okta-generated client secret into Push, and Okta does not support
+      per-scope configuration. Outbound SIEM/SOAR delivery: Datadog (static API key), Splunk Cloud
+      (HEC token), and Microsoft Sentinel via the Logs Ingestion API (a customer-created Entra app
+      client secret that expires and must be rotated by hand). The generic webhook path, used for
+      Panther, Cribl, SentinelOne, Tines and Slack, sends to a destination URL with optional custom
+      headers, and the docs say it works only if the SIEM accepts ingestion with
+      authentication method "none". Graded B because the IdP connectors are keyless and the
+      SIEM connectors want static credentials. Even with SIEM sinks excluded, the pasted Okta
+      client secret would hold the grade at B.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://pushsecurity.com/help/audience/engineering/rest-v1/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "When generating a new key, you have two permission levels to choose from: Read only and Full access."
+    notes: >-
+      Key creation offers a permission level and nothing else. No expiry field or org expiry
+      policy is documented anywhere in the public API or admin docs.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://pushsecurity.com/help/audience/engineering/_bundle/rest-v1.yaml?download
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To create or manage your API keys, go to the [Settings](https://console.pushsecurity.com/app/settings/api-keys) page in the Push admin console."
+    notes: >-
+      The OpenAPI spec covers employees, accounts, apps, browsers, controls, findings, detections
+      and webhooks, but has no API-key endpoints. Keys are created and revoked only in the console.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://pushsecurity.com/help/audience/engineering/rest-v1/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A Read only key lets you make GET requests, while Full access allows for all types of requests."
+    notes: >-
+      This passes narrowly. There are only two tiers (read-only vs everything), with no per-resource
+      or per-endpoint scopes. Keys belong to the tenant, not to an individual admin.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://pushsecurity.com/help/audience/administrators/docs/administering-push
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Add and manage API keys from this section. API keys are used to interact with the Push REST API and share your Push data with other platforms."
+    notes: >-
+      The admin docs describe the API Keys settings tab and an "API key added or removed" audit
+      event. Nothing public documents a last-used timestamp for a key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Push Security does not appear as a provider on GitHub's secret-scanning partner list.
+
+notes: >-
+  All docs cited are public: the help center and the REST v1 reference with its downloadable
+  OpenAPI file. The admin console (console.pushsecurity.com) requires login, so the API-key
+  settings screen could not be inspected. An expiry picker or last-used column could exist there
+  without being documented. Outbound webhooks are signed with a Push-issued webhook secret key,
+  which is a static secret in the other direction. Grade only moves if Push adds token exchange
+  or federation for API clients, or at least key expiry, a key-management API and last-used
+  tracking.

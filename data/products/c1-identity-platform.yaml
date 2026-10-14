@@ -1,0 +1,207 @@
+id: c1-identity-platform
+vendor: C1 (formerly ConductorOne)
+product: C1 Identity Platform (API + Baton connectors)
+website: https://www.c1.ai
+docs: https://www.c1.ai/docs/product/admin/service-principals/workload-federation
+category: identity
+status: listed
+summary: >-
+  Service principals can swap an OIDC token from any issuer you register (or a SPIFFE JWT-SVID)
+  for a 30-minute C1 token, with CEL conditions on the claims, so no C1 secret has to exist. Into
+  your tenants it is keyless for AWS, Entra ID and Salesforce, but GCP, Google Workspace, Okta,
+  GitHub, Slack and Azure RBAC still want a key or token you create and paste.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Workload federation on service principals: register any HTTPS OIDC issuer (presets for
+      GitHub Actions, GitLab, HCP Terraform, AWS IAM outbound federation, SPIFFE, or Custom OIDC),
+      bind it to a service principal with a CEL condition on the JWT claims, and exchange the JWT
+      via RFC 8693 token exchange for a short-lived C1 access token.
+    issuers: ["any"]
+    evidence:
+      - url: https://www.c1.ai/docs/product/admin/service-principals/workload-federation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Workload federation eliminates stored secrets entirely."
+      - url: https://www.c1.ai/docs/product/admin/service-principals/workload-federation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Built-in presets are available for GitHub Actions, GitLab CI/CD, HCP Terraform, AWS IAM, and SPIFFE. Use \"Custom OIDC\" for any other provider."
+      - url: https://www.c1.ai/docs/product/admin/service-principals/workload-federation
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "C1 validates the token: issuer, signature, audience, freshness, and your conditions"
+      - url: https://www.c1.ai/docs/product/admin/service-principals/custom-oidc
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Any platform that issues OIDC tokens can be used with workload federation."
+      - url: https://www.c1.ai/docs/api-reference/workload-federation/create-provider
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "CreateProvider registers a new external OIDC issuer for the tenant."
+      - url: https://www.c1.ai/docs/product/admin/service-principals/overview
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Contact your C1 account team to enable the feature."
+      - url: https://www.c1.ai/docs/developer/api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Your new API key is created and the client ID and client secret are shown."
+      - url: https://www.c1.ai/docs/developer/c1-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Connectors authenticate using OAuth2 client credentials:"
+    notes: >-
+      Genuine bring-your-own-issuer: any issuer with OIDC discovery and a public JWKS can be
+      registered (issuer URL immutable after creation), and each trust constrains by CEL over all
+      claims (sub, repo, ref, etc.), optional IP allowlist and scoped roles. Audience is not
+      free-form: the JWT's aud must contain the C1 tenant domain. Exchanged tokens are Bearer with
+      expires_in 1800 in the documented example. Service principals (and so federation) must be
+      enabled by the C1 account team and created by a Super Admin; no paid plan gate is documented,
+      so tier_gated is left empty. The fallback paths are static: personal API keys (client ID +
+      secret, optionally non-expiring) and service-principal client credentials (Ed25519 key,
+      max 180 days, optional DPoP). Self-hosted Baton connectors authenticate back to C1 with a
+      connector client ID and client secret (OAuth2 client credentials, minted with a "Rotate"
+      button on the connector page); the docs do not show a federation option for them, so an
+      on-prem connector still carries a static C1 secret.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cross-account IAM role with an External ID for AWS, plus C1-owned OAuth apps for Entra ID and
+      Salesforce; GCP and Google Workspace want an uploaded service-account JSON key, Okta an API
+      token or a customer-created OAuth app private key, GitHub a PAT or customer-created GitHub App
+      private key, Slack a pasted OAuth token, and Azure RBAC a client secret.
+    evidence:
+      - url: https://www.c1.ai/docs/baton/aws
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "C1 uses an IAM Trust relationship between your AWS Account and C1's Service AWS Account."
+      - url: https://www.c1.ai/docs/baton/aws
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "AWS requires the use of External IDs when granting third-party access to your AWS account."
+      - url: https://www.c1.ai/docs/baton/microsoft-entra
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Follow these instructions to set up a built-in, no-code connector hosted by C1 using OAuth."
+      - url: https://www.c1.ai/docs/baton/salesforce
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Log in and authorize C1 with your Salesforce instance."
+      - url: https://www.c1.ai/docs/baton/google-workspace
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The connector requires a JSON key, so confirm you can create one before you start."
+      - url: https://www.c1.ai/docs/baton/google-cloud-platform
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Download the service account's JSON key"
+      - url: https://www.c1.ai/docs/baton/okta
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The OAuth 2.0 Private Key method is recommended for production environments because it provides scoped access with short-lived tokens rather than a long-lived API token."
+      - url: https://www.c1.ai/docs/baton/github
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "To set up the GitHub connector, you can choose to create a personal access token (classic), a fine-grained access token, or a GitHub app."
+      - url: https://www.c1.ai/docs/baton/slack
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Your user OAuth token is created. Copy and save the token value."
+      - url: https://www.c1.ai/docs/baton/azure
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Next, we'll generate a client secret for this app. Click Certificates & secrets."
+    notes: >-
+      Connectors checked: AWS, Entra ID, Azure, GCP, Google Workspace, Okta, GitHub, Salesforce,
+      Slack. Keyless: AWS (cloud-hosted path assumes a role in your account trusted to
+      arn:aws:iam::765656841499:role/ConductorOneService, with a C1-provided External ID; AWS China
+      is self-hosted only and uses static access keys or IRSA), Entra ID (OAuth / admin-consent
+      tab; client-secret and certificate tabs also exist), Salesforce (OAuth login to C1; JWT
+      bearer, client-credentials and username/password paths also exist). Static: GCP and Google
+      Workspace (service-account JSON key with domain-wide delegation; the docs warn new Google orgs
+      block key creation by default), Okta (API token, or a customer-owned OIDC app's private key,
+      which is C-shaped), GitHub (classic/fine-grained PAT or a GitHub App the customer creates and
+      whose private key they hand over; no C1-owned GitHub App install), Slack (customer-created
+      app token), Azure RBAC (app registration client secret). Least-privilege guidance is good
+      throughout (custom read-only Okta role, scoped GitHub permissions), but not keyless. 400+
+      other connectors were not individually assessed.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://www.c1.ai/docs/product/admin/service-principals/overview
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Maximum 180 days; must be rotated before expiry"
+      - url: https://www.c1.ai/docs/product/admin/service-principals/overview
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Credential expiration can't be extended after creation."
+      - url: https://www.c1.ai/docs/developer/api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Give your new API key a name and select whether the key will expire."
+    notes: >-
+      Service-principal credentials have a hard 180-day ceiling (90 days is the recommended
+      default) and Super Admins get digest alerts for credentials expiring within 30 days. Personal
+      API keys, however, can be created without an expiry and no tenant policy forcing one is
+      documented; this passes on the machine-principal credential, not the personal key.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://www.c1.ai/docs/api-reference/service-principal/create-credential
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "CreateCredential creates a new client credential for a service principal."
+      - url: https://www.c1.ai/docs/api-reference/service-principal/revoke-credential
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "RevokeCredential revokes (deletes) a client credential for a service principal."
+    notes: Personal API clients also have create/update/delete endpoints.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://www.c1.ai/docs/product/admin/service-principals/security
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Every credential and federation trust can be limited to a subset of the service principal's roles."
+    notes: >-
+      Scoping is coarse (Full, Basic User, Read-Only Administrator, Read-Only to System Logs), but
+      it is a purpose-built machine principal with its own role assignment, plus per-credential IP
+      allowlists.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://www.c1.ai/docs/developer/api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The API key is added to list of your personal API clients, and its client ID and usage data for the key are shown."
+      - url: https://www.c1.ai/docs/api-reference/service-principal/create-credential
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "lastUsedAt"
+    notes: Both the service-principal credential and personal client schemas expose a read-only lastUsedAt timestamp.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: >-
+      Neither C1 nor ConductorOne appears in GitHub's supported secret-scanning patterns, partner
+      or otherwise, so a leaked client secret is not auto-revoked.
+
+notes: >-
+  ConductorOne renamed itself C1 in April 2026; docs moved to c1.ai but tenant hostnames are still
+  *.conductor.one (c1eu.ai for EU) and SDK env vars keep the CONDUCTORONE_ prefix. Workday announced
+  its acquisition of C1 on 2026-10-12; the deal had not closed as of this check. Docs are public
+  (including the OpenAPI-derived API reference), so nothing here relied on gated material. C1 also
+  vends short-lived credentials outward for agents and MCP servers (Agent SSO, AWS
+  AssumeRoleWithWebIdentity with a C1-issued OIDC token); that is a product feature, not how C1
+  itself reaches your tenants, and is not graded here. Outbound would rise to A if C1 offered
+  GCP impersonation/WIF, a C1-owned GitHub App and Okta OIN service app, and a federated credential
+  for Azure RBAC.

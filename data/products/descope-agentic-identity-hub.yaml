@@ -1,0 +1,185 @@
+id: descope-agentic-identity-hub
+vendor: Descope
+product: Descope platform / Agentic Identity Hub (Management API)
+website: https://www.descope.com
+docs: https://docs.descope.com/management
+category: identity
+status: listed
+summary: >-
+  Descope will swap your agents' AWS or GCP tokens for Descope tokens, but configuring Descope
+  itself (API, SDKs, Terraform, CLI) still takes a management key whose expiry can be set to never.
+  Its AWS connectors can use a cross-account role, while GCP and most SaaS connectors want a pasted
+  key, token or client secret.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static management key, sent as "Bearer <ProjectID>:<ManagementKey>" to the Management API,
+      SDKs, CLI and Terraform provider; no federated or short-lived alternative is documented for
+      the management plane.
+    evidence:
+      - url: https://docs.descope.com/management
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Use a management key with your [Project ID](/management/project-settings#general) to call the management SDK or [API](/api/management/users)."
+      - url: https://docs.descope.com/management
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A management key works until it expires or is deactivated."
+      - url: https://raw.githubusercontent.com/descope/terraform-provider-descope/main/docs/index.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The provider authenticates with the Descope API using a management key. You can create management keys in the [Company Settings](https://app.descope.com/settings/company) section of the Descope console."
+      - url: https://docs.descope.com/managing-environments/manage-envs-in-github
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The management key should be stored as a secret by clicking the `New Repository Secret` button."
+      - url: https://docs.descope.com/agentic-identity-hub/core-components/clients/workloads
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Your agent never needs a long-lived secret. It authenticates as a workload, gets a scoped Descope token, and uses that token to reach your APIs and MCP servers."
+      - url: https://docs.descope.com/agentic-identity-hub/core-components/connections/fetching-connection-tokens
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A Management Key bypasses policies and grants full administrative access, so use it deliberately:"
+    notes: >-
+      Descope does federation for your workloads. A client or Inbound App with the JWT Bearer grant
+      accepts JWTs from any trusted issuer you add, and there are worked AWS (IRSA) and GCP examples.
+      But the Descope access token you get back is for your own APIs, MCP servers and vaulted
+      connection tokens. It is not documented as working on the configuration-management API. That
+      API (users, tenants, SSO, roles, flows, connectors, project settings), the descope CLI, the
+      Terraform provider (Pro+ plan) and Descope's own GitHub/GitLab CI templates all take a static
+      management key. The public API reference for create/load management key does show an
+      undocumented `trustedIssuer` object (name, issuer, audience, claimFilters, expireTime) on the
+      key. That hints at federated management keys, but no prose doc, SDK type (go-sdk MgmtKey has no
+      such field), or Terraform attribute exposes it, so it does not count. The grade moves to A/B
+      once that is documented and usable. Project access keys (M2M) exchange a static key for a
+      short-lived JWT for your app, not for managing Descope. Descope Engine (on-prem connector
+      runner, FedRAMP only) authenticates back to Descope with a static Engine ID plus Engine Key
+      (ENGINE_SECRET), which can be rotated through a management API endpoint.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS connectors (S3, EventBridge, SES, SNS, SES email validation) can assume a customer IAM
+      role with an External ID. GCP connectors want a service-account JSON key, and SaaS
+      connectors want pasted API keys, bot tokens, PATs or customer OAuth client secrets.
+    evidence:
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/audit-and-troubleshooting/aws-eventbridge
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Use role-based permissions to authenticate instead of long-lived credentials. You will need to provide:"
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/audit-and-troubleshooting/aws-s3
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "When creating a custom IAM role for the AWS S3 connector, you must include the following trust policy to allow Descope to assume the role:"
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/kyc/aws-rekognition
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Generate Access Key ID and Secret Access Key from"
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/analytics/google-cloud-logging
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A Service Account Key JSON file created from a service account on your Google Cloud project."
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/marketing/salesforce
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The connector requires authentication using OAuth 2.0 Client Credentials grant type."
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/messaging/slack
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Token: The OAuth token for Slack's Bot User, used to authenticate API requests."
+      - url: https://docs.descope.com/connectors/connector-configuration-guides/audit-and-troubleshooting/datadog
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Create a new API Key or use an existing one."
+      - url: https://docs.descope.com/identity-federation/outbound-apps/creating-outbound-apps
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The secret from the provider when creating your authentication account"
+    notes: >-
+      Checked AWS S3, EventBridge, SES, SNS, SES Email Validation (role + External ID offered, with
+      access keys as an alternative), AWS Rekognition and AWS Translate (access keys only), Google
+      Cloud Logging and Google Cloud Translation (service-account JSON key), Salesforce (customer
+      connected-app client secret), Slack (pasted bot token), Snowflake (PAT), Datadog and SendGrid
+      (API key), LDAP (bind password or mTLS private key) and generic HTTP (bearer/API key/basic or
+      client-credentials secret). There is no Azure connector. There is no machine connector into
+      Okta, Entra/M365, Google Workspace or GitHub. Those systems appear as customer-tenant SSO
+      (human login) or as Outbound Apps, which require a client ID and secret the customer registers
+      with the provider. Keyless on part of AWS, static everywhere else: B.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.descope.com/management
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "When you create a key, you set a name and an expiration (30, 60, or 90 days, or never)."
+      - url: https://docs.descope.com/management/company-settings/mgmt-keys-sdks
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "description, expiration (`expiresIn` in seconds; `0` for no expiration), and permitted IPs are optional."
+      - url: https://raw.githubusercontent.com/descope/terraform-provider-descope/main/docs/resources/management_key.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "If not set, the key will not expire."
+    notes: >-
+      Expiry exists but "never" is allowed and is the API/Terraform default. Company Settings
+      documents SSO and MFA enforcement for console users but no policy forcing a maximum key
+      lifetime.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.descope.com/management/company-settings/mgmt-keys-sdks
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You can use the Descope management SDK to create, update, delete, load, or search Management Keys."
+      - url: https://docs.descope.com/management
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The three-dot menu on an active key offers **Edit**, **Rotate**, **Deactivate**, and **Delete**, the same actions as [access keys](/management/m2m-access-keys)."
+    notes: >-
+      Create/delete through the API (role company-mgmt-keys-read-write) and the descope_management_key
+      Terraform resource. In-place "Rotate" appears in the console only.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.descope.com/management
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This section defines what roles the management key has. You can choose whether these roles are defined on a company level, for specific projects or for Descopers for SCIM only usage."
+      - url: https://docs.descope.com/management
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Each management key can include a list of permitted IPs. When that list is set, the key only works from those originating addresses."
+    notes: >-
+      Keys are their own principal with company-, project- or tag-level roles (read-only asset
+      management, FGA, audit, infra, etc.) plus IP allowlists.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.descope.com/management/company-settings/mgmt-keys-sdks
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "This operation loads an existing Management Key by ID, including its name, description, status, expiration, permitted IPs, and role configuration."
+    notes: >-
+      The management-key object (API reference, go-sdk MgmtKey) has createdTime and expireTime but
+      no last-used field. No last-used display is documented. Key creation and modification are
+      company-level audit events, but use is not shown on the key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: Descope does not appear in GitHub's supported secret-scanning patterns, partner or otherwise.
+
+notes: >-
+  Graded the Management API, the surface a customer's CI/Terraform uses to automate Descope config.
+  This is an odd result for an identity vendor. The Agentic Identity Hub sells keyless workload
+  identity (JWT Bearer from any trusted issuer, ID-JAG/XAA, AWS/GCP workload token exchange) for
+  your agents and APIs, but Descope's own control plane does not consume it. The fix is likely
+  small: the management API schema already has a `trustedIssuer` field on management keys. Re-check
+  when that ships as a documented feature. Docs are public (docs.descope.com, with llms.txt); nothing
+  was gated.

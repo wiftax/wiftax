@@ -1,0 +1,221 @@
+id: aembit-workload-iam
+vendor: Aembit
+product: Aembit Workload IAM (Aembit Cloud API and Edge)
+website: https://aembit.io
+docs: https://docs.aembit.io/dev-guide/api/cloud/
+category: identity
+status: listed
+summary: >-
+  The Aembit management API takes no long-lived keys: workloads trade an OIDC ID token from any
+  issuer they configure, or a cloud or CI identity, for a short-lived Aembit access token. Into AWS,
+  GCP and Azure it is keyless, but for Okta, GitHub, Slack, Google Workspace and Salesforce you still
+  paste an API token or your own OAuth app's client secret into Aembit.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      A Trust Provider (OIDC ID Token for any issuer, plus GitHub, GitLab, Terraform Cloud, AWS,
+      Azure, GCP, Kubernetes and Kerberos types) attests the workload and matches iss, aud, sub and
+      custom claims; an Aembit Access Token Credential Provider bound to an Aembit Role then issues a
+      short-lived bearer token for the Cloud API.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.aembit.io/dev-guide/api/cloud/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Aembit also supports authentication to the Aembit API using a native authentication capability which utilizes OIDC (Open ID Connect tokens) ID Tokens."
+      - url: https://docs.aembit.io/dev-guide/api/cloud/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Aembit requires you to use Authorization Header Bearer (access) tokens when making API calls and doesn’t support long-lived credentials."
+      - url: https://docs.aembit.io/user-guide/access-policies/trust-providers/oidc-id-token-trust-provider/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Support for Any OIDC Provider - Connect to any identity provider compliant with the OIDC standard."
+      - url: https://docs.aembit.io/dev-guide/api/edge/auth/oidc-id-token/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Your Trust Provider can match on aud, iss, sub, or any custom claim the token carries."
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/aembit-access-token/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The Aembit Access Token Credential Provider generates access tokens for authenticating applications and services to the Aembit API."
+      - url: https://raw.githubusercontent.com/Aembit/terraform-provider-aembit/main/docs/index.md
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Setting the environment variable `AEMBIT_OIDC_ID_TOKEN` to a system provided OIDC ID Token is required when using the generic OIDC ID Token native authentication method."
+      - url: https://docs.aembit.io/user-guide/deploy-install/about-agent-controller/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Device Codes are temporary one-time-use codes, valid for 15 minutes, that you use during installation to authenticate the Agent Controller with your Aembit Tenant."
+      - url: https://docs.aembit.io/user-guide/deploy-install/about-agent-controller/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Token Refresh - Agent Controller securely stores refresh tokens and uses them to obtain new access tokens from Aembit Cloud as needed, without requiring re-registration."
+    notes: >-
+      Machine access to the management API has no static-key path at all: the only other documented
+      method is a human's browser-session token copied from the UI profile. The Terraform provider
+      takes only a Trust Provider "client_id" (an identifier, not a secret) plus the platform's ID
+      token. The OIDC ID Token Trust Provider can validate signatures by OIDC discovery, uploaded
+      JWKS, an uploaded public key, or a Base64 shared symmetric key; the last is an optional
+      customer-held secret for legacy issuers, not an Aembit credential. Edge components: Agent
+      Controller registers by Trust Provider attestation (AWS Role, AWS or Azure metadata,
+      Kubernetes service account) or, on-prem and bare metal, with a 15-minute one-time Device Code;
+      after registration it holds a refresh token it uses to mint access tokens, and Agent Proxies
+      get their Aembit Cloud token from the Agent Controller. That stored refresh token is the one
+      persistent credential in the Edge path and its lifetime is not documented publicly.
+  outbound:
+    grade: B
+    mechanism: >-
+      Aembit acts as an OIDC issuer that your AWS (STS AssumeRoleWithWebIdentity), GCP (Workload
+      Identity Federation with service account impersonation) and Azure (Entra federated credential)
+      trust, so cloud access is keyless; most SaaS targets (Okta, GitHub, Slack, Google Workspace,
+      Salesforce, Wiz) instead need an API token or a client secret from an OAuth app you register,
+      stored in Aembit.
+    evidence:
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/aws-security-token-service-federation/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "OIDC Issuer URL - OpenID Connect (OIDC) Issuer URL, auto-generated by Aembit, is a dedicated endpoint for OIDC authentication within AWS."
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/google-workload-identity-federation/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "obtain short-lived Google Cloud credentials through Aembit acting as a third-party federated Identity Provider (IdP)."
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/azure-entra-workload-identity-federation/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "One requesting the https://graph.microsoft.com/.default scope"
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/integrations/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "It leverages Azure’s Workload Identity Federation, allowing Aembit to authenticate using short-lived, federated tokens based on OpenID Connect (OIDC) standards."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/okta/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API Key - Provide the key copied from Okta and use the format SSWS api-token, replacing api-token with your API token."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/github-rest/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A personal access token (API Key Method)"
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/github-rest/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Client Secret - Provide the Secret copied from GitHub."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/google-drive/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Client Secret - Provide the Secret copied from Google."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/slack/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Client Secret - Provide the Secret copied from Slack."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/microsoft-graph/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Client Secret - Provide the client secret copied from Azure."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/salesforce-rest/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Client Secret - Provide the Consumer Secret copied from Salesforce."
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/integrations/gitlab/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "As soon as you successfully create the integration, Aembit rotates the token for the GitLab service account and continues to rotate it as long as the Credential Provider Integration exists."
+      - url: https://docs.aembit.io/user-guide/administration/discovery/integrations/wiz/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Client Secret - Paste the Client Secret you copied earlier."
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/api-key/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The Application Programming Interface (API) Key credential provider is designed for scenarios where authentication is accomplished using a static API Key."
+      - url: https://docs.aembit.io/user-guide/administration/log-streams/gcs-bucket/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Select GCS Bucket using Workload Identity Federation as the Destination Type."
+      - url: https://docs.aembit.io/user-guide/access-policies/server-workloads/guides/snowflake/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Aembit generates and securely stores a private key, while the corresponding public key is registered with Snowflake."
+    notes: >-
+      Aembit's outbound surface is its Credential Providers: what Aembit Cloud (or the Agent Proxy,
+      with Private Network Access) uses to reach the target on the workload's behalf. Checked:
+      AWS (STS federation, keyless; Secrets Manager via an IAM Role integration), GCP (WIF, keyless;
+      BigQuery also offers a client-secret OAuth path), Azure / Microsoft Graph (Entra WIF, keyless;
+      the Microsoft Graph server guide and the Office 365 / Microsoft Enterprise MCP gateway pages
+      instead use a client secret you create), Azure Key Vault (keyless via Entra federation), Vault
+      (Aembit-signed JWT, keyless), Claude and OpenAI APIs (WIF credential providers, keyless),
+      Snowflake (Aembit-generated key pair, only the public key leaves Aembit), S3 and GCS log streams
+      (bucket policy and WIF, keyless). Want a static secret from you: Okta (SSWS API token, the only
+      documented method), GitHub (PAT, or client secret of a GitHub App or OAuth app you register;
+      no Aembit-owned GitHub App), Slack, Google Workspace / Drive and Salesforce (client secret of an
+      app you register, plus a user authorization), Microsoft Graph via client credentials, Wiz
+      discovery (client ID and secret), GitLab service-account integration (a PAT that Aembit then
+      rotates). The generic API Key and Username & Password providers exist for targets with nothing
+      better and hold whatever you paste (their docs describe no rotation), and the Azure Key Vault
+      provider states it "Doesn’t manage secret lifecycle (creation, rotation, deletion)—only
+      retrieval." Because the clouds are keyless and the SaaS
+      connectors are not, this is a B; the static secrets are for third-party targets that offer no
+      federation, which is the problem Aembit exists to contain, but the rubric counts them.
+
+hygiene:
+  expiry:
+    pass: null
+    evidence:
+      - url: https://docs.aembit.io/dev-guide/api/cloud/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Aembit requires you to use Authorization Header Bearer (access) tokens when making API calls and doesn’t support long-lived credentials."
+      - url: https://docs.aembit.io/user-guide/access-policies/credential-providers/aembit-access-token/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Lifetime - The duration for which the generated access token remains valid. The minimum lifetime is 300 seconds (5 minutes)."
+    notes: >-
+      Aembit issues no long-lived machine credential for its own API: access tokens carry a
+      configured lifetime and are minted from attested identity.
+  rotation_api:
+    pass: null
+    evidence:
+      - url: https://docs.aembit.io/dev-guide/api/cloud/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Aembit requires you to use Authorization Header Bearer (access) tokens when making API calls and doesn’t support long-lived credentials."
+    notes: No static Aembit key exists to rotate.
+  scoping:
+    pass: null
+    evidence:
+      - url: https://docs.aembit.io/dev-guide/api/cloud/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Using the Aembit Access Token type and a Role with permissions to the appropriate entities"
+    notes: >-
+      Not applicable, but federated API tokens are scoped by the Aembit Role on the Credential
+      Provider and optionally by Resource Set.
+  last_used:
+    pass: null
+    evidence:
+      - url: https://docs.aembit.io/dev-guide/api/cloud/
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Aembit requires you to use Authorization Header Bearer (access) tokens when making API calls and doesn’t support long-lived credentials."
+    notes: No static Aembit key exists.
+  leak_revocation:
+    pass: null
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+    notes: >-
+      Aembit is not on GitHub's secret-scanning pattern list (partner or user). Not applicable since
+      Aembit issues no long-lived key; its short-lived access tokens are JWTs.
+
+notes: >-
+  Graded the management (Cloud) API that customers automate against, including through the Aembit
+  Terraform provider. The Edge API (/edge/v1/auth), used by the Edge SDKs and CLI to fetch target
+  credentials, accepts the same attestation methods: AWS metadata, IAM role, Lambda and ECS, Azure
+  metadata, GCP identity token, Kubernetes service account, GitHub, GitLab, Terraform Cloud and
+  generic OIDC. Docs are public and complete enough to grade; no gated material was needed. Aembit
+  also ships an MCP Identity Gateway and MCP Authorization Server; their per-user OAuth flows to
+  SaaS MCP servers also depend on client secrets of customer-registered apps and are counted in the
+  outbound notes.

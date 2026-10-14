@@ -1,0 +1,179 @@
+id: p0-security
+vendor: P0 Security
+product: P0 platform (Management, JIT access and inventory APIs)
+website: https://www.p0.dev
+docs: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+category: identity
+status: listed
+summary: >-
+  P0's API accepts a short-lived Google Cloud service-account identity token in place of a key, but
+  no other issuer; the legacy API key never expires and always carries the full Owner role. Into
+  your clouds, Okta, Entra, Google Workspace, GitHub and Slack it is keyless, while Kubernetes,
+  Cloudflare, Tailscale and the SIEM sinks still want a pasted token or secret.
+
+surfaces:
+  inbound:
+    grade: B
+    mechanism: >-
+      A Google-issued service-account OIDC identity token (audience = the P0 org URL, verified email
+      claim, email must be a member of the P0 org with an RBAC role) is accepted directly as the
+      bearer token. The only other machine path is a legacy, non-expiring, Owner-scoped API key.
+    issuers: ["Google Cloud service-account identity tokens (accounts.google.com)"]
+    evidence:
+      - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A workload running on Google Cloud can authenticate as a service account with a short-lived identity token, so no long-lived secret needs to live in your CI system. P0 accepts a Google-issued service-account identity token as a bearer token."
+      - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The service account's email must be a member of your P0 organization, or P0 rejects the token."
+      - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Recommended. Short-lived, no stored secret. Requires Google Cloud."
+      - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "API keys are legacy and are being phased out in favor of Google Cloud service-account tokens. They still work, but prefer a service-account token for new integrations."
+      - url: https://docs.p0.dev/integrations/resource-integrations/ssh/self-hosted
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A Google Cloud service-account token is recommended for CI/CD or unattended registration: it's short-lived and needs no stored secret."
+    notes: >-
+      The docs name exactly three token sources: a Google service-account identity token, a P0 CLI
+      token (a human's SSO session, not for automation), and the legacy API key. No configurable
+      OIDC issuer, GitHub Actions, GitLab, AWS or Azure identity is documented, so this is an
+      allowlist of one (Google). A workload outside GCP can still get there by using GCP Workload
+      Identity Federation to impersonate a service account and mint the ID token, but Google
+      remains the only issuer P0 trusts. Trust is constrained by audience (the org URL) and the
+      service account's email, which must be an RBAC member, so the identity gets least-privilege
+      roles such as Security Reviewer. The self-hosted SSH agent registers once with any of these
+      tokens, then generates its own ECDSA key pair under /etc/p0-ssh-agent/keys and authenticates
+      to P0 with JWTs; the docs advise deleting an API key after registration if one was used.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS via sts:AssumeRoleWithWebIdentity with a Google-signed token into a P0 role; GCP by
+      granting roles to P0's own service account; Azure via an app registration with a federated
+      credential; Okta via an API Services app trusting a P0-generated public key; Entra (legacy),
+      Google Workspace, GitHub and Slack via admin consent / app install. Kubernetes, Cloudflare,
+      Tailscale, Datadog and Splunk integrations take a customer-created token or client secret.
+    evidence:
+      - url: https://docs.p0.dev/integrations/resource-integrations/aws/installation-methods
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "P0 assumes the P0RoleIamManager role by calling sts:AssumeRoleWithWebIdentity with a Google-signed token."
+      - url: https://docs.p0.dev/integrations/resource-integrations/google-cloud
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The IAM management install grants resourcemanager.projects.getIamPolicy to P0's service account on the project."
+      - url: https://docs.p0.dev/integrations/resource-integrations/microsoft-azure/azure-app-registration
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Stage the installation with p0_azure_app_staged to obtain the application name and federated credential details, create the Azure AD application and its federated credential from those outputs, then complete the installation with p0_azure_app, passing the new application's client ID."
+      - url: https://docs.p0.dev/integrations/directory-integrations/okta
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Paste the public key you copied from P0 during the public key generation process, then click Done."
+      - url: https://docs.p0.dev/integrations/directory-integrations/google-workspace
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Click \"Install integration\". This will take you to a Google consent screen:"
+      - url: https://docs.p0.dev/integrations/directory-integrations/microsoft-entra-id-legacy
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Click \"Install integration\". This will take you to Microsoft's site and present you with a consent screen."
+      - url: https://docs.p0.dev/integrations/resource-integrations/github
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Review the permissions required by the P0 GitHub app and select Install."
+      - url: https://docs.p0.dev/integrations/resource-integrations/kubernetes
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Copy the resulting token from the shell, return to the P0 IAM management screen, and paste it into the Cluster token input field."
+      - url: https://docs.p0.dev/integrations/resource-integrations/cloudflare
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "SCIM API token: a Cloudflare API token that grants P0 access to the account's SCIM API."
+      - url: https://docs.p0.dev/integrations/resource-integrations/tailscale
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The installation process involves generating an OAuth client in Tailscale and providing its Client ID and Client secret to P0."
+      - url: https://docs.p0.dev/integrations/siem-integrations/datadog-setup
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "You must provide a Datadog API key to authenticate log submissions."
+    notes: >-
+      Checked: AWS, GCP, Azure, Okta, Entra ID (new security-perimeter version and legacy),
+      Google Workspace, GitHub (teams), GitHub Repositories, Slack, Kubernetes, SSH, Snowflake,
+      Databricks, Cloudflare, Tailscale, Datadog and Splunk HEC SIEM sinks. Keyless: AWS, GCP,
+      Azure, Okta (P0 generates the key pair and holds the private key; the customer only pastes
+      P0's public key into an Okta API Services app, so no customer secret is handed over), Entra,
+      Google Workspace, GitHub, Slack, Databricks (a connector in the customer's AWS account signs
+      in with AWS outbound web identity federation), and GitHub Repositories (customer-owned GitHub
+      App whose private key stays in the customer's AWS Secrets Manager; P0 says it never reads
+      it). The new Entra perimeter and Snowflake run vendor-generated shell/SQL; neither page asks
+      for a secret, but the generated commands are only visible after login. Static: Kubernetes
+      (a long-lived service-account token from a p0-service-account-secret is pasted into P0, also
+      in the Terraform path), Cloudflare (account API token), Tailscale (OAuth client ID and secret
+      with the "all" scope), Datadog SIEM (API key) and Splunk (HEC token). Every cloud is keyless;
+      B rather than A because Kubernetes and several SaaS connectors take static credentials.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A Google Cloud service-account token or a CLI token expires on its own; an API key does not."
+      - url: https://docs.p0.dev/integrations/resource-integrations/ssh/self-hosted
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A legacy API key also works, but carries the full Owner role and doesn't expire on its own."
+    notes: The create-key request takes only a name; there is no expiry field or org policy.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.p0.dev/p0-management/management-api/api-key-management-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "The API Key Management API lets you create, list, and delete your organization's API keys programmatically. Use these endpoints to automate key provisioning and rotation in your infrastructure-as-code and CI/CD workflows."
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "A P0 API key carries the full Owner role and cannot be scoped to a lesser role."
+      - url: https://docs.p0.dev/p0-management/management-api/api-key-management-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Every API key is granted the Owner role, so any key can create, list, and delete other API keys. Treat each key as a full administrative credential, and store it securely."
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.p0.dev/p0-management/management-api/api-key-management-api
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Returns metadata for every API key in the organization, ordered by creation time. Never returns key material."
+    notes: >-
+      The documented ApiKeyMetadata object has only id, created, name and user; no last-used field
+      is documented in the API or the dashboard docs. The delete docs tell you to "confirm the key
+      is unused before you delete it" without saying how. Key creation and deletion are audit-logged.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-13
+        checked_by: tehreet
+        quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
+    notes: P0 Security does not appear anywhere in GitHub's supported-patterns list, partner or otherwise.
+
+notes: >-
+  Docs are public (docs.p0.dev, with Markdown copies of every page). Inbound would move to A if P0
+  accepted tokens from a customer-configured OIDC issuer (GitHub Actions, AWS, Azure, any IdP)
+  instead of Google only. The legacy API key fails four of five hygiene checks, but it is optional:
+  a GCP-based or GCP-federated workload never needs one. P0's own outbound auth into AWS is itself
+  federation from a Google identity, which is the pattern it asks customers to use inbound.
