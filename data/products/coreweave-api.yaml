@@ -10,7 +10,6 @@ summary: >-
   provider, and managed-auth kubeconfigs. Its one credential is a static, user-scoped API Access
   Token minted by hand in the Cloud Console, with almost no hygiene around it. CoreWeave's CKS and
   AI Object Storage cards grade very differently; see those.
-
 surfaces:
   inbound:
     grade: F
@@ -22,34 +21,49 @@ surfaces:
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/api-access
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "API Access Tokens are user-scoped tokens that grant users permission to access API endpoints. They gate the ability to deploy CKS Clusters, VPCs, and to manage and access cluster metrics."
+        quote: >-
+          API Access Tokens are user-scoped tokens that grant users permission to access API
+          endpoints. They gate the ability to deploy CKS Clusters, VPCs, and to manage and access
+          cluster metrics.
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens
         checked_on: 2026-09-17
         checked_by: tehreet
-        quote: "This page explains how to create, use, and manage API Access Tokens and the kubeconfig files generated alongside them, so you can authenticate kubectl to CKS clusters and keep credentials secure."
-      - url: https://docs.coreweave.com/support/cks/articles/what-is-the-difference-between-managed-auth-and-unmanaged-auth.md
+        quote: >-
+          This page explains how to create, use, and manage API Access Tokens and the kubeconfig
+          files generated alongside them, so you can authenticate kubectl to CKS clusters and keep
+          credentials secure.
+      - url: >-
+          https://docs.coreweave.com/support/cks/articles/what-is-the-difference-between-managed-auth-and-unmanaged-auth.md
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Managed auth uses CoreWeave-issued API access tokens against the managed-auth endpoint"
+        quote: Managed auth uses CoreWeave-issued API access tokens against the managed-auth endpoint
       - url: https://docs.coreweave.com/docs/products/cks/reference/cks-api
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-10-05
+        checked_by: sisyphus
+        quote: >-
+          Replace {API_ACCESS_TOKEN} in the examples on each operation page with your CoreWeave API
+          access token.
     notes: >-
       Nothing in the token docs, the CKS API reference, or the Object Storage WIF docs describes
       exchanging an external OIDC/SAML token for a control-plane token; Object Storage's WIF
       explicitly "only generates temporary credentials" for Object Storage. So the Terraform
       provider and every cluster/VPC create call run on a long-lived Console token, and 1 of 5
-      hygiene checks passes. The CKS clusters this API creates, and AI Object Storage, both accept
-      federated identities and are graded on their own cards.
+      hygiene checks passes. The rewritten CKS API reference still authenticates with a bearer API
+      access token and now points at a separate IAM Access Policies page for required permissions;
+      that page has not been read and is not yet evidence either way. The CKS clusters this API
+      creates, and AI Object Storage, both accept federated identities and are graded on their own
+      cards.
   outbound:
     grade: N/A
     mechanism: The control plane never needs access to customer infrastructure.
     evidence:
       - url: https://docs.coreweave.com/docs/products/cks/reference/cks-api
-        checked_on: 2026-09-16
-        checked_by: tehreet
-    notes: The CKS API exposes only cluster list/create/get/delete/update; no integration pulls from a customer cloud. Per-cluster OIDC issuance is graded on the CKS card.
-
+        checked_on: 2026-10-05
+        checked_by: sisyphus
+        quote: REST and gRPC API for creating, listing, updating, and deleting CoreWeave CKS clusters.
+    notes: >-
+      The CKS API exposes only cluster list/create/get/delete/update; no integration pulls from a
+      customer cloud. Per-cluster OIDC issuance is graded on the CKS card.
 hygiene:
   expiry:
     pass: true
@@ -57,11 +71,13 @@ hygiene:
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Expiration How long the token remains valid."
+        quote: Expiration How long the token remains valid.
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/kubeconfig
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Tokens have an expiration date, so a token that worked previously can expire between sessions."
+        quote: >-
+          Tokens have an expiration date, so a token that worked previously can expire between
+          sessions.
     notes: >-
       Every API Access Token carries an expiration set at creation. The docs do not state the
       default, the maximum, whether "never" is selectable, or whether an org policy can cap it;
@@ -72,39 +88,59 @@ hygiene:
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "You can view or delete Access Tokens on the Access Tokens dashboard"
+        quote: You can view or delete Access Tokens on the Access Tokens dashboard
       - url: https://docs.coreweave.com/docs/products/cks/reference/cks-api
-        checked_on: 2026-09-16
-        checked_by: tehreet
-    notes: Tokens are created and deleted only in the Cloud Console; the CKS API has no token endpoints. Rotation means a human in a browser.
+        checked_on: 2026-10-05
+        checked_by: sisyphus
+        quote: >-
+          The API lets you create, list, update, and delete managed Kubernetes clusters on CoreWeave
+          infrastructure.
+    notes: >-
+      Tokens are created and deleted only in the Cloud Console; the rewritten CKS API reference
+      lists five endpoints, all of them cluster CRUD, and no token endpoints. Rotation means a human
+      in a browser.
   scoping:
     pass: false
     evidence:
-      - url: https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md
+      - url: >-
+          https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "user-scoped and grant permissions to deploy CKS clusters and VPCs, access cluster metrics, and authenticate against the managed-auth endpoint."
-    notes: A token is the user; there is no way to restrict one to a cluster, a namespace, or a subset of the user's org permissions.
+        quote: >-
+          user-scoped and grant permissions to deploy CKS clusters and VPCs, access cluster metrics,
+          and authenticate against the managed-auth endpoint.
+    notes: >-
+      A token is the user; there is no way to restrict one to a cluster, a namespace, or a subset of
+      the user's org permissions. The CKS API reference now refers to IAM Access Policies for
+      required permissions, which may describe a scoped machine principal; that page is not cited
+      here and the check is held at fail until it is read.
   last_used:
     pass: false
     evidence:
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens
         checked_on: 2026-09-16
         checked_by: tehreet
-      - url: https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md
+      - url: >-
+          https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md
         checked_on: 2026-09-16
         checked_by: tehreet
-    notes: No last-used timestamp is documented for API Access Tokens in the token management or support pages. Graded conservatively.
+    notes: >-
+      No last-used timestamp is documented for API Access Tokens in the token management or support
+      pages. Graded conservatively.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-09-16
-        checked_by: tehreet
-    notes: CoreWeave does not appear anywhere in GitHub's supported secret-scanning patterns list, partner or otherwise, despite tokens having a greppable CW-SECRET- prefix.
-
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-05
+        checked_by: sisyphus
+    notes: >-
+      CoreWeave does not appear in GitHub's supported secret-scanning patterns, partner or
+      otherwise, despite tokens having a greppable CW-SECRET- prefix. The page has been reorganized
+      and the fetched text returned navigation only; the pattern table was not reachable, so the
+      fail stands on the prior reading and a human should re-read the table.
 notes: >-
   Home team, graded on the same rubric as everyone else. The fix is a federated path into
-  api.coreweave.com (exchange an OIDC token for a short-lived control-plane token, the way
-  Object Storage already does), then an API to mint and revoke tokens, token scoping, a
-  last-used column, and a GitHub secret-scanning partnership.
+  api.coreweave.com (exchange an OIDC token for a short-lived control-plane token, the way Object
+  Storage already does), then an API to mint and revoke tokens, token scoping, a last-used column,
+  and a GitHub secret-scanning partnership.
