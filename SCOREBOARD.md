@@ -32,7 +32,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Sola Security | [Sola (SaaS and cloud security posture)](data/products/sola-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🟠 C** | Zenity | [AI Agent Security platform](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Aembit | [Aembit Workload IAM (Aembit Cloud API and Edge)](data/products/aembit-workload-iam.yaml) | 🟢 A | 🟡 B | `· · · · ·` | listed | 2026-10-13 |
-| **🟡 B** | Akeyless | [Akeyless Identity Security Platform (Secrets Management API)](data/products/akeyless-platform.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
+| **🟡 B** | Akeyless | [Akeyless Identity Security Platform (Secrets Management API)](data/products/akeyless-platform.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-19 |
 | **🟡 B** | Britive | [Cloud PAM (JIT / zero standing privilege) API](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | C1 (formerly ConductorOne) | [C1 Identity Platform (API + Baton connectors)](data/products/c1-identity-platform.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Datadog | [API (API keys + application keys)](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
