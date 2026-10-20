@@ -1,0 +1,207 @@
+id: elastic-cloud-enterprise
+vendor: Elastic
+product: Elastic Cloud Enterprise (ECE orchestrator API)
+website: https://www.elastic.co
+docs: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
+category: data
+status: listed
+summary: >-
+  Automation reaches the self-managed ECE orchestrator API with a static API key (or a username
+  and password traded for a JWT); keys default to a three-month expiry but can be set to never, can be rotated by API,
+  but cannot be scoped below their owner, show no last-used time, and no workload federation
+  exists. Platform snapshot repositories want a pasted S3 access key, GCS service-account JSON
+  key, or Azure SAS token.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static ECE API key sent in the Authorization header (created in the Cloud UI or via the API,
+      default three-month expiry); the alternative is a native/LDAP/AD username and password
+      exchanged at /users/auth/_login for a JWT bearer token. No OIDC or JWT federation for
+      workloads.
+    evidence:
+      - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The Elastic Cloud Enterprise RESTful APIs support both key-based and token-based authentication. Key-based is generally the preferred method."
+      - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "For token-based API authentication, you can use the same username and password that you use to log into the Cloud UI."
+      - url: https://www.elastic.co/docs/api/doc/cloud-enterprise.json
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: '"securityDefinitions":{"apiKey":{"type":"apiKey","name":"Authorization","in":"header"},"basicAuth":{"type":"basic"}}'
+      - url: https://www.elastic.co/docs/reference/ecctl/ecctl-authentication
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The second method uses the `user` and `pass` values to obtain a valid JWT token, that token is then used as the Authentication Bearer header for every API call."
+      - url: https://raw.githubusercontent.com/elastic/terraform-provider-ec/master/docs/index.md
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "Elasticsearch Service (ESS) only supports `apikey`. Elastic Cloud Enterprise (ECE) supports `apikey` or a combination of `username` and `password`."
+    notes: >-
+      The only security schemes in the ECE OpenAPI spec are an API key header and HTTP basic; the
+      /users/auth/_login JWT is minted from a username and password, so it is a static secret by
+      another name, not federation (ecctl refreshes it every minute but still holds the password).
+      SAML, LDAP and Active Directory provider profiles exist but are for humans signing into the
+      Cloud UI. ecctl (--api-key or --user/--pass) and the `ec` Terraform provider (apikey, or
+      username/password for ECE only) inherit the same static options. API keys cannot be created
+      for the built-in admin and readonly users, so automation needs a named native/LDAP/AD user.
+      Host enrollment: adding allocator/proxy/coordinator hosts uses roles tokens, either
+      ephemeral (auto-revoked after one hour) or persistent ("Available ... indefinitely. Can be
+      revoked at any time."), per
+      https://www.elastic.co/docs/deploy-manage/deploy/cloud-enterprise/generate-roles-tokens.
+      Applies to self-managed ECE only; ECE itself requires an Elastic license (Enterprise-level
+      features), but API keys are not an extra-cost add-on, so no tier gate is recorded.
+
+  outbound:
+    grade: F
+    mechanism: >-
+      Platform-level snapshot repositories (the automatic found-snapshots backups) are configured
+      with a pasted static credential: S3 access key and secret key, a GCS service-account JSON
+      key with storage.admin, an Azure storage SAS token, or MinIO access/secret keys.
+    evidence:
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/cloud-enterprise
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "In Elastic Cloud Enterprise (ECE), snapshot repositories are managed at the platform level and can be assigned to individual deployments. When a repository is assigned to a deployment, a snapshot is taken every 30 minutes by default."
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ece-aws-custom-repository
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "All repository options must be specified, as there are no default values."
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ece-aws-custom-repository
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The secret key to use for authentication."
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/google-cloud-storage-gcs-repository
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The service account should be granted the role of storage.admin so that Elasticsearch clusters can read, write, and list the bucket objects."
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/google-cloud-storage-gcs-repository
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "Save the service account key in JSON file format. You are going to use it later to configure your Elasticsearch deployment for snapshotting."
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/azure-storage-repository
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: '"sas_token": "AZURE SAS_TOKEN",'
+      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-aws-custom-repository
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "Next, create an IAM user, copy the access key ID and secret, and configure the following user policy. This is important to make sure the access keys, which you will need to provide to your cluster, can only access the intended bucket."
+    notes: >-
+      ECE is self-managed, so these credentials live in the customer's own ECE installation (and
+      deployment keystores), not with Elastic; this is still the product reaching into customer
+      cloud storage with a long-lived secret the customer hands it. Repositories checked: S3
+      (access key + secret key fields on the platform form), GCS (service-account JSON key in the
+      gcs.client.*.credentials_file secure setting, storage.admin role), Azure (SAS token in the
+      repository JSON), MinIO (access/secret keys). The deployment-level S3 guide (shared by ECH
+      and ECE) gives a bucket-scoped IAM-user policy, and SAS tokens are inherently scoped, but the
+      GCS guide asks for storage.admin and none of the ECE repository pages explain rotation, so
+      the bar for D is not met. Plain self-managed Elasticsearch can pick up EC2 instance-role or
+      EKS web-identity credentials when no keys are set; the ECE pages do not document that path
+      for ECE-orchestrated containers, so it was not credited. No other outbound connectors into
+      customer clouds or SaaS were found for the orchestrator; allocator/runner hosts are
+      infrastructure the customer installs ECE on, enrolled with roles tokens (see inbound notes).
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "By default, the API key will expire three months after its creation date, but you can set the expiration to Never."
+      - url: https://www.elastic.co/docs/api/doc/cloud-enterprise.json
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The optional expiration for the API key, provided as a duration (ex: '1d', '3h')"
+    notes: >-
+      Fails: the Cloud UI defaults to a three-month expiry and responses carry an
+      X-Elastic-Api-Key-Expiration header, but any user can choose Never, no platform policy to cap
+      lifetime is documented, and the API's `expiration` field is optional. A changeable UI default
+      is not an enforced expiry (same call as cloudflare-api, doppler-secrets and elasticsearch).
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://www.elastic.co/docs/api/doc/cloud-enterprise.json
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: '"summary":"Create API key","description":"Creates a new API key.","operationId":"create-api-key"'
+      - url: https://www.elastic.co/docs/reference/ecctl/ecctl_auth_key_create
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "Creates a new API key for the current authenticated user."
+    notes: >-
+      POST /users/auth/keys creates a key; DELETE /users/auth/keys/{api_key_id},
+      DELETE /users/{user_id}/auth/keys/{api_key_id} and bulk DELETE /users/auth/keys/_all revoke
+      them. ecctl wraps these as `ecctl auth key create|delete|list|show`.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The API key has the same permissions as the API key owner."
+      - url: https://www.elastic.co/docs/api/doc/cloud-enterprise.json
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The optional roles for the API key. Takes the role of the creator if not specified. Currently unavailable in self-hosted ECE."
+      - url: https://www.elastic.co/docs/deploy-manage/users-roles/cloud-enterprise-orchestrator/manage-users-roles
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "In addition to the system admin and readonly users, you can create additional users and assign pre-built roles to control access to platform operations, deployment assets, or API calls."
+    notes: >-
+      Marginal pass. The key itself cannot be scoped (per-key role_assignments are explicitly
+      unavailable in self-hosted ECE), but a purpose-built native user can be created for
+      automation and given one of the pre-built roles (Platform admin, Platform viewer, Deployment
+      manager, Deployment viewer), and its keys carry only that role. That matches the rubric's
+      "purpose-built machine principal" allowance; roles are coarse (no custom roles, no
+      per-deployment scoping). A reader who treats native users as human accounts would fail
+      this check; inbound is F either way since expiry also fails.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://www.elastic.co/docs/api/doc/cloud-enterprise.json
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "The response model for an API key."
+      - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "When you use an API key to authenticate, the API response header X-Elastic-Api-Key-Expiration indicates the key’s expiration date."
+    notes: >-
+      ApiKeyResponse exposes id, user_id, organization_id, description, key, creation_date,
+      expiration_date and role_assignments; no last-used field. The docs mention only creation and
+      expiry, not usage.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-14
+        checked_by: tehreet
+        quote: "Elastic Cloud API Key"
+    notes: >-
+      GitHub lists only "Elastic Cloud API Key" and "Elastic Stack API Key", both as non-partner
+      (user alert / push protection) patterns, so Elastic is not notified for automatic
+      revocation. Neither pattern is described as covering self-managed ECE API keys, and an ECE
+      installation is not reachable by a vendor revocation service in any case.
+
+notes: >-
+  Scope: the ECE orchestrator's own REST API (platform and deployment lifecycle), self-managed
+  only. Elastic Cloud Hosted and Serverless use the Elastic Cloud API, graded separately as
+  elastic-cloud-api (its keys support role assignments, which ECE's do not). Data-plane access
+  to ECE-orchestrated deployments uses Elasticsearch API keys and realms (elasticsearch card);
+  Kibana and Fleet ride on those (kibana, elastic-agent-fleet cards). Not graded separately:
+  Elastic Cloud on Kubernetes (ECK) is a Kubernetes operator with no orchestrator API of its own,
+  so access is governed by Kubernetes RBAC on its custom resources ("Built on the Kubernetes
+  Operator pattern, Elastic Cloud on Kubernetes (ECK) extends the basic Kubernetes orchestration
+  capabilities", https://www.elastic.co/docs/deploy-manage/deploy/cloud-on-k8s); Logstash is a
+  client of Elasticsearch that authenticates with user/password, cloud_auth or an Elasticsearch
+  API key ("Authentication to a secure Elasticsearch cluster is possible using one of the
+  user/password, cloud_auth or api_key options",
+  https://www.elastic.co/docs/reference/logstash/plugins/plugins-outputs-elasticsearch), so it is
+  covered by the elasticsearch card. Grade moves to C or better only if ECE accepts federated
+  workload tokens or another non-static bootstrap.
