@@ -1,0 +1,226 @@
+id: temporal
+vendor: Temporal
+product: Temporal (Cloud and self-hosted Server)
+website: https://temporal.io
+docs: https://docs.temporal.io/cloud/api-keys
+category: devtools
+status: listed
+summary: >-
+  Temporal Cloud workers, the Cloud Ops API, tcld and Terraform authenticate with static API keys
+  (mTLS with your own CA is a Namespace-only alternative); no OIDC path exists. Keys always expire
+  (2-year cap) and are API-rotatable, scoped and GitHub partner-revoked, but show no last use.
+  Self-hosted Server can verify your own JWTs. Into your cloud it is keyless on AWS and GCP.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static API key owned by a user or Service Account (Authorization: Bearer), accepted by
+      Namespace gRPC endpoints, the Cloud Ops API, tcld and the Terraform provider. Namespaces can
+      instead use mTLS client certificates chained to a CA you upload; the control plane cannot.
+    evidence:
+      - url: https://docs.temporal.io/cloud/api-keys
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "API keys work with Temporal Cloud operational tools, including the Temporal Cloud CLI extension, tcld, Cloud Ops APIs, and the Terraform provider."
+      - url: https://docs.temporal.io/cloud/api-keys
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "API keys serve as an authentication mechanism for executing and managing Workflows via the SDK and Temporal CLI, offering an alternative to mTLS-based authentication."
+      - url: https://docs.temporal.io/cloud/manage-access/service-accounts
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Service Accounts use API Keys as the authentication mechanism to connect to Temporal Cloud."
+      - url: https://docs.temporal.io/cloud/connectivity
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Control Plane access is always securely authenticated via API keys or JWT tokens, regardless of how you choose to connect."
+      - url: https://docs.temporal.io/ops
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "An API Key for authentication (owned by that User or Service Account)"
+      - url: https://docs.temporal.io/cloud/certificates
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Temporal Cloud authenticates a client connection by validating the client certificate against one or more CA certificates that are configured for the specified Namespace."
+      - url: https://docs.temporal.io/self-hosted-guide/security
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "The default JWT ClaimMapper implementation can be used as is or as a base for a custom implementation of a similar plugin."
+      - url: https://docs.temporal.io/self-hosted-guide/security
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "KeySourceURIs are the HTTP endpoints that return public keys of token issuers in the JWKS format."
+      - url: https://docs.temporal.io/self-hosted-guide/security
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "A typical approach is for ClaimMapper to interpret custom Claims from a caller's JWT, such as membership in groups, and map them to Temporal roles for the user."
+      - url: https://raw.githubusercontent.com/temporalio/temporal/main/common/config/config.go
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "// JWT audience for validating tokens"
+      - url: https://raw.githubusercontent.com/temporalio/temporal/main/common/config/config.go
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "// Regular expression to parse permissions claim value. The regex should contain named groups \"namespace\" and \"role\", for example"
+    notes: >-
+      Graded on Temporal Cloud. No OIDC, GitHub Actions, cloud workload identity or token-exchange
+      path is documented for either plane; the Control Plane's "JWT tokens" are the browser-login
+      sessions of tcld and `temporal cloud login`, not federation. Namespace mTLS trusts a CA
+      bundle you upload (with optional certificate filters on the leaf subject), so a customer PKI
+      issuing short-lived leaves avoids handing Temporal a secret; but it is X.509 rather than
+      OIDC, it does not reach the Cloud Ops API, tcld or Terraform, and a Namespace created with
+      API key auth "cannot later enable mTLS alongside API keys". Even Temporal's own Serverless
+      Workers on Lambda and Cloud Run are configured with TEMPORAL_API_KEY or TLS key material.
+      Self-hosted Temporal Server is different: its default JWT ClaimMapper verifies tokens against
+      JWKS URLs you choose (keySourceURIs) with an optional audience, so any issuer works. It does
+      not lift this grade, unlike the best-deployment rule on `elasticsearch`: Elasticsearch's JWT
+      realm is a product feature available on Elastic's hosted service, while Temporal's is a
+      plugin seam on software you run yourself. It maps roles from a Temporal-specific
+      "permissions" claim that CI and cloud workload tokens do not carry (so in practice a
+      claim-adding IdP or a custom Go build), issuer trust is only the JWKS list, subject checks
+      need custom code, and an unconfigured server has no authentication at all (the default
+      noopAuthorizer allows every request).
+  outbound:
+    grade: A
+    mechanism: >-
+      Workflow History Export, Audit Logs and Serverless Workers reach in by assuming an IAM role
+      you create that trusts Temporal's AWS roles (with an External ID for Lambda and AgentCore),
+      or by impersonating a GCP service account you grant to Temporal's service accounts.
+    evidence:
+      - url: https://docs.temporal.io/cloud/export/aws-export-s3
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Temporal Cloud creates multiple intermediary IAM roles for export operations for security purposes."
+      - url: https://docs.temporal.io/cloud/export/gcp-export-gcs
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Create a service account in the same project that grants Temporal permission to write to your GCS bucket."
+      - url: https://docs.temporal.io/cloud/audit-logs-aws
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "You can use this AWS CloudFormation template to create an IAM role with access to a Kinesis stream you have in your account."
+      - url: https://docs.temporal.io/cloud/audit-logs-gcp
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "In the service account email field, enter the email of the service account you created in the prerequisites."
+      - url: https://docs.temporal.io/production-deployment/worker-deployments/serverless-workers/aws-lambda
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "The trust policy on the role includes an External ID condition to prevent"
+      - url: https://docs.temporal.io/production-deployment/worker-deployments/serverless-workers/cloud-run
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Temporal Cloud scales the Worker Pool by impersonating a service account you create, called the invoker service account."
+      - url: https://docs.temporal.io/production-deployment/worker-deployments/serverless-workers/aws-lambda/self-hosted-setup
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "On AWS infrastructure (EC2, ECS, EKS): The server uses the attached instance role, task role, or pod role automatically."
+      - url: https://docs.temporal.io/production-deployment/worker-deployments/serverless-workers/aws-lambda/self-hosted-setup
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Outside AWS: Use IAM Roles Anywhere, or configure static AWS"
+      - url: https://docs.temporal.io/production-deployment/worker-deployments/serverless-workers/cloud-run/self-hosted-setup
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Create the invoker service account that the Temporal Service impersonates to scale the Worker Pool."
+      - url: https://raw.githubusercontent.com/temporalio/temporal/main/common/archiver/gcloud/README.md
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "`credentialsPath` is required but could be empty \"\" in order to allow a Google default credentials."
+      - url: https://raw.githubusercontent.com/temporalio/temporal/main/common/archiver/s3store/README.md
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "See https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials on how to set up authentication against s3"
+    notes: >-
+      Checked on Temporal Cloud: Workflow History Export (S3, GCS), Audit Logs (Kinesis, Pub/Sub),
+      Serverless Workers (AWS Lambda, Cloud Run, Bedrock AgentCore) and private connectivity
+      (PrivateLink, Private Service Connect; endpoints you create, no credential). Temporal Cloud
+      runs on AWS and GCP only, and every reach-in on both is keyless: AWS via a role you create
+      whose trust policy names Temporal's IAM roles (External ID on the Lambda and AgentCore
+      invocation roles; the export and audit-log CloudFormation templates were not inspected for
+      one), GCP via roles/iam.serviceAccountTokenCreator granted to Temporal's service accounts.
+      Metrics flow the other way: your scraper pulls from metrics.temporal.io with a Temporal API
+      key (an inbound credential, covered above). Self-hosted Server: S3 and GCS archival and
+      Serverless Workers use the server's ambient identity (AWS SDK default chain incl. instance,
+      task or pod role or IAM Roles Anywhere; Google default credentials). The docs' GCS archival
+      example points credentialsPath at a keyfile JSON and static AWS keys remain possible but
+      "not recommended"; neither is required.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://docs.temporal.io/cloud/api-keys
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "A: The maximum expiration time for an API key is 2 years."
+      - url: https://docs.temporal.io/cloud/api-keys
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Temporal API keys automatically expire based on the specified expiration time."
+    notes: >-
+      Every key carries an expiration date and the platform caps it at two years, so a
+      never-expiring key cannot exist. No org policy to set a shorter cap is documented, and the
+      Namespace page's "Generate API Key" button mints a Namespace-admin key at the full two years.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.temporal.io/ops
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Rotate service account keys on a schedule with a job."
+      - url: https://docs.temporal.io/cloud/api-keys
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "To use this feature, have your Service Account create a new API key using the Cloud Ops APIs or the CLI before the current one expires."
+    notes: >-
+      The Cloud Ops API has CreateApiKey, GetApiKeys and DeleteApiKey (plus disable via update);
+      Service Accounts can mint their own replacement key.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.temporal.io/cloud/manage-access/service-accounts
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Service Accounts afford Temporal Cloud Account Owner and Global Admin roles the ability to create an identity for machine authentication, an identity not associated with a human user."
+      - url: https://docs.temporal.io/cloud/manage-access/service-accounts
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "Namespace Admins can now manage and create Namespace-scoped Service Accounts, regardless of their Account Role."
+    notes: >-
+      A key inherits its owner's permissions, but Service Accounts are purpose-built machine
+      principals with their own account role and per-Namespace permissions (custom roles also
+      exist), which the rubric counts. Keys on user identities inherit that human's access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.temporal.io/cloud/api-keys
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "To find an API key, you can filter by API key state and identity type (Global Administrators and Account Owners only)."
+      - url: https://raw.githubusercontent.com/temporalio/api-cloud/main/temporal/api/cloud/identity/v1/message.proto
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "// The date and time when the API key was last modified."
+    notes: >-
+      The ApiKey resource has created_time and last_modified_time but no last-used field, and the
+      API keys page offers filtering by state and identity type only. The docs advise checking
+      "usage metrics and logs" instead.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-20
+        checked_by: tehreet
+        quote: "| Temporal | Temporal Cloud API Key | temporal_cloud_api_key | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |"
+    notes: >-
+      The first ✓ is GitHub's Partner column: a Temporal Cloud API key pushed to a public repo is
+      reported to Temporal.
+
+notes: >-
+  One card for Temporal Cloud and self-hosted Temporal Server, which share the same Namespace gRPC
+  API but authenticate it differently; hygiene applies to Temporal Cloud API keys (the self-hosted
+  server issues no credentials). Four of five hygiene checks pass; a last-used timestamp would
+  make it five. Inbound moves to B or A only if Temporal Cloud accepts a federated token (GitHub
+  Actions OIDC, cloud workload identity, or a bring-your-own issuer).
