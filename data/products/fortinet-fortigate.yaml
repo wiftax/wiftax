@@ -1,0 +1,231 @@
+id: fortinet-fortigate
+vendor: Fortinet
+product: FortiGate / FortiOS (REST API and SDN connectors)
+website: https://www.fortinet.com
+docs: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "The full FortiOS API reference is behind a Fortinet login; schema facts come from Fortinet's Ansible collection docs. The last-used fail is unverified, and one more hygiene pass would make inbound D."
+summary: >-
+  The FortiOS REST API accepts only a static bearer token tied to a REST API admin. Trusted hosts,
+  an admin profile and an optional client certificate narrow it, but the token never expires by
+  default, has no last-used view and is not GitHub partner-revoked. Into your cloud, SDN connectors
+  use the VM's own IAM role, managed identity or metadata service account when the FortiGate runs in
+  that cloud; hardware and off-cloud FortiGates need static AWS, Azure, GCP or OCI keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API token generated for a REST API administrator (config system api-user) and sent as
+      Authorization: Bearer (or as a URL query parameter if enabled). Each API user is restricted by
+      trusted hosts and an admin profile, and can additionally require a client certificate matching
+      a PKI peer group; the certificate is checked alongside the token, not instead of it.
+    evidence:
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "FortiGate supports only token-based authentication for API calls."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Token-based authentication requires the administrator to generate a token, which is then included in each API request for authentication."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If the API token must be added to the URL query parameter, then enable the following global setting:"
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "REST API administrator accounts are used for automated configuration, backup creation, and monitoring of the FortiGate."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Certificate matching is supported as an extra layer of security. Both the client certificate and token must match to be granted access to the API."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Allow all (0.0.0.0/0) is not allowed"
+      - url: https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/gen/fortios_system_api_user.rst.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Token-based authentication. Generated from GUI of Fortigate."
+    notes: >-
+      Graded on FortiOS 8.0.2 (the 7.6.4 REST API administrator page is identical). Fortinet states
+      the REST API takes only token auth; no OIDC, JWT, OAuth client-credentials, cloud workload
+      identity or token-exchange path exists for automation. Trusted hosts (mandatory, and 0.0.0.0/0
+      is refused) and the optional PKI peer-group check are real compensating controls, but both sit
+      on top of a long-lived token: the client certificate is an extra factor, not a replacement, so
+      this is not even the C-level static-mTLS case. Interactive admin logins (SAML SSO, RADIUS,
+      FortiToken) are for humans. The full FortiOS API reference lives on the login-walled Fortinet
+      developer network and is not publicly verifiable; schema facts here come from Fortinet's own
+      Ansible collection docs. Central management via FortiManager or FortiGate Cloud has its own
+      APIs and is not graded here. No tier gate: REST API admins exist on every FortiGate.
+  outbound:
+    grade: B
+    mechanism: >-
+      Public SDN connectors (AWS, Azure, GCP, OCI) can use the FortiGate-VM's own cloud identity
+      (AWS instance IAM role with optional cross-account STS AssumeRole and external ID, Azure
+      managed identity, GCP metadata service account, OCI instance principal), but only when the
+      FortiGate runs inside that cloud. Hardware FortiGates and VMs elsewhere must store an AWS
+      access key, Azure client secret, GCP service-account private key or an OCI API signing key.
+    evidence:
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/aws-administration-guide/619567/configuring-an-aws-sdn-connector-using-iam-roles
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "IAM authentication is available only for FGT-AWS and FGT-AWSONDEMAND platforms."
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/aws-administration-guide/374400/sdn-connector-support-for-aws-sts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For FortiOS 7.2.1 and later versions, the SDN connector supports using external ID, which allows the target account owner to permit the source account to assume the role only under specific circumstances."
+      - url: https://docs.fortinet.com/document/fortigate/7.0.0/new-features/374400
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The use-metadata-iam,access-key, and secret-key properties are only for STS credential setup when external-account-list is enabled."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/642352/aws-sdn-connector-using-access-keys
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the Access key ID field, enter the key created in the AWS management portal."
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/azure-administration-guide/236610/configuring-an-sdn-connector-using-a-managed-identity
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Instead of authentication using service principal credentials, the SDN connector uses a service principal that the system assigns."
+      - url: https://docs.fortinet.com/document/fortigate/6.4.0/new-features/44446/simplify-azure-fabric-connector-configuration-for-a-fortigate-vm-deployed-on-azure
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For a FortiGate that is not deployed on Azure, you must still configure the Tenant ID, Client ID, and Client secret fields for an Azure Fabric connector."
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/azure-administration-guide/948968/azure-sdn-connector-service-principal-configuration-requirements
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the newly created client secret value in to the Client secret field in FortiOS."
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/gcp-administration-guide/298652/configuring-gcp-sdn-connector-using-metadata-iam
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Use metadata IAM option is only available to FortiGate-VMs running on GCP."
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/gcp-administration-guide/255828/creating-a-gcp-service-account
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This topic describes how to create a GCP service account and an API key pair, and provides guidelines on how to edit the private key for use in FortiOS."
+      - url: https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/oci-administration-guide/562317/configuring-an-oci-sdn-connector-using-iam-roles
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "FortiOS 7.6.1 and later versions support this feature."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/480499/oci-sdn-connector-using-certificates
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This example shows how to use FortiGate's default Fortinet_Factory certificate to authenticate against OCI."
+      - url: https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/gen/fortios_system_sdn_connector.rst.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Secret token of Kubernetes service account."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/545113/aws-lambda-action
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "AWS Lambda functions can be called when an automation stitch is triggered."
+    notes: >-
+      Checked: AWS (access keys; instance IAM role; STS AssumeRole into other accounts with external
+      ID, whose source credential is still the instance role or an access key), Azure (service
+      principal client secret; user- or system-assigned managed identity; Azure Stack uses a
+      username and password), GCP (service-account JSON private key; metadata IAM), OCI (API signing
+      key registered to an OCI user, by default the box's Fortinet_Factory certificate; instance
+      principal from 7.6.1), EKS/AKS/GKE/OKE and private Kubernetes (cloud keys or a static
+      service-account token), AliCloud and IBM Cloud (access key, API key), VMware NSX/ESXi, Nutanix,
+      OpenStack, Cisco ACI (server credentials), and automation-stitch actions to AWS Lambda and Azure
+      Functions (static function API keys). Graded B, not A: every keyless path is the ambient
+      identity of a FortiGate-VM running inside that same cloud, and the SDN connector schema has no
+      federation option (no Azure federated credential or certificate, no GCP workload identity
+      federation, no IAM Roles Anywhere), so a hardware FortiGate, or a VM in another cloud, can only
+      reach AWS, Azure, GCP or OCI with a stored long-lived secret. Graded only on the on-prem
+      appliance, outbound would be D (Fortinet documents minimum IAM policies but no rotation).
+      Outbound moves to A if FortiOS can present a federated identity from anywhere, e.g. acting as
+      an OIDC issuer for Azure federated credentials and GCP WIF, or IAM Roles Anywhere with the
+      device certificate.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It is possible and a good practice to configure an expiry time for an access token."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "after a REST API administrator is created, use the following execute command to regenerate the API token and specify an expiry time from 1 - 10080 minutes"
+      - url: https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/fortios_monitor.rst.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Expiry of API key in minutes from now (valid range: 1 - 10080). This can only be set for Fortinet Support Tool user."
+    notes: >-
+      The token created with a REST API admin has no expiry; a 1-minute-to-7-day expiry is an
+      optional argument when regenerating the key from the CLI, and the API's generate-key call only
+      honours it for the Fortinet Support Tool user. The api-user object has no expiry field and no
+      global setting forces one. Optional expiry is not enforced expiry (same call as
+      elastic-cloud-api).
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/fortios_monitor.rst.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generate a new api-key for the specified api-key-auth admin. The old api-key will be replaced."
+      - url: https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/gen/fortios_system_api_user.rst.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Configure API users."
+    notes: >-
+      The monitor endpoint system/api-user/generate-key mints a replacement token and the
+      cmdb system/api-user table creates and deletes API users, so rotation and revocation can be
+      scripted. Regeneration replaces the old key immediately (one key per API user), so a
+      zero-downtime rotation needs a second API user.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Where permissions for the REST API administrator are defined."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It is highly recommended to apply the principle of least privilege to the REST API administrator account and avoid using the generic super_admin profile for permissions."
+    notes: >-
+      A REST API admin is a purpose-built machine principal with its own admin profile (per-area
+      read/write/none) and VDOM assignment, plus trusted-host source restrictions.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/gen/fortios_system_api_user.rst.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Configure API users."
+      - url: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An API token is generated. Make note of the token, as it is only shown once."
+    notes: >-
+      The api-user schema (name, comments, api-key, accprofile, vdom, schedule, cors, peer-auth,
+      peer-group, trusthost) has no last-used field, and neither the REST API administrator nor the
+      Using APIs page mentions one. API calls appear in event logs, which is not a per-key last-used
+      view. The full monitor API reference is login-walled and not publicly verifiable.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Fortinet does not appear in GitHub's supported secret scanning patterns table at all, so a
+      leaked FortiOS API token is neither detected by a Fortinet pattern nor reported to Fortinet.
+      The token is also only meaningful against a specific FortiGate reachable from a trusted host.
+
+notes: >-
+  One card for FortiOS on FortiGate appliances and FortiGate-VMs: the REST API (inbound) and the
+  Security Fabric SDN connectors and automation actions (outbound). FortiManager, FortiGate Cloud
+  and FortiSASE have their own APIs and would be separate cards. Two of five hygiene checks pass
+  (rotation API, scoping), so inbound is F; an enforced maximum token lifetime and a last-used
+  timestamp would lift it to D. Inbound moves to C or better only if the REST API accepts something
+  other than a static token, such as federated OIDC tokens or short-lived tokens from an IdP.

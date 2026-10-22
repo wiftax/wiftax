@@ -1,0 +1,230 @@
+id: sentinelone-singularity
+vendor: SentinelOne
+product: Singularity platform (Management Console API, Cloud Native Security, Data Lake)
+website: https://www.sentinelone.com
+docs: https://github.com/Sentinel-One/ai-siem/blob/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "SentinelOne's docs are behind a login; receipts come from its GitHub repos and blog. The expiry and last-used passes are thin, and if both fail, inbound drops to F."
+summary: >-
+  Workloads call the Singularity Management API with a static API token (Authorization: ApiToken),
+  usually one belonging to a Service User; no OIDC or workload identity path exists. Tokens must
+  carry an expiry date, can be rotated by API, are scoped by account/site role, and Service Users
+  show a last-activation time, but there is no GitHub partner revocation. Into AWS it is keyless; repo
+  scanning and S3-compatible exports want static keys.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static API token sent as "Authorization: ApiToken <token>", minted for a Service User (scoped to
+      the tenant, an account or a site with an RBAC role, mandatory expiry date) or as a personal
+      console-user token. The same token covers the Management REST API, PowerQuery, UAM and Purple AI
+      GraphQL and Data Lake config calls; raw log ingest takes a separate static SDL Log Write Key.
+    evidence:
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"securityDefinitions": {"ApiTokenAuth": {"type": "apiKey", "name": "Authorization", "in": "header", "description": "Authorization Token"}}'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/docs/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Settings → Users → Service Users → Create Service User → copy the API token."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/docs/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`S1_CONSOLE_URL` and `S1_CONSOLE_API_TOKEN` are the minimum, and between them they authorise every SDL query and configuration operation including parser and dashboard deployment."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/docs/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The SDL Log Write Key: Console → Singularity Data Lake → API Keys → Log Write Key. No API mints one."
+      - url: https://raw.githubusercontent.com/Sentinel-One/purple-mcp/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Purple MCP uses a SentinelOne Console token configured at startup via environment variables."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Log in to the API with a token. To learn more about temporary and 6-month tokens and how to generate them"
+    notes: >-
+      SentinelOne's own documentation (support portal, community KB, in-console API docs) is
+      login-walled, so this card is graded from SentinelOne-published GitHub sources: the Management
+      API v2.1 Swagger spec and credential docs in Sentinel-One/ai-siem, and the purple-mcp README.
+      The spec declares a single security scheme, the ApiToken header; nothing in it or the public
+      material offers OIDC, GitHub Actions, cloud workload identity or a token exchange. Human SAML
+      SSO and username/password login exist but are not workload paths. Whether any federation
+      exists behind the login wall is not publicly verifiable. The Data Lake's Log Write/Read keys
+      are a second, console-only static credential type with no API to mint them. Inbound moves to
+      B or A only if the Management API accepts a federated token.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS is keyless: Cloud Native Security / Cloud Workload Security connect through an IAM role
+      created by a CloudFormation "connection stack" whose ARN is pasted into the console, and Cloud
+      Funnel exports to S3 by assuming a customer role with a SentinelOne-issued external ID. Repo
+      scanning wants a GitLab or Azure Repos personal access token, and Cloud Funnel to
+      S3-compatible stores (e.g. R2) takes a static access key and secret.
+    tier_gated: Separate licenses (Cloud Native Security, Cloud Funnel / Singularity Data Lake)
+    evidence:
+      - url: https://www.sentinelone.com/blog/feature-spotlight-auto-discover-unprotected-amazon-ec2-instances-with-cloud-rogues/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once creation of the Connection Stack is complete, copy the Role ARN value, return to the SentinelOne console, and paste the Role ARN value where indicated in the AWS Standalone Account Protection pop-up."
+      - url: https://www.sentinelone.com/blog/feature-spotlight-auto-discover-unprotected-amazon-ec2-instances-with-cloud-rogues/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To get started, Singularity Cloud Workload Security customers need to first grant SentinelOne read-only access to their AWS cloud accounts."
+      - url: https://www.sentinelone.com/blog/cloud-native-security-prioritize-better-response-faster-with-verified-exploit-paths/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It provides templates to deploy, and within minutes, allows customers to set up read-access across AWS, Microsoft Azure, Google GCP, Oracle Cloud, Alibaba Cloud, and Digital Ocean."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Get the AWS assume role external ID"
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If set to true, activates the AWS AssumeRole functionality for accessing S3 buckets or other associated resources."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access key id, for S3 compatible storages (e.g. R2)"
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This endpoint allows users to onboard a new VCS integration, enabling automated scanning for secrets and IaC misconfigurations."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"gitlabPersonalAccessToken": {"maxLength": 200, "minLength": 0, "type": "string"}'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"azurePersonalAccessToken": {"type": "string"}'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/pipelines/pull/object_store/aws/cloudtrail/metadata.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Requires an AWS account with an IAM role that Data Pipelines can assume (auth.assume_role + auth.external_id) and an SQS queue wired to the S3 bucket(s) containing CloudTrail logs."
+    notes: >-
+      Checked: Cloud Native Security / Cloud Workload Security account onboarding (AWS: CloudFormation
+      connection stack creating a role, keyless; Azure, GCP, OCI, Alibaba and DigitalOcean: SentinelOne
+      only says the wizard "provides templates to deploy", and the per-cloud steps are behind the login
+      wall, so whether Azure takes a client secret or GCP a service-account key is not publicly
+      verifiable); Cloud Funnel export (S3 via AssumeRole with an external ID SentinelOne generates,
+      keyless; S3-compatible stores such as R2 via static access key and secret); CNAPP VCS
+      integrations (GitHub via GitHub App ID, installation ID and app private key; GitLab, GitLab
+      Enterprise and Azure Repos via personal access token; the spec does not say whose GitHub App
+      key is used, so GitHub is not counted either way); AI SIEM Data Pipelines object-store
+      ingestion (CloudTrail from S3 via assumed role plus external ID; Azure and GCP sources list
+      auth_type "OAuth" with no further detail). B because AWS is keyless and the repo integrations
+      still want static PATs. A keyless Azure (federated credential or multi-tenant app consent) and
+      GCP (impersonation) path, plus GitHub App or OAuth-app installs in place of PATs, would be
+      needed for A; a documented Azure client secret or GCP JSON key would not move the grade below
+      B. Marketplace / Hyperautomation connectors to third-party SaaS were not graded (customer-supplied
+      API keys of those products).
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"required": ["expirationDate", "name", "scope"]'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '{"expirationDate": {"type": "string", "format": "date-time", "description": "Date when the generated token expires"}}, "required": ["expirationDate"]'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To learn more about temporary and 6-month tokens and how to generate them"
+    notes: >-
+      Passes, with a caveat for review. Unlike the changeable-default cases (elastic-cloud-api,
+      cloudflare-api), there is no "Never": expirationDate is a required field both when a Service
+      User is created and when its token is regenerated, and personal console tokens are 6-month
+      tokens. The maximum date a Service User token may be given is not publicly verifiable
+      (third-party guides show a preset drop-down with one- and two-year options and a console warning
+      above one month). If SentinelOne accepts an arbitrary far-future date, this should flip to fail
+      and inbound would drop to F.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/references/tags/Service_Users.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generate a new API token for a service user and revoke the existing API token."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/references/tags/Service_Users.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a new service user."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Revoke an API token."
+    notes: >-
+      POST /service-users creates a Service User with its token, POST
+      /service-users/{id}/generate-api-token rotates it (revoking the old one immediately, so there is
+      no overlap; the workaround is a second Service User), DELETE /service-users/{id} and POST
+      /users/revoke-api-token revoke.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"scope": {"type": "string", "description": "User scope", "example": "tenant", "enum": ["tenant", "account", "site"]}'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "List of id and role id, id is mandatory for user in scope account/site."
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/docs/read-only.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use a dedicated service user with the least-privileged role that covers the task."
+    notes: >-
+      Service Users are purpose-built machine principals with their own scope (tenant, account or
+      site) and RBAC role per scope, which the rubric counts. Personal console tokens inherit the
+      human user's access.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"description": "Last activation"'
+      - url: https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/references/tags/Users.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "User was last active before this timestamp."
+    notes: >-
+      Judgment call. Service User objects carry a lastActivation timestamp (sortable on GET
+      /service-users), and the API defines lastActivation as when the user "was last active". A
+      Service User can only be active through its API token, so this is read as a per-token last-used
+      time. The token-details endpoint itself returns only createdAt and expiresAt. If lastActivation
+      turns out not to track API calls, this flips to fail (inbound stays D at three passes only if
+      expiry holds).
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      SentinelOne does not appear in GitHub's supported secret scanning patterns table at all, as
+      partner or as a user-alert pattern, so a leaked API token or SDL key is not reported to
+      SentinelOne for revocation.
+
+notes: >-
+  One card for the Singularity platform's machine-facing surfaces: the Management Console API
+  (endpoint, XDR, CNS, Purple AI, Hyperautomation and Data Lake config all share the same ApiToken),
+  Cloud Native Security / Cloud Workload Security account connections, Cloud Funnel exports and
+  Data Lake ingestion. Agent site/registration tokens (endpoint enrollment) are not graded. Public
+  evidence comes from SentinelOne-published GitHub repositories and blog posts because the product
+  docs require a customer login. Expiry and last_used are judgment calls flagged in their notes;
+  if both fail, inbound drops to F. GitHub partner revocation would add a hygiene pass, and a
+  federated token path (GitHub Actions OIDC, cloud workload identity or bring-your-own issuer) for
+  the Management API is what would lift inbound to B or A.

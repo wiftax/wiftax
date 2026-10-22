@@ -46,6 +46,16 @@
         "quote": { "type": "string" }
       }
     },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "reason"],
+      "description": "Set when vendor docs needed to verify a grade-deciding claim are not public. Absent means normal confidence.",
+      "properties": {
+        "level": { "type": "string", "enum": ["low"] },
+        "reason": { "type": "string", "maxLength": 300 }
+      }
+    },
     "notes": { "type": "string" }
   },
   "$defs": {

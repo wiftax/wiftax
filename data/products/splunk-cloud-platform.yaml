@@ -1,0 +1,257 @@
+id: splunk-cloud-platform
+vendor: Splunk (Cisco)
+product: Splunk Cloud Platform
+website: https://www.splunk.com
+docs: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/Setupauthenticationwithtokens
+category: observability
+status: listed
+summary: >-
+  The REST API and ACS admin API take static JWT authentication tokens owned by a Splunk user, and
+  data comes in on static HEC tokens; no OIDC or workload identity path exists. Tokens can be
+  API-rotated and show last use, but inherit their owner's access, may last forever and are not
+  GitHub partner-revoked. Data Manager reaches AWS by role with external ID; Azure, GCP and the add-ons
+  want client secrets or keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static authentication token (a Splunk-signed JWT bound to one Splunk user, sent as
+      Authorization: Bearer) for the REST API on port 8089 and for the Admin Config Service (ACS)
+      API, plus a static 32-character HEC token for ingesting data. Six-hour ephemeral tokens exist
+      but are minted with a username and password or an existing token.
+    evidence:
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/Setupauthenticationwithtokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Static authentication tokens let you access a Splunk platform instance. You can create, modify, update and delete them in Splunk Web, and they can last indefinitely."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/UseAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After you receive a valid token for the instance you want to use, you can use the token to make calls to REST endpoints on the instance. Your access is the same as what you have if you logged in with credentials."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Config/ACSusage
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The ACS API uses authentication tokens, in the form of a JSON Web Token (JWT), to authenticate and authorize ACS endpoint requests."
+      - url: https://admin.splunk.com/service/info/specs/v2/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"bearerAuth":{"bearerFormat":"JWT","scheme":"bearer","type":"http"}'
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Config/ManageAuthtokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You must provide a valid username and password for basic authentication."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Config/ManageAuthtokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The ACS tokens endpoint supports an optional type request parameter, which lets you create an ephemeral JWT token that expires by default after 6 hours."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/UsetheHTTPEventCollector
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each token has a unique value, which is a 128-bit number that is represented as a 32-character globally unique identifier (GUID)."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Config/ManageHECtokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The HTTP Event Collector (HEC) lets you send data and application events to your Splunk deployment over HTTP protocol using token-based authentication."
+    notes: >-
+      Graded on the weakest path a workload must use: the REST API and ACS take static or ephemeral
+      Splunk JWTs, and HEC ingestion takes only a static GUID token with no expiry or rotation
+      (the value cannot be changed, only replaced). The ACS OpenAPI spec declares only basicAuth and
+      a Splunk-issued bearer JWT. Ephemeral tokens (max six hours, created via REST or ACS) would
+      look like grade C for the REST/ACS plane, but they are minted with a Splunk username and
+      password or with another token, so a long-lived root remains, and they do not cover HEC. No
+      OIDC, GitHub Actions, cloud workload identity or token exchange from an external issuer is
+      documented; the SAML and Okta/Azure IdP support is for human login, and tokens are only
+      issued by the Splunk instance itself. Tokens are per search head and are not replicated
+      across the search tier. Splunk Enterprise (self-managed) shares the same token model and is
+      not graded separately; Splunk Observability Cloud (separate access tokens) is a different
+      product.
+  outbound:
+    grade: B
+    mechanism: >-
+      Data Manager onboards AWS by having you create a SplunkDMReadOnly role (plus CloudFormation
+      roles for Firehose) whose trust policy names Splunk's role with an sts:ExternalId; Azure
+      onboarding wants an Entra app client secret, the Data Manager S3 input wants an IAM user's
+      access key, and the Splunk Add-ons for AWS, Google Cloud and Microsoft Cloud Services on
+      Splunk Cloud want an access key, service-account JSON key, or client secret or certificate.
+    evidence:
+      - url: https://help.splunk.com/en/data-management/ingest-data-from-cloud-sources/use-data-inputs/1.16/amazon-web-services-data/configure-aws-for-onboarding-from-a-single-account
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A SplunkDMReadOnly role allows Splunk Cloud to read metadata from your AWS events and logs."
+      - url: https://help.splunk.com/en/data-management/ingest-data-from-cloud-sources/use-data-inputs/1.16/amazon-web-services-data/configure-aws-for-onboarding-from-a-single-account
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"sts:ExternalId": "<EXTERNAL_ID>"'
+      - url: https://help.splunk.com/en/data-management/ingest-data-from-cloud-sources/use-data-inputs/1.16/amazon-web-services-data/about-cloudformation-stack-templates
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Splunk provides CloudFormation templates to establish the stack set execution role and the Data Manager read role."
+      - url: https://help.splunk.com/en/data-management/ingest-data-from-cloud-sources/use-data-inputs/1.16/amazon-web-services-data/prerequisites-for-onboarding-aws-data-sources
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The access key ID and secret access key for the IAM user."
+      - url: https://help.splunk.com/en/data-management/ingest-data-from-cloud-sources/use-data-inputs/1.16/microsoft-azure-data/onboarding-for-azure-data-in-data-manager
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Configure the Data sources, Tenant ID, Client ID, Client Secret, Event Hub subscription ID, Event Hub region, and Data Destination."
+      - url: https://help.splunk.com/en/data-management/ingest-data-from-cloud-sources/use-data-inputs/1.16/google-cloud-platform-data/gcp-prerequisites-for-data-manager
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Ask your GCP admin to create a service account for Data Manager to use to query the status of your deployment."
+      - url: https://splunk.github.io/splunk-add-on-for-amazon-web-services/ManageAwsAccounts/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter the Key ID and Secret Key credentials for the AWS account that the Splunk platform uses to access your AWS data."
+      - url: https://splunk.github.io/splunk-add-on-for-amazon-web-services/AutoDiscoveredAwsIAMRole/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Splunk Cloud restricts the use of the Auto-discovered EC2 IAM role feature due to security reasons."
+      - url: https://splunk.github.io/splunk-add-on-for-amazon-web-services/CreateAwsIAMRole/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Splunk Add-on for AWS supports the AWS Security Token Service (AWS STS) AssumeRole API action that lets you use IAM roles to delegate permissions to IAM users to access AWS resources."
+      - url: https://splunk.github.io/splunk-add-on-for-google-cloud-platform/ConfigureGoogleCloudAccount/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For non-Dedicated accounts, the add-on supports external-account credentials only on AWS and Azure virtual machines."
+      - url: https://splunk.github.io/splunk-add-on-for-google-cloud-platform/ConfigureGoogleCloudAccount/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The add-on supports Google Cloud's Application Default Credentials (ADC) feature for customer-managed on-premise instances. This feature isn't supported for cloud instances."
+      - url: https://splunk.github.io/splunk-add-on-for-microsoft-cloud-services/Configureazureappaccount/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Select client_secret for client secret authentication or client_certificate for certificate-based authentication. Default: client_secret"
+    notes: >-
+      Checked: Data Manager for AWS (single account, multiple accounts, organizational units:
+      keyless, a customer-created role trusting Splunk's role with an external ID; data is pushed
+      to HEC by Firehose), Data Manager's AWS S3/SQS input (static IAM user access key), Data
+      Manager for Azure (Entra app registration client secret; Event Hubs push), Data Manager for
+      GCP (Terraform you run in your project pushes via Dataflow to HEC; the service account
+      Data Manager uses "to query the status" is configured in-product, and whether a key is
+      handed to Splunk is not publicly verifiable), Splunk Add-on for AWS (on Splunk Cloud the EC2
+      instance-role path is blocked, so pull inputs need an IAM user access key, optionally
+      chained to AssumeRole), Splunk Add-on for Google Cloud Platform (service-account JSON key;
+      the external-account WIF option needs an AWS or Azure VM you control, and ADC is
+      self-managed only, so neither is documented for Splunk Cloud), Splunk Add-on for Microsoft
+      Cloud Services (client secret by default, or an uploaded certificate private key). The AWS
+      add-on and both Microsoft paths do document least-privilege policies. B because AWS has one
+      keyless path; Azure and GCP have none. Push-based inputs (Firehose, EventBridge, Event Hubs
+      exports) make your cloud hold a Splunk HEC token instead, which is an inbound credential.
+      Federated Search and Edge/Ingest Processor destinations were not assessed.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/CreateAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you create a new static token, you can set whether or not the token expires, and whether or not it is valid before a certain time. Both of these choices are optional, which means that you can configure a token to last forever and be available for use immediately."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/CreateAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Static tokens can have an unlimited expiry, and have backing in app key value store (KV store)."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/EnableTokenAuth
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You cannot perform this operation in Splunk Cloud or on Splunk Web, and you cannot set an expiration time in the past."
+      - url: https://admin.splunk.com/service/info/specs/v2/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"expiresOn":{"default":"+30d","type":"string"}'
+    notes: >-
+      Fails: ACS and the token docs apply a 30-day default when no expiry is given, but a static
+      token may be set to never expire, and Splunk Cloud customers cannot even change the global
+      default (that authorize.conf setting is Splunk Enterprise only); no maximum lifetime or
+      policy to forbid non-expiring tokens is documented. A changeable default is not an enforced
+      expiry (same call as elastic-cloud-api). HEC tokens have no expiry at all.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Config/ManageAuthtokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can use the ACS API to view existing tokens, create new tokens, view individual tokens, and delete tokens."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/CreateAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you have an existing valid static or ephemeral token, you can use it rather than user credentials to authenticate when creating a new token."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Config/ManageHECtokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can use the Admin Config Service (ACS) API to create and manage HEC tokens for your Splunk Cloud Platform deployment programmatically."
+    notes: >-
+      Authentication tokens can be created, listed, disabled and deleted via the instance REST
+      endpoint services/authorization/tokens and via ACS (/adminconfig/v2/tokens); HEC tokens via
+      ACS (/adminconfig/v2/inputs/http-event-collectors) and the scp Terraform provider. ACS token
+      creation itself requires basic auth with a username and password.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/CreateAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Native Splunk authentication: Where user accounts exist only on that specific instance"
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/Addandeditroles
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Splunk Cloud Platform comes with a set of default roles, and you can also create your own custom roles that you can tailor to the needs of your organization."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/Rolesandcapabilities
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Users can only access the Splunk platform and use capabilities through roles that you assign to them."
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Data/UsetheHTTPEventCollector
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "(Optional) Choose a different index by selecting it in the Available Indexes pane of the Select Allowed Indexes control."
+    notes: >-
+      Fails. A token carries exactly its owner's access and cannot be narrowed itself, and Splunk
+      documents no service-account or API-only account type. The workaround (create a native local
+      user for the workload, give it a custom role with only the needed capabilities and indexes,
+      and issue the token to it) does not count under the wif.tax rule that scoping passes only
+      when the vendor documents a non-human account type (tenable-vulnerability-management passes
+      on its documented API-only user; rapid7-insight-platform fails on the same workaround).
+      Tokens issued to a human's SAML account inherit all of that person's access. HEC tokens are
+      ingest-only and limited to their allowed indexes, but they are not the API path.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/ManageAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When the token was last used"
+      - url: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/ManageAuthTokens
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The instance updates the last seen IP address and time whenever you use a token."
+      - url: https://admin.splunk.com/service/info/specs/v2/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"lastUsed":{"format":"date-time","type":"string"}'
+    notes: >-
+      Authentication tokens show last-used time and IP in Splunk Web and in the ACS TokenInfo
+      schema (lastUsed, lastUsedIP). No last-used field is documented for HEC tokens.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Splunk does not appear in GitHub's supported secret-scanning patterns table at all (no
+      partner, user-alert or push-protection pattern for authentication tokens or HEC tokens), so a
+      leaked token is not reported to Splunk for revocation.
+
+notes: >-
+  Hygiene is graded on the static authentication tokens used for the REST and ACS APIs: two of
+  five pass (rotation API, last used), so inbound is F. A documented service-account type with
+  its own role would add the scoping pass and lift inbound to D. HEC tokens, which every ingesting workload must hold, are weaker
+  (no expiry, no last-used, no partner revocation; only API management and index scoping pass,
+  two of five) and would be F on their own. An org policy capping token lifetime would also add a pass;
+  inbound moves to B or A only if the REST, ACS and HEC endpoints accept a federated token
+  (GitHub Actions OIDC, cloud workload identity, or a bring-your-own issuer). Outbound moves to A
+  if Data Manager and the add-ons offer keyless Azure (federated credential or multi-tenant app
+  consent) and GCP (service account impersonation) and the AWS add-on accepts a cross-account
+  role on Splunk Cloud without an IAM user key.

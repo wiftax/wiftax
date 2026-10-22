@@ -44,6 +44,9 @@ Notes:
   workloads running anywhere.
 - Personal access tokens, "app passwords", and "auth tokens" are static keys no
   matter what the vendor calls them.
+- Federation only counts toward A or B if it is **self-serve and documented for
+  workloads**. A trust that the vendor's support team has to switch on, or that is
+  documented only for human logins, is noted on the card but does not lift the grade.
 
 ## Surface 2: Outbound
 
@@ -61,6 +64,11 @@ SaaS) on my behalf.*
 
 A product with an N/A outbound surface is graded on inbound alone.
 
+For SaaS, repos and other non-cloud integrations, an app the customer installs or
+consents to (a GitHub App, Entra admin consent, Atlassian or Slack app consent) counts
+as keyless, since no secret changes hands. A product whose only integrations are
+consent-based apps of this kind can earn an A even though it reaches into no cloud.
+
 ## Hygiene checks
 
 Applied to any long-lived credential the product still issues. Each is a yes/no
@@ -71,7 +79,7 @@ vendor stuck at D or F still has something to fix this quarter.
 |---|---|
 | `expiry` | Keys can be given an expiry, **and** the default or an org policy can enforce one. A field that defaults to "never" and cannot be forced counts as a fail. |
 | `rotation_api` | A key can be created and revoked through the API, so rotation can be automated without a browser. |
-| `scoping` | A key can be limited to a subset of permissions or resources, not just "everything the owner can do". A purpose-built machine principal with its own least-privilege policy (IAM user, service account, app registration) counts; a key that inherits a human's full permissions does not. |
+| `scoping` | A key can be limited to a subset of permissions or resources, not just "everything the owner can do". A purpose-built machine principal with its own least-privilege policy (IAM user, service account, app registration) counts; a key that inherits a human's full permissions does not. Creating an ordinary user account for a workload and giving it a narrow role only counts if the vendor documents a non-human or API-only account type. |
 | `last_used` | The vendor shows when a key was last used, so dead keys can be found and killed. |
 | `leak_revocation` | The vendor participates in a secret-scanning partner program (GitHub's, at minimum) so a key leaked to a public repo is revoked automatically. |
 
@@ -83,6 +91,12 @@ only changes when the receipts change. This is the rule that keeps us factual, a
 it is exactly the input the crawler agent produces.
 
 `checked_on` must be within the last 12 months or the card is flagged **stale**.
+
+**Login-walled documentation.** When the docs that would settle a hygiene check are
+behind a customer login, the check fails: no receipt, no pass. If those unverifiable
+items could change the headline grade, the card also carries `confidence: low` with
+the reason, and the site shows it. Publishing the documentation is how a vendor gets
+credit.
 
 ## Status
 

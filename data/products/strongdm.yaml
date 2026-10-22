@@ -1,0 +1,244 @@
+id: strongdm
+vendor: StrongDM
+product: StrongDM control plane API and service accounts
+website: https://www.strongdm.com
+docs: https://docs.strongdm.com/references/api/api-keys.md
+category: identity
+status: listed
+summary: >-
+  The StrongDM API, SDKs and Terraform provider take only a static API key pair, and CLI automation
+  uses static admin or service account tokens; no OIDC or workload identity path exists. Keys can be
+  permission-scoped and managed by API, but "never" expiry is allowed, there is no last-used view and
+  no GitHub partner revocation. Into your cloud, discovery is keyless via StrongDM's OIDC issuer, but
+  Azure CLI and GCP service account resources still need static keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API key pair (access key ID plus secret, used to sign each gRPC request) for the API, the
+      Go/Java/Python/Ruby SDKs and the Terraform provider; the CLI automates with static admin tokens
+      or service account tokens (SDM_ADMIN_TOKEN). No OIDC, cloud workload identity or token-exchange
+      path exists for any of them.
+    evidence:
+      - url: https://docs.strongdm.com/references/api/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To use the StrongDM API, you need to have an API `access` and `secret` key. These keys authorize every request when managing objects with the API, so please keep them safe."
+      - url: https://docs.strongdm.com/references/api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each SDK provides a client that must be constructed with an API `ID` and `Secret` (also referred to as your API key)."
+      - url: https://docs.strongdm.com/references/api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Instead, the StrongDM API requires the use of request signatures modeled on the [AWS V4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)."
+      - url: https://docs.strongdm.com/admin/principals/service-accounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service accounts authenticate to StrongDM with admin tokens in order to conduct automated administrative processes or perform any automated function that needs resource access."
+      - url: https://docs.strongdm.com/admin/principals/service-accounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The StrongDM client checks the local environment for the variable SDM\\_ADMIN\\_TOKEN."
+      - url: https://docs.strongdm.com/admin/principals/admin-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Admin tokens provide tokenized account access for automated StrongDM use."
+      - url: https://docs.strongdm.com/concepts/security/authentication-and-identity-federation.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "StrongDM allows customers to federate with a variety of Identity Providers to manage user identity and authentication."
+      - url: https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/models.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// The OIDC issuer URL for the organization, used for OIDC federation"
+    notes: >-
+      Graded on the weakest path a workload must use: the control-plane API only accepts a signed
+      static key pair, and the docs name service accounts with static tokens as the CI pipeline
+      answer. The SigV4-style signing keeps the secret off the wire, but the secret is still
+      long-lived. The OIDC and SAML federation StrongDM documents is human SSO into StrongDM
+      (Okta, Entra ID, Google and any OIDC provider). StrongDM is itself an OIDC issuer (each org
+      exposes an oidcIssuerUrl), but that issuer is used for StrongDM's own calls into your clouds,
+      not to let your workloads log in to StrongDM.
+      Moves to B or A only if the API or service accounts accept a federated
+      token (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer).
+  outbound:
+    grade: B
+    mechanism: >-
+      Resource discovery authenticates with StrongDM-issued OIDC tokens that AWS (IAM role trust),
+      Entra ID (app with workload identity federation) and GCP (Workload Identity Pool) accept, and
+      many resource types run on the customer-run node's ambient identity (AWS instance profile with
+      optional role ARN and external ID, EKS instance profile, RDS IAM, Azure managed identity,
+      Kubernetes pod identity, Google ADC). Azure CLI cloud resources, GCP CLI/SDK (service account)
+      and GKE resources still want a static service-principal secret, certificate or JSON key.
+    evidence:
+      - url: https://docs.strongdm.com/admin/resources/discovery.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "StrongDM acts as an OIDC identity token issuer and uses workload identity federation to authenticate discovery scans."
+      - url: https://docs.strongdm.com/admin/resources/discovery.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This policy allows AWS to accept a StrongDM-issued OIDC JWT and permit the bearer to assume a specified IAM role."
+      - url: https://docs.strongdm.com/admin/resources/discovery.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You configure one or more Azure Subscription IDs, an Entra ID app registration configured for workload identity federation, and reader-level access (at minimum)."
+      - url: https://docs.strongdm.com/admin/resources/discovery.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "StrongDM issues OIDC tokens, and GCP Workload Identity Pools trust StrongDM’s OIDC issuer."
+      - url: https://docs.strongdm.com/admin/resources/clouds/aws-instance-profile.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This resource type is nearly the same as the AWS cloud resource type, except that it does not support static keys for authentication."
+      - url: https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/models.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// The external ID to associate with assume role requests. Does nothing if a role ARN is not provided."
+      - url: https://docs.strongdm.com/admin/resources/datasources/azure-postgresql-managed-identity.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Azure PostgreSQL (Managed Identity) datasource type supports both user-assigned and system-assigned managed identities to authenticate to Azure Database for PostgreSQL."
+      - url: https://docs.strongdm.com/admin/resources/clusters/kubernetes-podidentity.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Kubernetes (Pod Identity) resource type is a unique resource type that can be added to and accessed using StrongDM without exposing the underlying cluster's private keys outside the cluster."
+      - url: https://docs.strongdm.com/admin/resources/clouds/google-groups.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "StrongDM stores no Google credentials."
+      - url: https://docs.strongdm.com/admin/resources/clouds/azure.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In StrongDM, there are two types of Azure cloud resources: **Azure**, which is configured to accept a password; and **AzureCertificate**, which is configured to accept a certificate file."
+      - url: https://docs.strongdm.com/admin/resources/clouds/gcp.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Either paste the contents of the service account key file (JSON) that you saved when you created the Google Cloud service account, or import the key file"
+      - url: https://docs.strongdm.com/admin/resources/clusters/gke.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When your users connect to this cluster, they have exactly the rights permitted by this Google Service Account key."
+      - url: https://docs.strongdm.com/admin/resources/clouds/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This resource type is nearly the same as the AWS (Instance Profile) cloud resource type, except that it supports only static keys for authentication."
+      - url: https://docs.strongdm.com/admin/access/secret-stores/aws-secrets-manager.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your credentials are stored in a tool that is controlled by you, and those credentials are never transmitted to StrongDM in any form."
+    notes: >-
+      Checked: resource discovery connectors (AWS, Azure, GCP); AWS cloud resources (AWS static key,
+      AWS Instance Profile, AWS Management Console with role ARN and external ID or static key pair);
+      Azure cloud (password or certificate only); GCP (Workforce Identity Federation via StrongDM's
+      SAML CA, keyless; CLI/SDK service account needs a JSON key); Google Groups (node ADC, no stored
+      credential); Microsoft Entra ID (managed identity, or an app client secret on non-Azure nodes);
+      EKS (static IAM user keys) and EKS (Instance Profile); GKE (service account key); AKS and
+      generic Kubernetes (client certificates or service account tokens) and Kubernetes (Pod
+      Identity); RDS PostgreSQL (IAM) and Azure MySQL/PostgreSQL (Managed Identity); secret stores
+      (AWS Secrets Manager via instance role and AssumeRole, Azure Key Vault via managed identity, GCP
+      Secret Manager via ADC/WIF). The reach-in is split: StrongDM's SaaS mints the OIDC tokens for
+      discovery, while resource connections are made by gateways and relays you run, with credentials
+      stored by default in StrongDM's resource configuration or optionally in your own secret store.
+      Keyless options exist on all three clouds, so this sits at B because the Azure CLI, GCP CLI/SDK
+      and GKE resource types have no keyless mode. Most database and SSH resource types use passwords
+      or keys by nature; those are the target system's credentials, not the cloud reach-in, and
+      StrongDM can rotate some of them through its secret engines. Moves to A if Azure and GCP cloud
+      and GKE resources accept managed identity, ADC or StrongDM's OIDC issuer like discovery does.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.strongdm.com/admin/principals/admin-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Specify when the token expires (1 week, 1 month, 1 year, or never)."
+      - url: https://docs.strongdm.com/references/cli/admin/tokens/add.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--duration value duration before token expires in seconds (default: 0)"
+    notes: >-
+      Fails: admin tokens and API keys can carry an expiry, but "never" is a listed choice, the CLI
+      duration defaults to 0, and no org policy to force or cap a lifetime is documented. Service
+      account tokens show no expiry setting at all (the Service account model has no deadline field).
+      A changeable option is not an enforced expiry (same call as elastic-cloud-api).
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/svc.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// 3. **Tokens** are access keys with permissions that can be used for authentication."
+      - url: https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/models.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// Tokens include admin tokens, API keys, and SCIM tokens."
+      - url: https://docs.strongdm.com/references/cli/admin/tokens/delete.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "sdm admin tokens delete - delete token by name or filter"
+      - url: https://docs.strongdm.com/references/api/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API credential rotation is not currently available."
+    notes: >-
+      Tokens are Account objects, so the SDK Accounts service (Create, Delete) and `sdm admin tokens
+      add`/`delete` create and revoke API keys and admin tokens without a browser; the create
+      response returns the access key and secret. API keys have no in-place rotate, so automated
+      rotation is create-new-then-delete; admin tokens also have a Rotate action with a 24-hour
+      overlap, documented in the Admin UI.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.strongdm.com/references/api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The amount of API access afforded to an API key depends entirely on what was granted to the key by the organization's administrators when the key was created."
+      - url: https://docs.strongdm.com/references/cli/admin/tokens/add.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--permissions value permissions attached to the token (comma separated list, e.g. role:create,role:list)"
+      - url: https://docs.strongdm.com/admin/principals/service-accounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Like user accounts, service accounts gain access to resources through role membership, via the static and dynamic access rules that have been defined for that role."
+    notes: >-
+      API keys and admin tokens carry an explicit permission list (for example role:create) rather
+      than their creator's rights, and service accounts are machine principals whose resource access
+      comes from their own roles.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/models.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// The timestamp when the Token was last rekeyed."
+      - url: https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/models.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// The timestamp when this key was last used, if at all."
+    notes: >-
+      The Token model has created, deadline, duration, permissions and rekeyed timestamps but no
+      last-used field, and the tokens and service account docs do not mention last use. The second
+      quote is from ProxyClusterKey, which shows StrongDM tracks last use for proxy cluster keys but
+      not for API keys, admin tokens or service accounts.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      StrongDM does not appear in GitHub's supported secret scanning patterns table, so a leaked API
+      key or admin token is not reported to StrongDM for revocation.
+
+notes: >-
+  One card for the StrongDM control plane (API, SDKs, Terraform provider, CLI admin and service
+  account tokens) and the resource credentials it brokers. Two of five hygiene checks pass, so
+  inbound is F; an enforceable maximum token lifetime would make three and lift it to D. StrongDM
+  already runs a per-org OIDC issuer for its own discovery calls, which shows the pieces exist;
+  accepting federated tokens from customer issuers for service accounts would move inbound to B or
+  A. Human SSO, MFA and the StrongDM Vault's secret engines are out of scope here.

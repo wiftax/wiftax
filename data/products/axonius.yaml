@@ -1,0 +1,213 @@
+id: axonius
+vendor: Axonius
+product: Axonius platform (Asset Cloud, SaaS and self-hosted)
+website: https://www.axonius.com
+docs: https://docs.axonius.com/docs/manage-service-accounts
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "The API v2 reference needs a login, so it is not confirmed that every endpoint accepts the OAuth token that earns the C. On the API key and secret path alone, inbound would be D."
+summary: >-
+  The Axonius REST API takes a service account's static API key and secret, or an OAuth 2.1
+  client secret swapped for a one-hour token; no OIDC or workload identity path exists. Service
+  accounts get their own role, data scope, IP allowlist and last-used time, but keys never expire
+  and GitHub does not revoke leaked ones. Into your cloud, AWS is a keyless cross-account role;
+  Azure, GCP and most SaaS adapters take static secrets.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      Service accounts authenticate either with a static API key and secret sent on every request
+      (api-key / api-secret headers) or with an OAuth 2.1 client ID and client secret exchanged
+      via client_credentials at /api/oauth2/token for a bearer token valid one hour. No OIDC,
+      cloud workload identity or token-exchange path is documented.
+    evidence:
+      - url: https://docs.axonius.com/docs/axonius-rest-api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The REST API is only accessible using a service account dedicated for API access."
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API Key and Secret – The default method. You generate an API key and secret pair that are included in each API request."
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "OAuth 2.1 – Generates a Client ID and Client Secret that are exchanged for a short-lived access token."
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use the /api/oauth2/token endpoint to exchange your Client ID and Client Secret for an access token."
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The response body contains an access_token. This token expires after one hour."
+      - url: https://docs.axonius.com/docs/managing-api-settings
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rate limiting applies to requests made with an API key and secret or with an OAuth2/MCP bearer token; browser sessions are not counted."
+      - url: https://raw.githubusercontent.com/Axonius/axonius_api_client/master/axonius_api_client/auth/api_key.py
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'self.http.session.headers["api-secret"] = self._creds["secret"]'
+      - url: https://docs.axonius.com/docs/connect-an-mcp-client-with-your-axonius-login
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "With a service account. An administrator creates a service account with Allow Axonius MCP connection and gives the client its API key and secret."
+    notes: >-
+      Graded C on the OAuth 2.1 option: the one-hour bearer token is short-lived, but it is minted
+      from a client secret you hold, which is a static root (OAuth client_credentials with a client
+      secret is C at best, as on `crowdstrike-falcon-api`). The
+      default API key and secret path alone would be D or F. Nothing in the public docs offers
+      OIDC, GitHub Actions, cloud workload identity or token exchange. The API v2 reference
+      (developer.axonius.com) is login-walled, so per-endpoint coverage of OAuth tokens is not
+      publicly verifiable; the rate-limit settings treat OAuth2 bearer tokens as belonging to an
+      API key, which suggests the same API. The MCP "connect with your login" flow gives a
+      read-only, 24-hour token tied to a human user and is not a workload path. For v6.1.73 and
+      earlier, regular user accounts could also hold an API key (Account Settings > API Key); from
+      v6.1.74 only service accounts reach the API. No tier gate documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      The AWS adapter on Axonius-hosted SaaS assumes a cross-account role you deploy with
+      CloudFormation, using your Axonius Customer ID as External ID (self-hosted on EC2 uses the
+      instance profile). Azure adapters want an app registration client secret or certificate
+      private key, GCP wants a service-account JSON key, and SaaS adapters (GitHub, Okta, Slack,
+      Google Workspace) want tokens, API keys or private keys.
+    evidence:
+      - url: https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Cross-account role - The best option for Axonius-hosted (SaaS) customers. Axonius will assume a role in the Launch Account directly and use that role for all other operations within your environment."
+      - url: https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "ExternalID - Copy your Customer ID from your Axonius Instance."
+      - url: https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Axonius strongly recommends avoiding the use of IAM Users/Keys in cases where using a cross-account role or instance profile are available."
+      - url: https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Customers with an Axonius Federal (FedRAMP) environment should NOT use the Cross Account Role method."
+      - url: https://docs.axonius.com/docs/aws-parameters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "AWS Access Key ID (optional) - Provide AWS Access Key ID or choose to use an EC2 instance attached IAM role."
+      - url: https://docs.axonius.com/docs/azure-deploying-the-adapter
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Azure Client Secret – Specify a non-expired key generated from the new client secret."
+      - url: https://docs.axonius.com/docs/azure-deploying-the-adapter
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use this method to run your Axonius instance on Azure virtual machines with managed identities to authenticate without storing client secrets or certificates."
+      - url: https://docs.axonius.com/docs/connecting-gcp-in-axonius
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JSON Key pair for the service account - A JSON-document containing service-account credentials to GCP."
+      - url: https://docs.axonius.com/docs/gcp-initial-setup
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the Service Account just created, go to Keys."
+      - url: https://docs.axonius.com/docs/github
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authorization Token - Specify the personal access token that has read access."
+      - url: https://docs.axonius.com/docs/okta
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API Key – Recommended for standard read-only connections."
+    notes: >-
+      Checked: AWS (CloudFormation/Organizations and single-account; cross-account role with
+      External ID for SaaS, instance profile for self-hosted on EC2, IAM user access keys
+      otherwise), Azure (single-tenant Enterprise Application with client secret or certificate
+      plus private key; managed identity only when you self-host Axonius on an Azure VM), GCP
+      (service-account JSON key is the only required parameter; no impersonation or WIF option
+      documented), Microsoft Entra ID (client secret or certificate), GitHub (fine-grained PAT or
+      a GitHub App private key you upload), Okta (API key, or OAuth2 with a private key), Google
+      Workspace (service account with domain-wide delegation), Slack (user token), and the AWS
+      Secrets Manager and Azure Key Vault credential integrations (access keys or instance
+      profile; client secret). Keyless on AWS for SaaS customers only, and FedRAMP customers are
+      told not to use the cross-account role. The External ID is your Axonius Customer ID, shown
+      under System Settings > About, rather than a random per-connection value. B, not A, because
+      Azure and GCP have no keyless path on Axonius-hosted SaaS. GCP service-account
+      impersonation and an Azure multi-tenant app or federated credential would lift this to A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Key Creation Time – The time that the key was created. This parameter is useful to renew the key according to your organization’s policy."
+    notes: >-
+      No expiry field, default lifetime or maximum lifetime is documented for service-account API
+      keys or OAuth client secrets; the docs leave renewal to your own policy based on the creation
+      time. Password expiration settings exist but cover human passwords only. Fails.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use the following endpoint to reset credentials programmatically:"
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Resetting generates a new Client ID and Client Secret, and invalidates all existing access tokens for that service account."
+    notes: >-
+      POST /api/settings/service_accounts/<id>/reset_credentials regenerates OAuth credentials and
+      revokes the old ones in one call. API-key rotation is documented in the UI only, and
+      service-account create/delete endpoints sit in the login-walled API v2 reference, so they are
+      not publicly verifiable. Passes on the documented reset endpoint, with a single cutover (no
+      overlap of old and new secrets).
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API requests sent using the service account can only apply to the assets and information within this data scope."
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Role – The role that defines what this API user can do. Only roles with API Access permission may be associated with a service account."
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This provides extra validation that service accounts are accessed via REST API calls only for known IP addresses."
+    notes: >-
+      Service accounts are purpose-built machine principals with their own role, data scope and
+      optional CIDR allowlist; the docs suggest several accounts to compartmentalize access.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.axonius.com/docs/manage-service-accounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Last Used – The date and time that the account was last used."
+    notes: >-
+      Shown per service account (and so per key, since each account holds one credential pair).
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Axonius does not appear in GitHub's supported secret scanning patterns table, so a leaked
+      Axonius API key or client secret is not reported to Axonius for revocation.
+
+notes: >-
+  One card for the Axonius platform (Asset Cloud and its product modules such as SaaS
+  Applications and Cloud Asset Compliance), which share one REST API and one adapter framework,
+  on Axonius-hosted SaaS and self-hosted deployments. Three of five hygiene checks pass, so even
+  the plain API key path would be D. Inbound moves to B or A only if the REST API accepts a
+  federated token (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer); an
+  enforced maximum key lifetime and GitHub partner revocation would close the hygiene gaps.
+  The API v2 reference is login-walled and was not graded beyond what the public docs state.

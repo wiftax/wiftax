@@ -1,0 +1,244 @@
+id: teleport
+vendor: Teleport
+product: Teleport (Cloud and self-hosted)
+website: https://goteleport.com
+docs: https://goteleport.com/docs/reference/deployment/join-methods/
+category: identity
+status: listed
+summary: >-
+  Bots (tbot, the Terraform provider) and agents join Teleport with a JWT from any OIDC issuer you
+  configure (generic_oidc, v18.11+), plus dedicated GitHub, GitLab, CI and cloud join methods, and
+  get short-lived certificates. Secret join tokens, bound keypairs and tctl-signed identity files
+  still exist. Into your cloud Teleport is an OIDC issuer for AWS and Entra ID, but GKE discovery,
+  GitLab, Okta, Intune, Jamf and PagerDuty integrations want static keys.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Join tokens with a delegated join method: generic_oidc verifies a JWT from any issuer you name
+      with a required audience and claim rules, and dedicated methods cover GitHub Actions, GitLab,
+      CircleCI, Bitbucket, Azure DevOps, Spacelift, Terraform Cloud, env0, AWS IAM/EC2, GCP, Azure,
+      Oracle, Kubernetes and TPM. The bot gets short-lived certificates usable by tbot, tctl, tsh,
+      the API clients and the Terraform provider.
+    issuers: ["any"]
+    evidence:
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The generic_oidc join method can be used to join bots and agents by authenticating via any OIDC-compatible provider."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The OIDC issuer. Must exactly match the `iss` value in incoming OIDC"
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The audience (`aud`) value to require in the incoming JWTs."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The generic_oidc join method requires Teleport v18.11.0 or later."
+      - url: https://goteleport.com/docs/machine-workload-identity/deployment/generic-oidc.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Instead of using shared secrets, the `generic_oidc` join method allows Teleport Agents and Bots to authenticate to the Teleport Auth Service using a JWT issued by any OIDC-compatible provider."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "to access Teleport-protected resources in Azure DevOps pipelines without the use of long-lived secrets."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The non-renewable join methods guarantee that an attacker stealing the instance certificates will not be able to maintain access to the Teleport cluster."
+      - url: https://goteleport.com/docs/machine-workload-identity/introduction.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Bots authenticate using join tokens that specify which bot user they grant access to and what proof (join method) is needed."
+      - url: https://goteleport.com/docs/reference/infrastructure-as-code/terraform-provider.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Terraform Provider will rely on its runtime (AWS, GCP, Kubernetes, CI/CD system) to prove its identity to Teleport."
+      - url: https://goteleport.com/docs/reference/infrastructure-as-code/terraform-provider.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Such credentials are high-privileged and long-lived. They must be protected and rotated."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Teleport supports static tokens for backward compatibility, their use should be avoided."
+      - url: https://goteleport.com/docs/feature-matrix.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Eliminates the need for API keys and long-term secrets with short-lived certificates."
+    notes: >-
+      Graded on bot (Machine & Workload Identity) joining, which is how a workload automates the
+      Teleport API, tctl and the Terraform provider. generic_oidc trusts an issuer you set (OIDC
+      discovery or static_jwks), requires an exact `aud`, and lets you write must_match_fields and
+      allow_any rules over `sub` and any other claim, so issuer, subject and audience are all
+      constrainable: A, like `hashicorp-vault`'s JWT auth. It is new (v18.11.0) and Teleport warns you
+      are "solely responsible" for the rules. Before it, the allowlisted dedicated methods would have
+      been a B. No forced weaker path: every surface accepts a delegated join, though secret-based
+      paths remain available (ephemeral and static join tokens, bound keypair registration secrets
+      and static keys, and long-lived identity files from `tctl auth sign`, which Teleport itself
+      calls high-privileged). The feature matrix lists Machine & Workload Identity issuance and
+      "secretless authentication" in all three editions; TPM joining is Enterprise-only and the ec2
+      method is unavailable on Teleport Enterprise Cloud. Ambient cloud joins (iam, gcp, azure,
+      kubernetes in-cluster) alone would not have earned A.
+  outbound:
+    grade: B
+    mechanism: >-
+      Teleport publishes OIDC discovery and keys and acts as the identity provider for an AWS IAM
+      role (AWS OIDC integration) and an Entra ID app's federated credential, so AWS and Azure reach-ins
+      are keyless. Discovery agents you run use instance roles or managed identities, but the GKE
+      discovery guide downloads a GCP service-account key, and SaaS integrations take a GitLab PAT,
+      an Okta SSWS token or client secret, Intune and Jamf client secrets, a GitHub App private key or
+      a PagerDuty API key.
+    evidence:
+      - url: https://goteleport.com/docs/enroll-resources/application-access/cloud-apis/awsoidc-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For this to work, the `openid-configuration` and public keys are automatically exposed in your cluster at:"
+      - url: https://goteleport.com/docs/enroll-resources/application-access/cloud-apis/awsoidc-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The integration requires no extra configuration or services to run."
+      - url: https://goteleport.com/docs/zero-trust-access/management/external-audit-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "With External Audit Storage enabled, your Teleport Enterprise Cloud cluster acts as an OpenID Connect (OIDC) identity provider to authenticate to your organization's AWS account."
+      - url: https://goteleport.com/docs/identity-governance/integrations/entra-id.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Teleport OIDC IdP then generates a short-lived credential for the Microsoft Graph API client configured for Entra ID."
+      - url: https://goteleport.com/docs/identity-governance/integrations/entra-id.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For a Teleport cloud cluster, OIDC IdP based authentication is the only supported authentication method."
+      - url: https://goteleport.com/docs/enroll-resources/auto-discovery/servers/azure-vm-discovery/azure-vm-discovery-manual.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Discovery Service can run on an Azure VM with attached managed identity."
+      - url: https://goteleport.com/docs/enroll-resources/auto-discovery/servers/gcp-discovery.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The easiest way to ensure that is to run the Discovery Service on a GCP instance and assign the service account to that instance."
+      - url: https://goteleport.com/docs/enroll-resources/auto-discovery/kubernetes/gke-discovery.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In this step, you will create a service account and download a credentials file for the Teleport Discovery Service."
+      - url: https://goteleport.com/docs/identity-security/integrations/gitlab.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To set up the GitLab integration, create a GitLab personal access token with the following scope:"
+      - url: https://goteleport.com/docs/identity-security/integrations/okta.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Either a SSWS bearer token or OAuth 2.0 client credentials can be used."
+      - url: https://goteleport.com/docs/zero-trust-access/device-trust/intune-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Client secret value: Paste the client secret value you copied in Step 2."
+      - url: https://goteleport.com/docs/identity-security/integrations/github.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Throughout this guide, you will create a GitHub application, configure the required permissions, generate a Private Key, and finally install it into your organization."
+      - url: https://goteleport.com/docs/identity-governance/access-requests/plugins/pagerduty.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generate an API key that the PagerDuty plugin will use to create and modify incidents as well as list users, services, and on-call policies."
+    notes: >-
+      Checked: AWS OIDC integration (EC2/RDS enrollment, AWS console and CLI access, Access Graph AWS
+      sync, External Audit Storage, IAM Identity Center), Entra ID integration and Azure sync, Azure
+      VM and AKS discovery, GCP VM, GCP database and GKE discovery, GitLab and GitHub Identity
+      Security imports, Okta (Identity Security), Jamf and Intune device-trust sync, the GitHub SSH CA
+      integration (a GitHub OAuth app client secret for user identity lookup) and the PagerDuty access
+      request plugin. AWS and Azure are keyless with Teleport as the OIDC issuer; the IAM Identity
+      Center SCIM token AWS hands Teleport flows the other way. GCP has no Teleport-as-issuer
+      integration: discovery runs in a Teleport agent you host with ambient credentials on GCE, while
+      the GKE guide creates a JSON key. Static SaaS tokens make this B. Teleport's Workload Identity
+      JWTs can also be federated into AWS, Azure and GCP by your workloads, which is issuance to your
+      workloads, not Teleport reaching in. Okta and Entra ID integrations are Enterprise features.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "They can be created by the CLI (a strong random value is picked when not specified, default TTL is 30 minutes):"
+      - url: https://goteleport.com/docs/reference/infrastructure-as-code/terraform-provider/resources/provision_token.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Expires is a global expiry time header can be set on any resource in the system."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This join method is inherently less secure because long-lived tokens can be stolen and reused."
+    notes: >-
+      Graded on secret join tokens, the long-lived credential Teleport still issues. `tctl tokens add`
+      defaults to 30 minutes, but a token resource's `expires` is an optional header, static tokens in
+      teleport.yaml never expire, and no cluster policy capping token lifetime is documented. A
+      changeable default is not an enforced expiry (precedent: `elastic-cloud-api`).
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Ephemeral tokens are secret tokens created dynamically via the CLI or Teleport API."
+      - url: https://goteleport.com/docs/installation/agents/join-token.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens created via `tctl` can be deleted (revoked) via the `tctl tokens rm` command."
+    notes: >-
+      Tokens are API resources (gRPC, tctl, Terraform teleport_provision_token, Kubernetes operator).
+      Bound keypair tokens also support forced keypair rotation via rotate_after.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://goteleport.com/docs/machine-workload-identity/introduction.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Bots have one or more Teleport roles, governing their access to resources in your infrastructure, and Teleport records their activity using audit logs."
+      - url: https://goteleport.com/docs/reference/deployment/join-methods/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You should use the minimal set of system roles required."
+    notes: >-
+      A bot is a purpose-built machine principal with its own roles, and each token names one bot (or
+      a minimal set of agent system roles), which the rubric counts.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://goteleport.com/docs/reference/infrastructure-as-code/teleport-resources/bot-instance.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The N most recent authentication status records for this bot instance."
+      - url: https://goteleport.com/docs/machine-workload-identity/introduction.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Bot Instances keep track of individual `tbot` installations over time, even as they renew their certificates or rejoin."
+    notes: >-
+      Judgment call: `tctl tokens ls` shows only expiry, but a bot's join token is consumed on use and
+      the credential that lives on is the bot instance, whose recent authentications and heartbeats
+      (with timestamps) are recorded, so dead bots can be found. Agents joined with static tokens get
+      no equivalent per-token record.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Teleport (Gravitational) does not appear in GitHub's supported secret-scanning patterns table,
+      as partner or otherwise. Join token names are random strings with no recognisable prefix.
+
+notes: >-
+  One card for Teleport Enterprise Cloud, Enterprise self-hosted and Community Edition: they share
+  the join-method machinery and integrations. Hygiene covers secret join tokens (two of the five
+  checks fail). It does not change the grade, since inbound is A on generic_oidc. Headline is B,
+  held down by outbound: a Teleport-as-issuer path for GCP (Workload Identity Federation for the
+  Discovery Service and GKE) and keyless options for the GitLab, Okta, Jamf, Intune and PagerDuty
+  integrations would move it to A.

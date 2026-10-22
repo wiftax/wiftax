@@ -1,0 +1,239 @@
+id: chainguard-platform
+vendor: Chainguard
+product: Chainguard registry and platform API
+website: https://www.chainguard.dev
+docs: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids/
+category: devtools
+status: listed
+summary: >-
+  Workloads reach cgr.dev and the Chainguard API by trading an OIDC token from any issuer you
+  register (GitHub, GitLab, AWS, Kubernetes, CircleCI, your own) for a token valid up to an hour,
+  matched on issuer, subject, audience and custom claims. Pull tokens remain for clients that
+  cannot do OIDC and always expire within a year; the free Catalog Starter plan gets only those.
+  Outbound, Chainguard signs its webhooks with OIDC and is the OIDC issuer for Checks into AWS,
+  GCP and Azure.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Assumable identity: a Chainguard identity with a claim_match on issuer, subject, audience and
+      custom claims (exact or regex), bound to a role. A workload presents its own OIDC token to
+      issuer.enforce.dev/sts/exchange (or chainctl auth login --identity) and gets a Chainguard
+      token valid up to an hour for the API and registry. Static pull tokens remain for clients
+      that cannot run OIDC.
+    issuers:
+      - any
+    tier_gated: Paid plans (Catalog Starter organizations cannot create assumable identities)
+    evidence:
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can restrict access to an identity so that only workflows that present tokens matching a specific issuer and subject can assume it."
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You must specify an issuer and subject in the claim match block, but you can optionally specify an `audience` here as well."
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "you can exchange your platform's OIDC token for a Chainguard API token like in the following example."
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API token issued by `/sts/exchange` will be valid for up to an hour."
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A pull token is the only credential they can issue for automation."
+      - url: https://raw.githubusercontent.com/chainguard-dev/terraform-provider-chainguard/main/docs/resources/identity.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`claim_patterns` (Map of String) The custom claim patterns for matching acceptable custom claims that appear in tokens to assume this identity."
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "First create an identity using `chainctl`, which can be limited to only allow OIDC federation from certain GitHub workflow runs:"
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/identity-examples/aws-identity-oidc.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tutorial outlining how to create a Chainguard identity that can be assumed by an AWS user or role using outbound identity federation."
+      - url: https://edu.chainguard.dev/platform/administration/assumable-ids/identity-examples/kubernetes-identity.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A Kubernetes cluster operates as an OIDC issuer."
+      - url: https://edu.chainguard.dev/api-v1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "the identity will expire, with a maximum lifetime of 30d."
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This generates a longer-lived token that can be used to pull images from other environments that don't support OIDC, such as some CI environments, Kubernetes clusters, or with registry mirroring tools like Artifactory."
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/pull-through-guides/ecr-pull-through.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Because ECR authenticates to Chainguard's registry on your behalf, you must supply it with credentials."
+    notes: >-
+      Bring-your-own-issuer: any OIDC issuer can be named (exact or issuer_pattern), with exact or
+      regex subject, audience and custom-claim matching; documented examples cover GitHub Actions,
+      GitLab, Bitbucket, Buildkite, CircleCI, Jenkins, Keycloak, Entra ID, Kubernetes service
+      account tokens and AWS IAM outbound identity federation (plus a legacy AWS GetCallerIdentity
+      identity type). Issuers that are not reachable from the internet can register their JWKS as a
+      "static" identity, capped at 30 days. The same exchanged token works for the control-plane
+      API (console-api.enforce.dev), Terraform and cgr.dev, so no API function requires a static
+      secret; per the weakest-path rule this keeps A. Pull tokens are still the documented path for
+      clients that cannot run a token exchange (kubelet imagePullSecrets, ECR pull-through cache in
+      Secrets Manager, Artifactory, Nexus, Cloudsmith mirrors). That is a limitation of those
+      clients, not of Chainguard's API, but it means many real registry-mirror setups hold a static
+      pull token; the hygiene below grades it. Tier gate: the free Catalog Starter plan cannot
+      create assumable identities, so on that plan inbound is pull-token only (would be D).
+  outbound:
+    grade: A
+    mechanism: >-
+      Chainguard reaches customer systems as an OIDC issuer or GitHub App, never with a customer
+      secret: CloudEvents webhooks carry an issuer.enforce.dev OIDC token for the receiver to
+      verify; Chainguard Checks gets short-lived AWS, GCP and Azure credentials through IAM OIDC
+      providers, workload identity pools and Entra federated credentials that trust
+      issuer.enforce.dev; Guardener and Checks act on GitHub through the Chainguard GitHub App.
+    evidence:
+      - url: https://edu.chainguard.dev/platform/administration/cloudevents/events-example.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Every Chainguard event has a JSON Web Token (JWT) formatted OIDC ID token in its Authorization header."
+      - url: https://edu.chainguard.dev/platform/administration/cloudevents/events-example.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use the `iss` field to ensure that the issuer is Chainguard, specifically `https://issuer.enforce.dev`."
+      - url: https://edu.chainguard.dev/platform/administration/cloudevents/image-copy-gcr.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It also sets up a Chainguard Identity with permissions to pull from the private `cgr.dev` repository, allows the Cloud Run service's service account to assume the puller identity, and sets up a subscription to notify the Cloud Run service when pushes happen to `cgr.dev`."
+      - url: https://edu.chainguard.dev/chainguard/checks/identity-and-trust.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A check's VM holds no long-lived credentials."
+      - url: https://edu.chainguard.dev/chainguard/checks/identity-and-trust.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In IAM, add an OpenID Connect identity provider with the provider URL `https://issuer.enforce.dev` and an audience, such as `sts.amazonaws.com`."
+      - url: https://edu.chainguard.dev/chainguard/checks/identity-and-trust.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For Google Cloud, add an OIDC provider to a workload identity pool, with the issuer `https://issuer.enforce.dev` and the attribute mapping `google.subject=assertion.sub`."
+      - url: https://edu.chainguard.dev/chainguard/checks/identity-and-trust.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the Microsoft Entra application that the check signs in as, add a federated identity credential with the issuer `https://issuer.enforce.dev`, the subject `chainguard:<repository-id>:<identity>`, and an audience, such as `api://AzureADTokenExchange`."
+      - url: https://edu.chainguard.dev/chainguard/guardener/github/app-connections.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The bridge between the two is a **connection**: a Chainguard App installation on a GitHub organization, linked to a Chainguard organization."
+      - url: https://edu.chainguard.dev/platform/chainctl/chainctl-docs/chainctl_iam_account-associations_set_aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Set AWS account association for a location."
+    notes: >-
+      Checked: CloudEvents subscriptions (registry push/pull and IAM events to a webhook you run;
+      Chainguard signs each delivery with an OIDC JWT, so the receiver holds no shared secret);
+      the image-mirroring examples (copy to Artifact Registry/ECR are customer-run services
+      triggered by events, which pull from cgr.dev with an assumable identity and push with their
+      own cloud identity; Chainguard never holds registry credentials); registry pull-through
+      guides for ECR, Artifact Registry, Artifactory, Nexus, Harbor and Cloudsmith (all pull
+      direction, so the pull token they store is an inbound credential, covered above); Chainguard
+      Checks workload identities into AWS, GCP, Azure (keyless, Chainguard as OIDC issuer, trust
+      pinned on the exact subject); Guardener and Checks via the Chainguard GitHub App; account
+      associations for AWS, GCP and Azure (account ID, project, tenant/client IDs only, no secret;
+      little current documentation of what uses them). Chainguard Workspaces sessions forward the
+      developer's own laptop credentials (gcloud ADC, GitHub, Claude) and are human dev
+      environments, not graded here. No integration found that asks for a static cloud key.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The maximum valid value is `8760h` (equivalent to 365 days), Valid unit strings range from nanoseconds to hours and are `ns`, `us`, `ms`, `s`, `m`, and `h`, for example `--ttl=24h`."
+      - url: https://edu.chainguard.dev/platform/chainctl/chainctl-docs/chainctl_auth_pull-token_create.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Maximum value is 8760h or one year. (default 720h0m0s)"
+      - url: https://edu.chainguard.dev/api-v1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Defaults to / Maximum of 30 days after creation time."
+    notes: >-
+      Pull tokens default to 30 days and the platform caps them at one year, so a never-expiring
+      pull token cannot exist (a platform-enforced max lifetime passes, as on temporal). Static-JWKS
+      identities are capped at 30 days. No org policy for a shorter cap is documented. The
+      Console's "Custom" expiration date picker was not verified to enforce the same cap.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To revoke a token, delete the associated identity."
+      - url: https://edu.chainguard.dev/platform/chainctl/chainctl-docs/chainctl_auth_pull-token_create.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a pull token."
+    notes: >-
+      Pull tokens are created with chainctl auth pull-token create and revoked by deleting their
+      identity (chainctl iam identities delete, or the /iam/v1/identities/{id} API), all
+      scriptable from an assumable identity. On Catalog Starter the limited_owner role cannot
+      delete identities; you delete the token's role binding instead.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Pulls authenticated in this way are associated with a Chainguard identity, which is associated with the organization selected when the pull token was created."
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**Access** sets what the token can pull: **Container Images**, **Packages**, **Java Libraries**, **JavaScript Libraries**, or **Python Libraries**."
+      - url: https://edu.chainguard.dev/platform/administration/iam-organizations/roles-role-bindings/roles-role-bindings.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For example, CI systems should have a role like `registry.pull`, not `editor`."
+    notes: >-
+      Each pull token is its own machine identity limited to pulling one repository
+      type, under an organization or folder you choose (--parent), not a copy of the creator's
+      access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://edu.chainguard.dev/chainguard/containers/registry/authenticating.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The **Access Tokens** page lists your selected organization's pull tokens, with each token's **Name**, **Description**, **Access**, **Created** date, and **Expiration** date."
+      - url: https://edu.chainguard.dev/api-v1.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "last_seen is the timestamp for when the identity was last federated."
+    notes: >-
+      The Identity API object carries lastSeen ("last federated"), but nothing documents whether a
+      registry login with a pull token updates it, and the Console's Access Tokens list shows no
+      last-used column. Judged a fail as not publicly verifiable; a documented last-used for pull
+      tokens would flip it.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Chainguard does not appear in GitHub's supported secret scanning patterns table, so a leaked
+      pull token is not reported to Chainguard for revocation.
+
+notes: >-
+  One card for the Chainguard platform: the registry (cgr.dev, apk.cgr.dev, Libraries indexes) and
+  the console-api.enforce.dev control plane share one IAM model and one STS. Checks, Guardener and
+  Workspaces are newer products on the same IAM; they appear only in outbound. Inbound is A on paid
+  plans and would be D on Catalog Starter (pull tokens only, three of five hygiene checks pass).
+  Hygiene applies to pull tokens. A documented last-used timestamp and GitHub partner revocation
+  for pull tokens would complete hygiene; the grades would not change.

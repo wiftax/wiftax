@@ -1,0 +1,224 @@
+id: cisco-duo-admin-api
+vendor: Cisco
+product: Duo Admin API
+website: https://duo.com
+docs: https://duo.com/docs/adminapi
+category: identity
+status: listed
+summary: >-
+  Automating Duo means an Admin API integration key and secret key that sign every request with
+  HMAC. The secret never expires, shows no last use and is not a GitHub secret-scanning partner,
+  though it has granular permissions and can be reset over the API. There is no OIDC or federation
+  path. Directory sync from Entra ID and Google is consent-based, but device-trust integrations want
+  pasted client secrets, API keys or passwords.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Admin API application created by an Owner in the Duo Admin Panel: a static integration key
+      (HTTP Basic username) and secret key used as the HMAC-SHA512 (v5) or HMAC-SHA1 (v2, legacy)
+      signing key on every request.
+    tier_gated: Duo Essentials, Advantage or Premier (Admin API is not on the free plan)
+    evidence:
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Locate the entry for Admin API in the catalog. Click the + Add button to create the application, and get your integration key, secret key, and API hostname."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API uses HTTP Basic Authentication to authenticate requests. Use your Duo application's integration key as the HTTP Username."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Lastly, compute the HMAC-SHA512 of this canonical representation, using your Duo application's secret key as the HMAC key."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The security of your Duo application is tied to the security of your secret key (skey)."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Duo Admin API is automatically available to paying Duo Premier, Duo Advantage, and Duo Essentials plan customers and new customers with an Advantage or Premier trial."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Admin API performs the IP check after verifying the authentication signature in a request."
+    notes: >-
+      No OIDC, JWT bearer, token exchange, cloud workload identity or mTLS option is documented for
+      the Admin API, so the weakest (and only) path is the static ikey/skey pair. HMAC signing means
+      the secret key itself never crosses the wire and requests carry a Date header, which limits
+      replay, but the key is still a long-lived shared secret that Duo stores in recoverable form
+      (the API's Retrieve Secret Key endpoint returns it in plain text to a sufficiently privileged
+      Admin API app). Optional "Networks for API Access" IP allowlisting is a useful compensating
+      control, not an identity. The "sso-oauth-client-credentials" integration type in the same API
+      is Duo SSO acting as an OAuth server for your own APIs, not a way to authenticate to Duo. With
+      2 of 5 hygiene checks passing, the grade is F; an enforced expiry plus a last-used timestamp
+      would make it D.
+  outbound:
+    grade: B
+    mechanism: >-
+      Entra ID and Google Workspace directory sync use admin consent to Duo's own app (keyless).
+      Trusted Endpoints device-management integrations want a pasted Entra client secret (Intune),
+      Jamf Pro or Ivanti/Sophos user passwords, a CrowdStrike API client secret, a Cisco Secure
+      Endpoint API key or a Meraki API key. AD and OpenLDAP sync run through the customer-hosted Duo
+      Authentication Proxy, which holds the directory bind password locally.
+    evidence:
+      - url: https://duo.com/docs/azuresync
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once you've signed in to Entra ID, you must click Accept to grant Duo the read rights needed to import users from your Entra ID domain."
+      - url: https://duo.com/docs/googlesync
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once you've signed in to Google, review and grant the requested permissions and click Continue to grant Duo the read rights needed to import users from your Google directory."
+      - url: https://duo.com/docs/adsync
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you chose to create a new connection then your next step is to install the Duo Authentication Proxy software on a machine that can connect to both Duo's cloud service and to your AD domain controller."
+      - url: https://duo.com/docs/adsync
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The account used to bind to Active Directory. This account needs read-only access to your directory."
+      - url: https://duo.com/docs/oktasync
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The SCIM token expires every 90 days. You will need to regenerate the token in Duo and update it in Okta for continued inbound provisioning."
+      - url: https://duo.com/docs/trusted-endpoints-intune
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the Azure application client secret value that you created during the Azure configuration steps, and paste the copied secret into the Azure Secret Value field in the Duo Admin Panel."
+      - url: https://duo.com/docs/trusted-endpoints-intune
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Under \"Client secrets\" click + New client secret. In the Description leave a comment, then under \"Expires\" select 730 days (24 months) (the permitted maximum)."
+      - url: https://duo.com/docs/trusted-endpoints-jamf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter the password for the Jamf Pro standard or LDAP user in the \"Jamf Pro account password\" field."
+      - url: https://duo.com/docs/trusted-endpoints-crowdstrike-falcon
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the Secret value from CrowdStrike and paste it into the Client Secret field in the Duo Admin Panel."
+      - url: https://duo.com/docs/trusted-endpoints-cisco-amp
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the API Key from the Cisco Secure Endpoint console and paste this in Duo as the API Key value in the \"Enter Cisco Secure Endpoint Credentials\" section."
+      - url: https://duo.com/docs/trusted-endpoints-meraki
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the new API key from the Meraki Dashboard. Return to the Duo Admin Panel and paste the Meraki API key in the Meraki API Key box in the \"Create a REST API key\" section."
+      - url: https://duo.com/docs/trusted-endpoints-workspaceone
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a read-only API user and role and an API key in Workspace ONE for Duo to obtain managed endpoint information."
+    notes: >-
+      Checked: directory sync for AD, Entra ID, Google, Okta, OpenLDAP and generic SCIM (overview at
+      duo.com/docs/directorysync), and Trusted Endpoints integrations for Intune, Jamf Pro,
+      CrowdStrike Falcon, Cisco Secure Endpoint, Meraki Systems Manager, Workspace ONE, Ivanti
+      Neurons for MDM and Sophos Mobile. Keyless: Entra ID sync (admin consent) and Google sync (OAuth
+      authorization by a Google admin, re-authorized when it lapses). Okta and generic SCIM push into
+      Duo with a Duo-issued bearer token (an inbound credential that expires every 90 days), so Duo
+      never reaches into Okta. AD and OpenLDAP sync never hand Duo a directory credential: the bind
+      password stays in authproxy.cfg on a host you run (optionally encrypted on Windows hosts), though that
+      host also stores a Duo ikey/skey. The device-trust integrations are the static part: Intune
+      wants a client secret on an Entra app you register (customer-managed OAuth secret, C-like),
+      while Jamf, Workspace ONE, Ivanti and Sophos want an API user's password and Meraki, Secure
+      Endpoint and CrowdStrike want API keys or client secrets. Duo does give least-privilege
+      guidance throughout (read-only Graph permission, Jamf Auditor privilege set, read-only Secure
+      Endpoint scope). Keyless on some, static on others is B; Intune via admin consent or a
+      federated credential on Duo's multi-tenant app would be the obvious fix.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://duo.com/docs/protecting-applications
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you suspect a compromise of the credentials of your Duo application you may want to reset the application's secret."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Secret used when configuring systems to use this integration. The secret key will be hidden, showing only the last four characters."
+    notes: >-
+      Neither the Admin API integration object nor the Admin Panel docs offer an expiry date or an
+      org policy that forces one; the secret key lives until someone resets it, and Duo frames
+      resetting as a compromise response. Contrast Duo's own bypass codes and SCIM tokens, which do
+      carry expirations.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If set to 1, resets the integration's secret key to a new, randomly generated value. The new secret key is returned in the return value."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a new integration. The new integration key and secret key are randomly generated and returned in the response."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Attempting to reset the secret key for the same Admin API integration whose integration key and secret key are used to make this call will return an error."
+      - url: https://duo.com/docs/protecting-applications
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "There is no way to make the previously-used secret key or client secret value valid for use after the reset."
+    notes: >-
+      POST /admin/v3/integrations creates an Admin API app, POST /admin/v3/integrations/[ikey] with
+      reset_secret_key=1 resets a secret and DELETE removes one, all needing "Grant applications".
+      An app cannot reset its own secret, and a reset is an instant cutover with no overlap, so
+      automated rotation needs a second privileged Admin API app or a create-new-then-delete-old
+      pattern.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Determine the permissions you want to grant to this Admin API application."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Admin API application can read authentication, offline access, telephony, and administrator action log information."
+    notes: >-
+      Each Admin API application is a purpose-built machine principal, not tied to a human admin,
+      with its own set of permission toggles (read log, read or write resource, settings,
+      applications, administrators, identity verification) plus optional source-IP restriction.
+      Permissions are account-wide per category rather than per object.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The date the WebAuthn credential was last used."
+      - url: https://duo.com/docs/adminapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Returns a paged list of integrations."
+    notes: >-
+      The integration object returned by GET /admin/v3/integrations has no last-used or
+      last-authenticated field, and the Protecting Applications page shows none for application
+      secrets, even though Duo tracks date_last_used for user WebAuthn credentials. Admin action
+      logs record what an Admin API app changed, not when its key was last presented.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Neither Duo nor Cisco appears in GitHub's supported secret-scanning patterns table, so a leaked
+      Duo secret key pushed to a public repo is not reported to Duo. Third-party scanners (for example
+      GitGuardian) detect Duo keys, but that does not trigger revocation.
+
+notes: >-
+  Graded on the Admin API, the documented way to automate Duo administration (MSP subaccounts are
+  managed through the same Admin API app via subaccount permissions). The sibling Auth API uses the
+  same ikey/skey HMAC scheme on its own application type and was not graded separately. Two of five hygiene checks pass (rotation API,
+  scoping). Inbound moves to D with an enforceable expiry and a last-used timestamp, plus GitHub
+  partner revocation for good measure, and to B or A only if the Admin API accepts a federated
+  token instead of an HMAC secret.

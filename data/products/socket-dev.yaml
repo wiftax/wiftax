@@ -1,0 +1,236 @@
+id: socket-dev
+vendor: Socket
+product: Socket API and CLI
+website: https://socket.dev
+docs: https://docs.socket.dev/docs/api-keys
+category: devtools
+status: listed
+summary: >-
+  CI jobs, the Socket CLI and the self-hosted Socket Firewall authenticate with a static
+  organization API token stored as a CI secret; no OIDC or workload federation path exists. Tokens
+  are scoped, show last use and can be rotated or revoked by API, but cannot be given an expiry and
+  are not in GitHub's secret-scanning partner program. Outbound it uses Socket-owned apps (GitHub
+  App, Jira, Linear, Asana, ClickUp, Vanta) with no customer secret.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static organization API token sent as a Bearer token or HTTP Basic username, created in the
+      dashboard or via the API. Used by the REST API, the Socket CLI in every documented CI system
+      (GitHub Actions, GitLab, Bitbucket, Jenkins, Azure DevOps) and Socket Firewall Enterprise.
+      The only OAuth paths are browser and device-code logins for humans (remote MCP, CLI).
+    evidence:
+      - url: https://docs.socket.dev/reference/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Socket's API uses organization tokens for authenticating requests."
+      - url: https://docs.socket.dev/reference/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authenticating requests to the Socket API can be done by passing the API token as a Bearer token in the `Authorization` header, or as the username field of an HTTP Basic authentication header."
+      - url: https://docs.socket.dev/docs/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API tokens are required to use the [Socket CLI](https://docs.socket.dev/docs/socket-cli) or [Socket REST API](https://docs.socket.dev/reference/)."
+      - url: https://docs.socket.dev/docs/create-socket-api-key-for-cicd.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These work the same whether you run the CLI locally or in a **CI/CD integration** (GitHub Actions, GitLab, Bitbucket, Jenkins, Azure DevOps)."
+      - url: https://docs.socket.dev/docs/socket-for-github-actions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}"
+      - url: https://docs.socket.dev/docs/socket-in-your-gitlab-pipeline.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For the \"**Value:**\" field, enter your <**Socket API Token**>"
+      - url: https://docs.socket.dev/docs/socket-login.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In CI, set the `SOCKET_CLI_API_TOKEN` environment variable instead."
+      - url: https://docs.socket.dev/docs/socket-firewall-enterprise-registry-mode-codeartifact-configuration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Socket API token comes from `SOCKET_SECURITY_API_TOKEN`, never the config file."
+      - url: https://api.socket.dev/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authentication: Organization API token, OAuth2, or NextAuth session."
+      - url: https://docs.socket.dev/docs/remote-socket-mcp.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "your MCP client opens a browser to authenticate with Socket on first connect, so there's no API key to copy or manage"
+    notes: >-
+      The v0 OpenAPI spec defines only bearerAuth and basicAuth, both carrying the organization
+      token. The v1 API adds OAuth2, but the only grant documented is the device authorization flow
+      (/v1/oauth2/device/authorize and /verify, a user_code a person approves in a browser), used by
+      remote Socket MCP and interactive login; there is no client-credentials, JWT-bearer or token
+      exchange grant, and no CI or cloud issuer can be trusted. Every CI recipe (GitHub Actions,
+      GitLab, Bitbucket, Jenkins, Azure DevOps) stores SOCKET_SECURITY_API_KEY as a CI secret even
+      though GitHub and GitLab already issue OIDC tokens to those jobs, and the GitHub Actions
+      recipe uses GITHUB_TOKEN only for GitHub, not for Socket. The self-hosted Socket Firewall
+      Enterprise (registry and wrapper mode) also calls home with SOCKET_SECURITY_API_TOKEN.
+      `socket login` with a blank token uses Socket's "limited public token", a shared static
+      credential for public package lookups. Static tokens with three of five hygiene checks = D.
+  outbound:
+    grade: A
+    mechanism: >-
+      Socket-owned apps installed or authorized by you: the Socket Security GitHub App, the Socket
+      for Jira Atlassian Forge app, a Slack app, an Origin marketplace app, and Socket's OAuth clients
+      for Linear, Asana, ClickUp and Vanta. No customer-created key or client secret is handed over.
+    evidence:
+      - url: https://docs.socket.dev/docs/socket-for-github-installation.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Install the [Socket Security App](https://github.com/apps/socket-security) from the GitHub Marketplace by visiting: [github.com/apps/socket-security](https://github.com/apps/socket-security)."
+      - url: https://docs.socket.dev/docs/permissions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "We use read access only to retrieve the file tree listing (names and paths) and then download only the specific dependency manifest, lockfile, and related configuration file types listed below."
+      - url: https://docs.socket.dev/docs/jira-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The integration is powered by the **Socket for Jira** Atlassian Forge app, which is installed in your Jira Cloud instance and connected to your Socket organization."
+      - url: https://docs.socket.dev/docs/linear-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authorization happens entirely from the Socket dashboard — there is no separate app to install in a third-party admin console."
+      - url: https://docs.socket.dev/docs/asana-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The integration connects to Asana using OAuth."
+      - url: https://docs.socket.dev/docs/clickup-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "ClickUp OAuth does not use granular scopes."
+      - url: https://docs.socket.dev/docs/vanta-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Upon completion, Socket will store a refresh token in your organization settings for ongoing communication with Vanta."
+      - url: https://docs.socket.dev/docs/socket-for-origin.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In Origin, open the **App Marketplace**, select **Socket**, and install it on the repositories you want to scan."
+      - url: https://docs.socket.dev/docs/slack-alerts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can configure a Slack Webhook URL in your organization dashboard which will receive any new or updated pull request notifications generated by the Socket Organization's associated GitHub app installation."
+      - url: https://docs.socket.dev/docs/notifications.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| **Microsoft Teams** | A display name and a Workflows webhook URL | That Teams channel |"
+      - url: https://docs.socket.dev/docs/socket-firewall-enterprise-registry-mode-artifactory-configuration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use a scoped **Access Token** with read-only permissions."
+      - url: https://docs.socket.dev/docs/integrations.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| Data Exports | Enterprise | Export alert and dependency data to external data warehouses |"
+    notes: >-
+      Checked: GitHub (Socket Security GitHub App, keyless; the only native SCM integration, with
+      GitLab, Bitbucket and Azure DevOps covered by running the CLI in your own pipeline instead);
+      Jira Cloud (Socket-owned Forge app); Linear, Asana, ClickUp (Socket's OAuth client, you
+      authorize in the browser); Vanta (OAuth, Socket keeps the refresh token from its own client,
+      not a client secret you manage); Cursor Origin (marketplace app); Slack (Socket Slack app for
+      Notifications, or a pasted incoming-webhook URL for PR alerts) and Microsoft Teams (Workflows
+      webhook URL). The webhook URLs are push-only destinations rather than access into your
+      systems, so they do not lower the grade, but they are bearer URLs worth rotating if leaked.
+      Not counted as outbound: `socket scan github` takes a GitHub PAT, but the CLI uses it on your
+      machine ("a GitHub PAT is required even for organizations that have installed the Socket
+      GitHub application"); Socket Firewall Enterprise's Artifactory, Nexus and CodeArtifact
+      credentials live in a proxy you deploy, not with Socket. Enterprise Data Exports to data
+      warehouses have no public setup doc, so how Socket authenticates to your warehouse is not
+      publicly verifiable; a pasted warehouse key or cloud access key there would drop this to B.
+      Socket reaches into no cloud account, so A rests on vendor-app consent alone (as on
+      proofpoint-tap).
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.socket.dev/reference/postapitoken.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Maximum number of API calls allowed per month"
+      - url: https://docs.socket.dev/docs/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Ensure your API tokens are stored securely and rotate them if you have concerns about their usage."
+    notes: >-
+      The Create API Token body takes name, scopes, visibility, max_quota and resource restrictions,
+      and the full v0 OpenAPI spec has no expiry or expires_at field anywhere; the only limit is a
+      monthly call quota. A token lives until someone rotates or revokes it, and no org policy can
+      force a lifetime.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.socket.dev/reference/postapitokensrotate.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This endpoint requires the following org token scopes: - api-tokens:rotate"
+      - url: https://docs.socket.dev/reference/postapitokensrevoke.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This endpoint requires the following org token scopes: - api-tokens:revoke"
+      - url: https://docs.socket.dev/reference/postapitoken.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API Token created must use a subset of permissions the API token creating them."
+    notes: >-
+      Create, update, rotate, revoke and list endpoints exist under /orgs/{org_slug}/api-tokens,
+      each gated by its own api-tokens:* scope. Rotation keeps the token's name, scopes and
+      visibility.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.socket.dev/docs/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API Tokens can individually manage the capabilities they can use in our API."
+      - url: https://docs.socket.dev/reference/creating-and-managing-api-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**Least Privilege Principle**: Assign only the necessary scopes to each token to minimize potential security risks."
+      - url: https://api.socket.dev/v0/openapi
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens restricted to specific repositories may only delete resolutions anchored to a granted repository."
+    notes: >-
+      Tokens are organization tokens rather than a user's personal credential, carry an explicit
+      list of 60-plus per-endpoint scopes, and can be restricted to specific repositories. Socket
+      documents a minimal CI scope set (repo, security-policy:read, triage, full-scans,
+      packages:list).
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.socket.dev/docs/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Audits of last usage and remaining quota are available on the dashboard."
+      - url: https://docs.socket.dev/reference/getapitokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Timestamp when the API Token was last used"
+    notes: >-
+      The dashboard shows last usage, and List API Tokens returns last_used_at for every token, so
+      dead tokens can be found by script.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Socket does not appear in GitHub's supported secret-scanning patterns table (searched for
+      "Socket"), so a Socket token pushed to a public repo is not
+      reported to Socket. No other leak-revocation program is documented.
+
+notes: >-
+  One card for Socket's API, CLI and integrations; the GitHub App, CI actions, Socket Firewall
+  Enterprise and MCP all authenticate back to the same organization API tokens, so they share this
+  grade. Hygiene is good for a static key (scopes, repository restriction, last use, full token API)
+  but misses expiry and leak revocation. Inbound moves to B or A only if the API accepts a federated
+  token, for example GitHub Actions or GitLab OIDC traded for a short-lived Socket token; adding an
+  enforceable expiry plus GitHub partner scanning would still leave it a D, with five of five checks.
