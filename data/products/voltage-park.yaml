@@ -1,0 +1,162 @@
+id: voltage-park
+vendor: Voltage Park (Lightning AI)
+product: Voltage Park On-Demand control plane (cloud-api.voltagepark.com, VMs, bare metal, storage)
+website: https://www.voltagepark.com
+docs: https://support.voltagepark.com/article/api
+category: cloud
+status: listed
+confidence:
+  level: low
+  reason: "The dashboard Developers page where tokens are managed is behind a login. Scoping and last-used fail on public docs only; two more passes would make inbound D."
+summary: >-
+  The On-Demand API that deploys VMs, bare metal, storage and Managed Kubernetes takes only a
+  static bearer API token, issued through support or the dashboard. Tokens expire after one year,
+  but no token API, scoping, last-used view or GitHub partner revocation is documented. Managed
+  Kubernetes clusters are graded on the voltage-park-kubernetes card. Voltage Park never reaches
+  into your cloud.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API token sent as Authorization: Bearer to cloud-api.voltagepark.com (the OpenAPI
+      spec also lists a UI-Authorization header used by the web console). Tokens are requested
+      from support or created on the dashboard Developers page. No OIDC, workload identity or
+      token-exchange path exists for the control plane.
+    issuers: []
+    evidence:
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This API uses Bearer Token Authentication to authorize requests."
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Every request must include a valid API token in the Authorization header."
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Since self-service API key generation is currently not available, API keys must be requested from our support team."
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Our Voltage Park On Demand API allows developers to deploy, manage, and monitor virtual machines (VMs) and bare metal instances."
+      - url: https://cloud-api.voltagepark.com/api/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API authorization generated from TensorDock storefront"
+      - url: https://cloud-api.voltagepark.com/api/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "\"description\":\"UI Authorization Header\",\"in\":\"header\",\"name\":\"UI-Authorization\""
+    notes: >-
+      Graded on the On-Demand API, the only documented way for a workload to deploy, resize or
+      terminate VMs, bare metal, storage and Kubernetes clusters. Every operation in the OpenAPI
+      spec accepts the bearer token (apiTokenAuth) or the console's UI-Authorization header, and
+      nothing else; the spec describes the token as generated from the TensorDock storefront the
+      API is built on. No Terraform provider, CLI, OIDC, GitHub Actions or cloud workload identity
+      path is documented. The API page contradicts itself on issuance (support-only, yet "create
+      new tokens or delete existing ones" on the Developers page); either way it is a human in a
+      browser or a support ticket. The Managed Kubernetes cluster API server, which can trust your
+      own OIDC issuer, is graded separately on the voltage-park-kubernetes card (the split follows
+      coreweave-api and coreweave-cks); creating or changing a cluster is still a call to this API
+      with this token. Storage is VAST NFS
+      mounted by IP allowlist, with no access keys. SSH access to instances uses your public keys.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Voltage Park never needs access into customer infrastructure: no bucket import, registry
+      pull, model hub or data sync integration exists.
+    evidence:
+      - url: https://cloud-api.voltagepark.com/api/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The all-purpose management API for Voltage Park On-Demand."
+      - url: https://support.voltagepark.com/article/deploy-storage
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Backed by VAST Data’s Universal Storage architecture, our storage offering delivers all-flash performance and exabyte-scale capacity to meet the demands of modern AI, ML, HPC, and data-intensive applications."
+      - url: https://support.voltagepark.com/article/example-deploying-gpt-oss-on-voltage-park
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Now, we download the model from Huggingface through the Ollama command-line interface:"
+    notes: >-
+      Checked the full OpenAPI spec (virtual machines, bare metal, Kubernetes, billing,
+      organization, SSH keys, cloud-init validation, locations, storage) and every help-center
+      article: none stores a customer cloud, registry, Hugging Face or W&B credential or pulls data
+      on the customer's behalf. Storage is Voltage Park-hosted VAST NFS; the shared-storage API only
+      allowlists client IPs. Model and data downloads in the tutorials are run by the customer's own
+      code on the rented machine, which is not the product reaching in.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens are valid for one year, after which they expire, so be sure to rotate them regularly to maintain access."
+    notes: >-
+      The docs state a fixed one-year lifetime with no "never" option, a platform-enforced maximum
+      (the precedent on temporal, where a 2-year cap passes). Whether a shorter lifetime can be
+      chosen or enforced by org policy is not publicly verifiable.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "On the Developers page of the Voltage Park dashboard, you can view and manage your API tokens."
+      - url: https://cloud-api.voltagepark.com/api/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Add new SSH public key to your organization"
+    notes: >-
+      Tokens are created and deleted on the dashboard or by support. The OpenAPI spec has no
+      endpoint to create, list or revoke API tokens; the only credential endpoints manage
+      organization SSH public keys. Rotation needs a browser.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keep your API key secure! Treat it like a password and NEVER expose it in public repositories."
+      - url: https://support.voltagepark.com/article/account
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Send Invite: Click this button to invite teammates to join the platform."
+    notes: >-
+      No token permissions, scopes, roles or service-account type are documented; organization
+      management is a member list and an invite button. One token reaches every operation in the
+      spec, including billing and organization settings. Not publicly verifiable whether the
+      login-walled Developers page offers scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://support.voltagepark.com/article/api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "From this page, you can create new tokens or delete existing ones."
+    notes: >-
+      The only description of the Developers page mentions create and delete. No last-used
+      timestamp is documented; not publicly verifiable beyond that.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Neither Voltage Park, Lightning AI nor TensorDock appears in GitHub's supported
+      secret-scanning patterns table, so a leaked API token is not reported to Voltage Park.
+
+notes: >-
+  Voltage Park merged into Lightning AI in January 2026 and its help center is now run by Lightning
+  AI; this card grades the Voltage Park On-Demand control plane (VMs, bare metal, storage), and
+  voltage-park-kubernetes grades the Managed Kubernetes cluster API. Dedicated Reserve contracts
+  use the same platform and no separate machine auth is documented. Lightning AI's own Studio platform is a separate product, not graded here. One of
+  five hygiene checks passes (expiry), so inbound is F; an API to mint and revoke tokens plus
+  scoped tokens or a service-account type would lift it to D. Inbound moves to B or A only if
+  cloud-api.voltagepark.com accepts a federated token, which the Kubernetes add-on shows the team
+  already knows how to wire up.

@@ -1,0 +1,124 @@
+id: sf-compute-object-storage
+vendor: San Francisco Compute Company
+product: SF Compute Object Storage
+website: https://sfcompute.com
+docs: https://docs.sfcompute.com/preview/object-storage
+category: cloud
+status: listed
+summary: >-
+  This card is object storage only. Buckets are reached with static S3-style access key pairs that
+  read and write every bucket in a workspace and region. No expiry, per-bucket or read-only
+  scoping, last-used view or GitHub revocation is documented; keys can only be created and revoked
+  from the sf CLI or console. The control plane is graded on the sf-compute card.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static S3-compatible access key ID and secret access key, created with `sf storage
+      access-key create` or in the console, set as SFC_ACCESS_KEY_ID / SFC_SECRET_ACCESS_KEY for
+      rclone or boto3; no temporary-credential or federation path exists.
+    issuers: []
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Buckets hold your files, and tools built for S3-compatible object stores, such as rclone and boto3, read and write to them."
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Save the returned access key ID and secret in your secrets manager."
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Set these variables on your laptop and on each instance that uses the bucket."
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Creating and deleting buckets and access keys in a workspace requires a [role](/preview/roles.md) that allows the `bucket` and `access_key` resources there."
+    notes: >-
+      The only documented way into a bucket is a long-lived key pair, including from SF Compute's
+      own instances (the checkpoint example reads the key from environment variables; no instance
+      identity or STS-style exchange exists). Creating a key requires the sf CLI or console, so it
+      also rests on the static sk_live_ token or a human login graded on the sf-compute card.
+      1 of 5 hygiene checks passes.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Object storage never pulls from customer clouds; imports run rclone on the customer's own
+      machine with the source provider's credentials.
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use `rclone config` to add a remote named `source` with that provider's endpoint and its own credentials."
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Data passes through the machine running rclone."
+    notes: >-
+      No server-side import, replication or sync from S3, GCS, Azure or Hugging Face is documented;
+      SF Compute never holds the source credential.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "SF Compute enforces these limits on buckets and access keys:"
+    notes: >-
+      The create commands, console flow and limits table mention no expiry, default lifetime or
+      org policy for access keys; a key lives until someone revokes it.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The SF Compute API doesn't manage buckets or access keys yet."
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use `sf storage` to script them, or [contact us](https://sfcompute.com/contact) if you need programmatic access."
+    notes: >-
+      Passed on the CLI, consistent with sf-compute: `sf storage access-key create` and
+      `sf storage access-key delete` run without a browser and the vendor says to script them. There
+      is no REST endpoint, and rotation is cramped by the cap of 2 keys per workspace per region.
+      A reviewer applying a strict "REST API" reading would flip this to fail (no grade change).
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An access key can read and write every bucket in its workspace and region."
+    notes: >-
+      Keys are not principals with roles: the RBAC `access_key` resource governs who may manage
+      keys, not what a key may do. Every key is read-write on every bucket in its workspace and
+      region; a read-only or single-bucket key is impossible, and the only boundary is a separate
+      workspace. Unlike sf-compute's tokens, this does not meet the scoping bar.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "List buckets and keys with `sf storage buckets list` and `sf storage access-key list`, or open [Storage](https://console.sfcompute.com/dashboard/storage) in the console."
+    notes: >-
+      The key listing is documented but no last-used field is; the console's Access keys tab is
+      behind a login and the screenshot is not evidence. Graded conservatively.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: SF Compute does not appear in GitHub's supported secret-scanning patterns table.
+
+notes: >-
+  Split from sf-compute because storage auth differs materially from the control plane, following
+  coreweave-object-storage. The fix is short-lived storage credentials minted from an identity
+  (instance identity on SF Compute VMs, or an OIDC token exchange like CoreWeave's), then expiry,
+  per-bucket and read-only key scopes, a last-used field, and a GitHub secret-scanning partnership.

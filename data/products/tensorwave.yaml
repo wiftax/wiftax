@@ -1,0 +1,192 @@
+id: tensorwave
+vendor: TensorWave
+product: TensorWave AMD GPU cloud (bare metal, Managed Kubernetes, Managed Slurm, storage)
+website: https://tensorwave.com
+docs: https://docs.tensorwave.com/kubernetes/health-overview.md
+category: cloud
+status: listed
+confidence:
+  level: low
+  reason: "TensorWave publishes no API, CLI, token or S3 key docs; the dashboard, handoff docs and user-management pages are login-only or empty. If those showed expiring, API-rotatable, scoped credentials, inbound could move from F to D."
+summary: >-
+  TensorWave documents no public control-plane API, CLI, Terraform provider or federation path.
+  Workloads get in with SSH keys tied to LDAP users and a kubeconfig downloaded from the dashboard
+  that "contains credentials"; S3-compatible storage is advertised but its keys are undocumented.
+  No hygiene check can be verified. Outbound is not graded: Slack alert delivery is the only
+  integration, and how it connects is undocumented.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static credentials only: SSH public keys (root on bare metal, LDAP user records on Managed
+      Slurm) and a kubeconfig file downloaded by hand from the cluster page in the dashboard. No
+      public API, API token, service account, CLI or Terraform provider is documented, and no OIDC
+      or workload identity federation path exists. S3-compatible object storage is listed as a
+      product feature with no documentation of how its access keys are issued.
+    issuers: []
+    evidence:
+      - url: https://docs.tensorwave.com/kubernetes/health-overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Clicking this button downloads a kubeconfig file for your cluster, which you can use to
+          authenticate and interact with it via `kubectl` from your local machine.
+      - url: https://docs.tensorwave.com/kubernetes/health-overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keep your kubeconfig file secure. It contains credentials that grant access to your cluster."
+      - url: https://docs.tensorwave.com/observability/kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Download your cluster's kubeconfig directly from the cluster header by clicking
+          **Kubeconfig**.
+      - url: https://docs.tensorwave.com/slurm/access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Authentication is by SSH key. Password authentication is disabled. Your public key must be
+          present in your LDAP user record before first login
+      - url: https://docs.tensorwave.com/welcome-to-tensorwave/bare-metal-quickstart.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: All SSH keys you've initially provided will have root user access.
+      - url: https://docs.tensorwave.com/slurm/access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          IDP setup requires coordination during or after initial cluster deployment. To discuss
+          options or initiate configuration, contact your TensorWave account manager.
+      - url: https://tensorwave.com/products/storage/high-speed-network-storage
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: S3 compatible object storage
+      - url: https://docs.tensorwave.com/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Graded on the weakest path a workload must use, as the CoreWeave cards are. The full docs
+      index (llms.txt) has quickstarts, Slurm and Kubernetes observability pages and empty
+      user-management stubs, but no API reference, token page, CLI or Terraform provider, and the
+      Terraform registry lists no TensorWave provider; cluster provisioning appears to happen
+      through sales and handoff, not an API. A workload therefore authenticates with a dashboard
+      kubeconfig (credential type, lifetime and scope not publicly documented) or an SSH key, both
+      static. The optional IdP integration for Slurm is human SSO set up by the account manager, so
+      per RUBRIC it is noted but does not lift the grade. S3-compatible storage keys are not
+      publicly verifiable; S3-style access keys are static by construction. What would move it: a
+      documented API with a federated (OIDC token exchange) path, or at minimum published
+      credential docs passing three hygiene checks for D.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Not graded. The only integration TensorWave itself operates is posting alerts into the
+      customer's connected Slack workspace, and how that workspace is connected (app install,
+      webhook URL or bot token) is undocumented. Registry pulls, Hugging Face downloads and data
+      transfer are run by the customer's own jobs with the customer's own credentials.
+    evidence:
+      - url: https://docs.tensorwave.com/observability/notifications-and-alerts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          When enabled, qualifying events are sent to your organization's connected Slack
+          workspace.
+      - url: https://docs.tensorwave.com/observability/notifications-and-alerts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: Use the workspace dropdown to select which Slack workspace should receive alerts.
+      - url: https://docs.tensorwave.com/slurm/containers.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Credentials are stored under your home directory and apply to subsequent `apptainer
+          pull`, `apptainer exec`, and `apptainer shell` calls that reference the registry.
+      - url: https://docs.tensorwave.com/welcome-to-tensorwave/faq.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          We provide multiple data storage and transfer options, including high-speed SSDs and
+          cloud storage integrations.
+    notes: >-
+      Slack alert delivery is the only integration TensorWave runs, its connection mechanism is
+      undocumented, and so it is not graded (no receipt, no grade). Checked: Slack and email
+      alerts, private registry login (Apptainer, Enroot/Docker), the Hugging Face quickstart,
+      storage, and the FAQ's "cloud storage integrations". Registry and Hugging Face credentials are
+      typed into the customer's own login pod and used by the customer's jobs; TensorWave does not
+      hold them. The FAQ's "cloud storage integrations" are not described anywhere public. If
+      TensorWave documents the Slack connection (a Slack app install would be keyless; a pasted
+      webhook URL or bot token would be D/F) or any cloud storage integration, this surface gets a
+      grade. Headline is F either way.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.tensorwave.com/kubernetes/health-overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keep your kubeconfig file secure. It contains credentials that grant access to your cluster."
+      - url: https://docs.tensorwave.com/welcome-to-tensorwave/bare-metal-quickstart.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      No expiry is documented for the kubeconfig credential, SSH keys or S3 keys, and no org policy
+      to enforce one. Not publicly verifiable; failed per the login-wall rule.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.tensorwave.com/observability/kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Download your cluster's kubeconfig directly from the cluster header by clicking
+          **Kubeconfig**.
+      - url: https://docs.tensorwave.com/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      The kubeconfig is fetched by clicking a button in the dashboard, and no public API exists to
+      mint or revoke any credential. Bare-metal SSH keys are rotated by editing authorized_keys on
+      the node; Slurm keys live in LDAP records the cluster admin manages.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.tensorwave.com/welcome-to-tensorwave/bare-metal-quickstart.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: All SSH keys you've initially provided will have root user access.
+      - url: https://docs.tensorwave.com/user-and-team-management/managing-team-member-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      No machine principal or service account is documented. The kubeconfig's RBAC scope is not
+      stated, bare-metal keys are root, and Slurm SSH keys belong to LDAP user records. The
+      "Managing team member access" page is public but empty. Kubernetes RBAC inside the cluster
+      can of course be configured by the customer, but that is the customer's own work, not a
+      TensorWave-issued scoped credential.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.tensorwave.com/observability/kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: No last-used view is documented for any credential. Not publicly verifiable.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: TensorWave does not appear in GitHub's supported secret-scanning patterns table.
+
+notes: >-
+  TensorWave sells reserved AMD Instinct clusters (bare metal, Managed Kubernetes, Managed Slurm,
+  WEKA-backed shared storage with an S3-compatible endpoint) delivered with handoff documentation.
+  Graded as one card because no product documents a distinct machine-auth mechanism; if TensorWave
+  publishes an API or object storage key docs, those may deserve their own cards, as CoreWeave's do.
+  The public docs (GitBook, docs.tensorwave.com) cover workloads on the cluster, not credentials:
+  the "Syncing Public Keys", "Managing team member access" and "Self-serve inviting users" pages
+  are empty. The fix list: publish credential docs, add expiry and a revocation API, offer a
+  service account with scoped access, and accept OIDC tokens from CI for the dashboard API and
+  object storage.

@@ -1,0 +1,195 @@
+id: fluidstack
+vendor: Fluidstack
+product: Fluidstack Atlas (Infrastructure and Management APIs, fluidctl, managed Kubernetes and Slurm)
+website: https://www.fluidstack.io
+docs: https://docs.fluidstack.io/kubernetes/access-clusters
+category: cloud
+status: listed
+confidence:
+  level: low
+  reason: "docs.fluidstack.io no longer resolves; every receipt is a Wayback copy from Feb-Jul 2026. How OAuth client credentials are issued, scoped and expired is not public. Neither could lift the F unless Kubernetes CI stops needing a long-lived token."
+summary: >-
+  Fluidstack's documented way for CI to deploy to its managed Kubernetes is a long-lived
+  ServiceAccount token that works until someone deletes it. The Atlas API and fluidctl take a
+  bearer token from an interactive SSO login or an OAuth client ID and secret that you get from
+  Fluidstack. There is no OIDC federation for workloads, no last-used view, and no GitHub
+  secret-scanning partnership.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Atlas Infrastructure and Management APIs take an HTTP bearer JWT; workloads get one from an
+      OAuth client ID and client secret (fluidctl --client-id/--client-secret) or pass a raw token
+      with --token. Managed Kubernetes kubeconfigs use a browser-based SSO exec plugin, so the
+      documented CI/CD path is a long-lived Kubernetes ServiceAccount token Secret. Lighthouse
+      metrics take a static API key or OAuth client credentials, both provisioned by Fluidstack
+      support. No OIDC or workload identity federation path is documented.
+    issuers: []
+    evidence:
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For automation scenarios like CI/CD pipelines, GitHub Actions, or other headless runners where interactive browser authentication isn't possible, you can create a Kubernetes ServiceAccount with a long-lived token."
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The generated kubeconfig uses an exec-based credential plugin that automatically opens a browser for SSO authentication when you run kubectl commands."
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "ServiceAccount tokens are long-lived. If leaked, access persists until the token is manually revoked."
+      - url: https://web.archive.org/web/20260214010414/https://docs.fluidstack.io/cli-reference/fluidctl
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--client-secret string OAuth Client Secret"
+      - url: https://web.archive.org/web/20260711060054/https://docs.fluidstack.io/cli-reference/auth/fluidctl_auth
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "-T, --token string Auth token"
+      - url: https://web.archive.org/web/20260711043734id_/https://docs.fluidstack.io/redocusaurus/management-api.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "bearerFormat: JWT"
+      - url: https://web.archive.org/web/20260711055850/https://docs.fluidstack.io/projects/manage-projects
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authorization: Bearer <token>"
+      - url: https://web.archive.org/web/20260608212616/https://docs.fluidstack.io/lighthouse/authorization
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Fluidstack can provision static API keys that can be used to facilitate access to Fluidstack metrics from your internal Grafana instances."
+      - url: https://web.archive.org/web/20260608212616/https://docs.fluidstack.io/lighthouse/authorization
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Contact Fluidstack to receive your OAuth credentials"
+      - url: https://web.archive.org/web/20260711045002/https://docs.fluidstack.io/getting-started/sso
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Fluidstack supports SSO for the Fluidstack Console, allowing your organization to authenticate users through your existing identity provider."
+    notes: >-
+      Graded on the weakest path a workload must use (precedent: coreweave-api, coreweave-cks).
+      The control plane alone would be C at best: OAuth client_credentials with a client secret is
+      a short-lived token from a static root. But deploying to a Fluidstack Kubernetes cluster from
+      CI has one documented route, a long-lived ServiceAccount token, which is a static key, and 2
+      of 5 hygiene checks pass, so inbound is F. SSO (Okta, Entra, Google, custom OIDC/SAML via
+      Auth0, enabled by your TAM) is for human Console logins only and does not count. There is no
+      way to configure a cluster's api-server to trust a customer OIDC issuer, as CoreWeave's
+      unmanaged auth does. The older platform.fluidstack.io API used a static api-key header from
+      the dashboard (2024 docs) and the 2025 Harbor registry used a static "CLI secret"; neither
+      appears in the 2026 docs. What would move the grade: documented OIDC trust on cluster
+      api-servers or token exchange into Atlas from GitHub Actions and other issuers.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      The current Atlas docs describe no integration that reaches into customer clouds, registries
+      or SaaS; customers push into Fluidstack, not the other way round.
+    evidence:
+      - url: https://web.archive.org/web/20260711060333/https://docs.fluidstack.io/api-reference/infrastructure-api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The regional API for Fluidstack"
+      - url: https://web.archive.org/web/20260214005219/https://docs.fluidstack.io/api-reference/management-api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The global API for Fluidstack"
+      - url: https://web.archive.org/web/20250325074300/https://docs.fluidstack.io/atlas/surge
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Seamless Integration - Works with existing ML pipelines through AWS SQS, RabbitMQ, and Redis triggers"
+    notes: >-
+      Checked: the Infrastructure API (projects, instances, Kubernetes, Slurm, capacity), the
+      Management API (regions, clusters, orgs, members, invitations, SSH keys), Kubernetes and
+      Slurm guides, and Lighthouse. None pulls from customer S3/GCS/Azure, private registries,
+      Hugging Face or W&B. The March 2025 docs described Surge, a managed inference service with
+      AWS SQS, RabbitMQ and Redis triggers, which would reach into customer infrastructure, but no
+      auth method was documented and Surge is gone from the 2026 docs. If Surge or a data-import
+      feature is still sold, outbound needs grading; a human reviewer should check.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "ServiceAccount tokens are long-lived. If leaked, access persists until the token is manually revoked."
+      - url: https://web.archive.org/web/20260608212616/https://docs.fluidstack.io/lighthouse/authorization
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The token is valid for 24 hours (86400 seconds)."
+    notes: >-
+      The documented CI token never expires. OAuth access tokens last 24 hours, but no expiry or
+      policy is documented for the client secret behind them or for the metrics API key. Not
+      publicly verifiable beyond that.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Consider rotating tokens periodically by deleting and recreating the Secret."
+      - url: https://web.archive.org/web/20260608212616/https://docs.fluidstack.io/lighthouse/authorization
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Both methods are opt-in, please reach out via standard support channels if you are interested in any of the options outlined in this page."
+    notes: >-
+      Passed on the credential that sets the grade: the ServiceAccount token Secret is created and
+      deleted with kubectl, so rotation can be scripted. Fluidstack's own credentials (OAuth client
+      secrets, metrics API keys) come from support, and the Management API spec has no credential
+      endpoints, so they would fail. Judgment call; flipping it does not change the F.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Grant the ServiceAccount the necessary permissions. You can restrict the token's capabilities by choosing a different role:"
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use namespace-scoped permissions when possible to limit blast radius."
+      - url: https://web.archive.org/web/20260711051636/https://docs.fluidstack.io/kubernetes/manage-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Fine-grained RBAC is not supported at this time."
+    notes: >-
+      A ServiceAccount is a purpose-built machine principal with its own namespace RBAC role
+      (view, edit, admin or custom), which counts. The "no fine-grained RBAC" line is about
+      Fluidstack org members' Kubernetes user accounts, where org admins get cluster-admin. Scoping
+      of OAuth client credentials against the Atlas API is not documented; Management API member
+      roles are admin, editor and viewer.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters
+        checked_on: 2026-10-22
+        checked_by: tehreet
+      - url: https://web.archive.org/web/20260711043734id_/https://docs.fluidstack.io/redocusaurus/management-api.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      No last-used timestamp is documented for ServiceAccount tokens, OAuth clients or metrics API
+      keys, and the Management API spec exposes no credential objects. Not publicly verifiable.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Fluidstack does not appear in GitHub's supported secret-scanning patterns table (the only
+      "Fluid" row is Azure Fluid Relay). Kubernetes ServiceAccount JWTs have no vendor prefix to
+      match.
+
+notes: >-
+  One card for Fluidstack's current Atlas platform: the regional Infrastructure API
+  (<region>.atlas.fluidstack.io), the global Management API (api.atlas.fluidstack.io), fluidctl,
+  managed Kubernetes and Slurm, and Lighthouse metrics. docs.fluidstack.io stopped resolving
+  before 2026-10-22 and fluidstack.io now carries no product or docs links, so every receipt is an
+  Internet Archive capture (latest July 2026). Kubernetes and Slurm clusters are provisioned by
+  support, not the API. Slurm can use LDAP federation on request, which is for human users. Ways
+  to move off F: let cluster api-servers trust a customer OIDC issuer and document it for CI
+  instead of long-lived tokens; offer token exchange from GitHub Actions and other OIDC issuers
+  into Atlas; make OAuth clients self-serve with expiry, scoping and last-used; join GitHub's
+  secret-scanning partner program.

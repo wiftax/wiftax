@@ -1,0 +1,213 @@
+id: vultr-cloud
+vendor: Vultr
+product: Cloud control plane (API v2, vultr-cli, Terraform; compute, GPU, VKE, Container Registry)
+website: https://www.vultr.com
+docs: https://docs.vultr.com/platform/iam
+category: cloud
+status: listed
+summary: >-
+  Workloads drive Vultr with a static API key, ideally on an API-only service user with its own
+  IAM policy. That key can be traded for short-lived role sessions and registry logins, and Vultr
+  servers can use an identity token instead. Vultr also accepts JWTs from an external OIDC
+  issuer, but documents this only for IdP users, with no subject or audience conditions. Keys
+  can be set to never expire, show no last use, and are not revoked when leaked. Object Storage
+  has its own card.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      Static API key (Authorization: Bearer) owned by a user or API-only service user scoped by IAM
+      policies, used by the API, vultr-cli and the Terraform provider. It can be exchanged for an
+      assumed-role session token (ars-...) with a set duration, and Container Registry mints Docker
+      credentials that expire within 30 days. Vultr instances and bare metal can assume a role with
+      a 5-minute metadata identity token. External OIDC issuers can be trusted for role
+      assumption, but the docs cover only IdP users and do not let you constrain subject or
+      audience.
+    issuers: []
+    evidence:
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Vultr API v2 uses API keys for authentication."
+      - url: https://docs.vultr.com/platform/iam/service-user/how-to-create-a-service-user.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service users are API-only accounts designed for programmatic access to your organization's resources."
+      - url: https://docs.vultr.com/platform/iam/roles/assumed-roles/how-to-assume-a-role.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Assuming a role creates a temporary session that grants the permissions defined by the role's policies."
+      - url: https://docs.vultr.com/platform/iam/roles/assumed-roles/how-to-assume-a-role.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The session is time-bound and expires after the specified duration or when the role's"
+      - url: https://docs.vultr.com/platform/iam/product-integrations/container-registry-auth/temporary-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Vultr Container Registry avoids this by issuing short-lived Docker credentials on demand, with a scope that matches the caller's IAM policy."
+      - url: https://docs.vultr.com/platform/iam/product-integrations/container-registry-auth/credential-lifecycle.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Every credential has an expiry, and the maximum is 30 days."
+      - url: https://docs.vultr.com/platform/iam/product-integrations/container-registry-auth/vke-and-cicd.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Store the service user's API key in your pipeline's secret store"
+      - url: https://docs.vultr.com/platform/iam/product-integrations/instance-and-bare-metal-auth/obtain-identity-token.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "it is used to assume an IAM role without a stored API key or user credentials."
+      - url: https://docs.vultr.com/platform/iam/oidc/oidc-issuers/how-to-create-an-oidc-issuer.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "users authenticated by the external IdP (such as Okta, Google, or Azure AD) can assume roles in Vultr without separate Vultr credentials."
+      - url: https://docs.vultr.com/platform/iam/oidc/oidc-issuers/how-to-create-an-oidc-issuer.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The issuer requires the JWK (JSON Web Key) public key components from the external identity provider's JWKS endpoint."
+      - url: https://docs.vultr.com/platform/iam/roles/assumed-roles/how-to-assume-a-role-using-aws-sts-compatibility.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For federated role assumption using a JWT token from an external OIDC issuer (such as Okta, Google, or Azure AD)."
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The STS action. Must be AssumeRole."
+      - url: https://docs.vultr.com/platform/iam/roles/role-trusts/how-to-create-a-role-trust.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "can include conditions such as IP restrictions, time-of-day limits, and an expiration date."
+      - url: https://docs.vultr.com/platform/iam/roles/role-trusts/how-to-create-a-role-trust.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "trusts cannot be created via Terraform"
+      - url: https://docs.vultr.com/products/compute/kubernetes/management/connection.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "including API endpoints, authentication credentials, and resource specifications."
+    notes: >-
+      Graded C, not A or B. Vultr IAM lets you register an external OIDC issuer, trust it from an
+      assumable role (FederatedAssumption), and swap its JWT for a role session through an
+      STS-style AssumeRoleWithWebIdentity call, all self-serve over the API. Three things keep it
+      from counting under RUBRIC.md. (1) It is documented only for people signed in to Okta,
+      Google or Azure AD, with no CI or workload guide. (2) The only documented trust conditions
+      are IP, time of day and expiry. The oidc_claims condition appears only as the automatic
+      account pin on instance trusts, so nothing documented stops every subject of a shared
+      issuer such as GitHub Actions from assuming the role. (3) The API reference says the STS
+      action "Must be AssumeRole", which contradicts the guide. The issuer is registered as one
+      pasted JWK rather than a JWKS URL, so the trust breaks when the IdP rotates keys. A human
+      reviewer should check this reading. A documented workload flow with sub/aud claim
+      conditions would make this A. Without that, the root is a static API key. It buys
+      short-lived sessions and registry credentials, so C (short-lived from a static root). The
+      instance and bare-metal identity token is ambient identity inside Vultr and does not earn
+      A. VKE kubeconfigs fetched via the API carry a bearer token whose lifetime is not
+      documented. VKE clusters can instead trust an OIDC issuer URL you supply (shown only as a
+      kubectl login with Okta). Object Storage uses separate S3 keys and is graded on
+      vultr-object-storage.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Compute, GPU, VKE and Container Registry never take customer cloud or SaaS credentials.
+      Snapshot and ISO import read public URLs, and the Docker Hub proxy serves public images.
+    evidence:
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The public URL containing a RAW image."
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Public URL location of the ISO image to download."
+      - url: https://docs.vultr.com/products/orchestration/container-registry/dockerhub-proxy.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All public container images on Docker Hub can be accessed through VCR by prefixing the image URL with the appropriate VCR regional endpoint."
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The password of the source server."
+    notes: >-
+      Checked: snapshot from URL and ISO from URL (public URLs only), the Container Registry
+      Docker Hub proxy (public images only), registry replication (between Vultr regions), and the
+      API reference for any AWS, GCS, Azure, Hugging Face or private-registry credential fields
+      (none found). The one place Vultr reaches into customer infrastructure is Managed Database
+      migration, which takes the source server's host, username and password. Managed Databases
+      is a sibling product outside this card's scope; graded, it would be D or F.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.vultr.com/platform/iam/organizations/manage-user-api-access/how-to-create-an-api-key-for-a-user.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Leave this unselected to create a key that does not expire."
+      - url: https://docs.vultr.com/platform/release-notes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All API keys also now support an optional expiration date and name for convenient identification after they are generated."
+    notes: >-
+      Expiry is optional and "never" is a documented choice. No org policy that forces or caps
+      key lifetime is documented, so this fails under the changeable-default precedent.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.vultr.com/platform/other/api/other-user/rotate-api-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Regularly rotating API keys is a critical security practice that reduces the risk of unauthorized access."
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These methods enable you to manage your API keys without having to access the customer portal."
+    notes: >-
+      Keys are created with POST /v2/users/{user-id}/apikeys (or /v2/apikeys for yourself) and
+      deleted with DELETE. The rotation guide walks through this with no browser step.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.vultr.com/platform/iam/service-user/how-to-create-a-service-user.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service users are API-only accounts designed for programmatic access to your organization's resources."
+      - url: https://docs.vultr.com/platform/iam/product-integrations/container-registry-auth/vke-and-cicd.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Give it a narrow policy, such as push and pull on a single build registry, and mint short-lived credentials at the start of each job."
+      - url: https://docs.vultr.com/platform/iam/organizations/manage-user-api-access/how-to-manage-vultr-api-access-control-for-users.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access control restricts which IP addresses and subnets can authenticate to the Vultr API on a user's behalf."
+    notes: >-
+      Passes under the documented non-human account rule: a service user is API-only and gets its
+      own IAM policies, down to a single registry. Scope belongs to the principal, not the key, so
+      all of one user's keys have the same reach.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Gets all API keys for the currently authenticated user."
+    notes: >-
+      The API key object returns id, masked key, name, expire and date_expire only. Neither the
+      API reference nor the IAM key guides mention a last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Vultr does not appear in GitHub's supported secret-scanning patterns table in any column, so
+      a leaked API key is not auto-revoked.
+
+notes: >-
+  Vultr shipped organization IAM in 2026: service users, policies, assumable roles, an STS-style
+  endpoint and IAM-minted registry credentials. That is a real IAM system, but the long-lived API key is still the root credential.
+  To reach A, Vultr would
+  document external-issuer federation for workloads (a GitHub Actions example, sub/aud claim
+  conditions on FederatedAssumption trusts, JWKS URL instead of a pasted key) and support it in
+  the Terraform provider. On hygiene, the fixes are an org policy that forces key expiry, a
+  last-used timestamp, and a GitHub secret-scanning partnership.

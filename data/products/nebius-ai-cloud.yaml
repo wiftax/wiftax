@@ -1,0 +1,238 @@
+id: nebius-ai-cloud
+vendor: Nebius
+product: Nebius AI Cloud (IAM service accounts, Compute, Managed Kubernetes, Object Storage, Container Registry)
+website: https://nebius.com
+docs: https://docs.nebius.com/iam/service-accounts/authentication
+category: cloud
+status: listed
+summary: >-
+  Federated credentials let a Nebius service account trust any OIDC issuer: an external JWT is
+  exchanged at Nebius STS for a 12-hour IAM token that drives the API, CLI, Terraform, registry
+  and Kubernetes. Object Storage still runs on S3 access keys, which can be minted short-lived from
+  that token but may also never expire. Nebius is itself an OIDC issuer for GCP and others, yet
+  Data Transfer and Serverless jobs take pasted keys.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      A federated-credentials resource binds an external OIDC issuer (issuer URL, optional inline
+      JWKS) and a federated subject (the JWT's sub) to a service account; the workload posts its JWT
+      as the actor_token to Nebius STS (RFC 8693) and receives a short-lived IAM access token. The
+      static alternatives are service-account authorized keys (a private key that signs a JWT
+      exchanged for the same token) and S3-style access keys for Object Storage.
+    issuers:
+      - any
+    evidence:
+      - url: https://docs.nebius.com/cli/reference/iam/federated-credentials/create
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "IAM subject (service account) that the federated subject impersonates."
+      - url: https://docs.nebius.com/cli/reference/iam/federated-credentials/create
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "OIDC-compatible JWT issuer URL."
+      - url: https://docs.nebius.com/terraform-provider/reference/resources/iam_v1_federated_credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For oidc_provider, the subject is calculated from the \"sub\" claim of the federated JWT token."
+      - url: https://raw.githubusercontent.com/nebius/api/refs/heads/main/nebius/iam/v1/federated_credentials.proto
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// The OIDC provider does not have to be a full OIDC provider, but it must expose"
+      - url: https://docs.nebius.com/iam/wif
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Nebius STS is an HTTP-based service that exchanges identity credentials for short-lived Nebius access tokens or OIDC ID tokens."
+      - url: https://docs.nebius.com/iam/wif
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A token that represents the acting identity of the exchange flow, for example, an external JWT."
+      - url: https://raw.githubusercontent.com/nebius/gosdk/refs/heads/main/auth/federated_credentials.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "// NewFederatedCredentialsTokener creates a [BearerTokener] serving token from"
+      - url: https://docs.nebius.com/cli/reference/profile/create
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "File path to a federated subject credentials."
+      - url: https://docs.nebius.com/iam/overview
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authorized keys are used to obtain IAM tokens for service accounts."
+      - url: https://docs.nebius.com/container-registry/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For a CI/CD environment, use a service account and either issue a long-lived static key and save it in your pipeline settings, or get a short-lived token each time your pipeline runs."
+      - url: https://docs.nebius.com/container-registry/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access tokens have a lifetime of 12 hours."
+      - url: https://docs.nebius.com/iam/service-accounts/access-keys
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access keys in Nebius AI Cloud are used to authenticate service accounts in AWS-compatible services, such as Object Storage."
+      - url: https://docs.nebius.com/object-storage/http-access
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authentication with an IAM token is not allowed over HTTP because HTTP does not use encryption."
+    notes: >-
+      Judgment call for a reviewer. The federation is real and self-serve: federated credentials
+      are a first-class IAM resource in the CLI, REST API and Terraform provider, the STS overview
+      lists "an external JWT" as an accepted token, the Go SDK ships a federated-credentials
+      tokener and CLI profiles take a federated-credentials file. Trust is pinned by issuer and
+      sub only; no audience or extra-claim condition is documented, the same gap the A on
+      keycard-agent-identity accepted. The weakness is documentation: there is no walkthrough for
+      GitHub Actions or any other issuer, only reference pages and the STS parameter table, so if
+      the reviewer reads "documented for workloads" as needing a how-to, this drops to C (the
+      authorized-key JWT flow is a static root). Data planes, graded on the weakest path a
+      workload must use: Container Registry takes the 12-hour IAM token (static keys optional);
+      kubeconfigs come from `nebius mk8s cluster get-credentials`, i.e. the same CLI identity;
+      Object Storage's documented S3 path needs an access key pair, but a federated service
+      account can create one through the IAM v2 API with an expires_at minutes away and delete it
+      after, so no long-lived secret is required, and the HTTP-access page implies IAM-token auth
+      also works over HTTPS (not documented elsewhere). Compute VMs also get ambient tokens from
+      the metadata service, which on its own would not earn the A.
+  outbound:
+    grade: B
+    mechanism: >-
+      Nebius STS issues OIDC ID tokens (issuer https://sts.nebius.com) that a workload exchanges at
+      Google Cloud Workload Identity Federation or any OIDC-trusting system, and every Managed
+      Kubernetes cluster publishes its own OIDC discovery endpoint. Managed reach-ins do not use
+      it: Object Storage Data Transfer takes S3 access key pairs or an Azure storage account key,
+      and Serverless AI jobs take a private registry's username and password or PAT.
+    evidence:
+      - url: https://docs.nebius.com/iam/wif
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Nebius AI Cloud allows you to produce ID tokens for your workloads."
+      - url: https://docs.nebius.com/iam/wif
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Any platform that supports OIDC Discovery can establish trust with this identity provider and validate the issued ID tokens."
+      - url: https://docs.nebius.com/iam/wif/configure
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This guide explains how to configure access to Google Cloud resources for Nebius workloads using OpenID Connect (OIDC) ID tokens."
+      - url: https://docs.nebius.com/kubernetes/networking/oidc-public-endpoint
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All Managed Service for Kubernetes clusters expose a public OpenID Connect (OIDC) discovery endpoint."
+      - url: https://docs.nebius.com/object-storage/transfer/access
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For a bucket in Object Storage or another S3-compatible storage service, the required credentials are a pair of keys called access and secret keys, also known as access key ID and secret access key."
+      - url: https://docs.nebius.com/object-storage/transfer/access
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If your source bucket (container) is in Azure Blob Storage, provide credentials of your storage account in Azure: the name and access key."
+      - url: https://docs.nebius.com/serverless/jobs/manage
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Personal access token, password or an API key."
+    notes: >-
+      Checked: Nebius STS ID tokens (GCP guide; any OIDC Discovery consumer, so AWS and Azure
+      federated credentials work by the same mechanism though no guide exists), Managed Kubernetes
+      cluster OIDC issuers, Object Storage Data Transfer (S3-compatible sources such as AWS S3 and
+      Azure Blob), Serverless AI jobs and endpoints pulling from Docker Hub, GHCR, Azure, NGC or
+      custom registries, and the Wiz integration (Wiz reaching into Nebius, an inbound credential).
+      The keyless path is "the product is itself an OIDC issuer I can trust", for workload code you
+      write. Nebius's own managed services that reach into your clouds do not use it: Data
+      Transfer wants a static S3 key pair or an Azure storage account key (account-wide), with
+      least-privilege roles documented only for the Nebius side; registry credentials can be held
+      in SecretStash but are still static. Nebius-held cross-account roles or STS-signed tokens for
+      Data Transfer would make this A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.nebius.com/iam/service-accounts/access-keys
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access keys can be issued without an expiration date."
+      - url: https://docs.nebius.com/iam/service-accounts/authorized-keys
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "(Optional) Set an expiration date."
+      - url: https://docs.nebius.com/container-registry/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "By default, the key lifetime is 6 months."
+    notes: >-
+      Mixed by key type. Static keys (Container Registry, Observability) default to six months and
+      are capped at three years, which would pass. But authorized keys (the control-plane static
+      root) and S3 access keys take an optional expires_at and are issued without one if it is
+      omitted, and no org policy to force an expiry is documented. Graded on the weakest key, per
+      the changeable-default precedent.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.nebius.com/rest-api/iam/v2/access-keys/delete
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--url https://api.nebius.cloud/iam/v2/access-keys/{id}"
+      - url: https://docs.nebius.com/rest-api/iam/v1/auth-public-keys/delete
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--url https://api.nebius.cloud/iam/v1/auth-public-keys/{id}"
+      - url: https://docs.nebius.com/rest-api/iam/v1/static-keys/revoke
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--url https://api.nebius.cloud/iam/v1/static-keys/revoke"
+    notes: >-
+      Access keys, authorized keys and static keys all have create, list and delete/revoke (plus
+      activate/deactivate) methods in the IAM API, CLI, SDKs and Terraform provider.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.nebius.com/iam/overview
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service accounts that are used to manage resources via programming interfaces, such as the Nebius AI Cloud CLI."
+      - url: https://docs.nebius.com/iam/authorization/roles
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To follow the principle of least privilege, create custom groups and assign roles with as few permissions as possible to these groups."
+      - url: https://docs.nebius.com/iam/authorization/static-keys
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each static key is issued for a specific Nebius AI Cloud service and cannot be used for other services."
+    notes: >-
+      Every key belongs to a service account, a purpose-built machine principal whose access comes
+      from group memberships; access permits can grant a role on a tenant, project or single
+      resource, and bucket policies narrow Object Storage further. Static keys are additionally
+      pinned to one service. Keys cannot be narrower than their service account.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/nebius/api/refs/heads/main/nebius/iam/v2/access_key.proto
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "string aws_access_key_id = 5;"
+      - url: https://raw.githubusercontent.com/nebius/api/refs/heads/main/nebius/iam/v1/auth_public_key.proto
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "string fingerprint = 2;"
+    notes: >-
+      The AccessKey, AuthPublicKey and StaticKey resources expose state, fingerprint, algorithm and
+      expiry but no last-used field, and no docs page mentions one. The console view was not
+      checked.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Nebius does not appear in GitHub's supported secret-scanning patterns table, in the Partner
+      column or any other.
+
+notes: >-
+  One card for the Nebius AI Cloud platform: IAM, Compute, Managed Kubernetes, Container Registry
+  and Object Storage share one IAM and one token. Unlike CoreWeave, federation reaches the control
+  plane, so it is not split. The A rests on the federated-credentials resource, which is documented
+  only in reference pages; a published GitHub Actions or generic-OIDC walkthrough and an audience
+  condition would settle it. Two of five hygiene checks pass; mandatory expiry on authorized and
+  access keys, a last-used timestamp and a GitHub partnership would fix the rest. Nebius Token
+  Factory (formerly AI Studio) uses its own API keys and has its own card, nebius-ai-studio.

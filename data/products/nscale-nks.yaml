@@ -1,0 +1,166 @@
+id: nscale-nks
+vendor: Nscale
+product: NKS (Nscale Kubernetes Service)
+website: https://www.nscale.com
+docs: https://docs.nscale.com/docs/platform-services/managed-kubernetes
+category: cloud
+status: listed
+summary: >-
+  This card is the NKS cluster API server, not the control plane that creates clusters. A cluster
+  can trust up to eight OIDC issuers you choose, pinned by audience and claim, and can turn off
+  Nscale credentials entirely. Clusters can also publish a public OIDC issuer for their service
+  accounts. The default path runs kubectl through the CLI on your Nscale login or static service
+  token, graded D on the nscale card.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      At cluster creation, spec.apiServer.authentication.externalIssuers lists up to 8 OIDC issuers
+      (issuerURL, audiences, usernameClaim, required usernamePrefix, groupsClaim) bound to built-in
+      cluster roles; Nscale credentials can be left on or disabled. The default kubeconfig holds no
+      secret and calls `nscale kubernetes token`, which uses your login or NSCALE_SERVICE_TOKEN.
+    issuers:
+      - any
+    evidence:
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can also let people sign in with your own OpenID Connect (OIDC) provider, and give them one of the built-in roles: 'cluster-admin', 'admin', 'edit', or 'view'."
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your provider's 'https://' URL, with no query string or fragment. It must match the 'iss' claim in your tokens exactly. Up to 8 issuers."
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "At least one. The token's 'aud' claim must match one of them."
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "People only get the access you bind. Someone with a valid token but no binding is refused everything."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/nks-core/main/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Additional external JWT/OIDC issuers the cluster's API server trusts."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/nks-core/main/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JWT claim mapped to the authenticated username."
+      - url: https://docs.nscale.com/docs/cli/kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you disable Nscale credentials, you must add at least one issuer, otherwise nobody could sign in."
+      - url: https://docs.nscale.com/docs/cli/kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Credentials are refreshed the same way as for every other command, and 'NSCALE_SERVICE_TOKEN' is honored for CI."
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The kubeconfig contains no password or token."
+    notes: >-
+      The externalIssuers block is kube-apiserver's JWT authenticator: any HTTPS issuer with
+      discovery, audience required, subject mapped via usernameClaim (default sub) and bound to
+      cluster-admin, admin, edit or view, so a GitHub Actions or cloud workload token can drive
+      kubectl with no Nscale secret. Judgment calls a reviewer should check: the docs frame it as
+      letting "people" sign in, but nothing restricts it to humans and the mechanism is the same
+      one coreweave-cks was graded A on; and the A requires opting in, since the default is the
+      CLI exec plugin on an Nscale user login or a static 90-day service token. The issuer list is
+      fixed at creation ("It can't be changed later") and is set only through the API or CLI, and
+      creating the cluster is itself a control-plane call that needs the service token graded on
+      the nscale card. Only the built-in roles can be bound through the spec; finer RBAC is up to
+      you inside the cluster.
+  outbound:
+    grade: A
+    mechanism: >-
+      A cluster can publish a public OIDC issuer (oidc.nks.<region>.nscale.com/<cluster-id>) for its
+      ServiceAccount tokens, which AWS, GCP, Azure or any other relying party can trust; NKS itself
+      holds no credential for customer infrastructure.
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/nks-core/main/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The public OIDC issuer URL of the cluster's ServiceAccount tokens. Use it to configure external relying parties."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/nks-core/main/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It is absent when the cluster uses only its in-cluster issuer."
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Applications running in the cluster should use projected ServiceAccount tokens."
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A request for longer is shortened to 24 hours without an error, so check the expiry you get back."
+    notes: >-
+      NKS has no managed integration that pulls from a customer's cloud, registry or SaaS (image
+      pulls use whatever pull secrets you put in the cluster). The outbound story is "the product is
+      itself an OIDC issuer I can trust", which the rubric scores A, as on coreweave-cks. Caveats:
+      the public issuer appears only in the NKS API spec, not the prose docs, there is no AWS, GCP
+      or Azure setup guide, and the spec says it is absent for clusters that use only their
+      in-cluster issuer, without documenting how to choose. If a reviewer reads that as not
+      documented for workloads, outbound would be N/A and the headline stays A.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "At present a service account token defaults to a 90 day lifetime."
+      - url: https://raw.githubusercontent.com/nscaledev/uni-identity/main/pkg/handler/serviceaccounts/client.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Default service account token lifetime, defaults to 90 days"
+    notes: >-
+      Hygiene here is the static credential behind the default path: the Nscale service token the
+      CLI exec plugin presents in CI. The OIDC path has no Nscale-issued secret. The 90 days is a
+      server-side setting, not a request field, so a non-expiring token cannot be minted; see the
+      nscale card.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.nscale.com/api-reference/service-accounts/rotate-service-account-token.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rotates a service account's access token. The returned access token can only be read once."
+    notes: The kubeconfig carries no token, so rotating the service token needs no kubeconfig change.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.nscale.com/docs/platform-services/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**Read** gives you read-only access (the Kubernetes 'view' role)."
+      - url: https://docs.nscale.com/docs/manage/roles-and-groups.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A group can be scoped to specific projects, limiting where its access applies."
+    notes: >-
+      A service account gets cluster access through the nks:kubernetes-api permission on its
+      groups' roles, scoped to projects: read maps to view, update to cluster-admin. Coarse, but a
+      purpose-built machine principal with its own role, which the rubric counts.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When the service token is due to expire."
+    notes: Service accounts carry expiry but no last-used field; only human users have lastActive.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: Nscale is not in GitHub's secret-scanning patterns table.
+
+notes: >-
+  Split from the nscale card because the cluster API server can trust your own OIDC issuers while
+  the rest of Nscale takes only a static service token. The A holds only for clusters created with
+  externalIssuers (ideally with Nscale credentials disabled); the default path's hygiene is what
+  the checks above show.
