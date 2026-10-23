@@ -1,0 +1,188 @@
+id: hyperbolic
+vendor: Hyperbolic
+product: Hyperbolic GPU cloud and Inference API (api.hyperbolic.ai, CLI, MCP server, Managed Kubernetes)
+website: https://hyperbolic.ai
+docs: https://hyperbolic.ai/docs/general/account-management.md
+category: cloud
+status: listed
+summary: >-
+  Renting GPUs, managing storage and SSH keys, and calling the Inference API all take one static
+  sk_live_ API key made in the dashboard. There is no OIDC or federation path. Keys have no
+  expiry, cannot be created or revoked through the API, carry no permission scopes, show no last
+  use, and are not in GitHub's secret-scanning partner program. Managed Kubernetes uses browser
+  SSO for humans only. Hyperbolic never reaches into your cloud.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static Bearer API key (sk_live_...) created under Settings > API Keys, personal or
+      Organization-owned, used by the public REST API, the Inference API, the hyperbolic CLI and
+      the MCP server. No OIDC, workload identity or token-exchange path exists.
+    issuers: []
+    evidence:
+      - url: https://hyperbolic.ai/docs/api-reference/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authenticate with a Bearer API key (`Authorization: Bearer <api-key>`)."
+      - url: https://hyperbolic.ai/docs/general/account-management.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After creation, API keys cannot be viewed or recovered - make sure you copy and save your key immediately after creating it!"
+      - url: https://hyperbolic.ai/docs/general/account-management.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "curl -X POST https://api.hyperbolic.ai/v2/on-demand/rentals/ssh-keys/attach"
+      - url: https://hyperbolic.ai/docs/inference/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An `sk_live_` API key, sent as a Bearer token"
+      - url: https://hyperbolic.ai/docs/inference/quickstart.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the key, which starts with `sk_live_`."
+      - url: https://hyperbolic.ai/docs/general/security-compliance.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All API requests require valid API keys"
+      - url: https://hyperbolic.ai/docs/managed-kubernetes/kubectl-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The first command opens your browser to sign in with Hyperbolic."
+      - url: https://hyperbolic.ai/docs/managed-kubernetes/kubectl-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access tokens are short-lived — when one expires, `kubectl` reopens the browser"
+      - url: https://hyperbolic.ai/docs/on-demand/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "RBAC bindings for your own teams and service accounts"
+      - url: https://raw.githubusercontent.com/HyperbolicLabs/hyperbolic-mcp/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You will use this key in your MCP server configuration environment variables"
+    notes: >-
+      Graded on the weakest path a workload must use: every control-plane call (rent, terminate,
+      reserve, storage volumes, SSH keys, balance) and every inference call takes the same static
+      key. The docs, the OpenAPI 3.1 spec and Hyperbolic's GitHub repos (CLI, MCP server, TS SDK)
+      describe no OIDC, GitHub Actions, cloud workload identity or token exchange, and no Terraform
+      provider was found. Managed Kubernetes (beta) kubeconfigs use kubelogin OIDC with
+      short-lived tokens, but sign-in is an interactive browser flow for human users; Hyperbolic
+      documents no machine path into the cluster API, so a CI job would have to mint an in-cluster
+      Kubernetes service-account token itself (another static secret). That SSO is noted here and
+      does not lift the grade, since federation documented only for human logins does not count.
+      The CLI's `hyperbolic auth login` is a human login. SSH keys to instances are customer-held
+      public keys, not a Hyperbolic credential.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Hyperbolic does not reach into customer clouds, buckets, registries or SaaS; data moves out
+      of instances with tools and credentials the customer runs inside them.
+    evidence:
+      - url: https://hyperbolic.ai/docs/on-demand/storage-and-ports.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For regions without persistent storage, implement regular backups to S3/GCS/Azure"
+      - url: https://hyperbolic.ai/docs/on-demand/managed-kubernetes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Shared network storage for clusters is in development; until it ships, use your own object storage for checkpoints."
+      - url: https://hyperbolic.ai/docs/on-demand/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Ubuntu with NVIDIA drivers and Docker preinstalled — bring your own frameworks or containers"
+    notes: >-
+      Checked: the full llms.txt index, the OpenAPI spec (rentals, storage volumes, SSH keys,
+      users, balances, API keys), storage and ports, Managed Kubernetes, Private Cloud, Inference
+      and the changelog. No S3/GCS/Azure import, private registry pull, Hugging Face or W&B
+      integration, or data sync job is offered; the storage guide's `aws s3 sync` and `gsutil`
+      examples run inside the customer's own instance with the customer's own credentials, which
+      is not Hyperbolic reaching in. Inference serves Hyperbolic-hosted open models only. If
+      Hyperbolic adds bucket import or registry pulls, this surface needs grading.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://hyperbolic.ai/docs/api-reference/api-keys/list-all-api-keys-for-the-current-user-or-organization.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An issued API key. The secret itself is only ever returned at creation."
+      - url: https://hyperbolic.ai/docs/general/account-management.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys may be revoked at any time."
+    notes: >-
+      The ApiKey object has publicId, userId, orgId, last4, createdAt and revokedAt, with no
+      expiration field, and the API keys docs describe creation and revocation only. A key lives
+      until someone revokes it. The create dialog itself is behind the dashboard login and was
+      not seen.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://hyperbolic.ai/docs/api-reference/api-keys/list-all-api-keys-for-the-current-user-or-organization.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "List all API keys for the current user or organization"
+      - url: https://hyperbolic.ai/docs/inference/quickstart.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Revocation takes effect within about a minute."
+    notes: >-
+      The only API-key endpoint in the public API is GET /v2/api-keys/list. Creating and revoking
+      keys happens in the dashboard, so rotation needs a human in a browser. SSH public keys, by
+      contrast, have full create/rename/delete endpoints.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://hyperbolic.ai/docs/general/organizations.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Every API key created while working in an Organization belongs to that Organization and is attributed to the member who created it."
+      - url: https://hyperbolic.ai/docs/general/organizations.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Organizations have two roles."
+      - url: https://hyperbolic.ai/docs/general/security-compliance.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Anyone with your key can make requests on your behalf and incur charges."
+    notes: >-
+      A key acts as its personal account or as the whole Organization; no permission scopes,
+      resource limits, read-only keys or service-account principal are documented, and the only
+      roles are Admin and Member for humans. An Organization key is shared rather than personal,
+      but it is not a purpose-built least-privilege machine principal.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://hyperbolic.ai/docs/api-reference/api-keys/list-all-api-keys-for-the-current-user-or-organization.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An issued API key. The secret itself is only ever returned at creation."
+    notes: >-
+      The ApiKey schema has createdAt and revokedAt but no last-used timestamp, and the docs only
+      advise reviewing billing for unexpected charges. The dashboard key list is login-walled;
+      graded on the public API schema.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Hyperbolic does not appear in GitHub's supported secret-scanning patterns table, partner or
+      otherwise, even though keys carry a greppable sk_live_ prefix. A leaked key keeps working
+      until a human revokes it in the dashboard.
+
+notes: >-
+  One card for the whole platform: On-Demand, Reserved and Private Cloud rentals, storage
+  volumes, the Inference API, the CLI and MCP server all share one sk_live_ key type, and Managed
+  Kubernetes is human SSO on top of the same account, so no split was warranted. Docs moved from
+  docs.hyperbolic.xyz to hyperbolic.ai/docs; the legacy api.hyperbolic.xyz host still serves the
+  same REST API. Zero of five hygiene checks pass. No confidence flag: the dashboard is
+  login-walled, but the public ApiKey schema already shows no expiry or last-used field, and
+  rotation_api and leak_revocation fail on public evidence, so the headline cannot reach D
+  without contradicting the published API. The cheapest fixes are API endpoints to create and
+  revoke keys, expiry and last-used fields, and a GitHub secret-scanning partnership for the
+  sk_live_ prefix; inbound moves above F only with a federated token path (GitHub Actions OIDC
+  or bring-your-own issuer) into api.hyperbolic.ai, or a machine path into Managed Kubernetes.

@@ -1,0 +1,245 @@
+id: modal
+vendor: Modal
+product: "Modal (serverless GPU compute: Functions, Sandboxes, SDK and CLI)"
+website: https://modal.com
+docs: https://modal.com/docs/guide/service-users
+category: cloud
+status: listed
+summary: >-
+  CI jobs and services drive Modal with a static token id/secret pair. No OIDC or GitHub Actions
+  federation exists into Modal. Service users (Team plan) are scoped per Environment, created and
+  deleted through the SDK, and show a last-used time. They never expire unless you set an expiry,
+  and Modal is not a GitHub secret-scanning partner. Outbound, Modal is an OIDC issuer: S3 mounts
+  and ECR pulls are keyless, but GCS, Artifact Registry, Azure and R2 need pasted keys.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static Modal API token (MODAL_TOKEN_ID ak-... plus MODAL_TOKEN_SECRET as-...), owned either
+      by a human member or by a service user, used by the Python/JS/Go SDKs and the modal CLI for
+      every deploy, run and Function call. Third-party apps can instead hold a Modal-issued OAuth
+      client secret plus refresh token. No OIDC, workload identity or token exchange path exists.
+    issuers: []
+    tier_gated: Team (service users and RBAC)
+    evidence:
+      - url: https://modal.com/docs/reference/modal.config
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Modal API tokens use MODAL_TOKEN_ID and MODAL_TOKEN_SECRET."
+      - url: https://modal.com/docs/reference/modal.config
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Third-party OAuth integrations typically inject MODAL_OAUTH_REFRESH_TOKEN,"
+      - url: https://modal.com/docs/sdk/py/latest/Client.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Constructor based on OAuth credentials; useful for managing Modal on behalf of third-party users."
+      - url: https://modal.com/docs/guide/service-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service users are programmatic accounts that allow automated systems to interact with Modal."
+      - url: https://modal.com/docs/guide/service-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Because service user tokens are long-lived and used in automated environments, it's important to limit their access to only what's necessary"
+      - url: https://modal.com/docs/guide/service-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service users are available on the Team and Enterprise plans."
+      - url: https://modal.com/docs/guide/continuous-deployment
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This requires you to create a Modal token and add it as a secret for your Github Actions workflow."
+      - url: https://modal.com/docs/guide/workspaces
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To interact with a Workspace's resources programmatically, you need to add an API token for that Workspace."
+      - url: https://modal.com/docs/cli/latest/workspace.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Proxy tokens provide authentication to Modal Endpoints, Servers, and Web Functions."
+    notes: >-
+      Modal's control plane and data plane are one API: the same token id/secret deploys Apps,
+      calls Functions, creates Sandboxes and reads Volumes, Dicts and Queues, so there is no weaker
+      side path to grade separately. The GitHub Actions guide stores MODAL_TOKEN_ID and
+      MODAL_TOKEN_SECRET as repository secrets; nothing in the guide, the config reference or
+      llms-full.txt describes exchanging a GitHub, cloud or other OIDC token for a Modal
+      credential. The OAuth client path (oc-/ov- client id and secret plus a refresh token) is for
+      platforms acting on behalf of Modal users and still rests on a static client secret, so it
+      is C-shaped at best and does not apply to a customer's own workloads. MODAL_IDENTITY_TOKEN
+      is a token Modal issues to its own containers for calling out (see outbound); code inside
+      Modal reaching Modal is ambient identity, which does not earn an A. Proxy tokens (wk-/ws-,
+      Environment-scoped under RBAC) are static keys for callers of a customer's own web
+      endpoints, not for driving Modal. Graded at the service-user mechanism (Team plan); on plans
+      without service users a workload holds a member token that carries that human's full access, which
+      fails scoping and would make this F. Moves to B or A if Modal accepts federated tokens for
+      service users.
+  outbound:
+    grade: B
+    mechanism: >-
+      Modal is an OIDC issuer (https://oidc.modal.com) and injects a short-lived
+      MODAL_IDENTITY_TOKEN into every Function. S3 CloudBucketMounts and ECR image pulls can
+      assume an AWS IAM role through it. GCS mounts, R2 mounts, GCP Artifact Registry, Azure
+      Container Registry, Docker Hub and OpenTelemetry export take static keys stored as Modal
+      Secrets.
+    evidence:
+      - url: https://modal.com/docs/guide/oidc-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "With the Modal OIDC integration, you can instead use automatically-generated identity tokens to authenticate to external services."
+      - url: https://modal.com/docs/guide/oidc-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generated tokens are automatically injected into your Function's containers via the MODAL_IDENTITY_TOKEN environment variable."
+      - url: https://modal.com/docs/guide/oidc-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Note how we use workspace_id to limit the scope of the role."
+      - url: https://modal.com/docs/guide/oidc-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "At this time, OIDC-authenticated container image pulling is only support with AWS ECR."
+      - url: https://modal.com/docs/guide/cloud-bucket-mounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Modal provides OIDC integration and will automatically generate identity tokens to authenticate to AWS."
+      - url: https://modal.com/docs/guide/cloud-bucket-mounts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It supports AWS S3, Cloudflare R2, and Google Cloud Storage buckets."
+      - url: https://modal.com/docs/sdk/py/latest/CloudBucketMount.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "GCS Buckets also require a secret with Google-specific key names (see below) populated with"
+      - url: https://modal.com/docs/guide/private-registries
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Alternatively, you can use OIDC token authentication."
+      - url: https://modal.com/docs/guide/private-registries
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Modal doesn't have native Azure support, but you can pull images from a private ACR using"
+      - url: https://modal.com/docs/sdk/py/latest/Image.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Secret containing ``SERVICE_ACCOUNT_JSON`` for registry authentication."
+      - url: https://modal.com/docs/guide/datadog-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Connecting this integration creates an API key in your Datadog account, which requires Datadog org owner permissions."
+      - url: https://modal.com/docs/guide/otel-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This is the key that the Modal integration will use to authenticate with your provider."
+    notes: >-
+      Checked: CloudBucketMount (S3, R2, GCS), private registries (ECR, GCP Artifact Registry and
+      Container Registry, Azure Container Registry, Docker Hub), the Datadog and OpenTelemetry
+      log/metric exports, and the OIDC guide. AWS is keyless on both platform paths: you register
+      oidc.modal.com as an IAM OIDC provider and trust a role on the sub claim (workspace,
+      Environment, App or Function), and Modal assumes it for the S3 mount (oidc_auth_role_arn) or
+      the ECR pull (AWS_ROLE_ARN in a Secret). GCP has no platform path: GCS mounts take an HMAC key
+      and Artifact Registry a service-account JSON key, even though the discovery document would
+      let your own Function code federate into GCP or Azure by hand (the guide says so, without a
+      walkthrough). Azure ACR needs long-lived repository tokens, R2 an API token, Docker Hub a
+      read-only PAT. The Datadog integration is an authorize-in-the-browser flow that mints the
+      Datadog API key for you (consent-style, counted as keyless); OpenTelemetry takes a pasted
+      API key header. Hugging Face, W&B and similar tokens in the examples are pasted into Secrets
+      by your own code, not Modal reaching in. Keyless on AWS with static keys elsewhere is B; a
+      GCP federation path for mounts and Artifact Registry would make it A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://modal.com/docs/cli/latest/workspace.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "the newly created Service User will never expire."
+      - url: https://modal.com/docs/cli/latest/token.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Lifetime of the new token, e.g. 12h, 7d, or 90d. Defaults to the workspace's maximum allowed lifetime."
+      - url: https://modal.com/docs/guide/audit-logs
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A workspace's maximum member API token lifetime was updated. Before/after values in seconds are recorded in the event metadata; an unset value means no cap."
+    notes: >-
+      Service user tokens, the credential this card grades, take an optional expiry (--expires-in,
+      expires_in) and default to never; no workspace policy that forces one on them is documented.
+      Member tokens are different: a workspace can set a maximum member API token lifetime, and
+      modal token new defaults to it. That cap is documented only in the CLI help and the audit-log
+      event (it is unset, "no cap", by default) and covers member tokens. Per the precedent that a
+      changeable default is not an enforced expiry, this fails. Whether the cap also binds service
+      users is not publicly verifiable (the settings page is behind a login). It would not change
+      the headline: inbound is D either way.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://modal.com/docs/guide/service-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Finally, you can also create a new Service User directly from Python:"
+      - url: https://modal.com/docs/guide/service-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Deleting a Service User will immediately revoke the credentials associated with that Service User."
+    notes: >-
+      modal.Workspace.service_users.create/delete and the matching modal workspace service-users
+      CLI commands need no browser, so a job can mint a new service user, swap it in and delete the
+      old one. A service user holds a single token, so rotating means replacing the service user
+      and re-granting its Environment roles. Member tokens come only from a web session (modal
+      token new) or the dashboard.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://modal.com/docs/guide/service-users
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For enhanced security, by default a Service User has no access to any of the Environments in the Workspace."
+      - url: https://modal.com/docs/guide/rbac
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Unlike human users, service users do not have a Workspace-level role; their access is controlled entirely through Environment Roles."
+    notes: >-
+      Service users are a purpose-built machine principal that starts with No Access and gets Viewer
+      or Contributor on each Environment it needs, which the rubric counts. The roles are coarse
+      (Viewer or Contributor per Environment, no per-App or per-action grants). Member tokens inherit the
+      human's workspace role. Service users and RBAC require the Team plan.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://modal.com/docs/sdk/py/latest/types.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A lightweight dataclass containing metadata about a Modal Service User."
+      - url: https://modal.com/docs/sdk/py/latest/types.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "name=\"last_used_at\""
+      - url: https://modal.com/docs/sdk/py/latest/Workspace.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A list of `ServiceUserInfo` dataclasses."
+    notes: >-
+      ws.service_users.list() and .info() return ServiceUserInfo, which carries last_used_at next
+      to created_at and expires_at, so idle service users can be found and deleted from a script.
+      Passed on the SDK type alone; no guide text describes it. A last-used view for member
+      tokens is not documented publicly.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Modal does not appear in GitHub's supported secret-scanning patterns table, partner or
+      otherwise, even though its tokens carry greppable ak-/as- (and wk-/ws- proxy) prefixes.
+
+notes: >-
+  One card for Modal: Functions, Sandboxes, Volumes and the rest sit behind one API and one
+  token type. Three of five hygiene checks pass, all on Team-plan service users. Without the Team plan a
+  workload uses a member token with its owner's full access, which would be F. Fixes, in order: let
+  service users accept a GitHub Actions or any-issuer OIDC token (Modal already runs an OIDC issuer
+  outbound), enforce a maximum lifetime on service users, join GitHub secret scanning, and add GCP
+  federation for GCS mounts and Artifact Registry.

@@ -1,0 +1,127 @@
+id: vultr-object-storage
+vendor: Vultr
+product: Object Storage (S3-compatible)
+website: https://www.vultr.com
+docs: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials
+category: cloud
+status: listed
+summary: >-
+  This card is object storage only. Apps authenticate with the subscription's S3 access key and
+  secret key. They are long-lived, have no documented expiry, scoping or last-used time, and
+  are not revoked when leaked. The control-plane API can regenerate them. Vultr IAM lists
+  object-level actions and per-user S3 keys, but publishes no guide to short-lived or federated
+  S3 credentials. The control plane is graded on vultr-cloud.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static S3 access key and secret key per Object Storage subscription, read from the console,
+      API (GET /v2/object-storage) or vultr-cli and replaced with a regenerate call. No documented
+      federation or temporary-credential path into the S3 endpoint.
+    issuers: []
+    evidence:
+      - url: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These credentials include the hostname, secret key, and access key."
+      - url: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your apps use these credentials to authenticate to the Vultr Object Storage subscription programmatically."
+      - url: https://docs.vultr.com/products/storage/object-storage/faq.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You need your Vultr Object Storage subscription credentials to access the files."
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Object Storage is S3 API compatible."
+      - url: https://docs.vultr.com/platform/iam/policies/iam-policy-actions-map/storage-actions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Get user S3 keys"
+    notes: >-
+      The documented credential is the subscription key pair, and nothing in the Object Storage
+      docs describes swapping an OIDC token or IAM role session for S3 keys. Some hints point
+      elsewhere. The IAM actions map lists object-level actions and a GetUserKeys action for
+      "user S3 keys", and the API reference's assumed-role session response has an empty
+      s3_credentials object. Neither is explained in public docs, so neither is graded. If
+      assumed-role sessions (including Vultr's external-issuer federation, see vultr-cloud) are
+      documented to return short-lived, IAM-scoped S3 keys, this would move to C or better.
+      Fetching or regenerating keys runs on the static API key graded on vultr-cloud. With 1 of 5
+      hygiene checks passing, the grade is F.
+  outbound:
+    grade: N/A
+    mechanism: Object Storage never needs access to customer infrastructure.
+    evidence:
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Objects uploaded to object storage can be accessed privately or publicly on the web."
+      - url: https://docs.vultr.com/how-to-migrate-amazon-s3-storage-to-vultr-object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rclone is an open-source application used to manage and migrate cloud storage solutions."
+    notes: >-
+      The migration guides from S3, GCS, Azure Blob, DigitalOcean and Linode have the customer run
+      rclone themselves, so Vultr never holds those credentials.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Regenerate the keys for an Object Storage."
+    notes: >-
+      No expiry is documented for S3 keys. They last until someone regenerates them.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://www.vultr.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Regenerate the keys for an Object Storage."
+      - url: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Regenerate the keys by specifying a Vultr object storage subscription ID if you need a fresh copy of the credentials."
+    notes: >-
+      POST /v2/object-storage/{id}/regenerate-keys replaces the pair in one call. There is only
+      one pair, so the old key dies right away and rotation cannot overlap.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Managing S3 Credentials for Vultr Object Storage subscription allows viewing and regenerating access credentials for S3-compatible storage buckets."
+    notes: >-
+      The documented key pair belongs to the whole subscription, every bucket in it. Per-user S3
+      keys governed by object-level IAM actions may exist (see inbound notes), but no public doc
+      says how to create them or limit them. Held at fail until documented.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: No last-used time is documented for S3 keys.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: Vultr does not appear in GitHub's secret-scanning patterns table.
+
+notes: >-
+  Split from vultr-cloud because the credential differs. This product uses S3 access key pairs,
+  while the control plane uses IAM-backed API keys with role sessions. The fix is to document
+  short-lived S3 credentials from IAM role sessions (the response field already exists), with
+  per-key scoping, expiry and a last-used time.

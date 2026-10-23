@@ -1,0 +1,222 @@
+id: crusoe-cloud
+vendor: Crusoe
+product: Crusoe Cloud (VMs, Managed Kubernetes, Object Storage, Container Registry, API/CLI/Terraform)
+website: https://crusoe.ai
+docs: https://docs.crusoecloud.com/reference/api/
+category: cloud
+status: listed
+summary: >-
+  Every way a workload drives Crusoe Cloud runs on a static key: an HMAC-signed API key pair for
+  the API, CLI and Terraform, separate S3-style keys for Object Storage, and registry tokens minted
+  from the API key. Keys inherit their creator's full permissions, expiry is optional, and there is
+  no OIDC or workload identity path. Outbound is mixed: customer-managed keys reach AWS KMS and GCP
+  Cloud KMS keylessly, but the registry's pull-through cache wants pasted cloud keys and PATs.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static Cloud API key (access key ID + secret key) created per user in the Console or via POST
+      /users/tokens; every request to api.cloud.crusoe.ai is HMAC-SHA256 signed with the secret.
+      The CLI and Terraform provider read the same pair from ~/.crusoe/config or CRUSOE_ACCESS_KEY_ID
+      / CRUSOE_SECRET_KEY. Object Storage takes separate user-scoped S3-style keys; Container
+      Registry takes a token minted with the API key; CMK hands out an admin kubeconfig. No OIDC,
+      workload identity federation or token-exchange path exists for the control plane.
+    issuers: []
+    evidence:
+      - url: https://docs.crusoecloud.com/reference/api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In order to authenticate to Crusoe Cloud's API, you must sign all requests using the following algorithm."
+      - url: https://docs.crusoecloud.com/reference/api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API access key ID and secret key"
+      - url: https://docs.crusoecloud.com/identity-and-security/managing-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You need to create an API access key to access the Crusoe Cloud API."
+      - url: https://docs.crusoecloud.com/installing-the-cli.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To authenticate with the Crusoe CLI, you will need an API access key ID and a secret key."
+      - url: https://docs.crusoecloud.com/infrastructure-cloud/terraform.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "At a minimum, the following options are required to authenticate to the Crusoe API:"
+      - url: https://raw.githubusercontent.com/crusoecloud/terraform-provider-crusoe/main/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When specified, credentials and default_project are loaded from this profile."
+      - url: https://docs.crusoecloud.com/storage/object-storage/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Object Storage uses dedicated AWS S3 style API keys (an access key and secret key pair) for authentication."
+      - url: https://docs.crusoecloud.com/container-registry/using-with-k8s.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "First, generate a new, long-lived token for your cluster to use."
+      - url: https://docs.crusoecloud.com/container-registry/token-rotator.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Uses your CMK cluster's Crusoe API credentials to generate a new short-lived registry token."
+      - url: https://docs.crusoecloud.com/orchestration/cmk/cluster-details.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "CMK cluster identity is currently decoupled from Crusoe identity and roles."
+      - url: https://docs.crusoecloud.com/api/v1alpha5/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This configures how users authenticate to the Kubernetes API server."
+    notes: >-
+      Graded on the weakest path a workload must use, as the CoreWeave cards are: creating VMs,
+      clusters, buckets or registry tokens all go through the HMAC-signed Cloud API key, so nothing
+      downstream can lift the grade. Registry tokens can be short-lived, but they are minted from
+      that static API key (the in-cluster rotator reads CRUSOE_ACCESS_KEY / CRUSOE_SECRET_KEY from a
+      Secret on non-CMK clusters), so that path is C at best and still rooted in the F key. The
+      v1alpha5 API exposes an auth_config.oidc block on CMK clusters (issuer_url, client_id, claims)
+      for kubectl oidc-login; it is alpha, absent from the v1 reference and the CMK guides, and
+      documented for users, not workloads, so it is noted but does not count. Console SSO is
+      OIDC-based but human-only. Hygiene below is graded on the Cloud API key; Object Storage keys
+      share the same shape (optional expiry, user-scoped, CLI/Terraform create and delete). What
+      would move the grade: OIDC token exchange for short-lived API credentials (B or A), or
+      service accounts with their own roles plus enforced expiry (D).
+  outbound:
+    grade: B
+    mechanism: >-
+      Customer-managed encryption keys (CMEK, used by Serverless Fine-Tuning) reach AWS KMS by
+      assuming a customer IAM role that trusts Crusoe's CrusoeCMEK role with the Crusoe project ID
+      as ExternalId, and GCP Cloud KMS through workload identity federation and service account
+      impersonation; no secret changes hands. Container Registry pull-through cache repositories store a pasted long-lived credential for
+      each private upstream: a GCP service account JSON key for GAR/GCR, an IAM user access key
+      pair for ECR, an Entra client secret or ACR token for Azure, and PATs or API keys for GHCR,
+      Docker Hub, GitLab, NGC and OCI.
+    evidence:
+      - url: https://docs.crusoecloud.com/container-registry/managing-repositories.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you create a repository in pull-through cache mode, you must specify an upstream registry `provider` and `url`, and if applicable, a `username` and `password`."
+      - url: https://docs.crusoecloud.com/container-registry/managing-repositories.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Entire service account JSON key file"
+      - url: https://docs.crusoecloud.com/container-registry/managing-repositories.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "IAM user's access key ID | IAM user's secret key"
+      - url: https://docs.crusoecloud.com/identity-and-security/customer-managed-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Crusoe uses it at runtime through role assumptions (AWS) or workload identity federation (GCP) that you control."
+      - url: https://docs.crusoecloud.com/identity-and-security/customer-managed-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Trusts Crusoe's `CrusoeCMEK` role to assume it, with your Crusoe project ID as the `ExternalId`, for tenant isolation."
+      - url: https://docs.crusoecloud.com/identity-and-security/customer-managed-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Crusoe exchanges a short-lived Google ID token (bearing the audience `crusoe-cmek/<crusoe-project-id>`) at the OIDC provider, uses the service account, and calls Encrypt and Decrypt on your key."
+      - url: https://docs.crusoecloud.com/command-center/telemetry-conduit.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your external platform scrapes the endpoint to retrieve metrics."
+    notes: >-
+      Checked: Container Registry pull-through cache (all ten upstream providers in the table),
+      customer-managed keys, VM images, Object Storage, CMK add-ons, Command Center Telemetry
+      Conduit, and dstack. Outbound covers every documented integration of the vendor's offering,
+      so CMEK counts even though it currently serves only Serverless Fine-Tuning: AWS is a
+      cross-account role with ExternalId and GCP is workload identity federation, both keyless.
+      Pull-through cache is the other integration that reaches into customer infrastructure, and
+      every private upstream wants a static secret (an IAM user key for ECR rather than a
+      cross-account role, a JSON key for GAR rather than WIF, a client secret for ACR) with no
+      least-privilege or rotation guidance. Keyless on at least one cloud plus static keys
+      elsewhere is B. Telemetry Conduit is a scrape endpoint the customer's platform pulls from
+      (inbound, monitoring token), not outbound. Keyless upstream auth for ECR, GAR and ACR would
+      move this to A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.crusoecloud.com/identity-and-security/managing-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "(Optional) Enter an expiration date for your key."
+      - url: https://docs.crusoecloud.com/storage/object-storage/managing-storage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`expire_at` is an optional argument that specifies an expiration date for the key in RFC 3339 format"
+    notes: >-
+      Expiry is optional in the Console for Cloud API keys and optional on Object Storage keys. The
+      API reference marks expires_at as required on POST /users/tokens, but no maximum lifetime or
+      org policy is documented, so any far-future date works. Per the changeable-default precedent and
+      coreweave-object-storage.yaml, a settable expiry that cannot be enforced is a fail.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.crusoecloud.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a new token owned by the logged in user."
+      - url: https://docs.crusoecloud.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Delete an API token owned by the logged in user."
+      - url: https://docs.crusoecloud.com/storage/object-storage/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Object Storage API keys cannot be rotated in place. Customers must create a new key and delete the old one."
+    notes: >-
+      POST and DELETE /users/tokens in the v1 API let a key be created and revoked without a
+      browser. Object Storage keys can be created and deleted via CLI and Terraform. Both are only
+      for the calling user's own keys.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.crusoecloud.com/identity-and-security/managing-organization-users.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All tokens inherit the permissions of the user who created them."
+      - url: https://docs.crusoecloud.com/storage/object-storage/managing-storage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can use object storage API keys in all buckets in all projects within your organization."
+    notes: >-
+      Roles are org- or project-level and attach to users; a token cannot carry less than its
+      creator. No service account or API-only principal type is documented, so a workload either
+      uses a human's key or a separate user account, which the rubric does not count. Registry
+      tokens are described as limited-scope, but they are minted from, and rooted in, the
+      full-permission API key.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.crusoecloud.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Retrieve all active/expired API tokens for the logged in user."
+      - url: https://docs.crusoecloud.com/api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "\"last_used\": \"2021-11-03T22:22:55Z\""
+    notes: >-
+      GET /users/tokens returns a last_used timestamp per Cloud API key. It is per-user only (no
+      org-wide inventory documented), and no last-used field is documented for Object Storage keys.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Crusoe does not appear in GitHub's supported secret-scanning patterns table, partner or
+      otherwise.
+
+notes: >-
+  One card for Crusoe Infrastructure Cloud: the API, CLI, Terraform provider, VMs, CMK, Managed
+  Slurm, Object Storage and Container Registry all bootstrap from the same HMAC-signed Cloud API
+  key, so a split in the CoreWeave style would produce several cards with the same inbound F. Managed AI
+  (Serverless Inference, Fine-Tuning, Self-Serve Deployments) uses separate Intelligence API keys
+  and is not graded inbound here, but its CMEK integration is counted in outbound. Inbound passes
+  2 of 5 hygiene checks (rotation API and last-used pass). The cheapest fixes: service accounts
+  with their own project roles, an org policy for maximum key lifetime, a GitHub secret-scanning
+  partnership, and keyless upstream auth for the registry cache.

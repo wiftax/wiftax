@@ -1,0 +1,217 @@
+id: nscale
+vendor: Nscale
+product: Nscale cloud (control-plane API, CLI, Terraform, serverless inference, object storage)
+website: https://www.nscale.com
+docs: https://docs.nscale.com/docs/manage/service-tokens
+category: cloud
+status: listed
+summary: >-
+  The Nscale control-plane APIs, CLI in CI, Terraform provider and serverless inference all take
+  one credential: a static service-account token. No federation path exists for workloads. The
+  token has a platform-set 90-day lifetime, rotates by API and belongs to a group-scoped service
+  account, but shows no last use and is not GitHub partner-revoked. Object storage uses static S3
+  keys. Importing a private Hugging Face model takes a pasted HF token. NKS clusters are graded on
+  their own card.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static service-account token (a JWT shown once, sent as a Bearer token or NSCALE_SERVICE_TOKEN)
+      accepted by the identity, compute, region, storage, NKS and reservation APIs, the CLI, the
+      Terraform provider and the OpenAI-compatible inference API. Humans use browser or device-code
+      login; no OIDC or token-exchange path from an external issuer is self-serve for workloads.
+    issuers: []
+    evidence:
+      - url: https://docs.nscale.com/docs/manage/service-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each token is a signed JSON Web Token that your services can present to authenticate against the Nscale API."
+      - url: https://docs.nscale.com/docs/faqs/deprecations.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service tokens now provide the authentication surface for all automation and integrations, offering finer-grained scoping and rotation controls."
+      - url: https://docs.nscale.com/docs/cli/serviceaccounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service accounts provide machine-to-machine authentication for CI/CD pipelines and automated workflows."
+      - url: https://docs.nscale.com/docs/manage/terraform.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The provider authenticates with Nscale using a service token, which you can generate and rotate in the"
+      - url: https://docs.nscale.com/docs/use-cases/chat.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "\"Authorization\": \"Bearer <SERVICE-TOKEN>\""
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A long lived access token that can be exchanged for an API access token."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Domain based authentication allows integration with user provided OIDC compliant identity services."
+      - url: https://raw.githubusercontent.com/nscaledev/uni-identity/main/pkg/oauth2/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Providers in organization namespaces are never trusted."
+      - url: https://raw.githubusercontent.com/nscaledev/uni-identity/main/pkg/oauth2/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "looks up UNI organization membership by email, and builds the userinfo and source-claims pair."
+      - url: https://docs.nscale.com/docs/storage/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create credentials tied to an identity policy. The secret is returned only once"
+    notes: >-
+      Graded on the weakest path a workload must use to automate Nscale, which is also the only
+      one: the service token. The identity service does implement RFC 8693 token exchange and can
+      accept bearer tokens from external OIDC issuers, but its source shows that trust is set by
+      Nscale's operators in the identity operator namespace ("Providers in organization namespaces
+      are never trusted"), each token must carry a verified email and map to an existing member,
+      and none of it is in the public docs or customer API (the org-level OAuth2 provider object
+      has only issuer, client ID and secret, for browser login). That is human SSO, not workload
+      federation, so it does not lift the grade. The "exchange" of a service token for a passport
+      JWT happens inside Nscale's API edge; the workload still holds the long-lived service token,
+      so this is D rather than C. Sibling credentials on the same cloud: object storage takes
+      static S3 access key/secret pairs per endpoint, with AWS-style identity policies for scoping
+      and API create/delete, but no expiry or last-used field in the Storage API; dedicated model
+      deployments (private cloud beta) mint their own static endpoint access key. Legacy Nscale
+      API keys were removed on 2025-11-01. Three of five hygiene checks pass, so D; inbound moves
+      to B or A only with self-serve token exchange from GitHub Actions or any OIDC issuer for
+      service accounts.
+  outbound:
+    grade: F
+    mechanism: >-
+      Bring-your-own-model procurement pulls from Hugging Face, and for private or gated repos takes
+      an optional raw Hugging Face token in the request body. No other documented reach-in into a
+      customer cloud, registry or SaaS exists.
+    tier_gated: Private cloud organizations (beta)
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/ims/main/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Queue a Hugging Face model for procurement into the caller's private Model Catalog."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/ims/main/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Optional raw Hugging Face token used only by the processor Job."
+      - url: https://docs.nscale.com/docs/dedicated-models/deploy-a-model.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The **Your Models** tab lists your project's own models."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/region/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a compute image from a public URL."
+      - url: https://docs.nscale.com/docs/faqs/deprecations.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Fine-tuning service"
+    notes: >-
+      Checked: the docs index (llms.txt) and every published OpenAPI spec in nscaledev/openapi
+      (identity, compute, region, storage, NKS, reservation, IMS). Custom images import only from a
+      public URL with no credential; object storage has no import or replication from customer S3,
+      GCS or Azure; file storage, volumes and reservations reach nothing outside Nscale; serverless
+      fine-tuning, which pushed models to Hugging Face, was removed on 2026-05-20. The one place
+      Nscale holds a credential for a third party is IMS model procurement (the "Your Models" path
+      of dedicated deployments): a raw, write-only Hugging Face token with no guidance on using a
+      read-only or fine-grained token or on rotation. It appears in the published API spec but not
+      in the prose docs, and the feature is a private-cloud beta, so a reviewer could argue it is
+      not yet a documented integration (outbound would then be N/A and the headline D). Graded F
+      as on cudo-compute; scoped-token guidance would make it D, and an Nscale-issued OIDC identity
+      that Hugging Face or a customer bucket could trust would make it A or B.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "At present a service account token defaults to a 90 day lifetime."
+      - url: https://raw.githubusercontent.com/nscaledev/uni-identity/main/pkg/handler/serviceaccounts/client.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Default service account token lifetime, defaults to 90 days"
+      - url: https://raw.githubusercontent.com/nscaledev/uni-identity/main/pkg/handler/serviceaccounts/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "a group membership on a service account rides a token that lives for up to 90 days and that the account can keep renewing itself."
+    notes: >-
+      Unlike a changeable default (see the precedent in the brief), the 90 days is not a customer
+      choice: the create and rotate requests carry no lifetime field, and the value is a
+      server-side flag (--default-service-account-token-lifetime) set by Nscale's operator, so a
+      never-expiring token cannot be minted. No org policy for a shorter cap exists. A service
+      account can rotate its own token indefinitely, so the account outlives any one token.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.nscale.com/api-reference/service-accounts/rotate-service-account-token.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rotates a service account's access token. The returned access token can only be read once."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Removes a service account and revokes an access token."
+      - url: https://docs.nscale.com/docs/cli/serviceaccounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rotate the access token for a service account. The old token is invalidated and a new one is returned."
+    notes: >-
+      Create, rotate and delete are Identity API calls (and nscale serviceaccounts subcommands),
+      so rotation can run from a job.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/uni-identity/main/pkg/handler/serviceaccounts/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This package manages organization-local non-human identities."
+      - url: https://docs.nscale.com/docs/manage/roles-and-groups.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A group can be scoped to specific projects, limiting where its access applies."
+      - url: https://docs.nscale.com/docs/manage/roles-and-groups.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Read-only access to resources in the projects the group is assigned to."
+    notes: >-
+      Service accounts are a purpose-built machine principal; their authority comes only from the
+      groups they are placed in, and groups carry predefined roles (reader, user, reservation and
+      others) scoped to chosen projects. No custom roles. Group and role management is documented
+      as available to private organizations only, so a self-serve serverless org may not be able
+      to narrow a token.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The last time a user performed some action."
+      - url: https://raw.githubusercontent.com/nscaledev/openapi/main/identity/latest/openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When the service token is due to expire."
+    notes: >-
+      Users have a lastActive field; the service-account status has only expiry and the token, and
+      the Service Tokens docs describe no last-used column. Object storage access keys have
+      none either.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Nscale does not appear in GitHub's supported secret-scanning patterns table, partner or
+      otherwise.
+
+notes: >-
+  One card for the Nscale cloud's shared identity layer, which every control-plane service,
+  serverless inference and the Terraform provider use; NKS clusters are split onto nscale-nks
+  because their API server can trust your own OIDC issuers. Much of the detail comes from
+  Nscale's own public specs and source (nscaledev/openapi, nscaledev/uni-identity), which the docs
+  link. A last-used timestamp and a GitHub secret-scanning partnership would complete the hygiene;
+  self-serve token exchange for service accounts would lift inbound.

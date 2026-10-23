@@ -1,0 +1,215 @@
+id: denvr-cloud
+vendor: Denvr Dataworks
+product: Denvr AI Cloud (control-plane API, Python/Go SDKs, Terraform provider)
+website: https://www.denvr.com
+docs: https://docs.denvrdata.com/docs/platform/api-keys
+category: cloud
+status: listed
+summary: >-
+  Workloads drive Denvr AI Cloud with a static API key made in the console, or with a user's
+  email and password. Keys expire within a year and can be limited to chosen permissions, but they
+  can't be created or revoked through the API, have no last-used date, and aren't covered by
+  GitHub secret scanning. Custom apps pull private images with a pasted registry password or token.
+  There is no federation path.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static, user-owned API key created in the dashboard (Administration > API Keys) and sent as
+      Authorization: ApiKey <key>; lifetime up to one year. The alternative is
+      POST /api/TokenAuth/Authenticate with the user's email and password, which returns a
+      24-hour access token and a one-year refresh token. No OIDC, workload identity or token
+      exchange path exists.
+    issuers: []
+    evidence:
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys let you call the Denvr AI Cloud API from scripts, CI/CD pipelines, and applications without embedding your username and password, and without re-authenticating every day."
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Long-lived, scoped credentials for API and automation access"
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Every endpoint in the API Reference accepts an API key in place of a login token, except `POST /api/TokenAuth/Authenticate` and `POST /api/TokenAuth/RefreshToken`, which exist to issue login tokens and do not need one."
+      - url: https://docs.denvrdata.com/docs/api-reference/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authenticates the user's credentials and, upon successful verification, issues an access token that can be used to authorize subsequent requests made to the API"
+      - url: https://docs.denvrdata.com/docs/overview/getting-started/api-usage-samples.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"refreshTokenExpireInSeconds": 31536000'
+      - url: https://raw.githubusercontent.com/denvrdata/go-denvr/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can provide an `apikey` and/or `username`/`password`, however, the `apikey` will always take priority."
+      - url: https://raw.githubusercontent.com/denvrdata/denvrpy/main/denvr/auth.py
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "DENVR_APIKEY / apikey takes precedence over DENVR_USERNAME / username and DENVR_PASSWORD / password."
+      - url: https://docs.denvrdata.com/docs/platform/user-management.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Denvr AI Services supports OIDC for single-signon at a tenant level."
+    notes: >-
+      Graded on the control-plane API at api.cloud.denvrdata.com, which is what CI, the Python and
+      Go SDKs and the Terraform provider (built on go-denvr) use to create VMs, bare metal,
+      applications, VPCs and snapshots. The public OpenAPI spec
+      (api.cloud.denvrdata.com/swagger/v1/swagger.json) lists only TokenAuth Authenticate,
+      RefreshToken and LogOut for auth; there is no token exchange endpoint and no security scheme
+      for an external issuer. The password path is a static root behind 24-hour tokens, but a
+      workload holding a user's password plus a one-year refresh token is no better than the API
+      key, so the grade rests on the key: static, 2 of 5 hygiene checks, F. Tenant OIDC SSO exists
+      but is for human login and must be switched on by support, so it does not lift the grade.
+      Model endpoints and custom applications are protected by their own static bearer API keys
+      ("Generate or provide secret keys for Bearer-authorization token"), the same class of
+      credential. There is no managed Kubernetes and no object storage, so no kubeconfig or S3
+      key path to grade.
+  outbound:
+    grade: F
+    mechanism: >-
+      Custom applications pull private container images with a registry username and
+      password/token pasted into the launch form or the CreateCustomApplication request; gated
+      Hugging Face models need a pasted HF_TOKEN environment variable. No keyless path to any
+      registry, cloud or SaaS.
+    evidence:
+      - url: https://docs.denvrdata.com/docs/platform/applications.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Username and password/token for private registries"
+      - url: https://docs.denvrdata.com/docs/overview/whats-new.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "support for custom apps which are docker workloads dynamically pulled from Dockerhub, github and private container registeries."
+      - url: https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This tutorial requires a Hugging Face token to be configured as an environment variable in your custom application."
+      - url: https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a new token with **Read** permissions"
+      - url: https://docs.denvrdata.com/docs/platform/storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Denvr AI Compute provide two primary storage categories."
+    notes: >-
+      Checked: custom applications (Docker Hub, GitHub and private registries: username plus
+      password or token, no guidance on scoping or rotating it), the vLLM custom-app tutorial
+      (Hugging Face user access token as an env var; it does say to use Read permissions, which is
+      the only least-privilege guidance found), model endpoints (catalog and shared model cache,
+      no customer-side credential documented), storage (local DAS and Denvr-hosted NAS only; no
+      import from customer S3, GCS or Azure buckets), and VMs and bare metal (SSH keys the
+      customer supplies for access into Denvr, which is inbound to the customer's own host, not
+      Denvr reaching out). No AWS role, GCP or Azure federation, or GitHub App exists. Graded F on
+      the registry credential, which is long-lived and comes with no least-privilege or rotation
+      guidance; scoped-token and rotation guidance for registry pulls would make it D, and pulling
+      with a short-lived token from a Denvr-issued OIDC identity would make it A or B.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A login access token expires after 24 hours. An API key can be valid for up to a year."
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "one week, one month, three months, six months, one year, or a custom date and time"
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keys also stop working on their own at the expiration date."
+    notes: >-
+      Every key gets an expiration and the platform caps it at one year; "never" is not offered.
+      That is a platform-enforced maximum lifetime, which passes (the precedent in
+      coreweave-api's expiry check, and the opposite of a changeable default). There is no org
+      policy to set a shorter cap; the docs only advise choosing the shortest period.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the dashboard, go to `Administration` → `API Keys` and select `Create API key`."
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Find the key by its description or token suffix."
+      - url: https://docs.denvrdata.com/docs/api-reference/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This endpoint allows for the renewal of the current access token, extending its validity period"
+    notes: >-
+      Keys are created and revoked only in the dashboard (revocation requires typing the key's
+      suffix into a confirmation box). The public OpenAPI spec has 37 paths covering clusters,
+      applications, VMs, bare metal, images, snapshots, VPCs and TokenAuth, and none for API keys.
+      RefreshToken renews a password-derived login token; it does not rotate an API key. Rotation
+      means a human in a browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A login token carries every permission your account has. An API key can be restricted to a subset of them."
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "of the permissions selected on the key and the permissions your account holds at the time of the request"
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys belong to the user who created them."
+    notes: >-
+      Passes because the key itself can carry a hand-picked subset of permissions ("Use specific
+      permissions"), so it is not limited to everything the owner can do. There is no service
+      account or other non-human principal: keys belong to a human and die with that user's
+      permissions, and the default "Use all user permissions" option gives a key the human's full
+      access. Close call; the pass rests on per-key permission selection, not on a machine
+      identity.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "lists the keys you own:"
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use `Actions` → `View` to see the full details of a key."
+    notes: >-
+      The documented list columns are token suffix, description, permissions and expiration date.
+      No last-used time is listed, and users can see only their own keys, so a tenant admin cannot
+      look for dead keys across the team.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+      - url: https://docs.denvrdata.com/docs/platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If a key has been exposed publicly, revoke it first and then contact Technical support."
+    notes: >-
+      Denvr does not appear in GitHub's supported secret-scanning patterns table, so a leaked key
+      is not reported to Denvr for revocation. Leak response is manual. The keys are JWTs
+      (eyJ...) with no vendor prefix, which would make a scanning pattern harder to write.
+
+notes: >-
+  One card for Denvr AI Cloud: there is a single control-plane API and no managed Kubernetes or
+  object storage with separate auth, so no split. Model endpoints and Ollama/vLLM apps are mentioned
+  under inbound. API keys shipped in Q3 2026 with a one-year cap and per-key permissions, which pass
+  2 of 5 hygiene checks; inbound stays F. API endpoints to create and revoke keys plus a last-used
+  column would make it D. Service accounts would make the scoping pass clean. A federated path
+  (exchange a GitHub Actions or other OIDC token for a short-lived API token) is what lifts inbound
+  to B or A. Docs are public (GitBook with .md variants and a public OpenAPI spec); nothing graded
+  here depended on a login wall.

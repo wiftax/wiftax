@@ -1,0 +1,224 @@
+id: runpod
+vendor: Runpod
+product: Runpod (Pods, Serverless, network volumes, S3-compatible API)
+website: https://www.runpod.io
+docs: https://docs.runpod.io/get-started/credentials
+category: cloud
+status: listed
+summary: >-
+  Every way a workload drives Runpod (REST v2, GraphQL, runpodctl, the rp and Flash CLIs, GitHub
+  Actions) runs on a static API key; network volumes over S3 need a second static key. No OIDC or
+  federation exists. API keys can be scoped, show a last-used time and are GitHub partner-revoked,
+  but cannot be forced to expire or rotated by API. Into your infra, only private ECR pulls are
+  keyless; Cloud Sync and other registries take pasted keys.
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static Runpod API key sent as a Bearer token to the REST API v2, the GraphQL API, runpodctl,
+      the rp/Flash CLIs and Serverless endpoint calls; a separate static S3 API key (access key +
+      rps_ secret) for the network volume S3-compatible API. Both are created in the console.
+    issuers: []
+    evidence:
+      - url: https://docs.runpod.io/api-reference-v2/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All requests require a [Runpod API key](/get-started/credentials.md) in the request headers."
+      - url: https://api.runpod.io/v2/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Runpod API key authentication. Generate an API key in the Runpod console and send it in the `Authorization` header as `Bearer <api_key>`."
+      - url: https://docs.runpod.io/get-started/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authenticate requests to the Runpod API, CLI, and SDKs."
+      - url: https://docs.runpod.io/runpodctl/reference/runpodctl-config.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your Runpod API key, which authenticates the CLI to access your account."
+      - url: https://docs.runpod.io/flash/cli/login.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After successful login, your API key is saved to `~/.runpod/config.toml`."
+      - url: https://docs.runpod.io/serverless/workers/github-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "runpod-api-key: ${{ secrets.RUNPOD_API_KEY }} # Add your API key to a GitHub secret"
+      - url: https://docs.runpod.io/storage/s3-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Next, you'll need to generate a new key called an \"S3 API key\" (this is separate from your Runpod API key)."
+      - url: https://docs.runpod.io/llms-full.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Searched the full docs export (llms-full.txt), the REST v2 OpenAPI spec and the GraphQL schema:
+      no OIDC, OpenID, workload identity, federation or token-exchange path exists for any plane,
+      and Runpod's own GitHub Actions example stores the API key as a repository secret. The only
+      non-key bearer the API accepts is a console session JWT for a signed-in human. The rp and
+      Flash CLI "browser" logins simply mint and save an API key locally. The S3-compatible API for
+      network volumes uses its own static access key/secret pair, which is the weakest data-plane
+      path (no expiry, scoping or last-used is documented for it); it is optional, since Pods can
+      mount volumes directly, so the card is graded on the API key that every workload must hold.
+      Runpod has no managed Kubernetes or hosted registry to grade separately, so one card covers
+      the vendor.
+  outbound:
+    grade: B
+    mechanism: >-
+      Private AWS ECR pulls are keyless: you add a repository policy trusting Runpod's fixed AWS
+      deployment roles and register the repository. Every other reach-in takes a pasted static
+      credential: Cloud Sync (AWS access key, GCP service-account JSON, Azure account key,
+      Backblaze key, Dropbox token), Docker Hub/GHCR/GAR registry passwords, and Hugging Face
+      tokens. The GitHub deploy integration is a GitHub App you install.
+    evidence:
+      - url: https://docs.runpod.io/tutorials/pods/use-private-ecr-images.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You configure cross-account IAM delegation so Runpod can pull images on your behalf, with no credential sharing required and no expiring tokens to manage."
+      - url: https://docs.runpod.io/tutorials/pods/use-private-ecr-images.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The `aws:PrincipalArn` values are Runpod's fixed AWS deployment roles."
+      - url: https://docs.runpod.io/api-reference-v2/registries/register-an-ecr-delegation.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Register an Amazon ECR delegation that lets Runpod pull private container images from your AWS registry for Pods and Serverless endpoints."
+      - url: https://docs.runpod.io/pods/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter your **AWS Access Key ID** and **Secret Access Key** in the provided fields."
+      - url: https://docs.runpod.io/pods/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Paste the entire contents of your Service Account JSON key into the provided field."
+      - url: https://docs.runpod.io/pods/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter your **Azure Account Name** and **Account Key** in the provided fields."
+      - url: https://docs.runpod.io/runpodctl/reference/runpodctl-registry.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For Google Artifact Registry or gcr.io, set `--username` to the literal `_json_key` and feed the multi-line service-account JSON key file through `--password-stdin`."
+      - url: https://docs.runpod.io/get-started/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter a name, the registry URL, your username, and your password or access token."
+      - url: https://docs.runpod.io/serverless/endpoints/model-caching.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you're using a gated model, you'll need to enter a [Hugging Face access token](https://huggingface.co/docs/hub/en/security-tokens)."
+      - url: https://docs.runpod.io/serverless/workers/github-integration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Uninstall \"Runpod Inc.\""
+    notes: >-
+      Checked: ECR delegation (Pods and Serverless, beta), Container Registry Auth (Docker Hub,
+      GHCR, Google Artifact Registry/gcr.io, other registries), Cloud Sync (S3, GCS, Azure Blob,
+      Backblaze B2, Dropbox), Hugging Face cached models, and the GitHub deploy integration. AWS ECR
+      is the one keyless cloud path, which makes this B rather than D/F. Cloud Sync is the worst:
+      it tells you to create an AWS access key under "Security credentials" and paste GCP
+      service-account JSON or an Azure storage account key, with only generic advice to use
+      dedicated accounts and rotate; GCP and Azure have no keyless option anywhere. A reviewer
+      should check the ECR design: the repository policy trusts Runpod's shared deployment roles
+      with no External ID or per-customer condition, and the delegation API takes only the
+      repository ARN, so nothing documented stops another Runpod account that knows the URI from
+      registering the same repository (a confused-deputy gap; still keyless, so not graded down).
+      The GitHub integration is a GitHub App installed with repository selection, which the rubric
+      counts as keyless.
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.runpod.io/get-started/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Give your key a name and set its permissions (**All**, **Restricted**, or **Read Only**)."
+      - url: https://graphql-spec.runpod.io/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "isLegacy - Boolean"
+      - url: https://docs.runpod.io/release-notes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Least-privilege tokens with fine-grained scopes and expirations for safer automation."
+    notes: >-
+      The November 2024 release note promises "expirations", but the current key-creation steps
+      ask only for a name and permissions, and the GraphQL ApiKey type (id, permissions, createdAt,
+      lastUsed, name, policies, isActive, isLegacy) has no expiry field. No default lifetime,
+      maximum or org policy is documented, and S3 API keys show none either. Per the
+      changeable-default precedent (temporal passes on a platform-enforced cap), nothing here is
+      enforced, so fail. Keys can be disabled with a toggle, which is not expiry.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.runpod.io/get-started/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Click **Revoke Key** to confirm."
+      - url: https://graphql-spec.runpod.io/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "RunPod API spec includes most common GraphQL types, queries, and mutations to manage your pods."
+      - url: https://docs.runpod.io/api-reference-v2/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use it to create and manage Pods, query Serverless endpoints, provision storage, and retrieve billing data"
+    notes: >-
+      API keys and S3 API keys are created, edited, disabled and revoked only on the console
+      Credentials page. REST v2 covers SSH keys, secrets, registry credentials and ECR delegations
+      but has no API-key endpoints; the published GraphQL mutations are pod, cluster and
+      registry-auth operations only (keys can be listed via myself.apiKeys, not minted or
+      revoked). Account secrets can be rotated by API, but those are values Runpod stores for you,
+      not credentials it issues.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://api.runpod.io/v2/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keys are scoped to the permissions granted when created; requests may return `403` when a valid key lacks access to the requested resource or action."
+      - url: https://docs.runpod.io/get-started/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To improve security, generate a new key with **Restricted** permission and select the minimum permission needed for your use case."
+      - url: https://docs.runpod.io/get-started/credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Read/Write**: Full access to your endpoints."
+    notes: >-
+      There is no service account or other machine principal; keys belong to a user or a team
+      (team-created keys act for the team, and Organizations, in beta, add member roles). But the
+      key itself carries permissions narrower than its owner: All, Read Only, or Restricted with
+      per-API None/Read Only/Read-Write and per-Serverless-endpoint access. That is a key limited
+      to a subset of permissions and resources, so it passes. Legacy keys from before
+      2024-11-11 have full AI API access. S3 API keys document no scoping.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://graphql-spec.runpod.io/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "lastUsed - DateTime"
+    notes: >-
+      The GraphQL ApiKey type exposes lastUsed alongside createdAt, so dead keys can be found
+      programmatically. The console docs do not mention a last-used column, and nothing equivalent
+      is documented for S3 API keys.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| RunPod | RunPod API Key | runpod_api_key | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |"
+    notes: >-
+      The first ✓ is GitHub's Partner column, so a Runpod API key pushed to a public repo is
+      reported to Runpod. S3 API keys are not listed.
+notes: >-
+  One card for the whole vendor: Pods, Serverless, Instant Clusters, network and global volumes
+  are all driven by the same API key, and Runpod has no managed Kubernetes or registry with its own
+  auth. Three of five hygiene checks pass (scoping, last used, GitHub partner revocation), which
+  holds inbound at D; an enforced expiry or an API to mint and revoke keys would make four. Inbound
+  moves to B or A only with a federated path (GitHub Actions OIDC or a bring-your-own issuer)
+  into the API. Outbound moves to A with keyless GCS/Azure/S3 for Cloud Sync and GAR, and should
+  add an External ID or per-customer condition to ECR delegation. REST API v1 is retired on
+  2026-11-15; this card is graded on v2.

@@ -1,0 +1,217 @@
+id: vast-ai
+vendor: Vast.ai
+product: Vast.ai GPU cloud (REST API, vastai CLI and SDK, Cloud Sync)
+website: https://vast.ai
+docs: https://docs.vast.ai/guides/reference/api-keys.md
+category: cloud
+status: listed
+summary: >-
+  The Vast.ai API, the vastai CLI, the Python SDK and Serverless endpoints accept only a static
+  Bearer API key; there is no OIDC or workload identity path. Keys can be scoped and rotated by API,
+  but they never expire, show no last use and are not on GitHub's partner revocation list. Cloud
+  Sync reaches Google Drive and Dropbox through OAuth consent, but S3, Backblaze, Hugging Face and
+  private registries want pasted static credentials.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static Vast.ai API key sent as Authorization: Bearer to console.vast.ai/api/v0, stored by the
+      CLI in ~/.config/vastai/vast_api_key or VAST_API_KEY; optionally scoped by permission
+      category and constraints. No federation, OIDC or token-exchange path exists.
+    issuers: []
+    evidence:
+      - url: https://docs.vast.ai/api-reference/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Every request to the Vast.ai API must include an API key."
+      - url: https://docs.vast.ai/api-reference/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Include your key as a Bearer token in the `Authorization` header:"
+      - url: https://docs.vast.ai/guides/reference/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You'll need a key for any programmatic access; the web console works without one."
+      - url: https://docs.vast.ai/cli/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This is recommended for CI pipelines, Docker containers, and scripts, it avoids writing keys to disk and makes it easy to inject secrets via your platform's secret manager."
+      - url: https://docs.vast.ai/api-reference/accounts/create-api-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All endpoints require `Authorization: Bearer $VAST_API_KEY`."
+      - url: https://docs.vast.ai/guides/serverless/openai-compatible-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If your code already uses the OpenAI Python client (or any OpenAI-compatible HTTP client), you can switch to Vast by changing two values: the **API key** and the **base URL**."
+      - url: https://docs.vast.ai/guides/reference/keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These keys are automatically created when you log in and will expire in one week."
+    notes: >-
+      The OpenAPI spec declares one security scheme (BearerAuth, "API key must be provided in the
+      Authorization header"), and the CLI, SDK and Serverless OpenAI-compatible proxy all use the
+      same key. Nothing in the docs index (llms.txt), the API, CLI or SDK authentication pages, or
+      the vast-cli source describes OIDC, GitHub Actions, cloud workload identity, SSO for machines
+      or a token exchange; no official Terraform provider was found. The one-week session keys are
+      browser logins for humans, not a workload path. Instance SSH keys are for reaching a rented
+      container, not the control plane. Two of five hygiene checks pass, so F. No tier gate: scoped
+      keys and Teams roles are available on every account.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud Sync and scheduled backups use per-account Cloud Connections: Google Drive and Dropbox
+      are connected through an OAuth consent prompt, while Amazon S3 (IAM user access key),
+      Backblaze (application key) and Hugging Face (S3 credentials from a token) take pasted static
+      keys; private Docker images take a registry username and password.
+    evidence:
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Submit the name, after which a new tab should open up asking if you would like to give Vast access to your Google Drive."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Submit the name, after which a new tab should open up asking if you would like to give Vast access to your Dropbox."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once the access key is created, you will be prompted with an Access Key, and a Secret access Key. This will be the information required to use your AWS user permissions on Vast."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Vast connects at the IAM-user level, so create a new IAM user scoped to the data you want to sync rather than reusing an existing one."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Note the keyId and the applicationKey that are returned to you. This is the data required for Vast."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Vast connects to Hugging Face through its S3-compatible Storage Buckets: generate S3 credentials on Hugging Face, then add them to Vast."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-sync.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Cloud Sync credentials are temporarily copied onto your instance's host machine, and Vast connects with the full access those credentials carry."
+      - url: https://docs.vast.ai/guides/instances/storage/cloud-backups.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Before creating backup jobs, you need to ensure you have a cloud storage connection set up in your Vast.ai account."
+      - url: https://docs.vast.ai/guides/templates/template-settings.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you are using a private Docker image then you will need to add authentication credentials so the machine running the instance can download it."
+      - url: https://raw.githubusercontent.com/vast-ai/vast-cli/master/vast.py
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "docker login arguments for private repo authentication, surround with ''"
+    notes: >-
+      Checked: Cloud Sync / Cloud Copy and scheduled cloud backups (Google Drive, Dropbox, Amazon
+      S3, Backblaze, Hugging Face Storage Buckets), instance snapshots to a registry, private Docker
+      registry pulls (Docker Hub, GHCR, GCR) and account environment variables. Google Drive and
+      Dropbox are OAuth consents to Vast's app, which the rubric counts as keyless; that alone keeps
+      this at B rather than D. Every cloud-storage integration is static: S3 needs an IAM user
+      access key (no cross-account role or external ID), Backblaze an application key, Hugging Face
+      S3 credentials derived from a write token, and private images a registry username and
+      password (the CLI's --login takes "-u user -p password"). The docs do give bucket-scoped
+      least-privilege guidance for S3, Backblaze and Hugging Face. No GCS or Azure Blob connection
+      exists, and nothing is keyless on AWS. Aggravating detail: Vast warns that connection
+      credentials, including the OAuth grants, are copied onto the marketplace host running the
+      instance, which may be an individual's machine unless Secure Cloud is selected. A reviewer
+      who reads B as requiring a keyless cloud (not a SaaS consent) would put this at D.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.vast.ai/api-reference/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys do not expire by default."
+      - url: https://docs.vast.ai/cli/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys do not expire by default. You can revoke a key at any time from the [Keys page](https://cloud.vast.ai/manage-keys/) or with `vastai delete api-key`."
+      - url: https://docs.vast.ai/guides/reference/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A 90-day rotation is a reasonable baseline for production keys."
+    notes: >-
+      Fails: keys never expire by default, and the Create API Key request body (name, permissions,
+      key_params) and the CLI's create api-key options have no expiry field; no org or team policy
+      to cap lifetime is documented. The 90-day figure is advice, not enforcement. The docs mention
+      "an expired key" in error troubleshooting, but no way to set one is documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.vast.ai/api-reference/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can also create keys programmatically via the API ([Create API Key](/api-reference/accounts/create-api-key.md)), CLI ([`vastai create api-key`](/cli/reference/create-api-key)), or SDK ([`vast.create_api_key()`](/sdk/python/reference/create-api-key))."
+      - url: https://docs.vast.ai/api-reference/accounts/delete-api-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API key is soft-deleted by setting a deleted_at timestamp."
+      - url: https://docs.vast.ai/guides/reference/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The old key stops working as soon as you reset; there's no overlap window."
+    notes: >-
+      POST, GET and DELETE on /api/v0/auth/apikeys create, list and revoke keys, and the SDK has
+      reset_api_key. Overlapping rotation works by creating a second key, then deleting the first;
+      in-place reset has no overlap window.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.vast.ai/guides/reference/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "By default, API keys have full access to your account."
+      - url: https://docs.vast.ai/api-reference/permissions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you create a scoped API key, you include only the categories the key needs."
+      - url: https://docs.vast.ai/api-reference/permissions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Constraints narrow a permission category to specific parameter values. This lets you create keys that can only operate on certain resources."
+    notes: >-
+      Each key carries its own permission set (eleven categories such as instance_write or
+      billing_read, narrowable per endpoint with eq/lte/gte constraints on parameters like instance
+      ID), so a key can hold less than its owner. The default is full access, including billing and
+      key management. There is no separate service-account principal; keys hang off a user or team
+      account.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.vast.ai/api-reference/accounts/show-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Retrieves all API keys associated with the authenticated user."
+      - url: https://docs.vast.ai/api-reference/accounts/show-ipaddrs.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This endpoint retrieves the history of IP address accesses for the authenticated user."
+    notes: >-
+      The show api keys response lists id, user_id, rights, team_id and team_name, with no
+      last-used or created field, and the API keys guide only advises reviewing keys "occasionally".
+      The vast-cli source has a "Last Used" column only for 2FA methods. Account-level IP history
+      exists but is not attributed to a key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Vast.ai does not appear in GitHub's supported secret-scanning patterns table, partner or
+      otherwise, so a key pushed to a public repo is not reported to Vast.
+
+notes: >-
+  One card for the whole platform: instances, volumes, Serverless endpoints, Teams and Cloud Sync
+  all run on the same account API key, and Vast has no separately authenticated object store,
+  registry or managed Kubernetes. Inbound moves to B or A only with a federated path (GitHub
+  Actions OIDC, cloud workload identity or a bring-your-own issuer); before that, an enforced
+  expiry or org cap plus a last-used timestamp would lift it to D. Outbound reaches A with a
+  cross-account IAM role for S3 and token-based or consent flows for the other providers.
