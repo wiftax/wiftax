@@ -1,0 +1,236 @@
+id: veza
+vendor: Veza
+product: Veza Access Graph platform
+website: https://veza.com
+docs: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication
+category: identity
+status: listed
+summary: >-
+  Most Veza API automation needs a static personal API key that never expires and inherits its
+  creator's access. OAuth2 Clients (client secret or a private key you hold) cover only a few
+  scopes, and nothing accepts a federated token. Team keys are API-managed, OAA-only and show last
+  activity; there is no GitHub partner revocation. Into your stack it is keyless for AWS and GCP,
+  but Azure, Okta, Snowflake and GitHub want a secret or key.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static API keys sent as a Bearer token: personal keys that inherit the creating user's role in
+      one team, or team keys bound to the team's OAA-only service account. OAuth2 Clients (client
+      credentials with a client secret, or a JWT bearer assertion signed by a private key you
+      register) mint 12-hour or 1-hour tokens, but only for a short list of scopes.
+    evidence:
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys are personal or team-scoped tokens used for general platform access. Each personal key inherits the permissions of the user who created it. Team API keys authenticate as a team service account."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When making requests to Veza APIs, provide the key as an OAuth 2.0 Bearer Token in the request Authorization header:"
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These API keys currently cannot be used to access other API endpoints beyond OAA operations"
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth2-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**JWT bearer**: the client authenticates by presenting a JWT assertion signed with its own private key. You generate the key pair and upload only the public key to Veza."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth2-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Client credentials access tokens expire after 12 hours."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth2-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Veza continues to add scopes. If a capability your service needs has no scope listed, contact your Veza account team."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth-scopes.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Veza does not issue ID tokens and does not publish an OpenID Connect discovery document, so `openid` has no effect."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/security/security-faq-2.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**Non-Interactive Access:** API Keys"
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/insight-point.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**Early Access**: OAuth2 client credentials provisioning for Insight Points is available on an Early Access basis."
+    notes: >-
+      Graded on the weakest path a workload must use, as on the precedent cards. The machine-to-machine
+      OAuth2 Client scopes are oaa_push, viewer, provider_manager, auditor, the assessments read
+      scopes and the Early Access Insight Point pipeline scope. Nothing covers access reviews,
+      Lifecycle Management, user and team management, key management or SCIM (the scim_provisioner
+      scope was withdrawn and "remains available to user accounts and API keys"). Automating those
+      means a personal API key, a static secret that inherits a human's role. If every API capability
+      had an OAuth2 Client scope, inbound would be C: JWT bearer with a private key you hold is still
+      a static root. No token exchange, workload identity or external OIDC issuer is accepted
+      anywhere; OIDC appears only as human SSO. Insight Points (the customer-run connector) register
+      with a static registration key, or in Early Access with an OAuth2 client ID and secret.
+  outbound:
+    grade: B
+    mechanism: >-
+      Keyless on AWS (cross-account IAM role with an External ID, recommended) and Google Cloud
+      (Workload Identity Federation from Veza's AWS role plus service account impersonation, recommended).
+      Azure and Entra ID need a client secret from your app registration. Okta needs a private key for
+      an OAuth service app or an API token. Snowflake needs a password, an RSA key pair or External OAuth
+      client credentials, and GitHub needs your GitHub App's private key.
+    evidence:
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "AWS discovery using an assumed IAM role is the recommended method. The steps below will enable a Veza AWS principal to assume a new role within your organization's AWS account for identity, resource, and authorization discovery."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Check the box to require an External ID and give it a unique value."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "While user credentials are easy to generate and configure, this option should be considered less secure than IAM role assumption."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/google.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Workload Identity Federation allows Veza to access Google Cloud resources securely without storing long-lived credentials. It uses a trust relationship between Veza's AWS role and your Google Cloud service account."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/azure.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Veza connects to Azure tenants using an App Registration granted read-only permissions for the Microsoft Graph API. You will need an app client ID, client secret, and the Azure tenant ID to enable the connection in Veza."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/okta.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Veza can establish a connection to Okta using OAuth 2.0 application credentials or user API keys."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/okta.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When configuring the Okta integration in Veza, click **Generate & Download Key Pair**."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/snowflake.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Veza connects to Snowflake using Basic authentication, key pair authentication, or External OAuth 2.0 with the client credentials grant."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/snowflake/export-to-snowflake.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Export to Snowflake supports only Basic authentication and key pair authentication."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/github.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Note the “App ID” towards the top of the screen. Click *Generate a private key* to download the base64-encoded .pem key file."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/administration/administration/customer-managed-encryption-keys/customer-provided-keys-setup.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your key policy must grant the Veza AWS account access to use the key."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/secrets-vaults.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When using secrets vaults, Veza stores only the secret identifiers (names or IDs) rather than the actual credential values."
+    notes: >-
+      Checked: AWS (and the AWS data services found through it), Google Cloud, Azure, Entra ID, Okta,
+      Snowflake (extraction and the Export to Snowflake feature), GitHub, customer-provided AWS KMS keys
+      for Secure Private Veza, Insight Points and Secrets Vaults. Keyless: AWS (role trusting
+      Veza's AWS account with a required External ID; an IAM user access key is an optional, "less
+      secure" alternative) and GCP (a workload identity pool trusts Veza's AWS role and impersonates
+      your service account; a service account key file is the fallback), plus the KMS key policy
+      grant. Static: Azure and Entra ID (a client secret on an app registration you create, with no
+      federated-credential or multi-tenant consent option documented, and a certificate for
+      SharePoint), Okta (a private_key_jwt key pair that Veza generates and stores, or an Okta API
+      token), Snowflake (password, RSA key pair or External OAuth client credentials; export allows
+      only password or key pair) and GitHub (your GitHub App's private key pasted into Veza). Grade
+      B because AWS and GCP are keyless. Azure would need a federated credential or a multi-tenant
+      app to reach A. Early Access Secrets Vaults (Azure Key Vault, through a customer-run Insight
+      Point) keep stored integration credentials out of Veza, but the credentials are still static.
+      Most of the 300-plus SaaS connectors were not assessed one by one.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/security/security-faq-2.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys do not expire."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter a descriptive name for the new key, and click *Save*."
+    notes: >-
+      Creating a personal or team key asks only for a name. Veza's security FAQ states that API keys
+      do not expire, and there is no lifetime field or org policy. OAuth2 client secrets and registered
+      public keys also have no documented expiry.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/users-teams/team-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create an API key by providing a key `name` and team `team_id`. The response includes the `access_key`, which cannot be retrieved again."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/users-teams/team-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Permanently delete a team API key."
+    notes: >-
+      Team API keys can be created, listed, revoked, reinstated and deleted through /api/preview/teamkeys,
+      a preview API that may change. No API is documented for personal API keys or OAuth2 Client
+      secrets. Those are managed in the web UI only.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/users-teams/team-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each key is associated with a single team and has the `oaa_push` role, restricted to specific read and write operations for creating and updating OAA data sources."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/administration/administration/users/teams.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you create a team, Veza automatically generates an internal service account for that team."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each Personal API Key inherits the permissions of the user who created it, and functions as a personal access token for that user."
+    notes: >-
+      This passes narrowly. Team API keys authenticate as a purpose-built team service account with
+      the least-privilege oaa_push role, and OAuth2 Clients take explicit scopes within one team.
+      Both count under the machine-principal precedent. However, the personal keys needed for admin
+      automation take the creator's full role within the selected team, and their permissions cannot
+      be narrowed further.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/users-teams/team-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Returns API key details such as last activity time and status."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Users can view the activity status and revoke, reinstate, or rename any keys they create or have permission to update."
+      - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth2-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| Last used at | Most recent authentication using this secret |"
+    notes: >-
+      Team keys return a last_access_at timestamp, the API Keys page shows each key's activity status,
+      and OAuth2 Client secrets show "Last used at". For personal keys the docs say only "activity
+      status", with no explicit timestamp.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Veza does not appear in GitHub's supported secret scanning patterns table, so a Veza API key
+      pushed to a public repo is not reported to Veza for revocation. Veza API keys have no
+      documented recognizable prefix.
+
+notes: >-
+  One card for the Veza SaaS platform (Access Graph, Access Reviews, Lifecycle Management, NHI
+  Security and Access Hub share one tenant API and one set of credentials). Three of five hygiene checks
+  pass (rotation_api, scoping, last_used), so inbound is D. Without the team-key preview API or
+  team service accounts it would fall to F. Inbound reaches C if OAuth2 Client scopes cover the
+  whole API, and B or A only if Veza accepts federated tokens (GitHub Actions OIDC, cloud workload
+  identity or a bring-your-own issuer, for example through RFC 8693 token exchange or a JWT bearer
+  grant that trusts an external JWKS). A platform-enforced API key lifetime and GitHub partner
+  revocation would add hygiene passes. Outbound reaches A if the Azure/Entra, Okta, Snowflake and
+  GitHub connectors move to federated credentials or vendor-owned apps.

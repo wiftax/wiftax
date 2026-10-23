@@ -1,0 +1,206 @@
+id: proofpoint-tap
+vendor: Proofpoint
+product: Targeted Attack Protection (TAP) and Threat Protection APIs
+website: https://www.proofpoint.com
+docs: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "Proofpoint's credential and integration docs are behind a login. All five hygiene checks fail partly for lack of public docs, and outbound A rests on a product page and a sibling product's consent flow."
+summary: >-
+  The TAP SIEM, People, Forensics and Campaign APIs take a static service principal and secret over
+  HTTP Basic auth. Newer Threat Protection report APIs swap a static API key and secret for a
+  one-hour token. No federation exists, and public docs show no expiry, API rotation, scoping,
+  last-used view or GitHub partner revocation. Into Microsoft 365, Proofpoint's documented path is
+  admin consent to its Entra app, with no secret handed over.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static service principal and secret, created on the Threat Insight Dashboard Settings page
+      (Connected Applications) and sent with HTTP Basic auth to tap-api-v2.proofpoint.com for the
+      SIEM, People, Forensics, Campaign and URL Decoder APIs. The newer Threat Protection report
+      APIs (Dash Reports, Email Bomb Events) use a static API key and secret from the Cloud Admin UI
+      to get a one-hour bearer token from auth.proofpoint.com (OAuth client_credentials).
+    evidence:
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Threat Insight Dashboard provides several different API endpoints for integration with other products in your security ecosystem."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "service credentials to authenticate to the API."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "the HTTP Basic Authorization method."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "# The service principal and secret are used to authenticate to the SIEM API. They are generated on the settings page of the Threat Insight Dashboard."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/People_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "MUST use service credentials to authenticate to the API."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Forensics_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "They correspond to the service principal and secret that was created on the Settings page."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Campaign_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "MUST use the HTTP Basic Authorization method."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/URL_Decoder_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The number of queries to this endpoint are limited by a simple, rolling 24-hour throttle per service credential."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Reports_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Navigate to the API Key Management section and click + Create New to generate a new API key and secret for the Threat Protection API."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Reports_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use the key and secret generated from the Admin Portal (See API Key Management) to generate an authentication token. The token is valid for 1 hour."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Reports_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'BODY="grant_type=client_credentials&client_id=<KEY>&client_secret=<SECRET>"'
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Email_Bomb_Events_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Credentials are provisioned through Cloud Admin UI (Threat Protection Page) > Settings > API Key Management > Threat Protection tab (generate and manage keys)."
+    notes: >-
+      Graded on the weakest path a workload must use: pulling TAP events into a SIEM or SOAR goes
+      through the SIEM API, which only takes the static service principal and secret as HTTP Basic
+      credentials on every request. The client_credentials path on the newer report APIs is C at
+      best under the cohort rule (a static key and secret you hold) and covers reporting endpoints
+      only, so it does not lift the grade. No OIDC, GitHub Actions, cloud workload identity or token
+      exchange is documented for any Proofpoint API. The API docs themselves are public; the
+      Threat Insight Dashboard admin guide (including the Connected Applications / service
+      credential pages) and the Threats and Supplier Threat Protection API pages are login-walled,
+      so anything they say about credential lifetime or roles is not publicly verifiable. Sibling:
+      the Proofpoint Essentials API authenticates with an Essentials username and password in
+      X-User / X-Password headers, which is weaker still.
+  outbound:
+    grade: A
+    mechanism: >-
+      API-based Microsoft 365 protection connects through Microsoft Graph; the only public Proofpoint
+      setup doc for a Microsoft 365 connection is an Entra admin consent flow to Proofpoint's
+      multi-tenant application, with no customer secret exchanged.
+    evidence:
+      - url: https://www.proofpoint.com/us/products/advanced-threat-protection/targeted-attack-protection
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Integrate with Microsoft Graph API for rapid deployment, with automated learning, to protect your environment in just days."
+      - url: https://www.proofpoint.com/us/products/advanced-threat-protection/targeted-attack-protection
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Secure Microsoft 365 via API while enabling SOC analysts to view and respond to Proofpoint detections in their Microsoft 365 console."
+      - url: https://help.proofpoint.com/Essentials/Product_Documentation/Account_Management/Integrations/Microsoft_365_Integration_MX
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "During the Microsoft 365 setup process, the administrator is redirected to a Microsoft Online login. This is referred to by Microsoft as an “Admin Consent Flow”."
+      - url: https://help.proofpoint.com/Essentials/Product_Documentation/Account_Management/Integrations/Microsoft_365_Integration_MX
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Proofpoint Essentials M365 Application will be installed in the organizations Azure tenant as a security principle."
+      - url: https://www.proofpoint.com/us/resources/white-papers/understanding-core-email-protection-api-and-adaptive-email-dlp
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You’ll learn about deploying the products via API, how the API works and the onboarding process to get started quickly."
+    notes: >-
+      Provisional, and the main call for a reviewer. Checked: Microsoft 365 API mode (Graph),
+      Google Workspace, Account Takeover Protection, Threat Response Auto-Pull / CLEAR and Proofpoint
+      CASB. TAP's own Microsoft 365 API onboarding steps sit behind the support login and the
+      architecture white paper is gated, so the mechanism is inferred from the TAP product page
+      (Graph API integration) plus Proofpoint's one public Microsoft 365 setup doc, the Essentials
+      admin consent flow to a Proofpoint-owned Entra app, which is keyless under the cohort rule.
+      The TAP page says it protects Google Workspace too, but no public doc says how it connects;
+      Google Workspace, ATO, TRAP and CASB connection setup is not publicly verifiable.
+      Nothing public asks the customer for a cloud key or a client secret. If the gated docs show
+      a customer-created app registration with a client secret (as older TRAP Exchange Online
+      setups are reported to use), this drops to C; a Google service-account JSON key would make
+      it B.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This script can be run as a cron job on any Unix OS which supports the bash shell. The service principal and secret must be customized before use."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/Concepts/Managing_Service_Credentials
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      No public Proofpoint page states that TAP service credentials or Threat Protection API keys
+      expire or that an admin can set or enforce a lifetime; the API docs treat the principal and
+      secret as a fixed value baked into a cron script. The service-credential management page is
+      login-walled (not publicly verifiable). Fails for lack of a citable expiry; a documented
+      enforced lifetime would flip it.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Forensics_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "They correspond to the service principal and secret that was created on the Settings page."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Reports_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Credentials are provisioned through Cloud Admin UI > Settings > API Key Management > Threat Protection tab."
+      - url: https://posthog.com/docs/cdp/sources/proofpoint-tap.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the TAP dashboard, go to **Settings** > **Connected Applications**, create a new service principal, and save the generated credentials."
+    notes: >-
+      Both credential types are created in an admin web UI. None of the public TAP or Threat
+      Protection API endpoints (SIEM, People, Forensics, Campaign, URL Decoder, Reports, Email
+      Bomb) creates, lists or revokes credentials, so rotation needs a browser. PostHog's connector
+      guide is cited for the Connected Applications path because Proofpoint's own page is gated.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The user is authenticated for the service but is not authorized to access data for the given customer."
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/Concepts/Managing_Service_Credentials
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      The service principal is a separate machine credential, but no public doc describes giving it
+      a role or limiting it to some TAP APIs or data; the only authorization documented is per
+      customer (the 403 case). Third-party connector guides mention API scopes on Connected
+      Applications, but Proofpoint's description is login-walled, so not publicly verifiable.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://help.proofpoint.com/Threat_Insight_Dashboard/Concepts/Managing_Service_Credentials
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: No public Proofpoint documentation shows a last-used time for service credentials or API keys; the management page is login-walled.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Proofpoint does not appear in GitHub's supported secret scanning patterns table at all, so a
+      leaked TAP principal and secret or Threat Protection API key is not reported to Proofpoint.
+
+notes: >-
+  One card for TAP's APIs, including the newer Threat Protection report APIs on the same Cloud
+  Admin platform. Siblings not graded here: Proofpoint Essentials (username/password API),
+  Proofpoint on Demand / PPS admin APIs, Threat Response, CASB and Adaptive Email Security
+  (ex-Tessian), whose docs are mostly login-walled. Much of Proofpoint's admin documentation needs a
+  support login; this card grades only what is public and says where that ran out. Zero of five
+  hygiene checks can be shown to pass. Inbound moves to D with three documented passes (an enforced
+  expiry, a credential-management API, roles on the principal), to C if the SIEM API accepts the
+  client_credentials token, and to B or A only with a federated token path.

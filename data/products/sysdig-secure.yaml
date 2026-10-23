@@ -1,0 +1,237 @@
+id: sysdig-secure
+vendor: Sysdig
+product: Sysdig Secure (API, agents and cloud onboarding)
+website: https://sysdig.com
+docs: https://docs.sysdig.com/en/developer-tools/sysdig-api/
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "Sysdig's full API reference requires a login. No last-used field is publicly documented; if one exists, inbound would be D."
+summary: >-
+  Scripts, CI scanners and Terraform call Sysdig Secure with a static bearer token (a user's API
+  token or a team service account), and agents connect with a static access key; no OIDC or workload
+  identity path exists. Service accounts are role-scoped and must carry an expiry, but user tokens and
+  agent keys never expire, no last use is shown and GitHub does not report leaks. Cloud onboarding is
+  keyless on AWS, Azure and GCP; registry Scan Now, Okta and Jira still take static secrets.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static bearer token (Authorization: Bearer) from a team service account, a global service account
+      or a user's personal API token, used by the REST APIs, the CLI scanner and CI integrations, the
+      registry scanner and the Terraform provider. Agents (host, Kubernetes, serverless) authenticate to
+      the backend with a static agent access key. No federation or token exchange exists.
+    evidence:
+      - url: https://docs.sysdig.com/en/developer-tools/sysdig-api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To use the APIs, you must authenticate with one of the following authentication options:"
+      - url: https://docs.sysdig.com/en/developer-tools/sysdig-api/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authorization: Bearer { team-based service account | global service account | api token }"
+      - url: https://docs.sysdig.com/en/administration/retrieve-the-sysdig-api-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When using the Sysdig API with custom scripts or applications, an API security token, specific to each user and team, must be supplied."
+      - url: https://docs.sysdig.com/en/developer-tools/managing-access-keys/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Access Key is a token that you must configure on Sysdig Agents to successfully forward data from your environment to the Sysdig backend."
+      - url: https://docs.sysdig.com/en/administration/teams-administration/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Applications or scripts can use Service Accounts to access Sysdig APIs."
+      - url: https://docs.sysdig.com/en/sysdig-secure/github-action-integration/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use the SECURE_SECURE_TOKEN environment variable to define the secret containing the API Token and make it available in the pipeline."
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-provider-sysdig/master/website/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The provider needs to be configured with proper API token before it can be used."
+    notes: >-
+      Graded on Sysdig Secure SaaS. The API docs list exactly three bearer-token options, all static;
+      nothing in the docs, the Terraform provider or the GitHub Actions and GitLab integrations offers
+      OIDC, GitHub Actions tokens, cloud workload identity or a token exchange (the only OIDC in the docs
+      is human SSO). Graded on the weakest path a workload must use: every agent needs a static access
+      key that has no expiry, so even a perfectly managed service account does not lift the grade. The
+      Next Gen API reference is login-walled, so fields it may expose beyond the public docs and the
+      Terraform provider are not publicly verifiable. Sysdig Monitor shares the same tokens and access
+      keys. IBM Cloud-hosted Sysdig (IBM Workload Protection) uses an IBM IAM API key instead and is not
+      graded here.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud account onboarding is keyless on all three clouds: an IAM role trusting Sysdig's AWS identity
+      with your tenant External ID, a service principal of Sysdig's multi-tenant Entra app, and GCP
+      Workload Identity Federation from Sysdig's AWS role to service accounts you create. Registry Scan
+      Now, Okta log ingestion and Jira ticketing take static secrets handed to Sysdig.
+    evidence:
+      - url: https://docs.sysdig.com/en/sysdig-secure/connect-aws/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Sysdig: A set of IAM Roles created during onboarding with specific, less permissive permissions attached."
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-aws-secure/master/modules/onboarding/main.tf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"sts:ExternalId": "${data.sysdig_secure_tenant_external_id.external_id.external_id}"'
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-azurerm-secure/master/modules/onboarding/main.tf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "# Create service principal in customer tenant, using the Sysdig Managed Application for Onboarding"
+      - url: https://docs.sysdig.com/en/sysdig-secure/azure-permissions-and-resources/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Sysdig: A Service Principal (robot user) created during onboarding with specific, less permissive roles."
+      - url: https://docs.sysdig.com/en/sysdig-secure/gcp-permissions-and-resources/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Attaches the Workload Identity Federation to the service accounts."
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-google-secure/master/modules/onboarding/main.tf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'attribute_condition = "attribute.aws_role==\"arn:aws:sts::${data.sysdig_secure_trusted_cloud_identity.trusted_identity.aws_account_id}:assumed-role/${data.sysdig_secure_trusted_cloud_identity.trusted_identity.aws_role_name}/${data.sysdig_secure_tenant_external_id.external_id.external_id}\""'
+      - url: https://docs.sysdig.com/en/sysdig-secure/vm-registry/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Type: Select the type of Registry you are adding. Depending on your selection, additional parameters will appear, such as the Access Key and Secret Key for AWS ECR."
+      - url: https://docs.sysdig.com/en/sysdig-secure/vm-registry/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For example, username/password for Docker Registry and JSON key for Google Container Registry."
+      - url: https://docs.sysdig.com/en/sysdig-secure/integrations-okta/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter the Client Secret, Okta Domain, and Client ID you saved from Okta (toggling back to the Okta interface if needed)."
+      - url: https://docs.sysdig.com/en/sysdig-secure/integrations-jira-ticketing/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API token must be created by the same User you input when creating a new Jira Ticketing Integration."
+      - url: https://docs.sysdig.com/en/sysdig-secure/aws-elastic-container-registry/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You need to provide either an Access Key/Secret Key or a service account that has the necessary permissions."
+      - url: https://docs.sysdig.com/en/sysdig-secure/google-registry/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "<GAR_REGISTRY_PASSWORD>: Base64 encoded Service Account JSON access key."
+    notes: >-
+      Checked: AWS, Azure and GCP cloud onboarding (CSPM, CIEM, threat detection, agentless and
+      vulnerability scanning; Terraform modules and the permissions pages), registry Scan Now
+      credentials, the self-hosted Registry Scanner (ECR, ACR, GAR), the Okta and Jira integrations.
+      Keyless: AWS uses roles that trust Sysdig's AWS identity with your tenant External ID; Azure creates
+      a service principal for Sysdig's multi-tenant app and grants it Reader and Directory Readers; GCP
+      binds Workload Identity Pools whose attribute condition pins Sysdig's AWS role and your External
+      ID, so no service-account key is made (the docs still list serviceAccountKeyAdmin among installer
+      roles and an older service-principal Terraform module creates a key; the current onboarding
+      modules do not). Static secrets handed to Sysdig: Scan Now registry credentials (ECR access
+      key/secret, GCR JSON key, registry username/password), the Okta API Service Integration client
+      secret (rotated by Okta, but still a client secret) and a user's Jira API token. The Registry
+      Scanner runs in your cluster, so its registry credentials stay with you (ECR via IRSA works;
+      GAR wants a JSON key, ACR a token or SP password). OCI onboarding was not checked in detail.
+      A would need keyless registry Scan Now (for example via the onboarded cloud roles).
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-provider-sysdig/master/website/docs/r/team_service_account.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`expiration_date` (Required) The service account expiration date."
+      - url: https://docs.sysdig.com/en/administration/teams-administration/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service accounts expire after a set period."
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-provider-sysdig/master/website/docs/r/agent_access_key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`enabled` - (Optional) Whether the agent access key is enabled or not."
+      - url: https://docs.sysdig.com/en/administration/retrieve-the-sysdig-api-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can Copy the token for use, or click the Reset Token button to generate a new one."
+    notes: >-
+      Fails on the credentials a workload cannot avoid. Team service account tokens must carry an
+      expiration date (no documented maximum, so like sentinelone-singularity's mandatory date it would
+      pass on its own), but agent access keys have no expiry field at all (only enable/disable), and
+      user API tokens live until someone clicks Reset Token; no org policy to cap either is documented.
+      Every agent needs an access key, so this is the weakest path. An expiry or maximum lifetime on
+      access keys and user tokens would flip this check and lift inbound to D.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.sysdig.com/en/developer-tools/managing-access-keys/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If the access key is compromised or you have a policy to renew it, you can generate a new access key and disable the old one."
+      - url: https://docs.sysdig.com/en/developer-tools/global-service-accounts/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Admins can create or delete a global service account by performing an API call."
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-provider-sysdig/master/website/docs/r/team_service_account.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Creates a team service account in Sysdig."
+    notes: >-
+      Access keys are created, disabled and deleted through /api/customers/accessKeys; team and global
+      service accounts are created and deleted through the API and Terraform. User API tokens are reset
+      only in the UI.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.sysdig.com/en/administration/teams-administration/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Unlike users, service accounts have no permissions out of the box. They only have the permissions granted by the role you assign them."
+      - url: https://docs.sysdig.com/en/administration/teams-administration/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service accounts are not bound to a user, but to a team."
+      - url: https://docs.sysdig.com/en/developer-tools/global-service-accounts/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each role has only the permissions needed to perform a specific task, such as managing access keys, or ingesting Prometheus remote write metric."
+    notes: >-
+      Team service accounts are purpose-built machine principals with one team role (standard or
+      custom) inside one team's data scope; global service accounts take narrow preset roles. User API
+      tokens inherit the user's role in their current team, and agent access keys can only be bound to a
+      team with agent limits, not permissions.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.sysdig.com/en/developer-tools/managing-access-keys/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The output provides a list of the access keys in the response and indicates whether they are enabled."
+      - url: https://raw.githubusercontent.com/sysdiglabs/terraform-provider-sysdig/master/website/docs/r/agent_access_key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`date_created` - Date when the agent key was created."
+    notes: >-
+      The access key object has id, enabled, accessKey, dateCreated, dateDisabled, limit, reservation,
+      teamId and metadata, with no last-used field; the service account docs and Terraform model show
+      creation and expiration dates only. The login-walled Next Gen API reference may expose more, but
+      that is not publicly verifiable.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Sysdig does not appear in GitHub's supported secret-scanning patterns table at all, so a leaked
+      API token or access key is not reported to Sysdig. Sysdig tokens are plain UUIDs with no
+      detectable prefix.
+
+notes: >-
+  One card for Sysdig Secure; Sysdig Monitor uses the same API tokens, service accounts and agent
+  access keys and would grade the same inbound. Two of five hygiene checks pass, so inbound is F;
+  expiry on access keys and user tokens would make it D, and last-used plus GitHub partner revocation
+  would add more. Inbound moves to B or A only if the API and agents accept a federated token (GitHub
+  Actions OIDC, cloud workload identity or a bring-your-own issuer). Judgment call for review: expiry
+  is failed on agent access keys and user tokens even though team service accounts require an expiry
+  date.

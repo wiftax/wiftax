@@ -1,0 +1,233 @@
+id: tines
+vendor: Tines
+product: Tines automation platform (Tines Stories, cloud and self-hosted)
+website: https://www.tines.com
+docs: https://www.tines.com/api/authentication/
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "Tines' API key settings page is behind a login. Expiry and last-used fail on the public docs only; two more passes would make inbound D."
+summary: >-
+  The Tines REST API, Terraform provider, webhooks and MCP servers take only a static Tines API
+  key; team and service keys are scoped to service-account users, but no expiry, API rotation,
+  last-used view or GitHub partner revocation is documented. Outbound, Tines is its own OIDC
+  issuer and reaches AWS, Google Cloud, Entra and Oracle Cloud keylessly, while most SaaS
+  connect flows still take a pasted API key or client secret.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static Tines API key (personal, team, service or tenant-owner) sent in the X-User-Token or
+      Authorization: Bearer header; the same keys authenticate team/tenant-restricted webhooks and
+      MCP servers, alongside per-webhook shared secrets. No OIDC, workload identity or token
+      exchange path exists for workloads.
+    evidence:
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each request sent to the REST API must be authenticated using an API key, included in the X-User-Token header."
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To authenticate using this method, simply include your API token in the Authorization header of your requests, prefixed with \"Bearer\" and a single space."
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tines has four types of API keys:"
+      - url: https://raw.githubusercontent.com/tines/terraform-provider-tines/main/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`api_key` (String, Sensitive) If this value is not set in the configuration, you must set the TINES_API_KEY environment variable instead."
+      - url: https://www.tines.com/llm/stories/docs/actions/types/webhook.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "There are a few methods for authenticating a webhook. The primary one is using webhook secrets: a random string assigned to each webhook."
+      - url: https://www.tines.com/llm/stories/docs/actions/types/webhook.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When configuring Team or Tenant access control, the only way to authenticate is to provide a valid Tines API Key with each request."
+    notes: >-
+      Graded on the REST API, which is what CI, Terraform and other workloads must use to manage
+      stories, credentials, cases and admin settings. The API reference and Terraform provider
+      document only the API key. Webhooks and Tines-built MCP servers add a per-webhook secret
+      (in the URL or used to sign requests) and an OAuth option, but that OAuth is a human consent
+      screen on the Tines tenant ("the user will be redirected to your Tines tenant to grant
+      consent"), not federation a workload can use. No OIDC, GitHub Actions, cloud workload
+      identity or token-exchange path is documented for inbound calls. Tines does act as an OIDC
+      issuer, but only outbound (see below). Same on cloud and self-hosted.
+  outbound:
+    grade: B
+    mechanism: >-
+      Tines is its own OIDC issuer: per-credential workload identity federation into AWS
+      (AssumeRoleWithWebIdentity), Google Cloud (WIF with optional service account impersonation),
+      Microsoft Entra (federated credential on your app registration) and Oracle Cloud (identity
+      propagation trust), plus AWS cross-account roles with External ID. Static keys remain
+      offered for AWS and Google service accounts, and most SaaS connect flows want a pasted API
+      key, password or customer-managed OAuth client secret.
+    evidence:
+      - url: https://www.tines.com/llm/stories/docs/credentials/workload-identity-federation.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Workload identity federation lets a credential authenticate to your cloud provider without storing a long-lived key or secret in Tines."
+      - url: https://www.tines.com/llm/stories/docs/credentials/workload-identity-federation.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your tenant acts as an OpenID Connect (OIDC) identity provider."
+      - url: https://www.tines.com/llm/stories/docs/credentials/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "No Tines AWS account and no external ID are involved: the role trusts your tenant's issuer URL and this credential's subject, and nothing else can assume it."
+      - url: https://www.tines.com/llm/stories/docs/credentials/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "We require an External ID to be set on the IAM role permissions you set up so that only the AWS credential you create in your tenant can be used to access your AWS data."
+      - url: https://www.tines.com/llm/stories/docs/credentials/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Role-based access is not available on self-hosted environments."
+      - url: https://www.tines.com/llm/stories/docs/credentials/aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access secret: The `access secret` from your [AWS Security Credentials]"
+      - url: https://www.tines.com/llm/stories/docs/credentials/workload-identity-federation/google-cloud.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tines signs a short-lived token for the credential and Google exchanges it for a short-lived access token, so no service account key is stored in Tines."
+      - url: https://www.tines.com/llm/stories/docs/credentials/workload-identity-federation/microsoft-entra.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tines signs a short-lived token for the credential and Microsoft Entra exchanges it for an access token for your app registration, so no client secret or certificate is stored in Tines."
+      - url: https://www.tines.com/llm/stories/docs/credentials/workload-identity-federation/oracle-cloud.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "OCI requires the token exchange itself to be authenticated, so you also create a confidential application in the domain and give Tines its client ID and secret."
+      - url: https://www.tines.com/llm/stories/docs/credentials/connect-flows/google-service-account.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Credential type | HTTP Request that includes a JWT token request."
+      - url: https://www.tines.com/llm/stories/docs/credentials/connect-flows/crowdstrike.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Defined by the user generating the API client."
+      - url: https://www.tines.com/llm/stories/docs/credentials/connect-flows/jira-software.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Customers often create an account for Tines to associate the API key with, scoping the permissions for that user as desired."
+      - url: https://www.tines.com/llm/stories/docs/credentials/connect-flows/github.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Credential type | OAuth 2.0"
+      - url: https://www.tines.com/llm/stories/docs/credentials/connect-flows.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Managed OAuth credentials allow users to easily authenticate to a platform by signing in with their account."
+      - url: https://www.tines.com/llm/stories/docs/credentials/oauth.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After registering your app with the 3rd-party service, you will receive a client ID and a client secret."
+    notes: >-
+      Checked credential types: AWS (workload identity OIDC, role with External ID, access key,
+      Bedrock API key), Google Cloud WIF, Microsoft Entra WIF, Oracle Cloud WIF, OAuth 2.0, JWT
+      (private key you paste), mutual TLS (client key you paste), Text, HTTP Request and Multi
+      Request (can fetch runtime secrets from Vault or AWS Secrets Manager). Connect flows checked:
+      AWS CLI (role + External ID), Google Service Account (private key JSON), Microsoft Graph and
+      Defender for Endpoint (customer app client secret, even though the Entra WIF credential can
+      replace it), GitHub (customer OAuth app client ID and secret), CrowdStrike (API client
+      secret), Okta (customer app private key), Jira Software (API key), ServiceNow (basic auth
+      or OAuth client secret), Slack, Google Calendar/Docs, GitLab and Salesforce (Tines-managed
+      OAuth apps, user sign-in, no customer secret; not on self-hosted). Clouds are all keyless:
+      AWS via OIDC or External ID roles, GCP and Entra via Tines-issued OIDC tokens bound to a
+      per-credential subject. Oracle Cloud's path also stores a confidential-app client secret,
+      but the docs note it cannot mint anything without a Tines-signed token. Graded B rather
+      than A because most SaaS connect flows still need a pasted long-lived key or client secret
+      and static AWS keys and Google service-account JSON keys remain offered (same call as
+      doppler-secrets, whose clouds are keyless via its own OIDC issuer but SaaS syncs take
+      tokens). Self-hosted loses the External ID role path and managed OAuth; the docs do not
+      say whether OIDC federation works there. The Tines 3B connection also uses Tines as an
+      OIDC issuer (API-key fallback only for unreachable self-hosted instances).
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "On the API Keys page you can view all of the API keys you have access to or create a new key."
+      - url: https://www.tines.com/llm/stories/docs/credentials/credential-configuration/expiry.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Emails will be sent thirty days, seven days and one day before the credential expires to alert the selected recipients that the credential needs to be updated."
+    notes: >-
+      The API key docs describe key types and creation but no expiry setting, default lifetime or
+      org policy. The credential "Expiry" field is a reminder date on stored credentials (Tines
+      emails before it), not an enforced lifetime on the Tines API key itself. Not publicly
+      verifiable beyond the docs; an enforced maximum lifetime would flip this.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To generate an API key in Tines, use the Tines connect flow."
+      - url: https://www.tines.com/stories/docs/api/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Keys are created in the UI (connect flow or settings page). The API reference index lists
+      Credentials, Users, Teams, Roles and other admin endpoints but no endpoint to create, list or
+      revoke API keys; audit logs record AuthenticationTokenCreation and Deletion events only.
+      The Credentials API can store a key someone minted, which does not rotate it.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Team API keys are also linked to separate service account users, but they have role-based access to a specific team on the tenant."
+      - url: https://www.tines.com/api/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service API keys are linked to separate service account users, and can be granted access to any tenant permissions such as AUDIT_LOG_READ and TUNNEL_MANAGE by a tenant owner."
+      - url: https://www.tines.com/llm/explained/10522850-what-happens-to-a-tines-api-key-when-the-user-account-that-created-it-leaves-the-tenant.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In summary, when a user is deactivated or removed entirely from the tenant, the only API key that stops working is their Personal API key."
+    notes: >-
+      Team and service keys belong to separate service-account users with a team role or
+      specific tenant permissions, a purpose-built machine principal the rubric counts. Personal
+      keys inherit the human's full access and tenant-owner keys have full Owner access; a tenant
+      can restrict key creation to holders of API_KEY_CREATE.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://www.tines.com/llm/stories/docs/admin/tenant-wide-credentials.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "the number of actions and stories the credential is used in, the credential type, when it was last used, created, and updated, the team name, the folder name, and the author name."
+    notes: >-
+      The "last used" column is for credentials Tines stores and uses outbound in actions. Nothing
+      in the API authentication docs or API reference shows when a Tines API key last
+      authenticated a request. Not publicly verifiable whether the login-walled API Keys
+      settings page shows it.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Tines does not appear in GitHub's supported secret-scanning patterns table, so a leaked
+      Tines API key is not reported to Tines for revocation.
+
+notes: >-
+  One card for Tines Stories on cloud and self-hosted; Tines 3B is a separate product, mentioned
+  only as an outbound target. One of five hygiene checks passes (scoping), so inbound is F; an
+  enforced key lifetime plus an API to create and revoke keys would lift it to D. Inbound moves to
+  B or A only if the Tines API accepts a federated token (GitHub Actions OIDC, cloud workload
+  identity or a bring-your-own issuer), which would be a short step for a tenant that already
+  runs its own OIDC issuer for outbound. Outbound reaches A if SaaS connect flows move off pasted
+  keys and client secrets (for example defaulting Microsoft connect flows to the Entra WIF
+  credential).

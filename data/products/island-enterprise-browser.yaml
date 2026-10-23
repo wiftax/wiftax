@@ -1,0 +1,189 @@
+id: island-enterprise-browser
+vendor: Island
+product: Island Enterprise Browser management API
+website: https://www.island.io
+docs: https://documentation.island.io/apidocs/generate-and-manage-api-keys
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "Island's docs and API reference redirect to its console login. Grades rest on third-party integration guides; expiry, rotation API and last-used fail as not publicly verifiable, and export authentication is unknown."
+summary: >-
+  Workloads automate Island's management console and SIEM feed with a static API key sent in an
+  api-key header. No federation exists. Keys get a role (Read-Only up to Full Admin), but Island's
+  docs are login-walled and nothing public shows expiry, a key-management API or last use, and
+  GitHub does not revoke leaked keys. Outbound, Microsoft Purview uses Entra admin consent, but
+  Google SecOps and Claude Compliance want static keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API key generated in the Island Management Console (Platform Settings > Integrations >
+      API, or a separate key under the Generic SIEM integration) with a chosen role, sent as an
+      `api-key` header to management.island.io and api.island.io. No OIDC, workload identity or
+      token-exchange path is documented anywhere public.
+    evidence:
+      - url: https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/389257580612079
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Island API supports all the key features of the Island Management Console, including the ability to create, read, update and delete policy, policy elements (such as URL lists), users, browser configuration policies, etc."
+      - url: https://raw.githubusercontent.com/elastic/integrations/main/packages/island_browser/docs/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authentication uses an API key as the required credential."
+      - url: https://raw.githubusercontent.com/ConductorOne/docs/main/baton/island.mdx
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The connector sends it verbatim as the lowercase HTTP header `api-key: <key>` (no `Bearer` prefix)."
+      - url: https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/Island/Data%20Connectors/IslandV2_CCP/IslandV2_connectorDefinition.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An Island API key is required."
+      - url: https://docs.hunters.ai/docs/island.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This key is used to authenticate and connect with API requests."
+      - url: https://explained.tines.com/en/articles/8592481-island-authentication-guide
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Name the key, choose an appropriate role and click \"Generate API Key\""
+      - url: https://docs.panther.com/data-onboarding/supported-logs/island-logs
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Detailed instructions for configuring the Island AWS S3 integration are available in the Island Documentation Portal (requires Management Console login)."
+    notes: >-
+      Island's own documentation (documentation.island.io, including the API reference and "Generate
+      and manage API keys") redirects to the Management Console login, and the Swagger endpoints on
+      management.island.io return 401, so this card is graded on public sources only: Island's
+      G-Cloud listing and the setup guides of integrators that call the API (Elastic, ConductorOne,
+      Microsoft Sentinel, Hunters, Tines, Cribl, Panther, Google SecOps). Every one of them uses a
+      console-generated API key; none mentions OIDC, a client-credentials flow or a cloud workload
+      identity. The SIEM Events API (api.island.io) and the v1 management API (management.island.io)
+      take the same kind of key. Anything Island documents behind the login about key lifetime,
+      rotation or federation is not publicly verifiable; if it shows federation the grade moves.
+  outbound:
+    grade: B
+    mechanism: >-
+      Microsoft Purview DLP connects through an Entra application the customer admin consents to
+      (keyless). Pushing logs to Google SecOps means pasting a Google Cloud API key and feed secret
+      into the Generic SIEM webhook URL, and the Claude Compliance API integration needs a
+      non-expiring Anthropic Compliance Access Key. S3, Azure Blob, Snowflake and other SIEM
+      destinations exist but their credential setup is login-walled.
+    evidence:
+      - url: https://www.island.io/blog/microsoft-purview-dlp-enterprise-browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The integration connects the Island Enterprise Browser and Island Extension with Microsoft Purview network data security through an Azure AD consented application via Microsoft Graph API."
+      - url: https://www.island.io/blog/microsoft-purview-dlp-enterprise-browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once an administrator grants consent and configures a Purview network collection or DLP policy, Island begins evaluating browser-level activity against those policies in real time."
+      - url: https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/island-browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Chronicle requires an API key for authentication."
+      - url: https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/island-browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the Server URL field, paste the complete webhook URL constructed in the previous step (the Chronicle endpoint URL with the API key and secret key appended as query parameters)."
+      - url: https://www.island.io/blog/island-integrates-with-the-claude-compliance-api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Island connects to Claude Enterprise via the Claude Compliance API and pulls the session content: chats, uploaded files, and attachments."
+      - url: https://platform.claude.com/docs/en/manage-claude/compliance-api-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Compliance Access Keys do not expire on their own."
+      - url: https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/389257580612079
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Customers can send their logs to Amazon S3, Snowflake, Azure Blob Storage or any SIEM of their choice during their contract with Island, meaning an export should not be required."
+      - url: https://docs.panther.com/data-onboarding/supported-logs/island-logs
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Island exports logs to an S3 bucket in your AWS account."
+    notes: >-
+      Provisional, because Island's integration docs are login-walled. Checked: Microsoft Purview
+      (Entra admin consent to an Island app via Graph, keyless under the cohort rule, as on
+      proofpoint-tap); Generic SIEM webhook push to Google SecOps (a Google Cloud API key plus a
+      Chronicle feed secret embedded in the URL Island stores; Google, not Island, gives the
+      restrict-the-key guidance); Claude Compliance API under SaaS API Protection (the Compliance
+      API only accepts Anthropic keys, and Compliance Access Keys never expire, so a static key
+      sits in Island); AWS S3, Azure Blob Storage and Snowflake log export, other SIEM pushes
+      (e.g. Splunk) and the AWS Security Hub Extended integration (all exist per Island and
+      partners, but how they authenticate is not publicly verifiable). Pull-based SIEMs (Sentinel,
+      Elastic, Hunters, Cribl, Panther's S3 reader) use the inbound key, not an outbound one.
+      Okta and Entra connections are human SSO and SCIM, out of scope. If the gated S3 page uses
+      a cross-account role with external ID this stays B; if Purview turns out to need a
+      customer-created app secret it drops to C or lower.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://www.elastic.co/docs/reference/integrations/island_browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Click + Create. The Create API Key drawer is displayed to assist in the key creation."
+    notes: >-
+      No public source mentions an expiry field, default lifetime or org policy for Island API
+      keys; the creation steps every integrator documents are name, role, generate. Not publicly
+      verifiable, so it fails for lack of a receipt; a documented enforced lifetime would flip it.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://www.elastic.co/docs/reference/integrations/island_browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If an API key already exists and you need to create a new one, you must first deactivate and delete the existing key by selecting Deactivate and Delete API Key."
+    notes: >-
+      Every public procedure creates and deletes keys in the console. No key-management endpoint
+      is visible in the public API references integrators link to (users, devices, timeline,
+      admin actions, compromised credentials, SIEM audits). Elastic's note also implies only one
+      management API key can exist at a time, so rotation means downtime rather than overlap.
+      Not publicly verifiable beyond that.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://www.elastic.co/docs/reference/integrations/island_browser
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Select Full Admin or System Admin as the role for this API key."
+      - url: https://raw.githubusercontent.com/ConductorOne/docs/main/baton/island.mdx
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Island API key with the Read-Only role."
+    notes: >-
+      Each key is assigned its own role at creation rather than inheriting the creator's access,
+      and a Read-Only role exists, which the rubric counts. It is coarse (console roles, no
+      per-endpoint or per-resource scopes are publicly documented), and the SIEM key guidance
+      asks for an admin-level account.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://explained.tines.com/en/articles/8592481-island-authentication-guide
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy your API key to a text editor and click \"Close\""
+    notes: >-
+      No public source shows a last-used timestamp for API keys. Not publicly verifiable; fails
+      for lack of a receipt.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Island does not appear in GitHub's supported secret scanning patterns table, so a leaked key
+      is neither detected nor reported to Island.
+
+notes: >-
+  Graded on public sources only: documentation.island.io and the API Explorer require a Management
+  Console login. One public hygiene pass (role scoping) puts inbound at F; documented key expiry,
+  a last-used view and a key-management API would lift it to D, and only a federated token path
+  (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer) would lift it further.
+  The browser's own end-user authentication (SSO through Okta, Entra and others) is human login
+  and out of scope. Island Desktop, Island Network and the MCP Gateway are managed from the same
+  console and were not graded separately.

@@ -1,0 +1,229 @@
+id: semgrep-appsec-platform
+vendor: Semgrep
+product: Semgrep AppSec Platform
+website: https://semgrep.dev
+docs: https://docs.semgrep.dev/deployment/tokens
+category: devtools
+status: listed
+summary: >-
+  CI scans (semgrep ci) and the Semgrep Web API accept only static tokens such as SEMGREP_APP_TOKEN.
+  No OIDC or CI token exchange exists. Tokens never expire, cannot be created through the API, show
+  no last use and are not in GitHub's partner program, though scopes such as Agent (CI) and
+  Read-only limit them. Into your repos it uses a GitHub App, but GitLab, Bitbucket and Azure DevOps
+  want access tokens.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static deployment token sent as Authorization: Bearer. CI jobs read it from SEMGREP_APP_TOKEN
+      (Agent (CI) scope); the Web API takes a Web API or Read-only scoped API token. No OIDC, CI
+      workload identity or token-exchange path is documented.
+    tier_gated: Team or Enterprise (Web API access)
+    evidence:
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An access token is a secure credential used to authorize requests to Semgrep AppSec Platform or the Semgrep API without a username and password."
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API tokens can be created by admins and are used for calls to the Semgrep API and to set up third-party integrations."
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These tokens authenticate agents running automated scans."
+      - url: https://semgrep.dev/docs/semgrep-ci/ci-environment-variables
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Set SEMGREP_APP_TOKEN to send findings to Semgrep AppSec Platform and use rules from the Policies page."
+      - url: https://docs.semgrep.dev/deployment/add-semgrep-to-ci.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Store it as an environment variable or secret in your CI provider."
+      - url: https://docs.semgrep.dev/semgrep-ci/sample-ci-configs.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}"
+      - url: https://docs.semgrep.dev/api-reference/v1/Authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API supports authentication with an API token with the \"Web API\" permission, without limited scopes of access."
+      - url: https://semgrep.dev/docs/semgrep-appsec-platform/semgrep-api
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API requires a Team or Enterprise tier account, with the subsequent API token provisioned in your settings."
+      - url: https://docs.semgrep.dev/deployment/sso.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This article walks you through single-sign on (SSO) configuration."
+    notes: >-
+      Graded on the weakest path a workload must use: both `semgrep ci` and the v1/v2 Web API take
+      only a static bearer token. The v1 and v2 OpenAPI specs declare SemgrepWebToken plus two
+      user-session JWT schemes (SemgrepJWT, SemgrepAdminJWT) used by the web app, not federation.
+      The only OIDC in the docs is SSO for human login (OpenID Connect and SAML). The GitHub Actions
+      sample reads SEMGREP_APP_TOKEN from repository secrets, and during onboarding the Semgrep GitHub
+      App writes that token into repo secrets for you; no id-token / OIDC exchange is offered. Managed
+      Scans avoid a CI token entirely by having Semgrep pull code over the SCM connection (outbound,
+      below), but anything you automate from your own CI or scripts still needs a static token.
+      CI scanning works on the free tier; Web API access needs Team or Enterprise.
+  outbound:
+    grade: B
+    mechanism: >-
+      GitHub (Cloud and Enterprise) connects through a Semgrep GitHub App your org installs, Cursor
+      Origin through Semgrep's public app, Jira Cloud through app consent, and AWS CodeArtifact by
+      assuming your IAM role with an External ID; GitLab, Bitbucket and Azure DevOps connections
+      want a customer-created access token, and private registries and Wiz want static credentials.
+    evidence:
+      - url: https://docs.semgrep.dev/deployment/connect-scm.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can connect to GitHub with Semgrep's GitHub App, or with a personal access token."
+      - url: https://docs.semgrep.dev/deployment/prepare/scm-permissions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "During the connection process, your organization creates a private GitHub App from Semgrep's template, named"
+      - url: https://docs.semgrep.dev/deployment/connect-scm.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You do not need to create an app or provide credentials."
+      - url: https://docs.semgrep.dev/kb/semgrep-supply-chain/connect-aws-codeartifact.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Its trust policy allows the Semgrep role ARN to assume it, but only with your External ID."
+      - url: https://docs.semgrep.dev/semgrep-appsec-platform/jira.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Follow the on-screen instructions to grant Semgrep the necessary permissions and set up the integration."
+      - url: https://docs.semgrep.dev/deployment/managed-scanning/gitlab.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You must provide a GitLab group access token or personal access token to Semgrep."
+      - url: https://docs.semgrep.dev/deployment/connect-scm.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your **Access token**. Semgrep requires a [workspace-level access token](https://support.atlassian.com/bitbucket-cloud/docs/create-a-workspace-access-token/), which is only available on **Bitbucket Cloud Premium**."
+      - url: https://docs.semgrep.dev/deployment/managed-scanning/bitbucket.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Set the token name, permissions, and expiry."
+      - url: https://docs.semgrep.dev/deployment/managed-scanning/azure.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "During setup and configuration, you must provide a personal access token generated by the account. This token must be authorized with **Full access**."
+      - url: https://docs.semgrep.dev/public_v2.openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generates a key pair server-side and returns the public certificate for the customer to upload to their Entra app registration."
+      - url: https://docs.semgrep.dev/kb/semgrep-supply-chain/connect-a-private-registry.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "**Username and password**: provide the required **Username** and **Password**."
+      - url: https://docs.semgrep.dev/semgrep-appsec-platform/wiz.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can obtain the **API Endpoint URL** and the **Authentication URL** from Wiz in [Tenant Info](https://app.wiz.io/tenant-info/general), while Wiz provides the **Client ID** and **Client Secret** when you set up a service account."
+      - url: https://docs.semgrep.dev/public_v2.openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Returns the Managed Scans VPC Bootstrap CloudFormation template in JSON format for setting up cross-account infrastructure."
+    notes: >-
+      Checked: GitHub Cloud (default is a private "Semgrep Code - YOUR_ORG_NAME" app created from
+      Semgrep's template, older orgs have the public semgrep-app; nothing pasted by the customer;
+      a GitHub PAT is an alternative); GitHub Enterprise Cloud with data residency and GitHub
+      Enterprise Server (app registered from Semgrep's flow on your instance); Cursor Origin (public
+      Semgrep app, keyless; a private app means handing Semgrep its private key); Jira Cloud (Atlassian
+      app consent, keyless); AWS CodeArtifact for Supply Chain dependency resolution (IAM role with
+      External ID, two-hour tokens; private beta); Managed Scans in your AWS VPC (CloudFormation
+      cross-account roles, private beta, documented only in the v2 API spec). Static: GitLab Cloud
+      and Self-Managed (group or personal access token with api scope), Bitbucket Cloud (workspace
+      access token, Premium only), Bitbucket Data Center (HTTP access token), Azure DevOps (PAT with
+      Full access during setup, narrowed afterwards), private package registries (username/password
+      or API token), Wiz (service-account client ID and secret), plus Bitbucket PR-comment tokens.
+      The v2 API spec also lists an Azure DevOps Entra service principal install where Semgrep
+      generates the key pair and you upload only the public certificate; that would be keyless from
+      your side, but it is not in the user docs, so it is not counted. The docs do give least-privilege
+      scopes per feature for the token-based SCMs. Semgrep Network Broker is a WireGuard tunnel you
+      run; its private key stays with you. B: keyless for GitHub and AWS, static tokens for the other
+      SCMs.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "However, they remain valid until manually revoked, even if the creator is no longer associated with the deployment."
+    notes: >-
+      The create-token steps offer scope and name only, with no expiry field, and no org policy for a
+      maximum lifetime is documented. A token minted today works until someone revokes it.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.semgrep.dev/public_v2.openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Delete all tokens matching the given filters"
+      - url: https://docs.semgrep.dev/public_v2.openapi.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Only CLI and API tokens can be bulk-deleted through this RPC, so"
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Go to [**Settings > Tokens > API tokens**](https://semgrep.dev/orgs/-/settings/tokens/api)."
+    notes: >-
+      Tokens are created and revoked in the web app (Settings > Tokens). The only API surface is an
+      Experimental bulk DELETE on /api/tokens/v1/deployments/{id}/tokens that removes every CLI or
+      API token of a given role at once; neither v1 nor v2 has a create-token or revoke-one endpoint,
+      so rotation cannot be automated without a browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Scopes are mutually exclusive."
+      - url: https://docs.semgrep.dev/kb/semgrep-appsec-platform/api-404-token-scope.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens with the **Agent (CI)** scope can connect scans with the platform to request rules, send findings, and post PR/MR comments, but they cannot use the Web API."
+      - url: https://docs.semgrep.dev/kb/semgrep-appsec-platform/api-404-token-scope.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It cannot perform write or mutate operations."
+    notes: >-
+      Passes on permission scoping: each token gets one of Agent (CI), Web API, Member or Read-only,
+      and does not inherit its creator's access (it outlives the creator). There is no per-project or
+      per-repository scoping, a token covers the whole deployment, and a Web API token has full read
+      and write access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.semgrep.dev/deployment/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Each token type has its own page that lists all existing tokens of that type."
+    notes: >-
+      The token pages offer search and a filter by scope or service; no last-used time is documented
+      on the token pages, the docs or either OpenAPI spec.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Semgrep does not appear in GitHub's supported secret scanning patterns table, so a leaked
+      SEMGREP_APP_TOKEN pushed to a public repo is not reported to Semgrep for revocation.
+
+notes: >-
+  One card for the hosted Semgrep AppSec Platform (Code, Supply Chain, Secrets, Managed Scans). The
+  open-source Semgrep CE CLI needs no credential for local scans; Semgrep Guardian (IDE and agent
+  plugins) signs developers in through browser OAuth or `semgrep login` and is a human path, not graded. Only one of five hygiene
+  checks passes, so inbound is F. Token expiry with an enforceable maximum, plus create/revoke API
+  endpoints, would lift it to D; accepting GitHub Actions or GitLab CI OIDC for `semgrep ci` would
+  remove the most widely copied static token and move inbound to B or A. Outbound reaches A if
+  GitLab, Bitbucket and Azure DevOps get app-based connections (the Entra service-principal install
+  in the v2 spec is a start).

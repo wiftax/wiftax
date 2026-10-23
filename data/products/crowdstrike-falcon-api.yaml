@@ -1,0 +1,208 @@
+id: crowdstrike-falcon-api
+vendor: CrowdStrike
+product: Falcon platform API (OAuth2 API clients)
+website: https://www.crowdstrike.com
+docs: https://developer.crowdstrike.com/api-reference/collections/oauth2.md
+category: security
+status: listed
+summary: >-
+  Every Falcon API call, SDK and the Terraform provider start from a static API client ID
+  and secret swapped for a 30-minute token; there is no OIDC or workload identity path. Clients are
+  scoped and API-resettable, but secrets do not expire, show no last use, and are not GitHub
+  partner-revoked. Into your cloud, CSPM registration is keyless on AWS, Azure and GCP, but OCI and
+  most container registry connections still use static keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      OAuth2 client_credentials: a static API client ID and secret created under API Clients & Keys
+      are POSTed to /oauth2/token for a bearer token that lasts 30 minutes. No federation, token
+      exchange or workload identity path exists.
+    evidence:
+      - url: https://developer.crowdstrike.com/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All API access requires OAuth2 credentials (client_id and client_secret) created in the Falcon console under Support and resources > API Clients & Keys."
+      - url: https://developer.crowdstrike.com/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens expire after 30 minutes."
+      - url: https://developer.crowdstrike.com/api-reference/collections/oauth2.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All API requests require a valid bearer token generated through this collection."
+      - url: https://developer.crowdstrike.com/api-reference/collections/oauth2.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API client secret to authenticate your API requests."
+      - url: https://raw.githubusercontent.com/CrowdStrike/terraform-provider-crowdstrike/main/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`client_secret` (String, Sensitive) Falcon Client Secret used for authenticating to the CrowdStrike APIs."
+      - url: https://developer.crowdstrike.com/sdks/powershell/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Obtain an access token using `Request-FalconToken` with your API Client ID and Secret."
+    notes: >-
+      The token endpoint takes only client_id, client_secret and an optional MSSP member_cid; no
+      grant for a JWT assertion or an external OIDC token is documented in the API reference, the
+      SDKs (FalconPy, PSFalcon, gofalcon), the Terraform provider or the Falcon MCP server. Grade C
+      under the precedent that OAuth client_credentials with a client secret is a short-lived token
+      from a static root. The "Federated Connections" API collection is NG-SIEM search federation
+      to external LogScale clusters (a view_token you supply), not authentication federation.
+      CreateAPIClient accepts redirect_uris and a type, suggesting other OAuth flows for apps, but
+      none removes the client secret for a workload. Falcon Foundry functions running inside
+      Falcon would be ambient identity on the vendor's platform and would not earn A anyway.
+      CrowdStrike's own API client docs (crowdstrike-api-introduction-for-developers) are behind
+      the Falcon login and not publicly verifiable.
+  outbound:
+    grade: B
+    mechanism: >-
+      Falcon Cloud Security registration is keyless on AWS (IAM role with external ID, assumed via
+      a CrowdStrike intermediate role), Azure (CrowdStrike's multi-tenant app as a service
+      principal in your tenant) and GCP (Workload Identity Federation pool trusting CrowdStrike's
+      AWS role or Google service account). OCI registration uses a long-lived API signing key on an
+      IAM user, and container registry connections other than ECR take passwords, tokens, an Azure
+      certificate or a GCP service-account JSON key.
+    evidence:
+      - url: https://developer.crowdstrike.com/cac/terraform/provider/falcon-cloud-security/resources/cloud-aws-account.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`external_id` (String) The external ID used to assume the AWS IAM role"
+      - url: https://developer.crowdstrike.com/cac/terraform/provider/falcon-cloud-security/resources/cloud-aws-account.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`intermediate_role_arn` (String) The ARN of the intermediate role used to assume the AWS IAM role"
+      - url: https://developer.crowdstrike.com/cac/terraform/provider/falcon-cloud-security/resources/cloud-azure-tenant.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`cs_azure_client_id` (String) Client ID of CrowdStrike's multi-tenant application in Azure."
+      - url: https://developer.crowdstrike.com/cac/terraform/modules/gcp-cloud-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The module enables keyless authentication through GCP's Workload Identity Federation and provides security monitoring capabilities including asset inventory and optional real-time log ingestion for threat detection."
+      - url: https://developer.crowdstrike.com/cac/terraform/modules/gcp-cloud-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Numeric unique ID of CrowdStrike's shared service account. Required when CrowdStrike authenticates via GCP OIDC."
+      - url: https://developer.crowdstrike.com/cac/terraform/modules/oci-cloud-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Associates an API key with the created user"
+      - url: https://developer.crowdstrike.com/cac/terraform/modules/oci-cloud-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`api_public_key`: Public key for API access, generated by Falcon Cloud Security"
+      - url: https://developer.crowdstrike.com/api-reference/collections/cloud-oci-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create, update, delete, and validate OCI tenancy accounts, rotate keys, and retrieve setup scripts."
+      - url: https://developer.crowdstrike.com/cac/terraform/provider/falcon-container-image/resources/container-registry.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`aws_iam_role` (String) AWS IAM role ARN. Required for: `ecr`."
+      - url: https://developer.crowdstrike.com/cac/terraform/provider/falcon-container-image/resources/container-registry.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`service_account_json` (Attributes) GCP service account JSON. Required for: `gar`, `gcr`."
+      - url: https://developer.crowdstrike.com/cac/terraform/provider/falcon-container-image/resources/container-registry.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`password` (String, Sensitive) Password, API key, or access token. Required for: `dockerhub`, `docker`, `github`, `gitlab`, `icr`, `artifactory`, `acr` (password auth), `mirantis`, `oracle`, `openshift`, `quay.io`, `nexus`, `harbor`."
+    notes: >-
+      Checked (from the public Developer Center API reference and the Terraform provider and
+      modules): CSPM/Cloud Security registration on AWS (cross-account role with external ID plus
+      agentless-scanning and DSPM roles; keyless), Azure (service principal for CrowdStrike's
+      multi-tenant app with Graph permissions and admin consent; keyless), GCP (a WIF pool in your
+      project that trusts CrowdStrike's AWS STS role or its Google service account via OIDC;
+      keyless), OCI (a Resource Manager stack creates an IAM user and attaches an API signing key
+      whose key pair Falcon generates; only the public key crosses, but the private key is a
+      long-lived credential CrowdStrike holds, with a rotate-key API and a key_age field), and
+      container image registry connections (ECR via IAM role plus external ID; ACR via password or
+      service-principal certificate; GAR/GCR via a service-account JSON key; Docker Hub, GitHub,
+      GitLab, Artifactory, Harbor, Quay and others via username plus password or token). B because
+      the three big clouds are keyless but OCI and most registries are not. Not graded here:
+      SaaS Security and Next-Gen SIEM third-party connectors (per-app OAuth or API keys configured
+      in the console, not publicly documented in detail) and Falcon Data Replicator, which is
+      CrowdStrike-hosted S3 that you pull from rather than a reach-in.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.crowdstrike.com/api-reference/collections/api-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Reset existing API Client(s)'s secret based on API Client ID(s) provided as request parameter(s) 'ids'."
+    notes: >-
+      CreateAPIClient and UpdateAPIClient take only description, is_confidential, name,
+      redirect_uris, scopes and type; there is no expiry or lifetime field, and no public document
+      describes a secret expiry or a CID-wide maximum-lifetime policy. A secret lives until someone
+      resets it or deletes the client. The in-console API documentation is login-walled, so an
+      unpublished expiry setting is not publicly verifiable; graded on what can be cited.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developer.crowdstrike.com/api-reference/collections/api-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Reset existing API Client(s)'s secret based on API Client ID(s) provided as request parameter(s) 'ids'."
+      - url: https://developer.crowdstrike.com/api-reference/collections/api-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Delete existing API Client(s) based on API Client ID(s) provided as request parameter(s) 'ids'."
+    notes: >-
+      The API Clients collection (scope Api Client Mgmt) creates, lists, updates, deletes and
+      resets the secret of API clients, so rotation can be scripted. Resetting replaces the secret
+      in place, so a zero-downtime rotation means creating a second client first.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.crowdstrike.com/cac/terraform/modules/aws-cloud-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It is highly recommended that you create a dedicated API client with only the required scopes."
+      - url: https://developer.crowdstrike.com/api-reference/collections/api-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Get all available scopes for customer."
+    notes: >-
+      An API client is its own principal, not a user's key, and carries an explicit list of
+      per-API read/write scopes (every operation in the reference names the scope it needs). Scopes
+      are per API collection, not per host group or resource, but that is still a least-privilege
+      machine principal under the rubric.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.crowdstrike.com/api-reference/collections/api-clients.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Possible values for sort by field includes id, name, created_by, updated_by, created_timestamp, last_modified."
+    notes: >-
+      The public API reference exposes created and last-modified metadata for API clients but no
+      last-used field, and the response schema for GetAPIClients is not published. Whether the
+      console's API Clients & Keys page shows last use is not publicly verifiable (login-walled);
+      API activity can be found in audit logs, which is not the same as a per-key last-used view.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      CrowdStrike does not appear in GitHub's supported secret scanning patterns table at all, so a
+      Falcon API client secret pushed to a public repo is neither alerted on by a GitHub pattern nor
+      reported to CrowdStrike.
+
+notes: >-
+  One card for the Falcon platform API across all its service collections; the Terraform
+  provider, FalconPy, PSFalcon and gofalcon all authenticate the same way. Two of five
+  hygiene checks pass, which would not matter at grade C but explains what to fix: a secret
+  lifetime with an enforceable maximum, a last-used timestamp, and a prefixed secret enrolled in
+  GitHub's partner program. Inbound moves to B or A only if /oauth2/token accepts a federated
+  assertion (GitHub Actions OIDC, cloud workload identity, or a bring-your-own issuer). Outbound
+  moves to A if OCI registration and the registry connectors (GAR, ACR, GitHub, GitLab) move to
+  federation the way the AWS, Azure and GCP registrations already have. Falcon sensors use a CID
+  and optional installation token, which is endpoint enrollment rather than API access and is not
+  graded here.
