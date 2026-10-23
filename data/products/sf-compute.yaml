@@ -1,0 +1,180 @@
+id: sf-compute
+vendor: San Francisco Compute Company
+product: SF Compute (v2 API and sf CLI)
+website: https://sfcompute.com
+docs: https://docs.sfcompute.com/preview/tokens
+category: cloud
+status: listed
+summary: >-
+  Workloads drive the SF Compute GPU market (API, sf CLI) with a static sk_live_ bearer token; no
+  OIDC or workload identity path exists. Tokens get least-privilege roles per workspace, show a
+  last-used time and can be rotated from the CLI, but "never expires" is allowed and GitHub does
+  not scan for them. SF Compute never reaches into your cloud. Object storage is graded on the
+  sf-compute-object-storage card.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static organization-level API token (sk_live_..., Authorization: Bearer) created with
+      `sf tokens create` or in the dashboard and bound to roles by grants; used by the v2 REST API
+      and by the sf CLI in scripts (SF_BEARER_TOKEN / SF_API_KEY).
+    issuers: []
+    evidence:
+      - url: https://docs.sfcompute.com/preview/using-the-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All requests require a Bearer token."
+      - url: https://docs.sfcompute.com/preview/using-the-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This prints a token starting with `sk_live_`."
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use tokens for CI/CD (continuous integration and delivery) pipelines, automation, and service accounts."
+      - url: https://docs.sfcompute.com/api-reference/account/get-the-authenticated-account-and-logged-in-user.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create an API token using `sf tokens create` or at https://sfcompute.com/dashboard/tokens."
+      - url: https://docs.sfcompute.com/preview/quick-start.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This opens your browser to sign in and stores your credentials locally."
+      - url: https://raw.githubusercontent.com/sfcompute/skills/main/sf-cli/SKILL.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "For scripts: set `SF_BEARER_TOKEN` or `SF_API_KEY`."
+    notes: >-
+      No OIDC, GitHub Actions, cloud workload identity or token-exchange path is documented
+      anywhere in the docs index, the v2 API's security scheme (a single bearer_auth "Create an API
+      token" scheme), or the CLI reference; `sf login` is a browser session for humans. The full
+      OpenAPI spec redirects to a login (blueprint.sfcompute.com), so it was not read. Graded D on
+      the control-plane token, which every workload that buys compute or launches instances must
+      hold. Object storage's static S3-style keys are graded separately on the
+      sf-compute-object-storage card (F), following the coreweave-object-storage split. The legacy
+      v1 API ("still works but is being phased out") also takes bearer tokens; its archived CLI
+      defaulted new tokens to "Never Expire" (100 years). The Kubernetes clusters product
+      mentioned in older marketing no longer appears in the public docs or either CLI and was not
+      graded. SF Autoresearch is a separate product with its own accounts.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      SF Compute has no documented integration that reaches into customer clouds, registries or
+      SaaS; data and images are pushed in by the customer's own tools.
+    evidence:
+      - url: https://docs.sfcompute.com/preview/object-storage.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Data passes through the machine running rclone."
+      - url: https://docs.sfcompute.com/preview/images.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Upload a raw disk image with `sf images upload`."
+      - url: https://docs.sfcompute.com/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Checked every page in the docs index: object storage (dataset import runs rclone on your own
+      machine with your source provider's credentials; SF Compute never holds them), images
+      (multipart upload from the CLI, no registry or bucket pull), instances, instance templates,
+      pools, orders, networking, events and limits. No S3/GCS/Azure import, private registry,
+      Hugging Face or W&B integration is documented. Instance "secrets" are served to your own VMs
+      from the metadata service, not used by SF Compute to reach out.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Without `--expires`, interactive runs prompt for an expiration and non-interactive runs default to 90 days."
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Pass `--no-expire` to create a token that never expires."
+      - url: https://sfcompute.com/changelog
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "now correctly never expire instead of defaulting to 14 days"
+      - url: https://raw.githubusercontent.com/sfcompute/cli/main/src/lib/tokens.ts
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "name: \"Never Expire\","
+    notes: >-
+      A changeable default is not an enforced expiry (the precedent on temporal.yaml's PASS turns
+      on a platform-enforced two-year cap). Non-interactive creation defaults to 90 days, but
+      `--no-expire` and the dashboard's "No expiration" option both mint never-expiring tokens, and
+      no org policy to forbid them is documented.
+      An org-level max lifetime would flip this to pass.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Creating or deleting a token requires a role with `token` permissions."
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Deleting a token revokes it immediately."
+      - url: https://docs.sfcompute.com/preview/roles.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "token = [\"*\"] # Manage tokens"
+    notes: >-
+      `sf tokens create` and `sf tokens delete` run non-interactively with `--no-input`, and a
+      token (not only a human) can hold the `token` permission, so a job can mint its replacement
+      and revoke the old one without a browser. The public v2 API reference lists no token
+      endpoints and the full OpenAPI spec is login-walled, so this passes on the CLI (as
+      temporal.yaml's does), not on a documented REST endpoint.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.sfcompute.com/preview/using-the-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens start with no permissions."
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Attach a role at creation time with `--role`, and pass `--workspace` to limit it to 1 workspace or `--org` to apply it organization-wide."
+      - url: https://docs.sfcompute.com/preview/grants.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Grant roles to tokens for CI/CD pipelines and other automation."
+      - url: https://docs.sfcompute.com/preview/roles.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Full access to instances, read access to pools, secrets, and SSH keys, and nothing else."
+    notes: >-
+      Tokens are their own principals: they do not inherit the creator's access, start with none,
+      and receive grants of built-in or custom roles (resource and verb rules) per workspace. RBAC
+      is in public preview.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.sfcompute.com/preview/tokens.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "NAME SUFFIX CREATED LAST USED EXPIRES"
+    notes: >-
+      `sf tokens list` shows a LAST USED column for every token in the organization.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      SF Compute does not appear in GitHub's supported secret-scanning patterns table, despite the
+      greppable sk_live_ prefix (which it shares with Stripe's live keys).
+
+notes: >-
+  Graded on the current v2 API and Rust sf CLI (public preview; GA for pools, orders, instances).
+  Three of five hygiene checks pass on the control-plane token, which holds the D; an enforced
+  maximum token lifetime or a GitHub secret-scanning partnership would make it four. Inbound moves
+  to B or A only if SF Compute accepts a federated token (GitHub Actions OIDC, cloud workload
+  identity, or a bring-your-own issuer) in place of sk_live_ tokens. Object storage, the weakest
+  credential on the platform, is graded F on the sf-compute-object-storage card.

@@ -1,0 +1,232 @@
+id: orca-security
+vendor: Orca Security
+product: Orca Cloud Security Platform
+website: https://orca.security
+docs: https://docs.orcasecurity.io/docs/managing-api-tokens
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "docs.orcasecurity.io is behind a login. Token hygiene comes from third-party integration guides, rotation API and last-used fail as not publicly verifiable, and Azure, GCP and OCI onboarding are unverified."
+summary: >-
+  Workloads call the Orca API, MCP server, Terraform provider and CI actions with a static API token
+  sent as "Authorization: Token"; no OIDC or workload identity path exists. Tokens take a role and
+  scope, but "Never Expire" is a checkbox, API rotation and last use are not publicly documented, and
+  GitHub does not report leaks. Into your cloud, AWS and Alibaba onboarding use a cross-account role;
+  Snyk, Cloudflare, Akamai, Zscaler and Terraform Cloud integrations want static secrets.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static Orca API token (optionally a "Service Token" not tied to a user) with a role and scope,
+      sent directly as "Authorization: Token <token>" to api.orcasecurity.io, the MCP server, the
+      Terraform provider, orca-cli and the Shift Left GitHub Actions. OAuth 2.0 exists only as a
+      browser flow for interactive MCP clients.
+    evidence:
+      - url: https://orca.security/mcp-server/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API token: For automated pipelines and services that can't use browser-based authentication."
+      - url: https://orca.security/mcp-server/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "OAuth 2.0: Recommended for interactive use. Your client handles the browser flow automatically"
+      - url: https://raw.githubusercontent.com/orcasecurity/orca-skills/main/.mcp.json.template
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"Authorization": "Token YOUR_ORCA_API_TOKEN_HERE"'
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "It is required to configure at least two configuration options: api_endpoint and api_token."
+      - url: https://raw.githubusercontent.com/orcasecurity/shiftleft-iac-action/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "api_token: ${{ secrets.ORCA_SECURITY_API_TOKEN }}"
+      - url: https://raw.githubusercontent.com/orcasecurity/orca-skills/main/plugins/security-engineer/skills/lib/orca_client.py
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Token: ORCA_API_TOKEN env var (base64 token string from Orca config)"
+      - url: https://truto.one/integrations/detail/orcasecurity/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use this endpoint to create a new user session by providing a valid security_token."
+    notes: >-
+      Orca's docs portal (docs.orcasecurity.io) redirects to a region-selection login, so the API
+      token and onboarding pages are not publicly verifiable; this card relies on Orca's public site,
+      Orca's own GitHub repos (Terraform provider, MCP template, GitHub Actions, orca-skills) and
+      third-party integration guides (Vanta, Expel, Observe, Tines, Cloudaware, Truto) that walk
+      through Orca's token dialog. Every documented automation path sends the long-lived token itself
+      as the bearer credential. A session endpoint can trade the token for a session, but the
+      weakest path a workload must use (Terraform, MCP, Shift Left actions, serving-layer API) takes
+      the raw token, so this is graded as a static key, not C. No OIDC, GitHub Actions OIDC, cloud
+      workload identity or token exchange is documented: Orca's own GitHub Actions store the token in
+      GitHub Secrets. The MCP server's OAuth is a browser consent flow for humans.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS onboarding deploys a CloudFormation stack that creates OrcaSecurityRole trusting Orca's AWS
+      account with an External ID; Alibaba Cloud uses a RAM role template; S3 export trusts Orca's
+      uploader role. Third-party integrations (Snyk, Cloudflare, Akamai, Zscaler ZPA, Terraform
+      Cloud) want a static API token or OAuth client secret stored in Orca.
+    evidence:
+      - url: https://orca.security/lp/aws-activate/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Simply log into your AWS account and provision Orca with cross-account read-only access."
+      - url: https://orca.security/lp/aws-activate/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Add the role ARN, and you’re done!"
+      - url: https://raw.githubusercontent.com/hisashiyamaguchi/note-orca-security-aws-onboarding/main/globalDefaultPolicy.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"AWS": "arn:aws:iam::976280145156:root"'
+      - url: https://raw.githubusercontent.com/hisashiyamaguchi/note-orca-security-aws-onboarding/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "contact Orca representative - he/she can give your external_id"
+      - url: https://orca.security/partners/technology/alibaba-cloud/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Simply log into your Alibaba Cloud account and provision Orca with cross-account read-only access."
+      - url: https://orca.security/partners/technology/alibaba-cloud/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An embedded RAM Role and Policy template provisions everything required."
+      - url: https://orca.security/partners/technology/oracle-cloud-infrastructure/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Simply log into your Oracle Cloud account and provision Orca with cross-account read-only access."
+      - url: https://orca.security/resources/video/azure-onboarding/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Walkthrough of how to onboard an Azure account for Orca to SideScan."
+      - url: https://orca.security/resources/video/gcp-onboarding/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Walkthrough of how to onboard a GCP account for Orca to SideScan."
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/data-sources/integration_s3_bucket_policy.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Renders the bucket policy that Orca's S3 uploader role needs in order to write"
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_snyk.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`api_token` — (Required, String, Sensitive) Snyk service account API token."
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_cloudflare.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`api_token` — (Required, String, Sensitive) Cloudflare API token."
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_akamai.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Orca uses Akamai EdgeGrid credentials"
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_zscaler_zpa.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The OAuth `client_id` and `client_secret` are"
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_terraform_cloud.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`api_token` — (Required, String, Sensitive) Terraform Cloud service-account"
+    notes: >-
+      Checked: cloud onboarding for AWS, Azure, GCP, OCI and Alibaba; S3 bucket export; and the
+      third-party integrations exposed in Orca's Terraform provider (Snyk, Cloudflare, Akamai, Zscaler
+      ZPA, Terraform Cloud; ticketing and alerting targets such as Jira, ServiceNow, Slack, PagerDuty,
+      Opsgenie, Splunk and Sentinel push findings out and were not counted). AWS is keyless: Orca's
+      CloudFormation template (seen in a public copy, since Orca's docs are login-walled) creates
+      OrcaSecurityRole trusting Orca's account 976280145156 with an sts:ExternalId condition that
+      Orca issues. Alibaba is keyless per Orca's page (RAM role template). Azure, GCP and OCI
+      onboarding mechanics are not publicly verifiable: Orca only publishes walkthrough videos, and
+      the OCI page copies the Alibaba wording ("RAM Role", "role ARN"), so it is not treated as
+      evidence of an OCI mechanism. B rests on AWS and Alibaba being keyless while Snyk, Cloudflare,
+      Akamai and Terraform Cloud want static API tokens and Zscaler ZPA an OAuth client secret. If
+      Azure or GCP turn out to take a client secret or service account key, the grade stays B; A
+      would need every integration to be keyless.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.expel.io/hc/en-us/articles/19321075551763
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Never Expire - select this checkbox."
+      - url: https://help.vanta.com/en/articles/11345793-connecting-vanta-orca-security
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "We want to set the expiration date as not setting any is a security concern."
+      - url: https://docs.observeinc.com/docs/install-the-orca-security-app
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Name the new API token, for example, Observe-Lambda-Token, and select a desired expiration date."
+    notes: >-
+      Tokens can carry an expiration date, but the creation dialog has a "Never Expire" checkbox and
+      no organization policy to forbid it or cap the lifetime is publicly documented. A changeable
+      expiry is not an enforced one (same call as `elastic-cloud-api`).
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://truto.one/integrations/detail/orcasecurity/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use this endpoint to retrieve a list of active authentication tokens associated with your Orca Security account."
+      - url: https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/custom_role.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"auth.tokens.write"'
+    notes: >-
+      Not publicly verifiable. A list-tokens endpoint and an auth.tokens.write RBAC permission exist,
+      but no public source documents creating or revoking API tokens through the API, and the
+      Terraform provider has no token resource; every integration guide creates tokens in the
+      console. Would pass with a citable create/revoke token endpoint.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.expel.io/hc/en-us/articles/19321075551763
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service Token - select this checkbox (to prevent the token expiring with a user account)."
+      - url: https://help.vanta.com/en/articles/11345793-connecting-vanta-orca-security
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Leave the Scope access to specific resources checkbox unchecked."
+      - url: https://explained.tines.com/en/articles/8227139-orca-security-authentication-guide
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Determine the expiration date, role, and scope you wish to apply"
+    notes: >-
+      Each token takes its own role (Viewer, Internal Viewer, custom roles) and can be scoped to
+      specific resources or accounts, and a Service Token is not tied to a user, which the rubric
+      counts as a purpose-built machine principal.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://truto.one/integrations/detail/orcasecurity/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use this endpoint to retrieve a list of active authentication tokens associated with your Orca Security account."
+    notes: >-
+      Not publicly verifiable: no public source shows a last-used timestamp on API tokens. Orca's
+      docs may show one behind the login wall; a public citation would flip this check.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Orca Security does not appear in GitHub's supported secret-scanning patterns table, so a leaked
+      Orca API token is not reported to Orca.
+
+notes: >-
+  One card for the Orca Cloud Security Platform (CSPM, CWPP, Shift Left, MCP server share one API
+  token model). Orca's documentation portal is login-walled, which limits what can be cited:
+  rotation API and last-used are failed as not publicly verifiable, and Azure, GCP and OCI
+  onboarding are unverified. With only scoping passing, inbound is F; publishing a create/revoke
+  token API, a last-used field and a max-lifetime policy would lift it to D. Inbound moves to B or A
+  only with a federated login (GitHub Actions OIDC, cloud workload identity or bring-your-own
+  issuer). Reviewer check: the AWS template evidence is a third-party copy of Orca's CloudFormation
+  template, not an Orca-hosted page.

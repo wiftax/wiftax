@@ -1,0 +1,186 @@
+id: cudo-compute
+vendor: CUDO Compute
+product: CUDO Compute (REST API, cudoctl, Python client, Terraform provider, object storage)
+website: https://www.cudocompute.com
+docs: https://docs.cudocompute.com/api/authentication.md
+category: cloud
+status: listed
+summary: >-
+  Every way to automate CUDO Compute (REST API, cudoctl, Python client, Terraform) runs on one
+  static bearer API key that inherits its user's permissions, has no expiry or last-used field,
+  and is not in GitHub's secret-scanning partner program. Keys can be created and deleted by API.
+  Object storage uses static S3 keys. The vLLM app asks you to paste a Hugging Face token.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static user API key sent as Authorization: Bearer, created in the console or with POST
+      /v1/api-keys; the same key configures cudoctl, the Python client and the Terraform provider.
+      Object storage takes static S3 access/secret keys per object storage user. No OIDC, workload
+      identity or token-exchange path exists.
+    issuers: []
+    evidence:
+      - url: https://docs.cudocompute.com/api/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All requests to the CUDO Compute API must be authenticated with an API key in the `Authorization` header unless explicitly documented otherwise."
+      - url: https://docs.cudocompute.com/api/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Currently the API uses a single global bearer scheme named `bearerAuth` with header `Authorization`. There is no separate refresh or OAuth flow."
+      - url: https://docs.cudocompute.com/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API key authentication. API keys should be passed using the format `Bearer API_KEY`."
+      - url: https://docs.cudocompute.com/tools/cudoctl.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You will need to **[Create an API key](/docs/api/authentication#create-an-api-key)** before you can use cudoctl."
+      - url: https://docs.cudocompute.com/tools/python-client.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once cudoctl is set up the python client will use the default API key configured by cudoctl."
+      - url: https://raw.githubusercontent.com/CudoVentures/terraform-provider-cudo/main/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`api_key` (String) Your API key"
+      - url: https://docs.cudocompute.com/guides/object-storage/command-line-tools.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access & secret key: Project > Object storage > Users > select user"
+      - url: https://docs.cudocompute.com/api/object-storage/get-an-object-storage-session-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Retrieves temporary session credentials for object storage access."
+      - url: https://docs.cudocompute.com/help/compute/how-can-i-log-in-to-compute.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Connecting an existing GitHub, Google or Microsoft account."
+    notes: >-
+      Graded on the weakest required path, which is also the only one: the control-plane API key.
+      The authentication page says there is no OAuth or refresh flow, and the OpenAPI spec defines
+      a single bearerAuth scheme. Object storage has a session-key endpoint that returns temporary
+      S3 credentials with a session token, but calling it needs the static API key, and the
+      documented path for s3cmd/s5cmd is a long-lived access/secret key pair on an object storage
+      user. GitHub, Google and Microsoft sign-in is for humans at the console and does not reach
+      workloads. There is no managed Kubernetes or container registry in the docs (clusters are
+      bare-metal machine groups), so no kubeconfig or registry auth to grade. Inbound moves off F
+      with three hygiene passes (D), or to B/A with an OIDC token exchange for API keys.
+  outbound:
+    grade: F
+    mechanism: >-
+      The only documented reach-in is the vLLM one-click app, which asks you to paste a Hugging Face
+      API token that is stored as VM metadata (CUDO_HF_TOKEN). No cloud bucket, registry or
+      data-import integration exists.
+    evidence:
+      - url: https://docs.cudocompute.com/apps/vllm.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You will need to enter your **HuggingFace model id** and your **HuggingFace API token**."
+      - url: https://docs.cudocompute.com/apps/vllm.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`CUDO_HF_TOKEN` the HuggingFace token you provided"
+      - url: https://docs.cudocompute.com/apps/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Quick deploy apps on CUDO Compute."
+      - url: https://docs.cudocompute.com/guides/images/create.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the Disks table open the action menu for the boot disk and select **Create image from disk**."
+    notes: >-
+      Checked the full OpenAPI spec (API keys, billing, clusters, disks, images, machines,
+      networks, object storage, projects, SSH keys, VMs, volumes), the guides, tutorials and all
+      apps (Dedicated LLM Inference, Dify, JupyterHub, JupyterLab, Ollama, OpenManus, vLLM). Images
+      are created only from an existing VM disk, not imported from a customer bucket or URL, and
+      nothing pulls from S3, GCS, Azure, a private registry or W&B. The vLLM app form is the one
+      place CUDO collects a credential for a third party: a static Hugging Face token, with no
+      advice to use a read-only or fine-grained token, kept in VM metadata shown on the VM page.
+      Judgment call: the token is used by the app on your own VM, so a reviewer could argue N/A as
+      on hot-aisle (where workloads fetch with credentials you place yourself); it is graded F
+      because CUDO's own console asks for and stores it. Headline is F either way.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.cudocompute.com/api/api-keys/create-an-api-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The identifier to use for the api key, which will become the final component of the api key's resource name."
+      - url: https://docs.cudocompute.com/api/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rotate keys regularly (e.g., every 90 days) and immediately on suspicion of compromise."
+    notes: >-
+      The create request takes only apikeyId, and the ApiKey object has only id, key and
+      createTime: no expiry can be set and no org policy exists. The 90-day rotation is advice to
+      the customer, not enforcement.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.cudocompute.com/api/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Programmatically with the `POST /v1/api-keys` endpoint"
+      - url: https://docs.cudocompute.com/api/api-keys/delete-an-api-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Deletes an API key, revoking all access for requests that use the key."
+      - url: https://docs.cudocompute.com/api/object-storage/generate-an-object-storage-key.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generates a new key for an object storage user."
+    notes: >-
+      API keys can be created with an existing key and deleted by name, and the docs give a
+      create, deploy, verify, revoke rotation workflow. Object storage keys can also be generated
+      and deleted through the API.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.cudocompute.com/api/authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your API key uniquely identifies you and inherits the permissions of your user or project context."
+      - url: https://docs.cudocompute.com/help/compute/adding-a-user-to-a-project.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The user must already be registered on the platform before being added."
+    notes: >-
+      A key carries no scope of its own and is the user. Project roles (Owner, Editor, Viewer) are
+      granted to registered human accounts by email; there is no service account or API-only
+      principal, so per the rubric a narrow role on an ordinary user does not count. The docs'
+      "create separate keys per environment or automation scope" advice cannot be enforced on the
+      key. Object storage users are a separate S3 principal per project and data center whose
+      access rights can be adjusted, but they do not cover the control plane.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.cudocompute.com/api/api-keys/list-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "List all API keys created by the requesting user."
+    notes: >-
+      The ApiKey resource returned by the list call has id, key and createTime only; no last-used
+      timestamp is documented in the API or the guides. The console's API keys page is behind a
+      login and could not be checked; the public API contract shows no such field.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      CUDO does not appear in GitHub's supported secret-scanning patterns table, so a key pushed to
+      a public repo is not reported to CUDO, even though the docs' example keys use a ck_live_
+      prefix.
+
+notes: >-
+  One card for the whole platform: VMs, bare metal, clusters, volumes, networks and object
+  storage are all driven through the same REST API and key, and only object storage adds a second
+  (also static) credential. One of five hygiene checks passes (rotation API). The cheapest fixes
+  are an expiry field with an enforceable maximum, a last-used timestamp, a service-account or
+  per-key scope, and joining GitHub's partner program; any two of those make inbound D. Federation
+  (exchanging a GitHub Actions or other OIDC token for a short-lived key) would make it B or A.

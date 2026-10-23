@@ -1,0 +1,250 @@
+id: digitalocean-api
+vendor: DigitalOcean
+product: DigitalOcean API (Droplets and GPU Droplets, DOKS, Spaces, Container Registry, App Platform, Gradient AI)
+website: https://www.digitalocean.com
+docs: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+category: cloud
+status: listed
+summary: >-
+  Every automated path into DigitalOcean (API, doctl, Terraform, registry logins, DOKS kubeconfigs)
+  starts from a personal access token made by hand in the Control Panel. Tokens can carry custom
+  scopes, show last use and are covered by GitHub secret scanning, but nothing forces an expiry and
+  there is no API to mint or rotate them. No federation from GitHub Actions or any other issuer.
+  Spaces keys are static too. Paperspace has its own card.
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static personal access token (PAT) created in the Control Panel, sent as a bearer token to
+      api.digitalocean.com and used by doctl, Terraform, docker login to registry.digitalocean.com
+      and DOKS kubeconfig generation. Spaces object storage uses separate static S3-style access
+      keys. No documented OIDC or workload identity exchange into the API.
+    issuers: []
+    evidence:
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          To use the DigitalOcean API, you need to generate a personal access token.
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          To generate a personal access token, log in to the DigitalOcean Control Panel.
+      - url: https://docs.digitalocean.com/products/app-platform/how-to/create-apps/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: Use the token to grant `doctl` access to your DigitalOcean account.
+      - url: https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          you can simulate what `doctl registries login` does with `docker login` by using your
+          registered email as the username (`-u`) and API token string as password (`-p`)
+      - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Access keys allow people or applications to connect to buckets using the S3-compatible
+          API, CLI tools, or third-party clients.
+      - url: https://docs.digitalocean.com/products/kubernetes/how-to/configure-single-sign-on-for-clusters/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          The kubeconfig for an SSO-enabled cluster includes a command that opens your IdP in a
+          browser for you to sign in.
+      - url: https://docs.digitalocean.com/reference/api/oauth/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Registering a confidential application assigns it a client ID and client secret which you
+          then use in API calls to the DigitalOcean authorization server.
+      - url: https://digitalocean.com/blog/oauth-app-workload-identity-droplets
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          we’ll deploy an open source Proof of Concept (PoC), configure roles and policies for
+          workload identity access control
+    notes: >-
+      Graded on the weakest path a workload must use, which is the control-plane PAT: Spaces keys,
+      registry credentials and DOKS OAuth tokens are all minted from it or beside it, and are
+      static themselves. DOKS cluster SSO accepts an OIDC issuer, but it is a browser login for
+      people and only covers kubectl against one cluster, so it does not lift the grade (rubric:
+      federation must be documented for workloads). The OAuth API is an authorization-code flow for
+      third-party apps (30-day access tokens, single-use refresh tokens, client secret for
+      confidential clients); at best that is a static root (C), and it needs a person to authorize
+      it. DigitalOcean's security team published a three-part blog series building workload
+      identity federation for Droplets and GitHub Actions on top of that OAuth API, but it is an
+      open-source proof of concept the customer deploys and runs, not a platform feature, so it is
+      noted and not credited. What would move this to B or A: a token-exchange endpoint on
+      cloud.digitalocean.com that trusts GitHub Actions (B) or any configured OIDC issuer (A) and
+      returns a short-lived, scoped API token. Hygiene passes 3 of 5, so D.
+  outbound:
+    grade: B
+    mechanism: >-
+      App Platform pulls source from GitHub, GitLab and Bitbucket after the user grants the
+      repository service access, and Knowledge Bases connect Dropbox by OAuth; both keyless.
+      Knowledge Bases index Amazon S3 only with a pasted IAM access key and secret, and App
+      Platform pulls private Docker Hub and GHCR images with a pasted username:token.
+    evidence:
+      - url: https://docs.digitalocean.com/products/app-platform/how-to/create-apps/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          If you have not previously created an app on App Platform, the repository service may
+          prompt you to provide DigitalOcean with read permissions to your account.
+      - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          click **Connect account** to first log in to your Dropbox account and authorize the
+          connection.
+      - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          In the [**Access Key ID**](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
+          field, enter the IAM access key ID for your S3 bucket or folder.
+      - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: In the **Secret Key** field, enter the secret key associated with your access key ID.
+      - url: https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          If you choose Docker Hub or GitHub Container Registry, you can enter credentials to
+          access private images using the syntax `username:token` or `username:password`.
+      - url: https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: We recommend using a non-expiring token with read-only scope.
+      - url: https://docs.digitalocean.com/products/custom-images/how-to/upload/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Checked: App Platform Git sources (GitHub, GitLab, Bitbucket; consent, keyless) and container
+      sources (DOCR native; Docker Hub and GHCR by pasted username:token, with DigitalOcean
+      recommending a non-expiring token); Knowledge Bases data sources (Spaces native, web crawl of
+      public URLs, Dropbox by OAuth consent, Amazon S3 by pasted IAM access key with no
+      least-privilege or rotation guidance); custom image import (public URL download, no
+      credential); Spaces migration (a third-party tool, Flexify.IO, not DigitalOcean reaching in).
+      No integration uses an AWS role, GCP impersonation or Azure federated credential. B rests on
+      the rubric's rule that consent apps count as keyless; the only cloud integration (S3) is a
+      pasted static key, so a reviewer reading B as "keyless on a cloud" would put this at F.
+      Gradient AI and GPU Droplet docs describe no other reach-in.
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: Expiration. Choose when the token expires.
+      - url: https://docs.digitalocean.com/reference/doctl/reference/registry/login/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Sets the DigitalOcean API token generated by the login command to never expire.
+      - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      PATs take an expiration chosen by the creator. The public docs do not list the options or a
+      default, and no team setting caps token lifetime (team settings cover contact emails, secure
+      sign-in and SSO only). doctl documents minting API tokens that never expire, and Spaces access
+      keys document no expiry at all. A changeable default is not an enforced expiry (precedent:
+      temporal.yaml, coreweave-object-storage.yaml).
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: In the … menu for a token, you can rename, regenerate, or delete the token.
+      - url: https://docs.digitalocean.com/reference/api/reference/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+      - url: https://docs.digitalocean.com/reference/api/reference/spaces-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`.
+    notes: >-
+      The API reference (and DigitalOcean's public OpenAPI spec) has no endpoint to create, list or
+      revoke personal access tokens; regenerate and delete live in the Control Panel menu. The
+      scopes page mentions "creating tokens through the API" but no such endpoint is published.
+      Spaces keys do have create/delete endpoints (the Spaces how-to page still says they cannot be
+      managed by API, which is out of date), and `doctl registries login` mints registry tokens,
+      but both run on an existing PAT. Rotating the root credential needs a browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Custom scopes grant more specific permissions, like only creating Droplets or updating
+          cloud firewalls, which lets you secure your workflows by granting only the permissions
+          the token needs and restricting access to other resources and actions.
+      - url: https://docs.digitalocean.com/reference/api/scopes/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: View and download Kubernetes cluster credentials
+      - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Limited access allows you to grant permissions for specific buckets.
+    notes: >-
+      A PAT can be cut down to individual resource-type CRUD scopes, which meets the rubric's
+      "subset of permissions". It is still a token belonging to a person (custom scopes are capped
+      by that user's team role and the token dies with them); DigitalOcean has no service-account or
+      API-only principal. Scopes are per resource type, not per resource, and the registry pull
+      secret applies to every registry on the account. Spaces keys can be limited per bucket.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Personal access tokens table showing token name, number of scopes, creation time, last
+          used status, and expiration date.
+      - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          You can click the entry in the Scopes column to view details about the token’s usage and
+          scopes.
+    notes: >-
+      The token list shows last-used status; the quote is the documented description of the token
+      table screenshot. Not documented for Spaces access keys.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| DigitalOcean | DigitalOcean Personal Access Token | digitalocean_personal_access_token | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |"
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| DigitalOcean | DigitalOcean OAuth Token | digitalocean_oauth_token | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |"
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "| DigitalOcean | DigitalOcean Refresh Token | digitalocean_refresh_token | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |"
+    notes: >-
+      The first ✓ is GitHub's Partner column. Personal access, OAuth, refresh and system tokens are
+      all partner patterns. Spaces access keys do not appear in the table.
+notes: >-
+  One card for the DigitalOcean control plane and the data planes reached with its credentials
+  (Spaces, Container Registry, DOKS kubeconfigs), since all of them bootstrap from the same PAT;
+  splitting Spaces would not change its grade (static keys, no expiry, per-bucket scoping, API
+  create/delete). Paperspace (now part of DigitalOcean) still has its own console and team API keys
+  and is graded on the paperspace card. The fix list: a federated token exchange for GitHub Actions
+  and arbitrary OIDC issuers (DigitalOcean's own PoC shows the shape), an API to create and revoke
+  PATs, a team policy that caps token lifetime, and a non-human principal to own tokens.

@@ -1,0 +1,250 @@
+id: snyk-platform
+vendor: Snyk
+product: Snyk platform API and CLI
+website: https://snyk.io
+docs: https://docs.snyk.io/platform-administration/service-accounts/service-accounts-using-oauth-2.0
+category: devtools
+status: listed
+summary: >-
+  The Snyk API and CLI take OAuth client-credentials service accounts (client secret or a JWT
+  signed by a key you host) that mint one-hour tokens, plus 90-day PATs and legacy API tokens that
+  never expire. No OIDC federation for CI exists, and the GitHub Actions docs still use a stored
+  SNYK_TOKEN. Into your cloud it is keyless on AWS, Azure, GCP, ECR, GitHub and Bitbucket Cloud
+  apps; other repos and registries want pasted tokens or keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      Enterprise service accounts using the OAuth 2.0 client_credentials grant, authenticated with a
+      static client secret or a private_key_jwt assertion signed by a key whose JWKS you host, return
+      short-lived access tokens accepted by the REST API and CLI (SNYK_OAUTH_TOKEN). PATs (90-day
+      cap), access-token service accounts (1-year cap) and legacy non-expiring API keys also work.
+    tier_gated: Enterprise (service accounts and API access)
+    evidence:
+      - url: https://docs.snyk.io/platform-administration/service-accounts/service-accounts-using-oauth-2.0.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "OAuth 2.0 access tokens are used the same way another Snyk token is used, but they have added security of a short time-to-live (TTL) and can be automatically refreshed."
+      - url: https://docs.snyk.io/platform-administration/service-accounts/service-accounts-using-oauth-2.0.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service accounts using OAuth 2.0 are available only with Enterprise plans through the Snyk API."
+      - url: https://docs.snyk.io/platform-administration/service-accounts/service-accounts-using-oauth-2.0.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This is an advanced feature for customers who have the infrastructure to host a publicly accessible"
+      - url: https://558411700-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FIEEjSXQQu36y0vmFV8zf%2Fuploads%2Fgit-blob-688a641e25b6bd8b33a94ac151f6adba5ecd370f%2Foauth-api-spec.yaml?alt=media
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "sub: client_id of your Service Account."
+      - url: https://docs.snyk.io/platform-administration/service-accounts/manage-service-accounts-using-the-snyk-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The time, in seconds, that a generated access token will be valid for. Defaults to one hour if unset."
+      - url: https://docs.snyk.io/developer-tools/snyk-cli/authenticate-to-use-the-cli.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Map your securely stored PAT or API token to the `SNYK_TOKEN` environment variable, or map your OAuth token to `SNYK_OAUTH_TOKEN`, directly within your pipeline configuration or GitHub Actions `env` block."
+      - url: https://docs.snyk.io/developer-tools/snyk-cli/commands/auth.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can set the client secret, and the id can be set in order to use the OAuth2 Client Credentials Grant."
+      - url: https://docs.snyk.io/developer-tools/integrations/snyk-ci-cd-integrations/github-actions-for-snyk-setup-and-checking-for-vulnerabilities.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Snyk GitHub Actions examples on this page refer to a Snyk API token:"
+      - url: https://docs.snyk.io/developer-tools/snyk-api/authentication-for-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To use the Snyk API, you must be an Enterprise plan customer and have a token from Snyk."
+    notes: >-
+      Graded C at the best mechanism, OAuth client-credentials service accounts (Enterprise only;
+      Free and Team plans get only a personal token for CLI and CI, which would be D/F territory).
+      Both OAuth variants bootstrap from a long-lived root you hold: a client secret, or an RSA
+      signing key whose public half sits on a JWKS URL you register. private_key_jwt is not
+      federation: Snyk's token endpoint requires iss and sub to be the service account's own
+      client_id, so a GitHub Actions, GitLab or cloud workload OIDC token cannot be presented, and
+      only the jwt-bearer client-assertion type is accepted (no RFC 8693 token exchange). Per the
+      brief's precedent, client_secret and private_key_jwt with a key you hold are C at best. No
+      OIDC, workload identity or token-exchange path is documented for the API or CLI (Snyk's GitBook docs assistant, asked directly, also found none). The weakest-path check
+      does not pull the grade lower: OAuth tokens work on the REST API and every CLI command. Snyk
+      Broker clients still need a static Broker token (see outbound notes). Moves to B or A if
+      Snyk accepts a federated token from GitHub Actions, cloud workload identity or a configured
+      issuer.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud scanning and ECR assume a customer IAM role with an External ID (AWS), use a federated
+      identity credential on an Entra app registration (Azure), or impersonate a customer Google
+      service account; GitHub Cloud App and Bitbucket Cloud App are installed apps. GitHub
+      Enterprise, GitLab, Azure Repos, Bitbucket Data Center, GAR/GCR, ACR, Docker Hub, GHCR and
+      Artifactory integrations want pasted PATs, passwords or JSON keys.
+    tier_gated: Enterprise (AWS and Google Cloud integrations; Azure needs Business or Enterprise)
+    evidence:
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-iac/cloud-platform-integrations/aws-integration/aws-integration-web-ui/step-2-create-the-snyk-iam-role.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Snyk generates this unique ID for your organization to prevent other parties from assuming the role without the ID, even if they have your role Amazon Resource Name (ARN)."
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-iac/cloud-platform-integrations/azure-integration-for-cloud-configurations/azure-integration-web-ui/step-2-create-the-entra-id-app-registration.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Additionally, Snyk has a security feature that locks the federated credential for a subscription and tenant to the Organization that onboards it."
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-iac/cloud-platform-integrations/google-cloud-integration/google-cloud-integration-web-ui/step-2-create-the-google-service-account-web-ui.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "IAM role to enable it to generate short-lived credentials for your service account."
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-amazon-elastic-container-registry-ecr/add-more-organizations-to-your-aws-iam-role-for-snyk-authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Ensure the value of \"sts:ExternalId\" is enclosed with square brackets and insert the additional Organization ID inside those brackets."
+      - url: https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/github-cloud-app.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The GitHub App performs Snyk-initiated pull requests directly rather than going through a service account."
+      - url: https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/bitbucket-cloud-app.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To give Snyk access to your Bitbucket account, you need to install the Snyk App on your Bitbucket Cloud workspace."
+      - url: https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/github-enterprise.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A personal access token (PAT) or fine-grained PAT must be generated in GitHub Enterprise under"
+      - url: https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/gitlab.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This token is then authenticated with GitLab, enabling access by Snyk to the repositories in that GitLab account."
+      - url: https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/azure-repositories-tfs.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generate a unique Azure DevOps personal access token (PAT) for Snyk, based on a username and password combination, and configured with the specific permissions Snyk needs to access your Azure repositories."
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-google-artifact-registry-gar.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the JSON key file field, paste the entire contents of the JSON key file you downloaded when"
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-microsoft-azure-container-registry-acr/configure-integration-for-acr.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter the user name, password, and container registry name (myregistry.azurecr.io) that you received when you generated a service principal for this integration."
+      - url: https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-docker-hub/configure-the-integration-with-docker-hub.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter your Docker Hub username and Access Token."
+      - url: https://docs.snyk.io/platform-administration/snyk-broker/classic-broker/prepare-snyk-broker-for-deployment/obtain-the-tokens-required-to-set-up-snyk-broker.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Snyk recommends rotating all API tokens and credentials used with Snyk Broker every 90 days."
+    notes: >-
+      Checked. Keyless: AWS cloud scanning (IAM role with SecurityAudit plus External ID), Azure
+      cloud scanning (app registration with a federated identity credential and a Reader service
+      principal; no client secret), Google Cloud scanning (Snyk's service account gets Token
+      Creator on yours, via a workload identity pool), ECR (IAM role whose trust policy lists Snyk
+      Organization IDs as sts:ExternalId), GitHub Cloud App and Bitbucket Cloud App (installed
+      apps), and the GitHub OAuth-app integration (user authorization; a GitHub PAT is optional for
+      fixed-account PRs). Static: GitHub Enterprise (PAT), GitLab (personal or group access token),
+      Azure Repos (PAT), Bitbucket Cloud legacy integration (Atlassian API token), Bitbucket Data
+      Center (username/password or PAT), Google Artifact Registry and GCR (service-account JSON
+      key), ACR (service principal password), Docker Hub (access token), GitHub Container Registry
+      (username plus PAT), JFrog Artifactory (username/password or access token), and the
+      Kubernetes controller's private-registry dockercfg secret. Snyk Broker, for private SCMs,
+      runs in your network with your SCM token plus a static Snyk Broker token. Docs scope the
+      registry and SCM tokens and recommend 90-day rotation, so the static side is D-like, but
+      keyless on all three clouds makes this B.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.snyk.io/platform-administration/service-accounts/choose-a-service-account-type-to-use-with-snyk-apis.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys are quick to implement in a workflow and do not expire."
+      - url: https://docs.snyk.io/platform-administration/service-accounts/manage-service-accounts-using-the-snyk-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The service account uses a legacy Snyk API key (no expiry)."
+      - url: https://docs.snyk.io/developer-tools/snyk-api/authentication-for-api/personal-access-tokens-pats.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Users cannot create PATs that live for more than 90 days."
+      - url: https://docs.snyk.io/developer-tools/snyk-cli/commands/auth.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Snyk API token can still be used as a fallback option."
+    notes: >-
+      Fails. PATs are hard-capped at 90 days and access-token service accounts at one year, which
+      would pass on their own, but the legacy user API token and the api_key service-account type
+      never expire, are still offered (the GitHub Actions page still points at the account API
+      token), and no Group or Org policy to disable them or force a maximum lifetime is documented.
+      OAuth client secrets carry no documented expiry either. An option that is allowed and cannot
+      be forbidden fails, as on elastic-cloud-api. A Group setting that blocks legacy API keys
+      would flip this check.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.snyk.io/platform-administration/service-accounts/manage-service-accounts-using-the-snyk-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "simultaneously delete the existing client secret and generate a new secret."
+      - url: https://docs.snyk.io/platform-administration/service-accounts/manage-service-accounts-using-the-snyk-api.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This call permanently deletes the specified service account and revokes its credentials."
+      - url: https://docs.snyk.io/developer-tools/snyk-api/authentication-for-api/personal-access-tokens-pats.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "PATs can only be created through the UI, but can be revoked through the UI and API."
+    notes: >-
+      Service accounts can be created and deleted through the REST API, and OAuth client secrets
+      support create/delete/replace with two active secrets for overlap. PATs cannot be created by
+      API, and the legacy user API token rotates only through the web UI's Revoke & Regenerate.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.snyk.io/platform-administration/service-accounts/service-accounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "you can choose Organization-level roles, including"
+      - url: https://docs.snyk.io/llms.txt
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Custom role template for a CLI Tester, an Organization-level role that lets CI/CD service accounts run Snyk CLI tests"
+      - url: https://docs.snyk.io/platform-administration/service-accounts/service-accounts.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Snyk prevents users from creating Organization service accounts with a role that has more privileges than those the user creating the service account has."
+    notes: >-
+      Service accounts are purpose-built machine principals with their own Group or Org role,
+      including custom roles (Snyk publishes a CLI Tester template), which the rubric counts. PATs
+      and legacy user tokens carry the human's full access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.snyk.io/developer-tools/snyk-api/authentication-for-api/personal-access-tokens-pats.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can see the name, created date and expiry for each token of a PAT (but not the token), and these details can be seen in the UI and through the API."
+    notes: >-
+      PATs show name, created and expiry only; the ServiceAccount and PersonalAccessToken schemas in
+      the REST spec have no last-used field. Enterprise audit logs record api.access events for 90
+      days, but nothing per credential.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Snyk does not appear anywhere in GitHub's supported secret-scanning patterns table (partner or
+      user pattern), so a Snyk token pushed to a public GitHub repo is not reported to Snyk for
+      revocation.
+
+notes: >-
+  One card for the Snyk platform's machine auth (REST API, CLI, CI plugins, IDE sign-in,
+  SCM, cloud and registry integrations). Snyk API & Web (DAST) and Evo
+  have separate auth and are not graded here. Two of five hygiene checks pass, which does not
+  matter at C but would at D if the OAuth path went away. Inbound moves up only with real
+  federation (accept GitHub Actions or cloud workload OIDC tokens, or a configured issuer with
+  subject and audience rules); a policy to disable legacy API keys, a last-used timestamp and
+  GitHub partner revocation would fix hygiene. Outbound moves to A if GAR/GCR, ACR and the static
+  SCM integrations gain keyless options.

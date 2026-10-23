@@ -1,0 +1,221 @@
+id: torq
+vendor: Torq
+product: Torq hyperautomation platform
+website: https://torq.io
+docs: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access
+category: security
+status: listed
+summary: >-
+  Workloads call the Torq REST API by trading a static client ID and secret for a one-hour bearer
+  token; no OIDC or workload identity path exists. New keys must carry an expiry, can be
+  role-scoped and show last use, but deleting them is UI-only and GitHub does not scan for them.
+  Into your cloud, AWS is keyless via an IAM role with external ID; GCP wants a service-account
+  JSON key and Azure a client secret.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      OAuth2 client_credentials: a static Torq API key (client ID and client secret, personal or
+      service account) is posted to auth.torq.io/v1/auth/token for a bearer token valid one hour,
+      used on the public REST API and the Torq steps integration. No federation path.
+    evidence:
+      - url: https://learn.torq.io/apidocs/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In the request to the authentication server, provide your Torq API key, which consists of a client ID and client secret."
+      - url: https://learn.torq.io/apidocs/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'curl POST https://auth.torq.io/v1/auth/token -H "Accept: application/json" -H "Accept-Language: en_US" -u "<CLIENT_ID>:<CLIENT_SECRET>" -d "grant_type=client_credentials"'
+      - url: https://learn.torq.io/apidocs/authentication
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A bearer token is valid for one hour (3,600 seconds)."
+      - url: https://learn.torq.io/apidocs/overview.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Torq REST API allows you to programmatically manage resources such as workflows, users, and secrets from outside the Torq platform."
+      - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To incorporate Torq vendor steps in your workflows or use the Torq API, you must first create a Torq integration instance or generate a bearer token. This process requires API key credentials: a client ID and a client secret."
+      - url: https://kb.torq.io/en/articles/14498016-torq-api-key-rotation-full-replacement-vs-expiration-update.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When a key is created, Torq generates a Client ID and Client Secret together, and neither value can be updated independently."
+    notes: >-
+      Short-lived tokens bootstrapped from a long-lived client secret is C (static root). Checked
+      the API reference index (developers.torq.io/llms.txt), the authentication page and the KB:
+      the token endpoint documents only grant_type=client_credentials with a client secret, and no
+      OIDC token exchange, GitHub Actions, cloud workload identity or private_key_jwt path exists.
+      The SSO claim-mapping endpoints and Okta/Entra OIDC guides are for human login. Webhook
+      triggers into Torq use a generated shared-secret header, also static. Inbound moves to B or A
+      only if the token endpoint accepts a federated JWT from GitHub Actions, a cloud, or an issuer
+      you configure.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS steps assume an IAM role you create that trusts Torq with a required External ID (and
+      can chain sts assume-role into other accounts); Slack and Microsoft 365 Delegated Access are
+      consent flows to Torq's own apps. GCP wants a service-account JSON private key, Azure CLI,
+      Microsoft 365 app-only, Defender and Sentinel want an Entra app client secret, and AWS REST
+      API (SigV4) steps take IAM user access keys.
+    evidence:
+      - url: https://kb.torq.io/en/articles/9138309-amazon-web-services-aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "AWS integrations use an AWS IAM role that you define in your AWS IAM configuration."
+      - url: https://kb.torq.io/en/articles/9138309-amazon-web-services-aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To create an IAM role in AWS, you need the Torq Workspace ID and the AWS External ID that are located in Torq."
+      - url: https://kb.torq.io/en/articles/9024670-assume-different-roles-via-the-sts-assume-role-command-in-aws-cli-steps.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "STS allows a single AWS Step integration instance to be used for multiple AWS accounts, reducing the number of integration instances that need to be created."
+      - url: https://kb.torq.io/en/articles/11079835-aws-sigv4-authorization-utilize-aws-calls-in-http-steps.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Via the AWS REST API integration with user access keys as SigV4 credentials"
+      - url: https://kb.torq.io/en/articles/9297304-google-cloud-platform-gcp.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Save the private key for later—you will use it when creating the GCP integration in Torq."
+      - url: https://kb.torq.io/en/articles/9138424-azure.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Paste the client secret you generated"
+      - url: https://kb.torq.io/en/articles/10287213-microsoft-365.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Paste the Client Secret you retrieved earlier."
+      - url: https://kb.torq.io/en/articles/9138305-microsoft-365-delegated-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Microsoft 365 Delegated Access integration is a Microsoft-sanctioned Enterprise app that allows users to grant Torq access to the resources that their own Microsoft 365 account can access."
+      - url: https://kb.torq.io/en/articles/9138337-slack-bot.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Slack steps integration adds the Torq bot (Torq app) to your workspace, which enables you to perform common Slack actions as part of your workflows and trigger Torq workflows directly from the Slack CLI by mentioning (@) the Torq bot or sending a message directly in the Torq app channel."
+      - url: https://kb.torq.io/en/articles/9138417-github.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the key to save it for later. You will need it to set up custom secrets in Torq."
+      - url: https://kb.torq.io/en/articles/9139783-okta.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API tokens inherit the same permissions as the user who creates them, and if the user permissions change, the API token permissions also change."
+      - url: https://kb.torq.io/en/articles/9140088-hashicorp-vault-approle.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Ensure the secret ID you create for the role is long-lasting by setting the secret_id_num_uses and secret_id_ttl parameters to 0."
+    notes: >-
+      Checked: AWS steps (also S3 and Redshift steps, and the S3 audit-log export, which reuse the
+      AWS integration): keyless, cross-account role with Require external ID, CloudFormation
+      template offered. AWS REST API integration for SigV4 HTTP steps: static IAM user access key
+      (the same page offers the assume-role alternative). GCP and Google Cloud Pub/Sub: a
+      service-account JSON private key uploaded to Torq (with domain-wide delegation for Workspace
+      data); no impersonation or WIF option. Azure (CLI, Blob), Azure Key Vault, Microsoft 365
+      app-only, Defender for Endpoint and Sentinel: a single-tenant Entra app registration you
+      create, with a client secret pasted into Torq; Azure even recommends Contributor. Microsoft
+      365 Delegated Access and Slack: consent to Torq's own multi-tenant apps, no customer secret
+      (delegated to a user or service account). GitHub: a personal access token or a GitHub App
+      private key stored as a custom secret. Okta and Jira: user-bound API tokens. HashiCorp Vault
+      AppRole: a never-expiring secret ID, by Torq's own instruction. CrowdStrike: OAuth client
+      ID/secret. Self-hosted step runners in your cluster were not found to offer ambient identity
+      for steps in public docs (not publicly verifiable). B because AWS is keyless while GCP and
+      Azure resource access require static secrets; GCP impersonation and an Azure federated
+      credential on a Torq app would lift it to A.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "New API keys require an expiration date at the time of creation."
+      - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If any keys were previously generated without one, they will remain valid and their expiration date will be listed as"
+      - url: https://learn.torq.io/apidocs/list-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The timestamp when the API key expires."
+    notes: >-
+      Passes because the platform requires an expiration date on every new key (same call as
+      sentinelone-singularity's mandatory expirationDate), not a changeable default. Caveats: no
+      maximum lifetime or org policy cap is documented, the date can be extended at will through
+      the UI or the Set API Key Expiration step, and legacy keys created before the rule still
+      show "Never" until someone sets a date.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://learn.torq.io/apidocs/list-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Returns a list of all API keys for the current workspace."
+      - url: https://kb.torq.io/en/articles/14498016-torq-api-key-rotation-full-replacement-vs-expiration-update.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After validation, delete the old key manually via the UI."
+      - url: https://kb.torq.io/en/articles/14498016-torq-api-key-rotation-full-replacement-vs-expiration-update.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Create a Service API Key step requires the Owner role."
+    notes: >-
+      Judgment call. The public REST API reference has only List API keys (GET /v1alpha/api-keys);
+      no create or delete endpoint. Inside Torq, the Create a Service API Key and Set API Key
+      Expiration workflow steps can mint a key and move an expiry, but Torq's own rotation guide
+      says the old key is deleted manually in the UI, and no Delete API Key step or endpoint is
+      documented. Shortening the old key's expiry with the step approximates revocation; a
+      reviewer could count that. Public create and delete endpoints would flip this check.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "However, they are more secure and efficient as they are not associated with any individual user."
+      - url: https://kb.torq.io/en/articles/9145806-torq-roles-and-scopes-manage-access-and-permissions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you build a custom role or a least-privilege service API key, use this table to find the scope behind a specific action."
+      - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Users own the private API keys they create."
+    notes: >-
+      Service API keys are machine principals not tied to a user, assigned a preset or custom role
+      built from granular scopes, and limited to one workspace or selected workspaces. Personal
+      keys act as their owner, which would not count on their own.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://learn.torq.io/apidocs/list-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The timestamp when the API key was last used to generate an access token."
+    notes: >-
+      The List API keys response carries last_authenticated_time per key. Whether the API Keys page
+      shows it in the UI is not publicly verifiable; the API field is enough to find dead keys.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Torq does not appear in GitHub's supported secret scanning patterns table, so a leaked Torq
+      client secret is not reported to Torq for revocation. No other partner program is documented.
+
+notes: >-
+  One card for the Torq platform (workflows, cases, HyperSOC/Socrates); all programmatic access
+  uses the same workspace API keys, so there are no materially different sibling products to
+  split. Hygiene applies to Torq API keys: three of five pass (expiry, scoping, last_used), and the
+  rotation_api fail is a judgment call flagged above. Hygiene does not change a C. Inbound moves
+  up only with federation on the token endpoint; outbound reaches A with GCP service-account
+  impersonation and keyless Azure (federated credential or Torq multi-tenant app for Azure
+  resources).

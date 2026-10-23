@@ -29,6 +29,7 @@ pre{background:var(--card);border:1px solid var(--line);border-radius:8px;paddin
 .prose{max-width:76ch}.prose h1{letter-spacing:-.02em}.prose table{border-collapse:collapse;width:100%;font-size:.93rem}.prose th,.prose td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
 footer{border-top:1px solid var(--line);margin-top:60px;padding:24px 0 40px;color:var(--muted);font-size:.88rem}footer a{color:var(--muted)}
 .notes{white-space:pre-line;color:var(--muted);font-size:.93rem}
+.lowconf{color:var(--C);font-size:.8em;border:1px solid currentColor;border-radius:3px;padding:0 4px;white-space:nowrap}.lowconf-note{border-left:3px solid var(--C);padding:.4em .8em;margin:.8em 0}
 .status-graduated{color:var(--A);font-weight:600}.status-disputed{color:var(--C);font-weight:600}
 .sub{color:var(--muted);font-size:.9rem}
 @media(max-width:700px){table.board .hide-sm{display:none}html{font-size:16px}.hero{padding:36px 0 16px}}

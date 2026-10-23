@@ -1,0 +1,276 @@
+id: wiz-platform
+vendor: Wiz (Google)
+product: Wiz platform API
+website: https://www.wiz.io
+docs: https://docs.wiz.io
+category: security
+status: listed
+summary: >-
+  Everything that automates Wiz (the GraphQL API, wizcli in CI, Terraform, the Kubernetes connector,
+  Wiz's own GitHub Action) signs in with a service account client ID and secret, swapped for a
+  24-hour token. No federation is publicly documented. Secrets are API-rotatable and scoped, but
+  expiry, last-used and leak revocation are missing or unverifiable. Into your clouds it is keyless
+  on AWS, Azure and GCP; Jira and ServiceNow integrations take passwords or secrets.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A Wiz service account (Settings > Access Management > Service Accounts) gets a Client ID and
+      Client Secret, which are exchanged with the OAuth 2.0 client_credentials grant at
+      auth.app.wiz.io/oauth/token for an access token that lasts 24 hours and is sent to the
+      tenant's GraphQL endpoint. The same pair is what wizcli, the Terraform provider, the Kubernetes
+      connector and Wiz's GitHub Action use. No OIDC or workload identity federation path is
+      publicly documented.
+    evidence:
+      - url: https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/wiz-audit-logs-source-setup
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Wiz Audit Logs connector uses OAuth machine-to-machine (M2M) authentication with a Wiz service account to ingest data into Databricks."
+      - url: https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/wiz-audit-logs-source-setup
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This is the token endpoint that the connector uses to exchange the client credentials for an access token."
+      - url: https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/wiz-audit-logs-source-setup
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the client secret immediately, because Wiz does not display it again after you close the dialog."
+      - url: https://product-docs-repo.illumio.com/Tech-Docs/Integrations/out/en/wiz-connector-for-illumio-integration-guide/add-a-wiz-service-account.html
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Tokens last for 24 hours, and after one expires, your system asks for a new one."
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Set this to 'client_credentials'."
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Set this to 'beyond-api' if using auth0 and 'wiz-api' if using Cognito."
+      - url: https://raw.githubusercontent.com/wiz-training/wiz-cli-terraform/main/.github/workflows/wiz-cli.yml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'run: ./wizcli auth --id "$WIZ_CLIENT_ID" --secret "$WIZ_CLIENT_SECRET"'
+      - url: https://raw.githubusercontent.com/wiz-sec-public/wiz-sensor-github-action/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JSON token containing registry credentials and Wiz API client credentials."
+      - url: https://raw.githubusercontent.com/wiz-sec/charts/master/wiz-kubernetes-connector/values.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'clientToken: "" # Client secret of the Wiz Service Account.'
+      - url: https://auth.wiz.io/.well-known/openid-configuration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"urn:ietf:params:oauth:grant-type:token-exchange"'
+      - url: https://www.wiz.io/blog/wiz-extends-support-to-okta
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "you can learn more in the Wiz docs (login needed)"
+    notes: >-
+      Graded C, not D: the bearer token is short-lived (24 hours), but the client secret behind it
+      is a long-lived static root, which the brief's precedent caps at C. Every public path that
+      automates Wiz uses that pair: third-party connectors (Databricks, Illumio, Panther, JupiterOne,
+      Windmill), wizcli in CI (Wiz's training workflow passes the ID and secret from repository
+      secrets), the community Terraform provider (AxtonGrams/wiz; Wiz's official provider is served
+      from Wiz's own registry and its docs are login-only), the wiz-kubernetes-connector, sensor and
+      outpost Helm charts in github.com/wiz-sec/charts, and even wiz-sensor-github-action, Wiz's
+      own GitHub Action published in 2026, which takes a static JSON token stored as a repo secret
+      rather than the job's GitHub OIDC token. Federated or OIDC service accounts were not found in
+      any public source. Wiz's product docs (docs.wiz.io) and integration docs (win.wiz.io) need a
+      login and returned 403/429 to unauthenticated requests, so a federation option there is not
+      publicly verifiable. The legacy Auth0 tenant (auth.wiz.io, the 'beyond-api' audience)
+      advertises the token-exchange grant in its metadata. That is Auth0's standard list and is not
+      evidence that Wiz accepts external workload tokens. The current Cognito-backed endpoint
+      (auth.app.wiz.io) returned 403 for its discovery document. Inbound moves to B or A if Wiz
+      publicly documents a service account that trusts GitHub Actions, cloud workload identity, or a
+      bring-your-own OIDC issuer.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud connectors are keyless. AWS uses a WizAccess-Role whose trust policy admits Wiz's
+      data-center role with an sts:ExternalId condition. Azure creates a service principal for
+      Wiz's tenant-managed multi-tenant Entra application and assigns it roles. GCP grants org roles
+      to a Wiz-managed service account. Ticketing integrations do take static secrets: a Jira
+      password, API token or PAT, and a ServiceNow password or OAuth client secret.
+    evidence:
+      - url: https://wizio-public.s3.amazonaws.com/deployment-v2/aws/wiz-aws-standard.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This is a nonce that will be used by our service to assume the role in your account."
+      - url: https://wizio-public.s3.amazonaws.com/deployment-v2/aws/wiz-aws-standard.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enter the AWS Trust Policy Role ARN for your Wiz data center."
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/connector_aws.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The AWS external ID / nonce, this will be used for IAM-related dependencies (`sts:ExternalId` conditional trust policies)."
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/integration_aws_sns.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "this is the role that should be assumed, the ExternalID of the role must be your Wiz Tenant ID (a GUID)."
+      - url: https://raw.githubusercontent.com/mozilla-platform-ops/relops_infra_as_code/master/terraform/azure_infrasec/wiz_azure_outpost_connector/variables.tf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Client ID of your Wiz's tenant managed Entra ID application."
+      - url: https://raw.githubusercontent.com/Karthickramasamy007/lz/main/azure-landing-zone-main/wiz-connection/wiz_azure_connector.tf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'source = "https://wizio-public.s3.amazonaws.com/deployment-v2/azure/wiz-azure-standard-connector-terraform-module.zip"'
+      - url: https://raw.githubusercontent.com/NandosUK/infrastructure-terraform-modules/main/gcp/wiz-security-org/examples/wiz-managed/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The following provides an example of integrating a Google Cloud Organization with Wiz using a Wiz-managed identity."
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/connector_gcp.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"isManagedIdentity" : true,'
+      - url: https://raw.githubusercontent.com/mozilla-platform-ops/relops_infra_as_code/master/terraform/azure_infrasec/wiz_azure_outpost/variables.tf
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "(Optional) Hours for password expiration for Wiz apps - Default: 87600h = 24h * 365 days * 10 years"
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/integration_jira.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Jira personal access token (used for on-prem)."
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/integration_servicenow.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "ServiceNow OAuth Client Secret."
+      - url: https://raw.githubusercontent.com/wiz-sec/charts/master/wiz-outpost-lite/values.yaml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: 'audienceTemplate: "databricks.wiz.io/{{ $.Values.agent.outpostId }}"'
+      - url: https://www.wiz.io/blog/the-wiz-approach-to-agentless-scanning
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Instead, the Wiz scanner runs in the customer’s own environment using the customer’s infrastructure and permissions."
+    notes: >-
+      Low-to-medium confidence, because Wiz's connector guides are login-only. Most receipts are
+      Wiz's own public deployment artifacts (the wizio-public S3 CloudFormation template and
+      Terraform modules) or copies of them in customer repos (Mozilla, NandosUK and a landing-zone
+      repo), plus the community Terraform provider. Checked: AWS standard connector (keyless:
+      role trusting Wiz's role with an ExternalId nonce; the AWS SNS automation integration reuses
+      the same pattern with your tenant ID as ExternalId); Azure standard connector (keyless: the
+      module creates a service principal for "your Wiz's tenant managed Entra ID application", i.e.
+      admin consent to a Wiz multi-tenant app, plus role assignments; it creates no password); GCP
+      org and project modules (keyless in Wiz-managed mode: org roles are granted to a
+      wiz...@<Wiz project>.iam.gserviceaccount.com identity, and no service account key is created
+      in either mode). Not publicly verifiable: OCI (the OCI connector guide and module are
+      not public), and the code connectors for GitHub, GitLab, Azure DevOps and Bitbucket, plus the
+      Okta, Google Workspace and Snowflake connectors. Static secrets that are documented: Jira
+      (password, API token or PAT) and ServiceNow (password or OAuth client secret) ticketing
+      integrations, which is why this is B and not A. In outpost (customer-hosted scanner)
+      deployments, Wiz runs in your account: Mozilla's copy of the Azure outpost module mints
+      Entra app passwords with a 10-year default expiry for the disk-analyzer apps, and the
+      outpost agent itself authenticates to Wiz with a client ID, secret and private key (an
+      inbound credential). The outpost-lite Databricks runner mounts a projected Kubernetes token
+      with a databricks.wiz.io audience, which looks like keyless Databricks federation but is not
+      documented publicly. The Kubernetes connector reaches clusters through an in-cluster broker
+      that holds a Wiz service account secret (inbound, covered above). Outbound moves to A if
+      ticketing integrations go keyless (for example Jira or ServiceNow OAuth apps) and the gated
+      code and SaaS connectors are shown to be keyless.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/panther-labs/panther-analysis/develop/rules/wiz_rules/wiz_rotate_service_account_secret.yml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"expiresAt",'
+      - url: https://product-docs-repo.illumio.com/Tech-Docs/Integrations/out/en/wiz-connector-for-illumio-integration-guide/add-a-wiz-service-account.html
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Rotate the Client Secret on a scheduled basis."
+    notes: >-
+      Wiz's service account object has an expiresAt field (seen in a Wiz audit-log sample in
+      Panther's detection rules), so an expiry can probably be set. No public source shows a
+      platform maximum or an org policy that forces one. Every public setup guide (Databricks,
+      Illumio, Panther, JupiterOne) creates the account without an expiry step, and third parties
+      tell you to rotate the secret yourself. Under the changeable-default precedent this fails.
+      The gated docs could show an enforced cap, which would flip it.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/internal/provider/resource_service_account.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "mutation CreateServiceAccount($input: CreateServiceAccountInput!) {"
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/internal/provider/resource_service_account.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "mutation DeleteServiceAccount ("
+      - url: https://raw.githubusercontent.com/panther-labs/panther-analysis/develop/rules/wiz_rules/wiz_rotate_service_account_secret.yml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"action": "RotateServiceAccountSecret",'
+    notes: >-
+      Service accounts can be created and deleted through GraphQL mutations (used by the
+      community Terraform provider, which requires the create:service_accounts and
+      delete:service_accounts scopes), and Wiz's audit log records a RotateServiceAccountSecret
+      action that returns a new clientSecret.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/service_account.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`scopes` (List of String) Scopes, required with THIRD_PARTY (GraphQL API type)."
+      - url: https://product-docs-repo.illumio.com/Tech-Docs/Integrations/out/en/wiz-connector-for-illumio-integration-guide/add-a-wiz-service-account.html
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Select the projects that you want to limit access to if you do not want to grant access to all projects."
+      - url: https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/wiz-audit-logs-source-setup
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Selecting one or more projects prevents the service account from querying audit logs, because the admin:audit scope is available only when no project is selected."
+    notes: >-
+      Service accounts are purpose-built machine principals with their own API scopes (for example
+      read:issues, admin:audit) and optional Project restriction, independent of any human user.
+      Purpose-specific types (SENSOR, BROKER, KUBERNETES_CONNECTOR, admission controller) exist for
+      in-cluster components.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://raw.githubusercontent.com/panther-labs/panther-analysis/develop/rules/wiz_rules/wiz_rotate_service_account_secret.yml
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"lastRotatedAt",'
+      - url: https://product-docs-repo.illumio.com/Tech-Docs/Integrations/out/en/wiz-connector-for-illumio-integration-guide/add-a-wiz-service-account.html
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Remove unused service accounts."
+    notes: >-
+      Not publicly verifiable. The service account fields visible in public sources (id, enabled,
+      name, clientId, scopes, lastRotatedAt, expiresAt, createdAt) include no last-used time, and
+      no public page describes one. Wiz's audit log does record API calls by service account,
+      which is a manual workaround, not a last-used field. The gated docs could show one.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+      - url: https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/specifics/wiz_oauth_credentials
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Prefixed: False"
+    notes: >-
+      Wiz does not appear in GitHub's supported secret-scanning patterns, partner or user. Google's
+      own tokens are there, but Wiz service account secrets are not. GitGuardian detects Wiz OAuth
+      credentials, but they have no prefix and GitGuardian is not a revoke-on-leak partner program.
+
+notes: >-
+  Graded the Wiz platform's machine interface: the GraphQL API and the components that call it
+  (wizcli, Terraform, the Kubernetes connector, sensor, broker and outposts), plus the cloud, code
+  and SaaS connectors that let Wiz reach into your environment. Wiz Code, Wiz Defend and Wiz Cloud
+  share this service-account model and are not split out. Wiz is now part of Google. Wiz's product
+  docs (docs.wiz.io), integration docs (win.wiz.io) and its official Terraform provider docs need a
+  login. This card relies on Wiz's public deployment templates, Helm charts and GitHub repos
+  (wiz-sec, wiz-sec-public, wiz-training), the community Terraform provider, third-party connector
+  docs and customer IaC that copies Wiz's modules. Two hygiene checks pass (rotation_api,
+  scoping). An enforced expiry, a last-used timestamp and joining GitHub's partner program would
+  make it five. Inbound moves above C only with documented workload federation for service
+  accounts.

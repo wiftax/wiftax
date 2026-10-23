@@ -1,0 +1,200 @@
+id: abnormal-security
+vendor: Abnormal AI (formerly Abnormal Security)
+product: Abnormal platform REST API
+website: https://abnormal.ai
+docs: https://app.swaggerhub.com/apis-docs/abnormal-security/abx
+category: security
+status: listed
+confidence:
+  level: low
+  reason: "Abnormal's API and token docs are behind its customer portal. The expiry pass and last-used fail rest on release notes, the OpenAPI spec and a third-party guide, and AWS, GCP and SaaS connector setup is not public."
+summary: >-
+  Abnormal's REST API takes only a static bearer token made in the portal; there is no OIDC or
+  client-credentials path. New tokens carry an expiry and per-endpoint read/write permissions, but
+  they can only be created, rotated and revoked in the portal, show no last use and are not in
+  GitHub's partner program. Abnormal reads Microsoft 365 and Google Workspace through OAuth grants,
+  while Okta remediation wants a pasted Okta API key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static REST API token created in the Abnormal portal (Settings > Integrations > API Token
+      Management) and sent as Authorization: Bearer to api.abnormalplatform.com (EU and FedRAMP hosts
+      alike), with an optional IP safelist. The OpenAPI spec declares a single bearer scheme for every
+      path, including SCIM; no OIDC, workload identity or token exchange exists.
+    issuers: []
+    evidence:
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: '"securitySchemes":{"BearerAuth":{"type":"http","scheme":"bearer"}}'
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keep the token safe, as it grants access to sensitive threat data related to your organization."
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you feel that the token has been compromised, please contact your Account Manager immediately."
+      - url: https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Abnormal now gives customers full control over their REST API tokens—enabling secure, self-service management directly in the Portal."
+      - url: https://docs.expel.io/connect-your-technology/a-c-integrations/abnormal-ai-setup-for-workbench
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Scroll down to the API Token Management section and select Create New Token."
+      - url: https://legal.abnormalsecurity.com/legal-hub/abnormal-security-api-terms-of-service-6feee5e3
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "\"Access Credentials\" means the necessary security keys, secrets, tokens, and other credentials to access the Abnormal APIs."
+    notes: >-
+      Abnormal's customer help center (portal and support site) is login-walled, so this card is
+      graded on public sources: the public OpenAPI spec on SwaggerHub (v1.6.0), Abnormal's What's New
+      release notes, its API terms, and Expel's integration guide (third-party, used only for the
+      portal token-creation steps it describes). Nothing public mentions OAuth client credentials,
+      OIDC federation, GitHub Actions or cloud workload identity for the API; the IP safelist narrows
+      where a leaked token works but does not remove the static secret. Tokens are graded as the "new"
+      self-service tokens; legacy tokens (no rotation, no scopes) keep working until they are
+      force-expired on April 30, 2027.
+  outbound:
+    grade: B
+    mechanism: >-
+      Microsoft 365 and Google Workspace are connected by API through OAuth permission grants to
+      Abnormal (no secret handed over). Okta can be connected by OAuth for detection only; automated
+      remediation needs a static Okta API key pasted into Abnormal. AWS, GCP, Slack, Zoom, Salesforce
+      and Workday are "API-based" with the mechanism not publicly documented.
+    evidence:
+      - url: https://abnormal.ai/learning/api-based-email-security-features
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API architecture connects through Microsoft Graph API or Google Workspace APIs without modifying mail flow, requiring only OAuth permission grants rather than external infrastructure or DNS modifications."
+      - url: https://abnormal.ai/resources/data-sheets/for-microsoft-365
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Abnormal integrates with Microsoft 365 via API in minutes, requiring no MX record changes, transport rules, or policies."
+      - url: https://abnormal.ai/resources/data-sheets/abnormal-security-for-okta
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Automated remediation requires API key integration; OAuth integration supports monitoring and detection but not automated response."
+      - url: https://abnormal.ai/resources/data-sheets/abnormal-security-for-okta
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Simple API or OAuth Integration to Ingest Okta Events"
+      - url: https://abnormal.ai/resources/data-sheets/cloud-platform-integrations
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API-based integrations with Okta, Salesforce, AWS, Workday, and others consolidate cloud identities into a single PeopleBase profile."
+      - url: https://abnormal.ai/resources/data-sheets/account-takeover-protection-google-cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Abnormal connects to GCP via API to ingest and normalize access data for every human signing in, requiring no additional agent deployment."
+      - url: https://abnormal.ai/platform/whats-new/portal-enhancements-abnormal-app-store-deployment-overview-and-platform-integration
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Abnormal now simplifies integration and expands visibility with the App Store, Deployment Overview, and new Platform Integrations for Slack, Zoom, Teams, Azure AD, and Okta."
+    notes: >-
+      Checked from public sources: Microsoft 365 / Entra ID and Teams (Graph API, OAuth permission
+      grants, keyless); Google Workspace (Workspace APIs, OAuth permission grants, keyless); Okta (OAuth
+      for monitoring, static Okta API key for remediation such as disabling users and ending sessions);
+      AWS (CloudTrail sign-in events), GCP, Slack, Zoom, Salesforce, ServiceNow and Workday (each
+      described only as "API-based", connection mechanism not publicly verifiable). The Microsoft 365
+      and Google Workspace receipt is a vendor learning-center article about API email security in
+      general; Abnormal's own consent steps sit behind the portal. The Okta data sheet is the only
+      public statement that a customer secret is required. Outbound reaches A only if Okta
+      remediation moves to OAuth and the AWS, GCP and SaaS connectors are shown to be keyless (for
+      AWS, a cross-account role with external ID); a public setup guide for each would settle it.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enforce IP safelisting and set expiration for every token"
+      - url: https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Existing tokens will automatically expire April 2027"
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Token expiration timestamp (ISO 8601)"
+      - url: https://docs.expel.io/connect-your-technology/a-c-integrations/abnormal-ai-setup-for-workbench
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All legacy tokens automatically expire on April 30, 2027."
+    notes: >-
+      Passed on the release note that every token gets an expiration, the API's token object where
+      expires_at is a required field, and Abnormal force-expiring all legacy tokens. Judgment call:
+      the maximum lifetime and whether a "never" choice exists are not publicly verifiable (the
+      creation dialog is in the login-walled portal; Expel's guide just recommends 365 days). If the
+      portal allows a non-expiring token, this flips to fail per the elastic-cloud-api precedent.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Get a list of API tokens for the authenticated customer"
+      - url: https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create, rotate, and revoke tokens instantly in the Portal"
+    notes: >-
+      The public API has only GET /soar/tokens (list); no create, rotate or revoke endpoint exists, so
+      rotation is a portal task. Expel notes that rotating in the portal invalidates the old value
+      immediately, so there is no overlap window either.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Assign permissions (Read, Write) with tenant or customer scope"
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "List of endpoint permissions (e.g., soar_v1_read_threats, soar_v1_manage_threat)"
+      - url: https://docs.expel.io/connect-your-technology/a-c-integrations/abnormal-ai-setup-for-workbench
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Access levels are fixed at creation, so an under-scoped token has to be recreated rather than edited."
+    notes: >-
+      New tokens belong to the customer rather than a user and carry their own per-endpoint read,
+      read-sensitive and write permissions, limited to one tenant or the whole customer. Legacy tokens
+      had no such scoping.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Swagger serializer for token object."
+    notes: >-
+      The token object has token_id, name, version, status, created_at, expires_at and permissions,
+      with no last-used field, and no public source mentions last-use tracking. The portal view is not
+      publicly verifiable.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Abnormal does not appear in GitHub's supported secret scanning patterns table, so a leaked
+      token is neither detected nor reported to Abnormal. The API docs tell customers to contact their
+      Account Manager if a token is compromised.
+
+notes: >-
+  One card for the Abnormal platform REST API (threats, cases, search and remediate, SCIM, posture
+  management), which all use the same bearer token. Public documentation is thin: the help center is
+  login-walled, so every grade rests on the public OpenAPI spec, release notes, data sheets and one
+  third-party integration guide, and gaps are marked "not publicly verifiable". Two of five hygiene
+  checks pass, so inbound is F; a token create/revoke API or a last-used timestamp would lift it to D
+  (with expiry confirmed), and accepting a federated token would be needed for B or A. Abnormal's own
+  blog (https://abnormal.ai/blog/user-identity-apis) urges "federating trust across systems using
+  standards like OAuth 2.0, OpenID Connect (OIDC), and mutual Transport Layer Security (TLS)", which
+  its API does not yet offer.

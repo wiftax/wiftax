@@ -1,0 +1,190 @@
+id: lambda-cloud
+vendor: Lambda
+product: Lambda Cloud (Cloud API, On-Demand instances, 1-Click Clusters, filesystems)
+website: https://lambda.ai
+docs: https://docs.lambda.ai/api/cloud
+category: cloud
+status: listed
+summary: >-
+  The Lambda Cloud API takes only a static API key, with no OIDC or workload identity path. Keys
+  can belong to a service identity with narrow workspace roles, can be created and deleted through
+  the API, and show a last-used time. But expiry is optional and off by default, and Lambda is not a
+  GitHub secret-scanning partner. The filesystem S3 adapter and Managed Kubernetes automation also
+  use static keys and tokens. Lambda never reaches into your cloud.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      Static Lambda Cloud API key (Authorization: Bearer) owned by a user or a service identity,
+      for every Cloud API operation. Data planes add more static credentials: an S3 access key
+      pair for the Filesystem S3 Adapter, and a long-lived Kubernetes service-account token
+      kubeconfig for non-interactive Managed Kubernetes access.
+    issuers: []
+    evidence:
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Lambda Cloud API uses API keys to authenticate incoming requests."
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "In general, Lambda recommends passing an HTTP Bearer header that contains your API key:"
+      - url: https://docs.lambda.ai/public-cloud/iam/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service identity: An identity that represents a non-human user of the account."
+      - url: https://docs.lambda.ai/public-cloud/s3-adapter-filesystems/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You won't be able to view your secret key again after you close the dialog."
+      - url: https://docs.lambda.ai/public-cloud/s3-adapter-filesystems/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "export AWS_ACCESS_KEY_ID='<ACCESS-KEY>'"
+      - url: https://docs.lambda.ai/managed-kubernetes/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "to enable non-interactive authentication to MK8s. This can be useful for CI/CD pipelines and automation scripts."
+      - url: https://docs.lambda.ai/managed-kubernetes/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To create a Service Account, along with the necessary Secret (token) and ClusterRoleBinding objects:"
+      - url: https://docs.lambda.ai/managed-kubernetes/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You're prompted to authorize Lambda Managed Kubernetes to access your Lambda account."
+      - url: https://docs.lambda.ai/public-cloud/enabling-sso/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This guide describes how to enable single sign-on (SSO), which allows users to authenticate to Lambda Cloud through your organization's existing identity provider (IdP)."
+    notes: >-
+      The OpenAPI spec (docs.lambda.ai/api/cloud/spec.json) defines only basic and bearer schemes,
+      both carrying the API key; no OIDC, GitHub Actions, cloud workload identity or token-exchange
+      endpoint exists, and the docs mention OIDC only for human SSO (which also requires a 1-Click
+      Cluster). Graded on the weakest path a workload must use, per the brief: the Cloud API key.
+      The data planes do not lift it. Filesystem S3 Adapter keys are static access key pairs
+      generated in the console (no Cloud API endpoint creates them, and no expiry is documented).
+      Managed Kubernetes logs humans in through kubelogin and the Lambda account in a browser; the
+      documented CI path is a Kubernetes service account whose token Secret is copied into a
+      kubeconfig, which is a long-lived static token. 1-Click Cluster JupyterLab uses a random
+      token shown in the console. There is no Lambda container registry. No first-party Terraform
+      provider was found; community providers use the same API key. Moves to B or A only if the
+      Cloud API accepts a federated token from GitHub Actions, a cloud workload identity or an
+      issuer you configure.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Lambda Cloud has no managed integration that reaches into customer infrastructure. Data
+      import and export are tools you run on your own instance with your own credentials.
+    evidence:
+      - url: https://docs.lambda.ai/public-cloud/importing-exporting-data/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you need to import data from AWS S3 or an S3-compatible object storage service like Cloudflare R2, Google Cloud Storage, or Minio, you can use s5cmd or rclone."
+      - url: https://docs.lambda.ai/public-cloud/importing-exporting-data/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "export AWS_SECRET_ACCESS_KEY='<SECRET-ACCESS-KEY>'"
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Lambda can send webhook notifications to your URL when support ticket events occur, enabling near real-time integration with your systems."
+    notes: >-
+      Checked: Importing and exporting data (S3, GCS, R2, MinIO via s5cmd or rclone on your
+      instance), the Filesystem S3 Adapter, filesystems, 1-Click Clusters, Managed Kubernetes,
+      Managed Slurm (examples load Hugging Face models from inside your own job), Guest Agent
+      (metrics from the instance to Lambda), Private Cloud access (FortiClient VPN), and the Cloud
+      API's outgoing webhooks for support tickets. None of these has Lambda's service reach into
+      your cloud, registry or SaaS. The S3 import path does have you paste static AWS keys into
+      .bashrc on the instance, but that is your workload's credential, not one handed to Lambda.
+      Webhooks push notifications to a URL you own with a bearer token and grant no access.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API key lifetime in seconds. If omitted, the API key does not expire."
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Returns null if no expiration period was set during key creation."
+    notes: >-
+      Service-identity keys created through the API take an optional expires_in; omitted means
+      never. The console flow documented in Managing access asks only for a name. No default
+      lifetime or org policy that forces one is documented, so per the changeable-default
+      precedent (and the coreweave-object-storage card) this fails.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Creates an API key for the specified identity."
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Deletes the specified API key. To delete an API key that belongs to an identity other than your own, you must have a role that contains the relevant permissions."
+    notes: >-
+      POST /api/v1/identities/{id}/api-keys, GET /api/v1/api-keys and DELETE /api/v1/api-keys/{id}
+      allow scripted rotation of service-identity keys. Filesystem S3 Adapter keys have no API
+      endpoint and are rotated in the console.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.lambda.ai/public-cloud/iam/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Used for automating Lambda Cloud operations."
+      - url: https://docs.lambda.ai/public-cloud/iam/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A workspace role includes workspace-scoped permissions only, and applies exclusively to the workspace you specify when assigning the role."
+      - url: https://docs.lambda.ai/public-cloud/predefined-roles/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Can list all instances in the specified workspace and view their metadata."
+      - url: https://docs.lambda.ai/public-cloud/access-security/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "API keys have full access to all Lambda API operations."
+    notes: >-
+      A key carries its identity's roles, and service identities are purpose-built machine
+      principals that can hold only a workspace role such as Instance Reader or Instance
+      Terminate, which the rubric counts. Only predefined roles are documented (no custom roles).
+      The Access and security overview still says keys have "full access to all Lambda API
+      operations", which reads as a leftover from the pre-IAM Admin/Member model; the IAM pages
+      and API reference describe per-identity RBAC, so this passes, but a reviewer should note the
+      contradiction. Keys on user identities inherit that human's roles.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.lambda.ai/api/cloud
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The date and time at which the API key was last used. Formatted as an ISO 8601 timestamp. Returns null if the key hasn't been used."
+    notes: >-
+      last_used_at is a required field on every listed key, so dead keys can be found through the
+      API. The audit log also records cloud.api_key.created and cloud.api_key.deleted.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Lambda does not appear in GitHub's supported secret-scanning patterns table, partner or
+      otherwise, so a leaked Lambda Cloud API key is not automatically reported or revoked.
+
+notes: >-
+  One card for Lambda's public cloud: On-Demand instances and filesystems are driven by the Cloud
+  API, while 1-Click Clusters, Managed Kubernetes and Managed Slurm are provisioned through the
+  console or sales and have no cluster endpoints in the API. Not split, because every machine path
+  (Cloud API, S3 adapter, MK8s service account) is a static secret and none federates; CoreWeave
+  was split only because its object storage and CKS accept federated identities. Three of five
+  hygiene checks pass on the Cloud API key, which is what holds it at D rather than F. An enforced
+  maximum lifetime and a GitHub secret-scanning partnership would make five; federation into the
+  Cloud API is what would move the grade.

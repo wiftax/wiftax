@@ -1,0 +1,157 @@
+id: paperspace
+vendor: DigitalOcean
+product: Paperspace (Machines, Notebooks, Deployments, Workflows; api.paperspace.com)
+website: https://www.paperspace.com
+docs: https://docs.digitalocean.com/reference/paperspace/api-keys/
+category: cloud
+status: listed
+summary: >-
+  Paperspace, now part of DigitalOcean, still runs its own console and API with its own credential:
+  a team API key made by hand in Team Settings. The docs describe no expiry, no scopes, no
+  last-used view, no API to mint keys and no GitHub secret-scanning partnership; even the official
+  GitHub Action takes the static key. Storage providers and private buckets also want pasted S3
+  keys. DigitalOcean's main API is graded separately.
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static team-scoped API key created in the Paperspace console (Team Settings, API keys tab),
+      sent as a bearer token to api.paperspace.com and used by the pspace CLI, the Gradient CLI and
+      the Paperspace Deploy GitHub Action. No federation path is documented.
+    issuers: []
+    evidence:
+      - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          API keys let you interact with Paperspace through the Core RESTful API, the Core
+          JavaScript SDK, and Gradient command-line utility (CLI).
+      - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: On the API keys tab, enter a name and click the Add button.
+      - url: https://docs.digitalocean.com/reference/paperspace/api-reference/authentication/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: An API key or access token
+      - url: https://raw.githubusercontent.com/Paperspace/deploy-action/main/README.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          This may also be set using the `PAPERSPACE_API_KEY` environment variable.
+    notes: >-
+      Paperspace keys are separate from DigitalOcean personal access tokens: different console,
+      different API host, different key. The Paperspace Deploy GitHub Action is the documented CI
+      path and reads a static key from GitHub secrets rather than exchanging the job's OIDC token.
+      Core API endpoints were deprecated in July 2024; the current api.paperspace.com reference
+      authenticates the same way. 0 of 5 hygiene checks pass, so F. Moving off F needs three of:
+      enforced expiry, a key-management API, per-key scopes, a last-used column, and a GitHub
+      secret-scanning partnership; moving to B or A needs federation.
+  outbound:
+    grade: B
+    mechanism: >-
+      Gradient Workflows connect to GitHub through the Gradient GitHub App (install, keyless).
+      Storage providers and private S3-compatible data sources (Spaces, AWS S3, GCS via its S3
+      endpoint) take a pasted access key and secret; private container registries take a pasted
+      username and password.
+    evidence:
+      - url: https://docs.digitalocean.com/products/paperspace/workflows/how-to/connect-to-github-app/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Select **Connect to GitHub**, and then follow the prompts to authorize GitHub to install
+          Gradient.
+      - url: https://docs.digitalocean.com/products/paperspace/notebooks/how-to/add-storage-providers/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          Create a bucket within your storage provider with read/write credentials, such as an
+          access key and secret key, for accessing the data.
+      - url: https://docs.digitalocean.com/products/paperspace/notebooks/how-to/connect-data-sources/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          If the bucket is private add an Access Key ID and Secret Access Key by choosing a
+          Paperspace Secret in the drop-down.
+      - url: https://docs.digitalocean.com/reference/paperspace/api-reference/storage/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: The storage provider configuration
+      - url: https://docs.digitalocean.com/reference/paperspace/api-reference/container-registries/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: The password for the registry.
+    notes: >-
+      Checked: Workflows GitHub integration (GitHub App, can be limited to chosen repos); Notebook
+      and team storage providers (S3 config with accessKey/secretAccessKey); S3-compatible data
+      sources for Notebooks (AWS S3, Spaces, GCS through its S3 endpoint, all by static key);
+      container registries (username/password); the Deploy GitHub Action (inbound, not a reach-in).
+      No AWS role, GCP impersonation or Azure federated credential option exists. The docs ask for
+      read/write keys and give no least-privilege or rotation guidance. B rests on the rubric's
+      rule that a consent app counts as keyless; every cloud path is a pasted key, so a reviewer
+      reading B as "keyless on a cloud" would put this at F.
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: Make sure to copy your new API key now.
+    notes: >-
+      Key creation takes only a name; no expiry field, default or policy is documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: You can revoke your API keys by clicking revoke in the console.
+      - url: https://docs.digitalocean.com/reference/paperspace/api-reference/teams/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Keys are created and revoked in the console. The API reference covers team memberships and
+      team secrets but has no API-key endpoints.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: API Keys have team-scoped permissions and are associated with your user account.
+      - url: https://docs.digitalocean.com/products/paperspace/accounts-and-teams/manage-teams/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: Team admins can change the roles of other team members.
+    notes: >-
+      A key carries its owner's access to the whole team; no per-key scopes or machine principal
+      are documented. Team roles are member and admin only.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+      - url: https://docs.digitalocean.com/reference/paperspace/core/install/index.html.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: >-
+          After the key is copied, the name of the key is available in the list of API Keys.
+    notes: The key list is documented as showing names only; no last-used timestamp is described.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Paperspace does not appear in GitHub's supported secret-scanning patterns table. The
+      DigitalOcean rows cover DigitalOcean PATs, OAuth, refresh and system tokens, not Paperspace
+      API keys.
+notes: >-
+  Split from digitalocean-api because Paperspace still has its own console, API host and key type
+  after the acquisition; the DigitalOcean PAT's custom scopes, last-used view and GitHub
+  partnership do not carry over. If Paperspace is folded into the DigitalOcean API and PATs, this
+  card should be retired.

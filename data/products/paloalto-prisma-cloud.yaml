@@ -1,0 +1,216 @@
+id: paloalto-prisma-cloud
+vendor: Palo Alto Networks
+product: Prisma Cloud (Enterprise Edition)
+website: https://www.paloaltonetworks.com/prisma/cloud
+docs: https://pan.dev/prisma-cloud/api/cspm/app-login/
+category: security
+status: listed
+summary: >-
+  Workloads call the Prisma Cloud API with a static access key (ID and secret) that is swapped at
+  /login for a 10-minute JWT; no OIDC or workload identity path exists. Keys can be capped by an org
+  maximum validity, rotated by API, held by role-scoped service accounts and show last use, but GitHub
+  does not report leaks. Into your cloud it is keyless on AWS and Alibaba, but Azure wants an app
+  client secret and GCP a service account JSON key.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      Access key (Access Key ID + Secret Key) owned by a user or service account, posted to POST /login
+      as username/password to get a JWT valid for 10 minutes (x-redlock-auth). The Compute (Runtime
+      Security) API, twistcli, the Terraform provider and CI plugins take the same access key.
+    evidence:
+      - url: https://pan.dev/prisma-cloud/api/cspm/app-login/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To generate a token, you must have an access key and include the following values in the request body parameter — access key ID as the username and your secret key as the password."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/get-started/access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Prisma Cloud requires an API access key to enable programmatic access to the REST API."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/get-started/access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The JWT is valid for 10 minutes, so you must refresh the token for continued access to the Prisma Cloud API."
+      - url: https://pan.dev/prisma-cloud/api/cwpp/access-api-saas/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Internally the token contains a Prisma Cloud platform token, which is only valid for 10 minutes."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/runtime-security/authentication/access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Prisma Cloud keys are required to access twistcli and the Compute API."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/runtime-security/authentication/access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can authenticate to the API using basic auth."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/terraform-provider-prismacloud/master/docs/index.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "`password` - (Env: `PRISMACLOUD_PASSWORD`) Secret key."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/application-security/get-started/connect-code-and-build-providers/ci-cd-runs/add-github-actions.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Add the Prisma Cloud access key as an environment variable to *GitHub Secrets*."
+    notes: >-
+      Graded C on the same pattern as `cyera-data-security`: the bearer token is a 10-minute JWT, but
+      minting it needs a long-lived Access Key ID and Secret Key, so a static secret sits at the root
+      of every workload path. No OIDC, GitHub Actions, cloud workload identity or token-exchange login
+      is documented; the OIDC configuration endpoints under /authn/api/v1/oauth2/config are for human
+      SSO. Even Prisma Cloud's own GitHub Actions integration stores the access key in GitHub Secrets
+      rather than trusting the runner's OIDC token. Reviewer check: the Runtime Security (Compute)
+      docs say the Compute API also accepts the access key directly as HTTP Basic auth (used to
+      download twistcli). Under the weakest-path rule that could be read as a plain static key (D,
+      given 4 of 5 hygiene passes); it was kept at C because the documented API access paths
+      (pan.dev, Terraform provider) all exchange the key for a short-lived token and the Basic path is
+      optional. Defenders are not graded here. Palo Alto's newer platform,
+      Cortex Cloud, has its own API keys and was not graded on this card.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS onboarding creates an IAM role trusting Prisma Cloud's AWS account with an External ID, and
+      Alibaba Cloud uses a RAM role trusting Prisma Cloud's account; both keyless. Azure onboarding
+      hands Prisma Cloud an app registration's client secret, GCP onboarding uploads a service account
+      JSON key, and OCI uses an API signing key for a dedicated IAM user.
+    evidence:
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-aws/manually-set-up-prisma-cloud-role-for-aws.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Select *Require external ID* and paste the *ExternalID* value that you copied in Step 1 above."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-aws/manually-set-up-prisma-cloud-role-for-aws.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Type of trusted entity: *Another AWS Account* and enter the *Account ID*: *188619942792*"
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-aws/onboard-aws-account.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A unique account ID is used to enable the trust relationship in the roles trust policy, which you will require later in the onboarding process."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-your-alibaba-account/set-up-your-alibaba-account.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After you create the role and the permissions are enabled, you can add the Alibaba Cloud Resource Name (ARN) on Prisma Cloud to assume the role to monitor your Alibaba Cloud account."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-your-azure-account/authorize-prisma-cloud.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Application Client Secret: c_application_key"
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-your-azure-account/authorize-prisma-cloud.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The client secret is a secret string that the application uses to prove its identity when requesting a token."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-your-azure-account/connect-azure-subscription.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Provide xref:authorize-prisma-cloud.adoc#terraform[details] for *Application (Client) ID*, *Application Client Secret*, *Enterprise Application Object ID* from the script output."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-gcp/onboard-gcp-project.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "*Download Terraform Script* and follow the *Steps* to upload your *Service Account Key (JSON) file*."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-gcp/prerequisites-to-onboard-gcp.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A combination of custom, predefined, and primitive roles grant the service account the permissions it needs to complete specific actions on the assets in your GCP organization or project."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-your-oci-account/add-oci-tenant-to-prisma-cloud.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To onboard the Oracle Cloud account, a public key is needed to access the OCI API. This public key is embedded in the Terraform template, and it changes each time you download the template."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-your-oci-account/rotate-access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Depending on your password policy, you can choose to rotate your user’s keys."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/application-security/get-started/connect-code-and-build-providers/code-repositories/add-bitbucket-server.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create and copy a Personal Access Token (PAT) on Bitbucket Server."
+    notes: >-
+      Checked: cloud account onboarding for AWS (CloudFormation or manual IAM role trusting Prisma
+      Cloud's AWS account 188619942792 with an External ID; keyless), Alibaba Cloud (RAM role trusting
+      Prisma Cloud's Alibaba account, ARN pasted; keyless), Azure (Terraform or manual app registration
+      in your tenant whose client secret you paste into Prisma Cloud; static secret, least-privilege
+      custom role documented, so C/D on its own), GCP (service account with documented roles, its JSON
+      key uploaded; static key) and OCI (Prisma Cloud generates the key pair and embeds only the public
+      key for a dedicated IAM user in the Terraform template, so no secret leaves your hands, but it is
+      a long-lived API signing key held by the vendor and rotated by re-running Terraform). Code
+      Security repository connections: GitHub uses a GitHub App install (keyless);
+      GitHub Server and GitLab Self-Managed want an OAuth application's client ID and secret; Bitbucket
+      Server wants a personal access token. No documented option for Azure federated credentials or
+      GCP Workload Identity Federation was found in the onboarding docs; either would lift outbound to
+      A.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/administration/define-prisma-cloud-enterprise-settings.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Use the *Access Key Maximum Validity* settings to establish the platform limit for the maximum number of days for access key validity."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/administration/create-access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you do not select key expiry, the key is set to never expire; if you select it, but do not specify a date, the key expires in a month."
+    notes: >-
+      Passes on the org policy, not the default: out of the box a key with no expiry selected never
+      expires, but an admin can set Enterprise Settings > Access Key Maximum Validity, a
+      tenant-wide cap on key lifetime (platform-enforced maximum = pass, per the precedent applied to
+      `temporal`). The docs do not list the drop-down values, so whether "no limit" is the shipped
+      default is not publicly verifiable.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://pan.dev/prisma-cloud/api/cspm/add-access-keys/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you want to create an access key for an existing Prisma Cloud service account instead of for the current user, then specify the name of the existing service account as the value for the request body parameter serviceAccountName."
+      - url: https://pan.dev/prisma-cloud/api/cspm/delete-access-keys/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Deletes the access key that has the specified ID."
+    notes: >-
+      POST /access_keys, DELETE /access_keys/:id and an update-status call (make inactive) cover
+      rotation. Each identity can hold at most two keys, enough for overlap during rotation.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/administration/add-service-account-prisma-cloud.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Service Accounts can be created for automation use cases to enable a nonhuman entity to interact programmatically with the Prisma Cloud APIs."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/administration/create-access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you create an access key, the key is tied to the role with which you logged in and if you delete the role, the access key is automatically deleted."
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/runtime-security/authentication/access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The CI User role is purpose-built for this use case."
+    notes: >-
+      Service accounts are purpose-built machine principals with their own role (permission group
+      plus account groups), and a key is bound to one role. A key made by a human user carries that
+      user's role permissions.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/administration/create-access-keys.adoc
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can verify the expiry date for the key and can update it here, review when it was last used and the status —Active or Expired."
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Neither Palo Alto Networks nor Prisma Cloud appears in GitHub's supported secret scanning
+      patterns table, so a leaked access key is not reported to Palo Alto for revocation.
+
+notes: >-
+  Graded on Prisma Cloud Enterprise Edition (SaaS): the CSPM API, the Runtime Security (Compute)
+  API it fronts, and cloud account onboarding. docs.prismacloud.io redirects scripted fetches, so
+  admin-guide receipts cite the vendor's public source repo (PaloAltoNetworks/prisma-cloud-docs) and
+  API receipts cite pan.dev. Self-hosted Prisma Cloud Compute Edition
+  is not graded here. Four of five hygiene checks pass; GitHub secret-scanning partnership
+  would make five. Inbound moves to B or A only if /login (or a successor) accepts a federated token
+  from GitHub Actions, a cloud workload identity or a customer-chosen OIDC issuer. Outbound moves to A
+  with keyless Azure (federated credential or multi-tenant app consent) and GCP (service account
+  impersonation or WIF) onboarding.

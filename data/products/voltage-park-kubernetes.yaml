@@ -1,0 +1,160 @@
+id: voltage-park-kubernetes
+vendor: Voltage Park (Lightning AI)
+product: Managed Kubernetes add-on (cluster API server on bare-metal rentals)
+website: https://www.voltagepark.com
+docs: https://support.voltagepark.com/article/add-on-managed-kubernetes
+category: cloud
+status: listed
+summary: >-
+  This card is the cluster API server, not the control plane that creates clusters. You can hand a
+  cluster an upstream Kubernetes AuthenticationConfiguration at creation or later, so it trusts
+  any OIDC issuer you choose, with your own audience and claim rules. Without it, access is the
+  long-lived kubeconfig from the console. Creating the cluster takes the static API token graded
+  F on the voltage-park card.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      Bring-your-own OIDC issuer: the cluster's kube-apiserver runs with --authentication-config,
+      and you supply the AuthenticationConfiguration (issuer URL, audiences, claim mappings and
+      validation rules) at creation in the console or API (authentication_config_b64) or update it
+      later from the instance page. Without it, the kubeconfig handed out at creation carries
+      long-lived certificate credentials.
+    issuers:
+      - any
+    evidence:
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Our control-plane exposes the standard Kubernetes OIDC authentication flow: every API request can be validated against an external OpenID Connect Identity Provider (IdP)."
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Internally, the control plane starts the API server with the standard --authentication-config flag, so the behavior matches upstream Kubernetes."
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This configuration can be supplied during cluster creation or updated later via the instance actions on the console."
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An OIDC-compliant IdP with discovery enabled (/.well-known/openid-configuration must be resolvable from the control plane)"
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Once the control plane trusts your IdP, you map IdP claims to Kubernetes roles exactly like any other subject."
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Short-lived, signed JWTs replace long-lived kubeconfig certificates."
+      - url: https://cloud-api.voltagepark.com/api/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Base64 encoded AuthenticationConfig file."
+      - url: https://kubernetes.io/docs/reference/access-authn-authz/authentication/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The configuration file approach allows you to configure multiple JWT authenticators, each with a unique issuer.url and issuer.discoveryURL."
+      - url: https://support.voltagepark.com/article/bare-metal
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "After deployment, retrieve your kubeconfig from the On-Demand > My Instances > Details page:"
+    notes: >-
+      The add-on passes your AuthenticationConfiguration straight to an upstream kube-apiserver,
+      so trust is constrained by issuer (url), audience (audiences) and subject (claim mappings,
+      claimValidationRules and RBAC on the mapped username), and several issuers can be listed.
+      It is self-serve, in the console and the On-Demand API, with no support ticket. Judgment
+      call: Voltage Park's guide is written for people (SSO and MFA, IdP groups, kubelogin in a
+      browser, a Google issuer example), and it never names CI or cloud workload tokens. It is
+      still graded A, as on coreweave-cks, because the documented feature is a generic JWT
+      authenticator for "every API request", not a vendor login screen: a GitHub Actions, GitLab
+      or cloud workload token from an issuer you list is validated the same way as the Google
+      example. This differs from hyperbolic and lambda-cloud, where Kubernetes OIDC is the
+      vendor's own interactive sign-in. Read strictly as "documented only for human logins", the
+      grade would instead fall to the static kubeconfig and be F (0 of 5 checks below). Two caveats,
+      as on coreweave-cks: OIDC is opt-in and the default is the long-lived kubeconfig, and
+      creating or updating a cluster is a call to cloud-api.voltagepark.com with the static token
+      graded on the voltage-park card. Managed Kubernetes comes only with bare-metal rentals.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      The add-on never needs access into customer infrastructure: no managed registry pull,
+      bucket mount or cloud integration that holds a customer credential is documented.
+    evidence:
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Kubernetes manifest file should use a persistentVolumeClaim with a name of pvc-<storage name>"
+      - url: https://support.voltagepark.com/article/attach-storage
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "once attached to storage your cluster will automatically mount the storage."
+    notes: >-
+      Checked the add-on guide, the bare-metal and storage articles and the Kubernetes parts of the
+      OpenAPI spec (versions, health, add-on details, Slurm user, Grafana service link, restore
+      snapshots): the only managed data path is Voltage Park's own VAST storage mounted as a PVC.
+      Workloads in the cluster reach your cloud with whatever credentials you deploy. Unlike
+      coreweave-cks, no public service-account OIDC issuer (discovery URL and JWKS) is documented
+      for the cluster, so it cannot be graded as an issuer your clouds trust; documenting one would
+      make outbound A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Short-lived, signed JWTs replace long-lived kubeconfig certificates."
+    notes: >-
+      Hygiene is graded on the kubeconfig issued at cluster creation, the static credential that
+      remains when OIDC is not configured. Its lifetime is not documented; Voltage Park's own guide
+      calls the certificates long-lived.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://cloud-api.voltagepark.com/api/v1/openapi.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Get details for a specific addon for a Kubernetes cluster"
+    notes: >-
+      The rental details returned by the API include the kubeconfig, but no endpoint or console
+      action to reissue or revoke it is documented. Kubernetes endpoints cover versions, health,
+      add-on details and a Slurm user only.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This can be done using the kubeconfig supplied to you during cluster creation."
+    notes: >-
+      The issued kubeconfig is the cluster's admin credential, used to create the RBAC bindings
+      for OIDC users. It is limited to one cluster but not to a subset of permissions. Narrower
+      access comes from your own OIDC identities and RBAC, not from the issued credential.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://support.voltagepark.com/article/add-on-managed-kubernetes
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: No last-used view for the kubeconfig credential is documented.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Voltage Park is not in GitHub's supported secret-scanning patterns table, and kubeconfig
+      client certificates carry no vendor-specific pattern.
+
+notes: >-
+  Split from the voltage-park card the way coreweave-cks is split from coreweave-api: this card
+  grades the cluster API server, voltage-park grades the On-Demand API that creates clusters. The
+  A holds only once you supply an AuthenticationConfiguration; the default is a long-lived
+  kubeconfig with no documented expiry, rotation or scoping. The Feb 2026 help article "How to Use
+  OIDC Authentication in Kubernetes (K8s) for Secure Cluster Access" rendered no body text when
+  fetched and is not cited. Documenting a workload example (GitHub Actions or a cloud issuer) would
+  settle the judgment call above.

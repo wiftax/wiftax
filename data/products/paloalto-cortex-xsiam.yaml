@@ -1,0 +1,222 @@
+id: paloalto-cortex-xsiam
+vendor: Palo Alto Networks
+product: Cortex XSIAM / Cortex XDR (public APIs and data sources)
+website: https://www.paloaltonetworks.com/cortex
+docs: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys
+category: security
+status: listed
+summary: >-
+  Scripts, SOAR tools and CI jobs call the Cortex XSIAM and XDR APIs with a static API key and key ID;
+  there is no OIDC or workload federation. Keys are role-scoped and can be created and deleted by API,
+  but the console lets a key never expire, and there is no last-used view or GitHub partner revocation.
+  Cloud onboarding into AWS, Azure and GCP is keyless, but many log collectors still want pasted
+  keys, connection strings or client secrets.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static API key (Authorization header) plus its numeric key ID (x-xdr-auth-id), created under
+      Settings > Integrations > API Keys or by the API Keys API, with an assigned role and optional
+      SBAC scope. "Advanced" keys sign each call with a nonce and timestamp, but the key underneath is
+      still a long-lived shared secret. No OIDC, cloud workload identity or token-exchange path exists.
+    evidence:
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/get-started-with-cortex-apis.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Depending on your desired security level, you can generate two types of API keys, Advanced or Standard, from Cortex XSIAM."
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/get-started-with-cortex-apis.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API Key ID is your unique token used to authenticate the API Key."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you request data or perform an action through an API call, you must include this API key in the header."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Advanced API key hashes the key using a nonce, a random string, and a timestamp to prevent replay attacks."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xdr-5.x/configure-cortex-xdr/manage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Cortex XDR then verifies the key's authenticity and, if valid, grants the requested access."
+    notes: >-
+      Applies to Cortex XSIAM 3.x and Cortex XDR 5.x, which share the same tenant API, key model and
+      docs (Cortex Cloud and AgentiX use the same API key scheme). The only federation-shaped feature
+      in the Platform API is authentication-settings, which configures SAML SSO for human users. The
+      Advanced key's nonce/timestamp hash stops replay of a captured request, not theft of the key.
+      Grade moves to B or A only if the public API accepts a federated token (GitHub Actions OIDC,
+      cloud workload identity or a bring-your-own issuer); to D with one more hygiene pass (an
+      enforced maximum key lifetime would do it).
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud service provider onboarding is keyless: AWS cross-account AssumeRole with a mandatory
+      External ID plus OIDC web identity for audit logs, an Azure multi-tenant service principal with a
+      federated credential on a managed identity for logs, and GCP service-account impersonation. The
+      S3 collector offers Workload Federated Identity or an assumed role. But the GCP Pub/Sub and
+      Google Workspace collectors want a service-account JSON key, Azure Event Hub wants connection
+      strings, and Office 365, Okta, Salesforce, Box, Dropbox and Workday want client secrets, API
+      tokens or passwords.
+    evidence:
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/amazon-web-services-cloud-onboarding/aws-security-model-and-authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Cortex XSIAM eliminates the risk of leaked credentials by strictly avoiding static IAM Access Keys, instead relying on temporary, short-lived tokens provided by the AWS Security Token Service (STS)."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/amazon-web-services-cloud-onboarding/aws-security-model-and-authentication.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "These calls include a mandatory sts:ExternalId condition to prevent \"confused deputy\" attacks, ensuring only your specific Cortex XSIAM tenant can access your roles."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Before Cortex XSIAM can proceed with onboarding, the Cortex XSIAM service principal must be present in your Azure tenant."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Cortex XSIAM creates the user-assigned managed identity (UAMI), federated identity credential, role assignments, and consumer group."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/google-cloud-platform-cloud-onboarding/google-cloud-platform-gcp-provider-permissions.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Allows the Cortex XSIAM SaaS audit-logs collector to create short-lived OAuth tokens for the audit-logs service account, so that the SaaS collector can pull from the Cortex XSIAM-owned Pub/Sub subscription without requiring a long-lived service-account key."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/create-a-workload-federated-identity-role.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This role grants Cortex XSIAM access to your logs with a short-lived OIDC token, without storing any long-lived AWS credentials."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/configure-data-collection-from-amazon-s3-manually.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Uses a designated AWS IAM user's static access key and secret to authenticate."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-cloud-platform/ingest-logs-and-data-from-a-gcp-pub-sub.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The setup process requires the subscription name and authentication key from your GCP instance."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-workspace/ingest-logs-and-data-from-google-workspace.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create a service account private key and download the private key file as a JSON file."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/azure-event-hub/ingest-logs-from-microsoft-azure-event-hub.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your storage account connection string required for partitions lease management and checkpointing in Cortex XSIAM."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/microsoft-office-365/ingest-logs-from-microsoft-office-365.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Obtain the Application Client ID and Secret for your Microsoft Entra ID (Azure AD) service from the Microsoft Entra ID console, and specify the values in Cortex XSIAM."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/okta/ingest-logs-and-data-from-okta.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Your Okta user must have a role capable of creating API tokens, such as Read-only Administrator, Super Administrator, or Organization Administrator."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/salesforce/ingest-logs-and-data-from-salesforce.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Consumer Key will be used for `client_id`, and Consumer Secret will be used for `client_secret` in OAuth 2.0."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/workday/ingest-report-data-from-workday.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Specify the password for the designated Integration System User that you created for accessing the custom report in Workday."
+    notes: >-
+      Checked: CSP onboarding for AWS (CloudFormation roles assumed by Cortex's AWS roles with an
+      External ID; audit logs via Google-signed OIDC and AssumeRoleWithWebIdentity), Azure (`az ad sp
+      create` for Cortex's multi-tenant app, audit logs via a user-assigned managed identity with a
+      federated identity credential), GCP (roles/iam.serviceAccountTokenCreator granted to Cortex's
+      service accounts) and OCI/Alibaba (Terraform templates; auth not inspected, not publicly
+      detailed in what was fetched). Amazon S3 collectors (CloudTrail, flow, Route 53, generic):
+      Workload Federated Identity (default), assumed role with External ID, or an IAM user's static
+      access key. CloudWatch uses Firehose pushing to an XSIAM HTTP endpoint with an XSIAM-issued
+      token (inbound). Static-credential collectors: GCP Pub/Sub (service-account JSON key), Google
+      Workspace (service-account private key with domain-wide delegation), Azure Event Hub (Event
+      Hub and storage connection strings), Office 365 and the newer Microsoft 365 connector (Entra
+      app client secret), Okta (SSWS API token), Salesforce (client credentials secret), Box (client
+      secret), Dropbox (app secret plus offline refresh token), Workday (integration user password).
+      The Microsoft 365 email collector uses interactive admin consent to an authorized app.
+      Keyless on all three big clouds for posture and audit logs, but at least one integration on
+      each of them still wants a static key, so B. Marketplace content-pack integrations (XSOAR
+      playbooks) were not graded.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If you want to define a time limit on the API key authentication, select"
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/cortex-platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Default value is one week from the time of the API call. Maximum expiration date is six months from the time of the API call."
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/cortex-platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A `null` value indicates the key does not expire."
+    notes: >-
+      Fails: keys generated through the API get a one-week default and a six-month cap, but the
+      console marks expiration "(Optional)" and a key with no expiration never expires. No tenant
+      setting that forces an expiry or caps console-created keys is documented (GitBook's own doc
+      search found none). Same call as elastic-cloud-api: a changeable default is not an enforced
+      expiry. Applying the API's six-month cap to console keys would flip this.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/cortex-platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Generate a new API Key and define the roles assigned to it and whether the security level is standard or advanced."
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/cortex-platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Delete API Keys by ID."
+      - url: https://cortex-docs.paloaltonetworks.com/xdr-5-api/cortex-platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Maximum expiration date is six months from the time of the API call."
+    notes: >-
+      /public_api/v1/api_keys/generate, get_api_keys and delete exist in both the XSIAM 3.6 and
+      XDR 5.2 Platform APIs (license note on XSIAM: Premium, Enterprise, NG SIEM or Enterprise Plus,
+      i.e. every XSIAM tier).
+  scoping:
+    pass: true
+    evidence:
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "You can select from predefined roles or custom roles."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Any scripts or external integrations using this API key to retrieve secrets from the credential store will return an unauthorized error."
+    notes: >-
+      Each key is its own principal with an explicitly chosen predefined or custom role, plus
+      optional Scope-Based Access Control on assets, endpoints, cases and dataset rows (SBAC is off
+      by default tenant-wide). It does not inherit its creator's access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://cortex-docs.paloaltonetworks.com/xsiam-api/cortex-platform/api-keys.md
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Timestamp when the API key was created, in epoch milliseconds (UTC)."
+    notes: >-
+      The get_api_keys response carries id, creation_time, created_by, user_name, roles,
+      security_level, comment and expiration, with no last-used field, and the Manage API keys page
+      describes no last-used column. Usage can only be reconstructed from management audit logs.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Palo Alto Networks and Cortex do not appear in GitHub's supported secret-scanning patterns
+      table at all, so a leaked Cortex API key is neither detected nor reported to the vendor.
+
+notes: >-
+  One card for Cortex XSIAM and Cortex XDR, which share the tenant public API, API key model and
+  data-source collectors (XSIAM docs cited; XDR 5.x pages match). Two of five hygiene checks pass
+  (API rotation, role scoping), so inbound is F. Inbound reaches D with an enforced expiry, a
+  last-used timestamp or GitHub partner revocation, and B or A only with federated tokens.
+  Outbound reaches A if the GCP Pub/Sub, Event Hub and Microsoft 365 collectors adopt the
+  impersonation, managed-identity and federated-credential patterns already used by CSP onboarding.
+  Prisma Cloud and Cortex Cloud are separate products not graded here.

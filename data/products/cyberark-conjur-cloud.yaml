@@ -1,0 +1,223 @@
+id: cyberark-conjur-cloud
+vendor: CyberArk (Palo Alto Networks)
+product: Secrets Manager - SaaS (formerly Conjur Cloud)
+website: https://www.cyberark.com/products/secrets-manager-saas/
+docs: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-config.htm
+category: security
+status: listed
+summary: >-
+  Workloads get into Secrets Manager SaaS (Conjur Cloud) with a JWT from any issuer you configure
+  (JWKS URL or pinned keys, issuer, audience, enforced claims) or with AWS IAM, Azure and GCP
+  identities, so no API key is needed, and a workload can manage authenticators and policy too.
+  Host API keys are optional, never expire and show no last use. Dynamic secrets into AWS and GCP
+  need a stored IAM user key or service-account key.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      authn-jwt authenticators validate a JWT against a JWKS URL or pinned public keys you set, with
+      optional issuer and audience checks, enforced claims and per-workload claim annotations, and
+      return an 8-minute Secrets Manager access token. Native authn-iam (AWS STS
+      GetCallerIdentity), authn-azure and authn-gcp cover cloud identities; API keys are an opt-in
+      fallback per workload.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-cloud.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JWT authentication is a generic, secure method for workloads running on various platforms to authenticate to Secrets Manager using a unique identity token or a third-party machine identity signed by a JWT provider."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-cloud.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JWKS URL: the URL of the JWT provider's JWKS endpoint."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-cloud.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Audience (optional): the JWT's aud value. When defined, this value must match one of the JWT's audience claims."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-cloud.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Enforced claims (optional): a comma-delimited list of JWT claims that are always verified when a workload authenticates."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-appid.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "At least one JWT claim name and value must be added as an annotation."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-github-uc.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "jwks-uri: GitHub's public keys URL (https://token.actions.githubusercontent.com/.well-known/jwks)"
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-uc.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JWKS URL: https://gitlab.com/oauth/discovery/keys"
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-config.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Create, update, and delete: In the UI and on Authenticator V2 API write endpoints, the authenticated resource (user or workload) must be a member of the Authn_Admins group, either directly or through a nested group."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-delegate-privileges-host-ex.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This example explains how to configure a workload that can create JWT authenticators, which we recommend for automation process."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authenticate-awsiam-overview.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Secrets Manager sends a GetCallerIdentity request to the STS on behalf of the workload, based on the provided session credentials."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authenticate-azure-overview.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Azure Authenticator can be used instead of API key based authentication, leading to a higher security posture with no need to store a 'secret-zero'."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-authentication.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The token is valid for 8 minutes for a workload identity, and 60 minutes for a user identity."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/integrations/terraform_provider.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "JWT authenticator (a valid JWT must be provided, such as a JWT issued third-party service)"
+    notes: >-
+      The JWT authenticator is generic: GitHub Actions and GitLab are documented as presets of the
+      same JWKS-URL form, and an "Other" type takes any provider; pinned public keys cover issuers
+      Secrets Manager cannot reach. Issuer is optional when a JWKS URL is given (derived from it)
+      and audience is optional, but every workload must bind at least one claim by annotation and
+      enforced claims can make specific ones mandatory, so trust can be pinned to issuer, audience
+      and subject-like claims. The weakest path a workload must use is not a static key: the
+      Authenticator V2 API, policy load and secret APIs all take the same short-lived access token,
+      and CyberArk documents a workload (not a human) creating JWT authenticators. Human admins
+      sign in through the Identity Security Platform; that platform's own APIs are graded
+      separately on `cyberark-identity-platform`. Client-certificate auth (authn-cert) exists only
+      for the self-hosted Edge cache. The Edge itself bootstraps from a one-time install token and
+      then rotates its own API key.
+  outbound:
+    grade: D
+    mechanism: >-
+      Dynamic-secret issuers: AWS issuers reference a stored IAM user access key (needing
+      sts:GetFederationToken or sts:AssumeRole), GCP issuers a stored service-account key, and the
+      Certificate Manager issuer an Identity service user's username and password. The keys must be
+      stored as Secrets Manager secrets, optionally synced (and rotated) from CyberArk PAM.
+    evidence:
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The issuer definition references the AWS access keys for an IAM user, that is, both the access key ID and the secret access key."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The IAM user must have the sts:GetFederationToken or sts:AssumeRole permission."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The access key ID and secret access key values must be stored in Secrets Manager, either as static secrets or synced from your PAM solution."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Optional: Provide an inline policy (AWS-policy-text) to limit the dynamic secret's permissions."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-gcp.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Uses a key for account authentication, which must be stored in Secrets Manager, either as static secrets or synced from your PAM solution"
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_issuer-ephemerals.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This legacy format is read-only: create and update requests only accept access_key_id_secret_ref and secret_access_key_secret_ref."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/conjur-cloud/venafi-cert-issuer.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To authenticate to Certificate Manager, SaaS, Secrets Manager uses an Idira Identity service user."
+    notes: >-
+      Checked: AWS and GCP dynamic-secret issuers, the Palo Alto Networks Certificate Manager
+      issuer, Vault Synchronizer (a customer-run service pulling from PAM into Secrets Manager;
+      inbound, not a reach-in), Edge (customer-run cache) and Secure Workload Access (a SPIFFE
+      issuer for your own workloads to federate into AWS, Azure, GCP and model APIs; Secrets
+      Manager does not use it to reach in). Every reach-in wants a long-lived key: no role-trust,
+      external-ID or service-account-impersonation option is documented for issuers. It earns D
+      rather than F because the AWS IAM user is told exactly which STS permission it needs, an
+      inline policy can narrow each dynamic secret, and the key can be a PAM-synced account that
+      CyberArk's CPM rotates. Secrets Hub, which syncs secrets into AWS Secrets Manager, Azure Key
+      Vault, GCP Secret Manager and HashiCorp Vault keylessly, syncs from PAM Safes only
+      (PAM_PCLOUD, PAM_SELF_HOSTED), so it is graded on `cyberark-identity-platform`. Outbound moves
+      to A if issuers can assume a role you create (with an external ID) and impersonate a GCP
+      service account the way Secrets Hub already does.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-default.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API key can be manually rotated at any time."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/policy/statement-ref-host.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "If the policy includes an API key annotation, an API key is created upon creation of the host, and is used to authenticate the workload to Secrets Manager."
+    notes: >-
+      Host API keys have no expiry field and no tenant policy caps their life; they live until
+      someone rotates them or sets authn/api-key to false. Host Factory tokens do take an
+      expiration, but those enrol hosts, they are not the host's own credential.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_rotate_other_api_key.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Replaces the specified host's API key with a new random API key."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/policy/statement-ref-host.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To remove API key authentication from a workload, change the authn/api-key annotation value in the workload's host policy from true to false, and use the PATCH API or the conjur policy update CLI to apply the update."
+      - url: https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/plugin-conjur-cloud-keys.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Secrets Manager - SaaS Keys plugin manages and protects API Keys used by Secrets Manager - SaaS hosts / workloads."
+    notes: >-
+      PUT /api/authn/conjur/api_key rotates a host's key and policy creates or removes it, all over
+      the API; Privilege Cloud's CPM can also rotate host keys on a schedule.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-authentication.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A request must comply with Secrets Manager RBAC authorization rules as recorded in policy."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-default.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A host needs access to its credentials to authenticate to Secrets Manager and get access to secrets."
+    notes: >-
+      An API key belongs to a host, a purpose-built workload identity that holds only the
+      privileges policy grants it (secret consumer groups, authenticator groups), not a human's.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_show_role.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Gets detailed information about a specific role, including the role members."
+      - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-audit-lp.htm
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The Audit service is only available to users that have been assigned to the Global auditor role in Identity Administration."
+    notes: >-
+      No last-used or last-authenticated field is documented for hosts or their API keys in the
+      role, resource or whoami APIs or the Resources page; finding dead keys means mining the
+      platform Audit service.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Neither CyberArk nor Conjur appears in GitHub's supported secret-scanning patterns table, so
+      a leaked host API key is not reported to CyberArk. Conjur API keys are random 51-56
+      character strings with no prefix, which makes them hard to detect at all.
+
+notes: >-
+  The product was renamed from Conjur Cloud to Secrets Manager - SaaS, and CyberArk docs now carry
+  Palo Alto Networks and "Idira" branding; doc URLs still use conjur-cloud. Self-hosted Conjur
+  Enterprise and open-source Conjur share the authenticator model but are not graded here.
+  Hygiene applies to host API keys, which only exist if a workload is created with
+  authn/api-key: true. Two of five checks pass; an enforced key lifetime and a last-used
+  timestamp are the fixes for workloads that still fall back to keys. The headline is set by
+  outbound: keyless issuers for AWS and GCP would make this an A card.

@@ -1,0 +1,162 @@
+id: hot-aisle
+vendor: Hot Aisle
+product: Hot Aisle GPU cloud (API, CLI and SSH admin TUI)
+website: https://hotaisle.xyz
+docs: https://admin.hotaisle.app/api/docs/
+category: cloud
+status: listed
+confidence:
+  level: low
+  reason: "API keys are managed in a login-only SSH admin TUI. The public API schema shows no expiry or last-used field; if the TUI enforced either plus another fix, inbound would move from F to D."
+summary: >-
+  Hot Aisle's API, CLI and the dstack backend that provision AMD GPU VMs and bare metal take
+  only a static user API key ("Authorization: Token ..."); there is no OIDC or federation path.
+  Keys can be created and deleted through the API and limited to chosen teams and roles, but
+  have no documented expiry, last-used view or GitHub partner revocation. Hot Aisle never
+  reaches into your infrastructure.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      Static user API key (prefix.secret) sent as "Authorization: Token <key>" to
+      admin.hotaisle.app/api, used by the hotaisle CLI and the dstack Hot Aisle backend. Keys are
+      created in the SSH admin TUI or via POST /user/api_keys/. Humans log in to the TUI with an
+      SSH key or an emailed code. No OIDC, workload identity or token-exchange path exists.
+    issuers: []
+    evidence:
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Please enter in the word 'Token', a space, and then paste in your token."
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The full token value. This is the only time the full token will be returned, as it is not stored plaintext on the server and cannot be recovered."
+      - url: https://github.com/hotaisle/hotaisle-cli
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When you log in to the admin TUI via ssh admin.hotaisle.app, check the breadcrumbs at the top; you'll likely start in the team settings."
+      - url: https://raw.githubusercontent.com/hotaisle/hotaisle-cli/main/internal/config/config.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "ApiToken string `json:\"api_token\"`"
+      - url: https://hotaisle.xyz/quick-start/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The same platform is available through the API, CLI, and cloud-init templates."
+      - url: https://dstack.ai/docs/concepts/backends/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The API key requires the owner role for your user and the operator and user roles for the team specified in team_handle."
+    notes: >-
+      The API's only security definition is the static token header; every endpoint (teams,
+      VMs, bare metal, power, billing, API keys, SSH keys) uses it. The CLI stores the key in its
+      config file, and dstack, Hot Aisle's documented automation integration, takes the same key
+      pasted into its config. Nothing on hotaisle.xyz, in the API schema or in the CLI source
+      describes OIDC, GitHub Actions federation or any token exchange. There is no managed
+      object storage, registry or Kubernetes service in the API to grade as a separate data
+      plane; VMs and bare metal are reached by SSH keys you upload. Two of five hygiene checks
+      pass, so F.
+  outbound:
+    grade: N/A
+    mechanism: Hot Aisle never needs access to customer infrastructure; it provisions VMs and bare metal you then log in to.
+    evidence:
+      - url: https://hotaisle.xyz/quick-start/
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Choose a GPU configuration and start your isolated compute."
+      - url: https://hotaisle.xyz/policies/shared-responsibility-model
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Storage, compute power, and networking infrastructure are all the responsibilities of Hot Aisle."
+    notes: >-
+      Checked the full API schema (teams, billing, VMs, bare metal, API and SSH keys), the CLI,
+      the quick start's next-steps list (AMD containers, dstack, Open WebUI, OpenCode, PyTorch,
+      TinyGrad, cloud-init templates) and the policies pages. None has Hot Aisle pull from a
+      customer bucket, registry, Hugging Face or W&B; anything your workload fetches on the VM
+      uses credentials you place there yourself. dstack calls into Hot Aisle, which is inbound.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "UserAPIKeyRequest represents the data needed to create or update an API key"
+    notes: >-
+      The API key create/update request takes only label, user_role and teams, and the API key
+      object has no expiry field. The TUI key screen is login-walled; not publicly verifiable
+      whether it sets a lifetime, but nothing in the public API suggests one.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Creates a new API key with specified permissions."
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Permanently deletes an API key."
+      - url: https://raw.githubusercontent.com/hotaisle/hotaisle-cli/main/cmd/cli/command_user.go
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Usage: \"Delete an API key.\","
+    notes: >-
+      POST and DELETE on /user/api_keys/ (also exposed as hotaisle user api-keys create/delete)
+      let a key with the owner user role mint its replacement and revoke itself.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "UserAPIKeyTeamRoles defines the permissions for an API key on a specific team"
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "The list of effective roles that this authenticated request has, based on API Key restrictions"
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Keys with a user role of 'owner' can modify the user, including changing name, leaving or accepting invites to teams, and creating api keys"
+    notes: >-
+      Judgment call. There is no service account: every key belongs to a human user. But each
+      key carries its own team list and per-team roles (owner, purchaser, operator, user) plus a
+      user role of owner or user, and requests run with the key's effective roles, so a key can
+      be limited to one team as operator without billing or user-admin rights. That meets the
+      rubric's "subset of permissions or resources" test; it is not a key inheriting the human's
+      full access. The catch is that a key which rotates itself needs the owner user role.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://admin.hotaisle.app/api/docs/swagger.json
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "UserAPIKey represents a user's API key"
+    notes: >-
+      The API key object returns prefix, label, user_role and teams only, with no created or
+      last-used timestamp. Not publicly verifiable whether the login-walled TUI shows one.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Hot Aisle does not appear in GitHub's supported secret-scanning patterns table, so a leaked
+      key is not reported to Hot Aisle for revocation. The keys have no distinctive prefix (hex
+      prefix, dot, hex secret), which makes a pattern harder to add.
+
+notes: >-
+  One card: Hot Aisle sells VMs and bare metal through one API, with no separate storage,
+  registry or Kubernetes product whose auth differs. The public docs are thin (a marketing site,
+  a Swagger UI and the CLI repo); the schema at admin.hotaisle.app/api/docs/swagger.json is the
+  main source, and key management in the SSH TUI is login-walled, hence confidence low. Same
+  scale as coreweave-api (F, user-owned static token), but Hot Aisle does better on two checks:
+  keys can be minted and revoked through the API and restricted to chosen teams and roles.
+  Inbound reaches D with one more check, for example an enforced key expiry or a last-used
+  timestamp on the key object. It reaches B or A only with an OIDC token exchange (GitHub
+  Actions or any issuer) for the API.

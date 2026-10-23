@@ -1,0 +1,232 @@
+id: upwind
+vendor: Upwind
+product: Upwind cloud security platform
+website: https://www.upwind.io
+docs: https://docs.upwind.io/settings/credentials
+category: security
+status: listed
+summary: >-
+  The Upwind API, Terraform provider, CI actions and sensors all authenticate with an OAuth client ID
+  and secret swapped for a 24-hour token; no OIDC or workload identity path exists. API credentials
+  are role-scoped and show last use, but secrets never expire, have no management API and are not
+  GitHub partner-revoked. Into your cloud it is keyless on AWS, Azure and GCP; OCI, classic Azure and
+  several SaaS integrations still want static secrets.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      Upwind client credentials (client ID + client secret) generated under Settings > Access
+      management > Credentials, exchanged at auth.upwind.io/oauth/token (grant_type=client_credentials)
+      for a bearer JWT that expires after 24 hours. The same secret type is used by the Management REST
+      API v1/v2, the Terraform provider, the GitHub Actions and CLI, Kubernetes and host sensors, and
+      in-account Cloud Scanners reporting back to Upwind.
+    evidence:
+      - url: https://docs.upwind.io/assets/js/37ee0c64.a788e4be.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "To access the endpoints of the API, you need to authenticate your requests. We use OAuth 2.0, a widely adopted industry standard for authorization, to secure and control access to the API."
+      - url: https://docs.upwind.io/assets/js/37ee0c64.a788e4be.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--data-urlencode 'client_secret=YOUR_CLIENT_SECRET'"
+      - url: https://docs.upwind.io/assets/js/e5ce9b41.877767b4.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--data-urlencode 'grant_type=client_credentials'"
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This documentation provides a comprehensive guide to creating secure Upwind credentials using OAuth2 and outlines best practices to safeguard the authentication and authorization processes."
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All tokens automatically expire after 24 hours."
+      - url: https://docs.upwind.io/assets/js/250c1d76.fc51debe.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Copy the client ID and client secret. The secret is shown once."
+      - url: https://docs.upwind.io/assets/js/3e73ea36.6344a959.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "upwind_client_secret: ${{ secrets.UPWIND_CLIENT_SECRET }}"
+      - url: https://docs.upwind.io/assets/js/cd2363d5.c8727893.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "--set credentials.clientSecret=$UPWIND_CLIENT_SECRET"
+      - url: https://docs.upwind.io/assets/js/df0d6700.bb802ac8.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Provide the Upwind Auth credentials using an AWS secrets manager secret."
+    notes: >-
+      Graded C on the static-root rule (same as `paloalto-prisma-cloud` and `cyera-data-security`):
+      the bearer token lives 24 hours, but minting it needs a long-lived client secret held by the
+      workload. No OIDC, GitHub Actions OIDC, cloud workload identity or token-exchange login is
+      documented anywhere in the docs site (all ~700 pages were searched); Upwind's own GitHub Actions
+      store UPWIND_CLIENT_SECRET in GitHub Secrets rather than trusting the runner's OIDC token, and
+      Cloud Scanners deployed in your account (Outpost model, Azure scanners) keep Upwind client
+      credentials in AWS Secrets Manager or Azure Key Vault. docs.upwind.io is a client-rendered
+      Docusaurus site, so receipts cite the page content bundles actually fetched; the matching
+      human-readable pages are /restapi/v1/introduction, /restapi/v2/introduction, /settings/credentials,
+      /terraform-provider/configuration, /code/ci/github-actions,
+      /getting-started/install-sensor/kubernetes/install and
+      /getting-started/connect-cloud-account/aws/outpost/glossary. No tier gate is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS onboarding provisions IAM roles that Upwind's SaaS Trust Account assumes with an
+      Upwind-generated External ID; Azure uses service principals for Upwind's multi-tenant apps that
+      Upwind reaches through federated credentials; GCP and OCI onboarding configure Workload Identity
+      Federation from Upwind's AWS environment. OCI's federation still requires handing Upwind a
+      confidential app client secret, the Azure classic flow and Azure activity-log integration use an
+      app client secret, and several SaaS integrations take static tokens.
+    evidence:
+      - url: https://docs.upwind.io/assets/js/1b8afc99.4d33b48b.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "All cross-account access uses AWS IAM assume-role with a scoped trust policy."
+      - url: https://docs.upwind.io/assets/js/f32e6693.63becf14.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "A value, generated by Upwind and unique to each AWS Organization, added to the trust policy of the IAM roles Upwind assumes."
+      - url: https://docs.upwind.io/assets/js/bcab3396.fcfddf6e.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Cross-tenant access is built on standard Microsoft Entra ID mechanisms: the customer tenant holds Upwind service principals with scoped role assignments, and Upwind's scanning workloads obtain short-lived tokens for those service principals through federated authentication."
+      - url: https://docs.upwind.io/assets/js/bcab3396.fcfddf6e.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Authentication is federated and short-lived; no standing customer-side credentials exist."
+      - url: https://docs.upwind.io/assets/js/8ab8e5d5.4270457d.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Upwind's SaaS onboarding uses two multi-tenant applications registered in Upwind's own Microsoft Entra tenant, so this step does not create an application or a client secret in your tenant."
+      - url: https://docs.upwind.io/assets/js/783173e9.b123cb47.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Classic onboarding authenticates Upwind through an application registration and client secret in your own Microsoft Entra tenant."
+      - url: https://docs.upwind.io/assets/js/3e5bd4bb.a2cb7cca.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This will grant access to your Google Cloud environment specifically from Upwind's AWS environment."
+      - url: https://docs.upwind.io/assets/js/3e5bd4bb.a2cb7cca.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "This configuration is essential for enabling Upwind to authenticate and interact with your Google Cloud resources without needing to manage long-lived credentials."
+      - url: https://docs.upwind.io/assets/js/5f8f7541.7943c55e.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "confidential_app_client_secret"
+      - url: https://docs.upwind.io/assets/js/8894b7aa.f1f88d05.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Unique external ID generated by Upwind to establish secure cross-account access."
+      - url: https://docs.upwind.io/assets/js/0b2d58f6.50ab50e4.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Upwind will retrieve the new service principal credential from the key vault and test connectivity to the Event Hub."
+      - url: https://docs.upwind.io/assets/js/ebaae3f7.5f7ce24c.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Step 2. Install the Upwind GitHub App"
+      - url: https://docs.upwind.io/assets/js/2661427a.d0cf560e.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "GitLab has no API for creating an OAuth application, so you create one on your"
+      - url: https://docs.upwind.io/assets/js/e9a20b32.728db14d.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "An OpenAI Admin API key carries organization management permissions; OpenAI does not offer a"
+    notes: >-
+      Checked cloud onboarding: AWS SaaS and Outpost (IAM roles trusting Upwind's account with an
+      External ID; keyless), Azure SaaS and Outpost (service principals for Upwind's multi-tenant
+      apps via admin consent; SaaS scanner workers use federated credentials; keyless), Azure classic
+      onboarding (app registration client secret, "ideally 24 months"; optional legacy path), GCP
+      (WIF from Upwind's AWS environment; keyless), OCI (WIF, but the onboarding asks for an identity
+      domain confidential app's client ID and secret, so a static secret is handed over). Integrations:
+      AWS CloudTrail and object-storage export (assumed role, External ID), GuardDuty and Defender for
+      Cloud (no customer secret), GCP Cloud Audit Logs (WIF), Azure Activity Logs (service principal
+      client secret that Upwind reads from your Key Vault), GitHub (GitHub App), GitLab and ServiceNow
+      (OAuth app client secret), Jira (Atlassian OAuth 3LO), Snowflake (key-pair or programmatic access
+      token), Databricks (service principal OAuth secret), OpenAI (Admin API key), Datadog (API key),
+      Splunk (HEC token). The Upwind client credentials that the Outpost templates and Cloud Scanners
+      carry are Upwind's own inbound credential (graded above), not a secret into your cloud.
+      Keyless on all three major clouds, so B rather than C; OCI WIF without a client secret, or
+      federation for Azure activity logs, would move it toward A for clouds, though SaaS integrations
+      would still hold static tokens.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When API credentials are removed, any existing active tokens will remain functional until they expire."
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Using multiple credentials lets you rotate them as part of your security practice, or revoke a specific key if it's inadvertently exposed."
+    notes: >-
+      Only the 24-hour access token expires. The credentials page lists name, client ID, last used,
+      scope and modification fields but no expiry, the generate dialog asks only for type and name,
+      and no organization policy to cap a client secret's lifetime is documented. A secret lives until
+      someone revokes it.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "From the top of the side pane, by clicking on the three dots icon and"
+      - url: https://docs.upwind.io/assets/js/250c1d76.fc51debe.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Settings > Access management> Credentials"
+    notes: >-
+      Credentials are generated and revoked in the console. The Management REST API v1 and v2
+      references (access management covers members, groups, roles and scopes) and the Terraform
+      provider's five resources have no endpoint or resource for client credentials, so rotation
+      cannot be automated without a browser. Not publicly verifiable whether an undocumented endpoint
+      exists.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "When creating Upwind API credentials, you must assign specific permissions; any token generated from these credentials will inherit those access levels. You can mirror the permissions of an existing member group or define a custom scope and roles."
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "No, you can only set scope and roles on credentials of API type."
+    notes: >-
+      API credentials are organization-level machine principals with their own RBAC scope and roles,
+      bounded by (never exceeding) the creator's access, which the rubric counts. Sensor, Cloud account
+      and Integration credentials cannot be scoped, but are purpose-typed for one job.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.upwind.io/assets/js/e16b00bb.667f8f79.js
+        checked_on: 2026-10-22
+        checked_by: tehreet
+        quote: "Timestamp indicating the most recent usage of these credentials."
+    notes: The Credentials table has a "Last used" column for every credential.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-10-22
+        checked_by: tehreet
+    notes: >-
+      Upwind does not appear in GitHub's supported secret scanning patterns table, so a leaked Upwind
+      client secret is neither detected nor reported to Upwind for revocation.
+
+notes: >-
+  One card for the Upwind platform (CNAPP: Cloud Scanners, sensors, Code/shift-left, API security,
+  identity and AI security share one credential system and one Management API). Two of five hygiene
+  checks pass (scoping, last used). Inbound moves to B or A only if Upwind accepts a federated token
+  (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer) for the API, CI actions
+  and sensors; a credential management API and an enforced secret lifetime would add hygiene passes
+  but do not change a C. Outbound reaches A for clouds if OCI onboarding drops the confidential app
+  secret and the classic Azure flow is retired.
