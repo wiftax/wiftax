@@ -147,9 +147,9 @@ header.top{view-transition-name:site-header}
 .m-foot .btn-2::part(base){background:var(--surface-2);color:var(--ink)}
 .m-foot .btn-1::part(base){background:var(--ink);color:var(--surface)}
 .m-foot wa-button::part(base):hover{filter:brightness(.96)}
-/* modal motion: keep page width steady when the dialog locks scrolling, and replace the default 80%-scale pop
+/* modal motion: replace the default 80%-scale pop
    with a short rise + fade. Durations ride Web Awesome's own --show/--hide-duration so its open/close flow is untouched. */
-html{scrollbar-gutter:stable}
+html,html.wa-scroll-lock{overflow-y:scroll} /* keep the page scrollbar while a dialog is open; scrollbar-gutter alone does not hold in Chrome. Background scroll is blocked in JS instead. */
 .m-dialog{--show-duration:420ms;--hide-duration:180ms}
 .m-dialog::part(dialog){animation-name:wif-dialog-in;animation-timing-function:cubic-bezier(.16,1,.3,1)}
 .m-dialog.closing::part(dialog){animation-name:wif-dialog-out;animation-timing-function:cubic-bezier(.4,0,1,1);animation-direction:normal}
