@@ -1,6 +1,7 @@
 id: paloalto-prisma-cloud
 vendor: Palo Alto Networks
-product: Prisma Cloud (Enterprise Edition)
+product: Prisma Cloud
+covers: Prisma Cloud Enterprise Edition.
 website: https://www.paloaltonetworks.com/prisma/cloud
 docs: https://pan.dev/prisma-cloud/api/cspm/app-login/
 category: security

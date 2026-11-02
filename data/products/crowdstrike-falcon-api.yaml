@@ -1,6 +1,9 @@
 id: crowdstrike-falcon-api
 vendor: CrowdStrike
-product: Falcon platform API (OAuth2 API clients)
+product: Falcon API
+covers: The Falcon platform API via OAuth2 API clients.
+aliases:
+  - Falcon
 website: https://www.crowdstrike.com
 docs: https://developer.crowdstrike.com/api-reference/collections/oauth2.md
 category: security

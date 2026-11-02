@@ -1,6 +1,7 @@
 id: oleria-identity-governance
 vendor: Oleria
-product: Oleria Adaptive Identity Governance (API)
+product: Adaptive Identity Governance
+covers: The Oleria API.
 website: https://www.oleria.com
 docs: https://docs.oleria.com/developer-docs/api-reference/generate-token
 category: identity

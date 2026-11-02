@@ -1,6 +1,8 @@
 id: socket-dev
 vendor: Socket
-product: Socket API and CLI
+product: Platform
+covers: The Socket API and CLI.
+aliases: ["Socket.dev"]
 website: https://socket.dev
 docs: https://docs.socket.dev/docs/api-keys
 category: devtools

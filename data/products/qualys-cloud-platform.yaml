@@ -1,6 +1,11 @@
 id: qualys-cloud-platform
 vendor: Qualys
-product: Qualys Cloud Platform APIs (VMDR, TotalCloud, CSAM and other modules)
+product: Cloud Platform
+covers: "The VMDR, TotalCloud, CSAM and other module APIs."
+aliases:
+  - VMDR
+  - TotalCloud
+  - CSAM
 website: https://www.qualys.com
 docs: https://docs.qualys.com/en/oauth/oauth-phase2/oauth/oauth_oidc.htm
 category: security

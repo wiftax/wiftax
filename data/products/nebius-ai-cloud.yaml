@@ -1,6 +1,7 @@
 id: nebius-ai-cloud
 vendor: Nebius
-product: Nebius AI Cloud (IAM service accounts, Compute, Managed Kubernetes, Object Storage, Container Registry)
+product: AI Cloud
+covers: IAM service accounts, Compute, Managed Kubernetes, Object Storage and Container Registry.
 website: https://nebius.com
 docs: https://docs.nebius.com/iam/service-accounts/authentication
 category: cloud

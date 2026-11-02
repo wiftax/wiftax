@@ -1,6 +1,8 @@
 id: trendmicro-vision-one
-vendor: Trend Micro (TrendAI)
-product: TrendAI Vision One platform API and Cloud Accounts
+vendor: Trend Micro
+product: Vision One
+covers: The platform API and Cloud Accounts.
+aliases: ["TrendAI", "TrendAI Vision One", "Trend Vision One"]
 website: https://www.trendmicro.com
 docs: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-platform-api-keys
 category: security

@@ -1,6 +1,8 @@
 id: runpod
 vendor: Runpod
-product: Runpod (Pods, Serverless, network volumes, S3-compatible API)
+product: GPU Cloud
+covers: "Pods, Serverless, network volumes and the S3-compatible API."
+aliases: ["RunPod", "Pods", "Runpod Serverless"]
 website: https://www.runpod.io
 docs: https://docs.runpod.io/get-started/credentials
 category: cloud

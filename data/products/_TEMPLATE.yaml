@@ -1,7 +1,10 @@
 # Copy to data/products/<id>.yaml. Read RUBRIC.md first. Every grade needs a receipt.
 id: vendor-product
 vendor: Vendor
-product: Product
+product: Product         # short name, max 40 chars, no parentheses
+# parent: Parent Co      # owning company, if any
+# covers: >-             # what the grade covers (services, endpoints, tools)
+# aliases: []            # former names, sub-products people search for
 website: https://example.com
 docs: https://docs.example.com/auth
 category: saas            # cloud | saas | devtools | data | security | observability | comms | identity | other

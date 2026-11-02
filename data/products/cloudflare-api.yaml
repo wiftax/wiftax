@@ -1,6 +1,7 @@
 id: cloudflare-api
 vendor: Cloudflare
-product: API / API tokens
+product: API
+covers: The Cloudflare API and API tokens.
 website: https://www.cloudflare.com
 docs: https://developers.cloudflare.com/fundamentals/api/get-started/
 category: cloud

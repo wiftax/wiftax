@@ -1,6 +1,10 @@
 id: elastic-cloud-enterprise
 vendor: Elastic
-product: Elastic Cloud Enterprise (ECE orchestrator API)
+product: Cloud Enterprise
+covers: The ECE orchestrator API.
+aliases:
+  - ECE
+  - Elastic Cloud Enterprise
 website: https://www.elastic.co
 docs: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys
 category: data

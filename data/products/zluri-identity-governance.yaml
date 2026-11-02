@@ -1,6 +1,7 @@
 id: zluri-identity-governance
 vendor: Zluri
-product: Zluri Identity Governance (public API + integrations)
+product: Identity Governance
+covers: The public API and integrations.
 website: https://www.zluri.com
 docs: https://developers.zluri.com/reference/authentication-1
 category: identity

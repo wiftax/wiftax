@@ -1,6 +1,7 @@
 id: strongdm
 vendor: StrongDM
-product: StrongDM control plane API and service accounts
+product: API
+covers: The control plane API and service accounts.
 website: https://www.strongdm.com
 docs: https://docs.strongdm.com/references/api/api-keys.md
 category: identity

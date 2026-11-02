@@ -1,6 +1,10 @@
 id: sentinelone-singularity
 vendor: SentinelOne
-product: Singularity platform (Management Console API, Cloud Native Security, Data Lake)
+product: Singularity
+covers: "The Management Console API, Cloud Native Security and Data Lake."
+aliases:
+  - Singularity Data Lake
+  - Cloud Native Security
 website: https://www.sentinelone.com
 docs: https://github.com/Sentinel-One/ai-siem/blob/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
 category: security

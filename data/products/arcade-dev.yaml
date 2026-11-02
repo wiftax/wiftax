@@ -1,6 +1,8 @@
 id: arcade-dev
 vendor: Arcade.dev
-product: Arcade (agent tool-calling and auth platform)
+product: Platform
+covers: Agent tool calling and authorization.
+aliases: ["Arcade"]
 website: https://www.arcade.dev
 docs: https://docs.arcade.dev/en/get-started/setup/api-keys
 category: identity

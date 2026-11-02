@@ -1,6 +1,10 @@
 id: cisco-duo-admin-api
-vendor: Cisco
-product: Duo Admin API
+vendor: Duo
+product: Admin API
+parent: Cisco
+aliases:
+  - Cisco Duo
+  - Duo Security
 website: https://duo.com
 docs: https://duo.com/docs/adminapi
 category: identity

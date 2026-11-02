@@ -1,6 +1,11 @@
 id: paloalto-cortex-xsiam
 vendor: Palo Alto Networks
-product: Cortex XSIAM / Cortex XDR (public APIs and data sources)
+product: Cortex XSIAM
+covers: Cortex XSIAM and Cortex XDR public APIs and data sources.
+aliases:
+  - Cortex XDR
+  - XSIAM
+  - XDR
 website: https://www.paloaltonetworks.com/cortex
 docs: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys
 category: security

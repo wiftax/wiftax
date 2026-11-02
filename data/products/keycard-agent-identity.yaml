@@ -1,6 +1,6 @@
 id: keycard-agent-identity
 vendor: Keycard
-product: Keycard (identity and access for AI agents)
+product: Agent Identity
 website: https://www.keycard.ai
 docs: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
 category: identity

@@ -7,8 +7,11 @@
   "required": ["id", "vendor", "product", "website", "status", "surfaces", "hygiene", "summary"],
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "description": "Filename slug, e.g. datadog-api" },
-    "vendor": { "type": "string" },
-    "product": { "type": "string" },
+    "vendor": { "type": "string", "maxLength": 32, "description": "Company name as people say it. No parent company, no parentheses." },
+    "product": { "type": "string", "maxLength": 40, "description": "Short display name. No parentheses, no scope lists, does not repeat the vendor unless the vendor's own brand does." },
+    "parent": { "type": "string", "description": "Owning company, if different from vendor, e.g. Palo Alto Networks" },
+    "covers": { "type": "string", "description": "What this card's grade covers: services, endpoints, tools. Shown on the product page, not the list." },
+    "aliases": { "type": "array", "items": { "type": "string" }, "description": "Other names people search for: former names, sub-products, acronyms" },
     "website": { "type": "string", "format": "uri" },
     "docs": { "type": "string", "format": "uri", "description": "Root of the product's auth documentation" },
     "category": { "type": "string", "enum": ["cloud", "saas", "devtools", "data", "security", "observability", "comms", "identity", "other"] },

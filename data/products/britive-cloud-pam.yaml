@@ -1,6 +1,7 @@
 id: britive-cloud-pam
 vendor: Britive
-product: Cloud PAM (JIT / zero standing privilege) API
+product: Cloud PAM
+covers: The just-in-time, zero standing privilege access API.
 website: https://www.britive.com
 docs: https://docs.britive.com/docs/service-identities
 category: identity

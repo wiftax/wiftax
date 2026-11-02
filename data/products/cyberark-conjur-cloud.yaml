@@ -1,6 +1,10 @@
 id: cyberark-conjur-cloud
-vendor: CyberArk (Palo Alto Networks)
-product: Secrets Manager - SaaS (formerly Conjur Cloud)
+vendor: CyberArk
+product: Secrets Manager SaaS
+parent: Palo Alto Networks
+aliases:
+  - Conjur Cloud
+  - Conjur
 website: https://www.cyberark.com/products/secrets-manager-saas/
 docs: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-config.htm
 category: security

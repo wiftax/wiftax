@@ -1,6 +1,10 @@
 id: hashicorp-vault
 vendor: HashiCorp
-product: Vault (self-managed and HCP Vault Dedicated)
+product: Vault
+covers: Self-managed Vault and HCP Vault Dedicated.
+aliases:
+  - HCP Vault Dedicated
+  - HCP Vault
 website: https://www.hashicorp.com/products/vault
 docs: https://developer.hashicorp.com/vault/docs/auth
 category: security

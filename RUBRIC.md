@@ -1,12 +1,11 @@
 # The wif.tax Rubric (v0)
 
-wif.tax grades **how a product lets machines authenticate**. Humans logging in with
-SSO is [sso.tax](https://sso.tax)'s problem. We only care about workloads: CI jobs,
-services, agents, cron, anything that is not a person at a keyboard.
+wif.tax grades **how a product lets machines authenticate**. The question for every product
+is the same: **can I use this without holding a long-lived secret?**
 
-The question for every product is the same: **can I use this without holding a
-long-lived secret?** If the answer is no, the product is charging you a tax. You pay
-it in rotation toil, in vault sprawl, and eventually in an incident.
+If the answer is no, the
+product you're using is charging you a tax. You're paying it in the form of rotation toil, in
+vault sprawl, and the only eventuality: an incident.
 
 ## Unit of assessment
 
@@ -21,8 +20,7 @@ the one that leaks.
 
 **Tier gates, both surfaces.** If the graded mechanism requires a paid or enterprise
 tier, grade at that mechanism anyway and record the tier in `tier_gated`. The
-scoreboard shows the gate. Charging extra for security is sso.tax's beat, but we
-will point at it.
+scoreboard shows the gate.
 
 ## Surface 1: Inbound
 

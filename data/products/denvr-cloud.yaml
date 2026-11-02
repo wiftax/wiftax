@@ -1,6 +1,8 @@
 id: denvr-cloud
 vendor: Denvr Dataworks
-product: Denvr AI Cloud (control-plane API, Python/Go SDKs, Terraform provider)
+product: AI Cloud
+covers: "The control-plane API, Python and Go SDKs and the Terraform provider."
+aliases: ["Denvr AI Cloud", "Denvr"]
 website: https://www.denvr.com
 docs: https://docs.denvrdata.com/docs/platform/api-keys
 category: cloud

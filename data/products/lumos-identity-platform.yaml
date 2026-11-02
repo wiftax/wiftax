@@ -1,6 +1,7 @@
 id: lumos-identity-platform
 vendor: Lumos
-product: Lumos Identity Platform (API, Terraform provider, on-prem agent)
+product: Identity Platform
+covers: "The API, Terraform provider and on-prem agent."
 website: https://www.lumos.com
 docs: https://developers.lumos.com/docs/quick-start.md
 category: identity

@@ -1,6 +1,8 @@
 id: nudge-security
 vendor: Nudge Security
-product: Nudge Security
+product: Platform
+aliases:
+  - Nudge
 website: https://www.nudgesecurity.com
 docs: https://help.nudgesecurity.com/en/articles/8890697-getting-started-with-the-nudge-security-api
 category: security

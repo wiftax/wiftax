@@ -1,6 +1,9 @@
 id: tines
 vendor: Tines
-product: Tines automation platform (Tines Stories, cloud and self-hosted)
+product: Platform
+covers: "Tines Stories, cloud and self-hosted."
+aliases:
+  - Tines Stories
 website: https://www.tines.com
 docs: https://www.tines.com/api/authentication/
 category: security

@@ -1,6 +1,7 @@
 id: hyperbolic
 vendor: Hyperbolic
-product: Hyperbolic GPU cloud and Inference API (api.hyperbolic.ai, CLI, MCP server, Managed Kubernetes)
+product: GPU Cloud and Inference API
+covers: "api.hyperbolic.ai, the CLI, the MCP server and Managed Kubernetes."
 website: https://hyperbolic.ai
 docs: https://hyperbolic.ai/docs/general/account-management.md
 category: cloud

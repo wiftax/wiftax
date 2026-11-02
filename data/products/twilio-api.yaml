@@ -1,6 +1,7 @@
 id: twilio-api
 vendor: Twilio
-product: REST API
+product: API
+covers: The Twilio REST API.
 website: https://www.twilio.com
 docs: https://www.twilio.com/docs/iam
 category: comms

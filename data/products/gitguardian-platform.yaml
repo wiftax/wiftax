@@ -1,6 +1,8 @@
 id: gitguardian-platform
 vendor: GitGuardian
-product: GitGuardian Platform (API, ggshield)
+product: Platform
+covers: The API and the ggshield CLI.
+aliases: ["ggshield"]
 website: https://www.gitguardian.com
 docs: https://docs.gitguardian.com/api-docs/authentication
 category: security

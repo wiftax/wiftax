@@ -1,6 +1,7 @@
 id: tensorwave
 vendor: TensorWave
-product: TensorWave AMD GPU cloud (bare metal, Managed Kubernetes, Managed Slurm, storage)
+product: GPU Cloud
+covers: "AMD GPU bare metal, Managed Kubernetes, Managed Slurm and storage."
 website: https://tensorwave.com
 docs: https://docs.tensorwave.com/kubernetes/health-overview.md
 category: cloud

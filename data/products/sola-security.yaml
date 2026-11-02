@@ -1,6 +1,7 @@
 id: sola-security
 vendor: Sola Security
-product: Sola (SaaS and cloud security posture)
+product: Platform
+covers: SaaS and cloud security posture.
 website: https://sola.security
 docs: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
 category: security

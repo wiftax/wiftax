@@ -1,6 +1,9 @@
 id: chainguard-platform
 vendor: Chainguard
-product: Chainguard registry and platform API
+product: Platform
+covers: The cgr.dev registry and the Chainguard platform API.
+aliases:
+  - Chainguard Images
 website: https://www.chainguard.dev
 docs: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable-ids/
 category: devtools

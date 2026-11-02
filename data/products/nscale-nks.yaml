@@ -1,6 +1,8 @@
 id: nscale-nks
 vendor: Nscale
-product: NKS (Nscale Kubernetes Service)
+product: Kubernetes Service
+aliases:
+  - NKS
 website: https://www.nscale.com
 docs: https://docs.nscale.com/docs/platform-services/managed-kubernetes
 category: cloud

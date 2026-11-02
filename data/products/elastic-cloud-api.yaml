@@ -1,6 +1,10 @@
 id: elastic-cloud-api
 vendor: Elastic
-product: Elastic Cloud control plane API (Hosted and Serverless)
+product: Cloud API
+covers: The Elastic Cloud control plane, for Hosted and Serverless deployments.
+aliases:
+  - Elastic Cloud
+  - Elastic Cloud Serverless
 website: https://www.elastic.co
 docs: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-api-keys
 category: cloud

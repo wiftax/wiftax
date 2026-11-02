@@ -1,6 +1,10 @@
 id: sf-compute
-vendor: San Francisco Compute Company
-product: SF Compute (v2 API and sf CLI)
+vendor: SF Compute
+product: GPU Cloud
+covers: The v2 API and sf CLI.
+aliases:
+  - San Francisco Compute Company
+  - sf CLI
 website: https://sfcompute.com
 docs: https://docs.sfcompute.com/preview/tokens
 category: cloud

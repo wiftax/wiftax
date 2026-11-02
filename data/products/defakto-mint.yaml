@@ -1,6 +1,9 @@
 id: defakto-mint
-vendor: Defakto (formerly SPIRL)
-product: Mint (SPIFFE workload identity control plane)
+vendor: Defakto
+product: Mint
+covers: The SPIFFE workload identity control plane.
+aliases:
+  - SPIRL
 website: https://www.defakto.security
 docs: https://d.defakto.security/iam/service-accounts
 category: identity

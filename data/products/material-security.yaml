@@ -1,6 +1,7 @@
 id: material-security
 vendor: Material Security
-product: Material platform (API v1)
+product: Platform
+covers: The platform API v1.
 website: https://material.security
 docs: https://docs.material.security/reference/api-v1/authentication
 category: security

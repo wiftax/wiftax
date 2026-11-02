@@ -1,6 +1,9 @@
 id: fortinet-fortigate
 vendor: Fortinet
-product: FortiGate / FortiOS (REST API and SDN connectors)
+product: FortiGate
+covers: FortiOS, via the REST API and SDN connectors.
+aliases:
+  - FortiOS
 website: https://www.fortinet.com
 docs: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
 category: security

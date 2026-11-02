@@ -1,6 +1,7 @@
 id: reco-saas-security
 vendor: Reco
-product: Reco Dynamic SaaS Security (SSPM / ITDR)
+product: Dynamic SaaS Security
+covers: SSPM and ITDR.
 website: https://www.reco.ai
 docs: https://docs.reco.ai/en/
 category: security

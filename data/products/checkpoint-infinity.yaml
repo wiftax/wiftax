@@ -1,6 +1,10 @@
 id: checkpoint-infinity
 vendor: Check Point
-product: Infinity Portal APIs and CloudGuard CNAPP
+product: Infinity Portal and CloudGuard
+covers: "The Infinity Portal APIs and the CloudGuard CNAPP API, Terraform provider and onboarding automation."
+aliases:
+  - CloudGuard CNAPP
+  - Infinity Portal APIs
 website: https://www.checkpoint.com
 docs: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
 category: security

@@ -1,6 +1,8 @@
 id: coreweave-cks
 vendor: CoreWeave
-product: CKS (Kubernetes Service)
+product: Kubernetes Service
+aliases:
+  - CKS
 website: https://www.coreweave.com
 docs: https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction
 category: cloud

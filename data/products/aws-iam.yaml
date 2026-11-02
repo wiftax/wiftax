@@ -1,6 +1,10 @@
 id: aws-iam
-vendor: Amazon Web Services
-product: IAM / STS
+vendor: AWS
+product: IAM and STS
+aliases:
+  - STS
+  - Security Token Service
+  - Amazon Web Services
 website: https://aws.amazon.com/iam/
 docs: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html
 category: cloud

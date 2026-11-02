@@ -1,6 +1,7 @@
 id: p0-security
 vendor: P0 Security
-product: P0 platform (Management, JIT access and inventory APIs)
+product: Platform
+covers: "The Management, JIT access and inventory APIs."
 website: https://www.p0.dev
 docs: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
 category: identity

@@ -1,6 +1,8 @@
 id: wiz-platform
-vendor: Wiz (Google)
-product: Wiz platform API
+vendor: Wiz
+product: Platform
+parent: Google
+covers: The Wiz platform API.
 website: https://www.wiz.io
 docs: https://docs.wiz.io
 category: security

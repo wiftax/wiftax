@@ -1,6 +1,9 @@
 id: splunk-cloud-platform
-vendor: Splunk (Cisco)
-product: Splunk Cloud Platform
+vendor: Splunk
+product: Cloud Platform
+parent: Cisco
+aliases:
+  - Splunk Cloud
 website: https://www.splunk.com
 docs: https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/Setupauthenticationwithtokens
 category: observability

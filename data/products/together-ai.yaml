@@ -1,6 +1,7 @@
 id: together-ai
 vendor: Together AI
-product: Together AI platform (inference, fine-tuning, GPU clusters API)
+product: Platform
+covers: Inference, fine-tuning and the GPU clusters API.
 website: https://www.together.ai
 docs: https://docs.together.ai/docs/api-keys-authentication
 category: cloud
