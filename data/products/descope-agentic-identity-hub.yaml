@@ -1,6 +1,10 @@
 id: descope-agentic-identity-hub
 vendor: Descope
-product: Descope platform / Agentic Identity Hub (Management API)
+product: Platform
+covers: "The Descope platform and Agentic Identity Hub, via the Management API, SDKs, Terraform and CLI."
+aliases:
+  - Agentic Identity Hub
+  - Management API
 website: https://www.descope.com
 docs: https://docs.descope.com/management
 category: identity

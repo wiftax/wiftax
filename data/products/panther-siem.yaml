@@ -1,6 +1,7 @@
 id: panther-siem
-vendor: Panther Labs
-product: Panther SIEM
+vendor: Panther
+product: SIEM
+aliases: ["Panther Labs"]
 website: https://panther.com
 docs: https://docs.panther.com/panther-developer-workflows/api
 category: security

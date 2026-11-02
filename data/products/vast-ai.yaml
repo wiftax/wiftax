@@ -1,6 +1,8 @@
 id: vast-ai
 vendor: Vast.ai
-product: Vast.ai GPU cloud (REST API, vastai CLI and SDK, Cloud Sync)
+product: GPU Cloud
+covers: "The REST API, vastai CLI and SDK, and Cloud Sync."
+aliases: ["vastai"]
 website: https://vast.ai
 docs: https://docs.vast.ai/guides/reference/api-keys.md
 category: cloud

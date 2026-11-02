@@ -1,6 +1,7 @@
 id: baseten
 vendor: Baseten
-product: Baseten (inference, training and Management API)
+product: Platform
+covers: "Inference, training and the Management API."
 website: https://www.baseten.co
 docs: https://docs.baseten.co/organization/api-keys
 category: cloud

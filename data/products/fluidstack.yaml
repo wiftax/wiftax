@@ -1,6 +1,9 @@
 id: fluidstack
 vendor: Fluidstack
-product: Fluidstack Atlas (Infrastructure and Management APIs, fluidctl, managed Kubernetes and Slurm)
+product: Atlas
+covers: "The Infrastructure and Management APIs, fluidctl, and managed Kubernetes and Slurm."
+aliases:
+  - fluidctl
 website: https://www.fluidstack.io
 docs: https://docs.fluidstack.io/kubernetes/access-clusters
 category: cloud

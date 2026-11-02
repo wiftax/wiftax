@@ -1,6 +1,7 @@
 id: datadog-api
 vendor: Datadog
-product: API (API keys + application keys)
+product: API
+covers: API keys and application keys.
 website: https://www.datadoghq.com
 docs: https://docs.datadoghq.com/account_management/api-app-keys/
 category: observability

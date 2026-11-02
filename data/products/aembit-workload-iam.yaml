@@ -1,6 +1,7 @@
 id: aembit-workload-iam
 vendor: Aembit
-product: Aembit Workload IAM (Aembit Cloud API and Edge)
+product: Workload IAM
+covers: The Aembit Cloud API and Aembit Edge.
 website: https://aembit.io
 docs: https://docs.aembit.io/dev-guide/api/cloud/
 category: identity

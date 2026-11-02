@@ -1,6 +1,8 @@
 id: push-security
 vendor: Push Security
-product: Push browser identity security platform (REST API v1)
+product: Platform
+covers: "Browser identity security, via REST API v1."
+aliases: ["Push"]
 website: https://pushsecurity.com
 docs: https://pushsecurity.com/help/audience/engineering/rest-v1/
 category: security

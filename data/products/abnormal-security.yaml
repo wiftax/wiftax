@@ -1,6 +1,8 @@
 id: abnormal-security
-vendor: Abnormal AI (formerly Abnormal Security)
-product: Abnormal platform REST API
+vendor: Abnormal AI
+product: Platform
+covers: The platform REST API.
+aliases: ["Abnormal Security"]
 website: https://abnormal.ai
 docs: https://app.swaggerhub.com/apis-docs/abnormal-security/abx
 category: security

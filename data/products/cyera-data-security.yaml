@@ -1,6 +1,7 @@
 id: cyera-data-security
 vendor: Cyera
-product: Cyera Data Security Platform (DSPM)
+product: Data Security Platform
+aliases: ["DSPM"]
 website: https://www.cyera.com
 docs: https://api.cyera.io/docs
 category: security

@@ -1,6 +1,6 @@
 id: semgrep-appsec-platform
 vendor: Semgrep
-product: Semgrep AppSec Platform
+product: AppSec Platform
 website: https://semgrep.dev
 docs: https://docs.semgrep.dev/deployment/tokens
 category: devtools

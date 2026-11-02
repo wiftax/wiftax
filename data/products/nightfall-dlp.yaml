@@ -1,6 +1,8 @@
 id: nightfall-dlp
 vendor: Nightfall AI
-product: Nightfall DLP (Developer API + SaaS/cloud connectors)
+product: DLP
+covers: The Developer API and the SaaS and cloud connectors.
+aliases: ["Nightfall"]
 website: https://www.nightfall.ai
 docs: https://help.nightfall.ai/developer-api/introduction/authentication_security
 category: security

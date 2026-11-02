@@ -1,6 +1,7 @@
 id: kibana
 vendor: Elastic
-product: Kibana (API, alerting and AI connectors)
+product: Kibana
+covers: "The Kibana API, alerting and AI connectors."
 website: https://www.elastic.co
 docs: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/kibana-authentication
 category: observability

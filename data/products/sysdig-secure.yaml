@@ -1,6 +1,7 @@
 id: sysdig-secure
 vendor: Sysdig
-product: Sysdig Secure (API, agents and cloud onboarding)
+product: Sysdig Secure
+covers: "The API, agents and cloud onboarding."
 website: https://sysdig.com
 docs: https://docs.sysdig.com/en/developer-tools/sysdig-api/
 category: security

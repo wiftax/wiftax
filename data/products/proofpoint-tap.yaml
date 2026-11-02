@@ -1,6 +1,9 @@
 id: proofpoint-tap
 vendor: Proofpoint
-product: Targeted Attack Protection (TAP) and Threat Protection APIs
+product: Targeted Attack Protection
+covers: TAP and the Threat Protection APIs.
+aliases:
+  - TAP
 website: https://www.proofpoint.com
 docs: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation
 category: security

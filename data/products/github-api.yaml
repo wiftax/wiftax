@@ -1,6 +1,10 @@
 id: github-api
 vendor: GitHub
-product: REST/GraphQL API and Actions
+product: API and Actions
+covers: The REST and GraphQL APIs and GitHub Actions.
+aliases:
+  - GitHub Actions
+  - GraphQL API
 website: https://github.com
 docs: https://docs.github.com/en/rest/authentication
 category: devtools

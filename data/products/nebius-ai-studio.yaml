@@ -1,6 +1,10 @@
 id: nebius-ai-studio
 vendor: Nebius
-product: Nebius Token Factory (formerly AI Studio) inference, fine-tuning and Sandboxes API
+product: Token Factory
+covers: "Inference, fine-tuning and Sandboxes APIs."
+aliases:
+  - AI Studio
+  - Nebius AI Studio
 website: https://tokenfactory.nebius.com
 docs: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
 category: cloud

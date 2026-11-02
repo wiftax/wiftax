@@ -1,6 +1,10 @@
 id: c1-identity-platform
-vendor: C1 (formerly ConductorOne)
-product: C1 Identity Platform (API + Baton connectors)
+vendor: C1
+product: Identity Platform
+covers: The API and Baton connectors.
+aliases:
+  - ConductorOne
+  - Baton
 website: https://www.c1.ai
 docs: https://www.c1.ai/docs/product/admin/service-principals/workload-federation
 category: identity

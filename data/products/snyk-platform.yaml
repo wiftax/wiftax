@@ -1,6 +1,7 @@
 id: snyk-platform
 vendor: Snyk
-product: Snyk platform API and CLI
+product: Platform
+covers: The Snyk API and CLI.
 website: https://snyk.io
 docs: https://docs.snyk.io/platform-administration/service-accounts/service-accounts-using-oauth-2.0
 category: devtools

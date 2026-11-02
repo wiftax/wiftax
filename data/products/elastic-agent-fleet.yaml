@@ -1,6 +1,10 @@
 id: elastic-agent-fleet
 vendor: Elastic
-product: Elastic Agent, Fleet and integrations (incl. APM/OTLP intake and agentless cloud integrations)
+product: Elastic Agent and Fleet
+covers: "Elastic Agent, Fleet and integrations, including APM/OTLP intake and agentless cloud integrations."
+aliases:
+  - Fleet
+  - APM
 website: https://www.elastic.co
 docs: https://www.elastic.co/docs/reference/fleet/fleet-enrollment-tokens
 category: observability

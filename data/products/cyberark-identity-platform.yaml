@@ -1,6 +1,12 @@
 id: cyberark-identity-platform
-vendor: CyberArk (Palo Alto Networks)
-product: Identity Security Platform APIs (Privilege Cloud, Secrets Hub, shared services)
+vendor: CyberArk
+product: Identity Security Platform
+parent: Palo Alto Networks
+covers: "Privilege Cloud, Secrets Hub and shared services APIs."
+aliases:
+  - Privilege Cloud
+  - Secrets Hub
+  - ISPSS
 website: https://www.cyberark.com/products/identity-security-platform/
 docs: https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm
 category: security

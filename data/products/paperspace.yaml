@@ -1,6 +1,7 @@
 id: paperspace
 vendor: DigitalOcean
-product: Paperspace (Machines, Notebooks, Deployments, Workflows; api.paperspace.com)
+product: Paperspace
+covers: "Machines, Notebooks, Deployments and Workflows, via api.paperspace.com."
 website: https://www.paperspace.com
 docs: https://docs.digitalocean.com/reference/paperspace/api-keys/
 category: cloud

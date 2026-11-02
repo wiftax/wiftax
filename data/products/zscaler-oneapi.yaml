@@ -1,6 +1,11 @@
 id: zscaler-oneapi
 vendor: Zscaler
-product: Zscaler OneAPI (ZIA, ZPA and other APIs via ZIdentity API clients)
+product: OneAPI
+covers: "ZIA, ZPA and other Zscaler APIs, via ZIdentity API clients."
+aliases:
+  - ZIA
+  - ZPA
+  - ZIdentity
 website: https://www.zscaler.com
 docs: https://automate.zscaler.com/docs/getting-started/getting-started
 category: security

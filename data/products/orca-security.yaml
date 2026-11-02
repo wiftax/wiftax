@@ -1,6 +1,7 @@
 id: orca-security
 vendor: Orca Security
-product: Orca Cloud Security Platform
+product: Cloud Security Platform
+aliases: ["Orca"]
 website: https://orca.security
 docs: https://docs.orcasecurity.io/docs/managing-api-tokens
 category: security

@@ -1,6 +1,10 @@
 id: teleport
 vendor: Teleport
-product: Teleport (Cloud and self-hosted)
+product: Platform
+covers: Teleport Cloud and self-hosted.
+aliases:
+  - Teleport Cloud
+  - tbot
 website: https://goteleport.com
 docs: https://goteleport.com/docs/reference/deployment/join-methods/
 category: identity

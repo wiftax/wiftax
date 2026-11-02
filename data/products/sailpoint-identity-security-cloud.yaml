@@ -1,6 +1,8 @@
 id: sailpoint-identity-security-cloud
 vendor: SailPoint
-product: Identity Security Cloud (IdentityNow) API
+product: Identity Security Cloud
+aliases:
+  - IdentityNow
 website: https://www.sailpoint.com
 docs: https://developer.sailpoint.com/docs/api/authentication
 category: identity

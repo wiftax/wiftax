@@ -1,6 +1,10 @@
 id: azure-entra-workload-identity
 vendor: Microsoft Azure
-product: Entra ID workload identities
+product: Entra Workload ID
+aliases:
+  - Entra ID workload identities
+  - Azure AD workload identity
+  - Workload identity federation
 website: https://learn.microsoft.com/en-us/entra/workload-id/
 docs: https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation
 category: cloud

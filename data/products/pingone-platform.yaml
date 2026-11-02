@@ -1,6 +1,7 @@
 id: pingone-platform
 vendor: Ping Identity
-product: PingOne platform (Management API)
+product: PingOne
+covers: The PingOne platform Management API.
 website: https://www.pingidentity.com
 docs: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-and-authentication-by-application-type/worker-applications.html
 category: identity

@@ -1,6 +1,7 @@
 id: island-enterprise-browser
 vendor: Island
-product: Island Enterprise Browser management API
+product: Enterprise Browser
+covers: The management API.
 website: https://www.island.io
 docs: https://documentation.island.io/apidocs/generate-and-manage-api-keys
 category: security

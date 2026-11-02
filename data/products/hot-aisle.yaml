@@ -1,6 +1,7 @@
 id: hot-aisle
 vendor: Hot Aisle
-product: Hot Aisle GPU cloud (API, CLI and SSH admin TUI)
+product: GPU Cloud
+covers: "The API, CLI and SSH admin TUI."
 website: https://hotaisle.xyz
 docs: https://admin.hotaisle.app/api/docs/
 category: cloud

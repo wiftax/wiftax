@@ -1,6 +1,8 @@
 id: crusoe-cloud
 vendor: Crusoe
-product: Crusoe Cloud (VMs, Managed Kubernetes, Object Storage, Container Registry, API/CLI/Terraform)
+product: Cloud
+covers: "VMs, Managed Kubernetes, Object Storage and Container Registry, via the API, CLI and Terraform."
+aliases: ["Crusoe Cloud"]
 website: https://crusoe.ai
 docs: https://docs.crusoecloud.com/reference/api/
 category: cloud

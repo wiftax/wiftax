@@ -1,6 +1,9 @@
 id: akeyless-platform
 vendor: Akeyless
-product: Akeyless Identity Security Platform (Secrets Management API)
+product: Identity Security Platform
+covers: The secrets management API.
+aliases:
+  - Secrets Management
 website: https://www.akeyless.io
 docs: https://docs.akeyless.io/docs/access-and-authentication-methods
 category: identity

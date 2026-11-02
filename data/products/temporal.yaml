@@ -1,6 +1,10 @@
 id: temporal
 vendor: Temporal
-product: Temporal (Cloud and self-hosted Server)
+product: Platform
+covers: Temporal Cloud and self-hosted Temporal Server.
+aliases:
+  - Temporal Cloud
+  - Temporal Server
 website: https://temporal.io
 docs: https://docs.temporal.io/cloud/api-keys
 category: devtools

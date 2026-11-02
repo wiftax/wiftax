@@ -1,6 +1,9 @@
 id: okta-management-api
 vendor: Okta
-product: Okta Management API (Workforce Identity Cloud)
+product: Management API
+covers: The Okta Management API for Workforce Identity Cloud.
+aliases:
+  - Workforce Identity Cloud
 website: https://www.okta.com
 docs: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
 category: identity

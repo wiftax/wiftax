@@ -1,6 +1,9 @@
 id: axonius
 vendor: Axonius
-product: Axonius platform (Asset Cloud, SaaS and self-hosted)
+product: Platform
+covers: Asset Cloud, both SaaS and self-hosted.
+aliases:
+  - Asset Cloud
 website: https://www.axonius.com
 docs: https://docs.axonius.com/docs/manage-service-accounts
 category: security

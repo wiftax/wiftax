@@ -1,6 +1,9 @@
 id: cudo-compute
 vendor: CUDO Compute
-product: CUDO Compute (REST API, cudoctl, Python client, Terraform provider, object storage)
+product: GPU Cloud
+covers: "The REST API, cudoctl, Python client, Terraform provider and object storage."
+aliases:
+  - cudoctl
 website: https://www.cudocompute.com
 docs: https://docs.cudocompute.com/api/authentication.md
 category: cloud

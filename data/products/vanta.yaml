@@ -1,6 +1,7 @@
 id: vanta
 vendor: Vanta
-product: Vanta platform (API and integrations)
+product: Platform
+covers: The API and integrations.
 website: https://www.vanta.com
 docs: https://developer.vanta.com/docs/concepts/authentication
 category: security

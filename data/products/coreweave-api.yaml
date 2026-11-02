@@ -1,6 +1,7 @@
 id: coreweave-api
 vendor: CoreWeave
-product: Control-plane API (api.coreweave.com, Terraform provider, kubeconfigs)
+product: Cloud API
+covers: "The control-plane API at api.coreweave.com, the Terraform provider and kubeconfigs."
 website: https://www.coreweave.com
 docs: https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/api-access
 category: cloud

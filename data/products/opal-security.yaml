@@ -1,6 +1,9 @@
 id: opal-security
 vendor: Opal Security
-product: Opal (access management platform API)
+product: Platform
+covers: The access management platform API.
+aliases:
+  - Opal
 website: https://www.opal.dev
 docs: https://docs.opal.dev/reference/authentication
 category: identity

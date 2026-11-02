@@ -1,6 +1,6 @@
 id: obsidian-security
 vendor: Obsidian Security
-product: Obsidian Security Platform
+product: Platform
 website: https://www.obsidiansecurity.com
 docs: https://docs.datadoghq.com/integrations/obsidian-security/
 category: security

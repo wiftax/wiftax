@@ -1,6 +1,12 @@
 id: rapid7-insight-platform
 vendor: Rapid7
-product: Insight / Command Platform API (InsightIDR, InsightConnect, InsightCloudSec)
+product: Command Platform
+covers: The Insight platform API for InsightIDR, InsightConnect and InsightCloudSec.
+aliases:
+  - Insight Platform
+  - InsightIDR
+  - InsightConnect
+  - InsightCloudSec
 website: https://www.rapid7.com
 docs: https://docs.rapid7.com/insight/managing-platform-api-keys/
 category: security

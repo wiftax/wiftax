@@ -1,6 +1,10 @@
 id: google-cloud-iam
 vendor: Google Cloud
-product: IAM / Workload Identity Federation
+product: IAM
+covers: Workload Identity Federation.
+aliases:
+  - Workload Identity Federation
+  - GCP
 website: https://cloud.google.com/iam
 docs: https://docs.cloud.google.com/iam/docs/workload-identity-federation
 category: cloud

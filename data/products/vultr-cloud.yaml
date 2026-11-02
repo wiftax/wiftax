@@ -1,6 +1,8 @@
 id: vultr-cloud
 vendor: Vultr
-product: Cloud control plane (API v2, vultr-cli, Terraform; compute, GPU, VKE, Container Registry)
+product: Cloud
+covers: "Compute, GPU, VKE and Container Registry, via API v2, vultr-cli and Terraform."
+aliases: ["VKE", "vultr-cli"]
 website: https://www.vultr.com
 docs: https://docs.vultr.com/platform/iam
 category: cloud

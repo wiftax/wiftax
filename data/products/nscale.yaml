@@ -1,6 +1,7 @@
 id: nscale
 vendor: Nscale
-product: Nscale cloud (control-plane API, CLI, Terraform, serverless inference, object storage)
+product: Cloud
+covers: The control-plane API, CLI, Terraform, serverless inference and object storage.
 website: https://www.nscale.com
 docs: https://docs.nscale.com/docs/manage/service-tokens
 category: cloud

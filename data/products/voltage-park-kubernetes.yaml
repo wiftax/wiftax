@@ -1,6 +1,8 @@
 id: voltage-park-kubernetes
-vendor: Voltage Park (Lightning AI)
-product: Managed Kubernetes add-on (cluster API server on bare-metal rentals)
+vendor: Voltage Park
+product: Managed Kubernetes
+parent: Lightning AI
+covers: The cluster API server for the Managed Kubernetes add-on on bare-metal rentals.
 website: https://www.voltagepark.com
 docs: https://support.voltagepark.com/article/add-on-managed-kubernetes
 category: cloud

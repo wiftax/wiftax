@@ -1,6 +1,7 @@
 id: vultr-object-storage
 vendor: Vultr
-product: Object Storage (S3-compatible)
+product: Object Storage
+covers: The S3-compatible object storage API.
 website: https://www.vultr.com
 docs: https://docs.vultr.com/products/storage/object-storage/management/manage-credentials
 category: cloud

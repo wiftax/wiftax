@@ -1,6 +1,10 @@
 id: voltage-park
-vendor: Voltage Park (Lightning AI)
-product: Voltage Park On-Demand control plane (cloud-api.voltagepark.com, VMs, bare metal, storage)
+vendor: Voltage Park
+product: GPU Cloud
+parent: Lightning AI
+covers: "On-Demand VMs, bare metal and storage, via the control-plane API."
+aliases:
+  - Voltage Park On-Demand
 website: https://www.voltagepark.com
 docs: https://support.voltagepark.com/article/api
 category: cloud

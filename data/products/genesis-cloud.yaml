@@ -1,6 +1,7 @@
 id: genesis-cloud
 vendor: Genesis Cloud
-product: Genesis Cloud (Compute API, Object Storage, Inference Service)
+product: Platform
+covers: "Compute API, Object Storage and Inference Service."
 website: https://www.genesiscloud.com
 docs: https://developers.genesiscloud.com/compute-api/
 category: cloud

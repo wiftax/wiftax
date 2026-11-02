@@ -1,6 +1,11 @@
 id: lambda-cloud
 vendor: Lambda
-product: Lambda Cloud (Cloud API, On-Demand instances, 1-Click Clusters, filesystems)
+product: Cloud
+covers: The Cloud API, On-Demand instances, 1-Click Clusters and filesystems.
+aliases:
+  - Lambda Cloud
+  - Lambda Labs
+  - 1-Click Clusters
 website: https://lambda.ai
 docs: https://docs.lambda.ai/api/cloud
 category: cloud

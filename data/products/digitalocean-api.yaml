@@ -1,6 +1,15 @@
 id: digitalocean-api
 vendor: DigitalOcean
-product: DigitalOcean API (Droplets and GPU Droplets, DOKS, Spaces, Container Registry, App Platform, Gradient AI)
+product: API
+covers: >-
+  Droplets, GPU Droplets, DOKS, Spaces, Container Registry, App Platform and Gradient AI, via the API, doctl and Terraform.
+aliases:
+  - Droplets
+  - DOKS
+  - Spaces
+  - App Platform
+  - Gradient AI
+  - doctl
 website: https://www.digitalocean.com
 docs: https://docs.digitalocean.com/reference/api/create-personal-access-token/
 category: cloud

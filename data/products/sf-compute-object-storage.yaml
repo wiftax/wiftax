@@ -1,6 +1,7 @@
 id: sf-compute-object-storage
-vendor: San Francisco Compute Company
-product: SF Compute Object Storage
+vendor: SF Compute
+product: Object Storage
+aliases: ["San Francisco Compute Company", "SFC"]
 website: https://sfcompute.com
 docs: https://docs.sfcompute.com/preview/object-storage
 category: cloud

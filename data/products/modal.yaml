@@ -1,6 +1,10 @@
 id: modal
 vendor: Modal
-product: "Modal (serverless GPU compute: Functions, Sandboxes, SDK and CLI)"
+product: Platform
+covers: "Serverless GPU compute: Functions, Sandboxes, the SDK and CLI."
+aliases:
+  - Modal Functions
+  - Modal Sandboxes
 website: https://modal.com
 docs: https://modal.com/docs/guide/service-users
 category: cloud
