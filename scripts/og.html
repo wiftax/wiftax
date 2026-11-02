@@ -1,0 +1,23 @@
+<!doctype html>
+<!-- Share card source. Render with: npm run og  (writes site/og.png) -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.bunny.net/css?family=inter:600,700&display=swap">
+<style>
+  html,body{margin:0}
+  body{width:1200px;height:630px;background:#F7F6F2;display:grid;place-items:center;overflow:hidden;font-family:Inter,sans-serif;color:#1A1917;position:relative}
+  .card{display:flex;flex-direction:column;align-items:center;gap:64px}
+  .mark{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:104px;font-weight:700;letter-spacing:-.02em;line-height:1}
+  .mark span{color:#76726B;font-weight:400}
+  .grades{display:flex;gap:20px}
+  .g{width:128px;height:128px;border-radius:30px;display:grid;place-items:center;font-size:62px;font-weight:700;box-shadow:0 1px 0 rgb(26 25 23/.04),0 12px 28px -12px rgb(26 25 23/.25)}
+  .A{background:#5BBF8A}.B{background:#5E9BE0}.C{background:#E3B341}.D{background:#EE9360}.F{background:#E36A7F}
+  .rule{position:absolute;inset:auto 0 0 0;height:10px;display:flex}
+  .rule i{flex:1}
+</style></head>
+<body>
+  <div class="card">
+    <div class="mark">wif<span>.tax</span></div>
+    <div class="grades"><div class="g A">A</div><div class="g B">B</div><div class="g C">C</div><div class="g D">D</div><div class="g F">F</div></div>
+  </div>
+  <div class="rule"><i class="A"></i><i class="B"></i><i class="C"></i><i class="D"></i><i class="F"></i></div>
+</body></html>
