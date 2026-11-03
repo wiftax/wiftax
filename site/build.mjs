@@ -84,7 +84,7 @@ const mHygRow = (p) => HYG.map((k) => { const v = p.hygiene[k].pass; return tip(
 const mRow = (p) => {
   const i = p.surfaces.inbound.grade, o = p.surfaces.outbound.grade;
   const side = o !== "N/A" && RANK[o] < RANK[i] ? ["Outbound", RUBRIC_NAMES.outbound[o]] : ["Inbound", RUBRIC_NAMES.inbound[i]];
-  return `<tr><th scope="row">${esc(p.product)}</th><td data-l="Grade">${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td data-l="Inbound">${tip(`t-${p.id}-in`, badge(i), RUBRIC_NAMES.inbound[i])}</td><td data-l="Outbound">${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), RUBRIC_NAMES.outbound[o])}</td><td class="m-hy" data-l="Hygiene">${mHygRow(p)}</td></tr>`;
+  return `<tr data-p="${p.id}"><th scope="row"><button type="button" class="m-open">${esc(p.product)}</button></th><td data-l="Grade" data-tab="${side[0] === "Outbound" ? "out" : "in"}">${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td data-l="Inbound" data-tab="in">${tip(`t-${p.id}-in`, badge(i), RUBRIC_NAMES.inbound[i])}</td><td data-l="Outbound" data-tab="out">${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), RUBRIC_NAMES.outbound[o])}</td><td class="m-hy" data-l="Hygiene" data-tab="hy">${mHygRow(p)}</td><td class="m-go" aria-hidden="true"></td></tr>`;
 };
 // Expandable receipts under each product row: the card's own summary, mechanisms and evidence quotes.
 // Evidence text comes verbatim from vendor docs (markdown, code spans, table rows, JSON). Render it readably without changing the words.
@@ -111,23 +111,29 @@ const quote = (e) => {
   return `<blockquote>${inline(q)}</blockquote>`;
 };
 // One source line per page, with every quote taken from it.
-const mRcpts = (ev) => {
+// Product view: opened from a row in the company modal. Body is dist/ev/<id>.html, fetched on demand (site/pd.js).
+const pdSrc = (ev) => {
   if (!ev?.length) return "";
   const by = new Map();
   for (const e of ev) { const g = by.get(e.url) ?? by.set(e.url, { url: e.url, on: e.checked_on, qs: [] }).get(e.url); if (e.quote) g.qs.push(e); if (e.checked_on > g.on) g.on = e.checked_on; }
-  return `<ul class="ev-r">${[...by.values()].map((g) => `<li>${g.qs.map(quote).join("")}<div class="ev-src"><a href="${esc(g.url)}" target="_blank" rel="nofollow noopener">${esc(host(g.url))}</a><time>${esc(g.on)}</time></div></li>`).join("")}</ul>`;
+  return `<div class="srcs">${[...by.values()].map((g) => `<article class="src">${g.qs.map(quote).join("")}<footer><a href="${esc(g.url)}" target="_blank" rel="nofollow noopener">${esc(host(g.url))}<span aria-hidden="true">↗</span></a><time>${esc(g.on)}</time></footer></article>`).join("")}</div>`;
 };
-const mSurf = (label, s) => `<section class="ev-s"><h4>${badge(s.grade)}${label}</h4>${s.tier_gated ? `<span class="tier">${esc(s.tier_gated)}</span>` : ""}${mRcpts(s.evidence)}</section>`;
-const mHygEv = (p) => { const rows = HYG.filter((k) => p.hygiene[k].evidence?.length); return rows.length ? `<section class="ev-s"><h4>Hygiene</h4>${rows.map((k) => { const v = p.hygiene[k].pass; return `<div class="ev-h"><div class="ev-hl"><span class="tile ${v === null ? "hz" : v ? "hy" : "hn"}">${icon(HYG_ICON[k], { label: v === null ? "n/a" : v ? "pass" : "fail" })}</span>${HYG_LABEL[k]}</div>${mRcpts(p.hygiene[k].evidence)}</div>`; }).join("")}</section>` : ""; };
-// The panel body is a separate small file (dist/ev/<id>.html) fetched on first open, so the home page stays light.
-const mFlags = (p) => `${p.status === "disputed" ? `<p class="ev-flag">${icon("flag")} <b>Disputed.</b></p>` : p.status === "graduated" ? `<p class="ev-flag ev-grad">${icon("star")} <b>Graduated${p.graduated_on ? ` ${esc(p.graduated_on)}` : ""}.</b></p>` : ""}${p.vendor_statement ? `<section class="ev-s"><h4>Vendor statement</h4><ul class="ev-r"><li><blockquote>${inline(p.vendor_statement.quote)}</blockquote><div class="ev-src"><a href="${esc(p.vendor_statement.url)}" target="_blank" rel="nofollow noopener">${esc(host(p.vendor_statement.url))}</a><time>${esc(p.vendor_statement.date)}</time></div></li></ul></section>` : ""}${p.confidence ? `<p class="ev-flag">${icon("triangle-exclamation")} <span><b>Low confidence.</b> ${inline(p.confidence.reason)}</span></p>` : ""}`;
-const mEvBody = (p) => `${mFlags(p)}${p.summary ? `<p class="ev-sum">${inline(p.summary)}</p>` : ""}${mSurf("Inbound", p.surfaces.inbound)}${p.surfaces.outbound.grade !== "N/A" || p.surfaces.outbound.evidence?.length ? mSurf("Outbound", p.surfaces.outbound) : ""}${mHygEv(p)}`;
+const pdSurf = (key, side, s) => `<div class="pd-pane" role="tabpanel" data-tab="${key}" hidden><p class="pd-mean">${badge(s.grade)}<span>${esc(RUBRIC_NAMES[side][s.grade])}</span></p>${s.tier_gated ? `<p class="pd-tier">${esc(s.tier_gated)}</p>` : ""}${pdSrc(s.evidence)}</div>`;
+const pdHyg = (p) => `<div class="pd-pane" role="tabpanel" data-tab="hy" hidden><ul class="pd-hyg">${HYG.map((k) => {
+  const h = p.hygiene[k], v = h.pass, cls = v === null ? "hz" : v ? "hy" : "hn", st = v === null ? "n/a" : v ? "pass" : "fail";
+  const row = `<span class="tile ${cls}">${icon(HYG_ICON[k])}</span><span class="pd-hl">${HYG_LABEL[k]}</span><span class="pd-hv pd-${cls}">${st}</span>`;
+  return `<li>${h.evidence?.length ? `<details><summary>${row}<span class="pd-chev" aria-hidden="true"></span></summary>${pdSrc(h.evidence)}</details>` : `<div class="pd-hrow">${row}</div>`}</li>`;
+}).join("")}</ul></div>`;
+const mFlags = (p) => `${p.status === "disputed" ? `<p class="ev-flag">${icon("flag")} <b>Disputed.</b></p>` : p.status === "graduated" ? `<p class="ev-flag ev-grad">${icon("star")} <b>Graduated${p.graduated_on ? ` ${esc(p.graduated_on)}` : ""}.</b></p>` : ""}${p.confidence ? `<p class="ev-flag">${icon("triangle-exclamation")} <span><b>Low confidence.</b> ${inline(p.confidence.reason)}</span></p>` : ""}${p.vendor_statement ? `<div class="pd-vs"><h4>Vendor statement</h4>${pdSrc([{ url: p.vendor_statement.url, checked_on: p.vendor_statement.date, quote: p.vendor_statement.quote }])}</div>` : ""}`;
+const pdBody = (p) => {
+  const i = p.surfaces.inbound.grade, o = p.surfaces.outbound.grade, applic = HYG.filter((k) => p.hygiene[k].pass !== null), pass = applic.filter((k) => p.hygiene[k].pass).length;
+  return `<h3 class="pd-name">${esc(p.product)}</h3>${p.summary ? `<p class="ev-sum">${inline(p.summary)}</p>` : ""}${mFlags(p)}<div class="pd-tabs" role="tablist"><button type="button" role="tab" data-tab="in">Inbound ${badge(i)}</button><button type="button" role="tab" data-tab="out">Outbound ${o === "N/A" ? `<span class="na">—</span>` : badge(o)}</button><button type="button" role="tab" data-tab="hy">Hygiene <span class="pd-n">${applic.length ? `${pass}/${applic.length}` : "n/a"}</span></button></div>${pdSurf("in", "inbound", p.surfaces.inbound)}${pdSurf("out", "outbound", p.surfaces.outbound)}${pdHyg(p)}`;
+};
 mkdirSync(join(out, "ev"), { recursive: true });
-for (const p of products) writeFileSync(join(out, "ev", `${p.id}.html`), mEvBody(p));
-const mEv = (p) => `<tr class="m-ev"><td colspan="5"><details data-ev="${p.id}"><summary>Evidence${icon("chevron-down", { cls: "ev-chev" })}</summary><div class="ev"></div></details></td></tr>`;
+for (const p of products) writeFileSync(join(out, "ev", `${p.id}.html`), pdBody(p));
 // Column heading with a "?" that explains it. Wording is the site's existing surface descriptions.
 const qh = (slug, key, label, text) => `<span class="qh">${label}<span class="q" tabindex="0" aria-label="About ${label}" data-tip="${esc(text)}">${icon("circle-question", { solid: true })}</span></span>`;
-const companyModal = (c) => `<template id="m-${c.slug}" data-label="${esc(c.vendor)}"><div class="m-head" tabindex="-1" autofocus><span class="m-name">${esc(c.vendor)}</span>${c.parent ? `<span class="m-parent">${esc(c.parent)}</span>` : ""}</div><table class="m-table"><thead><tr><th scope="col"><span class="wa-visually-hidden">Product</span></th><th scope="col">${qh(c.slug, "g", "Grade", "The product's headline grade is the lower of the two, because the weakest link is the one that leaks.")}</th><th scope="col">${qh(c.slug, "in", "Inbound", "How a workload running anywhere authenticates to this product.")}</th><th scope="col">${qh(c.slug, "out", "Outbound", "How this product reaches into your cloud, repos, or other SaaS.")}</th><th scope="col">${qh(c.slug, "hy", "Hygiene", "For any static credential the product still issues.")}</th></tr></thead><tbody>${c.products.map((p) => mRow(p) + mEv(p)).join("")}</tbody></table><div class="m-foot"><wa-button class="btn-2" href="/rubric/">Methodology</wa-button><wa-button class="btn-1" href="https://github.com/wiftax/wiftax/issues/new?title=${encodeURIComponent(c.vendor)}" target="_blank">Suggest a fix</wa-button></div></template>`;
+const companyModal = (c) => `<template id="m-${c.slug}" data-label="${esc(c.vendor)}"><div class="m-head" tabindex="-1" autofocus><span class="m-name">${esc(c.vendor)}</span>${c.parent ? `<span class="m-parent">${esc(c.parent)}</span>` : ""}</div><table class="m-table"><thead><tr><th scope="col"><span class="wa-visually-hidden">Product</span></th><th scope="col">${qh(c.slug, "g", "Grade", "The product's headline grade is the lower of the two, because the weakest link is the one that leaks.")}</th><th scope="col">${qh(c.slug, "in", "Inbound", "How a workload running anywhere authenticates to this product.")}</th><th scope="col">${qh(c.slug, "out", "Outbound", "How this product reaches into your cloud, repos, or other SaaS.")}</th><th scope="col">${qh(c.slug, "hy", "Hygiene", "For any static credential the product still issues.")}</th><th aria-hidden="true"></th></tr></thead><tbody>${c.products.map(mRow).join("")}</tbody></table><div class="m-foot"><wa-button class="btn-2" href="/rubric/">Methodology</wa-button><wa-button class="btn-1" href="https://github.com/wiftax/wiftax/issues/new?title=${encodeURIComponent(c.vendor)}" target="_blank">Suggest a fix</wa-button></div></template>`;
 const index = `<h1 class="wa-visually-hidden">wif.tax</h1>
 <div class="finder"><wa-input id="q" type="search" size="large" placeholder="Search" with-clear autocomplete="off" label="Search companies and products">${icon("magnifying-glass", { slot: "start" })}<div slot="end" class="gf" role="group" aria-label="Filter by grade"><div class="gf-tray">${"ABCDF".split("").map((g) => `<button type="button" class="gt gt-${g}" data-grade="${g}" aria-pressed="false" aria-label="Grade ${g}">${g}</button>`).join("")}</div>${icon(FA_PRO ? "bars-filter" : "filter", { cls: "gf-icon" })}</div></wa-input></div>
 <ul class="companies wa-grid wa-gap-0" id="list">${items}</ul>
@@ -150,14 +156,13 @@ function setC(slug){const u=new URL(location);slug?u.searchParams.set('c',slug):
 async function openCompany(slug){const t=document.getElementById('m-'+slug);if(!t)return false;await customElements.whenDefined('wa-dialog');const f=t.content.cloneNode(true),h=f.querySelector('.m-head');mLabel.replaceChildren(h);mFoot.replaceChildren(f.querySelector('.m-foot'));mBody.replaceChildren(f);dlg.setAttribute('aria-label',t.dataset.label);dlg.open=true;setC(slug);return true}
 list.addEventListener('click',e=>{const a=e.target.closest('a[data-m]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();openCompany(a.dataset.m)});
 dlg.addEventListener('wa-hide',e=>{if(e.target===dlg)dlg.classList.add('closing')});
-mBody.addEventListener('toggle',e=>{const d=e.target;if(!d.open||!d.dataset.ev||d.dataset.loaded)return;d.dataset.loaded=1;const b=d.querySelector('.ev');b.setAttribute('aria-busy','true');fetch('/ev/'+d.dataset.ev+'.html').then(r=>r.ok?r.text():Promise.reject()).then(h=>{b.innerHTML=h}).catch(()=>{delete d.dataset.loaded}).finally(()=>b.removeAttribute('aria-busy'))},true);
 const hold=e=>{const b=e.composedPath().find(n=>n.part&&n.part.contains('body'));if(!b||b.scrollHeight<=b.clientHeight)e.preventDefault()};
 dlg.addEventListener('wa-show',e=>{if(e.target!==dlg)return;addEventListener('wheel',hold,{passive:false});addEventListener('touchmove',hold,{passive:false})});
 dlg.addEventListener('wa-after-hide',e=>{if(e.target!==dlg)return;removeEventListener('wheel',hold);removeEventListener('touchmove',hold)});
 dlg.addEventListener('wa-after-hide',e=>{if(e.target===dlg){dlg.classList.remove('closing');setC(null)}});
 (window.requestIdleCallback||setTimeout)(()=>{const w=document.createElement('div');w.hidden=true;w.setAttribute('aria-hidden','true');const t=document.querySelector('template[id^="m-"]');if(t)w.append(...[...t.content.querySelectorAll('wa-icon')].map(i=>i.cloneNode()));document.body.append(w)});
-run(false);if(u0.get('c'))openCompany(u0.get('c')).then(ok=>{const d=ok&&u0.get('p')&&mBody.querySelector('details[data-ev="'+CSS.escape(u0.get('p'))+'"]');if(d){d.open=true;setTimeout(()=>d.closest('tr').previousElementSibling.scrollIntoView({block:'start'}),450)}})</script>`;
-writeFileSync(join(out, "index.html"), layout({ title: "wif.tax — the static key tax", desc: "Which products let machines authenticate without long-lived secrets. Graded, with receipts.", body: index }));
+run(false);if(u0.get('c'))openCompany(u0.get('c'))</script>`;
+writeFileSync(join(out, "index.html"), layout({ extraHead: `<script type="module" src="/pd.js?v=${createHash("sha256").update(readFileSync(join(root, "site/pd.js"))).digest("hex").slice(0, 8)}"></script>`, title: "wif.tax — the static key tax", desc: "Which products let machines authenticate without long-lived secrets. Graded, with receipts.", body: index }));
 
 // ---- json, badges (no per-product pages: products live in the company modal on /)
 mkdirSync(join(out, "api/products"), { recursive: true });
@@ -199,7 +204,7 @@ writeFileSync(join(out, "_headers"), `/*\n  X-Content-Type-Options: nosniff\n  X
 writeFileSync(join(out, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1a1a1a"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-weight="700" font-size="17" fill="#fff">$</text></svg>`);
 cpSync(join(root, "site/style.css"), join(out, "style.css"));
 cpSync(join(root, "site/tooltip.js"), join(out, "tooltip.js"));
-for (const f of ["rubric.css", "rubric.js", "og.png"]) cpSync(join(root, "site", f), join(out, f));
+for (const f of ["rubric.css", "rubric.js", "og.png", "pd.js"]) cpSync(join(root, "site", f), join(out, f));
 mkdirSync(join(out, "vendor"), { recursive: true });
 for (const [pkg, f] of [["core", "floating-ui.core.mjs"], ["dom", "floating-ui.dom.mjs"]]) cpSync(join(root, `node_modules/@floating-ui/${pkg}/dist/floating-ui.${pkg}.browser.min.mjs`), join(out, "vendor", f));
 if (WA_PRO) cpSync(join(root, "vendor/webawesome-pro"), join(out, "wa"), { recursive: true });
