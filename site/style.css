@@ -125,6 +125,35 @@ header.top{view-transition-name:site-header}
 .m-hy .tip{margin-inline:var(--wa-space-3xs)}
 .tile{display:inline-grid;place-items:center;width:2.25em;height:2.25em;border-radius:var(--wa-border-radius-m)}
 .tile.hy{background:var(--grade-A);color:var(--ink)}.tile.hn{background:var(--surface-2);color:var(--ink-3)}.tile.hz{background:var(--surface-2);color:color-mix(in srgb,var(--ink-3) 55%,var(--surface-2))}
+/* evidence row under each product */
+.m-table tbody tr:not(.m-ev) > *{border-bottom:0;padding-block-end:var(--wa-space-xs)}
+.m-table tr.m-ev > td{padding:0 0 var(--wa-space-m);text-align:start;white-space:normal;border-bottom:var(--wa-border-width-s) solid var(--wa-color-surface-border)}
+.m-table tbody tr.m-ev:last-child > td{border-bottom:0}
+.m-ev summary{display:inline-flex;align-items:center;gap:var(--wa-space-2xs);cursor:pointer;list-style:none;font-size:var(--wa-font-size-s);color:var(--ink-2);padding:var(--wa-space-2xs) var(--wa-space-s);margin-inline-start:calc(-1 * var(--wa-space-s));border-radius:var(--wa-border-radius-m);transition:background var(--wa-transition-fast),color var(--wa-transition-fast)}
+.m-ev details{border:0;background:none;padding:0;margin:0;border-radius:0}
+.m-ev summary::-webkit-details-marker{display:none}.m-ev summary::after,.m-ev summary::before{content:none;display:none}
+.m-ev summary:hover{background:var(--surface-2);color:var(--ink)}
+.m-ev summary:focus-visible{outline:var(--wa-focus-ring)}
+.ev-chev{font-size:.75em;transition:transform .2s ease}
+.m-ev details[open] .ev-chev{transform:rotate(180deg)}
+.ev{display:grid;gap:var(--wa-space-l);padding-block:var(--wa-space-s) var(--wa-space-xs);font-size:var(--wa-font-size-s);color:var(--ink-2)}
+.ev p{margin:0;max-width:68ch}
+.ev-sum{color:var(--ink)}
+.ev-s{display:grid;gap:var(--wa-space-xs)}
+.ev-s h4{display:flex;align-items:center;gap:var(--wa-space-xs);margin:0;font-size:var(--wa-font-size-s);font-weight:var(--wa-font-weight-semibold);color:var(--ink)}
+.ev-s h4 wa-badge.grade{font-size:var(--wa-font-size-2xs);border-radius:var(--wa-border-radius-s)}
+.ev-s .tier{justify-self:start}
+.ev-r{list-style:none;margin:var(--wa-space-2xs) 0 0;padding:0;display:grid;gap:var(--wa-space-s)}
+.ev-r li{padding-inline-start:var(--wa-space-s);border-inline-start:2px solid var(--border)}
+.ev-r blockquote{border:0;padding:0;margin:0 0 var(--wa-space-3xs);color:var(--ink-2);font-size:var(--wa-font-size-s);overflow-wrap:anywhere}
+.ev-src{display:flex;gap:var(--wa-space-s);flex-wrap:wrap;font-size:var(--wa-font-size-xs);color:var(--ink-3)}
+.ev-src a{color:var(--ink-2)}
+.ev-src time{font-family:var(--wa-font-family-code)}
+.ev-h{display:grid;gap:var(--wa-space-2xs);margin-block-start:var(--wa-space-2xs)}
+.ev-hl{display:flex;align-items:center;gap:var(--wa-space-s);color:var(--ink)}
+.ev-hl .tile{font-size:.8rem}
+/* keep the footer visually apart from content scrolling under it */
+.m-dialog::part(footer){border-top:var(--wa-border-width-s) solid var(--border);padding-block-start:var(--wa-space-l);margin-block-start:var(--wa-space-s)}
 /* phone: each product becomes a stacked block (name, then Grade / Inbound / Outbound, then Hygiene) */
 @media(max-width:40rem){
   .m-dialog{--width:calc(100vw - 2 * var(--wa-space-s));--spacing:var(--wa-space-l)}
@@ -135,6 +164,12 @@ header.top{view-transition-name:site-header}
   .m-table tbody tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--wa-space-m) var(--wa-space-s);padding-block:var(--wa-space-l);border-bottom:var(--wa-border-width-s) solid var(--wa-color-surface-border)}
   .m-table tbody tr:first-child{padding-block-start:var(--wa-space-xs)}
   .m-table tbody tr:last-child{border-bottom:0;padding-block-end:0}
+  .m-table tbody tr:not(.m-ev){border-bottom:0;padding-block-end:var(--wa-space-s)}
+  .m-table tbody tr.m-ev{display:block;padding-block:0 var(--wa-space-m);border-bottom:var(--wa-border-width-s) solid var(--wa-color-surface-border)}
+  .m-table tbody tr.m-ev:last-child{border-bottom:0;padding-block-end:0}
+  .m-table tr.m-ev > td{display:block;border:0;padding:0}.m-table tr.m-ev > td::before{content:none}
+  .m-table tbody tr:not(.m-ev) + tr:not(.m-ev){padding-block-start:var(--wa-space-l)}
+  .m-table tbody tr.m-ev + tr{padding-block-start:var(--wa-space-l)}
   .m-table tbody th,.m-table td{display:flex;flex-direction:column;align-items:flex-start;gap:var(--wa-space-xs);padding:0;border:0;text-align:start}
   .m-table tbody th{grid-column:1/-1;font-size:var(--wa-font-size-l);font-weight:var(--wa-font-weight-semibold)}
   .m-table td::before{content:attr(data-l);font-size:var(--wa-font-size-xs);color:var(--ink-3)}
