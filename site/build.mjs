@@ -87,11 +87,40 @@ const mRow = (p) => {
   return `<tr><th scope="row">${esc(p.product)}</th><td data-l="Grade">${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td data-l="Inbound">${tip(`t-${p.id}-in`, badge(i), RUBRIC_NAMES.inbound[i])}</td><td data-l="Outbound">${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), RUBRIC_NAMES.outbound[o])}</td><td class="m-hy" data-l="Hygiene">${mHygRow(p)}</td></tr>`;
 };
 // Expandable receipts under each product row: the card's own summary, mechanisms and evidence quotes.
-const mRcpts = (ev) => (ev ?? []).length ? `<ul class="ev-r">${ev.map((e) => `<li>${e.quote ? `<blockquote>${esc(e.quote)}</blockquote>` : ""}<div class="ev-src"><a href="${esc(e.url)}" target="_blank" rel="nofollow noopener">${esc(host(e.url))}</a><time>${esc(e.checked_on)}</time></div></li>`).join("")}</ul>` : "";
-const mSurf = (label, s) => `<section class="ev-s"><h4>${badge(s.grade)}${label}</h4>${s.tier_gated ? `<span class="tier">${esc(s.tier_gated)}</span>` : ""}<p>${esc(s.mechanism)}</p>${mRcpts(s.evidence)}</section>`;
+// Evidence text comes verbatim from vendor docs (markdown, code spans, table rows, JSON). Render it readably without changing the words.
+const PRODUCT_NAME = Object.fromEntries(products.map((p) => [p.id, p.product === p.vendor ? p.vendor : `${p.vendor} ${p.product}`]));
+const tidy = (t) => String(t).replace(/\s+/g, " ").replace(/\s+([.,;:!?)\]])/g, "$1").replace(/([(\[])\s+/g, "$1").trim();
+const inline = (t) => {
+  // split out code spans first so nothing inside them is touched
+  const md = tidy(t).replace(/\[([^\]]+)\]\([^)]*\)/g, "$1").replace(/\*\*/g, "").replace(/^#+\s+/, "");
+  return md.split(/(`[^`]+`)/g).map((seg) => {
+    if (/^`[^`]+`$/.test(seg)) { const c = seg.slice(1, -1); return PRODUCT_NAME[c] ? esc(PRODUCT_NAME[c]) : `<code>${esc(c)}</code>`; }
+    seg = seg.replace(/(\w)`(\w)/g, "$1’$2").replace(/`/g, "").replace(/(^|\s)\*([^*\s][^*]*?)\*(?=[\s.,;:]|$)/g, "$1$2").replace(/(\w)\*(?=\s|$)/g, "$1");
+    // URLs, <PLACEHOLDERS>, snake_case and namespaced identifiers read as code
+    return seg.split(/(https?:\/\/[^\s"')]+[^\s"').,;:]|<[A-Za-z_][\w-]*>|\b[a-z][a-z0-9]*(?:_[a-z0-9]+)+\b|\b[a-z0-9-]+:[A-Z][A-Za-z]+\b)/g).map((x, k) => k % 2 ? `<code>${esc(x)}</code>` : esc(x)).join("");
+  }).join("");
+};
+const GH_COLS = ["Partner", "User alert", "Push protection", "Validity check", "Metadata", "Base64"];
+const quote = (e) => {
+  const q = tidy(e.quote);
+  const cells = q.split("|").map((c) => c.trim()).filter((c, k, a) => !(c === "" && (k === 0 || k === a.length - 1)));
+  if (/supported-secret-scanning-patterns/.test(e.url) && cells.length === 9)
+    return `<div class="ev-gh"><b>${esc(cells[1])}</b><span class="ev-cells">${GH_COLS.map((h, k) => `<span class="${cells[k + 3] === "✓" ? "y" : "n"}">${cells[k + 3] === "✓" ? "✓" : "✗"} ${h}</span>`).join("")}</span></div>`;
+  if (cells.length >= 3 && /\|/.test(q)) return `<div class="ev-cells ev-row">${cells.filter(Boolean).map((c) => `<span>${inline(c)}</span>`).join("")}</div>`;
+  if (/^\s*(\{|\[\s*["{\d])/.test(q) || /^\s*"[\w$-]+"\s*:/.test(q) || /\s{2,}=/.test(e.quote)) return `<code class="ev-code">${esc(q)}</code>`;
+  return `<blockquote>${inline(q)}</blockquote>`;
+};
+// One source line per page, with every quote taken from it.
+const mRcpts = (ev) => {
+  if (!ev?.length) return "";
+  const by = new Map();
+  for (const e of ev) { const g = by.get(e.url) ?? by.set(e.url, { url: e.url, on: e.checked_on, qs: [] }).get(e.url); if (e.quote) g.qs.push(e); if (e.checked_on > g.on) g.on = e.checked_on; }
+  return `<ul class="ev-r">${[...by.values()].map((g) => `<li>${g.qs.map(quote).join("")}<div class="ev-src"><a href="${esc(g.url)}" target="_blank" rel="nofollow noopener">${esc(host(g.url))}</a><time>${esc(g.on)}</time></div></li>`).join("")}</ul>`;
+};
+const mSurf = (label, s) => `<section class="ev-s"><h4>${badge(s.grade)}${label}</h4>${s.tier_gated ? `<span class="tier">${esc(s.tier_gated)}</span>` : ""}${mRcpts(s.evidence)}</section>`;
 const mHygEv = (p) => { const rows = HYG.filter((k) => p.hygiene[k].evidence?.length); return rows.length ? `<section class="ev-s"><h4>Hygiene</h4>${rows.map((k) => { const v = p.hygiene[k].pass; return `<div class="ev-h"><div class="ev-hl"><span class="tile ${v === null ? "hz" : v ? "hy" : "hn"}">${icon(HYG_ICON[k], { label: v === null ? "n/a" : v ? "pass" : "fail" })}</span>${HYG_LABEL[k]}</div>${mRcpts(p.hygiene[k].evidence)}</div>`; }).join("")}</section>` : ""; };
 // The panel body is a separate small file (dist/ev/<id>.html) fetched on first open, so the home page stays light.
-const mEvBody = (p) => `${p.summary ? `<p class="ev-sum">${esc(p.summary)}</p>` : ""}${mSurf("Inbound", p.surfaces.inbound)}${p.surfaces.outbound.grade !== "N/A" || p.surfaces.outbound.evidence?.length ? mSurf("Outbound", p.surfaces.outbound) : ""}${mHygEv(p)}`;
+const mEvBody = (p) => `${p.summary ? `<p class="ev-sum">${inline(p.summary)}</p>` : ""}${mSurf("Inbound", p.surfaces.inbound)}${p.surfaces.outbound.grade !== "N/A" || p.surfaces.outbound.evidence?.length ? mSurf("Outbound", p.surfaces.outbound) : ""}${mHygEv(p)}`;
 mkdirSync(join(out, "ev"), { recursive: true });
 for (const p of products) writeFileSync(join(out, "ev", `${p.id}.html`), mEvBody(p));
 const mEv = (p) => `<tr class="m-ev"><td colspan="5"><details data-ev="${p.id}"><summary>Evidence${icon("chevron-down", { cls: "ev-chev" })}</summary><div class="ev"></div></details></td></tr>`;
