@@ -4,7 +4,7 @@ A site that grades other people's authentication should publish its own. This pa
 
 | Credential | Held because | Grade we would give ourselves |
 |---|---|---|
-| GitHub App private key for Sisyphus | GitHub Apps authenticate with a static RSA key that never expires. There is no federated path for an App to mint its own installation tokens. | C, same as the [GitHub card](/p/github-api/) |
+| GitHub App private key for Sisyphus | GitHub Apps authenticate with a static RSA key that never expires. There is no federated path for an App to mint its own installation tokens. | C, same as the [GitHub card](/?c=github&p=github-api) |
 
 ## What we got to zero
 

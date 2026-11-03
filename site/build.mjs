@@ -63,7 +63,7 @@ const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g
 const companies = Object.values(products.reduce((m, p) => ((m[p.vendor] ??= { vendor: p.vendor, parent: p.parent, products: [] }).products.push(p), m), {}))
   .map((c) => ({ ...c, slug: slug(c.vendor), grade: c.products.reduce((g, p) => (RANK[p.headline] < RANK[g] ? p.headline : g), "A") }))
   .sort((a, b) => a.vendor.localeCompare(b.vendor));
-const href = (c) => (c.products.length === 1 ? `/p/${c.products[0].id}/` : `/c/${c.slug}/`);
+const href = (c) => `/?c=${c.slug}`;
 const items = companies.map((c) => {
   const hay = [c.vendor, c.parent, ...c.products.flatMap((p) => [p.product, ...(p.aliases ?? [])])].filter(Boolean).join(" ").toLowerCase();
   return `<li data-s="${esc(hay)}" data-g="${c.grade}"><a href="${href(c)}" data-m="${c.slug}"><span class="co">${esc(c.vendor)}</span>${c.products.length > 1 ? `<wa-badge class="nprod" variant="neutral" appearance="outlined" pill>${c.products.length}</wa-badge>` : ""}</a><button type="button" class="gpick" data-grade="${c.grade}" aria-label="Show only grade ${c.grade}">${badge(c.grade)}</button></li>`;
@@ -120,7 +120,8 @@ const mRcpts = (ev) => {
 const mSurf = (label, s) => `<section class="ev-s"><h4>${badge(s.grade)}${label}</h4>${s.tier_gated ? `<span class="tier">${esc(s.tier_gated)}</span>` : ""}${mRcpts(s.evidence)}</section>`;
 const mHygEv = (p) => { const rows = HYG.filter((k) => p.hygiene[k].evidence?.length); return rows.length ? `<section class="ev-s"><h4>Hygiene</h4>${rows.map((k) => { const v = p.hygiene[k].pass; return `<div class="ev-h"><div class="ev-hl"><span class="tile ${v === null ? "hz" : v ? "hy" : "hn"}">${icon(HYG_ICON[k], { label: v === null ? "n/a" : v ? "pass" : "fail" })}</span>${HYG_LABEL[k]}</div>${mRcpts(p.hygiene[k].evidence)}</div>`; }).join("")}</section>` : ""; };
 // The panel body is a separate small file (dist/ev/<id>.html) fetched on first open, so the home page stays light.
-const mEvBody = (p) => `${p.summary ? `<p class="ev-sum">${inline(p.summary)}</p>` : ""}${mSurf("Inbound", p.surfaces.inbound)}${p.surfaces.outbound.grade !== "N/A" || p.surfaces.outbound.evidence?.length ? mSurf("Outbound", p.surfaces.outbound) : ""}${mHygEv(p)}`;
+const mFlags = (p) => `${p.status === "disputed" ? `<p class="ev-flag">${icon("flag")} <b>Disputed.</b></p>` : p.status === "graduated" ? `<p class="ev-flag ev-grad">${icon("star")} <b>Graduated${p.graduated_on ? ` ${esc(p.graduated_on)}` : ""}.</b></p>` : ""}${p.vendor_statement ? `<section class="ev-s"><h4>Vendor statement</h4><ul class="ev-r"><li><blockquote>${inline(p.vendor_statement.quote)}</blockquote><div class="ev-src"><a href="${esc(p.vendor_statement.url)}" target="_blank" rel="nofollow noopener">${esc(host(p.vendor_statement.url))}</a><time>${esc(p.vendor_statement.date)}</time></div></li></ul></section>` : ""}${p.confidence ? `<p class="ev-flag">${icon("triangle-exclamation")} <span><b>Low confidence.</b> ${inline(p.confidence.reason)}</span></p>` : ""}`;
+const mEvBody = (p) => `${mFlags(p)}${p.summary ? `<p class="ev-sum">${inline(p.summary)}</p>` : ""}${mSurf("Inbound", p.surfaces.inbound)}${p.surfaces.outbound.grade !== "N/A" || p.surfaces.outbound.evidence?.length ? mSurf("Outbound", p.surfaces.outbound) : ""}${mHygEv(p)}`;
 mkdirSync(join(out, "ev"), { recursive: true });
 for (const p of products) writeFileSync(join(out, "ev", `${p.id}.html`), mEvBody(p));
 const mEv = (p) => `<tr class="m-ev"><td colspan="5"><details data-ev="${p.id}"><summary>Evidence${icon("chevron-down", { cls: "ev-chev" })}</summary><div class="ev"></div></details></td></tr>`;
@@ -145,7 +146,7 @@ gb.forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const g=b.datas
 gf.querySelector('.gf-icon').addEventListener('click',()=>q.focus());
 q.addEventListener('input',run);q.addEventListener('keydown',e=>{if(e.key==='Enter'){const r=li.find(x=>!x.hidden);if(r)r.querySelector('a').click()}});
 const dlg=document.getElementById('m'),mLabel=document.getElementById('m-label'),mBody=document.getElementById('m-body'),mFoot=document.getElementById('m-foot');
-function setC(slug){const u=new URL(location);slug?u.searchParams.set('c',slug):u.searchParams.delete('c');history.replaceState(null,'',u)}
+function setC(slug){const u=new URL(location);slug?u.searchParams.set('c',slug):(u.searchParams.delete('c'),u.searchParams.delete('p'));history.replaceState(null,'',u)}
 async function openCompany(slug){const t=document.getElementById('m-'+slug);if(!t)return false;await customElements.whenDefined('wa-dialog');const f=t.content.cloneNode(true),h=f.querySelector('.m-head');mLabel.replaceChildren(h);mFoot.replaceChildren(f.querySelector('.m-foot'));mBody.replaceChildren(f);dlg.setAttribute('aria-label',t.dataset.label);dlg.open=true;setC(slug);return true}
 list.addEventListener('click',e=>{const a=e.target.closest('a[data-m]');if(!a||e.metaKey||e.ctrlKey||e.shiftKey)return;e.preventDefault();openCompany(a.dataset.m)});
 dlg.addEventListener('wa-hide',e=>{if(e.target===dlg)dlg.classList.add('closing')});
@@ -155,33 +156,14 @@ dlg.addEventListener('wa-show',e=>{if(e.target!==dlg)return;addEventListener('wh
 dlg.addEventListener('wa-after-hide',e=>{if(e.target!==dlg)return;removeEventListener('wheel',hold);removeEventListener('touchmove',hold)});
 dlg.addEventListener('wa-after-hide',e=>{if(e.target===dlg){dlg.classList.remove('closing');setC(null)}});
 (window.requestIdleCallback||setTimeout)(()=>{const w=document.createElement('div');w.hidden=true;w.setAttribute('aria-hidden','true');const t=document.querySelector('template[id^="m-"]');if(t)w.append(...[...t.content.querySelectorAll('wa-icon')].map(i=>i.cloneNode()));document.body.append(w)});
-run(false);if(u0.get('c'))openCompany(u0.get('c'))</script>`;
+run(false);if(u0.get('c'))openCompany(u0.get('c')).then(ok=>{const d=ok&&u0.get('p')&&mBody.querySelector('details[data-ev="'+CSS.escape(u0.get('p'))+'"]');if(d){d.open=true;setTimeout(()=>d.closest('tr').previousElementSibling.scrollIntoView({block:'start'}),450)}})</script>`;
 writeFileSync(join(out, "index.html"), layout({ title: "wif.tax — the static key tax", desc: "Which products let machines authenticate without long-lived secrets. Graded, with receipts.", body: index }));
 
-// ---- company pages (only for companies with more than one product)
-for (const c of companies.filter((c) => c.products.length > 1)) {
-  const rows = c.products.map((p) => `<li><a href="/p/${p.id}/">${badge(p.headline)}<span>${esc(p.product)}</span></a></li>`).join("");
-  const body = `<section class="hero"><h1>${esc(c.vendor)}</h1>${c.parent ? `<p class="sub">${esc(c.parent)}</p>` : ""}</section><ul class="plist">${rows}</ul>`;
-  mkdirSync(join(out, "c", c.slug), { recursive: true });
-  writeFileSync(join(out, "c", c.slug, "index.html"), layout({ title: `${c.vendor} — wif.tax`, desc: `${c.vendor}: ${c.products.length} products graded on wif.tax.`, path: `/c/${c.slug}/`, body }));
-}
-
-// ---- product pages, json, badges
+// ---- json, badges (no per-product pages: products live in the company modal on /)
 mkdirSync(join(out, "api/products"), { recursive: true });
 mkdirSync(join(out, "badge"), { recursive: true });
-const evList = (ev) => `<ul class="receipts">${(ev ?? []).map((e) => `<li>${icon("link")} <a href="${esc(e.url)}" rel="nofollow">${esc(host(e.url))}</a> <span class="sub">checked ${esc(e.checked_on)}</span>${e.quote ? `<blockquote>“${esc(e.quote)}”</blockquote>` : ""}</li>`).join("")}</ul>`;
-const surface = (name, s, hint) => `<div class="card"><h2>${name} ${badge(s.grade)}${s.tier_gated ? `<span class="tier">requires ${esc(s.tier_gated)}</span>` : ""}</h2><p class="sub">${hint}</p><p class="mech">${esc(s.mechanism)}</p>${s.issuers?.length ? `<dl class="kv"><dt>Issuers</dt><dd>${esc(s.issuers.join(", "))}</dd></dl>` : ""}${evList(s.evidence)}${s.notes ? `<p class="notes">${esc(s.notes)}</p>` : ""}</div>`;
 for (const p of products) {
-  const path = `/p/${p.id}/`;
-  const hyg = `<div class="card"><h2>Hygiene <span class="sub">for any static credential the product still issues</span></h2><table class="hygtable">${HYG.map((k) => { const c = p.hygiene[k]; return `<tr><td>${c.pass === null ? icon("circle-minus", { cls: "hz", label: "not applicable" }) : c.pass ? icon("circle-check", { cls: "hy", label: "pass" }) : icon("circle-xmark", { cls: "hn", label: "fail" })} ${HYG_LABEL[k]}</td><td>${c.pass === null ? "<span class=sub>Not applicable: no static credential on the graded path.</span>" : ""}${c.notes ? `<div class="notes">${esc(c.notes)}</div>` : ""}${evList(c.evidence)}</td></tr>`; }).join("")}</table></div>`;
-  const vs = p.vendor_statement ? `<div class="card"><h2>Vendor statement <span class="sub">${esc(p.vendor_statement.date)}</span></h2><blockquote>“${esc(p.vendor_statement.quote)}”</blockquote><a href="${esc(p.vendor_statement.url)}">source</a></div>` : "";
-  const body = `<section class="hero"><p class="sub">${companies.find((c) => c.vendor === p.vendor).products.length > 1 ? `<a href="/c/${slug(p.vendor)}/">${esc(p.vendor)}</a>` : esc(p.vendor)}${p.parent ? ` · ${esc(p.parent)}` : ""}${p.status !== "listed" ? ` · <span class="status-${p.status}">${p.status}${p.graduated_on ? " " + p.graduated_on : ""}</span>` : ""}</p><h1>${badge(p.headline)} ${esc(p.product)}</h1><p class="summary">${esc(p.summary)}</p>${p.covers ? `<p class="sub">${esc(p.covers)}</p>` : ""}${p.aliases?.length ? `<p class="sub">${esc(p.aliases.join(", "))}</p>` : ""}${p.confidence ? `<p class="lowconf-note">${icon("triangle-exclamation")} <b>Low confidence.</b> ${esc(p.confidence.reason)} Publishing the documentation is how a vendor gets credit.</p>` : ""}<p class="sub meta">${icon("book")} Docs: <a href="${esc(p.docs ?? p.website)}">${esc(host(p.docs ?? p.website))}</a> · Checked ${p.checked} · ${icon("code")} <a href="https://github.com/wiftax/wiftax/blob/main/data/products/${p.id}.yaml">source YAML</a> · ${icon("flag")} <a href="https://github.com/wiftax/wiftax/edit/main/data/products/${p.id}.yaml">dispute via PR</a></p></section>
-${surface(`${icon("arrow-right-to-bracket")} Inbound`, p.surfaces.inbound, "How a workload running anywhere authenticates to this product.")}
-${surface(`${icon("arrow-right-from-bracket")} Outbound`, p.surfaces.outbound, "How this product reaches into your cloud, repos, or other SaaS.")}
-${hyg}${vs}${p.notes ? `<div class="card"><h2>Notes</h2><p class="notes">${esc(p.notes)}</p></div>` : ""}
-<div class="card"><h2>Badge</h2><p><img src="/badge/${p.id}.svg" alt="wif.tax grade ${p.headline}"></p><pre>[![wif.tax grade](${SITE}/badge/${p.id}.svg)](${SITE}${path})</pre></div>`;
-  mkdirSync(join(out, "p", p.id), { recursive: true });
-  writeFileSync(join(out, "p", p.id, "index.html"), layout({ title: `${p.vendor} ${p.product}: grade ${p.headline} — wif.tax`, desc: p.summary, body, path }));
+  const path = `/?c=${slug(p.vendor)}&p=${p.id}`;
   writeFileSync(join(out, "api/products", `${p.id}.json`), JSON.stringify({ ...p, url: SITE + path }, null, 2));
   const label = "wif.tax", g = p.headline, w1 = 52, w2 = 30;
   writeFileSync(join(out, "badge", `${p.id}.svg`), `<svg xmlns="http://www.w3.org/2000/svg" width="${w1 + w2}" height="20" role="img" aria-label="wif.tax: ${g}"><title>wif.tax: ${g}</title><rect width="${w1}" height="20" fill="#555"/><rect x="${w1}" width="${w2}" height="20" fill="${COLOR[g]}"/><g fill="#fff" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle"><text x="${w1 / 2}" y="14">${label}</text><text x="${w1 + w2 / 2}" y="14" font-weight="bold">${g}</text></g></svg>`);
@@ -206,8 +188,13 @@ writeFileSync(join(out, "404.html"), layout({ title: "Not found — wif.tax", de
 mkdirSync(join(out, ".well-known"), { recursive: true });
 writeFileSync(join(out, ".well-known/security.txt"), `Contact: mailto:security@wif.tax\nExpires: ${new Date(Date.now() + 365 * 864e5).toISOString()}\nPreferred-Languages: en\nCanonical: ${SITE}/.well-known/security.txt\nPolicy: https://github.com/wiftax/wiftax/blob/main/SECURITY.md\n`);
 writeFileSync(join(out, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`);
-const urls = ["/", "/rubric/", "/policy/", "/our-own-tax/", ...companies.filter((c) => c.products.length > 1).map((c) => `/c/${c.slug}/`), ...products.map((p) => `/p/${p.id}/`)];
+const urls = ["/", "/rubric/", "/policy/", "/our-own-tax/"];
 writeFileSync(join(out, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((u) => `<url><loc>${SITE}${u}</loc><lastmod>${TODAY}</lastmod></url>`).join("")}</urlset>`);
+// Old per-company and per-product pages now open the company modal (and expand the product's evidence).
+writeFileSync(join(out, "_redirects"), [
+  ...products.flatMap((p) => [`/p/${p.id}/ /?c=${slug(p.vendor)}&p=${p.id} 301`, `/p/${p.id} /?c=${slug(p.vendor)}&p=${p.id} 301`]),
+  "/c/:slug/ /?c=:slug 301", "/c/:slug /?c=:slug 301", "/p/* / 301",
+].join("\n") + "\n");
 writeFileSync(join(out, "_headers"), `/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\n  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://ka-f.webawesome.com https://ka-f.fontawesome.com; style-src 'self' 'unsafe-inline' https://ka-f.webawesome.com https://fonts.bunny.net https://ka-f.fontawesome.com; font-src 'self' https://ka-f.webawesome.com https://fonts.bunny.net https://ka-f.fontawesome.com; connect-src 'self' data: https://ka-f.webawesome.com https://ka-f.fontawesome.com; script-src 'self' 'unsafe-inline' https://ka-f.webawesome.com https://ka-f.fontawesome.com; frame-ancestors 'none'\n/api/*\n  Access-Control-Allow-Origin: *\n  Cache-Control: public, max-age=3600\n/badge/*\n  Access-Control-Allow-Origin: *\n  Cache-Control: public, max-age=3600\n`);
 writeFileSync(join(out, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1a1a1a"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-weight="700" font-size="17" fill="#fff">$</text></svg>`);
 cpSync(join(root, "site/style.css"), join(out, "style.css"));
