@@ -84,7 +84,7 @@ const mHygRow = (p) => HYG.map((k) => { const v = p.hygiene[k].pass; return tip(
 const mRow = (p) => {
   const i = p.surfaces.inbound.grade, o = p.surfaces.outbound.grade;
   const side = o !== "N/A" && RANK[o] < RANK[i] ? ["Outbound", RUBRIC_NAMES.outbound[o]] : ["Inbound", RUBRIC_NAMES.inbound[i]];
-  return `<tr><th scope="row">${esc(p.product)}</th><td>${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td>${tip(`t-${p.id}-in`, badge(i), RUBRIC_NAMES.inbound[i])}</td><td>${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), RUBRIC_NAMES.outbound[o])}</td><td class="m-hy">${mHygRow(p)}</td></tr>`;
+  return `<tr><th scope="row">${esc(p.product)}</th><td data-l="Grade">${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td data-l="Inbound">${tip(`t-${p.id}-in`, badge(i), RUBRIC_NAMES.inbound[i])}</td><td data-l="Outbound">${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), RUBRIC_NAMES.outbound[o])}</td><td class="m-hy" data-l="Hygiene">${mHygRow(p)}</td></tr>`;
 };
 // Column heading with a "?" that explains it. Wording is the site's existing surface descriptions.
 const qh = (slug, key, label, text) => `<span class="qh">${label}<span class="q" tabindex="0" aria-label="About ${label}" data-tip="${esc(text)}">${icon("circle-question", { solid: true })}</span></span>`;
