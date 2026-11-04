@@ -1,5 +1,8 @@
 name: check
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch: # patrol starts this on sisyphus/* branches; its GITHUB_TOKEN pushes do not trigger workflows
 jobs:
   check:
     runs-on: ubuntu-latest
