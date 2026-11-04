@@ -87,8 +87,8 @@ const lowConf = (p, pill = false) => {
   const why = esc(String(p.confidence.reason).replace(/`/g, "").replace(/\s+/g, " ").trim());
   // same tooltip pattern as the column-heading "?" icons
   return pill
-    ? `<span class="tip lc-pill" tabindex="0" data-tip="${why}">${icon("triangle-exclamation", { solid: true })}<span>Low confidence</span></span>`
-    : `<span class="q lc" tabindex="0" aria-label="Low confidence" data-tip="Low confidence. ${why}">${icon("triangle-exclamation", { solid: true })}</span>`;
+    ? `<span class="tip lc-pill" tabindex="0" data-tip="${why}">${icon("circle-exclamation", { solid: true })}<span>Low confidence</span></span>`
+    : `<span class="q lc" tabindex="0" aria-label="Low confidence" data-tip="Low confidence. ${why}">${icon("circle-exclamation", { solid: true })}</span>`;
 };
 const mRow = (p) => {
   const i = p.surfaces.inbound.grade, o = p.surfaces.outbound.grade;
