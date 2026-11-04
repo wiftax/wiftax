@@ -1,0 +1,285 @@
+id: flagsmith
+vendor: Flagsmith
+product: Platform
+covers: >-
+  Flagsmith Cloud (SaaS): the Management API, Flags/SDK API, CLI and Terraform provider, and its
+  integrations. Notes cover self-hosted and Enterprise Flagsmith, which run the same open-source API.
+aliases:
+  - Flagsmith Cloud
+  - Bullet Train
+website: https://www.flagsmith.com
+docs: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+category: devtools
+status: listed
+summary: >-
+  The Management API exchanges a token from any OIDC issuer you configure (issuer, audience and
+  claim rules) for a one-hour access token, on every plan; RBAC roles on it need Scale-Up or
+  Enterprise. Server-side SDK keys and the Terraform provider stay static, with no enforced expiry,
+  no last-used and no GitHub partner revocation. GitHub and Slack connect by app consent; the
+  observability, analytics, GitLab and warehouse integrations take pasted keys.
+
+surfaces:
+  inbound:
+    grade: A
+    mechanism: >-
+      OIDC trust relationship: POST a token from GitHub Actions or any issuer that serves HTTPS
+      discovery to /api/v1/auth/oidc/token/, matched on issuer, a required audience and optional
+      claim rules, and get a one-hour Bearer token acting as org admin or a set of RBAC roles.
+      Organisation (Master) API keys remain available.
+    issuers: ["any"]
+    evidence:
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "To interact with the Management API, you need to authenticate your requests using an API Token associated with your Organisation, or a short-lived access token obtained through an OIDC trust relationship."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Trust relationships let a workload that already has an OIDC identity — for example, a GitHub Actions job — call the Management API without any stored secrets."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "The freeform option supports any OIDC identity provider, such as GitLab CI or Kubernetes:"
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Expected audience: the aud claim the token must carry."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Claim matching rules: additional claims the token must match."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Access tokens expire after one hour by default."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Granular permissions for your API tokens and OIDC trust relationships require an Enterprise or Scale-Up subscription."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/CLI
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Configure an OIDC trust relationship for your repository, then use the Flagsmith/setup-cli action:"
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Exchange an OIDC token issued by a trusted identity provider for a short-lived Flagsmith access token."
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "OIDC issuer URL expected in exchanged tokens' `iss` claim."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/sdks
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Client-side SDK Keys give both client-side SDKs and server-side SDKs access to Remote Evaluation mode."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/sdks
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Server-side SDK Keys give server-side SDKs access to Local Evaluation mode."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/flags-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "The Flags API uses a non-secret Environment Key for authentication."
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Manage server-side SDK keys for an environment."
+      - url: https://docs.flagsmith.com/third-party-integrations/ci-cd/terraform
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "In order to configure the Flagsmith Terraform provider we need an API key."
+      - url: https://github.com/Flagsmith/terraform-provider-flagsmith/blob/main/docs/index.md
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Master API key used by flagsmith api client."
+      - url: https://docs.flagsmith.com/deployment-self-hosting/core-configuration/environment-variables
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "TRUST_RELATIONSHIP_ACCESS_TOKEN_LIFETIME_SECONDS: Lifetime of access tokens minted by the OIDC trust relationship token exchange."
+    notes: >-
+      Bring-your-own-issuer federation, self-serve and documented for workloads (GitHub Actions
+      form with repository, environment and workflow-file pins; freeform issuer for GitLab CI,
+      Kubernetes and others; CLI and setup-cli action docs). The audience is required and unique
+      per issuer, and claim rules (with * wildcards) can pin sub or any other claim. Shipped in
+      v2.265.0 (August 2026); the live SaaS OpenAPI spec lists /api/v1/auth/oidc/token/ and the
+      trust-relationships endpoints. No tier_gated: a trust relationship with full org-admin
+      rights works on any plan, and only RBAC roles on it need Scale-Up or Enterprise (so on
+      lower plans the federated token is all-powerful within the org). Exchanged tokens cannot
+      manage Master API keys or trust relationships, and the trust-relationship CRUD API takes a
+      user token only, so setup is a human step. Why A despite static keys elsewhere: flag
+      evaluation in remote mode needs only the client-side Environment Key, which Flagsmith
+      documents as public, not a secret. Local evaluation mode and the Edge Proxy need a
+      server-side SDK key (ser.), which is a static secret with no federated alternative; a
+      federated job can mint and delete one through the Management API with an expires_at,
+      following the `nebius-ai-cloud` reasoning, but nothing short-lives it for you. The
+      Terraform provider accepts only a Master API key (sent as Api-Key), so Terraform still
+      needs a static key; the Flagsmith CLI supports the OIDC path. Human SAML, OIDC, LDAP and
+      Okta login are not graded. The dashboard's trust-relationship panel sits behind a
+      Flagsmith feature flag in the open-source frontend; we could not confirm from outside a
+      login that it is on for every Cloud organisation, but the API endpoints are live and
+      documented. Self-hosted and Enterprise run the same open-source exchange (lifetime set by
+      TRUST_RELATIONSHIP_ACCESS_TOKEN_LIFETIME_SECONDS); non-admin trust relationships need the
+      RBAC module.
+  outbound:
+    grade: B
+    mechanism: >-
+      GitHub through the Flagsmith GitHub App you install and Slack through OAuth consent;
+      Datadog, New Relic, Dynatrace, Grafana, GitLab, Amplitude, Segment, RudderStack, Mixpanel
+      and Heap take pasted keys or tokens, and bring-your-own ClickHouse and Databricks
+      warehouses take a database password or a service-principal client secret.
+    evidence:
+      - url: https://docs.flagsmith.com/third-party-integrations/project-management/github
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "In GitHub, add the app from the GitHub Marketplace."
+      - url: https://docs.flagsmith.com/third-party-integrations/project-management/slack
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "You will be sent to Slack to authenticate your account."
+      - url: https://docs.flagsmith.com/third-party-integrations/observability-and-monitoring/datadog
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Add the Datadog API key into Flagsmith (Integrations > Add Datadog Integration)"
+      - url: https://docs.flagsmith.com/third-party-integrations/observability-and-monitoring/new-relic
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "The Key type is User."
+      - url: https://docs.flagsmith.com/third-party-integrations/observability-and-monitoring/dynatrace
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Log into Dynatrace create a new Access Token with the following permissions:"
+      - url: https://docs.flagsmith.com/third-party-integrations/observability-and-monitoring/grafana
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Paste the service account token from Grafana into the Service account token field."
+      - url: https://docs.flagsmith.com/third-party-integrations/project-management/gitlab
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "All require the api scope."
+      - url: https://docs.flagsmith.com/third-party-integrations/project-management/gitlab
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Remember to rotate your GitLab access token before it expires."
+      - url: https://docs.flagsmith.com/third-party-integrations/analytics/segment
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Paste the Write Key from step 1 into the API Key field in Flagsmith."
+      - url: https://docs.flagsmith.com/third-party-integrations/analytics/amplitude
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Add the Amplitude API key into Flagsmith (Integrations > Add Amplitude Integration)"
+      - url: https://docs.flagsmith.com/experimentation/connect-a-warehouse
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "the username and password of the user you created in step 1."
+      - url: https://docs.flagsmith.com/experimentation/connect-a-warehouse
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "On Flagsmith Cloud, connecting your own ClickHouse or Databricks requires a Scale-Up or Enterprise subscription."
+      - url: https://docs.flagsmith.com/experimentation/connect-databricks
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Enter the Client ID and Client secret from step 2."
+      - url: https://docs.flagsmith.com/experimentation/connect-databricks
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Secrets expire after the lifetime you choose; see Rotate the secret."
+      - url: https://docs.flagsmith.com/third-party-integrations/webhook
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "You can also provide a Secret which will be hashed and included in the HTTP header."
+    notes: >-
+      Flagsmith reaches into no AWS, GCP or Azure account, so the keyless side is the rubric's
+      consent rule: the GitHub App (issues and pull requests) and the Slack app. Everything else
+      wants a customer-made static credential. Some come with least-privilege guidance (Dynatrace
+      "Ingest events" scope, ClickHouse grants limited to the events table, a Databricks service
+      principal with only the sql scope and rotation steps), but the New Relic integration asks
+      for a User key and GitLab for a token with the full api scope, and Datadog, Grafana and the
+      analytics keys come with no scoping or rotation guidance. Databricks is OAuth M2M from a
+      client secret you hand over (short-lived from a static root). Segment, RudderStack and
+      Mixpanel keys are ingest write keys and Heap takes a non-secret environment ID. Outgoing
+      webhooks are HMAC-signed with a secret you choose; that authenticates Flagsmith to you and
+      grants it nothing. Jira works the other way round (you give Jira a Flagsmith key, an inbound
+      credential); ServiceNow and Adobe Analytics are listed but not built; AppDynamics is APM
+      for a self-hosted install. Self-hosted: GitHub needs a GitHub App you create and run
+      yourself, and the S3 organisation import/export is a local management command.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Once API key expires, clients cannot use it anymore."
+    notes: >-
+      Master API keys have an optional expiry_date and server-side SDK keys an optional
+      expires_at, both nullable. No default expiry and no org policy forcing one are documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Manage server-side SDK keys for an environment."
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "If the API key is revoked, clients cannot use it anymore. (This cannot be undone.)"
+      - url: https://docs.flagsmith.com/getting-started/run-locally-with-a-coding-agent
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Authenticate the CLI with an organisation API key, not `flagsmith login`: create one with `POST /api/v1/organisations/<id>/master-api-keys/`"
+    notes: >-
+      Server-side SDK keys have list, create, update and delete endpoints that accept a Master API
+      key (or a federated token), so they rotate unattended. Master API keys can be created and
+      revoked through /master-api-keys/, but only with a user's token: Flagsmith deliberately
+      blocks machine credentials from managing machine credentials.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "An API token acts with the permissions selected when it was created: either full organisation admin — able to manage all projects within that organisation — or a set of RBAC roles."
+      - url: https://docs.flagsmith.com/administration-and-security/access-control/rbac
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "Roles can be assigned to Management API keys, but Management API keys cannot belong to groups."
+      - url: https://docs.flagsmith.com/integrating-with-flagsmith/sdks
+        checked_on: 2026-11-04
+        checked_by: tehreet
+        quote: "These keys are secret and should not be shared."
+    notes: >-
+      Master API keys belong to the organisation, not a user, and can carry RBAC roles instead of
+      admin, but only on Scale-Up or Enterprise; on lower plans every Master API key is full org
+      admin. Server-side SDK keys are bound to one environment and only read flags and write
+      identities.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://api.flagsmith.com/api/v1/swagger.json
+        checked_on: 2026-11-04
+        checked_by: tehreet
+    notes: >-
+      The MasterAPIKey schema has created, revoked, expiry_date and has_expired, and the
+      EnvironmentAPIKey schema has created_at, active and expires_at; neither has a last-used
+      field, and the docs describe none.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-04
+        checked_by: tehreet
+    notes: >-
+      Flagsmith does not appear in GitHub's supported secret scanning patterns table (it would sit
+      between Firebase and Flickr), so a leaked ser. key or Master API key pushed to a public repo
+      is not reported to Flagsmith.
+
+notes: >-
+  One card for Flagsmith Cloud and self-hosted/Enterprise Flagsmith, which run the same
+  open-source API, so the OIDC exchange is in both. Graded on Cloud. Headline B is set by
+  outbound: it reaches A if the observability, GitLab and warehouse integrations move to app
+  consent or federation. On inbound,
+  the static keys still left are server-side SDK keys and Terraform's Master API key; enforced
+  expiry, last-used and GitHub secret-scanning partnership would take hygiene from two of five.
