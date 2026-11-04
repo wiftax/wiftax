@@ -1,0 +1,146 @@
+name: patrol
+
+# Sisyphus (https://github.com/wiftax/sisyphus) checks every card's receipts and opens
+# Notices of Assessment against this repo. It runs here, not in its own repo, so it can
+# use this repo's one-job GITHUB_TOKEN instead of a GitHub App private key.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Mondays 09:00 UTC. The boulder does not wait.
+  workflow_dispatch:
+    inputs:
+      card:
+        description: "Only check this card id (e.g. github-api). Blank = every card."
+        required: false
+        default: ""
+      dry_run:
+        description: "Report drift and write proposals to out/, but open nothing and commit nothing."
+        type: boolean
+        default: false
+      no_llm:
+        description: "Report drift only; skip the model."
+        type: boolean
+        default: false
+
+# One patrol at a time. A second trigger waits rather than racing the state commit.
+concurrency:
+  group: patrol
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  patrol:
+    if: github.repository == 'wiftax/wiftax'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # push sisyphus/* branches and the sisyphus-state branch (main is protected by ruleset)
+      pull-requests: write # open Notices of Assessment
+      issues: write # open an issue when a proposal fails validation twice; create labels
+      actions: write # start the required "check" workflow on each sisyphus/* branch
+      id-token: write # GitHub OIDC token, exchanged for an Anthropic access token (WIF)
+    env:
+      # Workload Identity Federation. None of these are secrets; they are repository variables.
+      ANTHROPIC_FEDERATION_RULE_ID: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+      ANTHROPIC_ORGANIZATION_ID: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+      ANTHROPIC_SERVICE_ACCOUNT_ID: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+      ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+      WIFTAX_DIR: ${{ github.workspace }}/wiftax
+      STATE_DIR: ${{ github.workspace }}/state
+    steps:
+      - name: Checkout sisyphus
+        uses: actions/checkout@v5
+        with:
+          repository: wiftax/sisyphus
+          ref: main
+          path: sisyphus
+          persist-credentials: false
+
+      - name: Checkout wiftax
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          path: wiftax
+          persist-credentials: true # Sisyphus pushes sisyphus/* branches from this checkout
+
+      # Page hashes from the last patrol live on their own branch, outside main.
+      - name: Checkout state
+        uses: actions/checkout@v5
+        with:
+          ref: sisyphus-state
+          path: state
+          persist-credentials: true
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Install
+        run: |
+          npm --prefix sisyphus ci
+          npm --prefix wiftax ci
+
+      # Sisyphus mints a fresh GitHub OIDC token into this file before every model call
+      # (the JWT expires about five minutes after issuance). This first one lets a dry run
+      # prove the exchange.
+      - name: Request GitHub OIDC token for Anthropic
+        if: ${{ github.event.inputs.no_llm != 'true' }}
+        run: |
+          JWT_FILE="$RUNNER_TEMP/gha-jwt"
+          curl -sS --fail-with-body -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
+            | jq -r .value > "$JWT_FILE"
+          chmod 600 "$JWT_FILE"
+          test -s "$JWT_FILE"
+          echo "ANTHROPIC_IDENTITY_TOKEN_FILE=$JWT_FILE" >> "$GITHUB_ENV"
+
+      - name: Verify Anthropic WIF exchange (dry run only)
+        if: ${{ github.event.inputs.dry_run == 'true' && github.event.inputs.no_llm != 'true' }}
+        working-directory: sisyphus
+        run: |
+          node -e '
+            const Anthropic = require("@anthropic-ai/sdk").default;
+            new Anthropic().messages.countTokens({ model: "claude-opus-5", messages: [{ role: "user", content: "sisyphus auth check" }] })
+              .then(r => console.log("WIF exchange OK; count_tokens ->", r.input_tokens, "input tokens"))
+              .catch(e => { console.error("WIF exchange FAILED:", e.status ?? "", e.message); process.exit(1); });
+          '
+
+      - name: Patrol
+        working-directory: sisyphus
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SISYPHUS_CHECK_WORKFLOW: check.yml
+          SISYPHUS_CARD: ${{ github.event.inputs.card }}
+        run: |
+          set -o pipefail
+          ARGS="--data $WIFTAX_DIR --state $STATE_DIR"
+          if [ -n "$SISYPHUS_CARD" ]; then ARGS="$ARGS --card $SISYPHUS_CARD"; fi
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          if [ "${{ github.event.inputs.no_llm }}" = "true" ]; then ARGS="$ARGS --no-llm"; fi
+          npx tsx src/cli.ts check $ARGS
+
+      - name: Remove identity token
+        if: always()
+        run: rm -f "$RUNNER_TEMP/gha-jwt"
+
+      - name: Upload dry-run proposals
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: proposals
+          path: sisyphus/out/
+          if-no-files-found: ignore
+
+      - name: Commit state
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        working-directory: state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "state unchanged"
+            exit 0
+          fi
+          git commit -m "state: patrol $(date -u +%Y-%m-%d)"
+          git push origin HEAD:sisyphus-state
