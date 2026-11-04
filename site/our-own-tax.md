@@ -4,11 +4,12 @@ A site that grades other people's authentication should publish its own. This pa
 
 | Credential | Held because | Grade we would give ourselves |
 |---|---|---|
-| GitHub App private key for Sisyphus | GitHub Apps authenticate with a static RSA key that never expires. There is no federated path for an App to mint its own installation tokens. | C, same as the [GitHub card](/?c=github&p=github-api) |
+| None | | |
 
 ## What we got to zero
 
 - **Anthropic API.** Sisyphus authenticates with workload identity federation from GitHub Actions' OIDC issuer. No API key exists.
+- **GitHub.** Sisyphus used to open its pull requests as a GitHub App, which authenticates with a static RSA key that never expires. It now runs in this repo's Actions on the default `GITHUB_TOKEN`, which lives for one job. The App and its key are deleted.
 - **Cloudflare.** The site deploys through Cloudflare's GitHub integration. We hold no Cloudflare API token. DNS is edited by a human in a browser with a passkey, because a Terraform pipeline would need a static token.
 - **GitHub Actions.** The CI on the data repo runs on the default `GITHUB_TOKEN`, which lives for one job.
 
