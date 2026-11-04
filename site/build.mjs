@@ -82,7 +82,14 @@ const tip = (id, target, text) => `<span class="tip" tabindex="0" data-tip="${es
 const HYG_ICON = { expiry: "hourglass", rotation_api: "arrows-rotate", scoping: "shield-check", last_used: "clock-rotate-left", leak_revocation: "link-slash" };
 const mHygRow = (p) => HYG.map((k) => { const v = p.hygiene[k].pass; return tip(`t-${p.id}-h-${k}`, `<span class="tile ${v === null ? "hz" : v ? "hy" : "hn"}">${icon(HYG_ICON[k], { label: v === null ? "n/a" : v ? "pass" : "fail" })}</span>`, HYG_LABEL[k]); }).join("");
 // Low confidence: a small marker by the product name; the reason lives in its tooltip.
-const lowConf = (p, pill = false) => p.confidence ? `<span class="lc${pill ? " lc-pill" : ""}" tabindex="0" role="note" aria-label="Low confidence: ${esc(String(p.confidence.reason).replace(/`/g, "").replace(/\s+/g, " ").trim())}" data-tip="${pill ? "" : "Low confidence. "}${esc(String(p.confidence.reason).replace(/`/g, "").replace(/\s+/g, " ").trim())}">${icon("triangle-exclamation")}${pill ? "<span>Low confidence</span>" : ""}</span>` : "";
+const lowConf = (p, pill = false) => {
+  if (!p.confidence) return "";
+  const why = esc(String(p.confidence.reason).replace(/`/g, "").replace(/\s+/g, " ").trim());
+  // same tooltip pattern as the column-heading "?" icons
+  return pill
+    ? `<span class="tip lc-pill" tabindex="0" data-tip="${why}">${icon("triangle-exclamation", { solid: true })}<span>Low confidence</span></span>`
+    : `<span class="q lc" tabindex="0" aria-label="Low confidence" data-tip="Low confidence. ${why}">${icon("triangle-exclamation", { solid: true })}</span>`;
+};
 const mRow = (p) => {
   const i = p.surfaces.inbound.grade, o = p.surfaces.outbound.grade;
   const side = o !== "N/A" && RANK[o] < RANK[i] ? ["Outbound", RUBRIC_NAMES.outbound[o]] : ["Inbound", RUBRIC_NAMES.inbound[i]];

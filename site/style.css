@@ -264,9 +264,7 @@ html{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink-3) 45%,var
 
 /* low-confidence marker */
 .m-pn{display:inline-flex;align-items:center;gap:var(--wa-space-xs)}
-.lc{display:inline-grid;place-items:center;flex:none;width:1.5rem;height:1.5rem;border-radius:var(--wa-border-radius-s);color:color-mix(in srgb,var(--grade-C) 70%,var(--ink));font-size:var(--wa-font-size-xs);cursor:help}
-.lc:hover,.lc:focus-visible{background:color-mix(in srgb,var(--grade-C) 22%,var(--surface))}
-.lc:focus-visible{outline:var(--wa-focus-ring)}
-.lc-pill{display:inline-flex;gap:var(--wa-space-2xs);width:auto;height:auto;padding:.2em .6em;border-radius:var(--wa-border-radius-pill);background:color-mix(in srgb,var(--grade-C) 20%,var(--surface));color:var(--ink);font-size:var(--wa-font-size-xs);font-weight:var(--wa-font-weight-medium,500);letter-spacing:0}
-.lc-pill wa-icon{color:color-mix(in srgb,var(--grade-C) 70%,var(--ink))}
+.m-pn .lc{margin:0;font-size:var(--wa-font-size-xs)}
+.lc-pill{display:inline-flex;align-items:center;gap:var(--wa-space-2xs);padding:.2em .6em;border-radius:var(--wa-border-radius-pill);background:var(--surface-2);color:var(--ink-2);font-size:var(--wa-font-size-xs);font-weight:var(--wa-font-weight-medium,500);letter-spacing:0}
+.lc-pill wa-icon{color:var(--ink-3)}
 .pd-name{display:flex;align-items:center;flex-wrap:wrap;gap:var(--wa-space-s)}
