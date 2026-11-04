@@ -109,9 +109,14 @@
 @keyframes pop{from{opacity:0;transform:scale(.6)}}
 @media(max-width:40rem){
   .stage{padding:var(--wa-space-m)}
-  .nd-i{width:2.6rem;height:2.6rem;font-size:1.1rem}
+  .stage{padding:var(--wa-space-m) var(--wa-space-s) var(--wa-space-l)}
+  .legend{justify-content:center;gap:var(--wa-space-m)}
+  .nd-i,.nd-sm .nd-i{width:2.3rem;height:2.3rem;font-size:1rem}
+  .nd-allow .nd-brands{grid-template-columns:repeat(3,.9rem);font-size:.8rem;padding:.45rem .5rem}
+  .chip{width:1.4rem;height:1.4rem;margin-top:-.7rem;font-size:.62rem}
   .flow{grid-template-columns:auto minmax(1.75rem,1fr) auto minmax(1.75rem,1fr) auto}
   .ln{margin-inline:var(--wa-space-2xs)}
+  .flow-fan{grid-template-columns:auto minmax(1.75rem,1fr) auto}
   .ladder{flex-direction:row;overflow-x:auto;gap:var(--wa-space-2xs)}
   .ld .ld-n{display:none}
   .mean-n{display:block}
@@ -191,3 +196,7 @@
 @media(max-width:48rem){.hc{grid-template-areas:"t n" "x x"}}
 .rb{padding-block-end:var(--wa-space-xl)}
 .rb-sec:last-child{padding-block-end:0}
+@media(max-width:40rem){
+  @keyframes tok{0%{left:0;opacity:0;transform:scale(.6)}12%{opacity:1;transform:none}66%{left:calc(100% - 1.4rem);opacity:1;transform:none}82%,100%{left:calc(100% - 1.4rem);opacity:0;transform:scale(.3) rotate(-20deg)}}
+  @keyframes key{0%{left:0;opacity:0;transform:scale(.6)}12%{opacity:1;transform:none}66%{left:calc(100% - 1.4rem)}92%{left:calc(100% - 1.4rem);opacity:1;transform:none}100%{left:calc(100% - 1.4rem);opacity:0}}
+}
