@@ -121,7 +121,7 @@ body.addEventListener("click", (e) => {
   const t = e.target.closest('.pd-tabs [role="tab"]');
   if (t) return select(t.closest(".pd"), t.dataset.tab);
   const row = e.target.closest("tr[data-p]");
-  if (row && !e.target.closest("a")) open(row.dataset.p, e.target.closest("[data-tab]")?.dataset.tab);
+  if (row && !e.target.closest("a, .lc")) open(row.dataset.p, e.target.closest("[data-tab]")?.dataset.tab);
 });
 body.addEventListener("keydown", (e) => {
   const t = e.target.closest?.('.pd-tabs [role="tab"]');

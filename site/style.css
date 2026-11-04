@@ -252,7 +252,7 @@ html,html.wa-scroll-lock{overflow-y:scroll} /* keep the page scrollbar while a d
 
 /* scrollbars in the site palette: thin warm-grey thumb, no track (page and modal) */
 html{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink-3) 45%,var(--ground)) var(--ground)}
-.m-dialog::part(body){scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink-3) 35%,var(--surface)) transparent;scrollbar-gutter:stable}
+.m-dialog::part(body){overflow-x:hidden;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink-3) 35%,var(--surface)) transparent;scrollbar-gutter:stable}
 
 /* product name stays pinned while its receipts scroll */
 .pd-top{position:sticky;top:0;z-index:2;padding-block-end:var(--wa-space-s);background:var(--surface);box-shadow:0 1px 0 transparent;transition:box-shadow .2s}
@@ -261,3 +261,12 @@ html{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink-3) 45%,var
 /* anchor the modal near the top instead of centring it, so content height changes (tab switches, product view) only extend downward */
 .m-dialog::part(dialog){margin-block:min(8vh,4.5rem) auto;max-height:calc(100dvh - 2 * min(8vh,4.5rem))}
 @media(max-width:40rem){.m-dialog::part(dialog){margin-block:var(--wa-space-m) auto;max-height:calc(100dvh - 2 * var(--wa-space-m))}}
+
+/* low-confidence marker */
+.m-pn{display:inline-flex;align-items:center;gap:var(--wa-space-xs)}
+.lc{display:inline-grid;place-items:center;flex:none;width:1.5rem;height:1.5rem;border-radius:var(--wa-border-radius-s);color:color-mix(in srgb,var(--grade-C) 70%,var(--ink));font-size:var(--wa-font-size-xs);cursor:help}
+.lc:hover,.lc:focus-visible{background:color-mix(in srgb,var(--grade-C) 22%,var(--surface))}
+.lc:focus-visible{outline:var(--wa-focus-ring)}
+.lc-pill{display:inline-flex;gap:var(--wa-space-2xs);width:auto;height:auto;padding:.2em .6em;border-radius:var(--wa-border-radius-pill);background:color-mix(in srgb,var(--grade-C) 20%,var(--surface));color:var(--ink);font-size:var(--wa-font-size-xs);font-weight:var(--wa-font-weight-medium,500);letter-spacing:0}
+.lc-pill wa-icon{color:color-mix(in srgb,var(--grade-C) 70%,var(--ink))}
+.pd-name{display:flex;align-items:center;flex-wrap:wrap;gap:var(--wa-space-s)}
