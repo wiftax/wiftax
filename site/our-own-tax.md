@@ -4,7 +4,7 @@ A site that grades other people's authentication should publish its own. This pa
 
 | Credential | Held because | Grade we would give ourselves |
 |---|---|---|
-| None | | |
+| None | — | A |
 
 ## What we got to zero
 
