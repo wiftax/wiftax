@@ -26,6 +26,7 @@ async function open(id, tab = "in") {
   const sc = scroller();
   listTop = sc?.scrollTop ?? 0;
   fromRow = body.querySelector(`tr[data-p="${CSS.escape(id)}"] .m-open`);
+  body.querySelector(".pd")?.cleanup?.();
   body.querySelector(".pd")?.remove();
   const pd = document.createElement("div");
   pd.className = "pd ev";
@@ -44,7 +45,16 @@ async function open(id, tab = "in") {
   body.append(pd);
   body.classList.add("drill");
   select(pd, tab);
-  if (sc) sc.scrollTop = 0;
+  if (sc) {
+    sc.scrollTop = 0;
+    // hairline under the pinned name once content scrolls beneath it
+    // pin flush with the top of the scroll area (the dialog body has top padding), keeping the same resting layout
+    const pt = parseFloat(getComputedStyle(sc).paddingTop) || 0;
+    Object.assign(top.style, { top: `${-pt}px`, marginTop: `${-pt}px`, paddingTop: `${pt}px` });
+    const onScroll = () => top.classList.toggle("stuck", sc.scrollTop > 2);
+    sc.addEventListener("scroll", onScroll, { passive: true });
+    pd.cleanup = () => sc.removeEventListener("scroll", onScroll);
+  }
   back.focus({ preventScroll: true });
   setP(id);
 }
@@ -52,6 +62,7 @@ async function open(id, tab = "in") {
 function close() {
   if (!body.classList.contains("drill")) return;
   body.classList.remove("drill");
+  body.querySelector(".pd")?.cleanup?.();
   body.querySelector(".pd")?.remove();
   const sc = scroller();
   if (sc) sc.scrollTop = listTop;
