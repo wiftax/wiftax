@@ -7,19 +7,16 @@ docs: https://developers.genesiscloud.com/compute-api/
 category: cloud
 status: listed
 summary: >-
-  The Compute API, Terraform provider, S3-compatible Object Storage and Inference API all take
-  static secrets created by hand in the console's Keys and Tokens page. Genesis says a token has
-  full access to the account. No expiry, token API, last-used view or GitHub partner revocation is
-  documented, and there is no OIDC path. Genesis never reaches into your cloud or SaaS.
+  The Compute API, Terraform, Object Storage and Inference API all take static secrets made by hand
+  in the console, each with full account access. No hygiene check passes and there is no OIDC path.
+  Genesis never reaches into your cloud or SaaS.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API token (ID plus Secret Token) generated in the console's Keys and Tokens page and
-      sent as Authorization: Bearer (X-Auth-Token is deprecated) to api.genesiscloud.com; the
-      Terraform provider, Go client and Inference Service use the same kind of token, and Object
-      Storage uses a static S3 access key and secret of the "Object Storage" token type.
+      A static API token made in the console and sent as a bearer token. Object Storage uses a
+      static S3-style access key and secret.
     issuers: []
     evidence:
       - url: https://developers.genesiscloud.com/compute-api/
@@ -51,21 +48,16 @@ surfaces:
         checked_by: tehreet
         quote: "Make sure to select Inference Service when creating a new token."
     notes: >-
-      One card: compute, object storage and inference share one console page of static secrets, so
-      a split would not change any grade. No OIDC, GitHub Actions, workload identity or token
-      exchange is documented on the developer site, the Terraform provider or Go client docs, or
-      the support knowledge base, so every path a workload must use (control plane, Terraform, S3
-      data plane, inference) runs on a long-lived secret. The support site (support.genesiscloud.com)
-      returned HTTP 403 to automated fetches and the OpenAPI spec at
-      api.genesiscloud.com/compute/v1/openapi.yaml did not respond, so support articles are cited
-      from Wayback Machine captures (latest available, 2025-03 to 2026-02). A Genesis-managed
-      Kubernetes service or container registry, if one exists, is not documented publicly and was
-      not graded.
+      Compute, object storage and inference share one console page of static secrets, so one card.
+      No OIDC, GitHub Actions, workload identity or token exchange is documented anywhere. Every
+      path a workload must use runs on a long-lived secret. Support articles are cited from Wayback
+      captures, since the live site blocks automated fetches. A managed Kubernetes or registry, if
+      one exists, is not documented and was not graded.
   outbound:
     grade: N/A
     mechanism: >-
-      Genesis Cloud never needs access to customer infrastructure. Custom image import (POST
-      /compute/v1/snapshots) only fetches a URL you supply, with no credential field.
+      Genesis never needs access to your infrastructure. Custom image import fetches a URL you
+      supply, with no credential.
     evidence:
       - url: https://developers.genesiscloud.com/compute-api/snapshots
         checked_on: 2026-10-22
@@ -80,15 +72,10 @@ surfaces:
         checked_by: tehreet
         quote: "In every case you will end up with a URL from which you can access your image, which is all you need to create a snapshot using our API."
     notes: >-
-      Checked: the Compute API reference (instances, images, snapshots, volumes, filesystems,
-      floating IPs, SSH keys, security groups), the Object Storage and Inference Service API pages,
-      the Terraform provider docs and the support knowledge base. No integration with a customer's
-      AWS, GCP or Azure account, private container registry, Hugging Face or W&B is documented;
-      instance startup scripts and metadata run inside your instance, not as Genesis reaching out.
-      Image import is graded N/A, not keyless access: Genesis fetches a URL you supply with no
-      credential, and the documented flow hosts the image in Genesis's own Object Storage. That is
-      not access into your infrastructure. It differs from together-ai, where you sign a presigned
-      URL into your own S3 bucket.
+      No integration with your AWS, GCP or Azure account, registry, Hugging Face or W&B is
+      documented. Startup scripts run inside your instance, not as Genesis reaching out. Image
+      import is N/A, not keyless access, since the documented flow hosts the image in Genesis's own
+      storage. On together-ai, by contrast, you sign a URL into your own S3 bucket.
 
 hygiene:
   expiry:
@@ -103,9 +90,8 @@ hygiene:
         checked_by: tehreet
         quote: "If you accidentally publish your token, please immediately revoke it."
     notes: >-
-      Neither the token article nor the API docs mention an expiry, a default lifetime or an org
-      policy; manual revocation is the only documented end of a token's life. The console form is
-      login-walled, so an expiry field there is not publicly verifiable and gets no credit.
+      No expiry, default lifetime or org policy is documented. Manual revocation is the only end.
+      The console is login-walled, so any expiry field there gets no credit.
   rotation_api:
     pass: false
     evidence:
@@ -121,9 +107,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      The Compute API lists instances, images, snapshots, volumes, filesystems, SSH keys and
-      security groups; the Go client generated from the OpenAPI spec has no token or access-key
-      operations. Tokens and object storage keys are created and deleted only in the console.
+      No API or client operation manages tokens or storage keys. They are created and deleted only
+      in the console.
   scoping:
     pass: false
     evidence:
@@ -140,10 +125,8 @@ hygiene:
         checked_by: tehreet
         quote: "Members of a project can have one of three roles: admin, editor, or viewer."
     notes: >-
-      A token has a service type (Compute, Object Storage, Inference Service), but Genesis's own
-      docs, including the Inference page, say a token "provides access to everything" in the
-      account. Project roles (admin, editor, viewer) apply to human members; no service account,
-      API-only principal or per-token role is documented.
+      Tokens have a service type, but Genesis says a token "provides access to everything" in the
+      account. Project roles apply to people, and there is no service account or per-token role.
   last_used:
     pass: false
     evidence:
@@ -152,9 +135,8 @@ hygiene:
         checked_by: tehreet
         quote: "Only the ID and Description will show on your screen."
     notes: >-
-      The token article describes the list as showing the ID and description; no last-used time is
-      documented. The console itself is login-walled and not publicly verifiable. Even if expiry
-      and last-used both turned out to pass in the console, inbound would stay F (2 of 5).
+      No last-used time is documented, and the console is login-walled. Even if expiry and last use
+      passed there, inbound would stay F.
   leak_revocation:
     pass: false
     evidence:
@@ -162,14 +144,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Genesis Cloud does not appear in GitHub's supported secret-scanning patterns table, partner
-      or otherwise.
+      Genesis Cloud is not in GitHub's secret scanning table at all.
 
 notes: >-
-  Graded on the public developer site, the Terraform provider and Go client repositories, and
-  Wayback captures of the support knowledge base (the live support site blocks automated
-  fetches). Every machine path runs on a full-account static token or S3 key with 0 of 5 hygiene
-  checks passing. Cheapest fixes: a token create/revoke API, an enforced expiry, per-token roles
-  or service accounts, a last-used column and a GitHub secret-scanning partnership (3 of these
-  would make inbound D). Reaching B or A needs OIDC federation into api.genesiscloud.com and
-  Object Storage.
+  Every machine path runs on a full-account static token or S3 key, with no hygiene check passing.
+  Any three of a token API, enforced expiry, per-token roles, a last-used column and GitHub partner
+  scanning would make inbound D. B or A needs OIDC federation into the API and Object Storage.

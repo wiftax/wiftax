@@ -7,19 +7,16 @@ docs: https://docs.reco.ai/en/
 category: security
 status: listed
 summary: >-
-  Reco's platform API takes only a static API access key, made in the UI, which can be bound to
-  a role, an expiry and an IP allowlist; the expiry is optional and defaults to never. Into your
-  SaaS it connects through its own apps for Google Workspace, Microsoft 365, GitHub, Slack and
-  Salesforce and an AWS role with external ID, but Okta, GitHub Enterprise and many others want
-  pasted secrets.
+  Reco's API takes only a static access key made in the UI, with a role and an optional expiry that
+  defaults to never. Reco connects to most SaaS through its own apps, but Okta, GitHub Enterprise
+  and others want pasted secrets.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API access key created by an admin under the API Access Keys tab in the Reco web UI,
-      optionally tied to a role, an expiration date and permitted IPs. No federation,
-      OAuth client-credentials or short-lived token path is publicly documented.
+      A static access key created by an admin in the Reco UI, optionally tied to a role, an expiry
+      and allowed IPs. No federation or short-lived token is documented.
     evidence:
       - url: https://web.archive.org/web/20250105152050/https://docs.reco.ai/en/articles/10285332-reco-onboarding-guide
         checked_on: 2026-10-13
@@ -38,24 +35,17 @@ surfaces:
         checked_by: tehreet
         quote: "This page is password-protected."
     notes: >-
-      Reco's API reference and admin docs (readme.reco.ai) are password-protected, so the API's
-      auth schemes, any key-management endpoints and any last-used display could not be verified.
-      The key-creation details (role, optional expiry, optional permitted IPs) come from BlinkOps'
-      public connector guide for Reco, not from Reco itself. The vendor help center
-      (docs.reco.ai) failed TLS handshakes on 2026-10-13 from curl, WebFetch and Chrome, so its
-      pages are cited from Internet Archive snapshots (January 2025, September 2024). Reco
-      describes itself as API-based; no customer-deployed agent or collector that would carry its
-      own credential back to Reco was found in the public docs. Graded F on public evidence; it
-      would move to D if Reco documents a key-management API and last-used timestamps.
+      Reco's API and admin docs are password-protected, so its auth options, key API and last-used
+      display could not be checked. Key details come from a BlinkOps connector guide, not Reco. The
+      help center failed to load on 2026-10-13, so its pages are cited from archived snapshots. No
+      customer-run agent with its own credential was found. Graded F on public evidence. It would
+      move to D if Reco documents a key API and last-used times.
   outbound:
     grade: B
     mechanism: >-
-      Admin consent / OAuth install of Reco's own apps for Google Workspace ("RecoLabs Data
-      Connector App"), Microsoft 365 / Entra ID, GitHub (GitHub App), Slack ("Reco Main") and
-      Salesforce (Reco's connected app, authorized as a dedicated integration user), plus an AWS
-      cross-account IAM role with external ID for the S3 bring-your-own-bucket export. Okta,
-      GitHub Enterprise and many security-tool connectors want a pasted client secret, PAT or API
-      key.
+      Reco installs its own apps for Google Workspace, Microsoft 365, GitHub, Slack and Salesforce,
+      and assumes an AWS role for S3 export. Okta, GitHub Enterprise and many security tools want
+      pasted secrets.
     evidence:
       - url: https://web.archive.org/web/20250105151109/https://docs.reco.ai/en/articles/8672500-onboarding-guide-google-workspace
         checked_on: 2026-10-13
@@ -106,20 +96,12 @@ surfaces:
         checked_by: tehreet
         quote: "Copy the generated Client ID and Client Secret to a safe place"
     notes: >-
-      Connectors checked. Keyless (vendor app consent or install): Google Workspace, Microsoft
-      AD / Audit / Apps (admin consent to Reco's app), GitHub (GitHub App), GitLab (OAuth
-      authorize), Slack Apps and Slack Enterprise (Reco's Slack app), Salesforce (OAuth consent to
-      Reco's connected app as an API-only integration user), and AWS S3 bring-your-own-bucket
-      (cross-account role, Reco account 495155430317, external ID). Static secrets handed over:
-      Okta (client ID + client secret from the Reco OIN API Service Integration, or an SSWS API
-      token), GitHub Enterprise (classic PAT with repo and admin:org scopes), Microsoft "use your
-      own application" (optional; customer app client secret), Datadog (API key + application
-      key, with scoping guidance), Wiz (service-account client secret). Under the cohort rule an
-      Okta OIN service app counts as keyless, but in practice the customer still copies a
-      long-lived client secret out of Okta and pastes it into Reco. No AWS, GCP or Azure
-      cloud-account posture connectors were found in the public help center; the S3 export is the
-      only cloud-account connector. Help center pages are from January 2025 archive snapshots and
-      may lag the current product.
+      Keyless: Google Workspace, Microsoft 365, GitHub, GitLab, Slack and Salesforce through Reco's
+      own apps, and S3 export through a cross-account role with an External ID. Static: Okta takes a
+      client secret or API token, and GitHub Enterprise a classic admin token. Datadog and Wiz take
+      API keys or secrets. An Okta service app counts as keyless under the rule, but you still paste
+      a long-lived Okta secret into Reco. No cloud posture connectors for AWS, GCP or Azure were
+      found. Help center pages are from 2025 archives and may lag the product.
 
 hygiene:
   expiry:
@@ -130,8 +112,7 @@ hygiene:
         checked_by: tehreet
         quote: "(Optional) Enter an Expiration Date. If left blank, the key never expires."
     notes: >-
-      Expiry is settable per key but defaults to never; no org-level policy forcing an expiry is
-      publicly documented.
+      You can set an expiry per key, but it defaults to never and no org policy forces one.
   rotation_api:
     pass: false
     evidence:
@@ -140,8 +121,8 @@ hygiene:
         checked_by: tehreet
         quote: "This page is password-protected."
     notes: >-
-      Only UI key creation is publicly documented. The API reference is password-protected, so an
-      API for creating and revoking access keys could not be verified.
+      Only creating keys in the UI is documented. The API reference is password-protected, so a key
+      API could not be verified.
   scoping:
     pass: true
     evidence:
@@ -154,8 +135,8 @@ hygiene:
         checked_by: tehreet
         quote: "(Optional) Enter Permitted IP Addresses. If left blank, access is allowed from any IP."
     notes: >-
-      Each key carries its own role (built-in or custom RBAC role) and an optional source-IP
-      allowlist. Source is a third-party (BlinkOps) connector guide; Reco's own RBAC page is gated.
+      Each key has its own role and an optional IP allowlist. The source is BlinkOps' guide, since
+      Reco's own page is gated.
   last_used:
     pass: false
     evidence:
@@ -163,19 +144,18 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "The new key appears in the list with Status: Active."
-    notes: No public evidence that Reco shows when an API access key was last used.
+    notes: >-
+      No public evidence shows when a key was last used.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Reco does not appear in GitHub's supported secret-scanning patterns, partner or user.
+    notes: >-
+      Reco is not in GitHub's secret-scanning patterns.
 
 notes: >-
-  Docs are partly gated: Reco's API and admin documentation (readme.reco.ai) is password-protected,
-  and the public help center (docs.reco.ai) was unreachable on 2026-10-13 (TLS handshake failure),
-  so help-center receipts are Internet Archive snapshots and key-creation details come from a
-  BlinkOps integration guide. A newer live Okta guide may describe the SSWS path in more detail
-  than the September 2024 snapshot cited here. The inbound grade is what the public receipts
-  support; a gated key-management API with last-used timestamps would lift it to D.
+  Reco's API docs are password-protected and its help center was down on 2026-10-13. Receipts come
+  from archived snapshots and a BlinkOps guide. The grade reflects public receipts. A gated key API
+  with last-used times would lift inbound to D.

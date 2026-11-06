@@ -9,18 +9,16 @@ docs: https://docs.opal.dev/reference/authentication
 category: identity
 status: listed
 summary: >-
-  Workloads call the Opal API, Terraform provider and MCP servers with a static bearer token
-  (service-user or personal); expiry is optional and Opal is not a GitHub secret-scanning partner.
-  Into your clouds only AWS is keyless (cross-account role with External ID); GCP, Google
-  Workspace, Azure, Okta and most SaaS connectors want a key, secret or token pasted in.
+  To call the Opal API, Terraform provider or MCP servers, your code needs a static bearer token.
+  Opal reaches AWS with a role, but GCP, Google Workspace, Azure, Okta and most SaaS connectors want
+  a pasted key or secret.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static bearer API token, either a personal access token (read-only or full-access, inherits
-      the user's Opal permissions) or a token minted for a service user scoped by Opal roles; no
-      federation or client-credentials flow exists for the REST API.
+      A static bearer token, either a personal token with the user's permissions or a service user
+      token scoped by Opal roles. The REST API has no federation.
     evidence:
       - url: https://docs.opal.dev/reference/authentication
         checked_on: 2026-10-13
@@ -47,23 +45,14 @@ surfaces:
         checked_by: tehreet
         quote: "Opal authenticates the agent with its own client credentials when the agent redeems an ID-JAG."
     notes: >-
-      The public OpenAPI spec (app.opal.dev/openapi.yaml) declares a single security scheme, HTTP
-      bearer. The Terraform provider takes the same static token (`OPAL_AUTH_TOKEN`); the Opal
-      CLI uses an interactive login session, not a workload credential. Two newer paths exist only for the MCP servers and do not change the grade: MCP OAuth
-      (beta) is interactive authorization-code + PKCE for humans, and Okta Cross App Access (limited
-      beta) lets an Okta-registered AI agent act on behalf of a human user by redeeming an Okta
-      ID-JAG, but the agent still authenticates to Opal's token endpoint with a static client
-      secret, only Okta is accepted as issuer, and service users are excluded. No on-prem
-      agent/collector authenticates back to Opal Cloud; the alternative is a fully self-hosted Opal
-      deployment. Custom connectors are customer-hosted HTTP services that Opal calls, verified by
-      an HMAC signing secret.
+      The public OpenAPI spec lists only bearer auth, and Terraform uses the same token. Two newer
+      MCP paths do not change the grade. MCP OAuth is an interactive login for humans. Okta Cross
+      App Access still needs a static client secret, accepts only Okta and excludes service users.
   outbound:
     grade: B
     mechanism: >-
-      Keyless cross-account IAM role with External ID for AWS and a GitHub App created through
-      Opal's registration flow for GitHub organizations; GCP and Google Workspace want an uploaded
-      service-account JSON key, Azure/Entra wants a client secret from a customer app registration,
-      and Okta wants either a customer-generated private key or an SSWS API token.
+      AWS uses a cross-account role with External ID and GitHub uses a GitHub App. GCP, Google
+      Workspace, Azure and Okta want a service account key, client secret, private key or API token.
     evidence:
       - url: https://docs.opal.dev/integrations/setting-up-your-aws-organization-in-opal
         checked_on: 2026-10-13
@@ -114,21 +103,11 @@ surfaces:
         checked_by: tehreet
         quote: "Open the account activation email and set a long, 32+ random character password—think of this as an API key."
     notes: >-
-      Connectors checked: AWS (keyless: cross-account OpalIngester role with External ID, Opal's
-      AWS account as principal; self-hosted Opal recommends IRSA but also offers IAM user access
-      keys), GitHub organization (keyless: GitHub App created in your org via Opal's Register App
-      flow, no secret pasted), Slack notifications on Opal Cloud (keyless: install of Opal's Slack
-      app). Static: GCP (service-account JSON key, no impersonation/WIF option documented), Google
-      Groups/Workspace (same JSON key plus domain-wide delegation to your own service account, not
-      to an Opal-owned one), Azure/Entra (client secret on your own app registration, no federated
-      credential or Opal multi-tenant app documented), Okta (private key for your own API Services
-      app, which is short-lived-from-static-root, or a static SSWS API token), GitHub Enterprise
-      (client secret + private key, optional classic PAT with admin:enterprise), GitLab (OAuth app
-      secret), Slack user groups (your own Slack app's client secret), Salesforce (connected-app
-      consumer secret plus a service user's password), Snowflake (key pair), Datadog (API +
-      application key), Active Directory/LDAP (bind password). AWS sessions additionally need an
-      OIDC client ID and client secret from your IdP so Opal can broker AssumeRoleWithWebIdentity
-      for users. Keyless on AWS, so B; most other connectors hand over a long-lived secret.
+      Keyless: AWS, GitHub organizations and Slack notifications. Static: GCP and Google Workspace
+      take a JSON key, and Azure a client secret on your own app. Okta takes a private key or an
+      SSWS token. GitHub Enterprise, GitLab, Salesforce, Snowflake, Datadog and Active Directory
+      also take secrets. AWS sessions also need an OIDC client secret from your IdP. Keyless on AWS,
+      so B.
 
 hygiene:
   expiry:
@@ -143,9 +122,7 @@ hygiene:
         checked_by: tehreet
         quote: "API keys for service users can be created under the API Keys tab and can be set to expire."
     notes: >-
-      Expiry is optional (`expires_at` is nullable). No organization setting to force a maximum API
-      token lifetime is documented; the only lifetime settings found cover MCP OAuth tokens and
-      login sessions.
+      Expiry is optional, and no org setting forces a maximum token lifetime.
   rotation_api:
     pass: true
     evidence:
@@ -158,8 +135,8 @@ hygiene:
         checked_by: tehreet
         quote: "Deletes a first-party API token. Admins can delete any token."
     notes: >-
-      POST /tokens, GET /tokens and DELETE /tokens/{id} exist. The 2-active-token cap per service
-      user allows overlap rotation (create new, swap, delete old).
+      The API can create, list and delete tokens. Each service user can hold two active tokens,
+      which allows overlap during rotation.
   scoping:
     pass: true
     evidence:
@@ -172,8 +149,8 @@ hygiene:
         checked_by: tehreet
         quote: "Read-only tokens can only perform GET requests, limited to resources you have permission to view."
     notes: >-
-      Service users are a purpose-built machine principal with their own role assignments.
-      Personal access tokens inherit the creating user's permissions (optionally read-only).
+      Service users are machine identities with their own roles. Personal tokens inherit their
+      creator's permissions.
   last_used:
     pass: true
     evidence:
@@ -181,7 +158,8 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "The date and time the token was last used."
-    notes: The Token object returned by the API carries a nullable last_used_at field.
+    notes: >-
+      Tokens from the API include a last-used timestamp.
   leak_revocation:
     pass: false
     evidence:
@@ -189,12 +167,10 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
     notes: >-
-      Opal does not appear on GitHub's secret-scanning partner list, although its tokens carry a
-      recognizable prefix (the API reference example shows `opal_pat_`).
+      Opal is not a GitHub secret-scanning partner, even though its tokens carry a recognizable
+      prefix.
 
 notes: >-
-  Grade covers Opal Cloud (app.opal.dev / api.opal.dev); self-hosted Opal uses the same token model.
-  Docs are public (Mintlify, with llms.txt and a public OpenAPI spec), so nothing was gated. Inbound
-  moves to C or better only if the REST API accepts a federated or client-credentials token for
-  service users; outbound moves toward A if GCP gets impersonation/WIF, Azure gets a federated
-  credential or an Opal multi-tenant app, and Okta/Google Workspace get an Opal-owned app.
+  Covers Opal Cloud. Self-hosted Opal uses the same tokens. Docs are public. Inbound moves to C or
+  better only with a federated or client-credentials token for service users. Outbound moves toward
+  A with keyless GCP, Azure, Okta and Google Workspace.

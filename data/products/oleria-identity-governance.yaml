@@ -7,17 +7,16 @@ docs: https://docs.oleria.com/developer-docs/api-reference/generate-token
 category: identity
 status: listed
 summary: >-
-  The Oleria API only takes a one-hour JWT minted from a client ID and client secret created in the
-  web app, with no federation, no expiry, no key-management API and no secret-scanning partnership.
-  Into your stack it is keyless for AWS, Entra/M365, Google Workspace, GitHub and Salesforce, but
-  GCP, Azure, Okta and Slack still want a pasted key, secret or token.
+  To call the Oleria API, your code trades a static client ID and secret for a one-hour token.
+  Oleria reaches AWS, Microsoft, Google Workspace, GitHub and Salesforce without keys, but GCP,
+  Azure, Okta and Slack want a pasted secret.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      OAuth 2.0 client credentials: a static client_id and client_secret created under Settings ->
-      Manage API Keys are exchanged for a JWT access token that typically lives one hour.
+      OAuth client credentials. A static client ID and secret from the web app buy a JWT that
+      usually lasts one hour.
     evidence:
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
         checked_on: 2026-10-13
@@ -36,22 +35,15 @@ surfaces:
         checked_by: tehreet
         quote: "Programmatic access to your Oleria workspace, secured with OAuth 2.0 Client Credentials."
     notes: >-
-      No workload identity federation, OIDC token exchange, private_key_jwt or mTLS option is
-      documented; the token request body must carry the client_secret. The API went GA in August
-      2026, so this may move. The Oleria MCP server uses interactive user sign-in, not a machine
-      credential. On-prem agents (Active Directory, Ping Directory, PingFederate) dial out to
-      api.<tenant>.oleria.io and auth.prod.oleria.io after being installed from a PowerShell script
-      that Oleria generates. The docs do not say what credential the agent uses to authenticate
-      back to Oleria (probably something embedded in that script). The AD agent also stores a
-      customer AD service-account username and password.
+      No federation, signed-JWT or mTLS option is documented, and every token request carries the
+      secret. The API went GA in August 2026, so this may change. The MCP server uses interactive
+      sign-in. On-prem agents install from a script Oleria generates, and the docs do not say what
+      credential they use to call back.
   outbound:
     grade: B
     mechanism: >-
-      Keyless for AWS (CloudFormation-created cross-account oleriaConnectorRole), Entra ID / M365
-      (admin consent to Oleria's app), Google Workspace (domain-wide delegation to Oleria's client
-      ID), GitHub (Oleria Connector GitHub App) and Salesforce (Oleria's connected app). GCP wants a
-      service-account JSON key, Azure RBAC a client secret or certificate, Okta a private key for a
-      customer-created service app, and Slack bot and user tokens from a customer-created app.
+      Oleria uses a cross-account role for AWS and its own apps for Entra, Google Workspace, GitHub
+      and Salesforce. GCP, Azure, Okta and Slack want a key, secret or token.
     evidence:
       - url: https://docs.oleria.com/integrations/aws-iam-and-s3
         checked_on: 2026-10-13
@@ -90,17 +82,10 @@ surfaces:
         checked_by: tehreet
         quote: "Oleria connects using tokens issued from a Slack app that you create and install in your workspace or organization."
     notes: >-
-      Connectors checked: AWS, GCP, Azure, Entra ID / M365, Google Workspace, Okta, GitHub,
-      Salesforce, Slack and Active Directory. Keyless: AWS, Entra (the Microsoft OAuth path; the
-      client-secret and certificate paths are optional alternatives), Google Workspace, GitHub and
-      Salesforce. Static keys: GCP (a service-account JSON key, even though the docs say Google
-      blocks key creation by default on newer organizations), Azure RBAC (client secret or
-      certificate on a customer app registration), Okta (private_key_jwt with a private key the
-      customer generates and pastes in, so not an OIN app), Slack (xoxb bot and user tokens from a
-      customer-created app) and Active Directory (a service-account password given to the
-      on-prem agent). The AWS docs never mention an External ID, so the role's trust policy may not
-      guard against the confused-deputy problem. It still counts as keyless. The more than 150
-      other SaaS connectors were not assessed one by one.
+      Static: a GCP service account JSON key, an Azure client secret or certificate, an Okta private
+      key you generate, Slack tokens from your own app, and an AD service account password. The AWS
+      docs never mention an External ID, but the role still counts as keyless. The 150+ other
+      connectors were not assessed.
 
 hygiene:
   expiry:
@@ -111,8 +96,7 @@ hygiene:
         checked_by: tehreet
         quote: "Select Create API Key. Enter a descriptive name for your integration (for example, BI nightly export or internal access-graph viewer) and select Create."
     notes: >-
-      Creating a key asks only for a name. No expiry field, default lifetime or org policy for the
-      client secret is documented.
+      Creating a key asks only for a name. No expiry, default lifetime or org policy is documented.
   rotation_api:
     pass: false
     evidence:
@@ -121,8 +105,7 @@ hygiene:
         checked_by: tehreet
         quote: "Go to Settings -> Manage API Keys and open the key you want to rotate."
     notes: >-
-      Creating, rotating and deleting keys is documented only in the web app. The API reference has
-      no endpoints for managing API keys or clients.
+      Keys are managed only in the web app. The API has no key endpoints.
   scoping:
     pass: false
     evidence:
@@ -135,9 +118,8 @@ hygiene:
         checked_by: tehreet
         quote: "Requires the https://devx.{environment}.oleria.io/write scope."
     notes: >-
-      The API defines separate read and write OAuth scopes, but the key-creation flow does not let
-      the customer choose them. Changing a credential's permissions goes through Customer Success.
-      Scored as a fail because the customer cannot scope the key themselves.
+      The API has read and write scopes, but you cannot choose them when creating a key. Changing a
+      key's permissions goes through Customer Success, so it fails.
   last_used:
     pass: false
     evidence:
@@ -146,8 +128,7 @@ hygiene:
         checked_by: tehreet
         quote: "Open the new key from the list. The details panel shows the values you need besides the secret:"
     notes: >-
-      The key details panel lists the API URL, Authentication URL, Audience and Client ID. A
-      last-used timestamp is not documented anywhere.
+      No last-used time is documented.
   leak_revocation:
     pass: false
     evidence:
@@ -155,13 +136,10 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
-    notes: Oleria does not appear anywhere on GitHub's supported secret scanning patterns list.
+    notes: >-
+      Oleria is not on GitHub's secret-scanning list.
 
 notes: >-
-  Oleria's docs (docs.oleria.com) are public, and the API reference and OpenAPI fragments can be
-  read without logging in. Graded on the public REST API at devx.<tenant>.oleria.io, which went GA
-  in August 2026. Oleria's webhooks sign payloads with a shared secret and allow overlap during
-  rotation. That covers outbound event delivery and does not change either grade. Inbound would
-  move to A/B only if Oleria accepted federated workload tokens. Outbound would reach A if GCP
-  moved to impersonation/WIF, Azure to a federated credential or multi-tenant consent, Okta to an
-  OIN service app, and Slack to a Slack app owned by Oleria.
+  Graded on the public REST API, GA in August 2026. Docs are public. Inbound would move to A or B
+  only with federated workload tokens. Outbound would reach A if GCP, Azure, Okta and Slack all
+  moved to keyless setups.

@@ -8,20 +8,16 @@ docs: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-p
 category: security
 status: listed
 summary: >-
-  Workloads call the Vision One API with a static bearer API key; there is no federation path. Keys
-  get a custom role, can be created, listed and deleted by API and carry a last-used time, but the API
-  accepts a 0-month expiry, Cloud Accounts keys can run 180 months, and Trend is not a GitHub
-  secret-scanning partner. Into your cloud it is keyless on AWS, Azure, GCP and Alibaba (Trend is an
-  OIDC issuer you trust), but OCI uses an API signing key and Okta wants a pasted admin API token.
+  Your code calls the Vision One API with a static API key. There is no federation. Outbound, Trend
+  is an OIDC issuer that AWS, Azure, GCP and Alibaba trust, but OCI uses an API signing key and Okta
+  wants a pasted admin token.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static API key sent as "Authorization: Bearer", created under Administration → API Keys (or by
-      the API) with a role, an expiry and an optional CIDR allowlist. Older user-account
-      "authentication tokens" for APIs-only accounts are the same kind of static bearer token. No
-      OIDC, workload identity or token-exchange path is documented.
+      A static bearer API key with a role, an expiry and an optional IP allowlist. Older tokens for
+      API-only accounts are the same kind of static key.
     evidence:
       - url: https://automation.trendmicro.com/xdr/Guides/Authentication
         checked_on: 2026-10-22
@@ -52,24 +48,16 @@ surfaces:
         checked_by: tehreet
         quote: "In Automation Center to authenticate and make API requests for automation purposes"
     notes: >-
-      Graded on the Vision One public API (/v3.0), which is how CI jobs, SOAR tools and SIEM
-      connectors automate the platform. The Authentication guide and every key page describe a
-      bearer API key and nothing else; no OIDC, GitHub Actions, cloud workload identity or token
-      exchange is documented, and the Automation Center API reference itself is login-walled
-      (automation.trendmicro.com/xdr/api-v3 redirects to the console), so anything only described there
-      is not publicly verifiable. The Cloud Accounts onboarding key ("V1 CAM API Key") is the same kind
-      of key: it is passed into your CloudFormation or Terraform deployment so the stack can call Vision
-      One back, and it also works in Automation Center. Endpoint agents and Server & Workload
-      Protection have their own keys, managed outside this API and not graded here. No tier gate is
-      documented for API keys.
+      Graded on the Vision One public API, which CI jobs, SOAR tools and SIEM connectors use. The
+      docs describe only a bearer API key. The full API reference needs a console login, so anything
+      only there is unverifiable. The Cloud Accounts onboarding key is the same kind of key, passed
+      into your deployment so it can call Vision One. Endpoint agent keys are managed elsewhere and
+      not graded. No tier gate is documented.
   outbound:
     grade: B
     mechanism: >-
-      Cloud Accounts deploys a stack that trusts Vision One as an identity provider: an IAM OIDC
-      provider and roles in AWS, an app registration with a federated credential in Azure, a workload
-      identity pool and provider in Google Cloud, and a RAM OIDC provider in Alibaba Cloud. Oracle
-      Cloud gets a dedicated user with an identity-domains API key instead, and the Okta connector takes
-      pasted Okta admin API tokens.
+      Cloud Accounts deploys a stack that trusts Vision One as an OIDC issuer in AWS, Azure, Google
+      Cloud and Alibaba. OCI gets a user with an API key, and Okta takes pasted admin tokens.
     evidence:
       - url: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-aws
         checked_on: 2026-10-22
@@ -120,21 +108,12 @@ surfaces:
         checked_by: tehreet
         quote: "Connect TrendAI Vision One™ to your Microsoft Entra ID and grant permission to allow associated apps to access your Microsoft Entra ID data in one or multiple tenants."
     notes: >-
-      Checked: Cloud Accounts for AWS (CloudFormation, Terraform, Organizations, Control Tower), Azure
-      (subscription, management group), Google Cloud (project, organization), Alibaba Cloud and OCI;
-      the resource and permission pages for each; Microsoft Entra ID (admin consent to Trend's
-      multi-tenant app, keyless); and Okta. AWS, Azure, Google Cloud and Alibaba are keyless: the
-      deployed core stack registers Vision One as an OIDC issuer (IAM OIDC provider, Entra federated
-      credential, GCP workload identity pool provider, RAM OIDC provider) and Trend gets temporary
-      credentials from it, which makes Trend the OIDC issuer the rubric's A describes. The docs list
-      these resources but do not print the trust conditions (audience, subject), so how tightly each
-      trust is scoped was not verified. OCI is the exception: the core stack creates a dedicated
-      identity-domains user with an API key (OCI API keys do not expire); the docs do not say where the
-      private key is held, but no federation resource is created. Okta is the clearest static path: you
-      paste one or two Okta API tokens that inherit the creating admin's permissions (Super admin or
-      Org admin for user enforcement). Those static paths keep this at B; an Okta OAuth app and an OCI
-      federation would make it A. The Cloud Accounts API key flows the other way (your stack calling
-      Vision One) and is covered under inbound.
+      AWS, Azure, Google Cloud and Alibaba are keyless, with Trend as the issuer the rubric's A
+      describes. The docs do not print the trust conditions, so how tightly each is scoped was not
+      verified. Entra ID uses admin consent to Trend's app. OCI is the exception: the stack creates
+      a user with a non-expiring API key and no federation. Okta takes API tokens that inherit an
+      admin's permissions. Those static paths keep this at B. An Okta OAuth app plus OCI federation
+      would make it A.
 
 hygiene:
   expiry:
@@ -161,14 +140,9 @@ hygiene:
         checked_by: tehreet
         quote: "Authentication tokens expire one year after generating."
     notes: >-
-      Fails. Every key has an expiration time, but Trend's own MCP server, generated from the
-      Create API Keys schema, offers 1, 3, 6, 12 or 0 months, and Trend's published pytmv1 wheel (0.11.0)
-      defaults months_to_expiration to 0. The public docs do not say what 0 means and the API reference is
-      login-walled, so "0 = never expires" is a strong reading, not a quote. Separately, the Cloud
-      Accounts onboarding key can be minted for 180 months (15 years), which is no practical limit. No
-      organization policy to cap key lifetime is documented. A changeable default is not an enforced
-      expiry (same call as elastic-cloud-api). Third-party connector tokens do expire after one year;
-      a platform-wide cap like that for every key would flip this check.
+      Every key has an expiry, but Trend's own code offers 0 months, likely meaning never. Cloud
+      Accounts keys can run 15 years, and no policy caps lifetime. A changeable default fails, as on
+      elastic-cloud-api.
   rotation_api:
     pass: true
     evidence:
@@ -185,10 +159,8 @@ hygiene:
         checked_by: tehreet
         quote: "[Delete API keys](https://automation.trendmicro.com/xdr/api-v3#tag/API-Keys/paths/~1v3.0~1iam~1apiKeys~1delete/post)"
     notes: >-
-      The v3.0 API has POST /iam/apiKeys (create), GET, PATCH (role, name, status) and POST
-      /iam/apiKeys/delete, exposed in Trend's pytmv1 SDK and its Vision One MCP server, so a job can
-      mint a replacement and delete the old key. The console docs also let you disable a key with a
-      toggle.
+      The API can create, list, update and delete keys, so a job can mint a replacement and delete
+      the old one.
   scoping:
     pass: true
     evidence:
@@ -209,9 +181,8 @@ hygiene:
         checked_by: tehreet
         quote: "On the Permissions tab, under Dashboards & Reports → Reports, select the permission Third-party auditing (API only)."
     notes: >-
-      Platform API keys are not tied to a human: each gets its own role, which can be a custom role
-      flagged as assignable to API keys, built from the per-app permissions in the Authentication guide.
-      New keys can no longer get Master Administrator. Keys can also be pinned to CIDR ranges.
+      Each key gets its own role, which can be a custom role, and can be pinned to IP ranges. New
+      keys cannot be Master Administrator.
   last_used:
     pass: true
     evidence:
@@ -224,10 +195,8 @@ hygiene:
         checked_by: tehreet
         quote: '"lastUsedDateTime",'
     notes: >-
-      The List API keys endpoint can sort by lastUsedDateTime, and the pytmv1 SDK's ApiKey model
-      carries last_used_date_time, so dead keys can be found by API. The public console docs do not
-      mention a last-used column, and the API reference that documents the field is login-walled; the
-      receipts are Trend's own public code.
+      The list API sorts by last-used time, and Trend's SDK carries the field. The receipts are
+      Trend's public code, since the API reference is login-walled.
   leak_revocation:
     pass: false
     evidence:
@@ -235,15 +204,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Neither Trend Micro, TrendAI nor Vision One appears in GitHub's supported secret-scanning patterns
-      table, so a leaked Vision One API key is not reported to Trend for revocation.
+      Trend Micro is not in GitHub's secret-scanning table, so a leaked key is not reported to
+      Trend.
 
 notes: >-
-  One card for the Vision One platform: the public API (and the API keys it issues) and the Cloud
-  Accounts app that connects AWS, Azure, Google Cloud, Alibaba Cloud and OCI. Trend Micro now
-  brands the platform TrendAI Vision One. Three of five hygiene checks pass (rotation API, scoping,
-  last used), which keeps inbound at D. Inbound moves to B or A only if the API accepts a federated
-  token (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer). An enforced maximum key lifetime and
-  GitHub secret-scanning partnership would add the missing checks. Several receipts come from
-  Trend's public vision-one-mcp-server repo because the Automation Center API reference requires a
-  console login; a reviewer with console access should confirm what monthsToExpiration 0 means.
+  Covers the Vision One API and the Cloud Accounts app, now branded TrendAI Vision One. Three of
+  five hygiene checks pass, which keeps inbound at D. Inbound moves to B or A only with a federated
+  token. A reviewer with console access should confirm what a 0-month expiry means.

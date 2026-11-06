@@ -7,19 +7,16 @@ docs: https://pan.dev/prisma-cloud/api/cspm/app-login/
 category: security
 status: listed
 summary: >-
-  Workloads call the Prisma Cloud API with a static access key (ID and secret) that is swapped at
-  /login for a 10-minute JWT; no OIDC or workload identity path exists. Keys can be capped by an org
-  maximum validity, rotated by API, held by role-scoped service accounts and show last use, but GitHub
-  does not report leaks. Into your cloud it is keyless on AWS and Alibaba, but Azure wants an app
-  client secret and GCP a service account JSON key.
+  To call the Prisma Cloud API, your code trades a static access key for a 10-minute token. No OIDC
+  path exists. Prisma reaches AWS and Alibaba by role, but Azure wants an app client secret and GCP
+  a service account JSON key.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      Access key (Access Key ID + Secret Key) owned by a user or service account, posted to POST /login
-      as username/password to get a JWT valid for 10 minutes (x-redlock-auth). The Compute (Runtime
-      Security) API, twistcli, the Terraform provider and CI plugins take the same access key.
+      An access key ID and secret, posted to /login for a 10-minute JWT. The Compute API, twistcli,
+      Terraform and CI plugins use the same key.
     evidence:
       - url: https://pan.dev/prisma-cloud/api/cspm/app-login/
         checked_on: 2026-10-22
@@ -54,25 +51,17 @@ surfaces:
         checked_by: tehreet
         quote: "Add the Prisma Cloud access key as an environment variable to *GitHub Secrets*."
     notes: >-
-      Graded C on the same pattern as `cyera-data-security`: the bearer token is a 10-minute JWT, but
-      minting it needs a long-lived Access Key ID and Secret Key, so a static secret sits at the root
-      of every workload path. No OIDC, GitHub Actions, cloud workload identity or token-exchange login
-      is documented; the OIDC configuration endpoints under /authn/api/v1/oauth2/config are for human
-      SSO. Even Prisma Cloud's own GitHub Actions integration stores the access key in GitHub Secrets
-      rather than trusting the runner's OIDC token. Reviewer check: the Runtime Security (Compute)
-      docs say the Compute API also accepts the access key directly as HTTP Basic auth (used to
-      download twistcli). Under the weakest-path rule that could be read as a plain static key (D,
-      given 4 of 5 hygiene passes); it was kept at C because the documented API access paths
-      (pan.dev, Terraform provider) all exchange the key for a short-lived token and the Basic path is
-      optional. Defenders are not graded here. Palo Alto's newer platform,
-      Cortex Cloud, has its own API keys and was not graded on this card.
+      Same pattern as cyera-data-security: the token is short-lived, but a long-lived key mints it.
+      No workload federation is documented, and the OIDC settings are for human SSO. Prisma's own
+      GitHub Actions integration stores the key in GitHub Secrets. Reviewer check: the Compute API
+      also accepts the key directly as Basic auth. That could read as a plain static key, which
+      would be D. It stays C because the documented API paths all exchange the key, and Basic auth
+      is optional.
   outbound:
     grade: B
     mechanism: >-
-      AWS onboarding creates an IAM role trusting Prisma Cloud's AWS account with an External ID, and
-      Alibaba Cloud uses a RAM role trusting Prisma Cloud's account; both keyless. Azure onboarding
-      hands Prisma Cloud an app registration's client secret, GCP onboarding uploads a service account
-      JSON key, and OCI uses an API signing key for a dedicated IAM user.
+      AWS and Alibaba trust a role with no key. Azure takes an app client secret, GCP a service
+      account JSON key, and OCI a long-lived API signing key.
     evidence:
       - url: https://raw.githubusercontent.com/PaloAltoNetworks/prisma-cloud-docs/master/docs/en/enterprise-edition/content-collections/connect/connect-cloud-accounts/onboard-aws/manually-set-up-prisma-cloud-role-for-aws.adoc
         checked_on: 2026-10-22
@@ -123,19 +112,12 @@ surfaces:
         checked_by: tehreet
         quote: "Create and copy a Personal Access Token (PAT) on Bitbucket Server."
     notes: >-
-      Checked: cloud account onboarding for AWS (CloudFormation or manual IAM role trusting Prisma
-      Cloud's AWS account 188619942792 with an External ID; keyless), Alibaba Cloud (RAM role trusting
-      Prisma Cloud's Alibaba account, ARN pasted; keyless), Azure (Terraform or manual app registration
-      in your tenant whose client secret you paste into Prisma Cloud; static secret, least-privilege
-      custom role documented, so C/D on its own), GCP (service account with documented roles, its JSON
-      key uploaded; static key) and OCI (Prisma Cloud generates the key pair and embeds only the public
-      key for a dedicated IAM user in the Terraform template, so no secret leaves your hands, but it is
-      a long-lived API signing key held by the vendor and rotated by re-running Terraform). Code
-      Security repository connections: GitHub uses a GitHub App install (keyless);
-      GitHub Server and GitLab Self-Managed want an OAuth application's client ID and secret; Bitbucket
-      Server wants a personal access token. No documented option for Azure federated credentials or
-      GCP Workload Identity Federation was found in the onboarding docs; either would lift outbound to
-      A.
+      AWS uses a role with External ID and Alibaba a RAM role, both keyless. Azure takes a client
+      secret on your app, with a least-privilege role documented. GCP takes an uploaded JSON key.
+      For OCI, Prisma generates the key pair and you hold only the public key, but it is a
+      long-lived vendor-held key. GitHub uses an App install, while GitLab and Bitbucket servers
+      want secrets or tokens. Azure federated credentials or GCP workload federation would lift this
+      to A.
 
 hygiene:
   expiry:
@@ -150,11 +132,9 @@ hygiene:
         checked_by: tehreet
         quote: "If you do not select key expiry, the key is set to never expire; if you select it, but do not specify a date, the key expires in a month."
     notes: >-
-      Passes on the org policy, not the default: out of the box a key with no expiry selected never
-      expires, but an admin can set Enterprise Settings > Access Key Maximum Validity, a
-      tenant-wide cap on key lifetime (platform-enforced maximum = pass, per the precedent applied to
-      `temporal`). The docs do not list the drop-down values, so whether "no limit" is the shipped
-      default is not publicly verifiable.
+      Passes on the org policy, not the default. A key with no expiry never expires, but an admin
+      can set a tenant-wide maximum validity. That counts, as on temporal. The docs do not say
+      whether "no limit" is the default setting.
   rotation_api:
     pass: true
     evidence:
@@ -167,8 +147,8 @@ hygiene:
         checked_by: tehreet
         quote: "Deletes the access key that has the specified ID."
     notes: >-
-      POST /access_keys, DELETE /access_keys/:id and an update-status call (make inactive) cover
-      rotation. Each identity can hold at most two keys, enough for overlap during rotation.
+      The API can create, deactivate and delete keys. Each identity can hold two keys, enough for
+      overlap.
   scoping:
     pass: true
     evidence:
@@ -185,9 +165,8 @@ hygiene:
         checked_by: tehreet
         quote: "The CI User role is purpose-built for this use case."
     notes: >-
-      Service accounts are purpose-built machine principals with their own role (permission group
-      plus account groups), and a key is bound to one role. A key made by a human user carries that
-      user's role permissions.
+      Service accounts are machine identities with their own role, and each key binds to one role. A
+      human's key carries that user's role.
   last_used:
     pass: true
     evidence:
@@ -202,16 +181,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Neither Palo Alto Networks nor Prisma Cloud appears in GitHub's supported secret scanning
-      patterns table, so a leaked access key is not reported to Palo Alto for revocation.
+      Neither Palo Alto Networks nor Prisma Cloud is in GitHub's secret-scanning table, so leaked
+      keys are not reported.
 
 notes: >-
-  Graded on Prisma Cloud Enterprise Edition (SaaS): the CSPM API, the Runtime Security (Compute)
-  API it fronts, and cloud account onboarding. docs.prismacloud.io redirects scripted fetches, so
-  admin-guide receipts cite the vendor's public source repo (PaloAltoNetworks/prisma-cloud-docs) and
-  API receipts cite pan.dev. Self-hosted Prisma Cloud Compute Edition
-  is not graded here. Four of five hygiene checks pass; GitHub secret-scanning partnership
-  would make five. Inbound moves to B or A only if /login (or a successor) accepts a federated token
-  from GitHub Actions, a cloud workload identity or a customer-chosen OIDC issuer. Outbound moves to A
-  with keyless Azure (federated credential or multi-tenant app consent) and GCP (service account
-  impersonation or WIF) onboarding.
+  Graded on Prisma Cloud Enterprise Edition SaaS, including the Compute API and cloud onboarding.
+  Self-hosted Compute Edition is not graded here. Inbound moves to B or A only if /login accepts a
+  federated token. Outbound moves to A with keyless Azure and GCP onboarding.

@@ -12,22 +12,16 @@ docs: https://docs.rapid7.com/insight/managing-platform-api-keys/
 category: security
 status: listed
 summary: >-
-  Workloads call the Rapid7 platform APIs with a static X-Api-Key: a user key that inherits a
-  person's access or an organization "super key". Keys never expire, show no last use and are not
-  GitHub partner-revoked; only create and delete via API pass. No OIDC path exists. Into your
-  cloud, Cloud Security assumes an AWS role with an External ID, but Azure, GCP, OCI, Alibaba and
-  most SIEM and automation connectors want static secrets.
+  Workloads call Rapid7's platform APIs with a static API key. It either inherits a person's access
+  or is an organization key with full access. Only the create and delete API passes hygiene. Rapid7
+  reaches AWS with a role, but other clouds and most connectors want static secrets.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static Command Platform API key passed in the X-Api-Key header to the regional
-      *.api.insight.rapid7.com APIs (account, IDR, Connect, AppSec, log search, credential
-      management). Keys are either user keys (inherit the owner's permissions) or organization keys
-      (full access to every product); multi-tenant variants follow the same split. No OIDC,
-      workload identity or token-exchange path is documented. Cloud Security (InsightCloudSec) has
-      its own separate static Api-Key.
+      A static API key in the X-Api-Key header. User keys inherit their owner's access, and
+      organization keys can reach every product. Cloud Security has its own static key.
     evidence:
       - url: https://docs.rapid7.com/insight/api-overview/
         checked_on: 2026-10-22
@@ -62,24 +56,16 @@ surfaces:
         checked_by: tehreet
         quote: "api_key: ${{ secrets.ics_api_key }}"
     notes: >-
-      Graded on the Command Platform API key, the credential every Insight product API except
-      Cloud Security accepts. The API overview, the product API list and the Insight Account
-      OpenAPI spec describe only X-Api-Key; nothing documents OIDC, GitHub Actions federation,
-      cloud workload identity or token exchange, and the 2025-10 to 2026-10 platform release notes
-      add multi-tenant keys and broader Bulk Export key acceptance but no expiry, service account
-      or federation feature. Cloud Security (InsightCloudSec) rejects platform keys and uses its own
-      static Api-Key (per user, including API-only users) or a username/password /login session
-      token; its GitHub Actions integration stores that key as a repository secret. That separate
-      key was not graded for hygiene here and does not change the inbound grade (also static).
-      Human SSO (SAML, SCIM) exists but is not a machine path.
+      Every Insight API except Cloud Security accepts this key, and the docs describe nothing else.
+      There is no OIDC, cloud workload identity or token exchange, and a year of release notes adds
+      none. Cloud Security uses its own static key or a password session, and its GitHub Actions
+      setup stores the key as a secret. That key is also static, so it does not change the grade.
+      SAML and SCIM are for humans.
   outbound:
     grade: B
     mechanism: >-
-      Cloud Security harvests AWS by assuming a customer-created IAM role with an External ID
-      (keyless), but Azure wants an app registration client secret or certificate, GCP a
-      service-account JSON key, OCI an API signing key and Alibaba an access key pair. SIEM AWS
-      event sources and InsightConnect AWS plugins take IAM user access keys unless a
-      customer-hosted collector or orchestrator uses its own instance role.
+      Cloud Security assumes an AWS role you create, with an External ID. Azure, GCP, OCI and
+      Alibaba want static secrets, as do the SIEM and automation AWS connectors.
     evidence:
       - url: https://docs.rapid7.com/insightcloudsec/saas-aws-cloud-setup-single-cloud/
         checked_on: 2026-10-22
@@ -142,21 +128,12 @@ surfaces:
         checked_by: tehreet
         quote: "Credentials can be passwords, API keys, or other sensitive information, while other connection parameters can include data like IP addresses or port numbers."
     notes: >-
-      Checked: Cloud Security (InsightCloudSec, also surfaced as Cloud Risk Complete) onboarding for
-      AWS (role + External ID via CloudFormation, or IAM user keys), Azure (customer app
-      registration with client secret or certificate, no federated credential or multi-tenant
-      consent option documented), GCP (service-account JSON key, no impersonation or WIF option),
-      OCI (user API signing key) and Alibaba (access key pair); SIEM (InsightIDR) event sources for
-      AWS CloudTrail API/SQS (IAM user keys, or the collector's EC2 instance role when the collector
-      runs in your AWS), Azure (Event Hubs shared access policy key), GCP Pub/Sub (OAuth grant by a GCP
-      admin; Rapid7 holds the resulting token, no key exported), Microsoft 365 (customer app
-      client secret for cloud collection; an OAuth consent flow exists for the collector path) and
-      Okta (API token); Automation (InsightConnect) plugins such as AWS Security Hub (IAM user
-      keys) and Azure AD (client secret), whose credentials live in Rapid7's Credential Manager.
-      B because AWS harvesting is keyless while every other cloud and most connectors want a static
-      secret. Keyless Azure (multi-tenant consent or federated credential) and GCP (service account
-      impersonation) onboarding would lift this to A. The Azure and GCP SIEM OAuth grants are
-      user-delegated rather than static keys but tie collection to an admin's account.
+      AWS onboarding is keyless, though IAM user keys are also accepted. Azure wants an app client
+      secret or certificate, and GCP a JSON key, with no keyless option for either. OCI and Alibaba
+      also take static keys. SIEM AWS sources take IAM user keys unless your own collector runs on
+      EC2 with a role. Microsoft 365, Okta and automation plugins take secrets or tokens. GCP
+      Pub/Sub uses an OAuth grant by an admin, which ties collection to that person. B because only
+      AWS is keyless. Keyless Azure and GCP onboarding would lift it to A.
 
 hygiene:
   expiry:
@@ -171,11 +148,8 @@ hygiene:
         checked_by: tehreet
         quote: "I'm not referring to Rapid7 Platform keys (User / Organization) that do not expire"
     notes: >-
-      The GenerateApiKeyRequest schema has only name and type, the key responses carry no
-      expiration field, and the key management page documents no expiry setting or org policy.
-      A customer on Rapid7's community forum (not staff) confirms platform keys do not expire.
-      Keys live until revoked; deleting a user removes their user keys but not organization keys
-      they created.
+      Keys have no expiry field and no policy sets one. A community post confirms they do not
+      expire. Deleting a user removes their keys but not organization keys they made.
   rotation_api:
     pass: true
     evidence:
@@ -188,9 +162,8 @@ hygiene:
         checked_by: tehreet
         quote: "Generates a new API key for a user or organization."
     notes: >-
-      The Insight Account API has GET, POST and DELETE on /api/1/api-keys; an organization key can
-      mint organization keys and a user key can mint user keys for the same user, so rotation can
-      be scripted. Rapid7 explicitly recommends automating rotation.
+      The account API can list, create and delete keys, so rotation can be scripted. Rapid7
+      recommends automating it.
   scoping:
     pass: false
     evidence:
@@ -203,12 +176,9 @@ hygiene:
         checked_by: tehreet
         quote: "Organization key - Represents an entire organization and is a super key."
     notes: >-
-      A key cannot be given its own permissions: user keys inherit the owning user's roles and
-      resource access, organization keys can do everything. There is no service-account or
-      API-client principal on the Command Platform; the only way to narrow a key is to create an
-      ordinary (email-activated) user with a custom role and mint a key as that user, which the
-      rubric does not count. The October 2026 Bulk Export change scopes results "to the permissions
-      of the key used", which is still the owner's permissions.
+      A key cannot have its own permissions. User keys get the owner's roles and organization keys
+      get everything. The only workaround is an ordinary user with a custom role, which the rubric
+      does not count.
   last_used:
     pass: false
     evidence:
@@ -217,9 +187,8 @@ hygiene:
         checked_by: tehreet
         quote: '"description" : "Date the API Key was generated"'
     notes: >-
-      ApiKeyResponse carries id, name, type, organization_id, user_id and generated_on only, and
-      the key management page lists keys without any last-used column or mention. Platform audit
-      logs can be queried, but there is no per-key last-use view.
+      Neither the API nor the key management page shows a last-used time. Audit logs exist, but give
+      no per-key view.
   leak_revocation:
     pass: false
     evidence:
@@ -227,15 +196,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Rapid7 does not appear in GitHub's supported secret scanning patterns table in any column, so
-      a leaked platform or Cloud Security key is neither detected nor reported to Rapid7.
+      Rapid7 is not in GitHub's secret-scanning patterns, so leaked keys are neither detected nor
+      reported.
 
 notes: >-
-  One card for the Rapid7 Insight / Command Platform API and the cloud and SaaS reach-ins of
-  InsightIDR, InsightConnect and InsightCloudSec. One of five hygiene checks passes (rotation via
-  API), so static keys grade F. Expiry with an enforceable maximum plus a purpose-built service
-  account with its own role would make three and lift inbound to D; B or A needs the platform to
-  accept a federated token (GitHub Actions OIDC, cloud workload identity or a bring-your-own
-  issuer). InsightVM's on-premises console API (basic auth to the Security Console) and Cloud
-  Security's separate Api-Key are siblings not graded in depth here. "Not publicly verifiable":
-  whether the console shows key last use to administrators beyond what the API returns.
+  Covers the Insight platform API and the cloud and SaaS connections of InsightIDR, InsightConnect
+  and InsightCloudSec. One hygiene check passes, so F. Enforced expiry plus a service account with
+  its own role would lift inbound to D. B or A needs federation. The InsightVM console API is not
+  graded here.

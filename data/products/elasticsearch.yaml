@@ -7,19 +7,17 @@ docs: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deploymen
 category: data
 status: listed
 summary: >-
-  On Platinum or Enterprise, an Elasticsearch JWT realm can trust tokens from any issuer you
-  configure and pin issuer, audience, subject and claims, with no shared secret needed. Serverless
-  has no realms, so there it is API keys that never expire unless you set an expiry. Snapshots use
-  cloud identities on self-managed clusters; Elastic Cloud Hosted wants static cloud keys.
+  On Platinum or Enterprise, a JWT realm can trust tokens from any issuer you configure, with no
+  shared secret. Serverless has no realms, so there your code uses API keys. Snapshots use the
+  host's cloud identity when self-managed, but Elastic Cloud Hosted wants static keys.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      JWT realm (token_type id_token or access_token) that verifies a third-party JWT against a
-      JWKS (file or https URL) and enforces allowed_issuer, allowed_audiences,
-      allowed_subjects / allowed_subject_patterns and required_claims; with
-      client_authentication.type set to none no Elasticsearch-side secret is involved.
+      A JWT realm verifies a third-party token against a key set you supply and checks issuer,
+      audience, subject and required claims. With client authentication off, no Elasticsearch secret
+      is involved.
     issuers: ["any"]
     tier_gated: >-
       Platinum or Enterprise (self-managed; Platinum is existing customers only) or Elastic Cloud
@@ -62,35 +60,19 @@ surfaces:
         checked_by: tehreet
         quote: "Serverless does not support Elasticsearch authentication realms. User authentication is managed at the organization level ."
     notes: >-
-      Deployment types: the JWT realm is configured in elasticsearch.yml (user settings on Elastic
-      Cloud Hosted, ECK and elastic-cloud-enterprise), so it is available on self-managed, ECK,
-      ECE and Elastic Cloud Hosted, but not on Serverless, which has no deployment-level realms;
-      Serverless projects are reachable only with project API keys or Elastic Cloud API keys (see
-      elastic-cloud-api). The subscriptions matrix lists "Single sign-on (SAML, OpenID Connect,
-      Kerberos, JWT)" with a dash for Basic and Cloud Standard/Gold and a check for Platinum and
-      Enterprise. Fit for workload identity: an id_token realm accepts all subjects by default
-      (constrain with role mappings on username/metadata.jwt_claim_*), while an access_token realm
-      requires an allowed_subjects or allowed_subject_patterns list, so a GitHub Actions or
-      Kubernetes service account token can be pinned to iss + aud + sub (+ required_claims).
-      Elastic does not publish a GitHub Actions or Kubernetes recipe and the JWKS must be given
-      explicitly (no discovery); one realm trusts one issuer, so several issuers means several
-      realms. Client authentication defaults to shared_secret, a static header value, and Elastic says
-      disabling it is "strongly discouraged"; a strict reader running with the default would call
-      that a C. Other inbound options: the OIDC realm is browser/Kibana SSO only ("not suitable
-      for use by standard REST clients"); the PKI realm (static client certificate, C on its own)
-      "cannot be configured on Elastic Cloud Hosted or Elastic Cloud Enterprise deployments";
-      service account tokens exist only for built-in services such as elastic/fleet-server and
-      elastic/kibana (see kibana and elastic-agent-fleet, which also authenticate with
-      Elasticsearch API keys). Everything else, including Serverless, falls back to API keys,
-      which on their own would grade F (2 of 5 hygiene checks).
+      Best-deployment rule: graded on the best deployment type. The JWT realm runs on Elastic's
+      hosted service as well as ECE, ECK and self-managed clusters. Serverless has no realms and
+      takes only API keys. An access_token realm requires a subject list, so a CI or Kubernetes
+      token can be pinned to issuer, audience and subject. Client authentication defaults to a
+      static shared secret, and Elastic discourages turning it off. A strict reader using the
+      default would call that C. The OIDC realm is browser-only, and the PKI realm is not offered on
+      Hosted. API keys alone would grade F.
   outbound:
     grade: B
     mechanism: >-
-      Self-managed / ECK snapshot and searchable-snapshot repositories can use ambient cloud
-      identity (EC2/ECS IAM role, IRSA, EKS Pod Identity for S3; Azure managed identity or
-      workload identity; the attached GCE/GKE service account for GCS); Elastic Cloud Hosted
-      custom repositories and the Bedrock / Vertex AI / OpenAI inference endpoints require static
-      keys in the keystore or request body.
+      Self-managed and ECK snapshot repositories can use the host's cloud identity on AWS, Azure and
+      GCP. Elastic Cloud Hosted repositories and the Bedrock, Vertex AI and OpenAI inference
+      endpoints need static keys.
     evidence:
       - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/s3-repository
         checked_on: 2026-10-14
@@ -129,20 +111,12 @@ surfaces:
         checked_by: tehreet
         quote: "A valid service account in JSON format for the Google Vertex AI API."
     notes: >-
-      Checked: S3, GCS and Azure snapshot repositories (self-managed and Elastic Cloud Hosted),
-      inference endpoints (Amazon Bedrock, Google Vertex AI, OpenAI), and API-key-based remote
-      clusters. Keyless: S3 via instance/task IAM role, IRSA or EKS Pod Identity; Azure via managed
-      identity or workload identity; GCS via the attached service account (self-managed only; the
-      GCS page also says GOOGLE_APPLICATION_CREDENTIALS files are obstructed). Static: Elastic
-      Cloud Hosted custom repositories want an IAM user access key (with a bucket-scoped policy),
-      a GCS service account JSON key, or an Azure storage account key, all stored in the
-      deployment keystore; the Bedrock inference endpoint requires access_key/secret_key, Vertex
-      AI requires service_account_json, OpenAI an api_key. Remote clusters (API key model) store a
-      cross-cluster API key in the local keystore (cluster.remote.<name>.credentials; Enterprise
-      license). Serverless has no user-managed snapshot repositories ("anticipated in a future
-      release"). The keyless paths are ambient identity of hosts you run, so on the SaaS
-      deployment alone (Elastic Cloud Hosted) this surface would be D; graded B per the
-      best-across-deployment-types rule.
+      On clusters you run, S3 can use an instance role, IRSA or EKS Pod Identity, Azure a managed or
+      workload identity, and GCS the attached service account. On Elastic Cloud Hosted, custom
+      repositories want an IAM user key, a GCS JSON key or an Azure storage key in the keystore.
+      Inference endpoints for Bedrock, Vertex AI and OpenAI take static keys. Remote clusters store
+      a cross-cluster API key. The keyless paths depend on hosts you run, so Hosted alone would be
+      D. Graded B by the best-deployment rule.
 
 hygiene:
   expiry:
@@ -157,10 +131,8 @@ hygiene:
         checked_by: tehreet
         quote: "Optionally, set an expiry date. By default the API key will not expire, but it's a good security practice to give the key a limited lifespan."
     notes: >-
-      expiration is optional and no xpack.security.authc.api_key.* setting caps or forces it (the
-      API key service settings cover cache, hashing and deletion of expired keys only). The Kibana
-      "Connection details" quick-create defaults to 90 days, but the API and the main create pane
-      default to never. Service account tokens have no expiry field at all.
+      Expiry is optional and no setting can cap or force it. The API defaults to never, and only
+      Kibana's quick-create defaults to 90 days. Service account tokens cannot expire at all.
   rotation_api:
     pass: true
     evidence:
@@ -172,7 +144,8 @@ hygiene:
         checked_on: 2026-10-14
         checked_by: tehreet
         quote: "This API invalidates API keys created by the create API key or grant API key APIs."
-    notes: POST /_security/api_key creates, DELETE /_security/api_key invalidates; update and cross-cluster variants also exist.
+    notes: >-
+      The API creates, updates and invalidates keys.
   scoping:
     pass: true
     evidence:
@@ -185,9 +158,8 @@ hygiene:
         checked_by: tehreet
         quote: "For example, the following role_descriptors object defines a books-read-only role that limits the API key to read privileges on the books index."
     notes: >-
-      role_descriptors can restrict a key to specific cluster privileges, indices, fields and
-      documents. Without them the key snapshots the creator's full permissions, which is the
-      default. Cross-cluster API keys are scoped to search/replication on named indices.
+      Role descriptors can limit a key to specific privileges, indices, fields and documents. By
+      default, a key copies its creator's full permissions.
   last_used:
     pass: false
     evidence:
@@ -200,10 +172,7 @@ hygiene:
         checked_by: tehreet
         quote: "The API Keys management page in Kibana lists your API keys, including the name, date created, and status."
     notes: >-
-      The get API key response returns id, name, type, creation, expiration, invalidated,
-      invalidation, username, realm, metadata, role descriptors, access, certificate_identity and
-      profile_uid; there is no last-used or last-authenticated field. Usage can only be
-      reconstructed from audit logs.
+      The API key record has no last-used field. Usage can only be rebuilt from audit logs.
   leak_revocation:
     pass: false
     evidence:
@@ -212,14 +181,11 @@ hygiene:
         checked_by: tehreet
         quote: "Elastic Stack API Key"
     notes: >-
-      GitHub lists "Elastic Stack API Key" (elastic_stack_api_key) and "Elastic Cloud API Key"
-      (elastic_cloud_api_key) only as user patterns (isPublic false, private repos with GHAS, push
-      protection on). Neither is a partner pattern, so a key leaked to a public repo is not
-      reported to Elastic for automatic revocation.
+      GitHub flags Elastic API keys to repo owners with GitHub Advanced Security, but does not
+      report public leaks to Elastic for revocation.
 
 notes: >-
-  Scope: authentication to an Elasticsearch cluster or Serverless project's REST API. The
-  Elastic Cloud console API, Kibana, Fleet/Elastic Agent and ECE are separate cards
-  (elastic-cloud-api, kibana, elastic-agent-fleet, elastic-cloud-enterprise). The A depends on
-  a Platinum/Enterprise licence and on running a stateful deployment; a Serverless or Basic-tier
-  user is effectively on non-expiring API keys with no last-used data (F).
+  Covers the REST API of an Elasticsearch cluster or Serverless project. Elastic Cloud, Kibana,
+  Fleet and ECE have their own cards. The A needs a Platinum or Enterprise license and a stateful
+  deployment. On Serverless or Basic, you are effectively on non-expiring API keys with no last-used
+  data, which is F.

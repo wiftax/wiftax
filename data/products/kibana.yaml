@@ -7,20 +7,16 @@ docs: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deploymen
 category: observability
 status: listed
 summary: >-
-  Kibana passes your Authorization header to Elasticsearch, so on a Platinum/Enterprise stateful
-  deployment a JWT realm lets a workload call the Kibana API with a token from any issuer;
-  otherwise, and on Serverless, it is Elasticsearch API keys that never expire by default. Its GA
-  connectors want pasted secrets: AWS access keys for Bedrock, a GCP service-account JSON for
-  Gemini, client secrets for ServiceNow, Exchange and Defender.
+  Kibana relays your Authorization header to Elasticsearch. On Platinum or Enterprise stateful
+  deployments, a JWT realm lets your code call it with a token from any issuer. Otherwise, and on
+  Serverless, you use API keys that never expire by default. Its GA connectors want pasted secrets.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Kibana's HTTP authentication provider accepts an Authorization Bearer header and relays it
-      (plus ES-Client-Authentication) to Elasticsearch, so an Elasticsearch JWT realm that pins
-      issuer, audience and subject authenticates Kibana API calls with an external short-lived
-      JWT; the fallback is an Elasticsearch API key (ApiKey scheme) or basic auth.
+      Kibana relays a Bearer header to Elasticsearch, whose JWT realm checks issuer, audience and
+      subject. The fallback is an Elasticsearch API key or basic auth.
     issuers: ["any"]
     tier_gated: >-
       Platinum or Enterprise (self-managed) or Elastic Cloud Hosted Platinum / Enterprise, because
@@ -79,33 +75,19 @@ surfaces:
         checked_by: tehreet
         quote: "Basic auth tokens are constructed with the Basic keyword, followed by a space, followed by a base64-encoded string of your username:password (separated by a : colon)."
     notes: >-
-      Kibana has no credential store of its own for API callers: every Kibana API request is
-      authenticated by Elasticsearch, so this grade follows the elasticsearch card (A, JWT realm,
-      Platinum/Enterprise). Elastic does not have a page called "JWT for the Kibana API". The A
-      is assembled from three pieces: the documented header relay, the default schemes
-      ['apikey', 'bearer'], and the default header allowlist
-      ['authorization', 'es-client-authentication']. Kibana's own integration test confirms it:
-      Bearer JWTs from an ES JWT realm, with or without the shared secret, authenticate against a
-      Kibana API route. The elasticstack Terraform provider exposes bearer_token (KIBANA_BEARER_TOKEN) for its
-      kibana block, so IaC can use the same path. Deployment types: self-managed, ECK, ECE
-      (elastic-cloud-enterprise) and Elastic Cloud Hosted, where the JWT realm can be configured.
-      On Serverless there are no realms, and Kibana's
-      xpack.security.authc.http.jwt.taggedRoutesOnly defaults to true. That flag limits JWTs to a
-      handful of internal routes such as status and stats. A Serverless workload therefore uses a
-      project API key or an Elastic Cloud API key granted Kibana API access (see
-      elastic-cloud-api). Without Platinum the path is static Elasticsearch API keys, the same
-      keys and hygiene as the elasticsearch card, which on their own grade F (2 of 5).
-      Kibana's own connection to Elasticsearch uses the elastic/kibana service account token or
-      kibana_system credentials, which are static. Fleet and Elastic Agent enrollment run through
-      Kibana but are graded on elastic-agent-fleet.
+      Elasticsearch authenticates every Kibana API call, so this follows the elasticsearch card: A
+      via the JWT realm, on Platinum or Enterprise. No Elastic page says "JWT for the Kibana API".
+      The A rests on the documented header relay, the default schemes and header allowlist, and
+      Kibana's own test showing realm JWTs work on an API route. The Terraform provider accepts a
+      bearer token too. Serverless has no realms and limits JWTs to a few internal routes, so it
+      uses API keys (see elastic-cloud-api). Without Platinum you get static API keys, which grade F
+      as on the elasticsearch card.
   outbound:
     grade: C
     mechanism: >-
-      Generally available connectors that reach into customer systems authenticate with secrets the
-      customer creates and pastes. The best of them run an OAuth client-credentials flow from a
-      customer-managed client secret or private key (ServiceNow OAuth, Microsoft Exchange email,
-      Microsoft Defender for Endpoint, CrowdStrike, Webhook OAuth 2.0). The cloud AI connectors
-      want raw AWS access keys (Bedrock) or a GCP service-account JSON key (Gemini/Vertex).
+      GA connectors use secrets you create and paste. The best run OAuth client credentials from
+      your secret or private key. Bedrock wants AWS access keys and Gemini a service-account JSON
+      key.
     evidence:
       - url: https://www.elastic.co/docs/reference/kibana/connectors-kibana/bedrock-action-type
         checked_on: 2026-10-14
@@ -196,36 +178,12 @@ surfaces:
         checked_by: tehreet
         quote: "It supports two authentication methods: Bearer token (personal access token) and OAuth Authorization Code."
     notes: >-
-      GA connectors checked: Amazon Bedrock (access key + secret; the setup guide creates an IAM
-      user with a minimal policy), Google Gemini/Vertex (service-account JSON key), OpenAI and
-      Azure OpenAI (API key only), and the AI Connector / inference endpoints (Bedrock
-      access_key/secret_key, Vertex service_account_json, Azure OpenAI api_key, a pasted Entra
-      token or an app-registration client_secret). Also Slack (webhook URL or bot token from your
-      own Slack app), Microsoft Teams (Workflows webhook URL), Jira (API token or Data Center
-      password), PagerDuty (integration key), ServiceNow ITSM/SecOps (basic auth, or OAuth with
-      your own client secret and RSA private key) and Email (SMTP password or app password;
-      Microsoft Exchange via your own app's client secret). Rounding out the list: Webhook (basic,
-      client cert, or OAuth 2.0 client credentials from 9.2) and the response-action connectors
-      CrowdStrike (client ID/secret), SentinelOne (API token) and Microsoft Defender for Endpoint
-      (Azure app client secret). None of the GA connectors uses an AWS role, GCP impersonation or
-      workload identity federation, or an Azure federated credential. The Bedrock and Gemini
-      connectors cannot use role-based or federated auth. Anthropic models are reached only
-      through Bedrock (or the OpenAI-compatible "Other" provider). The Elastic Managed LLM (EIS)
-      needs no customer credential, but it is Elastic's own model service and does not reach
-      into your infrastructure. The Observability AI Assistant connector only feeds alerts to the
-      assistant and uses whichever LLM connector is configured, so its outbound auth is that
-      connector's. Graded C because the best GA option on several connectors is an OAuth
-      client-credentials flow (Microsoft Entra / ServiceNow / CrowdStrike / Okta-style) from a
-      customer-managed client secret or private key. The cloud LLM connectors alone (raw AWS
-      keys) would sit at D. Preview connectors (Serverless-only or 9.4+ preview) add Elastic's
-      "Quick Connect" OAuth, an install of Elastic's own app with no secret handed over, for
-      Slack v2, Microsoft Teams and Gmail (read-only). That is "Planned" for stateful Elastic
-      Stack and would move this surface to B when GA. Other preview connectors still want keys:
-      AWS CloudWatch/EKS/S3 (access keys), GCP IAM (SA JSON key), Azure Monitor and SharePoint
-      (client secret), Azure Blob (account key), Okta (private-key JWT or SSWS token) and GitHub
-      (PAT or your own OAuth app). Subscription: third-party connectors are paid features on
-      self-managed. The AI Connector "Elastic Stack users: An Enterprise subscription". Connector
-      secrets are stored as encrypted saved objects in Kibana.
+      No GA connector uses an AWS role, GCP impersonation or an Azure federated credential. Bedrock
+      takes access keys, Gemini a JSON key, OpenAI an API key, and Slack, Jira and PagerDuty tokens
+      or webhook URLs. ServiceNow, Exchange, Defender, CrowdStrike and Webhook offer OAuth client
+      credentials from your own secret or key. That best option makes C, and the cloud LLM
+      connectors alone would be D. Preview "Quick Connect" installs Elastic's own app for Slack,
+      Teams and Gmail with no secret. Once GA on stateful Stack, it would make this B.
 
 hygiene:
   expiry:
@@ -240,9 +198,8 @@ hygiene:
         checked_by: tehreet
         quote: "Optionally, set an expiry date. By default the API key will not expire, but it's a good security practice to give the key a limited lifespan."
     notes: >-
-      Same Elasticsearch API keys as the elasticsearch card. expiration is optional and no
-      xpack.security.authc.api_key.* setting caps or forces it. Kibana's "Connection details"
-      quick-create defaults a personal key to 90 days, but the API and the main create pane
+      Same Elasticsearch API keys as the elasticsearch card. Expiry is optional and no setting
+      forces it. Kibana's quick-create gives personal keys 90 days, but the API and main pane
       default to never.
   rotation_api:
     pass: true
@@ -255,7 +212,8 @@ hygiene:
         checked_on: 2026-10-14
         checked_by: tehreet
         quote: "This API invalidates API keys created by the create API key or grant API key APIs."
-    notes: POST /_security/api_key creates, DELETE /_security/api_key invalidates.
+    notes: >-
+      The Elasticsearch API creates and invalidates keys.
   scoping:
     pass: true
     evidence:
@@ -268,9 +226,8 @@ hygiene:
         checked_by: tehreet
         quote: "For a user API key, you can opt to configure access to specific Elasticsearch APIs and resources by assigning the key with predefined roles or custom privileges."
     notes: >-
-      role_descriptors can include Kibana application privileges (feature and space privileges),
-      so a key can be limited to, for example, connectors or alerting in one space. Without
-      role_descriptors the key snapshots its creator's full permissions, and that is the default.
+      A key's role descriptors can limit it to, say, connectors in one space. Without them the key
+      copies its creator's full permissions, which is the default.
   last_used:
     pass: false
     evidence:
@@ -283,9 +240,8 @@ hygiene:
         checked_by: tehreet
         quote: "The API Keys management page in Kibana lists your API keys, including the name, date created, and status."
     notes: >-
-      The get API key response has creation, expiration and invalidation times but no last-used
-      field, and the Kibana API Keys page shows none either. Usage can only be reconstructed from
-      audit logs.
+      Keys show creation, expiry and invalidation times but no last use. Usage can only be rebuilt
+      from audit logs.
   leak_revocation:
     pass: false
     evidence:
@@ -298,15 +254,11 @@ hygiene:
         checked_by: tehreet
         quote: "supportedSecret: Elastic Stack API Key"
     notes: >-
-      GitHub's pattern data marks elastic_stack_api_key and elastic_cloud_api_key isPublic false.
-      Both are user patterns (GHAS private repos, push protection), not partner patterns, so a key
-      leaked to a public repo is not reported to Elastic for revocation.
+      GitHub treats Elastic keys as user patterns for private repos and push protection, not partner
+      patterns. So a key leaked to a public repo is not reported to Elastic.
 
 notes: >-
-  Scope: authenticating to the Kibana HTTP API (self-managed, ECK, ECE, Elastic Cloud Hosted and
-  Serverless), and the Kibana Actions/Connectors framework used by alerting, cases, Elastic
-  Security response actions, AI Assistant and Agent Builder. Neighbouring cards: elasticsearch
-  (the realms and API keys Kibana relies on), elastic-cloud-api (Cloud API keys that can reach
-  Serverless Kibana), elastic-agent-fleet (Fleet APIs served by Kibana) and
-  elastic-cloud-enterprise. The headline is C because of the outbound connectors. A Basic-tier
-  or Serverless user calling the Kibana API is on non-expiring API keys (F inbound).
+  Covers the Kibana HTTP API on every deployment type, and the connectors behind alerting, cases,
+  security and AI features. Related cards: elasticsearch, elastic-cloud-api, elastic-agent-fleet and
+  elastic-cloud-enterprise. The headline is C because of outbound. Basic-tier or Serverless callers
+  use non-expiring API keys, which is F inbound.

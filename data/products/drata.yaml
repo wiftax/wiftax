@@ -6,20 +6,16 @@ docs: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
 category: security
 status: listed
 summary: >-
-  Workloads call the Drata API with a static API key or an OAuth client_credentials app whose
-  client secret mints 24-hour tokens; there is no federation, so a long-lived secret always sits
-  at the root. Keys are scoped and show last use, but Never is an allowed expiry, keys cannot be
-  managed by API and GitHub does not revoke leaked ones. Into AWS Drata assumes a role with an
-  external ID; GCP needs a service account JSON key and Azure a client secret.
+  To call the Drata API, your code holds a static API key or an OAuth client secret that mints
+  24-hour tokens. There is no federation. Drata reaches into AWS by assuming a role you create, but
+  GCP needs a JSON key and Azure a client secret.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      OAuth 2.0 client credentials against Drata's Auth0 tenant: an OAuth Application created in
-      Settings yields a client ID and client secret that mint short-lived bearer tokens for the
-      Public API v2 (and the MCP server). The alternative is a static API key sent as a bearer
-      token.
+      An OAuth app's client ID and secret mint short-lived bearer tokens for the Public API and MCP
+      server. The alternative is a static API key.
     evidence:
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
@@ -54,23 +50,16 @@ surfaces:
         checked_by: tehreet
         quote: "This guide walks you through setting up OAuth authentication for MCP clients."
     notes: >-
-      Graded C: the OAuth path issues tokens that expire (the documented example returns
-      expires_in 86400), but every token is bootstrapped from a client secret Drata generates and
-      you store, and the API spec documents only the clientCredentials flow and a static bearer
-      API key. No token exchange, private_key_jwt, OIDC trust of GitHub Actions or cloud workload
-      tokens, or any bring-your-own-issuer option is documented, so per the brief's precedent a
-      client_credentials secret is C at best. The MCP server uses a per-user interactive OAuth
-      grant, which is human login rather than workload auth. Not tier-gated in the docs, though
-      Drata pitches OAuth Applications at enterprise customers. Moves to B or A only if Drata
-      accepts federated tokens from an external OIDC issuer.
+      OAuth tokens expire after 24 hours, but each one starts from a client secret Drata generates
+      and you store. No token exchange, private key JWT, or trust of GitHub Actions or cloud
+      identity tokens is documented. A client secret root is C at best, per cohort precedent. The
+      MCP server uses a per-user login, which is human, not workload, auth. The docs show no tier
+      gate. Moves to B or A only if Drata accepts tokens from an outside OIDC issuer.
   outbound:
     grade: B
     mechanism: >-
-      AWS (and AWS GovCloud) is keyless: you create DrataAutopilotRole trusting Drata's account
-      with your tenant's external ID. GCP requires uploading a service account JSON key, and
-      Azure requires a client secret on an App Registration you create. GitHub, Bitbucket, GitLab,
-      Azure DevOps, Google Workspace and DigitalOcean connect through Drata's own app or OAuth
-      grant; Okta, JumpCloud, Cloudflare and Snowflake take tokens or client secrets you create.
+      Drata assumes a role you create in AWS, with an external ID. GCP needs an uploaded service
+      account JSON key, and Azure a client secret on your App Registration.
     evidence:
       - url: https://help.drata.com/en/articles/5048935-aws-integration-guide-infrastructure-user-access-review
         checked_on: 2026-10-22
@@ -133,22 +122,12 @@ surfaces:
         checked_by: tehreet
         quote: "Expected outcome: You have the Account Identifier, Client ID, Client Secret, and Warehouse needed to connect Snowflake to Drata."
     notes: >-
-      Checked: AWS, AWS GovCloud, GCP (manual and script setup), Azure, GitHub, GitHub Enterprise
-      Server, GitLab, Bitbucket, Azure DevOps, Google Workspace, Okta, JumpCloud, DigitalOcean,
-      Cloudflare and Snowflake help articles, plus the v2 API's aws-, azure- and gcp-connections
-      endpoints. AWS is keyless (cross-account role with a per-tenant external ID and the
-      SecurityAudit policy). GCP is a static service account JSON key, held by Drata and also
-      needing domain-wide delegation into Google Workspace; Azure is a customer-managed client
-      secret on a single-tenant App Registration (the guide suggests a 24-month expiry and warns
-      expiry disconnects the integration). Neither offers workload identity federation, service
-      account impersonation or a federated credential, which is why this is B rather than A. Both
-      come with read-only least-privilege role guidance (Reader, SecurityAudit, a reduced-permission
-      GCP custom role). Okta takes an admin API token plus an OIN app client secret, JumpCloud and
-      Cloudflare take API keys or tokens, Snowflake an OAuth client secret, DigitalOcean Spaces
-      optional static access keys and GitLab an optional PAT. GitHub, Bitbucket and GitHub
-      Enterprise Server use a Drata app you install; GitLab, Azure DevOps, Google Workspace and
-      DigitalOcean use an interactive OAuth grant. Moves to A if GCP and Azure gain keyless
-      options (WIF or SA impersonation; a federated credential on a Drata multi-tenant app).
+      AWS and GovCloud are keyless: a cross-account role with a per-tenant external ID and the
+      SecurityAudit policy. GCP takes a service account JSON key held by Drata, plus domain-wide
+      delegation into Google Workspace. Azure takes a client secret you manage, and the integration
+      disconnects when it expires. Neither offers federation or impersonation, so B, not A. GitHub,
+      Bitbucket and GitLab connect through a Drata app or OAuth grant. Okta, JumpCloud and
+      Cloudflare take tokens or secrets you create. Keyless GCP and Azure options would make it A.
 
 hygiene:
   expiry:
@@ -163,9 +142,8 @@ hygiene:
         checked_by: tehreet
         quote: "Custom (recommended for most customers)"
     notes: >-
-      API keys default to 12 months and OAuth Applications offer Never or Custom, but Never is
-      allowed for both and no org policy to forbid it is documented. A changeable default is not
-      an enforced expiry (precedent from this cohort's brief), so this fails.
+      API keys default to 12 months, but Never is allowed for keys and OAuth apps, and no org policy
+      forbids it. A changeable default fails.
   rotation_api:
     pass: false
     evidence:
@@ -178,9 +156,8 @@ hygiene:
         checked_by: tehreet
         quote: "Select the Create API Key button."
     notes: >-
-      Keys and OAuth Applications are created and revoked in Settings in the web app. The v2
-      OpenAPI spec (159 paths) has no endpoint for API keys, OAuth Applications or client secret
-      rotation, so rotation cannot be automated without a browser.
+      Keys and OAuth apps are created and revoked only in the web app. The API has no endpoints for
+      them.
   scoping:
     pass: true
     evidence:
@@ -193,10 +170,8 @@ hygiene:
         checked_by: tehreet
         quote: "Best practice: Always follow least privilege — only enable the minimum scopes needed for your integration."
     notes: >-
-      Both API keys and OAuth Applications are tenant-level integration credentials with per-resource
-      read/create/update/delete scopes, not a copy of the creator's access. Keys can also be pinned
-      to allowed source IPs. The "All read" and "All read and write" presets auto-grow to future
-      scopes.
+      Keys and OAuth apps belong to the tenant, not the creator, and carry per-resource scopes. Keys
+      can be pinned to source IPs. The "All read" presets grow to include future scopes.
   last_used:
     pass: true
     evidence:
@@ -205,7 +180,7 @@ hygiene:
         checked_by: tehreet
         quote: "You can view the API key name, the status of the key, who created the API key, when the key was last used to make a request, and when the key expires."
     notes: >-
-      Shown for API keys. A last-used field for OAuth Applications is not documented.
+      Shown for API keys. Not documented for OAuth apps.
   leak_revocation:
     pass: false
     evidence:
@@ -213,13 +188,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Drata does not appear in GitHub's supported secret-scanning patterns table, so neither API
-      keys nor OAuth client secrets leaked to a public repo are reported to Drata.
+      Drata is not in GitHub's secret scanning partner list, so leaked keys and client secrets are
+      not reported to Drata.
 
 notes: >-
-  One card for the Drata GRC platform. SafeBase (Drata's trust-center product) has its own Trust
-  API not graded here; Custom Connections push data in over the same Public API and credentials.
-  Two of five hygiene checks pass (scoping, last used). An enforceable maximum expiry, key and
-  OAuth Application management in the API, and GitHub secret-scanning partnership would fix
-  hygiene; inbound needs real federation to pass C, and outbound needs keyless GCP and Azure to
-  reach A.
+  One card for the Drata GRC platform. SafeBase's Trust API is not graded here. Hygiene would
+  improve with an enforced expiry, API key management and GitHub partner scanning. Inbound needs
+  real federation to pass C. Outbound needs keyless GCP and Azure to reach A.

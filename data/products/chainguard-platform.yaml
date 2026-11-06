@@ -9,22 +9,16 @@ docs: https://edu.chainguard.dev/platform/administration/assumable-ids/assumable
 category: devtools
 status: listed
 summary: >-
-  Workloads reach cgr.dev and the Chainguard API by trading an OIDC token from any issuer you
-  register (GitHub, GitLab, AWS, Kubernetes, CircleCI, your own) for a token valid up to an hour,
-  matched on issuer, subject, audience and custom claims. Pull tokens remain for clients that
-  cannot do OIDC and always expire within a year; the free Catalog Starter plan gets only those.
-  Outbound, Chainguard signs its webhooks with OIDC and is the OIDC issuer for Checks into AWS,
-  GCP and Azure.
+  To reach cgr.dev and the Chainguard API, your code trades an OIDC token from any issuer you
+  register for a token lasting up to an hour. The free Catalog Starter plan gets only static pull
+  tokens. Chainguard reaches your clouds as an OIDC issuer, without keys.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Assumable identity: a Chainguard identity with a claim_match on issuer, subject, audience and
-      custom claims (exact or regex), bound to a role. A workload presents its own OIDC token to
-      issuer.enforce.dev/sts/exchange (or chainctl auth login --identity) and gets a Chainguard
-      token valid up to an hour for the API and registry. Static pull tokens remain for clients
-      that cannot run OIDC.
+      You create a Chainguard identity that matches issuer, subject, audience and custom claims.
+      Your workload exchanges its OIDC token for a Chainguard token valid up to an hour.
     issuers:
       - any
     tier_gated: Paid plans (Catalog Starter organizations cannot create assumable identities)
@@ -78,27 +72,17 @@ surfaces:
         checked_by: tehreet
         quote: "Because ECR authenticates to Chainguard's registry on your behalf, you must supply it with credentials."
     notes: >-
-      Bring-your-own-issuer: any OIDC issuer can be named (exact or issuer_pattern), with exact or
-      regex subject, audience and custom-claim matching; documented examples cover GitHub Actions,
-      GitLab, Bitbucket, Buildkite, CircleCI, Jenkins, Keycloak, Entra ID, Kubernetes service
-      account tokens and AWS IAM outbound identity federation (plus a legacy AWS GetCallerIdentity
-      identity type). Issuers that are not reachable from the internet can register their JWKS as a
-      "static" identity, capped at 30 days. The same exchanged token works for the control-plane
-      API (console-api.enforce.dev), Terraform and cgr.dev, so no API function requires a static
-      secret; per the weakest-path rule this keeps A. Pull tokens are still the documented path for
-      clients that cannot run a token exchange (kubelet imagePullSecrets, ECR pull-through cache in
-      Secrets Manager, Artifactory, Nexus, Cloudsmith mirrors). That is a limitation of those
-      clients, not of Chainguard's API, but it means many real registry-mirror setups hold a static
-      pull token; the hygiene below grades it. Tier gate: the free Catalog Starter plan cannot
-      create assumable identities, so on that plan inbound is pull-token only (would be D).
+      Any OIDC issuer works, with exact or regex claim matching. Examples include GitHub Actions,
+      GitLab, Kubernetes and AWS outbound federation. Issuers not reachable from the internet can
+      register their keys for up to 30 days. One exchanged token covers the API, Terraform and the
+      registry, so nothing needs a static secret. Registry mirrors and Kubernetes image pulls often
+      still hold a static pull token, graded in hygiene below. The free Catalog Starter plan cannot
+      use OIDC login, so it would be D.
   outbound:
     grade: A
     mechanism: >-
-      Chainguard reaches customer systems as an OIDC issuer or GitHub App, never with a customer
-      secret: CloudEvents webhooks carry an issuer.enforce.dev OIDC token for the receiver to
-      verify; Chainguard Checks gets short-lived AWS, GCP and Azure credentials through IAM OIDC
-      providers, workload identity pools and Entra federated credentials that trust
-      issuer.enforce.dev; Guardener and Checks act on GitHub through the Chainguard GitHub App.
+      Chainguard reaches your systems as an OIDC issuer or GitHub App, never with your secret.
+      Webhooks carry a token you verify, and Checks reaches AWS, GCP and Azure through federation.
     evidence:
       - url: https://edu.chainguard.dev/platform/administration/cloudevents/events-example.md
         checked_on: 2026-10-22
@@ -137,19 +121,12 @@ surfaces:
         checked_by: tehreet
         quote: "Set AWS account association for a location."
     notes: >-
-      Checked: CloudEvents subscriptions (registry push/pull and IAM events to a webhook you run;
-      Chainguard signs each delivery with an OIDC JWT, so the receiver holds no shared secret);
-      the image-mirroring examples (copy to Artifact Registry/ECR are customer-run services
-      triggered by events, which pull from cgr.dev with an assumable identity and push with their
-      own cloud identity; Chainguard never holds registry credentials); registry pull-through
-      guides for ECR, Artifact Registry, Artifactory, Nexus, Harbor and Cloudsmith (all pull
-      direction, so the pull token they store is an inbound credential, covered above); Chainguard
-      Checks workload identities into AWS, GCP, Azure (keyless, Chainguard as OIDC issuer, trust
-      pinned on the exact subject); Guardener and Checks via the Chainguard GitHub App; account
-      associations for AWS, GCP and Azure (account ID, project, tenant/client IDs only, no secret;
-      little current documentation of what uses them). Chainguard Workspaces sessions forward the
-      developer's own laptop credentials (gcloud ADC, GitHub, Claude) and are human dev
-      environments, not graded here. No integration found that asks for a static cloud key.
+      Webhook deliveries are signed with an OIDC token, so your receiver holds no shared secret.
+      Image mirroring runs in your own infrastructure and never gives Chainguard registry
+      credentials. Registry pull-through caches pull from Chainguard, so their stored token is an
+      inbound credential, covered above. Checks reaches AWS, GCP and Azure through federation pinned
+      to an exact subject. GitHub access goes through the Chainguard GitHub App. No integration asks
+      for a static cloud key.
 
 hygiene:
   expiry:
@@ -168,10 +145,8 @@ hygiene:
         checked_by: tehreet
         quote: "Defaults to / Maximum of 30 days after creation time."
     notes: >-
-      Pull tokens default to 30 days and the platform caps them at one year, so a never-expiring
-      pull token cannot exist (a platform-enforced max lifetime passes, as on temporal). Static-JWKS
-      identities are capped at 30 days. No org policy for a shorter cap is documented. The
-      Console's "Custom" expiration date picker was not verified to enforce the same cap.
+      Pull tokens default to 30 days, and the platform caps them at one year. A platform-enforced
+      maximum passes, as on the temporal card.
   rotation_api:
     pass: true
     evidence:
@@ -184,10 +159,8 @@ hygiene:
         checked_by: tehreet
         quote: "Create a pull token."
     notes: >-
-      Pull tokens are created with chainctl auth pull-token create and revoked by deleting their
-      identity (chainctl iam identities delete, or the /iam/v1/identities/{id} API), all
-      scriptable from an assumable identity. On Catalog Starter the limited_owner role cannot
-      delete identities; you delete the token's role binding instead.
+      Pull tokens can be created and revoked from the CLI or API. On Catalog Starter you revoke by
+      deleting the token's role binding instead.
   scoping:
     pass: true
     evidence:
@@ -204,9 +177,8 @@ hygiene:
         checked_by: tehreet
         quote: "For example, CI systems should have a role like `registry.pull`, not `editor`."
     notes: >-
-      Each pull token is its own machine identity limited to pulling one repository
-      type, under an organization or folder you choose (--parent), not a copy of the creator's
-      access.
+      Each pull token is its own machine identity that can only pull, within an organization or
+      folder you choose.
   last_used:
     pass: false
     evidence:
@@ -219,10 +191,8 @@ hygiene:
         checked_by: tehreet
         quote: "last_seen is the timestamp for when the identity was last federated."
     notes: >-
-      The Identity API object carries lastSeen ("last federated"), but nothing documents whether a
-      registry login with a pull token updates it, and the Console's Access Tokens list shows no
-      last-used column. Judged a fail as not publicly verifiable; a documented last-used for pull
-      tokens would flip it.
+      Fails because it cannot be confirmed. Identities record when they last federated, but nothing
+      says a pull token login updates that, and the Console shows no last-used column.
   leak_revocation:
     pass: false
     evidence:
@@ -230,13 +200,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Chainguard does not appear in GitHub's supported secret scanning patterns table, so a leaked
-      pull token is not reported to Chainguard for revocation.
+      Chainguard is not in GitHub's secret scanning list, so leaked pull tokens are not reported to
+      it.
 
 notes: >-
-  One card for the Chainguard platform: the registry (cgr.dev, apk.cgr.dev, Libraries indexes) and
-  the console-api.enforce.dev control plane share one IAM model and one STS. Checks, Guardener and
-  Workspaces are newer products on the same IAM; they appear only in outbound. Inbound is A on paid
-  plans and would be D on Catalog Starter (pull tokens only, three of five hygiene checks pass).
-  Hygiene applies to pull tokens. A documented last-used timestamp and GitHub partner revocation
-  for pull tokens would complete hygiene; the grades would not change.
+  Covers the registry and control plane, which share one identity model. Inbound is A on paid plans
+  and would be D on Catalog Starter, with three of five hygiene checks passing on pull tokens.

@@ -12,20 +12,16 @@ docs: https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/i
 category: security
 status: listed
 summary: >-
-  Automation against CyberArk's platform APIs (Privilege Cloud, Secrets Hub, Identity) runs as an
-  Identity service user that trades its username and password, used as an OAuth client secret,
-  for a short-lived token; no federation path is documented. Passwords can be set to never expire.
-  Going out, Secrets Hub syncs into AWS, Azure, GCP and HashiCorp Vault with no stored secret.
+  Automation against CyberArk's platform APIs runs as an Identity service user. It trades a
+  password, used as an OAuth client secret, for a short-lived token. There is no federation path.
+  Secrets Hub syncs into AWS, Azure, GCP and HashiCorp Vault with no stored secret.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      An Identity service user flagged as an OAuth confidential client calls the tenant's OAuth2
-      client-credentials endpoint with its login name and password as client_id and client_secret,
-      and gets a short-lived bearer token accepted by the platform service APIs (Privilege Cloud,
-      Secrets Hub, SIA, Identity). The official SDK offers only Identity user or service-user
-      authentication.
+      An Identity service user sends its login name and password as an OAuth client ID and secret,
+      and gets a short-lived token for the platform APIs.
     evidence:
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
         checked_on: 2026-10-22
@@ -56,26 +52,17 @@ surfaces:
         checked_by: tehreet
         quote: "How to create an API authentication token and use in to run ISPSS APIs."
     notes: >-
-      Graded on the platform service APIs, which every automation of Privilege Cloud, Secrets Hub
-      or Identity must use. The token is short-lived but bootstrapped from a long-lived service-user
-      password acting as a client secret (static root, C). The detailed token page on
-      api-docs.cyberark.com redirects through a login flow and could not be saved; its search
-      snippet shows a POST to /oauth2/platformtoken with grant_type=client_credentials and the
-      service user's login and password, consistent with the Identity docs quoted. Identity's
-      "Federate with an external IdP" pages (SAML, OIDC) are for human sign-in; no token exchange,
-      JWT bearer or cloud workload identity path for API clients is documented. The Secrets Manager
-      SaaS API is the exception: it federates any JWT issuer (see `cyberark-conjur-cloud`), but
-      its tokens do not reach these platform APIs. Moves to A or B if the OAuth server accepts a
-      federated JWT (RFC 7523 or 8693) from an external issuer for service users.
+      Graded on the platform APIs that every automation of Privilege Cloud, Secrets Hub or Identity
+      must use. The token is short-lived but rooted in a long-lived password, so C. The detailed
+      token page is behind a login, but its search snippet matches the Identity docs. External IdP
+      federation is for human sign-in only. Secrets Manager SaaS federates any JWT issuer, as on the
+      cyberark-conjur-cloud card, but its tokens do not reach these APIs.
   outbound:
     grade: A
     tier_gated: Secrets Hub (separately licensed platform service)
     mechanism: >-
-      Secrets Hub syncs PAM secrets into AWS Secrets Manager by assuming an IAM role you create
-      that trusts a Secrets Hub role with an External ID, into Azure Key Vault through a federated
-      credential on your Entra app (issuer is your Identity tenant), into GCP Secret Manager through
-      Workload Identity Federation from its AWS role, and into HashiCorp Vault through Vault's JWT
-      auth method trusting the same issuer.
+      Secrets Hub assumes an AWS role you create with an External ID, and federates into Azure, GCP
+      and HashiCorp Vault.
     evidence:
       - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/
         checked_on: 2026-10-22
@@ -106,13 +93,10 @@ surfaces:
         checked_by: tehreet
         quote: "Supported secret stores: AWS_ASM (AWS Secrets Manager); AZURE_AKV (Azure Key Vault); GCP_GSM (GCP Secret Manager); HASHI_HCV HashiCorp Vault"
     notes: >-
-      Checked every Secrets Hub target store (AWS, Azure, GCP, HashiCorp Vault): all four are
-      keyless. Azure stores created earlier with an app client secret can be migrated, and the
-      script tells you to delete the old secret; HashiCorp setup needs a Vault token once, to
-      configure the JWT role. Not graded as reach-ins: Privilege Cloud's CPM and PSM, which
-      manage target-account passwords and keys as the product's core vaulting job and run through
-      connectors you host, and Connect Cloud Environments onboarding for Secure Cloud Access,
-      which was not inspected.
+      All four Secrets Hub targets are keyless. Older Azure stores with a client secret can be
+      migrated, and the script says to delete the old secret. Vault setup needs a Vault token once.
+      CPM and PSM manage target passwords as the core vaulting job, through connectors you host, so
+      they are not graded as reach-ins. Secure Cloud Access onboarding was not inspected.
 
 hygiene:
   expiry:
@@ -131,10 +115,8 @@ hygiene:
         checked_by: tehreet
         quote: "You can use 0 (zero) if you do not want to specify a password expiration period."
     notes: >-
-      A tenant password policy defaults to a 365-day maximum age, but it can be set to 0 and each
-      user can be marked "Password Never Expires", so no policy forces an expiry on a service user
-      (precedent: changeable default is not enforced expiry). Whether an expired password blocks
-      client_credentials was not publicly verifiable.
+      The tenant policy defaults to a 365-day maximum, but it can be set to 0 and users can be
+      marked never-expiring. A changeable default is not enforced expiry.
   rotation_api:
     pass: true
     evidence:
@@ -147,9 +129,8 @@ hygiene:
         checked_by: tehreet
         quote: "/CDirectoryService/SetUserState - Set the state of a user to Locked, Disabled, or Expired."
     notes: >-
-      Service users are created and disabled through the Identity CDirectoryService API, and
-      Privilege Cloud's Identity Service User plugin can verify, change and reconcile their
-      passwords on a schedule.
+      Service users are created and disabled through the Identity API. Privilege Cloud can change
+      their passwords on a schedule.
   scoping:
     pass: true
     evidence:
@@ -158,8 +139,7 @@ hygiene:
         checked_by: tehreet
         quote: "This user has least privilege access permissions, is not assigned MFA policies, and cannot access Idira IdentityIdentity Administration."
     notes: >-
-      A service user is a purpose-built machine principal that gets only the roles and service
-      permissions you assign it.
+      A service user is a machine identity that gets only the roles you assign it.
   last_used:
     pass: false
     evidence:
@@ -167,8 +147,7 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      No last-used or last-token-issued field for service users is documented on the public
-      Identity or platform pages; not publicly verifiable, so graded as a fail.
+      No last-used time for service users is publicly documented, so it fails.
   leak_revocation:
     pass: false
     evidence:
@@ -176,12 +155,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      CyberArk does not appear in GitHub's supported secret-scanning patterns table. A service
-      user's credential is an ordinary password, so it has no detectable format anyway.
+      CyberArk is not in GitHub's secret-scanning table, and a service user's password has no
+      detectable format.
 
 notes: >-
-  Split from `cyberark-conjur-cloud` because machine auth differs materially: Secrets Manager
-  SaaS federates any JWT issuer, while the shared platform APIs take only a service-user password
-  as an OAuth client secret. Docs now carry Palo Alto Networks and "Idira" branding. Hygiene
-  applies to Identity service-user passwords. Self-hosted PAM's PVWA REST API (CyberArk, LDAP,
-  RADIUS logons) is not graded here.
+  Split from cyberark-conjur-cloud because Secrets Manager SaaS federates any JWT issuer, while
+  these platform APIs take only a service-user password. Hygiene applies to those passwords.
+  Self-hosted PAM's REST API is not graded here.

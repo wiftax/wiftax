@@ -10,20 +10,16 @@ docs: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Inf
 category: security
 status: listed
 summary: >-
-  Infinity Portal APIs swap a client ID and secret key for a short-lived token, but the CloudGuard
-  API, its Terraform provider and onboarding automation take a static key ID and secret on every
-  call (HTTP Basic). No OIDC or workload federation path exists. Keys can be set to never expire.
-  Into your cloud, CloudGuard assumes an AWS role with an External ID, but Azure wants an app
-  secret and GCP a service account JSON key.
+  To automate CloudGuard, your code sends a static key ID and secret on every call. Other Infinity
+  Portal APIs swap a client secret for a short-lived token. There is no OIDC login. When CloudGuard
+  reaches into your cloud, it assumes an AWS role, but Azure and GCP want pasted secrets.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      CloudGuard REST API (api.dome9.com and api.*.cgn.portal.checkpoint.com), the dome9 Terraform
-      provider and SDK: static API key ID + secret sent as HTTP Basic auth on every request, issued
-      to a user or to a CloudGuard Service Account. Other Infinity Portal services: an Account or
-      User API key (client ID + secret key) posted to /auth/external for a short-lived bearer token.
+      The CloudGuard API, Terraform provider and SDK take a static key ID and secret as HTTP Basic
+      auth. Other Infinity Portal services swap a client ID and secret for a short-lived token.
     evidence:
       - url: https://docs.cgn.portal.checkpoint.com/reference/authentication.md
         checked_on: 2026-10-22
@@ -62,25 +58,17 @@ surfaces:
         checked_by: tehreet
         quote: "You get an authorization token."
     notes: >-
-      Graded on the weakest path a workload must use: automating CloudGuard (onboarding
-      environments, policies, findings) goes through the CloudGuard v2 API, whose only security
-      scheme is HTTP Basic with a long-lived key ID and secret, and the dome9 Terraform provider and
-      Go SDK send that pair on every request. The Infinity Portal /auth/external flow used by other
-      Check Point services (Harmony, Infinity Events and so on) mints a short-lived token from a
-      static client ID and secret key, which on its own would be C (same call as
-      cyera-data-security), but it does not lift the CloudGuard path. Nothing on either side
-      documents OIDC, GitHub Actions, cloud workload identity or a token exchange; Infinity Portal
-      SSO is for human login. The CloudGuard connectivity table lists an
-      /v2/auth/assume-role/jwt endpoint for the image-scan CI/CD tool; how it authenticates is not
-      publicly documented, so it is not counted. Static keys with 3 of 5 hygiene checks = D.
+      Graded on the weakest path a workload must use. Automating CloudGuard goes through its v2 API,
+      which only accepts a long-lived key pair. The Infinity Portal flow mints a short-lived token
+      from a static secret. Alone that would be C, as on the cyera-data-security card, but it does
+      not cover CloudGuard. Neither side documents OIDC or workload identity. A JWT endpoint for the
+      image-scan CI tool is listed, but how it authenticates is undocumented, so it does not count.
+      Static keys with 3 of 5 hygiene checks is D.
   outbound:
     grade: B
     mechanism: >-
-      CloudGuard onboarding: AWS uses a cross-account IAM role (CloudGuard-Connect or
-      CrossAccountRole) that CloudGuard assumes with an External ID, keyless. Azure subscriptions
-      use an app registration created by an onboarding script whose client secret is pasted into
-      CloudGuard. GCP projects use a service account JSON key pasted into CloudGuard. Alibaba
-      Cloud takes an access key and secret.
+      CloudGuard assumes an AWS role you create, with an External ID. Azure wants a pasted app
+      client secret, GCP a service account JSON key, and Alibaba an access key.
     evidence:
       - url: https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
         checked_on: 2026-10-22
@@ -139,25 +127,12 @@ surfaces:
         checked_by: tehreet
         quote: '"description": "Alibaba access key",'
     notes: >-
-      Checked CloudGuard onboarding for AWS (single account, legacy and unified, and AWS
-      Organizations), Azure (single subscription and organization/management group), GCP
-      (project), Alibaba Cloud and OCI, via the admin guide and the v2 API reference. AWS is keyless:
-      a role you create that CloudGuard assumes with a non-empty External ID; the legacy
-      "UserBased" access-key method is deprecated. Azure single-subscription onboarding has you paste
-      the Application ID and Secret Key printed by the onboarding script, and the API's Azure
-      credentials object requires clientId and clientPassword. Azure organization onboarding on
-      Standard Azure skips the paste ("credentials are automatically managed by the CloudGuard
-      application"), but whether that is a Check Point multi-tenant app with admin consent or a
-      secret the script hands over is not publicly verifiable (Azure China and Gov still paste a
-      Secret Key); it is not credited as keyless. GCP projects take a service account key JSON with
-      no impersonation or Workload Identity Federation option documented. Alibaba takes an
-      access key and secret. OCI onboarding registers a public key on a user created by Terraform,
-      so no customer-held secret is handed over. The scripts and templates do scope the
-      permissions (read-only vs full-protection, documented policies), so this is not an F path.
-      Keyless on AWS but static secrets on Azure and GCP = B. Lifts to A if Azure moves to a
-      multi-tenant app or federated credential and GCP to service account impersonation.
-      Infinity Portal services outside CloudGuard (Harmony Email, Harmony SASE and others) have
-      their own SaaS connectors and were not graded here.
+      AWS is keyless, and the legacy access-key method is deprecated. Azure subscription onboarding
+      has you paste the app ID and secret the script prints. Azure organization onboarding skips the
+      paste, but it is not public whether that uses a consented multi-tenant app, so it gets no
+      credit. GCP takes a service account JSON key with no impersonation option. OCI registers only
+      a public key, so no secret is handed over. The scripts scope permissions, so this is not F.
+      Keyless on AWS but static on Azure and GCP is B.
 
 hygiene:
   expiry:
@@ -176,11 +151,8 @@ hygiene:
         checked_by: tehreet
         quote: "The name of the Service Account and the role IDs to assign it."
     notes: >-
-      Fails. Infinity Portal User API keys default to three months, but Account API keys can be
-      created with no expiration date and no account policy to forbid that is documented; a
-      changeable default is not an enforced expiry (same call as elastic-cloud-api). CloudGuard
-      Service Account and V2 API keys have no expiry field at all: the service account model is a
-      name and role IDs.
+      Account API keys can be created with no expiry, and no policy forbids it. A changeable default
+      is not enforced expiry, as on elastic-cloud-api. CloudGuard keys have no expiry at all.
   rotation_api:
     pass: true
     evidence:
@@ -197,11 +169,8 @@ hygiene:
         checked_by: tehreet
         quote: "You get the Client ID and Access Key for the child account."
     notes: >-
-      CloudGuard's API has POST /v2/service-account, POST /v2/service-account/generate-key (new
-      key and secret) and DELETE /v2/service-account/{id}, so a job can rotate a service account's
-      key. On the Infinity Portal side, POST api/v1/tenant/token mints API keys for child accounts;
-      a general create/revoke endpoint for the account's own keys is not publicly documented, and
-      User API keys cannot manage other API keys.
+      The CloudGuard API can create a service account, generate a new key for it and delete it, so a
+      job can rotate keys.
   scoping:
     pass: true
     evidence:
@@ -222,11 +191,8 @@ hygiene:
         checked_by: tehreet
         quote: "Your permissions when using the REST API with the key will be the same as the permissions of the CloudGuard user who generated the key from the CloudGuard web application."
     notes: >-
-      CloudGuard Service Accounts are purpose-built machine principals not bound to an email, with
-      their own roles (custom roles can be limited to Organizational Units, environments and
-      specific controls). Infinity Portal Account API keys are limited to one service and a role.
-      User-owned V2 keys and User API keys inherit that human's access, which the rubric does not
-      count, but the machine-principal option exists.
+      CloudGuard Service Accounts are machine identities with their own roles, which can be limited
+      to environments and controls. Keys owned by a person get that person's access.
   last_used:
     pass: true
     evidence:
@@ -239,10 +205,8 @@ hygiene:
         checked_by: tehreet
         quote: "Get details on all service accounts in the account"
     notes: >-
-      The CloudGuard service account list (GET /v2/service-account) returns apiKeyId,
-      dateCreated and lastUsed for each service account, which covers the keys this card grades.
-      The Infinity Portal API Keys page documents no last-used column for Account or User API
-      keys (its table columns are configurable, but none is named). Narrow pass.
+      The CloudGuard service account list shows when each key was last used. The Infinity Portal
+      keys page shows no last use. Narrow pass.
   leak_revocation:
     pass: false
     evidence:
@@ -250,17 +214,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Check Point (Infinity Portal, CloudGuard or Dome9) does not appear in GitHub's supported
-      secret-scanning patterns table, partner or user alert, so a leaked key is not revoked
+      Check Point is not in GitHub's secret-scanning program, so a leaked key is not revoked
       automatically.
 
 notes: >-
-  One card for the Infinity Portal API keys and CloudGuard CNAPP (formerly Dome9), as assigned;
-  CloudGuard accounts live either on the legacy Dome9 portal (secure.dome9.com, V2 API keys under
-  Settings > Credentials) or inside the Infinity Portal (api.*.cgn.portal.checkpoint.com), and
-  both authenticate the API with a static key pair. Other Check Point products (Quantum management
-  API, Harmony Endpoint, Harmony Email, Harmony SASE) have their own APIs and may deserve separate
-  cards. Inbound moves to C if the CloudGuard API accepts the Infinity Portal short-lived token
-  instead of Basic auth, and to B or A only with workload federation (GitHub Actions OIDC, cloud
-  workload identity or bring-your-own issuer). An enforced key lifetime and GitHub partner
-  revocation would add two hygiene passes.
+  Covers Infinity Portal API keys and CloudGuard (formerly Dome9). Both the legacy Dome9 portal and
+  the Infinity Portal use a static key pair for the CloudGuard API. Other Check Point products may
+  need their own cards. Inbound moves to C if CloudGuard accepts the Portal's short-lived token, and
+  to B or A only with workload federation.

@@ -10,18 +10,16 @@ docs: https://developer.hashicorp.com/vault/docs/auth
 category: security
 status: listed
 summary: >-
-  Vault's JWT/OIDC auth method trusts any issuer you configure, so nothing needs a static Vault
-  credential to get in. Going out, the AWS, GCP and Azure secrets engines can run keyless via plugin
-  workload identity federation, but only on Vault Enterprise or HCP, and the remaining engines still
-  want a static (rotatable) root credential.
+  Vault's JWT/OIDC login trusts any issuer you configure, so your code needs no static Vault
+  credential. Outbound, the AWS, GCP and Azure engines can run keyless, but only on Vault Enterprise
+  or HCP. Other engines still want a static root credential that Vault can rotate.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      The JWT/OIDC auth method validates tokens from any issuer (OIDC discovery URL, JWKS URL or
-      static public keys) with bound_audiences, bound_subject and bound_claims per role; native
-      AWS, GCP, Azure and Kubernetes auth methods cover platform identities.
+      The JWT/OIDC auth method accepts tokens from any issuer and checks audience, subject and
+      claims per role. Native AWS, GCP, Azure and Kubernetes logins also exist.
     issuers: ["any"]
     evidence:
       - url: https://developer.hashicorp.com/vault/docs/auth/jwt
@@ -37,16 +35,15 @@ surfaces:
         checked_by: tehreet
         quote: "The aws auth method provides an automated mechanism to retrieve a Vault token for IAM principals and AWS EC2 instances."
     notes: >-
-      Available in Community Edition, Enterprise and HCP Vault Dedicated. AppRole (RoleID +
-      SecretID) is the static fallback for platforms with no identity; it is optional, not required.
+      Available in Community Edition, Enterprise and HCP Vault Dedicated. AppRole is an optional
+      static fallback for platforms with no identity of their own.
   outbound:
     grade: B
     tier_gated: Vault Enterprise 1.16+ (premium license) or HCP Vault Dedicated, for plugin WIF
     mechanism: >-
-      Plugin workload identity federation: Vault acts as an OIDC issuer and the AWS, GCP and Azure
-      secrets engines exchange its identity token for cloud credentials with no static root key.
-      Other engines (AliCloud, databases, and everything on Community Edition) still need a static
-      root credential that Vault can rotate.
+      Vault acts as an OIDC issuer, and its AWS, GCP and Azure engines trade that token for cloud
+      credentials. Other engines, and everything on Community Edition, need a static root
+      credential.
     evidence:
       - url: https://developer.hashicorp.com/vault/docs/secrets/aws
         checked_on: 2026-09-16
@@ -77,11 +74,10 @@ surfaces:
         checked_by: tehreet
         quote: "All plugins except MongoDB Atlas support rotating the root user's credentials."
     notes: >-
-      Graded at the top tier per the rubric and gated. On Community Edition every cloud secrets
-      engine is configured with a static root access key or service-account key, which Vault can
-      rotate on a schedule (rotate-root), so the un-gated grade would be C. Plugin WIF also requires
-      the cloud to reach Vault's /.well-known/openid-configuration, so an air-gapped Vault cannot use
-      it. AliCloud has no WIF option at all, which keeps the surface at B rather than A.
+      Graded at the gated top tier, per the rubric. On Community Edition every cloud engine takes a
+      static root key that Vault can rotate on a schedule, so the ungated grade would be C. The
+      cloud must reach Vault's OIDC discovery URL, so an air-gapped Vault cannot use this. AliCloud
+      has no keyless option, which keeps the grade at B rather than A.
 
 hygiene:
   expiry:
@@ -92,9 +88,8 @@ hygiene:
         checked_by: tehreet
         quote: "The system max TTL, which is 32 days but can be changed in Vault's configuration file."
     notes: >-
-      Every Vault token is capped by the system max TTL unless it is a root token (TTL 0 allowed)
-      or a periodic token that keeps being renewed. AppRole SecretIDs take secret_id_ttl and
-      secret_id_num_uses.
+      Every token is capped by the system max TTL, except root tokens and periodic tokens that keep
+      renewing. AppRole SecretIDs take a TTL and a use limit.
   rotation_api:
     pass: true
     evidence:
@@ -121,8 +116,8 @@ hygiene:
         checked_by: tehreet
         quote: "creation_time"
     notes: >-
-      Token lookup returns creation_time, issue_time, expire_time, ttl and num_uses but no
-      last-used timestamp; finding dead tokens means grepping the audit log.
+      Token lookup shows creation and expiry times but not last use. Finding dead tokens means
+      searching the audit log.
   leak_revocation:
     pass: false
     evidence:
@@ -131,10 +126,9 @@ hygiene:
         checked_by: tehreet
         quote: "HashiCorp Vault Service Token"
     notes: >-
-      Vault service, batch and root tokens are on GitHub's pattern list for user alerts and push
-      protection, but not as partner patterns, and HashiCorp cannot revoke a token on a Vault it
-      does not run. You get an alert, not a revocation.
+      GitHub alerts on leaked Vault tokens, but not as a partner pattern. HashiCorp cannot revoke a
+      token on a Vault it does not run. You get an alert, not a revocation.
 
 notes: >-
-  Hygiene is graded against the credentials Vault itself issues (tokens, AppRole SecretIDs). The
-  static root credentials for secrets engines belong to the target cloud, not to Vault.
+  Hygiene covers credentials Vault itself issues, such as tokens and AppRole SecretIDs. The static
+  root credentials for secrets engines belong to the target cloud, not to Vault.

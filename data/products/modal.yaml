@@ -10,20 +10,16 @@ docs: https://modal.com/docs/guide/service-users
 category: cloud
 status: listed
 summary: >-
-  CI jobs and services drive Modal with a static token id/secret pair. No OIDC or GitHub Actions
-  federation exists into Modal. Service users (Team plan) are scoped per Environment, created and
-  deleted through the SDK, and show a last-used time. They never expire unless you set an expiry,
-  and Modal is not a GitHub secret-scanning partner. Outbound, Modal is an OIDC issuer: S3 mounts
-  and ECR pulls are keyless, but GCS, Artifact Registry, Azure and R2 need pasted keys.
+  Your CI jobs drive Modal with a static token id and secret, with no OIDC login. Team-plan service
+  users are scoped, rotatable and show last use, but never expire by default. Outbound, S3 and ECR
+  are keyless, but GCS, Artifact Registry, Azure and R2 need pasted keys.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static Modal API token (MODAL_TOKEN_ID ak-... plus MODAL_TOKEN_SECRET as-...), owned either
-      by a human member or by a service user, used by the Python/JS/Go SDKs and the modal CLI for
-      every deploy, run and Function call. Third-party apps can instead hold a Modal-issued OAuth
-      client secret plus refresh token. No OIDC, workload identity or token exchange path exists.
+      A static token id and secret, owned by a member or a service user, used by the SDKs and CLI
+      for every call. No OIDC or token exchange exists.
     issuers: []
     tier_gated: Team (service users and RBAC)
     evidence:
@@ -64,29 +60,18 @@ surfaces:
         checked_by: tehreet
         quote: "Proxy tokens provide authentication to Modal Endpoints, Servers, and Web Functions."
     notes: >-
-      Modal's control plane and data plane are one API: the same token id/secret deploys Apps,
-      calls Functions, creates Sandboxes and reads Volumes, Dicts and Queues, so there is no weaker
-      side path to grade separately. The GitHub Actions guide stores MODAL_TOKEN_ID and
-      MODAL_TOKEN_SECRET as repository secrets; nothing in the guide, the config reference or
-      llms-full.txt describes exchanging a GitHub, cloud or other OIDC token for a Modal
-      credential. The OAuth client path (oc-/ov- client id and secret plus a refresh token) is for
-      platforms acting on behalf of Modal users and still rests on a static client secret, so it
-      is C-shaped at best and does not apply to a customer's own workloads. MODAL_IDENTITY_TOKEN
-      is a token Modal issues to its own containers for calling out (see outbound); code inside
-      Modal reaching Modal is ambient identity, which does not earn an A. Proxy tokens (wk-/ws-,
-      Environment-scoped under RBAC) are static keys for callers of a customer's own web
-      endpoints, not for driving Modal. Graded at the service-user mechanism (Team plan); on plans
-      without service users a workload holds a member token that carries that human's full access, which
-      fails scoping and would make this F. Moves to B or A if Modal accepts federated tokens for
-      service users.
+      One API covers the control and data planes, so there is no weaker side path. The GitHub
+      Actions guide stores the token as repository secrets, and no doc describes trading an OIDC
+      token for a Modal credential. Modal's OAuth client path is for platforms acting for users. It
+      rests on a static client secret and does not apply to your own workloads. Code inside Modal
+      reaching Modal is ambient identity and does not earn an A. Graded on Team-plan service users.
+      Without them a workload holds a member token with that person's full access, which fails
+      scoping and makes F.
   outbound:
     grade: B
     mechanism: >-
-      Modal is an OIDC issuer (https://oidc.modal.com) and injects a short-lived
-      MODAL_IDENTITY_TOKEN into every Function. S3 CloudBucketMounts and ECR image pulls can
-      assume an AWS IAM role through it. GCS mounts, R2 mounts, GCP Artifact Registry, Azure
-      Container Registry, Docker Hub and OpenTelemetry export take static keys stored as Modal
-      Secrets.
+      Modal is an OIDC issuer, and S3 mounts and ECR pulls use its tokens to assume an AWS role.
+      GCS, R2, Artifact Registry, Azure, Docker Hub and OpenTelemetry take static keys.
     evidence:
       - url: https://modal.com/docs/guide/oidc-integration
         checked_on: 2026-10-22
@@ -137,20 +122,12 @@ surfaces:
         checked_by: tehreet
         quote: "This is the key that the Modal integration will use to authenticate with your provider."
     notes: >-
-      Checked: CloudBucketMount (S3, R2, GCS), private registries (ECR, GCP Artifact Registry and
-      Container Registry, Azure Container Registry, Docker Hub), the Datadog and OpenTelemetry
-      log/metric exports, and the OIDC guide. AWS is keyless on both platform paths: you register
-      oidc.modal.com as an IAM OIDC provider and trust a role on the sub claim (workspace,
-      Environment, App or Function), and Modal assumes it for the S3 mount (oidc_auth_role_arn) or
-      the ECR pull (AWS_ROLE_ARN in a Secret). GCP has no platform path: GCS mounts take an HMAC key
-      and Artifact Registry a service-account JSON key, even though the discovery document would
-      let your own Function code federate into GCP or Azure by hand (the guide says so, without a
-      walkthrough). Azure ACR needs long-lived repository tokens, R2 an API token, Docker Hub a
-      read-only PAT. The Datadog integration is an authorize-in-the-browser flow that mints the
-      Datadog API key for you (consent-style, counted as keyless); OpenTelemetry takes a pasted
-      API key header. Hugging Face, W&B and similar tokens in the examples are pasted into Secrets
-      by your own code, not Modal reaching in. Keyless on AWS with static keys elsewhere is B; a
-      GCP federation path for mounts and Artifact Registry would make it A.
+      On AWS you register Modal's issuer and trust a role on the token's sub claim, such as a
+      workspace or App. GCP has no platform path: GCS mounts take an HMAC key and Artifact Registry
+      a JSON key. Your own Function code could federate into GCP or Azure by hand, but no
+      walkthrough exists. Azure registries, R2 and Docker Hub take long-lived tokens. Datadog uses a
+      browser consent flow, counted as keyless. Keyless on AWS with static keys elsewhere is B. A
+      GCP federation path would make it A.
 
 hygiene:
   expiry:
@@ -169,14 +146,9 @@ hygiene:
         checked_by: tehreet
         quote: "A workspace's maximum member API token lifetime was updated. Before/after values in seconds are recorded in the event metadata; an unset value means no cap."
     notes: >-
-      Service user tokens, the credential this card grades, take an optional expiry (--expires-in,
-      expires_in) and default to never; no workspace policy that forces one on them is documented.
-      Member tokens are different: a workspace can set a maximum member API token lifetime, and
-      modal token new defaults to it. That cap is documented only in the CLI help and the audit-log
-      event (it is unset, "no cap", by default) and covers member tokens. Per the precedent that a
-      changeable default is not an enforced expiry, this fails. Whether the cap also binds service
-      users is not publicly verifiable (the settings page is behind a login). It would not change
-      the headline: inbound is D either way.
+      Service user tokens take an optional expiry and default to never, and no policy forces one. A
+      workspace cap covers member tokens, unset by default. Whether it binds service users is
+      unverifiable. Inbound stays D either way.
   rotation_api:
     pass: true
     evidence:
@@ -189,11 +161,8 @@ hygiene:
         checked_by: tehreet
         quote: "Deleting a Service User will immediately revoke the credentials associated with that Service User."
     notes: >-
-      modal.Workspace.service_users.create/delete and the matching modal workspace service-users
-      CLI commands need no browser, so a job can mint a new service user, swap it in and delete the
-      old one. A service user holds a single token, so rotating means replacing the service user
-      and re-granting its Environment roles. Member tokens come only from a web session (modal
-      token new) or the dashboard.
+      The SDK and CLI create and delete service users without a browser. Each holds one token, so
+      rotation means replacing the service user and re-granting its roles.
   scoping:
     pass: true
     evidence:
@@ -206,10 +175,9 @@ hygiene:
         checked_by: tehreet
         quote: "Unlike human users, service users do not have a Workspace-level role; their access is controlled entirely through Environment Roles."
     notes: >-
-      Service users are a purpose-built machine principal that starts with No Access and gets Viewer
-      or Contributor on each Environment it needs, which the rubric counts. The roles are coarse
-      (Viewer or Contributor per Environment, no per-App or per-action grants). Member tokens inherit the
-      human's workspace role. Service users and RBAC require the Team plan.
+      Service users are machine identities that start with no access and get Viewer or Contributor
+      per Environment, which counts. Member tokens inherit the person's role. Requires the Team
+      plan.
   last_used:
     pass: true
     evidence:
@@ -226,10 +194,8 @@ hygiene:
         checked_by: tehreet
         quote: "A list of `ServiceUserInfo` dataclasses."
     notes: >-
-      ws.service_users.list() and .info() return ServiceUserInfo, which carries last_used_at next
-      to created_at and expires_at, so idle service users can be found and deleted from a script.
-      Passed on the SDK type alone; no guide text describes it. A last-used view for member
-      tokens is not documented publicly.
+      The SDK returns a last-used time for each service user, so idle ones can be found by script.
+      No guide text describes it.
   leak_revocation:
     pass: false
     evidence:
@@ -237,13 +203,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Modal does not appear in GitHub's supported secret-scanning patterns table, partner or
-      otherwise, even though its tokens carry greppable ak-/as- (and wk-/ws- proxy) prefixes.
+      Modal is not on GitHub's secret-scanning list, though its tokens carry greppable prefixes.
 
 notes: >-
-  One card for Modal: Functions, Sandboxes, Volumes and the rest sit behind one API and one
-  token type. Three of five hygiene checks pass, all on Team-plan service users. Without the Team plan a
-  workload uses a member token with its owner's full access, which would be F. Fixes, in order: let
-  service users accept a GitHub Actions or any-issuer OIDC token (Modal already runs an OIDC issuer
-  outbound), enforce a maximum lifetime on service users, join GitHub secret scanning, and add GCP
-  federation for GCS mounts and Artifact Registry.
+  One card, since everything sits behind one API and token type. Three of five checks pass, all on
+  Team-plan service users. The top fix is letting service users accept an OIDC token, since Modal
+  already runs an issuer.

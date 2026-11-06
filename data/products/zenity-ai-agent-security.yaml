@@ -6,19 +6,16 @@ docs: https://docs.zenity.io/integration
 category: security
 status: listed
 summary: >-
-  Zenity's API is reached with an account API key (client ID plus client secret) exchanged
-  through an Auth0 client-credentials grant for a short-lived bearer token; there is no federation.
-  Its docs are behind a customer login, so key hygiene is mostly unverifiable, and the public
-  connector pages show an IAM role for AWS Bedrock but customer-generated API keys for ChatGPT
-  Enterprise and Claude Enterprise.
+  To call Zenity, your code needs a long-lived client secret, which it trades for a short-lived
+  token. There is no federation. Zenity connects to AWS Bedrock with an IAM role, but ChatGPT and
+  Claude Enterprise need an API key you generate.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      An account API key (client ID + client secret) is exchanged through an Auth0
-      client_credentials grant for a short-lived bearer token scoped to the account's
-      organization; the client secret is the long-lived root.
+      An account client ID and secret, traded for a short-lived token. The client secret is the
+      long-lived root.
     evidence:
       - url: https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/README.md
         checked_on: 2026-10-13
@@ -41,25 +38,17 @@ surfaces:
         checked_by: tehreet
         quote: "The CLI performs the Auth0 `client_credentials` grant against the selected environment's tenant, scoped to that organization and the environment's API audience, then calls the API with the resulting bearer token (cached until it nears expiry)."
     notes: >-
-      docs.zenity.io (including the API and integration docs) redirects to a customer login, so
-      the API's auth is graded from Zenity's own public artifacts: the boundaries-as-code template
-      repo on GitHub and the README.md bundled inside the signed zenityctl 0.1.0 release archive
-      on get.zenity.io (the two zenityctl quotes come from that README; the archive is public, the
-      README is not served as a standalone page). Zenity's own GitHub Actions deploy workflow
-      stores the client secret as a repository secret and requests only `contents: read`, with no
-      `id-token` permission, so there is no sign of GitHub OIDC or any other federation. The
-      zenityctl README describes "Account API key (`client_credentials`)" as "the only mode"; the
-      public API is labelled `v1-beta`. Deployable components: the Cursor inventory plugin enrolls
-      with a pasted enrollment key that is exchanged for a short-lived device token
-      (https://raw.githubusercontent.com/zenitysec/zenity-cursor-plugin/HEAD/zenity-inventory/README.md:
-      "the enrollment key is exchanged for a short-lived device token"), so endpoint agents also
-      rest on a static root. If the gated docs show a federated or keyless path, this grade should
-      be revisited.
+      Zenity's docs are behind a customer login, so this is graded from its public GitHub template
+      repo and the zenityctl release archive. Zenity's own GitHub Actions workflow keeps the client
+      secret as a repo secret and does not request an OIDC token. The zenityctl README calls client
+      credentials the only mode. The Cursor plugin trades a pasted enrollment key for a short-lived
+      device token, so endpoint agents also rest on a static root. Revisit if gated docs show a
+      federated path.
   outbound:
     grade: B
     mechanism: >-
-      AWS Bedrock is connected with IAM roles; ChatGPT Enterprise and Claude Enterprise are
-      connected by pasting an API key the customer generates on the OpenAI or Anthropic platform.
+      AWS Bedrock connects with IAM roles. ChatGPT Enterprise and Claude Enterprise take an API key
+      you generate and paste in.
     evidence:
       - url: https://zenity.io/use-cases/platform/aws-bedrock
         checked_on: 2026-10-13
@@ -82,17 +71,11 @@ surfaces:
         checked_by: tehreet
         quote: "today announced the first agent-less security solution for Microsoft 365 Copilot with the Zenity AI Trust Layer."
     notes: >-
-      Graded from marketing pages only; the connector setup guides are in the gated customer
-      portal ("Zenity customers can view step-by-step documentation in the customer portal").
-      Checked: AWS Bedrock (IAM roles, keyless per the vendor's wording; the page does not say
-      whether this is a cross-account role with an external ID); ChatGPT Enterprise and Claude
-      Enterprise (customer-generated Compliance API keys, static); Slack / Claude Tag ("Connect
-      your Slack workspace", mechanism not stated, plausibly an app install). Microsoft Copilot
-      Studio, Microsoft 365 Copilot, Microsoft Foundry, Agent 365, Salesforce/Agentforce,
-      ServiceNow, Google Vertex AI and Cursor are all marketed as integrations, but no public page
-      says how Zenity authenticates to them, so they could not be classified. B rests on the
-      single AWS IAM-role statement plus two documented static-key connectors; if the AWS role
-      turns out to need access keys, this drops to D or F.
+      Graded from marketing pages only, because setup guides are in the gated portal. The AWS
+      Bedrock page says IAM roles but not whether it uses an External ID. ChatGPT and Claude
+      Enterprise take static API keys. Slack and the Microsoft, Salesforce, ServiceNow, Google and
+      Cursor integrations could not be classified. B rests on that single AWS statement. If the AWS
+      role turns out to need access keys, this drops to D or F.
 
 hygiene:
   expiry:
@@ -103,9 +86,8 @@ hygiene:
         checked_by: tehreet
         quote: "Repository **secrets**: `ZENITY_CLIENT_ID`, `ZENITY_CLIENT_SECRET` — an account API key."
     notes: >-
-      No public statement that account API keys can be given an expiry or that an org policy
-      can enforce one. Docs are gated, so this is unverified rather than confirmed absent. The
-      short-lived bearer token expires; the client secret that mints it is what this check is about.
+      No public source says client secrets can expire or that a policy can enforce it. Docs are
+      gated, so this is unverified, not confirmed absent.
   rotation_api:
     pass: false
     evidence:
@@ -114,9 +96,8 @@ hygiene:
         checked_by: tehreet
         quote: "There is no `login`, no `logout`, and no credential storage"
     notes: >-
-      No public API or CLI command for creating or revoking account API keys; zenityctl only
-      manages boundaries, taints and variables. The zenityctl binary's help text says keys are
-      created in the console (Settings, API keys). Unverified against the gated API docs.
+      No public API or CLI command creates or revokes keys. The zenityctl help says keys are made in
+      the console.
   scoping:
     pass: true
     evidence:
@@ -129,29 +110,27 @@ hygiene:
         checked_by: tehreet
         quote: "Both commands need the same credentials as `diff`, and only the `viewer` role."
     notes: >-
-      Account API keys are an organization-scoped machine principal carrying a role (`viewer` or
-      `operator`), so a CI key can be held read-only. How many roles exist, and whether a key can
-      be limited further, is in the gated docs.
+      Account API keys are machine identities with a role, viewer or operator, so a CI key can be
+      read-only. Finer limits are in gated docs.
   last_used:
     pass: false
     evidence:
       - url: https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/README.md
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: No public evidence that Zenity shows when an account API key was last used. Unverified against the gated docs.
+    notes: >-
+      No public evidence that Zenity shows when a key was last used. Unverified against the gated
+      docs.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Zenity does not appear anywhere in GitHub's supported secret-scanning patterns, partner or user.
+    notes: >-
+      Zenity is not in GitHub's secret scanning patterns.
 
 notes: >-
-  Zenity's documentation (docs.zenity.io) is entirely behind a customer login, so this card is
-  built from Zenity's public GitHub repos (zenitysec/boundaries-as-code-template,
-  zenitysec/zenity-cursor-plugin), the public zenityctl release archive on get.zenity.io, and
-  marketing pages on zenity.io. The C rests on zenityctl's documented Auth0 client_credentials
-  flow; the three failed hygiene checks are failures of public evidence, not confirmed gaps, and
-  matter less at C than they would at D/F. Grade would move to A/B only if Zenity accepts
-  federated tokens (for example GitHub Actions OIDC, which its own deploy template does not use).
+  Zenity's docs are all behind a login, so this card relies on public repos, the zenityctl archive
+  and marketing pages. The failed hygiene checks lack public evidence rather than being confirmed
+  gaps, and they matter less at C. Inbound moves to B or A only with federated tokens.

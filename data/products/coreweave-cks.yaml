@@ -8,18 +8,15 @@ docs: https://docs.coreweave.com/products/cks/auth-access/workload-identity/intr
 category: cloud
 status: listed
 summary: >-
-  This card is the cluster API server, not the control plane that creates clusters. Under "unmanaged
-  auth" a cluster trusts whatever OIDC issuer you configure, and every cluster is itself a public
-  OIDC issuer your other clouds can trust. The default "managed auth" mode instead rides on the
-  static control-plane token graded F on the coreweave-api card.
+  This card covers the cluster API server, not the control plane. In unmanaged auth mode, a cluster
+  trusts any OIDC issuer you configure. Each cluster is also an OIDC issuer your clouds can trust.
+  The default managed mode uses the static token graded F on the coreweave-api card.
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Unmanaged auth lets a cluster's api-server trust a customer-configured OIDC issuer (issuerUrl,
-      clientId, usernameClaim, groupsClaim, requiredClaim, signingAlgorithms) or Kubernetes
-      service-account tokens; managed auth (the default) uses a Cloud Console API Access Token
-      embedded in a kubeconfig.
+      In unmanaged auth, the API server trusts an OIDC issuer you configure or Kubernetes
+      service-account tokens. The default managed auth puts a Console API token in a kubeconfig.
     issuers:
       - any
     evidence:
@@ -55,19 +52,15 @@ surfaces:
         checked_by: tehreet
         quote: Managed auth is the default.
     notes: >-
-      The OIDC object maps to kube-apiserver's OIDC authenticator: any issuer with a discovery
-      document, audience pinned by clientId, subject/claims constrained via requiredClaim and the
-      username/groups claims. Shipped 2025-07-07 as an additive change that can be enabled on
-      existing clusters. Two caveats: managed auth is the default and routes through the static
-      control-plane token, so the A requires opting in to unmanaged auth; and turning the feature on
-      (creating or updating the cluster) is itself a control-plane call that needs that static
-      token. Private clusters are not self-service ("contact CoreWeave Support").
+      Any issuer with a discovery document works. The client ID pins the audience, and required
+      claims constrain the subject. It can be turned on for existing clusters. Two caveats. The A
+      requires opting in to unmanaged auth, since managed auth is the default. Turning it on is a
+      control-plane call that needs the static token. Private clusters need CoreWeave Support.
   outbound:
     grade: A
     mechanism: >-
-      Every CKS cluster is an OIDC issuer with a public discovery document and JWKS at
-      oidc.cks.coreweave.com/id/[CLUSTER-ID]; workloads present projected service-account tokens to
-      AWS, GCP or any other OIDC-trusting service, so no CoreWeave-held cloud credential exists.
+      Every CKS cluster is a public OIDC issuer. Workloads present their service-account tokens to
+      AWS, GCP or any OIDC-trusting service, so CoreWeave holds no cloud credential.
     evidence:
       - url: https://docs.coreweave.com/products/cks/auth-access/workload-identity/introduction
         checked_on: 2026-09-16
@@ -94,10 +87,9 @@ surfaces:
           Multi-cloud authentication: Authenticate CKS workloads to AWS, GCP, and other
           OIDC-compatible services.
     notes: >-
-      CKS has no managed integrations that pull from a customer's cloud; the outbound story is "the
-      product is itself an OIDC issuer I can trust", which the rubric scores A. AWS and GCP have
-      guides; Azure federated credentials accept any public OIDC issuer but no CoreWeave guide was
-      found. Shipped 2025-11-20.
+      CKS has no integrations that pull from your cloud. It is itself an OIDC issuer you can trust,
+      which the rubric scores A. AWS and GCP have guides. Azure accepts any public issuer, but
+      CoreWeave has no Azure guide.
 hygiene:
   expiry:
     pass: true
@@ -113,9 +105,8 @@ hygiene:
         checked_by: tehreet
         quote: Expiration How long the token remains valid.
     notes: >-
-      Hygiene here is graded on the managed-auth kubeconfig, which embeds a static API Access Token
-      in users.user.token; the unmanaged-auth OIDC path has no CoreWeave-issued static credential.
-      Default, maximum, and org enforcement of the expiry are undocumented.
+      Hygiene is graded on the managed-auth kubeconfig, which embeds a static API token. The
+      expiry's default, maximum and enforcement are undocumented.
   rotation_api:
     pass: false
     evidence:
@@ -135,8 +126,8 @@ hygiene:
           user-scoped and grant permissions to deploy CKS clusters and VPCs, access cluster metrics,
           and authenticate against the managed-auth endpoint.
     notes: >-
-      The kubeconfig is scoped to a cluster, but the embedded token is the user's full control-plane
-      token, so a leaked kubeconfig leaks more than cluster access.
+      The kubeconfig targets one cluster, but its token is the user's full control-plane token. A
+      leaked kubeconfig leaks more than cluster access.
   last_used:
     pass: false
     evidence:
@@ -144,8 +135,7 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
     notes: >-
-      No last-used timestamp is documented for API Access Tokens or kubeconfigs. Graded
-      conservatively.
+      No last-used time is documented for tokens or kubeconfigs. Graded conservatively.
   leak_revocation:
     pass: false
     evidence:
@@ -155,6 +145,5 @@ hygiene:
         checked_by: sisyphus
     notes: CoreWeave is not on GitHub's secret-scanning list.
 notes: >-
-  Home team, graded on the same rubric as everyone else. The A holds only if you switch the cluster
-  to unmanaged auth; the managed-auth default is the control-plane token in a kubeconfig, and its
-  hygiene is what the checks above show.
+  Home team, graded on the same rubric. The A holds only if you switch the cluster to unmanaged
+  auth. The default is the control-plane token in a kubeconfig, with the hygiene shown above.

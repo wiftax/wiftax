@@ -7,19 +7,17 @@ docs: https://docs.britive.com/docs/service-identities
 category: identity
 status: listed
 summary: >-
-  Britive service identities can authenticate with an ID token from any OIDC issuer you register
-  (plus AWS STS and SPIFFE), so automation needs no static Britive token. Into your clouds it is
-  keyless on AWS, GCP WIF, Azure WIF and OCI WIF, but Okta, Salesforce, Snowflake, Google Workspace
-  and ServiceNow connectors still want a pasted token, password or key.
+  Britive service identities can log in with an ID token from any OIDC issuer you register, or with
+  AWS STS or SPIFFE, so automation needs no static token. Britive reaches AWS, GCP, Azure and OCI
+  without keys. Okta, Salesforce, Snowflake, Google Workspace and ServiceNow connectors still need
+  pasted secrets.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Federated service identities: the tenant trusts an OIDC identity provider you configure by
-      issuer URL with allowed audiences and exact/regex claim-to-attribute mapping, and the workload
-      sends its ID token as "Authorization: OIDC::<token>"; AWS STS (GetCallerIdentity) and SPIFFE
-      JWT-SVID providers are also accepted. Static API tokens (1-90 days) remain available.
+      Your tenant trusts an OIDC issuer you configure, with allowed audiences and claim matching.
+      The workload sends its ID token directly. Static API tokens remain available.
     issuers: ["any"]
     evidence:
       - url: https://docs.britive.com/docs/service-identities
@@ -51,23 +49,15 @@ surfaces:
         checked_by: tehreet
         quote: "It includes support for workload federation, approvals, Britive administration, and many other features."
     notes: >-
-      Issuers are bring-your-own: any OIDC issuer URL (the docs use GitHub repo/branch claims as the
-      example), plus one AWS STS provider and SPIFFE/SPIRE trust domains. Trust is constrained by
-      issuer, allowed audience, a configurable iat validation window (default 30 seconds) and
-      claim-to-attribute mapping (e.g. sub), and the effective token lifetime is the lesser of the
-      ID token's exp and the service identity's configured validity. The older API prerequisites
-      page still describes only static API tokens created by an admin in the UI. On-prem Access
-      Broker agents register with a broker-pool authentication token (static, up to three per
-      pool, two active), or an authentication_token_generator script that can fetch one
-      dynamically; the docs do not describe federating the broker itself.
+      Any OIDC issuer URL works, plus an AWS STS provider and SPIFFE trust domains. Trust is limited
+      by issuer, audience, a token age window and claim matching such as subject. Tokens last no
+      longer than the ID token itself. On-prem Access Broker agents register with a static pool
+      token, or a script that fetches one. The docs do not describe federating the broker itself.
   outbound:
     grade: B
     mechanism: >-
-      Britive is a SAML IdP trusted by an AWS IAM role (AssumeRoleWithSAML) and an OIDC issuer
-      trusted by GCP Workload Identity Federation, an Azure app-registration federated credential,
-      OCI and EKS; Okta (super-admin API token), Salesforce (password + security token), Snowflake
-      (key pair), Google Workspace (service-account JSON key), ServiceNow (password) and the legacy
-      GCP/Azure connectors (JSON key / client secret) still take static credentials.
+      AWS roles trust Britive as a SAML provider, and GCP, Azure, OCI and EKS trust it as an OIDC
+      issuer. SaaS connectors and the legacy GCP and Azure connectors take static credentials.
     evidence:
       - url: https://docs.britive.com/docs/configuring-identity-provider
         checked_on: 2026-10-13
@@ -122,18 +112,11 @@ surfaces:
         checked_by: tehreet
         quote: "If you select Never, the client secret never expires."
     notes: >-
-      Connectors checked: AWS (SAML IdP + IAM role, keyless), AWS Identity Center and AWS account
-      access (same Britive SAML IdP pattern), GCP WIF (Britive is the OIDC issuer, keyless), GCP
-      legacy (service-account JSON key), Azure WIF (federated credential, keyless), Azure legacy
-      (client secret, docs mention a "Never" expiry option), OCI WIF (Britive issuer + confidential
-      app; still asks for a confidential-app client ID), OCI 1.0/2.0 (user API signing key, plus
-      client secret for provisioning), EKS (Britive OIDC issuer, keyless), Okta (API token with
-      Super Administrator), Google Workspace (service-account JSON key with domain-wide delegation),
-      Salesforce (user password + security token with Modify All Data), Snowflake (key pair for a
-      user with MANAGE GRANTS / ORGADMIN), ServiceNow (user password). Every major cloud has a
-      keyless option, which is better than most of the cohort, but every SaaS/IdP connector checked
-      wants a static credential, so B. No GitHub or Microsoft 365 connector is documented; Entra ID
-      appears only as an SSO/SCIM identity provider.
+      AWS, GCP, Azure, OCI and EKS all have a keyless option. That is better than most cards, but
+      every SaaS connector checked needs a static credential, so B. Okta needs a super-admin API
+      token. Salesforce needs a password and security token. Snowflake needs a key pair, Google
+      Workspace a service account key and ServiceNow a password. The legacy GCP and Azure connectors
+      use a key file or client secret. No GitHub or Microsoft 365 connector is documented.
 
 hygiene:
   expiry:
@@ -148,12 +131,8 @@ hygiene:
         checked_by: tehreet
         quote: "Enter the name and validity of the API token. Click **Save**. The validity counter is refreshed with every use of a token."
     notes: >-
-      Judgment call. Every API token and static service-identity token must carry a 1-90 day
-      validity, which looks like an enforced ceiling, but the counter resets on every use, so it
-      is an inactivity timeout rather than an expiry: a token that is used regularly (including by
-      whoever stole it) never expires. Short-lived temporary tokens (POST /api/tokens/temp, 24-hour
-      platform cap, lower tenant maximum) exist but must themselves be minted by an authenticated
-      caller.
+      Judgment call, and it fails. Tokens carry a 1 to 90 day validity, but the clock resets on
+      every use. A token that keeps being used, even by a thief, never expires.
   rotation_api:
     pass: true
     evidence:
@@ -166,8 +145,7 @@ hygiene:
         checked_by: tehreet
         quote: "Use the Get tokens API call to retrieve the id of the token that should be revoked."
     notes: >-
-      POST /api/token creates, DELETE /api/token/{tokenId} revokes, and POST/PATCH
-      /api/users/{targetUserId}/tokens replaces or re-dates a service identity's token.
+      The API can create, revoke and replace tokens, including a service identity's token.
   scoping:
     pass: true
     evidence:
@@ -184,10 +162,8 @@ hygiene:
         checked_by: tehreet
         quote: "API tokens inherit the same privileges as the user who created the tokens."
     notes: >-
-      Passes via service identities, which are purpose-built machine principals whose static token
-      carries only the policies/profiles assigned to that identity. Plain admin API tokens do not
-      scope: they inherit the creator's privileges, and POST /api/token is documented as creating
-      "an API token with full administrator privileges".
+      Passes through service identities, which are machine identities limited to their assigned
+      policies. Plain admin API tokens get full administrator rights.
   last_used:
     pass: true
     evidence:
@@ -196,21 +172,18 @@ hygiene:
         checked_by: tehreet
         quote: "Get all API tokens in the system"
     notes: >-
-      The ApiTokenBean returned by GET /api/token includes a lastAccessed date-time field alongside
-      createdOn, expiresOn, createdBy and type (DEFAULT, SCIM, ServiceIdentity). The field carries
-      no description in the spec, and no UI documentation of it was found.
+      The API's token object includes a last-accessed time. The field is undocumented, and no UI for
+      it was found.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Britive does not appear anywhere on GitHub's supported secret scanning patterns page.
+    notes: >-
+      Britive is not in GitHub's secret scanning list.
 
 notes: >-
-  Graded the Britive Cloud PAM tenant API ({tenant}.britive-app.com/api), which the PyBritive CLI,
-  Terraform provider and Access Broker all use. Docs are public at docs.britive.com, including a
-  per-endpoint OpenAPI reference. The same tenant also runs Britive's secrets manager and an MCP
-  gateway; they use the same token and service-identity model. The lastAccessed field and the
-  1-90 day validity range come from the published OpenAPI schema; behaviour was not tested
-  against a live tenant.
+  Graded the Britive tenant API, which the CLI, Terraform provider and Access Broker use. Its
+  secrets manager and MCP gateway share the same token model. The last-accessed field and validity
+  range come from the published API spec and were not tested live.

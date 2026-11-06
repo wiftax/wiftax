@@ -8,17 +8,16 @@ docs: https://help.nightfall.ai/developer-api/introduction/authentication_securi
 category: security
 status: listed
 summary: >-
-  The Nightfall API takes only a static bearer API key with no documented expiry, scoping,
-  last-used data or API for rotation, and the endpoint agent is installed with that same kind of key.
-  Into your clouds and most SaaS it is keyless (IAM role, impersonation, federation, app installs),
-  but Claude Enterprise wants a pasted static key.
+  To call the Nightfall API, your code needs a static API key, and the endpoint agent installs with
+  one too. Nightfall reaches into your clouds and most SaaS without keys, but Claude Enterprise
+  wants a pasted key.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API key created in the Nightfall console and sent as an Authorization Bearer header.
-      No OAuth, service-account token exchange or workload identity federation is documented.
+      A static API key from the Nightfall console, sent as a bearer token. No OAuth or workload
+      federation is documented.
     issuers: []
     evidence:
       - url: https://help.nightfall.ai/developer-api/introduction/authentication_security
@@ -34,19 +33,15 @@ surfaces:
         checked_by: tehreet
         quote: "This guide explains multiple ways to deploy the Nightfall Agent (NightfallAgent.msi) with the required API_KEY and COMPANY_ID parameters."
     notes: >-
-      The only documented machine credential is the console-created API key. The Windows endpoint
-      agent is deployed with a static API_KEY and COMPANY_ID passed as MSI properties (baked into
-      Intune/SCCM/GPO scripts or MST transforms), so the agent fleet also rests on a long-lived
-      secret. The macOS manual-install page does not say how the downloaded package authenticates
-      back to the tenant. No federation, OIDC, or short-lived token exchange was found in the public
-      help center (help.nightfall.ai, which is public, not gated).
+      The console API key is the only documented machine credential. The Windows endpoint agent
+      installs with a static API key baked into deployment scripts, so the agent fleet also rests on
+      a long-lived secret. The macOS docs do not say how the agent authenticates. The help center is
+      public and shows no federation or short-lived token.
   outbound:
     grade: B
     mechanism: >-
-      Cross-account IAM role with external ID (AWS S3), service account impersonation (GCS),
-      federated credential (Azure Blob) for Bring Your Own Bucket; vendor app installs / admin consent
-      for Google Workspace (DWD), Microsoft 365 and Entra ID, GitHub App, Slack, Notion, Salesforce,
-      Zendesk and Atlassian Marketplace apps. Claude Enterprise requires a pasted Compliance Access Key.
+      Nightfall assumes an AWS role, impersonates a GCP service account, uses an Azure federated
+      credential, and installs consented apps for SaaS. Claude Enterprise needs a pasted key.
     evidence:
       - url: https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/policies/advanced_settings/automated_action/session-replay-and-bring-your-own-bucket
         checked_on: 2026-10-13
@@ -85,19 +80,12 @@ surfaces:
         checked_by: tehreet
         quote: "Paste your Compliance Access Key from the Claude admin console."
     notes: >-
-      Checked: AWS S3, GCS and Azure Blob (Bring Your Own Bucket, all keyless); Google Workspace /
-      Google Drive (DWD to Nightfall's client ID); Microsoft 365 (Teams, OneDrive, SharePoint) and
-      Entra ID directory sync (admin consent); GitHub (GitHub App); Slack (OAuth install); Notion
-      (public OAuth); Salesforce (Nightfall connected app, OAuth + PKCE); Zendesk (OAuth sign-in);
-      Jira and Confluence (Atlassian Marketplace Connect app); Okta directory sync (OIN API Service
-      Integration); Gmail/Exchange inline DLP (mail routing, no stored credential); Claude Enterprise
-      (static key). Static keys handed over: Claude Enterprise Compliance Access Key. Judgment calls:
-      Okta is counted keyless per cohort rule as an OIN service app, but the customer copies the
-      Okta-generated client secret into Nightfall. Microsoft 365 is counted keyless because the
-      customer only grants admin consent, but Nightfall then creates per-tenant app registrations
-      with client secrets that expire and must be renewed by an admin, so long-lived Nightfall-held
-      secrets do exist in your tenant. Salesforce refresh tokens are long-lived and bound to the
-      authorizing user.
+      Keyless: S3, GCS and Azure Blob buckets, plus Google Workspace, Microsoft 365, GitHub, Slack,
+      Salesforce and Atlassian through app installs or consent. Claude Enterprise wants a static
+      Compliance Access Key, so B. Judgment calls: Okta counts as keyless as an OIN service app,
+      though you copy its client secret into Nightfall. Microsoft 365 counts as keyless because you
+      only grant consent, but Nightfall then creates app registrations with expiring client secrets
+      in your tenant.
 
 hygiene:
   expiry:
@@ -108,8 +96,7 @@ hygiene:
         checked_by: tehreet
         quote: "Enter a name for the API key and click Create."
     notes: >-
-      Key creation asks only for a name; no expiry field, default lifetime, or org policy is
-      documented anywhere in the public help center.
+      Key creation asks only for a name. No expiry, default lifetime or org policy is documented.
   rotation_api:
     pass: false
     evidence:
@@ -121,7 +108,8 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "You can click the Delete icon against an API key to delete the key."
-    notes: Creation and deletion are documented only in the console; no key-management API endpoint was found.
+    notes: >-
+      Keys are created and deleted only in the console. No key-management API was found.
   scoping:
     pass: false
     evidence:
@@ -129,7 +117,8 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "Your API keys carry many privileges, so be sure to keep them secure."
-    notes: No per-key permissions, scopes, or resource restrictions are documented.
+    notes: >-
+      No per-key permissions or resource limits are documented.
   last_used:
     pass: false
     evidence:
@@ -137,19 +126,19 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "Once you close the window, the Your API Keys section will display your newly generated key, with the majority of the Key redacted."
-    notes: The key list is documented as showing the redacted key only; no last-used timestamp is mentioned.
+    notes: >-
+      The key list shows only the redacted key, with no last-used time.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Nightfall does not appear on GitHub's supported secret scanning patterns page, partner or otherwise.
+    notes: >-
+      Nightfall is not in GitHub's secret-scanning patterns list.
 
 notes: >-
-  Graded the Nightfall Developer API (the surface a customer automates against) plus the connectors
-  behind Nightfall's SaaS DLP, exfiltration prevention and posture products, which all share one
-  console. The help center is public; nothing was gated. Absence-based hygiene fails (expiry,
-  rotation API, scoping, last used) reflect that the public docs describe none of these; the
-  console may show more than is documented. Grade moves to D with three of those documented, and
-  higher only with short-lived or federated auth for the API and endpoint agent.
+  Covers the Developer API plus the connectors behind Nightfall's SaaS products, which share one
+  console. The help center is public. The hygiene fails mean the docs describe none of these
+  features. Three documented would lift inbound to D. Higher needs short-lived or federated auth for
+  the API and endpoint agent.

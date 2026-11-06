@@ -8,22 +8,20 @@ category: security
 status: listed
 confidence:
   level: low
-  reason: "docs.orcasecurity.io is behind a login. Token hygiene comes from third-party integration guides, rotation API and last-used fail as not publicly verifiable, and Azure, GCP and OCI onboarding are unverified."
+  reason: >-
+    Orca's docs are behind a login. Token hygiene comes from third-party guides, the rotation and
+    last-used checks fail as unverifiable, and Azure, GCP and OCI onboarding are unverified.
 summary: >-
-  Workloads call the Orca API, MCP server, Terraform provider and CI actions with a static API token
-  sent as "Authorization: Token"; no OIDC or workload identity path exists. Tokens take a role and
-  scope, but "Never Expire" is a checkbox, API rotation and last use are not publicly documented, and
-  GitHub does not report leaks. Into your cloud, AWS and Alibaba onboarding use a cross-account role;
-  Snyk, Cloudflare, Akamai, Zscaler and Terraform Cloud integrations want static secrets.
+  To call the Orca API, MCP server, Terraform or CI actions, your code needs a static API token.
+  Orca reaches AWS and Alibaba by cross-account role, but Snyk, Cloudflare and other integrations
+  want static secrets.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static Orca API token (optionally a "Service Token" not tied to a user) with a role and scope,
-      sent directly as "Authorization: Token <token>" to api.orcasecurity.io, the MCP server, the
-      Terraform provider, orca-cli and the Shift Left GitHub Actions. OAuth 2.0 exists only as a
-      browser flow for interactive MCP clients.
+      A static API token with a role and scope, sent directly to the API, MCP server, Terraform and
+      GitHub Actions. OAuth exists only as a browser login for MCP.
     evidence:
       - url: https://orca.security/mcp-server/
         checked_on: 2026-10-22
@@ -54,23 +52,16 @@ surfaces:
         checked_by: tehreet
         quote: "Use this endpoint to create a new user session by providing a valid security_token."
     notes: >-
-      Orca's docs portal (docs.orcasecurity.io) redirects to a region-selection login, so the API
-      token and onboarding pages are not publicly verifiable; this card relies on Orca's public site,
-      Orca's own GitHub repos (Terraform provider, MCP template, GitHub Actions, orca-skills) and
-      third-party integration guides (Vanta, Expel, Observe, Tines, Cloudaware, Truto) that walk
-      through Orca's token dialog. Every documented automation path sends the long-lived token itself
-      as the bearer credential. A session endpoint can trade the token for a session, but the
-      weakest path a workload must use (Terraform, MCP, Shift Left actions, serving-layer API) takes
-      the raw token, so this is graded as a static key, not C. No OIDC, GitHub Actions OIDC, cloud
-      workload identity or token exchange is documented: Orca's own GitHub Actions store the token in
-      GitHub Secrets. The MCP server's OAuth is a browser consent flow for humans.
+      Orca's docs are behind a login, so this card relies on Orca's public repos and third-party
+      guides. Every automation path sends the long-lived token itself. A session endpoint can trade
+      it for a session, but Terraform, MCP and the CI actions take the raw token. So this is graded
+      as a static key, not C. No OIDC or workload identity is documented, and Orca's own actions
+      store the token in GitHub Secrets.
   outbound:
     grade: B
     mechanism: >-
-      AWS onboarding deploys a CloudFormation stack that creates OrcaSecurityRole trusting Orca's AWS
-      account with an External ID; Alibaba Cloud uses a RAM role template; S3 export trusts Orca's
-      uploader role. Third-party integrations (Snyk, Cloudflare, Akamai, Zscaler ZPA, Terraform
-      Cloud) want a static API token or OAuth client secret stored in Orca.
+      AWS onboarding creates a role trusting Orca's account with an External ID, and Alibaba uses a
+      RAM role. Snyk, Cloudflare, Akamai, Zscaler and Terraform Cloud want static tokens or secrets.
     evidence:
       - url: https://orca.security/lp/aws-activate/
         checked_on: 2026-10-22
@@ -133,19 +124,11 @@ surfaces:
         checked_by: tehreet
         quote: "`api_token` — (Required, String, Sensitive) Terraform Cloud service-account"
     notes: >-
-      Checked: cloud onboarding for AWS, Azure, GCP, OCI and Alibaba; S3 bucket export; and the
-      third-party integrations exposed in Orca's Terraform provider (Snyk, Cloudflare, Akamai, Zscaler
-      ZPA, Terraform Cloud; ticketing and alerting targets such as Jira, ServiceNow, Slack, PagerDuty,
-      Opsgenie, Splunk and Sentinel push findings out and were not counted). AWS is keyless: Orca's
-      CloudFormation template (seen in a public copy, since Orca's docs are login-walled) creates
-      OrcaSecurityRole trusting Orca's account 976280145156 with an sts:ExternalId condition that
-      Orca issues. Alibaba is keyless per Orca's page (RAM role template). Azure, GCP and OCI
-      onboarding mechanics are not publicly verifiable: Orca only publishes walkthrough videos, and
-      the OCI page copies the Alibaba wording ("RAM Role", "role ARN"), so it is not treated as
-      evidence of an OCI mechanism. B rests on AWS and Alibaba being keyless while Snyk, Cloudflare,
-      Akamai and Terraform Cloud want static API tokens and Zscaler ZPA an OAuth client secret. If
-      Azure or GCP turn out to take a client secret or service account key, the grade stays B; A
-      would need every integration to be keyless.
+      AWS is keyless, per a public copy of Orca's CloudFormation template. Alibaba is keyless per
+      Orca's page. Azure, GCP and OCI onboarding are not publicly documented. B rests on AWS and
+      Alibaba being keyless while Snyk, Cloudflare, Akamai and Terraform Cloud want static tokens
+      and Zscaler ZPA a client secret. If Azure or GCP take keys, it stays B. A needs every
+      integration keyless. Ticketing and alert targets were not counted.
 
 hygiene:
   expiry:
@@ -164,9 +147,8 @@ hygiene:
         checked_by: tehreet
         quote: "Name the new API token, for example, Observe-Lambda-Token, and select a desired expiration date."
     notes: >-
-      Tokens can carry an expiration date, but the creation dialog has a "Never Expire" checkbox and
-      no organization policy to forbid it or cap the lifetime is publicly documented. A changeable
-      expiry is not an enforced one (same call as `elastic-cloud-api`).
+      Tokens can expire, but a "Never Expire" checkbox exists and no public policy forbids it. Same
+      call as elastic-cloud-api.
   rotation_api:
     pass: false
     evidence:
@@ -179,10 +161,8 @@ hygiene:
         checked_by: tehreet
         quote: '"auth.tokens.write"'
     notes: >-
-      Not publicly verifiable. A list-tokens endpoint and an auth.tokens.write RBAC permission exist,
-      but no public source documents creating or revoking API tokens through the API, and the
-      Terraform provider has no token resource; every integration guide creates tokens in the
-      console. Would pass with a citable create/revoke token endpoint.
+      No public source documents creating or revoking tokens by API, and every guide uses the
+      console. A citable endpoint would pass this.
   scoping:
     pass: true
     evidence:
@@ -199,9 +179,8 @@ hygiene:
         checked_by: tehreet
         quote: "Determine the expiration date, role, and scope you wish to apply"
     notes: >-
-      Each token takes its own role (Viewer, Internal Viewer, custom roles) and can be scoped to
-      specific resources or accounts, and a Service Token is not tied to a user, which the rubric
-      counts as a purpose-built machine principal.
+      Each token takes its own role and can be limited to specific resources. Service Tokens are not
+      tied to a user, which counts as a machine identity.
   last_used:
     pass: false
     evidence:
@@ -210,8 +189,8 @@ hygiene:
         checked_by: tehreet
         quote: "Use this endpoint to retrieve a list of active authentication tokens associated with your Orca Security account."
     notes: >-
-      Not publicly verifiable: no public source shows a last-used timestamp on API tokens. Orca's
-      docs may show one behind the login wall; a public citation would flip this check.
+      No public source shows a last-used time. The gated docs may, and a public citation would flip
+      this.
   leak_revocation:
     pass: false
     evidence:
@@ -219,15 +198,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Orca Security does not appear in GitHub's supported secret-scanning patterns table, so a leaked
-      Orca API token is not reported to Orca.
+      Orca is not in GitHub's secret-scanning table, so leaked tokens are not reported to Orca.
 
 notes: >-
-  One card for the Orca Cloud Security Platform (CSPM, CWPP, Shift Left, MCP server share one API
-  token model). Orca's documentation portal is login-walled, which limits what can be cited:
-  rotation API and last-used are failed as not publicly verifiable, and Azure, GCP and OCI
-  onboarding are unverified. With only scoping passing, inbound is F; publishing a create/revoke
-  token API, a last-used field and a max-lifetime policy would lift it to D. Inbound moves to B or A
-  only with a federated login (GitHub Actions OIDC, cloud workload identity or bring-your-own
-  issuer). Reviewer check: the AWS template evidence is a third-party copy of Orca's CloudFormation
-  template, not an Orca-hosted page.
+  One card for the Orca platform, whose products share one token model. Only scoping passes, so
+  inbound is F. A token API, a last-used field and a lifetime cap would lift it to D. B or A needs a
+  federated login. Reviewer check: the AWS template evidence is a third-party copy.

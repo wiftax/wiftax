@@ -7,20 +7,16 @@ docs: https://docs.baseten.co/organization/api-keys
 category: cloud
 status: listed
 summary: >-
-  CI, Terraform, the CLIs, the Management API and inference calls all use static Baseten API keys
-  that never expire. Keys are API-rotatable, can be team-owned and limited to inference on chosen
-  models, and show last use; Baseten is not a GitHub secret-scanning partner. Baseten is itself an
-  OIDC issuer, so pulling weights and images from your S3, ECR, GCS and Artifact Registry is
-  keyless; Azure, Hugging Face, R2, CoreWeave and other registries take static secrets.
+  Every Baseten call, from CI to inference, uses a static API key that never expires. Baseten is
+  itself an OIDC issuer, so it pulls weights and images from your AWS and GCP storage without keys.
+  Azure, Hugging Face, R2 and other registries take static secrets.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static API key (b10_..., Authorization: Bearer or Api-Key), personal or team-owned, used by
-      the Baseten and Truss CLIs, the Truss Push GitHub Action, the Terraform provider, the
-      Management API and model endpoints. Sandbox and volume tokens are short-lived but minted
-      from that API key. No federation path exists.
+      A static API key, personal or team-owned. Short-lived sandbox and volume tokens exist, but
+      they are minted from that key. No federation path exists.
     issuers: []
     evidence:
       - url: https://docs.baseten.co/organization/api-keys.md
@@ -56,23 +52,16 @@ surfaces:
         checked_by: tehreet
         quote: "Best for laptops where you don't want a long-lived secret on disk."
     notes: >-
-      Graded on the weakest path a workload must use: every documented automation route (GitHub
-      Actions, Baseten CLI, Truss, Terraform, Management API, inference) takes a static API key, and
-      the CI guide stores it as a GitHub secret rather than using the job's OIDC token. The Truss
-      and Baseten CLIs offer browser OAuth (RFC 8628 device flow), but that is a human login. Sandbox
-      access tokens (2 h) and volume tokens (1 h) are exchanged from an API key, so they are a
-      static root, not federation. Frontier Gateway's "federated API keys" are keys Baseten mints for
-      a model lab's own customers, not OIDC federation. The Baseten OIDC issuer
-      (oidc.baseten.co) points outward only; nothing documented lets api.baseten.co accept a token
-      from GitHub, a cloud, or your own issuer. 3 of 5 hygiene checks pass, so D.
+      Every automation route takes a static API key, including CI, the CLIs, Terraform and
+      inference. The CI guide stores it as a GitHub secret instead of using the job's OIDC token.
+      The CLIs' browser login is for humans. Gateway "federated API keys" are keys Baseten mints for
+      a lab's customers, not OIDC. Baseten's own OIDC issuer points outward only. Nothing lets the
+      API accept a token from GitHub, a cloud or your own issuer. 3 of 5 hygiene checks pass, so D.
   outbound:
     grade: B
     mechanism: >-
-      Baseten is an OIDC issuer (oidc.baseten.co) with per-org/team/model/environment subject
-      claims: you trust it from an AWS IAM role or GCP Workload Identity pool, and builds, training
-      jobs and volume syncs pull S3/ECR and GCS/Artifact Registry with short-lived tokens. AWS
-      AssumeRole with an external ID is also offered. Azure Blob, Hugging Face, Cloudflare R2,
-      CoreWeave and every other container registry need a static secret stored in Baseten.
+      You trust Baseten's OIDC issuer from an AWS role or GCP pool, and Baseten pulls from S3, ECR,
+      GCS and Artifact Registry with short-lived tokens. Other sources need static secrets.
     evidence:
       - url: https://docs.baseten.co/organization/oidc.md
         checked_on: 2026-10-22
@@ -127,21 +116,12 @@ surfaces:
         checked_by: tehreet
         quote: "Baseten enables export and walks you through configuring your destination, including any destination-specific credentials or webhook URLs."
     notes: >-
-      Checked: BDN weights and checkpoint_repository sources (S3, GCS, Azure Blob, Hugging Face,
-      Cloudflare R2, CoreWeave AI Object Storage), private base images (ECR, GCR/Artifact Registry,
-      any other registry via DOCKER_REGISTRY_* secrets), training storage, volume sync, and audit-log
-      export. AWS (S3, ECR) and GCP (GCS, Artifact Registry, GCR) are keyless via Baseten's OIDC
-      issuer, whose subject can be pinned to org, team, model, environment and workload type; AWS
-      AssumeRole with an external ID is a second keyless route (on by default for Enterprise, on
-      request otherwise; OIDC shows no tier gate). Static keys remain the documented quick path on
-      those clouds too. Azure Blob takes only a storage account key (the most broadly scoped Azure
-      storage credential), and Hugging Face, R2, CoreWeave and third-party registries (Docker Hub,
-      GHCR, NGC) take long-lived tokens or passwords, so B rather than A. Runtime OIDC mounts a
-      token in your container for any provider your code exchanges it with (Azure, Vault,
-      Snowflake, Databricks), but Baseten's own pullers do not use it for Azure. Audit-log export
-      goes through WorkOS (Enterprise, support-enabled); its destination credentials are not
-      publicly documented and were not graded. Metrics export is your scraper pulling with a
-      metrics-only Baseten key (inbound).
+      AWS and GCP are keyless through Baseten's OIDC issuer, and the subject can be pinned to an
+      org, team, model or environment. AWS AssumeRole with an External ID is a second keyless route.
+      It is on by default for Enterprise and on request otherwise. Azure Blob takes only a storage
+      account key. Hugging Face, R2, CoreWeave and other registries take long-lived tokens or
+      passwords, so B, not A. Baseten can mount an OIDC token in your container, but its own pullers
+      do not use it for Azure. Audit log export credentials are not public and were not graded.
 
 hygiene:
   expiry:
@@ -156,8 +136,7 @@ hygiene:
         checked_by: tehreet
         quote: "Creates an API key with the provided name and type."
     notes: >-
-      The create request takes name, type, model_ids and team_id; there is no expiry field and no
-      org policy to cap key lifetime. Rotation is left to "rotate keys periodically".
+      Keys have no expiry field, and no org policy caps their lifetime.
   rotation_api:
     pass: true
     evidence:
@@ -170,9 +149,8 @@ hygiene:
         checked_by: tehreet
         quote: "Deletes an API key by prefix and returns info about the API key."
     notes: >-
-      POST /v1/api_keys and DELETE by prefix, also in the Baseten CLI. Org-level "API key
-      management" keys can create, list and revoke team keys without a human's credentials. The
-      first key must come from the dashboard or a browser CLI login.
+      Keys can be created and deleted through the API and CLI. Key-management keys can rotate team
+      keys without a human. The first key must come from the dashboard or a browser login.
   scoping:
     pass: true
     evidence:
@@ -185,11 +163,9 @@ hygiene:
         checked_by: tehreet
         quote: "The key can only call specific models within the selected environments."
     notes: >-
-      Team keys are non-human principals with a fixed permission level (full access, inference
-      only, metrics only, Model APIs, key management) and optional model and environment limits.
-      Full-access team keys cannot be narrowed below "manage everything in the team", and multiple
-      teams are an Enterprise feature, but the inference-only and metrics-only types are
-      least-privilege keys that the rubric counts. Personal keys inherit the user's access.
+      Team keys are non-human and come in fixed levels, such as full access, inference only and
+      metrics only, with optional model limits. The narrow types count. Personal keys get the user's
+      full access.
   last_used:
     pass: true
     evidence:
@@ -201,7 +177,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Last recorded use in ISO 8601 format, or null if unavailable."
-    notes: The list endpoint returns last_used_at (updates may be delayed), as does the dashboard.
+    notes: >-
+      The API and dashboard show when each key was last used, sometimes with a delay.
   leak_revocation:
     pass: false
     evidence:
@@ -213,16 +190,10 @@ hygiene:
         checked_by: tehreet
         quote: "Baseten API keys use the stable `b10_` prefix so secret-scanning tools can identify exposed credentials."
     notes: >-
-      Baseten does not appear in GitHub's supported secret-scanning patterns table. The b10_
-      prefix (only on keys created from 2026-10-01) makes a partnership possible, but today
-      detection is left to the customer's own scanner and revocation to a human.
+      Baseten is not in GitHub's secret scanning list. Its new b10_ key prefix would make a
+      partnership possible.
 
 notes: >-
-  One card for the whole platform: inference endpoints, Model APIs, training, sandboxes and the
-  Management API all authenticate with the same API keys. Three of five hygiene checks pass;
-  an enforced key expiry or a GitHub secret-scanning partnership would add a fourth and fifth but
-  inbound stays D until api.baseten.co accepts a federated token (GitHub Actions OIDC or a
-  bring-your-own issuer), which Baseten already understands well as an issuer. Outbound moves to
-  A if Azure Blob, R2 and CoreWeave sources gain a keyless path (Azure federated credentials can
-  already trust an external OIDC issuer like oidc.baseten.co) and Hugging Face and other
-  registries move off pasted tokens.
+  Covers inference, Model APIs, training, sandboxes and the Management API, which share the same
+  keys. Inbound stays D until the API accepts a federated token. Outbound moves to A if Azure, R2
+  and CoreWeave gain a keyless path and registries stop needing pasted tokens.

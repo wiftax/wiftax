@@ -7,20 +7,16 @@ docs: https://developer.vanta.com/docs/concepts/authentication
 category: security
 status: listed
 summary: >-
-  Every Vanta API client is an OAuth app whose client_id and client_secret are swapped for a
-  one-hour token; no federation path exists. The secret has no documented expiry, can only be
-  rotated in the Developer Console, shows no last use and is not in GitHub's partner program, but
-  apps carry their own scopes. Into your clouds Vanta is keyless on AWS, GCP and Azure, while
+  To call Vanta, your code needs a long-lived OAuth client secret, which it trades for a one-hour
+  token. There is no federation. Vanta reaches into AWS, GCP and Azure without keys, but AWS
   GovCloud and Oracle Cloud still take static keys.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      OAuth 2.0 client_credentials: a Manage Vanta, private Build Integrations or Auditor API app
-      created in the Developer Console exchanges its static client_id and client_secret at
-      POST api.vanta.com/oauth/token for a one-hour bearer token. Public integrations use
-      authorization_code, still with a client secret. No API keys, and no workload federation.
+      An OAuth app's static client ID and secret, traded for a one-hour token. There are no API keys
+      and no workload federation.
     evidence:
       - url: https://developer.vanta.com/docs/concepts/authentication.md
         checked_on: 2026-10-22
@@ -51,20 +47,15 @@ surfaces:
         checked_by: tehreet
         quote: "**Authentication.** OAuth. Sign in with your Vanta account when the browser flow opens."
     notes: >-
-      Graded C: the access token is short-lived (3600 s, one active token per app) but the client
-      secret behind it is a static root. The auth concepts page lists four app types mapped to two
-      grant types (client_credentials, authorization_code) and nothing else; no JWT bearer, token
-      exchange, GitHub Actions OIDC or cloud workload identity grant is documented. The hosted MCP
-      server uses interactive user OAuth, which is not a workload path. Inbound moves to B or A only
-      if /oauth/token accepts a federated token (RFC 8693 or JWT bearer) from an external issuer.
+      Graded C because the token is short-lived but the client secret behind it is a static root.
+      The docs list only two OAuth grant types, both needing a client secret. No JWT bearer, token
+      exchange or OIDC login is documented. The hosted MCP server uses interactive user login, which
+      is not a workload path.
   outbound:
     grade: B
     mechanism: >-
-      AWS: an IAM role (vanta-auditor) trusting Vanta's AWS accounts with an sts:ExternalId
-      condition. GCP: Workload Identity Federation pool and provider in a vanta-scanner project
-      (service account keys still accepted). Azure: a vanta-scanner app registration in your tenant
-      with a federated credential trusting a Vanta issuer (client secrets still accepted). AWS
-      GovCloud uses a Vanta IAM user's access keys and Oracle Cloud an API signing private key.
+      Vanta assumes an AWS role with an External ID, uses GCP Workload Identity Federation, and uses
+      a federated credential on an Azure app. GovCloud and Oracle Cloud take static keys.
     evidence:
       - url: https://help.vanta.com/en/articles/11345698-porting-aws-integrations-across-regions.md
         checked_on: 2026-10-22
@@ -123,20 +114,11 @@ surfaces:
         checked_by: tehreet
         quote: "Vanta is able to make API calls as the connecting user"
     notes: >-
-      Checked: AWS accounts and Organizations (console, CloudFormation, Terraform), AWS GovCloud,
-      GCP (project, folder, org), Azure and Azure Government, Oracle Cloud, GitHub, GitLab Cloud,
-      Azure DevOps (Entra ID sign-in), Okta, Google Workspace, DigitalOcean (OAuth) and Snowflake.
-      Keyless on all three big clouds: AWS by cross-account role with External ID; GCP by WIF in a
-      Vanta-generated scanner project; Azure by a federated credential on your app registration
-      ("Other issuer" with Vanta's issuer, subject and audience), the default since September 2026.
-      GCP service account keys and Azure client secrets (24-month cap) remain accepted for older
-      connections. GitHub is a GitHub App install; Okta's default is private_key_jwt where Vanta
-      holds the key and you register its JWKS URL, so you hold nothing (an SSWS API token is a
-      legacy alternative). Google Workspace, GitLab and DigitalOcean are delegated OAuth as the
-      connecting admin. Graded B, not A, because AWS GovCloud is documented with a Vanta IAM user's
-      access keys and Oracle Cloud requires a user's API signing private key. Snowflake setup runs a
-      Vanta-provided SQL snippet whose credential type is not shown publicly. The many other SaaS
-      connectors were not each checked; several (HRIS, MDM, scanners) likely take vendor API keys.
+      Vanta reaches into all three big clouds without keys. Azure federation has been the default
+      since September 2026. Older GCP service account keys and Azure client secrets are still
+      accepted. GitHub is a GitHub App, and Okta defaults to a key Vanta holds. Graded B, not A,
+      because AWS GovCloud takes a Vanta IAM user's access keys and Oracle Cloud takes a user's
+      private signing key. Many other SaaS connectors were not checked.
 
 hygiene:
   expiry:
@@ -147,9 +129,8 @@ hygiene:
         checked_by: tehreet
         quote: "Store both values securely. You can rotate the secret at any time."
     notes: >-
-      Only the one-hour access token expires. No expiry, maximum lifetime or org policy is
-      documented for the client_secret itself, so it lives until someone rotates it or deletes the
-      app.
+      Only the one-hour token expires. The client secret has no documented expiry or org cap, so it
+      lives until rotated or deleted.
   rotation_api:
     pass: false
     evidence:
@@ -162,10 +143,8 @@ hygiene:
         checked_by: tehreet
         quote: "Rotation is supported from the Developer Console."
     notes: >-
-      Apps and secrets are created, rotated and deleted in the Developer Console UI. The API
-      reference index (developer.vanta.com/llms.txt) has no endpoint group for applications or
-      client secrets; the Suspend endpoint revokes per-customer tokens of public integrations, not
-      the secret.
+      You create, rotate and delete secrets only in the Developer Console. The API has no endpoint
+      for them.
   scoping:
     pass: true
     evidence:
@@ -182,10 +161,8 @@ hygiene:
         checked_by: tehreet
         quote: "The edit is recorded as performed by the calling application, since vanta-api authenticates an OAuth client rather than a specific user."
     notes: >-
-      An application is a purpose-built machine principal, not a key inheriting a human's access,
-      and each token is limited to the scopes requested (read vs write, plus documents, vendors and
-      issues scopes; Build Integrations apps can only push their own resources). Coarse: most
-      endpoint groups are all:read or all:write, and no per-resource restriction exists.
+      Each app is a machine identity, and its tokens get only the scopes it requests. Scopes are
+      coarse, mostly read-all or write-all.
   last_used:
     pass: false
     evidence:
@@ -194,9 +171,8 @@ hygiene:
         checked_by: tehreet
         quote: "**Rotate `client_secret` when team members leave** or any time you suspect a leak."
     notes: >-
-      No last-used timestamp for an application or secret is documented in the developer docs or
-      the help center; the Developer Console's UI is login-walled, so a field there is not publicly
-      verifiable.
+      No last-used time is documented. The Developer Console is behind a login, so it cannot be
+      checked publicly.
   leak_revocation:
     pass: false
     evidence:
@@ -204,13 +180,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Vanta does not appear in GitHub's supported secret scanning patterns table, despite its
-      prefixed vci_/vcs_/vat_ credentials. A leaked client secret is not reported to Vanta.
+      Vanta is not in GitHub's secret scanning partner program, despite its prefixed credentials.
+      Leaked secrets are not reported to Vanta.
 
 notes: >-
-  One card for the Vanta platform: the Manage Vanta, Build Integrations and Auditor APIs share one
-  OAuth token endpoint, and Vanta Gov (api.vanta-gov.com) uses the same model. One of five hygiene
-  checks pass (scoping), but hygiene does not change a C. Easiest fixes: an enforced secret
-  expiry, an API to rotate secrets, a last-used view, and GitHub partner registration for the
-  vcs_ prefix. Outbound reaches A if GovCloud moves to a cross-account role and Oracle Cloud to a
-  keyless option, and the legacy GCP key and Azure secret paths are retired.
+  Covers the Vanta platform, whose APIs and Vanta Gov share one OAuth token endpoint. Inbound moves
+  to B or A only if that endpoint accepts a federated token. Outbound reaches A if GovCloud and
+  Oracle Cloud go keyless and the legacy GCP key and Azure secret paths are retired.

@@ -10,17 +10,15 @@ docs: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.h
 category: cloud
 status: listed
 summary: >-
-  Register any OIDC issuer as an IAM identity provider and AssumeRoleWithWebIdentity trades its
-  token for an hour of credentials with no key on disk; since outbound identity federation shipped,
-  your roles can mint JWTs for everyone else too. IAM user access keys still never expire, so try
-  not to make any.
+  Your code can trade a token from any OIDC issuer you register for up to an hour of AWS
+  credentials, with no key on disk. AWS roles can also mint JWTs that other services trust. IAM user
+  access keys still never expire, so avoid creating them.
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      IAM OIDC identity provider (any issuer with an OIDC discovery document and JWKS) plus
-      sts:AssumeRoleWithWebIdentity; the role trust policy pins issuer, audience (aud/azp) and
-      subject with <issuer>:aud and <issuer>:sub condition keys.
+      Register any OIDC issuer as an IAM identity provider, then call AssumeRoleWithWebIdentity. The
+      role's trust policy pins issuer, audience and subject.
     issuers:
       - any
     evidence:
@@ -59,22 +57,17 @@ surfaces:
           An IAM OIDC identity provider must have at least one and can have a maximum of 100
           audiences.
     notes: >-
-      Bring-your-own issuer: the provider URL must be https with a /.well-known/openid-configuration
-      document exposing issuer and jwks_uri; tokens must be signed RS256/384/512 or ES256/384/512,
-      and a JWKS may hold at most 100 RSA and 100 EC keys. Trust is constrained per role with
-      <issuer>:aud and <issuer>:sub condition keys. Limits: 100 OIDC providers per account by
-      default (raisable to 700), 100 audiences and 5 thumbprints per provider, each provider URL
-      unique per account, and the provider must live in the same account as the role that trusts it.
-      Role sessions run 15 minutes to 12 hours. Ambient identity inside AWS (EC2 instance roles, ECS
-      task roles, Lambda execution roles, EKS Pod Identity) is table stakes and does not earn the A
-      on its own; the A is for workloads anywhere. IAM Roles Anywhere covers the X.509 case (your
-      own CA as a trust anchor) for workloads with certificates but no OIDC issuer.
+      Any https issuer with an OIDC discovery document and JWKS works. Each role's trust policy
+      limits which audience and subject it accepts. An account can hold 100 providers by default,
+      raisable to 700, and the provider must be in the same account as the role. Ambient identity
+      inside AWS, such as EC2 or Lambda roles, does not earn the A on its own. The A is for
+      workloads running anywhere. IAM Roles Anywhere covers workloads that have certificates from
+      your own CA but no OIDC issuer.
   outbound:
     grade: A
     mechanism: >-
-      IAM outbound identity federation: any IAM principal with sts:GetWebIdentityToken permission
-      gets a short-lived (60-3600 s) STS-signed JWT with a chosen audience, verifiable at an
-      account-specific OIDC issuer URL with discovery and JWKS endpoints.
+      With outbound identity federation, an IAM role can get a short-lived JWT signed by AWS STS.
+      Third parties verify it against an issuer URL specific to your account.
     evidence:
       - url: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound.html
         checked_on: 2026-09-16
@@ -124,19 +117,13 @@ surfaces:
           Create a JSON document that contains the information that you would normally include in a
           request to the AWS GetCallerIdentity() endpoint, including a valid request signature.
     notes: >-
-      Until recently AWS had no general way for a role to prove itself to a third party with an OIDC
-      JWT; only EKS pods (cluster OIDC issuer) had one, and Vault, GCP and others worked around it
-      by accepting a SigV4-signed sts:GetCallerIdentity request. IAM outbound identity federation
-      changes that: it is off by default and must be enabled per account, GetWebIdentityToken is
-      only served by regional STS endpoints (not the global one), tokens last 60-3600 s (default
-      300), signing is ES384 or RS256, sub is the principal ARN, and the issuer URL is per account,
-      so a relying party trusts accounts one at a time. IAM policy conditions
-      (sts:IdentityTokenAudience, sts:DurationSeconds) let you constrain what a principal may mint.
-      Microsoft's own Entra docs list this as a supported federation source. Cross-account IAM roles
-      with an external ID remain the keyless path for AWS-to-AWS. We could not find a stated
-      principal-type restriction in the docs; the examples use roles. If it turns out IAM users
-      cannot call it, that does not change the grade because users should not exist for workloads
-      anyway.
+      Until recently only EKS pods could prove their identity to a third party with an OIDC token.
+      Others relied on a signed GetCallerIdentity request. Outbound identity federation fixes that.
+      It is off by default, must be enabled per account, and works only on regional STS endpoints.
+      Tokens last up to an hour. Because the issuer is per account, a relying party trusts accounts
+      one at a time. IAM conditions can limit what a role may mint. Entra lists it as a supported
+      federation source. Cross-account roles with an External ID remain the keyless path between AWS
+      accounts.
 hygiene:
   expiry:
     pass: false
@@ -155,11 +142,9 @@ hygiene:
           after the specified time or, if you are running a workload from a secure network, you can
           use an IP restriction policy.
     notes: >-
-      Access keys have no expiry field at all. AWS's documented workaround is a hand-written Deny
-      statement with a DateGreaterThan condition on the IAM user, which is a policy you must
-      remember to attach, not a key property, and nothing at the org level forces it. Access
-      Analyzer unused-access findings and the credential report tell you a key is old; they do not
-      make it stop working.
+      Access keys have no expiry. The workaround is a hand-written Deny policy with a date
+      condition, which nothing at the org level forces. Reports flag old keys but do not disable
+      them.
   rotation_api:
     pass: true
     evidence:
@@ -174,8 +159,8 @@ hygiene:
         checked_by: tehreet
         quote: Deletes the access key pair associated with the specified IAM user.
     notes: >-
-      Two keys per user, so you can create the new one before deleting the old one; UpdateAccessKey
-      can deactivate without deleting.
+      Each user can hold two keys, so you can create the new one before deleting the old. Keys can
+      also be deactivated without deleting.
   scoping:
     pass: true
     evidence:
@@ -192,10 +177,8 @@ hygiene:
           IAM users with access keys should be assigned least privilege access and have multi-factor
           authentication (MFA) enabled.
     notes: >-
-      A key cannot be scoped narrower than its IAM user, but the user is a purpose-built machine
-      identity whose policies can be limited to specific actions, resources, source IPs and time
-      windows. We count that as scoping; it is not a personal token that inherits a human's
-      permissions.
+      A key has its IAM user's permissions. That user is a machine identity whose policies can be
+      narrowed to specific actions, resources and source IPs, which counts.
   last_used:
     pass: true
     evidence:
@@ -213,8 +196,8 @@ hygiene:
           When an access key is used more than once in a 15-minute span, only the first use is
           recorded in this field. Applies to both account root user and IAM users.
     notes: >-
-      Per-key last-used date, service and region via API, console and the account credential report;
-      Access Analyzer unused-access analyzers add findings for a fee.
+      Each key's last-used date, service and region are available in the API, console and credential
+      report.
   leak_revocation:
     pass: true
     evidence:
@@ -232,12 +215,9 @@ hygiene:
           potential damage that may be caused by fraud-related activity leading to unauthorized
           charges, while not impacting the existing resources.
     notes: >-
-      GitHub's pattern list marks Amazon AWS Access Key ID as a partner pattern with push protection
-      and validity checks. AWS's response is quarantine, not revocation: it attaches the
-      AWSCompromisedKeyQuarantineV3 deny policy to the user and opens a support case, and the key
-      keeps working for everything the policy does not list until you delete it.
+      AWS is a GitHub secret scanning partner. It quarantines rather than revokes: it attaches a
+      deny policy and opens a support case, and the key works for anything that policy misses.
 notes: >-
-  Graded on machine access to the AWS API via IAM/STS. Amazon Cognito identity pools, IAM Identity
-  Center and service-specific long-term credentials (CodeCommit, Bedrock and CloudWatch Logs API
-  keys) are separate products and are not graded here. The outbound grade relies on IAM outbound
-  identity federation, which is new; re-check the regional and enablement caveats if the docs move.
+  Graded on machine access to the AWS API through IAM and STS. Cognito, IAM Identity Center and
+  service-specific keys are separate products. Outbound federation is new, so re-check its regional
+  and enablement limits if the docs change.

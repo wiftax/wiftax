@@ -8,17 +8,16 @@ docs: https://docs.arcade.dev/en/get-started/setup/api-keys
 category: identity
 status: listed
 summary: >-
-  Agents call the Arcade Engine with a static project API key that Arcade calls an administrator
-  credential, with no public key-management API, no documented scoping or last-used data, and no
-  GitHub secret-scanning partnership. Outbound, Arcade-managed OAuth apps (Google, Microsoft and
-  others) need no customer secret, but GitHub, Slack, Salesforce, Okta and API-key toolkits do.
+  To call the Arcade Engine, your agent needs a static project API key with full admin rights. When
+  Arcade acts for your users, its own OAuth apps for Google and Microsoft need no secret from you.
+  GitHub, Slack, Salesforce, Okta and API-key toolkits do.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static project API key sent as a Bearer token to the Engine API; created in the dashboard or
-      printed by `arcade login`. No workload federation or token exchange is documented.
+      A static project API key sent as a bearer token to the Engine API. No workload federation or
+      token exchange is documented.
     issuers: []
     evidence:
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
@@ -46,24 +45,18 @@ surfaces:
         checked_by: tehreet
         quote: "The Engine calls the Coordinator to validate API keys and resolve the account, organization, and project behind a request."
     notes: >-
-      The only OIDC on the inbound side is for humans. MCP Gateways can use a "User Source" (your
-      Okta, Entra, Auth0 and so on), but it is an Authorization Code + PKCE browser sign-in for end
-      users, and the User Source is configured with a client secret. The Coordinator is also an
-      OAuth authorization server for MCP clients, again for an interactive user. A headless
-      workload calling the Engine API, or an MCP client that "can't run a browser-based OAuth
-      flow", is left with the project API key (the "Arcade Headers" mode). Self-hosted engine
-      (Helm, AWS/Azure marketplace): operators sign in through your OIDC provider (configured with
-      a client ID and client secret in Helm values), and agents still use project API keys that the
-      Coordinator validates, so self-hosting does not change the grade. Hybrid/self-hosted MCP
-      servers (workers) are registered with a static shared "Secret" that the Engine presents to the
-      worker, and the local `arcade` tooling authenticates with ARCADE_API_KEY.
+      The only OIDC on the inbound side is browser sign-in for humans. MCP Gateways can use your
+      Okta or Entra as a user source, but that is an interactive login configured with a client
+      secret. A headless workload, or an MCP client that cannot open a browser, is left with the
+      project API key. Self-hosting does not change the grade. Operators sign in through your OIDC
+      provider, but agents still use project API keys. Self-hosted workers register with a static
+      shared secret.
   outbound:
     grade: B
     mechanism: >-
-      Per-user OAuth through Arcade-managed default OAuth apps (Google, Microsoft, Atlassian,
-      HubSpot, ServiceNow, Zendesk and others) and Dynamic Client Registration for the AWS MCP
-      Server need no customer secret; GitHub, Slack and Salesforce need a customer-owned OAuth app
-      and client secret; Okta group checks and API-key toolkits (Datadog, Postgres) need static keys.
+      Per-user OAuth through Arcade's own OAuth apps, and dynamic registration for the AWS MCP
+      Server, need no secret from you. Other connectors need your own app's client secret or a
+      static key.
     evidence:
       - url: https://docs.arcade.dev/en/references/auth-providers/google
         checked_on: 2026-10-13
@@ -98,21 +91,12 @@ surfaces:
         checked_by: tehreet
         quote: "DATADOG_API_KEY — A Datadog API key that authenticates requests to the Datadog API."
     notes: >-
-      Arcade reaches into customer SaaS mostly as a delegated per-user OAuth token vault, not as a
-      tenant-wide service connection. Connectors checked: Google (Arcade-managed default app,
-      keyless; own app with client secret recommended for production), Microsoft Graph/M365
-      (default app, keyless; own app with client secret for production), GitHub (customer-created
-      GitHub App client ID and secret; the GitHub remote MCP server also offers a fine-grained PAT
-      option), Slack and Salesforce (customer OAuth app and client secret; no Arcade default
-      documented), AWS (AWS-hosted MCP server via DCR and AWS Sign-In, no customer secret; Arcade
-      has no native AWS toolkit), Okta (group-based tool access wants a pasted Okta API token), Entra
-      ID group access (app registration plus client secret), Snowflake remote MCP (OAuth client
-      secret from a security integration), and API-key toolkits stored as Arcade "secrets" (Datadog
-      API and application keys, Postgres connection string with password). No GCP or Azure
-      resource connector and no Google Workspace domain-wide delegation path is documented. Graded
-      B because the Arcade-managed apps and AWS DCR are keyless while several connectors want
-      static keys or client secrets; a reader who weights Arcade's own production advice ("use
-      your own app") would land on C.
+      Arcade mostly stores per-user OAuth tokens rather than holding a tenant-wide connection.
+      Google and Microsoft work keyless through Arcade's default apps, though Arcade recommends your
+      own app with a client secret for production. The AWS MCP server also needs no secret. GitHub,
+      Slack, Salesforce, Entra and Snowflake need your own app's client secret. Okta needs a pasted
+      API token, and toolkits like Datadog and Postgres store static keys. Graded B because some
+      paths are keyless. If you follow Arcade's production advice, it would be C.
 
 hygiene:
   expiry:
@@ -127,8 +111,8 @@ hygiene:
         checked_by: tehreet
         quote: "You can always generate new keys if needed"
     notes: >-
-      A January 2026 changelog entry adds optional expiry in the dashboard, but the API key guide
-      does not mention it and no org policy that forces a maximum lifetime is documented.
+      A January 2026 changelog adds optional expiry in the dashboard. The API key guide does not
+      mention it, and no policy forces a maximum lifetime.
   rotation_api:
     pass: false
     evidence:
@@ -141,9 +125,8 @@ hygiene:
         checked_by: tehreet
         quote: "Click the Create API Key button in the top right"
     notes: >-
-      The public Engine OpenAPI spec has endpoints for auth providers, secrets, gateways, hooks and
-      workers but none for creating or revoking API keys. Keys are created in the dashboard or
-      printed by `arcade login`. The self-hosted Coordinator owns API keys but publishes no API for them.
+      The public Engine API has no endpoints to create or revoke API keys. Keys come from the
+      dashboard or `arcade login`, and the self-hosted Coordinator publishes no key API either.
   scoping:
     pass: false
     evidence:
@@ -152,9 +135,8 @@ hygiene:
         checked_by: tehreet
         quote: "API keys are administrator credentials. Anyone who has your API key can make requests to Arcade as you."
     notes: >-
-      Project API keys are limited to one project, but within it a key has full rights, and the docs
-      describe no read-only or per-permission keys. RBAC (Org Admin, Project Admin, Project Member)
-      governs which humans may create keys, not what a key can do.
+      A project key is limited to one project, but has full rights inside it. Roles control which
+      humans can create keys, not what a key can do.
   last_used:
     pass: false
     evidence:
@@ -163,22 +145,18 @@ hygiene:
         checked_by: tehreet
         quote: "Enter a descriptive name to help identify your key"
     notes: >-
-      No last-used timestamp for API keys is documented in the docs or the OpenAPI spec. (Tool
-      secrets show "Last accessed" in the CLI, but those are customer-supplied third-party secrets,
-      not Arcade keys.)
+      No last-used timestamp for API keys is documented. The "Last accessed" time in the CLI applies
+      to your third-party secrets, not Arcade keys.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Arcade does not appear anywhere in GitHub's supported secret scanning patterns list, partner or user.
+    notes: >-
+      Arcade is not in GitHub's secret scanning list.
 
 notes: >-
-  Graded the Arcade Engine API that agents and apps call (Arcade Cloud at api.arcade.dev, and the
-  same platform self-hosted via Helm or the AWS/Azure marketplaces). The docs are public, and the
-  docs source is on GitHub (ArcadeAI/docs). Arcade's core feature is a token vault for end-user
-  OAuth tokens. That is good for the third-party side, but the credential that unlocks the vault
-  is still a static, unscoped project API key. Personal API keys are being deprecated in favor of
-  project keys. The grade moves if Arcade accepts a federated workload token (OIDC/JWT from your
-  issuer) at the Engine, or adds enforced expiry, scoped keys and a key-management API.
+  Covers Arcade Cloud and the self-hosted engine. Arcade is a vault for end-user OAuth tokens, but
+  the key that unlocks it is a static, unscoped project key. The grade moves if the Engine accepts a
+  federated workload token, or adds enforced expiry, scoped keys and a key API.

@@ -8,7 +8,7 @@ A grade is a reading of the vendor's own public documentation against the [rubri
 
 1. **Open a pull request** on [github.com/wiftax/wiftax](https://github.com/wiftax/wiftax) changing the card. Change the receipts, not just the letter. If the docs say something different from what we quoted, link the page that says it.
 2. **Or email** disputes@wif.tax with the product, the claim you dispute, and the URL that contradicts it. We will open the PR for you.
-3. While a dispute is open the card shows `disputed`, with the vendor's statement verbatim.
+3. While a dispute is open, the card shows `disputed` with the vendor's statement verbatim.
 
 We do not require you to prove you work for the vendor. Receipts are receipts.
 
@@ -34,4 +34,4 @@ Sisyphus, our crawler, re-reads receipts and opens PRs when they drift. It does 
 
 ## Contact
 
-hello@wif.tax for everything else. security@wif.tax for problems with this site, see `/.well-known/security.txt`.
+hello@wif.tax for everything else. security@wif.tax for problems with this site. See `/.well-known/security.txt`.
