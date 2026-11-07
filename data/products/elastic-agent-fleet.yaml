@@ -10,19 +10,16 @@ docs: https://www.elastic.co/docs/reference/fleet/fleet-enrollment-tokens
 category: observability
 status: listed
 summary: >-
-  Agents and OpenTelemetry shippers get into Elastic with an enrollment token, an Elasticsearch
-  API key or an APM secret token. Expiry is optional and none of these is a GitHub partner pattern.
-  Outbound, AWS and Azure can be keyless (an agent's own role, or federated identity for some
-  Elastic-hosted integrations, still in preview). GCP, Okta, Entra ID, GitHub and Google Workspace
-  want a pasted secret.
+  Agents and OpenTelemetry shippers send data to Elastic with an enrollment token, an Elasticsearch
+  API key or an APM secret token. Agents you host can reach AWS and Azure with their own cloud
+  identity. GCP and SaaS sources want a pasted secret.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      A Fleet enrollment token (an Elasticsearch API key tied to one agent policy) is swapped for
-      per-agent API keys issued by Fleet. APM agents and OTLP shippers send a static APM secret
-      token or an Elasticsearch API key in the Authorization header. No workload federation.
+      A Fleet enrollment token is swapped for per-agent API keys. APM agents and OTLP shippers send
+      a static APM secret token or an Elasticsearch API key.
     evidence:
       - url: https://www.elastic.co/docs/reference/fleet/fleet-enrollment-tokens
         checked_on: 2026-10-14
@@ -61,32 +58,17 @@ surfaces:
         checked_by: tehreet
         quote: 'export OTEL_EXPORTER_OTLP_HEADERS="Authorization=ApiKey <key>"'
     notes: >-
-      This card covers the ingest and enrollment credentials an operator has to hold. The Fleet
-      enrollment token, standalone-agent and EDOT/OTLP Elasticsearch API keys, and APM agent API
-      keys exist on every deployment type: Elastic Cloud Hosted, Serverless and self-managed. The
-      Managed OTLP Endpoint (mOTLP) and the other managed inputs are Elastic Cloud Hosted and
-      Serverless only. Its key cannot be scoped to particular indices; the docs say "Index-level
-      privilege scoping is not supported for managed inputs". The APM secret token is a shared
-      static string configured on APM Server and on every APM agent. ECH and ECE create one when the
-      deployment is created. A Fleet Server you host yourself authenticates with an Elasticsearch
-      service token. Service tokens never expire. On Elastic Cloud, Elastic hosts Fleet Server and
-      you never handle this token. Fleet-managed agents swap the enrollment token for per-agent
-      communication and output API keys. These are least-privilege and Fleet manages them, but they
-      are still long-lived bearer keys on the host. None of these paths accepts an OIDC/JWT from a
-      workload's own issuer, so the grade is decided by static-key hygiene (2 of 5 checks pass, so
-      F). Two paths that could avoid a bearer key are graded on other cards. PKI client
-      certificates on a self-managed Elasticsearch output, and the Elasticsearch JWT realm, belong
-      to `elasticsearch`. Kibana and Fleet API automation with Elasticsearch API keys belongs to
-      `kibana`. Elastic Cloud organisation API keys belong to `elastic-cloud-api`. ECE belongs to
-      `elastic-cloud-enterprise`.
+      These credentials exist on every deployment type. The APM secret token is one static string
+      shared by APM Server and every agent. Self-hosted Fleet Server uses a service token that never
+      expires. Fleet's per-agent keys are least-privilege but still long-lived keys on the host.
+      None of these paths accepts an OIDC token from your own issuer, so hygiene decides: 2 of 5, so
+      F. Client certificates and the JWT realm are graded on the elasticsearch card. Kibana keys,
+      Elastic Cloud org keys and ECE have their own cards.
   outbound:
     grade: B
     mechanism: >-
-      AWS can be keyless: an agent you host uses its EC2 instance profile, EKS Pod Identity or
-      IRSA, or assumes a role with an external ID. Elastic-hosted (agentless) CSPM, Asset Discovery
-      and GuardDuty on AWS and Azure can use a federated identity (preview). Azure CSPM can use a
-      managed identity. GCP, most Azure log/metric integrations, Okta, Entra ID, GitHub and Google
-      Workspace want a pasted access key, client secret, API token, PAT or service-account JSON key.
+      An agent you host can use its machine's AWS or Azure identity, or assume an AWS role with an
+      external ID. GCP and SaaS sources want a pasted key, secret or token.
     evidence:
       - url: https://www.elastic.co/docs/reference/integrations/aws
         checked_on: 2026-10-14
@@ -157,29 +139,13 @@ surfaces:
         checked_by: tehreet
         quote: "Once you have downloaded your service account credentials as a JSON file, you are ready to set up your integration."
     notes: >-
-      The deciding question is who hosts the collector. An Elastic Agent you deploy can use the
-      cloud identity of the machine it runs on. That covers the AWS instance profile, EKS Pod
-      Identity or IRSA, and the Azure VM managed identity for CSPM. The GCP CSPM Cloud Shell flow
-      for an agent also attaches a service account to the VM. In each case no secret reaches
-      Elastic. Elastic Managed integrations, formerly "agentless", run on Elastic's infrastructure
-      and are available on Serverless and ECH only. They are GA on Serverless and on ECH 9.5+. For
-      these, the only keyless option is "federated identity", formerly "cloud connectors". This is
-      an AWS role ARN plus external ID, or an Azure user-assigned managed identity. It is still
-      Preview on Serverless and Stack 9.2+, and is documented only for CSPM and Asset Discovery on
-      AWS and Azure, plus the GuardDuty input of the AWS integration. Elastic-hosted collection
-      from AWS CloudWatch/S3/EC2 and similar sources, from GCP, from Azure logs/metrics, and from
-      every SaaS source needs a static secret. Connectors checked: AWS (access keys, temporary keys,
-      assume role, assume role with external ID, instance or pod role, federated identity). AWS
-      CSPM (federated identity, CloudFormation access keys, temporary keys). GCP and GCP CSPM
-      (service-account JSON key; the Elastic-hosted Cloud Shell script prints a key to paste in).
-      Azure CSPM (federated identity, client secret, managed identity on an agent you host). Azure
-      logs and metrics (connection string or client secret). Okta (API token, OAuth2 with a JWK
-      private key you generate, or the Elastic OIN app whose client secret you paste in, so it is
-      still a static secret). Entra ID entity analytics (client secret). GitHub audit and security
-      (PAT; GitHub App permissions are mentioned for some streams). Google Workspace
-      (service-account JSON key with domain-wide delegation). Graded B: keyless on AWS and Azure,
-      static keys elsewhere. CSPM on self-managed clusters needs a paid subscription; on Elastic
-      Cloud it is available to everyone.
+      What matters is who hosts the collector. An agent you deploy can use its machine's cloud
+      identity, such as an EC2 instance profile, EKS pod identity or Azure managed identity. No
+      secret reaches Elastic. Integrations that Elastic hosts can only go keyless through "federated
+      identity", an AWS role or Azure managed identity. That is still in preview and covers only
+      CSPM, Asset Discovery and GuardDuty. Elastic-hosted collection from other AWS sources, GCP,
+      Azure logs and all SaaS needs a static secret. Keyless on AWS and Azure, static elsewhere, so
+      B. CSPM on self-managed clusters needs a paid subscription.
 
 hygiene:
   expiry:
@@ -198,9 +164,9 @@ hygiene:
         checked_by: tehreet
         quote: "Service tokens never expire. You must actively delete them if they are no longer needed."
     notes: >-
-      Enrollment tokens and standalone-agent API keys can be given an expiry, but by default they
-      never expire and no documented org or cluster policy can force one. APM agent keys created
-      in the Applications UI, Fleet Server service tokens and APM secret tokens never expire.
+      Enrollment tokens and standalone-agent keys can expire, but default to never and no policy can
+      force it. APM keys from the UI, Fleet Server service tokens and APM secret tokens never
+      expire.
   rotation_api:
     pass: true
     evidence:
@@ -213,9 +179,9 @@ hygiene:
         checked_by: tehreet
         quote: "To perform bulk operations programmatically, use the POST /api/fleet/enrollment_api_keys/_bulk_delete endpoint."
     notes: >-
-      Enrollment tokens can be created, revoked and deleted through the Fleet API. Ingest and APM
-      keys are Elasticsearch API keys with create and invalidate APIs. The APM secret token can only
-      be changed by editing the APM integration policy or apm-server.yml, which restarts APM Server.
+      The Fleet API creates and revokes enrollment tokens, and Elasticsearch APIs create and
+      invalidate ingest keys. Changing the APM secret token means editing config, which restarts APM
+      Server.
   scoping:
     pass: true
     evidence:
@@ -232,10 +198,9 @@ hygiene:
         checked_by: tehreet
         quote: "Index-level privilege scoping is not supported for managed inputs."
     notes: >-
-      Enrollment tokens are bound to one agent policy. Fleet-issued per-agent keys carry only the
-      permissions that agent needs. Standalone, APM and mOTLP keys take role descriptors (for
-      example event:write only). The weak spots are the APM secret token, which is all-or-nothing,
-      and mOTLP keys, which cannot be limited to particular indices.
+      Enrollment tokens are bound to one agent policy, and Fleet's per-agent keys carry only what
+      that agent needs. The weak spots are the all-or-nothing APM secret token and mOTLP keys, which
+      cannot be limited to indices.
   last_used:
     pass: false
     evidence:
@@ -248,10 +213,8 @@ hygiene:
         checked_by: tehreet
         quote: "expiration?: EpochTime<UnitMillis>"
     notes: >-
-      The enrollment token object (active, api_key_id, created_at, expire_at, name, policy_id) has
-      no last-used field, and neither does the Elasticsearch API key type (creation, expiration,
-      invalidated, invalidation). Fleet does show each agent's last check-in, so stale agents can
-      be found. Unused enrollment tokens, ingest keys and APM keys cannot.
+      Neither enrollment tokens nor Elasticsearch API keys record last use. Fleet shows each agent's
+      last check-in, but unused tokens and keys cannot be found.
   leak_revocation:
     pass: false
     evidence:
@@ -260,17 +223,11 @@ hygiene:
         checked_by: tehreet
         quote: "Elastic Stack API Key"
     notes: >-
-      GitHub lists "Elastic Cloud API Key" and "Elastic Stack API Key" as user (non-partner)
-      patterns only. Neither is in the partner column, so a leaked enrollment token or ingest API
-      key is flagged to the repo owner but not reported to Elastic for automatic revocation. APM
-      secret tokens are arbitrary strings with no pattern at all.
+      GitHub flags Elastic API keys to the repo owner but does not report them to Elastic for
+      revocation. APM secret tokens have no pattern at all.
 
 notes: >-
-  Elastic is assessed as five cards: `elastic-cloud-api`, `elasticsearch`, `kibana`,
-  `elastic-agent-fleet` and `elastic-cloud-enterprise`. Every credential on this card ends up as
-  an Elasticsearch API key or service token, so any federation added to `elasticsearch` (an
-  ingest path accepting workload JWTs) would be what moves this card. The inbound grade only moves
-  if one of these changes: Fleet enrollment or the managed OTLP and APM intake accepts a workload
-  OIDC token; API-key expiry can be enforced and last-used is tracked; or Elastic joins GitHub's
-  secret-scanning partner program. The outbound grade only moves when Elastic-hosted federated
-  identity leaves preview and covers GCP and the SaaS sources.
+  One of five Elastic cards. Every credential here ends up as an Elasticsearch API key or service
+  token. Inbound moves if enrollment or intake accepts a workload OIDC token, if key expiry can be
+  enforced and last use tracked, or if Elastic joins GitHub partner scanning. Outbound moves when
+  Elastic-hosted federated identity leaves preview and covers GCP and SaaS.

@@ -6,19 +6,16 @@ docs: https://docs.datadoghq.com/integrations/obsidian-security/
 category: security
 status: listed
 summary: >-
-  Obsidian's API takes a static bearer token made by an admin in the console. Third-party docs
-  tell you to set its expiry to "Forever". How Obsidian connects into your SaaS tenants is
-  documented only behind login; the one public outbound setup, pushing data to Microsoft Sentinel,
-  has you hand Obsidian an Entra app client secret.
+  To call Obsidian's API, your code needs a static token an admin makes in the console, and partner
+  docs say to set it to never expire. How Obsidian connects to your SaaS is behind a login. The one
+  public setup, for Microsoft Sentinel, hands Obsidian an Entra client secret.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API token created by an admin under Settings > API access tokens and sent as
-      "Authorization: Bearer <token>" to the regional API server (api.obsec.io, api.obsec.eu,
-      etc.). No federation, OAuth client-credentials or other short-lived token path is publicly
-      documented.
+      A static API token that an admin creates in the console, sent as a bearer token to the
+      regional API. No short-lived or federated path is public.
     evidence:
       - url: https://docs.datadoghq.com/integrations/obsidian-security/
         checked_on: 2026-10-13
@@ -41,23 +38,16 @@ surfaces:
         checked_by: tehreet
         quote: "Authorization: `Bearer ${this.apiKey}`,"
     notes: >-
-      Obsidian's own API docs are gated (the docs.obsec.io host returns 404 publicly), so the
-      inbound story comes from third-party connector docs (Datadog, Axonius) and Obsidian's own
-      public Codex plugin on GitHub, which reads OBSIDIAN_API_TOKEN from the environment and sends
-      it as a bearer token. All three describe the same static API token; none mentions any
-      alternative. Federation may exist behind login, but nothing public supports it, so the grade
-      cannot go above F. Obsidian also ships a browser extension and offers Databricks Delta Sharing
-      of its dataset; how the extension authenticates back to Obsidian is not publicly documented.
-      Obsidian's Lakewatch blog says Delta Sharing recipients use "a bearer token or
-      identity-provider federation", but that describes the Delta Sharing protocol, not an Obsidian
-      API feature, so it does not count here.
+      Obsidian's own API docs are gated. Partner docs from Datadog and Axonius and Obsidian's public
+      Codex plugin all describe the same static token and no alternative. Federation may exist
+      behind the login, but with nothing public the grade stays F. A blog post mentions federation
+      for Databricks Delta Sharing, but that is the Delta Sharing protocol, not an Obsidian API
+      feature.
   outbound:
     grade: C
     mechanism: >-
-      Public receipts cover only the Microsoft Sentinel data-sharing push. For it, the customer
-      deploys an Entra app registration scoped to a Data Collection Rule and gives Obsidian the
-      app's tenant ID, application ID and client secret. Setup for the 200+ SaaS connectors (Okta,
-      Microsoft 365, Google Workspace, GitHub, Salesforce, etc.) is not publicly documented.
+      For the Microsoft Sentinel push, you create an Entra app and give Obsidian its client secret.
+      Setup for the 200+ SaaS connectors is not public.
     evidence:
       - url: https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/Obsidian%20Datasharing/Data%20Connectors/ObsidianDatasharing_CCP/ObsidianDatasharing_ConnectorDefinition.json
         checked_on: 2026-10-13
@@ -80,18 +70,11 @@ surfaces:
         checked_by: tehreet
         quote: "Obsidian now provides visibility and security posture rules across 200+ SaaS connectors, helping teams spot drift and close gaps before a breach."
     notes: >-
-      Low confidence. The only outbound integration with a public setup receipt is the Sentinel
-      push. There, the customer creates an Entra app registration and a client secret and gives
-      the secret to Obsidian. The app is scoped to Monitoring Metrics Publisher on one DCR. That
-      matches the cohort rule for a customer-managed OAuth client secret, so it is graded C. Checked
-      and not publicly verifiable: Okta, Microsoft 365 / Entra ID, Google Workspace, GitHub,
-      Salesforce, ServiceNow, Snowflake, Workday, Slack and Databricks. Obsidian's integration pages
-      for these are marketing pages with no setup or auth details, and the Okta OIN listing covers
-      only SSO/SCIM into Obsidian. Obsidian lists no AWS, GCP or Azure subscription connectors; it
-      covers AI platforms such as Amazon Bedrock and Azure AI Foundry, but no public page says how
-      it authenticates to them. If the gated docs show admin-consent or OAuth app installs for
-      the core SaaS connectors, this would likely move to B. It cannot move to A or B on public
-      evidence today.
+      Low confidence. Sentinel is the only connector with a public setup page. There you hand
+      Obsidian a client secret for an app scoped to one data collection rule. A customer-managed
+      OAuth client secret is graded C under the cohort rule. Okta, Microsoft 365, Google Workspace,
+      GitHub and others have only marketing pages. If gated docs show consent-based app installs for
+      the core connectors, this would likely move to B. Public evidence cannot support A or B today.
 
 hygiene:
   expiry:
@@ -102,9 +85,8 @@ hygiene:
         checked_by: tehreet
         quote: "Expiry date: Choose Forever."
     notes: >-
-      Tokens have an expiry-date field, so one can be set, but "Forever" is an allowed choice and
-      partner setup guides recommend it. No public evidence shows an org policy that can force
-      an expiry, so this fails as written.
+      Tokens can take an expiry date, but "Forever" is allowed and partner guides recommend it. No
+      public evidence shows an org policy that forces expiry.
   rotation_api:
     pass: false
     evidence:
@@ -117,10 +99,8 @@ hygiene:
         checked_by: tehreet
         quote: "Admin permission is needed to create the API token."
     notes: >-
-      Every public description creates tokens in the console UI. No token-management API is
-      publicly documented, and the public Codex plugin's GraphQL client has no token operations.
-      The API reference is gated, so a create/revoke endpoint may exist unseen; graded
-      conservatively.
+      Every public source creates tokens in the console, and no token API is documented. The API
+      reference is gated, so one may exist unseen.
   scoping:
     pass: true
     evidence:
@@ -133,11 +113,9 @@ hygiene:
         checked_by: tehreet
         quote: "Service access: Enable Full data access to all services and tenants."
     notes: >-
-      The token-creation form sets a role (with a dedicated "API" role) and a per-service and
-      per-tenant access setting independent of the creating admin, which counts as scoping. Weak
-      pass: the role catalog and the narrower service-access options are inferred from the
-      Datadog guide, not shown in Obsidian's own public docs, and that guide asks for full
-      access.
+      Each token gets its own role, including a dedicated API role, and per-service and per-tenant
+      access, independent of its creator. Weak pass: this comes from the Datadog guide, not
+      Obsidian's own docs.
   last_used:
     pass: false
     evidence:
@@ -146,24 +124,18 @@ hygiene:
         checked_by: tehreet
         quote: "Log into Obsidian Security using admin account and navigate to Settings > API access tokens."
     notes: >-
-      No public source mentions a last-used timestamp on the API access tokens page. Docs are
-      gated; graded conservatively.
+      No public source shows a last-used time. The docs are gated.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Obsidian Security does not appear in GitHub's supported secret-scanning patterns, partner or user.
+    notes: >-
+      Obsidian Security is not in GitHub's secret-scanning patterns.
 
 notes: >-
-  Graded the Obsidian Security Platform API (the GraphQL/REST API at api.obsec.io and its
-  regional siblings), the surface SIEM, SOAR and asset-inventory tools automate against. Obsidian
-  documents everything behind customer login: docs.obsec.io is not public and per-connector setup
-  guides are not on the website. Every receipt above comes from partner docs (Datadog, Axonius,
-  Microsoft Sentinel content hub), Obsidian's public GitHub Codex plugin, or Obsidian marketing
-  pages. A public Splunk, Cortex XSOAR, Tines or Torq connector with auth details was not found;
-  web search was unavailable during this check, so those were looked for only through GitHub code
-  search. Both grades are conservative and would move with public docs: inbound off F with
-  settable-and-enforced expiry, a token API, a last-used column or GitHub partnership; outbound to
-  B with any published admin-consent or app-install connector setup.
+  Graded on the Obsidian Platform API, which SIEM and SOAR tools automate against. Obsidian puts its
+  docs behind a login, so every receipt comes from partner docs, its public GitHub plugin or
+  marketing pages. Both grades are conservative. Published consent-based connector setup would move
+  outbound to B.

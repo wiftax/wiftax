@@ -8,24 +8,16 @@ docs: https://docs.vultr.com/platform/iam
 category: cloud
 status: listed
 summary: >-
-  Workloads drive Vultr with a static API key, ideally on an API-only service user with its own
-  IAM policy. That key can be traded for short-lived role sessions and registry logins, and Vultr
-  servers can use an identity token instead. Vultr also accepts JWTs from an external OIDC
-  issuer, but documents this only for IdP users, with no subject or audience conditions. Keys
-  can be set to never expire, show no last use, and are not revoked when leaked. Object Storage
-  has its own card.
+  To call Vultr, your code needs a static API key, ideally on an API-only service user. It can trade
+  that key for short-lived sessions. Vultr can trust an external OIDC issuer, but documents this
+  only for human logins, with no subject or audience checks.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      Static API key (Authorization: Bearer) owned by a user or API-only service user scoped by IAM
-      policies, used by the API, vultr-cli and the Terraform provider. It can be exchanged for an
-      assumed-role session token (ars-...) with a set duration, and Container Registry mints Docker
-      credentials that expire within 30 days. Vultr instances and bare metal can assume a role with
-      a 5-minute metadata identity token. External OIDC issuers can be trusted for role
-      assumption, but the docs cover only IdP users and do not let you constrain subject or
-      audience.
+      A static API key, traded for short-lived role sessions or registry logins. Vultr servers can
+      use a metadata identity token instead.
     issuers: []
     evidence:
       - url: https://www.vultr.com/api/
@@ -89,29 +81,17 @@ surfaces:
         checked_by: tehreet
         quote: "including API endpoints, authentication credentials, and resource specifications."
     notes: >-
-      Graded C, not A or B. Vultr IAM lets you register an external OIDC issuer, trust it from an
-      assumable role (FederatedAssumption), and swap its JWT for a role session through an
-      STS-style AssumeRoleWithWebIdentity call, all self-serve over the API. Three things keep it
-      from counting under RUBRIC.md. (1) It is documented only for people signed in to Okta,
-      Google or Azure AD, with no CI or workload guide. (2) The only documented trust conditions
-      are IP, time of day and expiry. The oidc_claims condition appears only as the automatic
-      account pin on instance trusts, so nothing documented stops every subject of a shared
-      issuer such as GitHub Actions from assuming the role. (3) The API reference says the STS
-      action "Must be AssumeRole", which contradicts the guide. The issuer is registered as one
-      pasted JWK rather than a JWKS URL, so the trust breaks when the IdP rotates keys. A human
-      reviewer should check this reading. A documented workload flow with sub/aud claim
-      conditions would make this A. Without that, the root is a static API key. It buys
-      short-lived sessions and registry credentials, so C (short-lived from a static root). The
-      instance and bare-metal identity token is ambient identity inside Vultr and does not earn
-      A. VKE kubeconfigs fetched via the API carry a bearer token whose lifetime is not
-      documented. VKE clusters can instead trust an OIDC issuer URL you supply (shown only as a
-      kubectl login with Okta). Object Storage uses separate S3 keys and is graded on
-      vultr-object-storage.
+      Vultr lets you trust an external OIDC issuer from a role, self-serve. Three things keep it
+      from counting. It is documented only for people signed in to Okta, Google or Azure AD. Its
+      only conditions are IP, time and expiry, so any subject of a shared issuer like GitHub Actions
+      could assume the role. The API reference also contradicts the guide. The issuer is one pasted
+      key, so trust breaks when the IdP rotates. A human reviewer should check this reading. The
+      server identity token is ambient identity inside Vultr and does not earn A.
   outbound:
     grade: N/A
     mechanism: >-
-      Compute, GPU, VKE and Container Registry never take customer cloud or SaaS credentials.
-      Snapshot and ISO import read public URLs, and the Docker Hub proxy serves public images.
+      Compute, GPU, VKE and Container Registry never take your cloud or SaaS credentials. Imports
+      read only public URLs and images.
     evidence:
       - url: https://www.vultr.com/api/
         checked_on: 2026-10-22
@@ -130,12 +110,10 @@ surfaces:
         checked_by: tehreet
         quote: "The password of the source server."
     notes: >-
-      Checked: snapshot from URL and ISO from URL (public URLs only), the Container Registry
-      Docker Hub proxy (public images only), registry replication (between Vultr regions), and the
-      API reference for any AWS, GCS, Azure, Hugging Face or private-registry credential fields
-      (none found). The one place Vultr reaches into customer infrastructure is Managed Database
-      migration, which takes the source server's host, username and password. Managed Databases
-      is a sibling product outside this card's scope; graded, it would be D or F.
+      Snapshot and ISO import read public URLs only, and the registry proxies only public Docker Hub
+      images. The API has no AWS, GCS, Azure or private registry credential fields. Managed Database
+      migration takes a source server's password, but that is a separate product. Graded, it would
+      be D or F.
 
 hygiene:
   expiry:
@@ -150,8 +128,8 @@ hygiene:
         checked_by: tehreet
         quote: "All API keys also now support an optional expiration date and name for convenient identification after they are generated."
     notes: >-
-      Expiry is optional and "never" is a documented choice. No org policy that forces or caps
-      key lifetime is documented, so this fails under the changeable-default precedent.
+      Expiry is optional and never is a documented choice. No org policy can force or cap key
+      lifetime.
   rotation_api:
     pass: true
     evidence:
@@ -164,8 +142,7 @@ hygiene:
         checked_by: tehreet
         quote: "These methods enable you to manage your API keys without having to access the customer portal."
     notes: >-
-      Keys are created with POST /v2/users/{user-id}/apikeys (or /v2/apikeys for yourself) and
-      deleted with DELETE. The rotation guide walks through this with no browser step.
+      The API can create and delete keys, and the rotation guide needs no browser.
   scoping:
     pass: true
     evidence:
@@ -182,9 +159,8 @@ hygiene:
         checked_by: tehreet
         quote: "Access control restricts which IP addresses and subnets can authenticate to the Vultr API on a user's behalf."
     notes: >-
-      Passes under the documented non-human account rule: a service user is API-only and gets its
-      own IAM policies, down to a single registry. Scope belongs to the principal, not the key, so
-      all of one user's keys have the same reach.
+      Service users are API-only and get their own IAM policies, down to a single registry. Scope
+      belongs to the user, so all of one user's keys reach the same things.
   last_used:
     pass: false
     evidence:
@@ -193,8 +169,7 @@ hygiene:
         checked_by: tehreet
         quote: "Gets all API keys for the currently authenticated user."
     notes: >-
-      The API key object returns id, masked key, name, expire and date_expire only. Neither the
-      API reference nor the IAM key guides mention a last-used time.
+      Keys show name and expiry but never when they were last used.
   leak_revocation:
     pass: false
     evidence:
@@ -202,14 +177,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Vultr does not appear in GitHub's supported secret-scanning patterns table in any column, so
-      a leaked API key is not auto-revoked.
+      Vultr is not in GitHub's secret scanning patterns, so leaked keys are not revoked.
 
 notes: >-
-  Vultr shipped organization IAM in 2026: service users, policies, assumable roles, an STS-style
-  endpoint and IAM-minted registry credentials. That is a real IAM system, but the long-lived API key is still the root credential.
-  To reach A, Vultr would
-  document external-issuer federation for workloads (a GitHub Actions example, sub/aud claim
-  conditions on FederatedAssumption trusts, JWKS URL instead of a pasted key) and support it in
-  the Terraform provider. On hygiene, the fixes are an org policy that forces key expiry, a
-  last-used timestamp, and a GitHub secret-scanning partnership.
+  Vultr shipped real organization IAM in 2026, but the long-lived API key is still the root. To
+  reach A, Vultr would document workload federation with subject and audience conditions and a JWKS
+  URL. VKE can trust an OIDC issuer, shown only for human login. Object Storage is graded on
+  vultr-object-storage.

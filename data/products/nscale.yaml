@@ -7,21 +7,16 @@ docs: https://docs.nscale.com/docs/manage/service-tokens
 category: cloud
 status: listed
 summary: >-
-  The Nscale control-plane APIs, CLI in CI, Terraform provider and serverless inference all take
-  one credential: a static service-account token. No federation path exists for workloads. The
-  token has a platform-set 90-day lifetime, rotates by API and belongs to a group-scoped service
-  account, but shows no last use and is not GitHub partner-revoked. Object storage uses static S3
-  keys. Importing a private Hugging Face model takes a pasted HF token. NKS clusters are graded on
-  their own card.
+  To call Nscale's APIs, CLI, Terraform or inference, your code needs a static service account
+  token. It expires after 90 days and rotates by API. Object storage uses static S3 keys. Importing
+  a private Hugging Face model takes a pasted HF token.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static service-account token (a JWT shown once, sent as a Bearer token or NSCALE_SERVICE_TOKEN)
-      accepted by the identity, compute, region, storage, NKS and reservation APIs, the CLI, the
-      Terraform provider and the OpenAI-compatible inference API. Humans use browser or device-code
-      login; no OIDC or token-exchange path from an external issuer is self-serve for workloads.
+      A static service account token, sent as a bearer token to every control-plane API, the CLI,
+      Terraform and the inference API. No workload federation is self-serve.
     issuers: []
     evidence:
       - url: https://docs.nscale.com/docs/manage/service-tokens.md
@@ -65,28 +60,17 @@ surfaces:
         checked_by: tehreet
         quote: "Create credentials tied to an identity policy. The secret is returned only once"
     notes: >-
-      Graded on the weakest path a workload must use to automate Nscale, which is also the only
-      one: the service token. The identity service does implement RFC 8693 token exchange and can
-      accept bearer tokens from external OIDC issuers, but its source shows that trust is set by
-      Nscale's operators in the identity operator namespace ("Providers in organization namespaces
-      are never trusted"), each token must carry a verified email and map to an existing member,
-      and none of it is in the public docs or customer API (the org-level OAuth2 provider object
-      has only issuer, client ID and secret, for browser login). That is human SSO, not workload
-      federation, so it does not lift the grade. The "exchange" of a service token for a passport
-      JWT happens inside Nscale's API edge; the workload still holds the long-lived service token,
-      so this is D rather than C. Sibling credentials on the same cloud: object storage takes
-      static S3 access key/secret pairs per endpoint, with AWS-style identity policies for scoping
-      and API create/delete, but no expiry or last-used field in the Storage API; dedicated model
-      deployments (private cloud beta) mint their own static endpoint access key. Legacy Nscale
-      API keys were removed on 2025-11-01. Three of five hygiene checks pass, so D; inbound moves
-      to B or A only with self-serve token exchange from GitHub Actions or any OIDC issuer for
-      service accounts.
+      The service token is the only workload path. Nscale's identity service can exchange tokens
+      from external OIDC issuers, but only Nscale's operators can set that trust. Each token must
+      also map to an existing member's verified email. That is human SSO, not workload federation,
+      so it does not lift the grade. Nscale swaps the service token for a JWT at its own edge, but
+      the workload still holds the long-lived token, so this is D, not C. Object storage uses static
+      S3 key pairs. Three of five hygiene checks pass.
   outbound:
     grade: F
     mechanism: >-
-      Bring-your-own-model procurement pulls from Hugging Face, and for private or gated repos takes
-      an optional raw Hugging Face token in the request body. No other documented reach-in into a
-      customer cloud, registry or SaaS exists.
+      Importing a model from a private or gated Hugging Face repo takes a raw Hugging Face token.
+      Nscale documents no other reach-in.
     tier_gated: Private cloud organizations (beta)
     evidence:
       - url: https://raw.githubusercontent.com/nscaledev/openapi/main/ims/main/openapi.yaml
@@ -110,18 +94,11 @@ surfaces:
         checked_by: tehreet
         quote: "Fine-tuning service"
     notes: >-
-      Checked: the docs index (llms.txt) and every published OpenAPI spec in nscaledev/openapi
-      (identity, compute, region, storage, NKS, reservation, IMS). Custom images import only from a
-      public URL with no credential; object storage has no import or replication from customer S3,
-      GCS or Azure; file storage, volumes and reservations reach nothing outside Nscale; serverless
-      fine-tuning, which pushed models to Hugging Face, was removed on 2026-05-20. The one place
-      Nscale holds a credential for a third party is IMS model procurement (the "Your Models" path
-      of dedicated deployments): a raw, write-only Hugging Face token with no guidance on using a
-      read-only or fine-grained token or on rotation. It appears in the published API spec but not
-      in the prose docs, and the feature is a private-cloud beta, so a reviewer could argue it is
-      not yet a documented integration (outbound would then be N/A and the headline D). Graded F
-      as on cudo-compute; scoped-token guidance would make it D, and an Nscale-issued OIDC identity
-      that Hugging Face or a customer bucket could trust would make it A or B.
+      Images, storage and the rest reach nothing outside Nscale, and fine-tuning's Hugging Face push
+      was removed in May 2026. Model import takes a raw Hugging Face token with no advice on scoping
+      or rotation. It appears only in the API spec, for a private-cloud beta, so a reviewer could
+      call it undocumented. Outbound would then be N/A and the headline D. Graded F as on
+      cudo-compute. Scoped-token guidance would make it D.
 
 hygiene:
   expiry:
@@ -140,11 +117,8 @@ hygiene:
         checked_by: tehreet
         quote: "a group membership on a service account rides a token that lives for up to 90 days and that the account can keep renewing itself."
     notes: >-
-      Unlike a changeable default (see the precedent in the brief), the 90 days is not a customer
-      choice: the create and rotate requests carry no lifetime field, and the value is a
-      server-side flag (--default-service-account-token-lifetime) set by Nscale's operator, so a
-      never-expiring token cannot be minted. No org policy for a shorter cap exists. A service
-      account can rotate its own token indefinitely, so the account outlives any one token.
+      Unlike a changeable default, Nscale fixes the 90-day lifetime server-side. Requests carry no
+      lifetime field, so you cannot mint a non-expiring token.
   rotation_api:
     pass: true
     evidence:
@@ -161,8 +135,7 @@ hygiene:
         checked_by: tehreet
         quote: "Rotate the access token for a service account. The old token is invalidated and a new one is returned."
     notes: >-
-      Create, rotate and delete are Identity API calls (and nscale serviceaccounts subcommands),
-      so rotation can run from a job.
+      The Identity API and CLI can create, rotate and delete tokens, so a job can rotate them.
   scoping:
     pass: true
     evidence:
@@ -179,11 +152,9 @@ hygiene:
         checked_by: tehreet
         quote: "Read-only access to resources in the projects the group is assigned to."
     notes: >-
-      Service accounts are a purpose-built machine principal; their authority comes only from the
-      groups they are placed in, and groups carry predefined roles (reader, user, reservation and
-      others) scoped to chosen projects. No custom roles. Group and role management is documented
-      as available to private organizations only, so a self-serve serverless org may not be able
-      to narrow a token.
+      Service accounts are machine identities that get predefined roles on chosen projects through
+      groups. Only private organizations can manage groups, so a self-serve serverless org may not
+      be able to narrow a token.
   last_used:
     pass: false
     evidence:
@@ -196,9 +167,7 @@ hygiene:
         checked_by: tehreet
         quote: "When the service token is due to expire."
     notes: >-
-      Users have a lastActive field; the service-account status has only expiry and the token, and
-      the Service Tokens docs describe no last-used column. Object storage access keys have
-      none either.
+      Users show last activity, but service accounts and storage keys show no last-used time.
   leak_revocation:
     pass: false
     evidence:
@@ -206,13 +175,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Nscale does not appear in GitHub's supported secret-scanning patterns table, partner or
-      otherwise.
+      Nscale is not in GitHub's secret-scanning patterns table.
 
 notes: >-
-  One card for the Nscale cloud's shared identity layer, which every control-plane service,
-  serverless inference and the Terraform provider use; NKS clusters are split onto nscale-nks
-  because their API server can trust your own OIDC issuers. Much of the detail comes from
-  Nscale's own public specs and source (nscaledev/openapi, nscaledev/uni-identity), which the docs
-  link. A last-used timestamp and a GitHub secret-scanning partnership would complete the hygiene;
-  self-serve token exchange for service accounts would lift inbound.
+  Covers the shared identity layer behind Nscale's control plane, inference and Terraform. NKS
+  clusters have their own card because they can trust your OIDC issuers. Much of the detail comes
+  from Nscale's public specs and source code. Self-serve token exchange for service accounts would
+  lift inbound.

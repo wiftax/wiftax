@@ -9,20 +9,16 @@ docs: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp
 category: identity
 status: listed
 summary: >-
-  Okta's admin API takes static SSWS tokens or OAuth service apps that sign a private_key_jwt with a
-  key you hold. Both give one-hour scoped tokens, but nothing lets a workload trade an external OIDC
-  token for Okta API access. SSWS tokens only expire after 30 idle days, can't be created by API and
-  aren't GitHub partner-revoked. Into your cloud, Workflows' S3 and Identity Center connectors use
-  an IAM role with External ID, but AWS role import and the Lambda connector want IAM access keys.
+  To call Okta's admin API, your code holds a static SSWS token or a private key that signs for
+  one-hour tokens. No external OIDC token works. Workflows reaches AWS by role for S3 and Identity
+  Center, but AWS role import and the Lambda connector want IAM access keys.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      OAuth 2.0 service app (client_credentials against the org authorization server) authenticated
-      with private_key_jwt, giving one-hour access tokens limited by Okta API scopes and the app's
-      admin roles, with optional DPoP binding. The legacy alternative is a static SSWS API token
-      carrying its creating admin's privileges. No external-issuer federation exists.
+      An OAuth service app signs a JWT with a private key you hold to get one-hour scoped tokens.
+      The legacy option is a static SSWS token with its creator's privileges.
     evidence:
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
         checked_on: 2026-10-22
@@ -73,29 +69,18 @@ surfaces:
         checked_by: tehreet
         quote: "OPA grants access. Once verified, OPA issues a short-lived access token. The workload uses it to retrieve secrets, passwords, or SSH certificates."
     notes: >-
-      Graded at the OAuth service app, which Okta recommends and which covers the Management API
-      (the OpenAPI spec lists both the SSWS apiToken scheme and OAuth scopes per endpoint) and the
-      Terraform provider. It is short-lived from a static root: the client assertion must have
-      iss = sub = client_id, so it is signed with a private key you hold. A customer-hosted JWKS URL
-      makes that key easier to rotate, and DPoP sender-constrains the access token, but neither
-      removes the key. Client secrets are not accepted for Okta-scoped tokens. No documented path
-      lets a GitHub Actions, cloud workload or other external OIDC token be exchanged for Okta API
-      scopes: Okta's RFC 8693 token exchange works only between authorization servers in the same
-      Okta tenant and mints tokens for custom authorization servers (which cannot carry Okta API
-      scopes), and Okta for AI Agents' ID-JAG flow also ends at a custom authorization server with
-      the agent signing a private-key client assertion. Okta Privileged Access does accept GitHub
-      Actions, GCP and other OIDC tokens via Workload Connections, but for secrets and SSH
-      certificates from OPA, not for the Management API (separate product, not graded here). Would
-      move to A or B if the org authorization server accepted a federated client assertion or
-      token exchange from a configured external issuer.
+      Graded at the OAuth service app, which Okta recommends for the Management API and Terraform.
+      It is short-lived from a static root, because you sign each request with a private key you
+      hold. A hosted JWKS URL eases rotation and DPoP binds the token, but neither removes the key.
+      Okta's token exchange only works within one tenant and cannot mint Okta API scopes. Okta for
+      AI Agents also ends in a private-key assertion. Okta Privileged Access accepts GitHub Actions
+      and cloud tokens, but it is a separate product.
   outbound:
     grade: B
     mechanism: >-
-      Okta Workflows' AWS S3 and AWS Multi-Account Access connectors assume a role you create
-      (Okta's account ID plus an External ID); the Azure AD connector uses Okta's multi-tenant app
-      by consent; Google Cloud Functions uses OAuth sign-in to Okta's Google app; AWS EventBridge
-      log streaming needs only an account ID. The AWS Account Federation app's role import and the
-      Workflows AWS Lambda connector want a static IAM access key and secret.
+      Workflows' S3 and Multi-Account Access connectors assume a role you create with an External
+      ID, and Azure and Google use consented apps. AWS role import and the Lambda connector want
+      static IAM keys.
     evidence:
       - url: https://help.okta.com/wf/en-us/content/topics/workflows/connector-reference/awss3/overviews/authorization.htm
         checked_on: 2026-10-22
@@ -142,21 +127,11 @@ surfaces:
         checked_by: tehreet
         quote: "HEC Token: The token from your Splunk Cloud HTTP Event Collector (HEC)."
     notes: >-
-      Checked: AWS Account Federation (SAML SSO plus role import), AWS IAM Identity Center SCIM
-      provisioning, log streaming to AWS EventBridge and Splunk Cloud, and the Workflows connectors
-      AWS S3, AWS Multi-Account Access (IAM Identity Center), AWS Lambda, Azure Active Directory
-      (Microsoft Entra ID), Google Cloud Functions and Google Workspace Admin. Keyless: Workflows S3
-      and Multi-Account Access (cross-account role with External ID), Azure AD (Okta's multi-tenant
-      app, admin or user consent), Google Cloud Functions and Google Workspace Admin (OAuth sign-in
-      to Okta's Google app; Okta holds the delegated grant, but you manage no secret) and EventBridge
-      (partner event source, no credential). Static: the AWS Account Federation app's role
-      download wants an IAM user's access key and secret, and the docs give a ListRoles-only
-      policy; the Workflows AWS Lambda connector wants an access key and secret with only an
-      Invoke/ListFunctions permissions note. IAM Identity Center SCIM provisioning stores an
-      AWS-issued SCIM bearer token in Okta, and Splunk Cloud log streaming stores a HEC token:
-      both are static secrets from the target, not cloud keys. The thousands of OIN SaaS
-      provisioning connectors were not individually checked. A role-assumption option for AWS
-      role import and the Lambda connector would make this A.
+      Keyless: Workflows S3 and Multi-Account Access by role, Azure AD by consent to Okta's app,
+      Google by OAuth sign-in, and EventBridge with no credential. Static: AWS role import wants an
+      IAM user's access key, with a ListRoles-only policy. The Workflows Lambda connector also wants
+      an access key. Identity Center SCIM and Splunk store target-issued tokens, not cloud keys. A
+      role option for role import and Lambda would make this A.
 
 hygiene:
   expiry:
@@ -171,10 +146,9 @@ hygiene:
         checked_by: tehreet
         quote: "API tokens are valid for 30 days and automatically renew every time they're used with an API request."
     notes: >-
-      Fails. SSWS tokens only expire after 30 idle days; a token in regular use (including by
-      whoever stole it) lives forever, and no org policy can set a maximum lifetime. Same call as
-      britive-cloud-pam and nudge-security: an inactivity timeout is not an expiry. Service-app
-      private keys (JWKs) carry no expiry either.
+      SSWS tokens expire only after 30 idle days, so a token in use lives forever, and no org policy
+      caps it. Same call as britive-cloud-pam and nudge-security. Service app keys never expire
+      either.
   rotation_api:
     pass: true
     evidence:
@@ -195,10 +169,8 @@ hygiene:
         checked_by: tehreet
         quote: "summary: Revoke an API token"
     notes: >-
-      Passes on the service app key: /api/v1/apps/{appId}/credentials/jwks can add, activate,
-      deactivate and delete keys, or the app can point at a JWKS URL you host. SSWS tokens alone
-      would fail: the API Tokens API can list, revoke and change network conditions but has no
-      create operation, so new SSWS tokens are minted in the Admin Console only.
+      Passes on service app keys, which the API can add, activate and delete, or you can host a JWKS
+      URL. SSWS tokens alone would fail, since only the console can create them.
   scoping:
     pass: true
     evidence:
@@ -215,11 +187,9 @@ hygiene:
         checked_by: tehreet
         quote: "API tokens inherit the privilege level of the admin account that is used to create them."
     notes: >-
-      Passes on the service app, a purpose-built machine principal with granted Okta API scopes and
-      its own standard or custom admin role over resource sets. Caveat: the "Public client app
-      admins" org setting auto-assigns Super Admin to service apps when enabled. SSWS tokens fail
-      this check: they act as the creating user, and Okta's own advice is a "service account" that
-      is an ordinary Okta user, with its help page suggesting super admin rights for stability.
+      Passes on the service app, a machine identity with its own API scopes and admin role. One
+      caveat: the "Public client app admins" setting, if on, makes service apps Super Admin. SSWS
+      tokens act as their creating user and would fail.
   last_used:
     pass: true
     evidence:
@@ -232,9 +202,8 @@ hygiene:
         checked_by: tehreet
         quote: "Green: The token has been used within the last three days."
     notes: >-
-      The Admin Console shows last use per SSWS token. The ApiToken API object has created,
-      lastUpdated and expiresAt but no last-used field, and no last-used view for service app keys
-      is documented (System Log records token grants).
+      The Admin Console shows last use for each SSWS token. Service app keys have no documented
+      last-used view.
   leak_revocation:
     pass: false
     evidence:
@@ -242,15 +211,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Okta does not appear in GitHub's supported secret-scanning patterns table at all, so leaked
-      SSWS tokens are neither reported to Okta nor flagged to the repo owner by a dedicated pattern.
+      Okta is not in GitHub's secret-scanning table, so leaked SSWS tokens are neither reported nor
+      flagged.
 
 notes: >-
-  Grades the Okta Workforce Identity Cloud Management API (/api/v1, plus the org authorization
-  server that mints Okta-scoped tokens). Okta Privileged Access (keyless Workload Connections for
-  secrets and SSH), Okta Workflows' own API and Auth0 are separate products. Hygiene is graded
-  across Okta's static credentials: the SSWS token and the service-app private key, as on
-  github-api; SSWS alone would pass only last_used. Inbound moves to B or A only if the org
-  authorization server accepts a federated token from an external issuer (GitHub Actions OIDC,
-  cloud workload identity or bring-your-own issuer). A hard SSWS lifetime cap and GitHub partner
-  revocation would add hygiene passes.
+  Grades the Workforce Identity Cloud Management API. Okta Privileged Access, Workflows' own API and
+  Auth0 are separate products. Hygiene covers both the SSWS token and the service app key, as on
+  github-api. SSWS alone would pass only last_used. Inbound moves to B or A only if Okta accepts a
+  federated token from an external issuer.

@@ -6,18 +6,15 @@ docs: https://docs.coreweave.com/docs/products/storage/object-storage/auth-acces
 category: cloud
 status: listed
 summary: >-
-  This card is object storage only. Any OIDC issuer with a discovery document can be exchanged for
-  30-minute S3-compatible keys (SAML gets up to 12 hours), and CoreWeave recommends exactly that for
-  production. The permanent access keys that still exist have poor hygiene, and creating them
-  requires the static control-plane token graded F on the coreweave-api card.
+  This card covers object storage only. Your code can trade a token from any OIDC issuer for
+  30-minute S3-style keys, which CoreWeave recommends for production. Permanent keys still exist
+  with poor hygiene, and creating them needs the static token graded F on the coreweave-api card.
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Workload Identity Federation: POST a JWT from any OIDC provider that implements OIDC Discovery
-      (issuer URL configured per org) to
-      api.coreweave.com/v1/cwobject/temporary-credentials/oidc/[ORG-ID] and receive a 30-minute
-      AccessKeyId/SecretAccessKey; SAML assertions yield keys up to 12h.
+      Your code posts a JWT from any OIDC issuer you configure and gets 30-minute S3-style keys.
+      SAML assertions get keys for up to 12 hours.
     issuers:
       - any
     evidence:
@@ -55,13 +52,11 @@ surfaces:
           Works with existing identity providers including AWS IAM, GCP Workload Identity, Azure
           Managed Identities, and custom OIDC providers.
     notes: >-
-      Documented tutorials cover GitHub Actions and non-CKS Kubernetes clusters; the provider must
-      implement OIDC Discovery and standard claims. WIF only mints credentials; org and bucket
-      access policies (which can reference OIDC group claims) still have to be written separately.
-      Shipped 2025-11-20. A direct exchange of a control-plane API token for 30-minute keys also
-      exists, but that is a static root and would be C on its own. The auth-access/about page
-      returned HTTP 500 on 2026-10-05; its quote was dropped and needs a human to relocate it. The
-      grade rests on the WIF pages, which are unchanged.
+      Tutorials cover GitHub Actions and Kubernetes clusters outside CKS. Federation only issues
+      credentials, and you still write org and bucket access policies. Trading a control-plane token
+      for 30-minute keys also works, but that is a static root and would be C alone. One cited docs
+      page returned an error and its quote needs relocating. The grade rests on the unchanged
+      federation pages.
   outbound:
     grade: N/A
     mechanism: Object storage never needs access to customer infrastructure.
@@ -83,9 +78,8 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
     notes: >-
-      Static keys created via CreateAccessKeyFromJWT take durationSeconds; 0 means permanent,
-      otherwise up to 12 hours. No documented default and no org policy to forbid permanent keys, so
-      the "cannot be forced" clause of the rubric applies. Graded conservatively.
+      Static keys take a duration where 0 means permanent, otherwise up to 12 hours. No default is
+      documented and no org policy forbids permanent keys, so the check fails.
   rotation_api:
     pass: true
     evidence:
@@ -98,10 +92,9 @@ hygiene:
         checked_on: 2026-10-05
         checked_by: sisyphus
     notes: >-
-      Keys can be created and revoked through the Object Storage API, but the create call itself
-      authenticates with the static control-plane API Access Token. The llms.txt index no longer
-      carries the revoke-access-keys line that was cited; a human should cite the revocation page
-      directly rather than the index.
+      Keys can be created and revoked through the API, but the create call uses the static
+      control-plane token. A human should cite the revocation page directly, since the old index
+      line is gone.
   scoping:
     pass: false
     evidence:
@@ -113,9 +106,8 @@ hygiene:
           the Object Storage Admin role or an organization access policy that grants
           cwobject:CreateAccessKey
     notes: >-
-      Access is governed by organization and bucket policies attached to the principal, not to the
-      key; nothing documented lets one key carry fewer permissions than its owner. The quoted policy
-      governs who may create keys, not what a key may do. Graded conservatively.
+      Permissions come from policies on the principal, not the key. Nothing lets one key carry less
+      than its owner. The quoted policy controls who can create keys, not what a key can do.
   last_used:
     pass: false
     evidence:
@@ -124,8 +116,7 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
     notes: >-
-      No last-used field is documented on access keys. Audit logging exists for object operations
-      but was not assessed as a per-key last-used signal.
+      Access keys have no documented last-used field.
   leak_revocation:
     pass: false
     evidence:
@@ -135,6 +126,6 @@ hygiene:
         checked_by: sisyphus
     notes: CoreWeave is not on GitHub's secret-scanning list.
 notes: >-
-  Home team, graded on the same rubric as everyone else. The A is real and the docs push production
-  users toward it; the remaining tax is that permanent keys are still one API call away, and that
-  call runs on the control-plane token.
+  Home team, graded on the same rubric. The A is real and the docs push production users to it. The
+  remaining tax is that permanent keys are one API call away, and that call uses the control-plane
+  token.

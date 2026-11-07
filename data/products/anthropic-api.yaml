@@ -6,22 +6,16 @@ docs: https://platform.claude.com/docs/en/manage-claude/authentication
 category: other
 status: listed
 summary: >-
-  A workload can trade a JWT from any OIDC issuer you register (subject, audience, claim and CEL
-  constraints) for a short-lived token bound to a service account, so no sk-ant key has to exist.
-  Static API keys remain, can be forced to expire by org policy, but cannot be minted over the API.
-  Anthropic-hosted agents reach back into your systems only on bearer tokens you hand over. wif.tax
-  runs on this API, and it was graded like everything else.
+  Your code can trade a JWT from any OIDC issuer you register for a short-lived token tied to a
+  service account, so no API key has to exist. Anthropic-hosted agents reach your systems only with
+  bearer tokens you hand over. wif.tax runs on this API, graded like everything else.
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Workload Identity Federation: register a federation issuer (issuer_url plus JWKS via OIDC
-      discovery, an explicit JWKS URL, or an inline key set), bind it to a service account with a
-      federation rule that matches subject_prefix, audience, exact claims and/or a CEL condition,
-      then exchange the IdP JWT at POST /v1/oauth/token (RFC 7523 jwt-bearer) for a short-lived
-      sk-ant-oat01 access token; the SDKs do the exchange and refresh when
-      ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID and
-      ANTHROPIC_IDENTITY_TOKEN_FILE (or ANTHROPIC_IDENTITY_TOKEN) are set.
+      Workload Identity Federation exchanges your issuer's JWT for a short-lived access token. A
+      federation rule matches subject, audience, claims or a CEL condition and binds it to a service
+      account.
     issuers:
       - any
     evidence:
@@ -71,35 +65,16 @@ surfaces:
         checked_by: tehreet
         quote: There is no `sk-ant-api...` string to mint, distribute, or rotate.
     notes: >-
-      Documented as GA with no beta header. The docs state only a role requirement (admin, owner or
-      primary owner) to set it up in the Console; no plan or price gate is documented, so tier_gated
-      is left empty. The Admin API used to manage issuers and rules as code is "unavailable for
-      individual accounts", and those endpoints reject Admin API keys and need an org:admin OAuth
-      token, with the first org:admin rule created by a human in the Console. Limits found: JWT at
-      most 16 KiB, asymmetric signatures only (RS/ES/PS), a kid header is required, iat and exp are
-      required, a jti is single-use by default (check_jti), the issuer's max JWT lifetime defaults
-      to 1 hour (configurable to 49 h), and the minted token lives for min(token_lifetime_seconds, 2
-      x remaining JWT validity), never under 60 s. Issuer and JWKS URLs Anthropic fetches must be
-      public https on port 443; explicit_url and inline modes allow a private issuer, which is
-      friendlier than Snowflake's public-only rule. Rules on shared issuers (GitHub Actions, GitLab,
-      Buildkite, Terraform Cloud, Google) must pin a tenant via subject, claim or CEL. Scopes are
-      coarse: workspace:inference, workspace:developer, workspace:manage_tunnels or org:admin;
-      "Finer-grained scopes (per resource, or read versus write) are not currently available." We
-      found no documented cap on issuers or rules per organization. Static alternatives remain:
-      personal, service account and legacy workspace API keys (sk-ant-api03-...) and Admin API keys
-      (sk-ant-admin01-...), graded under hygiene below. App Attest issues one-hour tokens to
-      attested iOS/macOS apps and was not graded. Claude Code's `claude setup-token` one-year OAuth
-      token authenticates a human's Pro/Max/Team/Enterprise subscription and is out of scope here.
+      Generally available, with no documented plan gate. Setting it up needs an admin, and the first
+      rule must be created in the Console by a human. Rules on shared issuers such as GitHub Actions
+      or GitLab must pin your tenant. Private issuers work by supplying the JWKS directly, unlike
+      Snowflake's public-only rule. Scopes are coarse, at the workspace or org level. Static API
+      keys and Admin API keys still exist and are graded under hygiene below.
   outbound:
     grade: C
     mechanism: >-
-      Every path back into your systems is a bearer credential you hand Anthropic. Best case is a
-      Managed Agents vault mcp_oauth credential (access token plus refresh token and client secret
-      that Anthropic refreshes for you) or a short-lived token you mint yourself and pass per
-      request to the Messages API MCP connector; the rest are static: vault static_bearer tokens,
-      environment_variable secrets substituted at egress, GitHub personal access tokens for mounted
-      repos, and MCP tunnel tokens. No cloud IAM role, service-account impersonation or OIDC
-      federation exists for the agent to reach AWS, GCP or Azure.
+      Every path back into your systems uses a bearer credential you give Anthropic. The best case
+      is an OAuth credential Anthropic refreshes, or a short-lived token you pass per request.
     evidence:
       - url: https://platform.claude.com/docs/en/agents-and-tools/mcp-connector
         checked_on: 2026-09-17
@@ -152,21 +127,13 @@ surfaces:
           Rotate the server certificate and tunnel token on a regular schedule, and immediately if
           you suspect compromise.
     notes: >-
-      The plain Messages API never touches your infrastructure; this surface only exists once you
-      opt into the MCP connector, Managed Agents (vaults, GitHub repository resources) or MCP
-      tunnels. Following the Twilio and Cloudflare cards, opt-in integrations are graded rather than
-      waved through as N/A. C rather than D because the best mechanism is short-lived: the
-      per-request connector accepts whatever short-lived token you mint, and a vault mcp_oauth
-      credential lets Anthropic refresh from a stored refresh token and client secret, which is the
-      rubric's C example exactly. The static paths (static_bearer, environment_variable, GitHub PAT,
-      tunnel token) come with least-privilege and rotation guidance, an allowed_hosts and
-      injection_location scope on env-var secrets, and update endpoints for rotation, so they would
-      sit at D on their own. Nothing is keyless: Anthropic is not an OIDC issuer your MCP server can
-      verify, there is no cross-account role or workload identity for cloud APIs, and egress
-      substitution cannot sign SigV4 requests. MCP tunnels are a research preview; their setup
-      component can be provisioned keylessly through WIF (workspace:manage_tunnels), but the tunnel
-      does not authenticate to the MCP server, so it does not change the grade. Not fetched or
-      graded: the Managed Agents self-hosted sandbox worker key.
+      The plain Messages API never touches your systems. This surface only exists if you opt into
+      the MCP connector, Managed Agents or MCP tunnels. Opt-in integrations are graded, as on the
+      Twilio and Cloudflare cards. It is C, not D, because the best path is short-lived. A stored
+      refresh token and client secret is exactly the rubric's C example. The static paths, such as
+      bearer tokens and GitHub PATs, come with scoping and rotation guidance, so alone they would be
+      D. Nothing is keyless. Anthropic is not an OIDC issuer you can verify and has no cloud role
+      option.
 hygiene:
   expiry:
     pass: true
@@ -190,11 +157,8 @@ hygiene:
           RFC 3339 datetime string indicating when the API Key expires, or `null` if it never
           expires.
     notes: >-
-      At creation you pick 3 hours, 1 day, 7 days, 30 days, a custom duration or Never; an
-      organization maximum-expiration policy removes Never, which is what the rubric asks for. The
-      same choice applies to Admin API keys. Caveats: the docs do not say which preset is the
-      default when no policy is set, we could not find the page that documents how or on which plans
-      the policy is configured, and expiration cannot be added to an existing key.
+      You can set an expiry at creation, and an org maximum-expiration policy removes the Never
+      option. The default with no policy is undocumented.
   rotation_api:
     pass: false
     evidence:
@@ -209,10 +173,8 @@ hygiene:
         checked_by: tehreet
         quote: The Admin API can't recover a lost key or give you a key to call the Claude API with.
     notes: >-
-      The Admin API exposes list, retrieve and update (name, status active/inactive) on
-      /v1/organizations/api_keys and nothing that mints a key, so the disable half of rotation is
-      scriptable and the create half is a browser. Admin API keys are also Console-only. The
-      intended answer is to stop rotating keys and federate instead.
+      The Admin API can list keys and disable them, but nothing can mint one. Creating a key needs
+      the browser.
   scoping:
     pass: true
     evidence:
@@ -235,11 +197,9 @@ hygiene:
           Claude Console keys do not have selectable scopes; every key carries full access to all
           endpoints that accept Admin API keys
     notes: >-
-      Passes on the rubric's purpose-built-principal clause: a service account key acts as a
-      non-human identity with its own organization role and workspace memberships, and any key can
-      be bound to a single workspace. There are no permission scopes on a regular key (a key does
-      whatever its workspace, user or service account can do) and Console Admin API keys carry full
-      admin access; only Claude Enterprise admin keys have selectable read/write scopes.
+      Service account keys act as a non-human identity with their own role and workspaces, which
+      passes. Regular keys have no permission scopes, and Console Admin API keys have full admin
+      access.
   last_used:
     pass: false
     evidence:
@@ -255,13 +215,8 @@ hygiene:
           is not associated with an API key, so `api_key_id` will be `null` even when grouping by
           that dimension.
     notes: >-
-      The API key object carries id, name, status, created_at, created_by, expires_at,
-      partial_key_hint, principal and scope; there is no last-used timestamp, and the Console docs
-      describe an expiration column but no last-used column. The Usage report can be filtered or
-      grouped by api_key_id, so a key with no usage can be found by walking daily buckets 31 days at
-      a time, but that is a usage log rather than a last-used signal, it does not cover Admin API
-      keys, and we graded it conservatively like Vault's audit-log grep. Send a receipt if the
-      Console shows last use.
+      Keys have no last-used timestamp. The usage report can be grouped by key, but that is a usage
+      log, as on the Vault card. Send a receipt if the Console shows last use.
   leak_revocation:
     pass: true
     evidence:
@@ -276,15 +231,9 @@ hygiene:
         checked_by: tehreet
         quote: Anthropic Admin API Key
     notes: >-
-      Anthropic is a GitHub secret-scanning partner for API keys, Admin API keys and session IDs,
-      with push protection and validity checks. What Anthropic does on a partner report (revoke vs
-      notify) is not stated in the docs we fetched.
+      Anthropic is a GitHub secret scanning partner for API keys and Admin API keys. The docs do not
+      say whether a reported key is revoked or only flagged.
 notes: >-
-  Headline C is set by the outbound surface; inbound alone is A with no tier gate we could find. We
-  are a paying customer and wif.tax's own crawler will authenticate to this API through a federation
-  rule, which is exactly what the A is for. Hygiene on the surviving static keys is 3 of 5: keys can
-  be forced to expire and get revoked on leak, but they are minted in a browser and carry no
-  last-used timestamp. Outbound moves to B or A if Managed Agents gain a cloud-native option (an AWS
-  role with external ID, GCP service-account impersonation, an Azure federated credential) or if
-  Anthropic-hosted agents present a verifiable OIDC identity to customer MCP servers instead of a
-  pasted bearer token.
+  Outbound sets the headline C. Inbound alone is A. wif.tax's crawler logs in through a federation
+  rule. Outbound moves to B or A if hosted agents gain a cloud-native role or present a verifiable
+  OIDC identity to your MCP servers.

@@ -10,17 +10,16 @@ docs: https://docs.github.com/en/rest/authentication
 category: devtools
 status: listed
 summary: >-
-  Nothing outside GitHub can federate into the GitHub API: you hold a personal access token or a
-  GitHub App private key, and the App key at least buys you one-hour installation tokens. In the
-  other direction GitHub Actions is a proper OIDC issuer, so your workflows reach AWS, GCP, Azure
-  and Vault without a single stored key.
+  To call the GitHub API from outside GitHub, you hold a personal access token or a GitHub App
+  private key. The App key at least yields one-hour tokens. GitHub Actions is an OIDC issuer, so
+  workflows reach AWS, GCP, Azure and Vault without stored keys.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      GitHub App: a JWT signed with a long-lived private key is exchanged for a one-hour installation
-      access token. Personal access tokens (classic and fine-grained) are static keys.
+      A GitHub App signs a JWT with its long-lived private key and trades it for a one-hour
+      installation token. Personal access tokens are static keys.
     evidence:
       - url: https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app
         checked_on: 2026-09-16
@@ -35,16 +34,14 @@ surfaces:
         checked_by: tehreet
         quote: "Infinite lifetimes are allowed but may be blocked by a maximum lifetime policy set by your organization or enterprise owner."
     notes: >-
-      We found no documented way to exchange an external OIDC token (from a cloud, a CI system, or
-      SPIFFE) for GitHub API access; the only federation GitHub documents runs the other way, from
-      Actions out to clouds. The GITHUB_TOKEN inside an Actions job is ambient identity on GitHub's
-      own platform and does not count. If GitHub ships inbound OIDC we will happily re-grade.
+      We found no documented way to trade an outside OIDC token, from a cloud, CI system or SPIFFE,
+      for API access. GitHub's federation only runs outward from Actions. The GITHUB_TOKEN inside an
+      Actions job is GitHub's own ambient identity and does not count.
   outbound:
     grade: A
     mechanism: >-
-      GitHub Actions is an OIDC issuer (https://token.actions.githubusercontent.com); AWS, GCP,
-      Azure, Vault and any other OIDC-aware target trust it by sub and aud claims and hand back a
-      short-lived credential, so no cloud secret is stored in GitHub.
+      GitHub Actions is an OIDC issuer that AWS, GCP, Azure and Vault can trust. They hand back
+      short-lived credentials, so no cloud secret is stored in GitHub.
     evidence:
       - url: https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect
         checked_on: 2026-09-16
@@ -55,8 +52,8 @@ surfaces:
         checked_by: tehreet
         quote: "With OIDC, your cloud provider issues a short-lived access token that is only valid for a single job, and then automatically expires."
     notes: >-
-      Outbound here means Actions workflows deploying into your infrastructure. The sub claim
-      (repo:org/repo:environment:prod and similar) is the trust boundary on the cloud side.
+      Outbound means Actions workflows deploying into your infrastructure. The cloud side trusts the
+      token's sub claim, such as repo:org/repo:environment:prod.
 
 hygiene:
   expiry:
@@ -71,9 +68,8 @@ hygiene:
         checked_by: tehreet
         quote: "If not provided, the default is 30 days, or less if the target has a token lifetime policy set."
     notes: >-
-      Passes for PATs: fine-grained tokens default to 30 days and org/enterprise owners can cap
-      lifetime for both token types. GitHub App private keys are the exception: they never expire
-      and no policy can force them to.
+      Passes for personal tokens. Fine-grained ones default to 30 days, and org owners can cap both
+      kinds. GitHub App private keys never expire and no policy can force them to.
   rotation_api:
     pass: false
     evidence:
@@ -86,9 +82,8 @@ hygiene:
         checked_by: tehreet
         quote: "Any authenticated requests will return a 403."
     notes: >-
-      Revocation is possible via the API (org endpoints for fine-grained PATs, and an unauthenticated
-      POST /credentials/revoke for any leaked token), but there is no API to create a PAT or a
-      GitHub App private key; both are minted in the browser. Half a rotation loop is not a loop.
+      The API can revoke tokens, including any leaked token. Nothing in the API creates a personal
+      token or an App private key, so rotation still needs a browser.
   scoping:
     pass: true
     evidence:
@@ -104,8 +99,8 @@ hygiene:
         checked_by: tehreet
         quote: "token_last_used_at"
     notes: >-
-      The org fine-grained PAT endpoints return token_last_used_at, and the personal settings UI
-      shows last use per token. GitHub also auto-revokes tokens unused for a year.
+      The org API returns last use for fine-grained tokens, and your settings page shows it per
+      token. GitHub also revokes tokens unused for a year.
   leak_revocation:
     pass: true
     evidence:
@@ -119,6 +114,5 @@ hygiene:
         quote: "GitHub Personal Access Token"
 
 notes: >-
-  Headline C is driven entirely by the inbound surface. A GitHub App is the right way to run a
-  machine against the API and its installation tokens are short-lived, but the root of trust is a
-  PEM file that never expires. Fine-grained PATs are well-scoped and policy-capped but still static.
+  The C comes from inbound. GitHub App tokens are short-lived, but their root is a private key file
+  that never expires. Fine-grained personal tokens are well scoped and capped but still static.

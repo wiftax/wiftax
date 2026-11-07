@@ -10,17 +10,16 @@ docs: https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-fede
 category: cloud
 status: listed
 summary: >-
-  A federated identity credential lets any OIDC issuer stand in for a client secret, and managed
-  identities hand out Entra-signed JWTs on demand. Client secrets cap at two years and tenant policy
-  can shorten or ban them; you get 20 federated credentials per app, exact-match only.
+  Your code can log in with a token from any OIDC issuer instead of a client secret, through a
+  federated identity credential. Managed identities can mint Entra-signed JWTs for other services.
+  Client secrets cap at two years, and tenant policy can shorten or ban them.
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Federated identity credential on an app registration or user-assigned managed identity that
-      trusts an external OIDC issuer URL with an exact issuer, subject and audience match; the
-      workload presents the external JWT as a client_assertion in the client credentials flow and
-      gets an Entra access token for Azure Resource Manager or any Entra-protected API.
+      A federated identity credential on an app or managed identity trusts an external OIDC issuer,
+      matching issuer, subject and audience exactly. Your workload swaps that token for an Entra
+      access token.
     issuers:
       - any
     evidence:
@@ -62,24 +61,16 @@ surfaces:
           Only issuers that provide tokens signed using the RS256 algorithm are supported for token
           exchange using workload identity federation.
     notes: >-
-      Bring-your-own issuer via the "Other issuer" scenario: any OIDC-discoverable https issuer.
-      Limits worth knowing: 20 federated identity credentials per app or user-assigned managed
-      identity; issuer plus subject must be unique per app; exactly one audience per credential
-      (recommended api://AzureADTokenExchange); no wildcards in any field, so one credential per
-      branch, environment or service account, though a "flexible federated identity credential" with
-      claim-matching expressions is in preview; RS256 signing only; Entra stores at most 100 signing
-      keys from the issuer's JWKS; issuer and subject fields are capped at 600 characters.
-      Entra-issued tokens cannot themselves be used as the external token, except through the
-      managed-identity-as-credential path within the same tenant. Misconfigured credentials are
-      created silently and only fail at exchange time. Ambient identity inside Azure (system- or
-      user-assigned managed identity via IMDS) is table stakes and does not earn the A on its own.
+      Any OIDC-discoverable https issuer works. Each app or managed identity can hold 20 federated
+      credentials. Each has one audience and no wildcards, so you need one per branch or
+      environment. A version with claim-matching rules is in preview. Only RS256 signing is
+      accepted. Mistakes are not caught on creation and only fail when the token is exchanged.
+      Managed identity inside Azure does not earn the A on its own.
   outbound:
     grade: A
     mechanism: >-
-      Managed identities obtain Entra-signed JWT access tokens from the Azure Instance Metadata
-      Service for a chosen resource/audience, verifiable at the tenant's OIDC discovery endpoint; a
-      managed identity token can also serve as the federated credential for an app registration, so
-      no client secret is needed anywhere.
+      Managed identities get Entra-signed JWTs from the Azure metadata service for an audience you
+      choose. Third parties verify them against your tenant's OIDC endpoint.
     evidence:
       - url: >-
           https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-use-vm-token
@@ -109,15 +100,11 @@ surfaces:
         checked_by: tehreet
         quote: can use managed identities to obtain Azure access tokens.
     notes: >-
-      The IMDS token endpoint returns a standard Entra JWT whose aud is the resource you ask for,
-      and Google Cloud's workload identity federation accepts exactly these tokens; AWS accepts them
-      through a generic IAM OIDC provider pointed at the tenant's v2.0 issuer. Two caveats that keep
-      this from being effortless: the resource must be an App ID URI registered in the tenant (IMDS
-      returns invalid_resource otherwise), so you typically register an app to represent the third
-      party; and cross-cloud (public to US Government or China) token exchange is not supported.
-      Managed identities exist only on Azure compute that supports them; an app registration running
-      elsewhere in Azure without a managed identity is back to certificates, secrets or a federated
-      credential.
+      Google Cloud workload identity federation accepts these tokens, and AWS accepts them through
+      an IAM OIDC provider. Two catches. The audience must be an app ID URI registered in your
+      tenant, so you usually register an app for the third party. Exchanges across separate clouds,
+      such as public to US Government, are not supported. Managed identities exist only on Azure
+      compute that supports them.
 hygiene:
   expiry:
     pass: true
@@ -140,11 +127,8 @@ hygiene:
           passwordLifetime | Enforce a max lifetime range for a password secret. | Restrict all new
           password secrets to a maximum of 30 days for applications created after 01/01/2015.
     notes: >-
-      Every client secret has an end date (default and portal maximum two years). The tenant default
-      app management policy can enforce a shorter passwordLifetime, or block passwordAddition
-      entirely, for all apps and service principals. Note the policy only blocks creating or
-      updating non-compliant credentials; it does not stop token issuance for credentials that
-      already exist.
+      Every client secret has an end date, two years at most. Tenant policy can force a shorter
+      lifetime or block secrets entirely, though it does not affect secrets that already exist.
   rotation_api:
     pass: true
     evidence:
@@ -157,8 +141,8 @@ hygiene:
         checked_by: tehreet
         quote: Remove a password from an application.
     notes: >-
-      Microsoft Graph addPassword / removePassword (and addKey / removeKey for certificates) with
-      startDateTime and endDateTime, so overlap-and-cut-over rotation is fully scriptable.
+      Microsoft Graph can add and remove secrets and certificates with start and end dates, so
+      overlapping rotation is fully scriptable.
   scoping:
     pass: true
     evidence:
@@ -176,9 +160,8 @@ hygiene:
           In Azure, you can specify a scope at four levels: management group, subscription, resource
           group, or resource.
     notes: >-
-      A secret carries its service principal's Azure RBAC role assignments (built-in or custom, at
-      any scope) and Graph app permissions, nothing more. Same reasoning as the other clouds: bound
-      to a machine principal, not a human's rights.
+      A secret carries only its service principal's role assignments and app permissions. It belongs
+      to a machine identity, not a person.
   last_used:
     pass: true
     evidence:
@@ -196,12 +179,8 @@ hygiene:
           Your tenant has applications with credentials which have not been used in more than 30
           days.
     notes: >-
-      Service principal sign-in logs record which credential key ID (or certificate thumbprint) was
-      used, and the "Remove unused credentials from applications" recommendation lists credentials
-      idle for 30 days. Caveats: the per-credential fields are on the beta Graph signIn resource
-      (v1.0 lacks them), downloading sign-in logs via Graph needs Entra ID P1/P2, and the
-      recommendation reports requiredLicenses microsoftEntraWorkloadId. Still a pass: the vendor
-      does show it.
+      Sign-in logs record which credential was used, and a recommendation lists credentials idle for
+      30 days. Some of this needs beta APIs or paid licenses, but it is shown.
   leak_revocation:
     pass: true
     evidence:
@@ -217,14 +196,9 @@ hygiene:
           occur when someone checks in the credentials in public code artifact on GitHub, or when
           the credentials are leaked through a data breach.
     notes: >-
-      GitHub lists Azure Active Directory Application Secret as a partner pattern with push
-      protection. On Microsoft's side the leak surfaces as an ID Protection "Leaked Credentials"
-      risk on the service principal; blocking it automatically needs a risk-based Conditional Access
-      policy for workload identities, which requires Workload Identities Premium, and managed
-      identities are out of scope. The secret is not revoked for you.
+      Microsoft is a GitHub secret scanning partner for app secrets. A leak raises a risk flag, but
+      the secret is not revoked. Auto-blocking needs the Workload Identities Premium license.
 notes: >-
-  Graded on machine access to Azure Resource Manager and other Entra-protected APIs using app
-  registrations and managed identities. Azure DevOps PATs, storage account keys, SAS tokens and
-  other per-service keys are separate products and are not graded here. Certificates on app
-  registrations are long-lived credentials too and the same hygiene checks apply to them
-  (asymmetricKeyLifetime policy, addKey / removeKey, thumbprint in sign-in logs).
+  Graded on machine access to Azure Resource Manager and other Entra-protected APIs. Azure DevOps
+  PATs, storage keys and SAS tokens are separate products. App certificates are long-lived too, and
+  the same hygiene checks apply.

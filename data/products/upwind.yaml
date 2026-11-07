@@ -6,21 +6,16 @@ docs: https://docs.upwind.io/settings/credentials
 category: security
 status: listed
 summary: >-
-  The Upwind API, Terraform provider, CI actions and sensors all authenticate with an OAuth client ID
-  and secret swapped for a 24-hour token; no OIDC or workload identity path exists. API credentials
-  are role-scoped and show last use, but secrets never expire, have no management API and are not
-  GitHub partner-revoked. Into your cloud it is keyless on AWS, Azure and GCP; OCI, classic Azure and
-  several SaaS integrations still want static secrets.
+  To call Upwind, your code needs a long-lived OAuth client secret, which it trades for a 24-hour
+  token. There is no OIDC login. Upwind reaches into AWS, Azure and GCP without keys, but OCI,
+  classic Azure and several SaaS integrations still take static secrets.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      Upwind client credentials (client ID + client secret) generated under Settings > Access
-      management > Credentials, exchanged at auth.upwind.io/oauth/token (grant_type=client_credentials)
-      for a bearer JWT that expires after 24 hours. The same secret type is used by the Management REST
-      API v1/v2, the Terraform provider, the GitHub Actions and CLI, Kubernetes and host sensors, and
-      in-account Cloud Scanners reporting back to Upwind.
+      A client ID and secret traded for a 24-hour token. The API, Terraform provider, CI actions,
+      sensors and Cloud Scanners all use this same secret type.
     evidence:
       - url: https://docs.upwind.io/assets/js/37ee0c64.a788e4be.js
         checked_on: 2026-10-22
@@ -59,27 +54,16 @@ surfaces:
         checked_by: tehreet
         quote: "Provide the Upwind Auth credentials using an AWS secrets manager secret."
     notes: >-
-      Graded C on the static-root rule (same as `paloalto-prisma-cloud` and `cyera-data-security`):
-      the bearer token lives 24 hours, but minting it needs a long-lived client secret held by the
-      workload. No OIDC, GitHub Actions OIDC, cloud workload identity or token-exchange login is
-      documented anywhere in the docs site (all ~700 pages were searched); Upwind's own GitHub Actions
-      store UPWIND_CLIENT_SECRET in GitHub Secrets rather than trusting the runner's OIDC token, and
-      Cloud Scanners deployed in your account (Outpost model, Azure scanners) keep Upwind client
-      credentials in AWS Secrets Manager or Azure Key Vault. docs.upwind.io is a client-rendered
-      Docusaurus site, so receipts cite the page content bundles actually fetched; the matching
-      human-readable pages are /restapi/v1/introduction, /restapi/v2/introduction, /settings/credentials,
-      /terraform-provider/configuration, /code/ci/github-actions,
-      /getting-started/install-sensor/kubernetes/install and
-      /getting-started/connect-cloud-account/aws/outpost/glossary. No tier gate is documented.
+      Graded C on the static-root rule, same as the paloalto-prisma-cloud and cyera-data-security
+      cards. The token lasts 24 hours, but minting it needs a long-lived secret. The docs describe
+      no OIDC or cloud workload identity login. Upwind's own GitHub Actions keep the secret in
+      GitHub Secrets instead of using the runner's OIDC token. Cloud Scanners in your account keep
+      it in AWS Secrets Manager or Azure Key Vault. No tier gate is documented.
   outbound:
     grade: B
     mechanism: >-
-      AWS onboarding provisions IAM roles that Upwind's SaaS Trust Account assumes with an
-      Upwind-generated External ID; Azure uses service principals for Upwind's multi-tenant apps that
-      Upwind reaches through federated credentials; GCP and OCI onboarding configure Workload Identity
-      Federation from Upwind's AWS environment. OCI's federation still requires handing Upwind a
-      confidential app client secret, the Azure classic flow and Azure activity-log integration use an
-      app client secret, and several SaaS integrations take static tokens.
+      Upwind assumes AWS roles with an External ID, uses Azure multi-tenant apps with federated
+      credentials, and federates into GCP and OCI.
     evidence:
       - url: https://docs.upwind.io/assets/js/1b8afc99.4d33b48b.js
         checked_on: 2026-10-22
@@ -138,22 +122,11 @@ surfaces:
         checked_by: tehreet
         quote: "An OpenAI Admin API key carries organization management permissions; OpenAI does not offer a"
     notes: >-
-      Checked cloud onboarding: AWS SaaS and Outpost (IAM roles trusting Upwind's account with an
-      External ID; keyless), Azure SaaS and Outpost (service principals for Upwind's multi-tenant
-      apps via admin consent; SaaS scanner workers use federated credentials; keyless), Azure classic
-      onboarding (app registration client secret, "ideally 24 months"; optional legacy path), GCP
-      (WIF from Upwind's AWS environment; keyless), OCI (WIF, but the onboarding asks for an identity
-      domain confidential app's client ID and secret, so a static secret is handed over). Integrations:
-      AWS CloudTrail and object-storage export (assumed role, External ID), GuardDuty and Defender for
-      Cloud (no customer secret), GCP Cloud Audit Logs (WIF), Azure Activity Logs (service principal
-      client secret that Upwind reads from your Key Vault), GitHub (GitHub App), GitLab and ServiceNow
-      (OAuth app client secret), Jira (Atlassian OAuth 3LO), Snowflake (key-pair or programmatic access
-      token), Databricks (service principal OAuth secret), OpenAI (Admin API key), Datadog (API key),
-      Splunk (HEC token). The Upwind client credentials that the Outpost templates and Cloud Scanners
-      carry are Upwind's own inbound credential (graded above), not a secret into your cloud.
-      Keyless on all three major clouds, so B rather than C; OCI WIF without a client secret, or
-      federation for Azure activity logs, would move it toward A for clouds, though SaaS integrations
-      would still hold static tokens.
+      Upwind reaches into AWS, Azure and GCP without keys, so this is B, not C. OCI federation still
+      asks you for a client secret. The optional classic Azure flow and the Azure activity log
+      integration use an app client secret. GitHub is a GitHub App, but GitLab, ServiceNow,
+      Snowflake, Databricks, Datadog and others take static secrets or tokens. The client secrets
+      that scanners carry are Upwind's inbound credential, not a key into your cloud.
 
 hygiene:
   expiry:
@@ -168,10 +141,8 @@ hygiene:
         checked_by: tehreet
         quote: "Using multiple credentials lets you rotate them as part of your security practice, or revoke a specific key if it's inadvertently exposed."
     notes: >-
-      Only the 24-hour access token expires. The credentials page lists name, client ID, last used,
-      scope and modification fields but no expiry, the generate dialog asks only for type and name,
-      and no organization policy to cap a client secret's lifetime is documented. A secret lives until
-      someone revokes it.
+      Only the 24-hour token expires. Client secrets have no expiry and no org policy can cap them,
+      so they live until revoked.
   rotation_api:
     pass: false
     evidence:
@@ -184,11 +155,8 @@ hygiene:
         checked_by: tehreet
         quote: "Settings > Access management> Credentials"
     notes: >-
-      Credentials are generated and revoked in the console. The Management REST API v1 and v2
-      references (access management covers members, groups, roles and scopes) and the Terraform
-      provider's five resources have no endpoint or resource for client credentials, so rotation
-      cannot be automated without a browser. Not publicly verifiable whether an undocumented endpoint
-      exists.
+      You create and revoke credentials only in the console. Neither the API nor the Terraform
+      provider can manage them.
   scoping:
     pass: true
     evidence:
@@ -201,9 +169,8 @@ hygiene:
         checked_by: tehreet
         quote: "No, you can only set scope and roles on credentials of API type."
     notes: >-
-      API credentials are organization-level machine principals with their own RBAC scope and roles,
-      bounded by (never exceeding) the creator's access, which the rubric counts. Sensor, Cloud account
-      and Integration credentials cannot be scoped, but are purpose-typed for one job.
+      API credentials are machine identities with their own roles, never exceeding the creator's
+      access. Sensor and integration credentials cannot be scoped but each serves one job.
   last_used:
     pass: true
     evidence:
@@ -211,7 +178,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Timestamp indicating the most recent usage of these credentials."
-    notes: The Credentials table has a "Last used" column for every credential.
+    notes: >-
+      The Credentials table shows when each credential was last used.
   leak_revocation:
     pass: false
     evidence:
@@ -219,14 +187,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Upwind does not appear in GitHub's supported secret scanning patterns table, so a leaked Upwind
-      client secret is neither detected nor reported to Upwind for revocation.
+      Upwind is not in GitHub's secret scanning partner program, so leaked secrets are not reported
+      to Upwind.
 
 notes: >-
-  One card for the Upwind platform (CNAPP: Cloud Scanners, sensors, Code/shift-left, API security,
-  identity and AI security share one credential system and one Management API). Two of five hygiene
-  checks pass (scoping, last used). Inbound moves to B or A only if Upwind accepts a federated token
-  (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer) for the API, CI actions
-  and sensors; a credential management API and an enforced secret lifetime would add hygiene passes
-  but do not change a C. Outbound reaches A for clouds if OCI onboarding drops the confidential app
-  secret and the classic Azure flow is retired.
+  One card for the whole Upwind platform, which shares one credential system and one API. Inbound
+  moves to B or A only if Upwind accepts a federated token. Hygiene fixes would not change a C.
+  Outbound reaches A for clouds if OCI drops the client secret and the classic Azure flow is
+  retired.

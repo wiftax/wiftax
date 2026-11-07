@@ -10,21 +10,16 @@ docs: https://goteleport.com/docs/reference/deployment/join-methods/
 category: identity
 status: listed
 summary: >-
-  Bots (tbot, the Terraform provider) and agents join Teleport with a JWT from any OIDC issuer you
-  configure (generic_oidc, v18.11+), plus dedicated GitHub, GitLab, CI and cloud join methods, and
-  get short-lived certificates. Secret join tokens, bound keypairs and tctl-signed identity files
-  still exist. Into your cloud Teleport is an OIDC issuer for AWS and Entra ID, but GKE discovery,
-  GitLab, Okta, Intune, Jamf and PagerDuty integrations want static keys.
+  Bots and agents join Teleport with a token from any OIDC issuer you configure, or from dedicated
+  CI and cloud methods, and get short-lived certificates. Outbound, Teleport is an OIDC issuer for
+  AWS and Entra ID, but GKE discovery and several SaaS integrations want static keys.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      Join tokens with a delegated join method: generic_oidc verifies a JWT from any issuer you name
-      with a required audience and claim rules, and dedicated methods cover GitHub Actions, GitLab,
-      CircleCI, Bitbucket, Azure DevOps, Spacelift, Terraform Cloud, env0, AWS IAM/EC2, GCP, Azure,
-      Oracle, Kubernetes and TPM. The bot gets short-lived certificates usable by tbot, tctl, tsh,
-      the API clients and the Terraform provider.
+      A join token that trusts a JWT from any issuer you name, with a required audience and claim
+      rules. Dedicated methods cover GitHub Actions, GitLab, the big clouds and more.
     issuers: ["any"]
     evidence:
       - url: https://goteleport.com/docs/reference/deployment/join-methods/
@@ -76,28 +71,18 @@ surfaces:
         checked_by: tehreet
         quote: "Eliminates the need for API keys and long-term secrets with short-lived certificates."
     notes: >-
-      Graded on bot (Machine & Workload Identity) joining, which is how a workload automates the
-      Teleport API, tctl and the Terraform provider. generic_oidc trusts an issuer you set (OIDC
-      discovery or static_jwks), requires an exact `aud`, and lets you write must_match_fields and
-      allow_any rules over `sub` and any other claim, so issuer, subject and audience are all
-      constrainable: A, like `hashicorp-vault`'s JWT auth. It is new (v18.11.0) and Teleport warns you
-      are "solely responsible" for the rules. Before it, the allowlisted dedicated methods would have
-      been a B. No forced weaker path: every surface accepts a delegated join, though secret-based
-      paths remain available (ephemeral and static join tokens, bound keypair registration secrets
-      and static keys, and long-lived identity files from `tctl auth sign`, which Teleport itself
-      calls high-privileged). The feature matrix lists Machine & Workload Identity issuance and
-      "secretless authentication" in all three editions; TPM joining is Enterprise-only and the ec2
-      method is unavailable on Teleport Enterprise Cloud. Ambient cloud joins (iam, gcp, azure,
-      kubernetes in-cluster) alone would not have earned A.
+      Graded on bot joining, which is how a workload automates the API, tctl and Terraform. The
+      generic_oidc method lets you constrain issuer, subject and audience, so it earns A, like the
+      hashicorp-vault card. It is new in v18.11, and Teleport warns you are solely responsible for
+      the rules. Before it, the dedicated methods alone would have been B. No surface forces a
+      weaker path, though secret join tokens and long-lived identity files remain. All three
+      editions include it. Ambient cloud joins alone would not earn A.
   outbound:
     grade: B
     mechanism: >-
-      Teleport publishes OIDC discovery and keys and acts as the identity provider for an AWS IAM
-      role (AWS OIDC integration) and an Entra ID app's federated credential, so AWS and Azure reach-ins
-      are keyless. Discovery agents you run use instance roles or managed identities, but the GKE
-      discovery guide downloads a GCP service-account key, and SaaS integrations take a GitLab PAT,
-      an Okta SSWS token or client secret, Intune and Jamf client secrets, a GitHub App private key or
-      a PagerDuty API key.
+      Teleport acts as the OIDC issuer for an AWS IAM role and an Entra ID federated credential. GKE
+      discovery downloads a GCP key, and GitLab, Okta, Intune, Jamf and PagerDuty take static
+      secrets.
     evidence:
       - url: https://goteleport.com/docs/enroll-resources/application-access/cloud-apis/awsoidc-integration.md
         checked_on: 2026-10-22
@@ -152,17 +137,11 @@ surfaces:
         checked_by: tehreet
         quote: "Generate an API key that the PagerDuty plugin will use to create and modify incidents as well as list users, services, and on-call policies."
     notes: >-
-      Checked: AWS OIDC integration (EC2/RDS enrollment, AWS console and CLI access, Access Graph AWS
-      sync, External Audit Storage, IAM Identity Center), Entra ID integration and Azure sync, Azure
-      VM and AKS discovery, GCP VM, GCP database and GKE discovery, GitLab and GitHub Identity
-      Security imports, Okta (Identity Security), Jamf and Intune device-trust sync, the GitHub SSH CA
-      integration (a GitHub OAuth app client secret for user identity lookup) and the PagerDuty access
-      request plugin. AWS and Azure are keyless with Teleport as the OIDC issuer; the IAM Identity
-      Center SCIM token AWS hands Teleport flows the other way. GCP has no Teleport-as-issuer
-      integration: discovery runs in a Teleport agent you host with ambient credentials on GCE, while
-      the GKE guide creates a JSON key. Static SaaS tokens make this B. Teleport's Workload Identity
-      JWTs can also be federated into AWS, Azure and GCP by your workloads, which is issuance to your
-      workloads, not Teleport reaching in. Okta and Entra ID integrations are Enterprise features.
+      AWS and Azure are keyless with Teleport as the issuer. GCP has no such integration. Discovery
+      there runs in an agent you host using its GCE identity, but the GKE guide creates a JSON key.
+      Static SaaS tokens make this B. Your workloads can also use Teleport tokens to reach your
+      clouds, but that is Teleport issuing to you, not reaching in. Okta and Entra ID integrations
+      are Enterprise features.
 
 hygiene:
   expiry:
@@ -181,10 +160,9 @@ hygiene:
         checked_by: tehreet
         quote: "This join method is inherently less secure because long-lived tokens can be stolen and reused."
     notes: >-
-      Graded on secret join tokens, the long-lived credential Teleport still issues. `tctl tokens add`
-      defaults to 30 minutes, but a token resource's `expires` is an optional header, static tokens in
-      teleport.yaml never expire, and no cluster policy capping token lifetime is documented. A
-      changeable default is not an enforced expiry (precedent: `elastic-cloud-api`).
+      Graded on secret join tokens. tctl defaults to 30 minutes, but expiry is optional, static
+      tokens in config never expire, and no cap exists. A changeable default fails, as on
+      elastic-cloud-api.
   rotation_api:
     pass: true
     evidence:
@@ -197,8 +175,8 @@ hygiene:
         checked_by: tehreet
         quote: "Tokens created via `tctl` can be deleted (revoked) via the `tctl tokens rm` command."
     notes: >-
-      Tokens are API resources (gRPC, tctl, Terraform teleport_provision_token, Kubernetes operator).
-      Bound keypair tokens also support forced keypair rotation via rotate_after.
+      Tokens are API resources managed through gRPC, tctl, Terraform and the Kubernetes operator.
+      Bound keypair tokens can force key rotation.
   scoping:
     pass: true
     evidence:
@@ -211,8 +189,8 @@ hygiene:
         checked_by: tehreet
         quote: "You should use the minimal set of system roles required."
     notes: >-
-      A bot is a purpose-built machine principal with its own roles, and each token names one bot (or
-      a minimal set of agent system roles), which the rubric counts.
+      A bot is a machine identity with its own roles, and each token names one bot or a minimal set
+      of agent roles.
   last_used:
     pass: true
     evidence:
@@ -225,10 +203,9 @@ hygiene:
         checked_by: tehreet
         quote: "Bot Instances keep track of individual `tbot` installations over time, even as they renew their certificates or rejoin."
     notes: >-
-      Judgment call: `tctl tokens ls` shows only expiry, but a bot's join token is consumed on use and
-      the credential that lives on is the bot instance, whose recent authentications and heartbeats
-      (with timestamps) are recorded, so dead bots can be found. Agents joined with static tokens get
-      no equivalent per-token record.
+      Judgment call. Token listings show only expiry, but a bot's join token is used up on join. The
+      bot instance's logins are timestamped, so dead bots can be found. Agents on static tokens get
+      no such record.
   leak_revocation:
     pass: false
     evidence:
@@ -236,13 +213,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Teleport (Gravitational) does not appear in GitHub's supported secret-scanning patterns table,
-      as partner or otherwise. Join token names are random strings with no recognisable prefix.
+      Teleport is not in GitHub's secret-scanning table, and join tokens have no recognizable
+      prefix.
 
 notes: >-
-  One card for Teleport Enterprise Cloud, Enterprise self-hosted and Community Edition: they share
-  the join-method machinery and integrations. Hygiene covers secret join tokens (two of the five
-  checks fail). It does not change the grade, since inbound is A on generic_oidc. Headline is B,
-  held down by outbound: a Teleport-as-issuer path for GCP (Workload Identity Federation for the
-  Discovery Service and GKE) and keyless options for the GitLab, Okta, Jamf, Intune and PagerDuty
-  integrations would move it to A.
+  Covers Teleport Cloud, Enterprise self-hosted and Community Edition, which share join methods and
+  integrations. Hygiene does not change the grade, since inbound is A. The headline is B because of
+  outbound. A GCP issuer path and keyless SaaS integrations would move it to A.

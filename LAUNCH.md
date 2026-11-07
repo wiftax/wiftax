@@ -8,7 +8,7 @@ static-secret count is **zero**. Anything we cannot get to zero goes on the
 
 - [ ] GitHub org `wiftax` (personal account as owner, personal email, nothing tied to an employer)
 - [ ] Org settings: require 2FA, secret scanning + push protection on for all repos, Dependabot alerts on
-- [ ] Cloudflare account on the same personal email; passkey or hardware key
+- [ ] Cloudflare account on the same personal email, with a passkey or hardware key
 - [ ] Registrar: all three domains in one account, registrar lock + auto-renew on, 2FA
 - [ ] Transfer DNS for wif.tax, wiftax.org, rotate.fail to Cloudflare
 - [ ] Licenses: `LICENSE` (Apache-2.0 for code) + `LICENSE-DATA` (CC BY 4.0 for `data/`)
@@ -24,7 +24,7 @@ static-secret count is **zero**. Anything we cannot get to zero goes on the
 ## 3. Cloudflare
 
 - [ ] Pages project for the site, connected via Cloudflare's GitHub App (no API token in our hands)
-- [ ] Custom domain wif.tax on Pages; wiftax.org → 301 to wif.tax via Redirect Rules
+- [ ] Custom domain wif.tax on Pages. wiftax.org → 301 to wif.tax via Redirect Rules
 - [ ] rotate.fail: parked one-pager until Sisyphus ships, then it is his home
 - [ ] DNSSEC on, CAA records (letsencrypt + digicert for Cloudflare-managed certs), HSTS with preload, TLS 1.2 minimum
 - [ ] Email Routing: `hello@`, `disputes@`, `security@` → Gmail
@@ -51,7 +51,7 @@ static-secret count is **zero**. Anything we cannot get to zero goes on the
 ## 6. Policy pages (plain English, short)
 
 - [ ] How grades work (links to RUBRIC.md)
-- [ ] How to dispute: open a PR or email disputes@; vendor statements shown verbatim
+- [ ] How to dispute: open a PR or email disputes@. Vendor statements shown verbatim
 - [ ] Takedown: we remove factual errors with receipts, not opinions
 - [ ] Editorial: products, never people
 

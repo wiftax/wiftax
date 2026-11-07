@@ -7,20 +7,16 @@ docs: https://docs.strongdm.com/references/api/api-keys.md
 category: identity
 status: listed
 summary: >-
-  The StrongDM API, SDKs and Terraform provider take only a static API key pair, and CLI automation
-  uses static admin or service account tokens; no OIDC or workload identity path exists. Keys can be
-  permission-scoped and managed by API, but "never" expiry is allowed, there is no last-used view and
-  no GitHub partner revocation. Into your cloud, discovery is keyless via StrongDM's OIDC issuer, but
-  Azure CLI and GCP service account resources still need static keys.
+  The StrongDM API, SDKs and Terraform provider take a static API key pair, and CLI automation uses
+  static tokens. There is no OIDC login. Outbound, discovery uses StrongDM's own OIDC tokens, but
+  Azure CLI, GCP service account and GKE resources need static keys.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API key pair (access key ID plus secret, used to sign each gRPC request) for the API, the
-      Go/Java/Python/Ruby SDKs and the Terraform provider; the CLI automates with static admin tokens
-      or service account tokens (SDM_ADMIN_TOKEN). No OIDC, cloud workload identity or token-exchange
-      path exists for any of them.
+      A static API key pair that signs each request, used by the API, SDKs and Terraform. The CLI
+      automates with static admin or service account tokens.
     evidence:
       - url: https://docs.strongdm.com/references/api/api-keys.md
         checked_on: 2026-10-22
@@ -55,24 +51,17 @@ surfaces:
         checked_by: tehreet
         quote: "// The OIDC issuer URL for the organization, used for OIDC federation"
     notes: >-
-      Graded on the weakest path a workload must use: the control-plane API only accepts a signed
-      static key pair, and the docs name service accounts with static tokens as the CI pipeline
-      answer. The SigV4-style signing keeps the secret off the wire, but the secret is still
-      long-lived. The OIDC and SAML federation StrongDM documents is human SSO into StrongDM
-      (Okta, Entra ID, Google and any OIDC provider). StrongDM is itself an OIDC issuer (each org
-      exposes an oidcIssuerUrl), but that issuer is used for StrongDM's own calls into your clouds,
-      not to let your workloads log in to StrongDM.
-      Moves to B or A only if the API or service accounts accept a federated
-      token (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer).
+      Graded on the weakest path a workload must use. The docs name service accounts with static
+      tokens as the CI answer. Signing keeps the secret off the wire, but it is still long-lived.
+      StrongDM's OIDC and SAML support is human SSO. StrongDM is itself an OIDC issuer, but only for
+      its own calls into your clouds, not for your workloads logging in. Moves to B or A only if the
+      API accepts a federated token.
   outbound:
     grade: B
     mechanism: >-
-      Resource discovery authenticates with StrongDM-issued OIDC tokens that AWS (IAM role trust),
-      Entra ID (app with workload identity federation) and GCP (Workload Identity Pool) accept, and
-      many resource types run on the customer-run node's ambient identity (AWS instance profile with
-      optional role ARN and external ID, EKS instance profile, RDS IAM, Azure managed identity,
-      Kubernetes pod identity, Google ADC). Azure CLI cloud resources, GCP CLI/SDK (service account)
-      and GKE resources still want a static service-principal secret, certificate or JSON key.
+      Discovery uses StrongDM-issued OIDC tokens trusted by AWS, Entra ID and GCP. Many resources
+      use the identity of a node you run. Azure CLI, GCP service account and GKE resources need
+      static secrets.
     evidence:
       - url: https://docs.strongdm.com/admin/resources/discovery.md
         checked_on: 2026-10-22
@@ -131,23 +120,12 @@ surfaces:
         checked_by: tehreet
         quote: "Your credentials are stored in a tool that is controlled by you, and those credentials are never transmitted to StrongDM in any form."
     notes: >-
-      Checked: resource discovery connectors (AWS, Azure, GCP); AWS cloud resources (AWS static key,
-      AWS Instance Profile, AWS Management Console with role ARN and external ID or static key pair);
-      Azure cloud (password or certificate only); GCP (Workforce Identity Federation via StrongDM's
-      SAML CA, keyless; CLI/SDK service account needs a JSON key); Google Groups (node ADC, no stored
-      credential); Microsoft Entra ID (managed identity, or an app client secret on non-Azure nodes);
-      EKS (static IAM user keys) and EKS (Instance Profile); GKE (service account key); AKS and
-      generic Kubernetes (client certificates or service account tokens) and Kubernetes (Pod
-      Identity); RDS PostgreSQL (IAM) and Azure MySQL/PostgreSQL (Managed Identity); secret stores
-      (AWS Secrets Manager via instance role and AssumeRole, Azure Key Vault via managed identity, GCP
-      Secret Manager via ADC/WIF). The reach-in is split: StrongDM's SaaS mints the OIDC tokens for
-      discovery, while resource connections are made by gateways and relays you run, with credentials
-      stored by default in StrongDM's resource configuration or optionally in your own secret store.
-      Keyless options exist on all three clouds, so this sits at B because the Azure CLI, GCP CLI/SDK
-      and GKE resource types have no keyless mode. Most database and SSH resource types use passwords
-      or keys by nature; those are the target system's credentials, not the cloud reach-in, and
-      StrongDM can rotate some of them through its secret engines. Moves to A if Azure and GCP cloud
-      and GKE resources accept managed identity, ADC or StrongDM's OIDC issuer like discovery does.
+      StrongDM's SaaS mints the discovery tokens. Gateways and relays you run make resource
+      connections, using the node's identity or stored credentials. Keyless options exist on all
+      three clouds. It is B because Azure CLI, GCP CLI/SDK and GKE resources have no keyless mode.
+      Database and SSH passwords are the target system's credentials, not cloud access, so they do
+      not count. Moves to A if those three resource types accept managed identity, ADC or StrongDM's
+      issuer.
 
 hygiene:
   expiry:
@@ -162,10 +140,9 @@ hygiene:
         checked_by: tehreet
         quote: "--duration value duration before token expires in seconds (default: 0)"
     notes: >-
-      Fails: admin tokens and API keys can carry an expiry, but "never" is a listed choice, the CLI
-      duration defaults to 0, and no org policy to force or cap a lifetime is documented. Service
-      account tokens show no expiry setting at all (the Service account model has no deadline field).
-      A changeable option is not an enforced expiry (same call as elastic-cloud-api).
+      Admin tokens and API keys can expire, but "never" is a choice and no policy can force a
+      lifetime. Service account tokens have no expiry setting. A changeable option fails, as on
+      elastic-cloud-api.
   rotation_api:
     pass: true
     evidence:
@@ -186,11 +163,8 @@ hygiene:
         checked_by: tehreet
         quote: "API credential rotation is not currently available."
     notes: >-
-      Tokens are Account objects, so the SDK Accounts service (Create, Delete) and `sdm admin tokens
-      add`/`delete` create and revoke API keys and admin tokens without a browser; the create
-      response returns the access key and secret. API keys have no in-place rotate, so automated
-      rotation is create-new-then-delete; admin tokens also have a Rotate action with a 24-hour
-      overlap, documented in the Admin UI.
+      The SDK and CLI create and delete API keys and admin tokens. Rotating an API key means
+      creating a new one and deleting the old.
   scoping:
     pass: true
     evidence:
@@ -207,9 +181,8 @@ hygiene:
         checked_by: tehreet
         quote: "Like user accounts, service accounts gain access to resources through role membership, via the static and dynamic access rules that have been defined for that role."
     notes: >-
-      API keys and admin tokens carry an explicit permission list (for example role:create) rather
-      than their creator's rights, and service accounts are machine principals whose resource access
-      comes from their own roles.
+      API keys and admin tokens carry an explicit permission list. Service accounts get resource
+      access from their own roles.
   last_used:
     pass: false
     evidence:
@@ -222,10 +195,7 @@ hygiene:
         checked_by: tehreet
         quote: "// The timestamp when this key was last used, if at all."
     notes: >-
-      The Token model has created, deadline, duration, permissions and rekeyed timestamps but no
-      last-used field, and the tokens and service account docs do not mention last use. The second
-      quote is from ProxyClusterKey, which shows StrongDM tracks last use for proxy cluster keys but
-      not for API keys, admin tokens or service accounts.
+      Tokens and service accounts record creation and rekey times, but never last use.
   leak_revocation:
     pass: false
     evidence:
@@ -233,13 +203,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      StrongDM does not appear in GitHub's supported secret scanning patterns table, so a leaked API
-      key or admin token is not reported to StrongDM for revocation.
+      StrongDM is not in GitHub's secret-scanning table, so a leaked key or token is not reported to
+      StrongDM.
 
 notes: >-
-  One card for the StrongDM control plane (API, SDKs, Terraform provider, CLI admin and service
-  account tokens) and the resource credentials it brokers. Two of five hygiene checks pass, so
-  inbound is F; an enforceable maximum token lifetime would make three and lift it to D. StrongDM
-  already runs a per-org OIDC issuer for its own discovery calls, which shows the pieces exist;
-  accepting federated tokens from customer issuers for service accounts would move inbound to B or
-  A. Human SSO, MFA and the StrongDM Vault's secret engines are out of scope here.
+  Two of five hygiene checks pass, so inbound is F. An enforceable maximum token lifetime would lift
+  it to D. StrongDM already runs an OIDC issuer for its own discovery calls. Accepting customer
+  issuers for service accounts would move inbound to B or A. Human SSO and Vault secret engines are
+  out of scope.

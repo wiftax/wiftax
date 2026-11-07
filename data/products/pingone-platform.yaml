@@ -7,21 +7,16 @@ docs: https://developer.pingidentity.com/pingone-api/foundations/authentication-
 category: identity
 status: listed
 summary: >-
-  Automation against the PingOne Management API runs as a Worker app using client credentials,
-  with a client secret or a private_key_jwt key you hold. Tokens last an hour, but the root is
-  static. Token exchange only takes tokens from the same PingOne environment. Secrets never expire
-  and are not GitHub partner-revoked. They can be rotated and scoped by API. Provisioning connectors
-  want client secrets, refresh tokens, PATs or admin passwords that you paste in.
+  Automation calls the PingOne Management API as a Worker app holding a client secret or a private
+  key. It trades that for a one-hour token. Provisioning connectors want client secrets, tokens or
+  passwords you paste in.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      Worker application (OIDC client_credentials grant) authenticating at /as/token with
-      CLIENT_SECRET_BASIC (default), CLIENT_SECRET_POST, CLIENT_SECRET_JWT or PRIVATE_KEY_JWT
-      (public keys registered as a JWKS or an https JWKS URL). The 1-hour access token carries the
-      Worker app's admin role assignments. The Terraform provider and the API getting-started guide
-      both use Worker app credentials.
+      A Worker app trades a client secret or a signed private-key JWT for a one-hour token that
+      carries the app's admin roles. Terraform uses the same path.
     evidence:
       - url: https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-and-authentication-by-application-type/worker-applications.md
         checked_on: 2026-10-22
@@ -60,32 +55,17 @@ surfaces:
         checked_by: tehreet
         quote: "For client identification and authentication, e-Flyers uses the client ID and secret defined in PingOne for the e-Flyers Token Exchange application"
     notes: >-
-      C because the API issues 1-hour access tokens, but getting one always needs a credential the
-      Worker app holds for a long time: a client secret, or a private key whose public half is
-      registered in PingOne. This is the brief's rule that client_credentials with a secret, or
-      private_key_jwt with a static key you hold, is C at best. PRIVATE_KEY_JWT with a jwksUrl means
-      PingOne never stores a secret, and you can keep the key in an HSM or KMS and rotate it by
-      publishing a new JWKS. It is still a static root, though. PingOne does support RFC 8693 token
-      exchange, but it is not federation. The subject and actor tokens must come from the same
-      PingOne environment, and the calling app must still authenticate with its own secret or key.
-      So a GitHub Actions, cloud workload or other external OIDC token cannot be exchanged for a
-      PingOne token. External IdPs in PingOne (OIDC, SAML, social) only handle user sign-on. The
-      docs show no JWT-bearer grant, no trusted-issuer setting for client authentication, and no
-      workload identity path. Customer-hosted LDAP gateways authenticate with gateway credentials,
-      which are also static. No tier gate applies, because Worker apps are on every PingOne
-      environment. Sibling products have their own auth and are not graded here: PingOne Advanced
-      Identity Cloud (the ForgeRock-based single-tenant service) and self-managed PingFederate and
-      PingAM. Inbound reaches B or A only if PingOne accepts a client assertion or subject token
-      from an external issuer you configure.
+      C because tokens last an hour, but getting one always needs a long-lived secret or private
+      key. With a JWKS URL, PingOne never stores a secret, but your key is still a static root.
+      PingOne's token exchange only accepts tokens from the same PingOne environment, and the app
+      still needs its own secret. So a GitHub Actions or cloud workload token cannot be exchanged.
+      External IdPs only handle user sign-in. Worker apps exist on every environment, so there is no
+      tier gate. B or A needs PingOne to accept tokens from an external issuer you configure.
   outbound:
     grade: C
     mechanism: >-
-      Provisioning connections push users and groups into SaaS directories using credentials you
-      create in the target and paste into PingOne. Best case is an OAuth client secret, sometimes
-      with a refresh token (Entra ID, Google Workspace, Salesforce, Zoom, generic SCIM or REST
-      client credentials). Others want a GitHub EMU PAT, a Slack OAuth token, ServiceNow or Workday
-      service-account passwords, or a Snowflake private key. Webhooks take basic auth, a static
-      header token or an mTLS client key.
+      Provisioning pushes users into SaaS directories with credentials you create in the target and
+      paste into PingOne. The best case is an OAuth client secret.
     evidence:
       - url: https://docs.pingidentity.com/pingone/integrations/p1_create_azure_connection.md
         checked_on: 2026-10-22
@@ -136,25 +116,13 @@ surfaces:
         checked_by: tehreet
         quote: "For example, you can define a custom authorization header with a token instead of using basic authentication."
     notes: >-
-      Checked these provisioning connections: Entra ID (both the newer Entra ID connector and the
-      older Azure / Office 365 one), Google Workspace, Salesforce, Zoom, generic SCIM, REST, Box,
-      GitHub EMU, Slack, ServiceNow, Workday, Snowflake, LDAP gateway, and PingOne-to-PingOne. Also
-      checked webhooks (SIEM streaming). None is keyless. Entra ID needs a client secret on an app
-      registration you create, with no admin consent to a Ping-owned multi-tenant app and no
-      federated credential. Google Workspace and Salesforce take a client secret plus a refresh
-      token you mint. Zoom, SCIM and REST can use client credentials. Following the anthropic-api
-      card, a customer-managed OAuth client secret or refresh token is C, so the best mechanism is
-      graded. The rest would be D or F on their own: a GitHub EMU classic PAT with admin:enterprise
-      scope, a pasted Slack OAuth token, Snowflake key-pair JWT (PingOne holds your private key) or
-      a bearer token, ServiceNow and Workday service-account passwords, and Box or REST static
-      bearer tokens. PingOne-to-PingOne needs a target-environment Worker app's client ID and
-      secret. The LDAP gateway runs on your network and keeps the directory bind credentials there.
-      Webhooks can use an mTLS client key that PingOne holds, as well as basic auth or a static
-      header token. PingOne has no connectors into AWS, GCP or Azure subscriptions. The AWS items in
-      its docs are SAML SSO into AWS and PingOne Authorize kits that call into PingOne. DaVinci flow
-      connectors (hundreds of third-party services, each with its own credentials) and Aquera's
-      hosted connectors were not assessed one by one. Outbound would reach B with admin consent or a
-      federated credential for Entra ID, or a Ping-owned GitHub App.
+      None of the checked connectors is keyless. Entra ID needs a client secret on an app you
+      register, with no admin consent to a Ping app and no federated credential. Google Workspace
+      and Salesforce take a client secret plus a refresh token you mint. Same rule as the
+      anthropic-api card: a customer-managed client secret is C, and the best mechanism is graded.
+      Worse ones include a GitHub EMU admin token or ServiceNow passwords. PingOne has no connectors
+      into cloud accounts. Admin consent or a federated credential for Entra ID, or a Ping-owned
+      GitHub App, would make it B.
 
 hygiene:
   expiry:
@@ -169,11 +137,8 @@ hygiene:
         checked_by: tehreet
         quote: "For security reasons, you should change an application's client secret on a regular basis."
     notes: >-
-      The application secret data model has an expiry only on the previous secret, which is the
-      grace window after a rotation (1 minute to 90 days). The current secret has no expiresAt
-      field, and the docs describe no environment or organization policy that forces one. Regular
-      rotation is advice, not something PingOne enforces. Private_key_jwt keys expire only if you
-      expire them yourself.
+      The current secret has no expiry, and no policy forces one. Only the previous secret expires,
+      at the end of a rotation's grace window. Private keys expire only if you expire them.
   rotation_api:
     pass: true
     evidence:
@@ -190,9 +155,8 @@ hygiene:
         checked_by: tehreet
         quote: "Use the PingOne admin console or the PingOne API to change a client secret."
     notes: >-
-      POST /applications/{id}/secret creates a new secret and keeps the old one valid for an overlap
-      window. DELETE removes the previous secret early. Private_key_jwt keys rotate by changing
-      the jwks or jwksUrl, either through an application update or on the JWKS host.
+      The API creates a new secret and keeps the old one valid for an overlap window. Private keys
+      rotate by updating the JWKS.
   scoping:
     pass: true
     evidence:
@@ -209,11 +173,8 @@ hygiene:
         checked_by: tehreet
         quote: "When creating a new Worker application, by default the application inherits the same role assignments as the actor that created the application."
     notes: >-
-      A Worker app is a purpose-built machine principal with its own admin role assignments, which
-      the rubric counts. Roles can be limited to an organization, environment, population, group or
-      application, and custom admin roles exist. One catch: a Worker app created through the API
-      inherits its creator's roles unless assignActorRoles is false. Apps created in the console
-      start with no roles.
+      A Worker app is a machine identity with its own admin roles, which can be narrowed to one
+      group or app. An app created by API inherits its creator's roles unless you turn that off.
   last_used:
     pass: false
     evidence:
@@ -222,10 +183,8 @@ hygiene:
         checked_by: tehreet
         quote: "A timestamp that specifies when the previous secret was last used."
     notes: >-
-      Judgment call. PingOne records lastUsed only for the previous secret during a rotation's
-      grace window, so you can confirm cutover before revoking it. The data models for the current
-      secret and for the application have no last-used timestamp, so an unused Worker app cannot be
-      found from its credential.
+      Judgment call. PingOne records last use only for the previous secret during rotation. The
+      current secret has no last-used time, so an unused Worker app cannot be found.
   leak_revocation:
     pass: false
     evidence:
@@ -233,13 +192,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Neither Ping Identity nor PingOne appears in GitHub's supported secret-scanning patterns, as a
-      partner or otherwise, so a leaked Worker app secret is not revoked automatically.
+      Ping Identity is not in GitHub's secret-scanning patterns, so a leaked secret is not revoked
+      automatically.
 
 notes: >-
-  Graded on the PingOne multi-tenant platform: its Management API and the Terraform provider,
-  both of which authenticate with Worker apps. Two of five hygiene checks pass
-  (rotation API and scoping), but inbound is C either way because client credentials mint
-  short-lived tokens. Siblings with different machine auth are not graded here: PingOne Advanced
-  Identity Cloud, and self-managed PingFederate and PingAM, which are software you run. All docs used are public: the docs.pingidentity.com and
-  developer.pingidentity.com .md alternates, plus the Terraform provider on GitHub.
+  Graded on multi-tenant PingOne and its Terraform provider. Only two hygiene checks pass, but
+  inbound is C either way because client credentials mint short-lived tokens. PingOne Advanced
+  Identity Cloud, PingFederate and PingAM have different machine auth and are not graded here. All
+  cited docs are public.

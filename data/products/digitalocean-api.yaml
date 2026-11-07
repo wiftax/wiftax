@@ -15,19 +15,15 @@ docs: https://docs.digitalocean.com/reference/api/create-personal-access-token/
 category: cloud
 status: listed
 summary: >-
-  Every automated path into DigitalOcean (API, doctl, Terraform, registry logins, DOKS kubeconfigs)
-  starts from a personal access token made by hand in the Control Panel. Tokens can carry custom
-  scopes, show last use and are covered by GitHub secret scanning, but nothing forces an expiry and
-  there is no API to mint or rotate them. No federation from GitHub Actions or any other issuer.
-  Spaces keys are static too. Paperspace has its own card.
+  Every automated path into DigitalOcean starts from a personal access token made by hand in the
+  Control Panel, with no federation from GitHub Actions or other issuers. Repo access is by consent,
+  but S3 indexing takes a pasted key. Paperspace has its own card.
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      A static personal access token (PAT) created in the Control Panel, sent as a bearer token to
-      api.digitalocean.com and used by doctl, Terraform, docker login to registry.digitalocean.com
-      and DOKS kubeconfig generation. Spaces object storage uses separate static S3-style access
-      keys. No documented OIDC or workload identity exchange into the API.
+      A static personal access token made in the Control Panel, used by the API, doctl, Terraform,
+      registry logins and DOKS kubeconfigs. Spaces uses separate static S3-style keys.
     issuers: []
     evidence:
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
@@ -75,26 +71,18 @@ surfaces:
           we’ll deploy an open source Proof of Concept (PoC), configure roles and policies for
           workload identity access control
     notes: >-
-      Graded on the weakest path a workload must use, which is the control-plane PAT: Spaces keys,
-      registry credentials and DOKS OAuth tokens are all minted from it or beside it, and are
-      static themselves. DOKS cluster SSO accepts an OIDC issuer, but it is a browser login for
-      people and only covers kubectl against one cluster, so it does not lift the grade (rubric:
-      federation must be documented for workloads). The OAuth API is an authorization-code flow for
-      third-party apps (30-day access tokens, single-use refresh tokens, client secret for
-      confidential clients); at best that is a static root (C), and it needs a person to authorize
-      it. DigitalOcean's security team published a three-part blog series building workload
-      identity federation for Droplets and GitHub Actions on top of that OAuth API, but it is an
-      open-source proof of concept the customer deploys and runs, not a platform feature, so it is
-      noted and not credited. What would move this to B or A: a token-exchange endpoint on
-      cloud.digitalocean.com that trusts GitHub Actions (B) or any configured OIDC issuer (A) and
-      returns a short-lived, scoped API token. Hygiene passes 3 of 5, so D.
+      Graded on the personal access token, since Spaces keys, registry logins and DOKS tokens all
+      come from it or sit beside it. DOKS cluster SSO accepts an OIDC issuer, but only for people
+      logging in with kubectl, so it does not count. The OAuth API needs a person to authorize it
+      and a client secret, so C at best. DigitalOcean's security team blogged an open-source
+      federation proof of concept, but you run it yourself, so it is not credited. Hygiene passes 3
+      of 5, so D.
   outbound:
     grade: B
     mechanism: >-
-      App Platform pulls source from GitHub, GitLab and Bitbucket after the user grants the
-      repository service access, and Knowledge Bases connect Dropbox by OAuth; both keyless.
-      Knowledge Bases index Amazon S3 only with a pasted IAM access key and secret, and App
-      Platform pulls private Docker Hub and GHCR images with a pasted username:token.
+      App Platform pulls from GitHub, GitLab and Bitbucket after you grant access, and Knowledge
+      Bases connect Dropbox by OAuth. S3 indexing and private Docker Hub or GHCR pulls take pasted
+      keys.
     evidence:
       - url: https://docs.digitalocean.com/products/app-platform/how-to/create-apps/index.html.md
         checked_on: 2026-10-22
@@ -132,16 +120,11 @@ surfaces:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Checked: App Platform Git sources (GitHub, GitLab, Bitbucket; consent, keyless) and container
-      sources (DOCR native; Docker Hub and GHCR by pasted username:token, with DigitalOcean
-      recommending a non-expiring token); Knowledge Bases data sources (Spaces native, web crawl of
-      public URLs, Dropbox by OAuth consent, Amazon S3 by pasted IAM access key with no
-      least-privilege or rotation guidance); custom image import (public URL download, no
-      credential); Spaces migration (a third-party tool, Flexify.IO, not DigitalOcean reaching in).
-      No integration uses an AWS role, GCP impersonation or Azure federated credential. B rests on
-      the rubric's rule that consent apps count as keyless; the only cloud integration (S3) is a
-      pasted static key, so a reviewer reading B as "keyless on a cloud" would put this at F.
-      Gradient AI and GPU Droplet docs describe no other reach-in.
+      Git sources and Dropbox use consent, which the rubric counts as keyless. Amazon S3 takes a
+      pasted IAM access key with no least-privilege or rotation guidance. Docker Hub and GHCR take a
+      pasted token, and DigitalOcean suggests a non-expiring one. No integration uses an AWS role,
+      GCP impersonation or Azure federation. B rests on the consent-app rule. A reviewer reading B
+      as "keyless on a cloud" would put this at F, since S3 is the only cloud integration.
 hygiene:
   expiry:
     pass: false
@@ -159,11 +142,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      PATs take an expiration chosen by the creator. The public docs do not list the options or a
-      default, and no team setting caps token lifetime (team settings cover contact emails, secure
-      sign-in and SSO only). doctl documents minting API tokens that never expire, and Spaces access
-      keys document no expiry at all. A changeable default is not an enforced expiry (precedent:
-      temporal.yaml, coreweave-object-storage.yaml).
+      Tokens take an expiry chosen by the creator, but no team setting caps it. doctl documents
+      never-expiring tokens, and Spaces keys have no expiry. A changeable default fails, as on
+      temporal and coreweave-object-storage.
   rotation_api:
     pass: false
     evidence:
@@ -179,12 +160,9 @@ hygiene:
         checked_by: tehreet
         quote: To create a new Spaces Access Key, send a POST request to `/v2/spaces/keys`.
     notes: >-
-      The API reference (and DigitalOcean's public OpenAPI spec) has no endpoint to create, list or
-      revoke personal access tokens; regenerate and delete live in the Control Panel menu. The
-      scopes page mentions "creating tokens through the API" but no such endpoint is published.
-      Spaces keys do have create/delete endpoints (the Spaces how-to page still says they cannot be
-      managed by API, which is out of date), and `doctl registries login` mints registry tokens,
-      but both run on an existing PAT. Rotating the root credential needs a browser.
+      No published endpoint creates or revokes personal access tokens. Spaces keys and registry
+      tokens can be made by API, but only with an existing token. Rotating the root token needs a
+      browser.
   scoping:
     pass: true
     evidence:
@@ -205,11 +183,8 @@ hygiene:
         quote: >-
           Limited access allows you to grant permissions for specific buckets.
     notes: >-
-      A PAT can be cut down to individual resource-type CRUD scopes, which meets the rubric's
-      "subset of permissions". It is still a token belonging to a person (custom scopes are capped
-      by that user's team role and the token dies with them); DigitalOcean has no service-account or
-      API-only principal. Scopes are per resource type, not per resource, and the registry pull
-      secret applies to every registry on the account. Spaces keys can be limited per bucket.
+      A token can be limited to per-resource-type scopes, which passes. It still belongs to a
+      person, since DigitalOcean has no service account. Spaces keys can be limited per bucket.
   last_used:
     pass: true
     evidence:
@@ -226,8 +201,7 @@ hygiene:
           You can click the entry in the Scopes column to view details about the token’s usage and
           scopes.
     notes: >-
-      The token list shows last-used status; the quote is the documented description of the token
-      table screenshot. Not documented for Spaces access keys.
+      The token list shows last use. Spaces keys do not.
   leak_revocation:
     pass: true
     evidence:
@@ -247,13 +221,10 @@ hygiene:
         checked_by: tehreet
         quote: "| DigitalOcean | DigitalOcean Refresh Token | digitalocean_refresh_token | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |"
     notes: >-
-      The first ✓ is GitHub's Partner column. Personal access, OAuth, refresh and system tokens are
-      all partner patterns. Spaces access keys do not appear in the table.
+      GitHub reports leaked DigitalOcean personal access, OAuth and refresh tokens to DigitalOcean.
+      Spaces keys are not covered.
 notes: >-
-  One card for the DigitalOcean control plane and the data planes reached with its credentials
-  (Spaces, Container Registry, DOKS kubeconfigs), since all of them bootstrap from the same PAT;
-  splitting Spaces would not change its grade (static keys, no expiry, per-bucket scoping, API
-  create/delete). Paperspace (now part of DigitalOcean) still has its own console and team API keys
-  and is graded on the paperspace card. The fix list: a federated token exchange for GitHub Actions
-  and arbitrary OIDC issuers (DigitalOcean's own PoC shows the shape), an API to create and revoke
-  PATs, a team policy that caps token lifetime, and a non-human principal to own tokens.
+  One card for the control plane and the services reached with its tokens, since all start from the
+  same personal access token. Splitting out Spaces would not change its grade. Paperspace is graded
+  on its own card. Fixes: a federated token exchange, an API for tokens, a team lifetime cap, and a
+  non-human token owner.

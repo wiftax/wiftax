@@ -8,18 +8,15 @@ docs: https://docs.runpod.io/get-started/credentials
 category: cloud
 status: listed
 summary: >-
-  Every way a workload drives Runpod (REST v2, GraphQL, runpodctl, the rp and Flash CLIs, GitHub
-  Actions) runs on a static API key; network volumes over S3 need a second static key. No OIDC or
-  federation exists. API keys can be scoped, show a last-used time and are GitHub partner-revoked,
-  but cannot be forced to expire or rotated by API. Into your infra, only private ECR pulls are
-  keyless; Cloud Sync and other registries take pasted keys.
+  Every way you drive Runpod, including the API, CLIs and GitHub Actions, uses a static API key.
+  Network volumes over S3 need a second static key. Runpod pulls private ECR images without keys,
+  but Cloud Sync and other registries take pasted keys.
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static Runpod API key sent as a Bearer token to the REST API v2, the GraphQL API, runpodctl,
-      the rp/Flash CLIs and Serverless endpoint calls; a separate static S3 API key (access key +
-      rps_ secret) for the network volume S3-compatible API. Both are created in the console.
+      A static API key sent as a bearer token to the REST and GraphQL APIs and the CLIs. The S3 API
+      for network volumes uses a separate static key pair.
     issuers: []
     evidence:
       - url: https://docs.runpod.io/api-reference-v2/overview.md
@@ -54,24 +51,17 @@ surfaces:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Searched the full docs export (llms-full.txt), the REST v2 OpenAPI spec and the GraphQL schema:
-      no OIDC, OpenID, workload identity, federation or token-exchange path exists for any plane,
-      and Runpod's own GitHub Actions example stores the API key as a repository secret. The only
-      non-key bearer the API accepts is a console session JWT for a signed-in human. The rp and
-      Flash CLI "browser" logins simply mint and save an API key locally. The S3-compatible API for
-      network volumes uses its own static access key/secret pair, which is the weakest data-plane
-      path (no expiry, scoping or last-used is documented for it); it is optional, since Pods can
-      mount volumes directly, so the card is graded on the API key that every workload must hold.
-      Runpod has no managed Kubernetes or hosted registry to grade separately, so one card covers
-      the vendor.
+      No OIDC, workload identity or token exchange exists anywhere in the docs or API specs.
+      Runpod's own GitHub Actions example stores the key as a secret. The CLI browser logins just
+      mint and save an API key. The S3 key is weaker, with no expiry, scoping or last use. It is
+      optional, since Pods can mount volumes directly, so the card is graded on the API key. One
+      card covers the vendor, since Runpod has no managed Kubernetes or registry.
   outbound:
     grade: B
     mechanism: >-
-      Private AWS ECR pulls are keyless: you add a repository policy trusting Runpod's fixed AWS
-      deployment roles and register the repository. Every other reach-in takes a pasted static
-      credential: Cloud Sync (AWS access key, GCP service-account JSON, Azure account key,
-      Backblaze key, Dropbox token), Docker Hub/GHCR/GAR registry passwords, and Hugging Face
-      tokens. The GitHub deploy integration is a GitHub App you install.
+      Private ECR pulls are keyless through a repository policy that trusts Runpod's AWS roles.
+      Cloud Sync, other registries and Hugging Face take pasted credentials. GitHub deploys use an
+      installed GitHub App.
     evidence:
       - url: https://docs.runpod.io/tutorials/pods/use-private-ecr-images.md
         checked_on: 2026-10-22
@@ -114,19 +104,12 @@ surfaces:
         checked_by: tehreet
         quote: "Uninstall \"Runpod Inc.\""
     notes: >-
-      Checked: ECR delegation (Pods and Serverless, beta), Container Registry Auth (Docker Hub,
-      GHCR, Google Artifact Registry/gcr.io, other registries), Cloud Sync (S3, GCS, Azure Blob,
-      Backblaze B2, Dropbox), Hugging Face cached models, and the GitHub deploy integration. AWS ECR
-      is the one keyless cloud path, which makes this B rather than D/F. Cloud Sync is the worst:
-      it tells you to create an AWS access key under "Security credentials" and paste GCP
-      service-account JSON or an Azure storage account key, with only generic advice to use
-      dedicated accounts and rotate; GCP and Azure have no keyless option anywhere. A reviewer
-      should check the ECR design: the repository policy trusts Runpod's shared deployment roles
-      with no External ID or per-customer condition, and the delegation API takes only the
-      repository ARN, so nothing documented stops another Runpod account that knows the URI from
-      registering the same repository (a confused-deputy gap; still keyless, so not graded down).
-      The GitHub integration is a GitHub App installed with repository selection, which the rubric
-      counts as keyless.
+      ECR is the one keyless cloud path, which makes this B rather than D or F. Cloud Sync is the
+      worst. It asks you to paste an AWS access key, a GCP service-account JSON or an Azure storage
+      key. GCP and Azure have no keyless option anywhere. A reviewer should check the ECR design.
+      The policy trusts Runpod's shared roles with no External ID, so another Runpod account that
+      knows the repository could register it. That is a confused-deputy gap, but still keyless, so
+      not graded down. The GitHub App counts as keyless.
 hygiene:
   expiry:
     pass: false
@@ -144,12 +127,9 @@ hygiene:
         checked_by: tehreet
         quote: "Least-privilege tokens with fine-grained scopes and expirations for safer automation."
     notes: >-
-      The November 2024 release note promises "expirations", but the current key-creation steps
-      ask only for a name and permissions, and the GraphQL ApiKey type (id, permissions, createdAt,
-      lastUsed, name, policies, isActive, isLegacy) has no expiry field. No default lifetime,
-      maximum or org policy is documented, and S3 API keys show none either. Per the
-      changeable-default precedent (temporal passes on a platform-enforced cap), nothing here is
-      enforced, so fail. Keys can be disabled with a toggle, which is not expiry.
+      A 2024 release note promised expirations, but key creation asks only for a name and
+      permissions. No lifetime or policy is enforced, unlike temporal's cap. Disabling a key is not
+      expiry.
   rotation_api:
     pass: false
     evidence:
@@ -166,12 +146,8 @@ hygiene:
         checked_by: tehreet
         quote: "Use it to create and manage Pods, query Serverless endpoints, provision storage, and retrieve billing data"
     notes: >-
-      API keys and S3 API keys are created, edited, disabled and revoked only on the console
-      Credentials page. REST v2 covers SSH keys, secrets, registry credentials and ECR delegations
-      but has no API-key endpoints; the published GraphQL mutations are pod, cluster and
-      registry-auth operations only (keys can be listed via myself.apiKeys, not minted or
-      revoked). Account secrets can be rotated by API, but those are values Runpod stores for you,
-      not credentials it issues.
+      Keys are created and revoked only in the console. Neither API can mint or revoke keys. Account
+      secrets rotate by API, but those are values Runpod stores, not credentials it issues.
   scoping:
     pass: true
     evidence:
@@ -188,12 +164,9 @@ hygiene:
         checked_by: tehreet
         quote: "Read/Write**: Full access to your endpoints."
     notes: >-
-      There is no service account or other machine principal; keys belong to a user or a team
-      (team-created keys act for the team, and Organizations, in beta, add member roles). But the
-      key itself carries permissions narrower than its owner: All, Read Only, or Restricted with
-      per-API None/Read Only/Read-Write and per-Serverless-endpoint access. That is a key limited
-      to a subset of permissions and resources, so it passes. Legacy keys from before
-      2024-11-11 have full AI API access. S3 API keys document no scoping.
+      There is no machine account, but each key can be narrower than its owner: read-only, or
+      restricted per API and per Serverless endpoint. Keys made before November 2024 have full
+      access. S3 keys have no scoping.
   last_used:
     pass: true
     evidence:
@@ -202,9 +175,8 @@ hygiene:
         checked_by: tehreet
         quote: "lastUsed - DateTime"
     notes: >-
-      The GraphQL ApiKey type exposes lastUsed alongside createdAt, so dead keys can be found
-      programmatically. The console docs do not mention a last-used column, and nothing equivalent
-      is documented for S3 API keys.
+      The GraphQL API shows a last-used time for each key, so dead keys can be found. S3 keys have
+      nothing similar.
   leak_revocation:
     pass: true
     evidence:
@@ -213,14 +185,8 @@ hygiene:
         checked_by: tehreet
         quote: "| RunPod | RunPod API Key | runpod_api_key | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |"
     notes: >-
-      The first ✓ is GitHub's Partner column, so a Runpod API key pushed to a public repo is
-      reported to Runpod. S3 API keys are not listed.
+      GitHub reports Runpod API keys pushed to public repos to Runpod. S3 keys are not covered.
 notes: >-
-  One card for the whole vendor: Pods, Serverless, Instant Clusters, network and global volumes
-  are all driven by the same API key, and Runpod has no managed Kubernetes or registry with its own
-  auth. Three of five hygiene checks pass (scoping, last used, GitHub partner revocation), which
-  holds inbound at D; an enforced expiry or an API to mint and revoke keys would make four. Inbound
-  moves to B or A only with a federated path (GitHub Actions OIDC or a bring-your-own issuer)
-  into the API. Outbound moves to A with keyless GCS/Azure/S3 for Cloud Sync and GAR, and should
-  add an External ID or per-customer condition to ECR delegation. REST API v1 is retired on
-  2026-11-15; this card is graded on v2.
+  Covers the whole vendor, since every product uses the same API key. Inbound moves to B or A only
+  with federation. Outbound moves to A with keyless Cloud Sync and registry pulls, and ECR should
+  add an External ID. REST API v1 retires on 2026-11-15, and this card grades v2.

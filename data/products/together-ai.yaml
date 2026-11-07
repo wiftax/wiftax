@@ -7,20 +7,16 @@ docs: https://docs.together.ai/docs/api-keys-authentication
 category: cloud
 status: listed
 summary: >-
-  Every workload path into Together (inference, fine-tuning, the GPU cluster API, the CLI in CI,
-  the container registry) runs on a static project API key. There is no OIDC or federation path
-  for workloads. Keys are project-scoped, but expiry is optional, there is no API to mint or revoke
-  them, no last-used view and no GitHub partner revocation. Pulls from S3 use presigned URLs;
-  Hugging Face and W&B want pasted tokens.
+  Every workload path into Together, from inference to the GPU cluster API and CI, runs on a static
+  project API key. There is no federation for workloads. Outbound, S3 imports use presigned URLs you
+  sign, but Hugging Face and W&B want pasted tokens.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static project-scoped API key (Authorization: Bearer, TOGETHER_API_KEY) created in the web
-      console, used by the REST API, SDKs, the tg CLI in CI and image pushes to Together's
-      registry. The CLI's browser device login is for humans; GPU cluster OIDC is interactive
-      kubectl login for team members.
+      A static project API key created in the console, used by the API, SDKs, CLI in CI and registry
+      pushes. The CLI's device login and cluster OIDC are for humans.
     issuers: []
     evidence:
       - url: https://docs.together.ai/docs/api-keys-authentication.md
@@ -68,26 +64,17 @@ surfaces:
         checked_by: tehreet
         quote: "When OIDC is enabled, editors use the OIDC kubeconfig for day-to-day `kubectl` access, and project admins keep the admin kubeconfig for administrative tasks such as RBAC setup."
     notes: >-
-      Graded on the weakest path a workload must use: every control-plane call (create a cluster,
-      launch a fine-tune, deploy an endpoint) and every inference call takes a project API key, and
-      Together's own GitHub Actions example stores one as a repo secret. The OpenAPI spec defines
-      only a bearerAuth scheme; no token exchange, GitHub Actions OIDC, cloud workload identity or
-      service-account type is documented, and no Terraform provider is listed in the public
-      registry. GPU cluster "external OIDC" makes the cluster's Kubernetes API server trust an
-      issuer and client ID you set at cluster creation (it cannot be added later), so a JWT from
-      your IdP authenticates kubectl and RBAC binds on email, preferred_username or sub. It is
-      documented only as an interactive browser/PKCE login for team members, and creating the
-      cluster and fetching its kubeconfig still need the API key or console, so it does not lift
-      the grade (rubric: federation must be self-serve and documented for workloads). A
-      Kubernetes-native workload identity setup on that API server may work but is not documented.
-      Not split into a GPU clusters card: unlike CoreWeave CKS, the cluster control plane uses the
-      same API key and the only federation is the human kubectl login described here.
+      Graded on the weakest path a workload must use. Every control-plane and inference call takes a
+      project key, and Together's GitHub Actions example stores one as a secret. The API spec
+      defines only bearer auth. GPU clusters can trust your OIDC issuer for kubectl, but it is
+      documented only as an interactive human login. Creating the cluster and fetching its
+      kubeconfig still need the API key, so it does not lift the grade. Unlike CoreWeave CKS, the
+      cluster control plane uses the same key, so there is no separate card.
   outbound:
     grade: B
     mechanism: >-
-      Model and adapter imports from S3 take a presigned archive URL you mint (no credential
-      handed over). Hugging Face imports and pushes take a pasted hf_ token, and W&B logging takes
-      a pasted W&B API key.
+      S3 imports take a presigned URL you mint, so no credential changes hands. Hugging Face takes a
+      pasted token, and W&B logging a pasted API key.
     evidence:
       - url: https://docs.together.ai/docs/dedicated-endpoints/custom-models.md
         checked_on: 2026-10-22
@@ -122,19 +109,11 @@ surfaces:
         checked_by: tehreet
         quote: "Together creates the key in your organization's default project and sets it as the `TOGETHER_API_KEY` environment variable in the Vercel project."
     notes: >-
-      Checked: dedicated-endpoint model and LoRA adapter uploads (Hugging Face, S3), the remote
-      model upload API, fine-tuning from a Hugging Face model (from_hf_model, hf_api_token),
-      fine-tuning output to Hugging Face (hf_output_repo_name), Weights & Biases logging
-      (wandb_api_key), the console Vercel integration, dedicated containers (images come from
-      Together's own registry, secrets are values you store with Together) and GPU clusters (data
-      loads are pods you run, not Together reaching in). Judgment call: S3 is counted as keyless
-      because Together never holds an AWS credential, only a presigned URL you sign yourself with
-      a minimum 100-minute life; there is no cross-account IAM role, GCS or Azure path at all.
-      Hugging Face and W&B take static tokens, with only a "read access" hint and no rotation
-      guidance, which caps outbound at B. The Vercel integration is a console connection that
-      pushes a Together key into Vercel (consent, no secret given to Together). Outbound would be
-      A with Hugging Face OAuth/app consent and a W&B alternative to pasted keys; if presigned
-      URLs are not accepted as keyless, this is D/F.
+      Judgment call: S3 counts as keyless because Together never holds an AWS credential, only a URL
+      you sign. There is no IAM role, GCS or Azure path. Hugging Face and W&B tokens come with only
+      a read-access hint and no rotation guidance, which caps outbound at B. The Vercel integration
+      pushes a Together key into Vercel, so Together holds no secret. Hugging Face OAuth and a W&B
+      alternative would make it A. If presigned URLs do not count as keyless, this is D or F.
 
 hygiene:
   expiry:
@@ -149,9 +128,8 @@ hygiene:
         checked_by: tehreet
         quote: "To keep a key that's scheduled to expire, select **Cancel expiration** from the same menu."
     notes: >-
-      Expiry is opt-in at creation, can be cancelled afterwards, and the docs recommend it only
-      "for keys used in temporary or testing contexts". No org policy can force it. A changeable
-      default is not an enforced expiry (precedent: temporal passes on a platform-enforced cap).
+      Expiry is optional, can be removed later, and is advised only for temporary keys. No policy
+      can force it. Compare temporal, which passes on a platform-enforced cap.
   rotation_api:
     pass: false
     evidence:
@@ -163,8 +141,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Keys are created, given an expiry and revoked in the console only. The public OpenAPI spec
-      has no API-key endpoints (projects are list-only), and the CLI has no key commands.
+      Keys are created, given an expiry and revoked in the console only. Neither the API nor the CLI
+      manages keys.
   scoping:
     pass: true
     evidence:
@@ -185,12 +163,9 @@ hygiene:
         checked_by: tehreet
         quote: "Today, all project collaborators (both admins and editors) have full access to these services."
     notes: >-
-      Passed narrowly: a project key belongs to the project, not to a person, and reaches only
-      that project's resources, so a dedicated project per workload gives a resource-limited
-      credential. There are no per-key permissions (a key is full access to its project, RBAC for
-      inference and fine-tuning is "still being rolled out") and the legacy org key "can't be
-      scoped to a specific project or workload, and can't be revoked". If resource-only scoping is
-      not enough, this flips to fail and the grade is unchanged.
+      Passed narrowly. A project key belongs to the project, not a person, and reaches only that
+      project. Keys have no per-key permissions, and the legacy org key cannot be scoped or revoked.
+      Failing this would not change the F.
   last_used:
     pass: false
     evidence:
@@ -203,10 +178,8 @@ hygiene:
         checked_by: tehreet
         quote: "Use API key IDs to segment usage and cost by key and workload."
     notes: >-
-      No last-used timestamp is documented for API keys. Cost analytics can group daily spend by
-      key (beta), which shows billable usage only, not a last-use time. The API keys settings page
-      itself is behind a login and not publicly verifiable; even if it shows a last-used column,
-      that is two of five checks and inbound stays F.
+      No last-used time is documented. Cost analytics shows spend per key, not last use. Even a
+      hidden last-used column would make two of five, and inbound stays F.
   leak_revocation:
     pass: false
     evidence:
@@ -214,14 +187,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Together AI does not appear in GitHub's supported secret-scanning patterns table, partner or
-      otherwise. A leaked key keeps working until someone revokes it in the console.
+      Together AI is not in GitHub's secret-scanning table. A leaked key works until someone revokes
+      it in the console.
 
 notes: >-
-  One card for the Together platform: serverless and dedicated inference, fine-tuning and
-  post-training, dedicated containers and the GPU clusters API all share one credential, the
-  project API key. One of five hygiene checks passes (scoping, narrowly). Inbound moves to D with
-  an API to create and revoke keys plus enforced expiry or a last-used column, and to B or A only
-  with a documented token exchange for workloads (GitHub Actions OIDC, cloud workload identity or a
-  bring-your-own issuer). GPU cluster Kubernetes OIDC already trusts customer issuers for humans;
-  documenting it for workloads would help the data plane but not the API-key control plane.
+  Inference, fine-tuning, containers and the GPU clusters API all share the project key. One of five
+  hygiene checks passes. Inbound moves to D with a key management API plus enforced expiry or last
+  use. It reaches B or A only with a token exchange for workloads.

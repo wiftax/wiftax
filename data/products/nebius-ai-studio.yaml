@@ -10,19 +10,16 @@ docs: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
 category: cloud
 status: listed
 summary: >-
-  Token Factory's OpenAI-compatible inference, fine-tuning, batch and dedicated-endpoint APIs take
-  a static project API key created by hand in the web UI; no expiry, rotation API, last-used view
-  or GitHub partner revocation is documented. Only the Sandboxes API also takes a Nebius IAM token.
-  Fine-tuning pushes to Hugging Face and W&B with tokens you paste in.
+  To call Token Factory's inference or fine-tuning APIs, your code needs a static project API key
+  made by hand in the web UI. Only the Sandboxes API also takes a Nebius IAM token. Fine-tuning
+  pushes to Hugging Face and W&B with tokens you paste in.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API key created on the project's API keys page in the Token Factory UI and sent as
-      Authorization: Bearer (NEBIUS_API_KEY) to the inference, fine-tuning, files, batch,
-      datasets and dedicated-endpoint APIs and to Prometheus metrics scraping. The Sandboxes API
-      alone documents a Nebius IAM bearer token plus Project header as its recommended scheme.
+      A static project API key from the Token Factory UI, sent as a bearer token. Only the Sandboxes
+      API also accepts a Nebius IAM token.
     issuers: []
     evidence:
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
@@ -54,21 +51,16 @@ surfaces:
         checked_by: tehreet
         quote: "Supports two auth types: iam (default) — bearer token + project ID, default URL provided jwt (legacy) — bearer token only, URL must be specified"
     notes: >-
-      Graded on the inference and fine-tuning API, the path every workload must use. Its OpenAPI
-      security scheme is a plain HTTP bearer and every guide uses NEBIUS_API_KEY; no Nebius IAM
-      token, service-account or federated path is documented for it. The Sandboxes API is the
-      exception: it takes a Nebius IAM token, which a workload could obtain keylessly through the
-      federated credentials graded A on nebius-ai-cloud, but a side endpoint does not lift the
-      product. The Nebius IAM StaticKey enum has an AI_STUDIO service, which hints that Token
-      Factory keys are IAM static keys (six-month default, three-year cap); that is not stated in
-      any Token Factory doc and is not credited. If Token Factory documented IAM-token auth for
-      inference, this card would inherit the AI Cloud grade.
+      Graded on the inference and fine-tuning API, which every workload must use. It documents only
+      the API key, with no IAM token or federated path. The Sandboxes API takes a Nebius IAM token,
+      which a workload could get keylessly through the federation graded A on nebius-ai-cloud. A
+      side endpoint does not lift the product. Nebius IAM hints that these keys may be IAM static
+      keys with a three-year cap, but no Token Factory doc says so, so it is not credited.
   outbound:
     grade: F
     mechanism: >-
-      Fine-tuning jobs export to Hugging Face with a pasted HF access token and to Weights & Biases
-      with a pasted W&B API key; Sandboxes import images from private registries with a username
-      and personal access token.
+      Fine-tuning exports to Hugging Face and Weights & Biases with tokens you paste. Sandboxes pull
+      private images with a username and access token.
     evidence:
       - url: https://docs.tokenfactory.nebius.com/post-training/how-to-fine-tune.md
         checked_on: 2026-10-22
@@ -87,12 +79,9 @@ surfaces:
         checked_by: tehreet
         quote: "**Working with custom model weights** is currently in beta and available on request."
     notes: >-
-      Checked: fine-tuning integrations (wandb, mlflow, hf), Sandboxes image import from Docker
-      Hub, GHCR and other registries, custom model weights (beta, support-enabled, no public auth
-      details) and dataset upload (pushed in by you, inbound). Every reach-in is a static token
-      you paste. The Hugging Face guidance asks for write access to the one output repo, which on
-      its own would be D; the W&B API key and registry PATs come with no least-privilege
-      guidance, so the surface is F. No cloud bucket integration is documented.
+      Every reach-in is a static token you paste. The Hugging Face guidance asks for write access to
+      one repo only, which alone would be D. The W&B key and registry tokens come with no
+      least-privilege guidance, so the surface is F. No cloud bucket integration is documented.
 
 hygiene:
   expiry:
@@ -103,8 +92,8 @@ hygiene:
         checked_by: tehreet
         quote: "Enter the key name and then click **Create**."
     notes: >-
-      The documented create flow asks only for a name. No expiry, default lifetime or org policy
-      is documented for Token Factory API keys; the API keys page itself is behind a login.
+      Creating a key asks only for a name. No expiry or org policy is documented, and the API keys
+      page is behind a login.
   rotation_api:
     pass: false
     evidence:
@@ -113,9 +102,7 @@ hygiene:
         checked_by: tehreet
         quote: "The value cannot be opened again later."
     notes: >-
-      Keys are created and deleted in the Token Factory UI; the API reference (models,
-      completions, files, fine-tuning, batch, datasets, endpoints, Sandboxes) has no key
-      endpoints.
+      Keys are created and deleted only in the UI. The API reference has no key endpoints.
   scoping:
     pass: false
     evidence:
@@ -128,16 +115,16 @@ hygiene:
         checked_by: tehreet
         quote: "A **project** is a logical container for your Nebius Token Factory resources."
     notes: >-
-      A key lives in one project, but project Members have full access to every project API, so
-      a key is the creating user's project access. The groups page mentions service accounts in
-      passing; no way to create one or give it a narrower role is documented in Token Factory.
+      A key lives in one project, but project members get full access to every project API. No
+      narrower service account is documented.
   last_used:
     pass: false
     evidence:
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
         checked_on: 2026-10-22
         checked_by: tehreet
-    notes: No last-used timestamp is documented; the API keys page is behind a login.
+    notes: >-
+      No last-used time is documented. The API keys page is behind a login.
   leak_revocation:
     pass: false
     evidence:
@@ -149,13 +136,10 @@ hygiene:
         checked_by: tehreet
         quote: "If a key is compromised, Nebius Token Factory can automatically revoke it"
     notes: >-
-      Nebius does not appear in GitHub's secret-scanning patterns table. The docs say compromised
-      keys can be revoked automatically but name no scanning programme, so it fails per the
-      Partner-column precedent.
+      Nebius is not in GitHub's secret-scanning table. The docs mention automatic revocation but
+      name no scanning program, so it fails under the Partner-column rule.
 
 notes: >-
-  Split from nebius-ai-cloud because Token Factory runs its own UI, projects and API keys rather
-  than Nebius AI Cloud IAM; only its Sandboxes API shares the IAM token. Zero of five hygiene
-  checks pass on public docs. The API keys page is login-walled, but outbound is F regardless, so
-  the headline would not move. Accepting Nebius IAM tokens (and so federated credentials) on the
-  inference and fine-tuning API would lift inbound to the AI Cloud grade.
+  Split from nebius-ai-cloud because Token Factory has its own UI, projects and API keys. The API
+  keys page is login-walled, but outbound is F either way, so the headline would not move. Accepting
+  Nebius IAM tokens on inference and fine-tuning would lift inbound to the AI Cloud grade.

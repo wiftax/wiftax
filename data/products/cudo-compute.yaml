@@ -9,19 +9,16 @@ docs: https://docs.cudocompute.com/api/authentication.md
 category: cloud
 status: listed
 summary: >-
-  Every way to automate CUDO Compute (REST API, cudoctl, Python client, Terraform) runs on one
-  static bearer API key that inherits its user's permissions, has no expiry or last-used field,
-  and is not in GitHub's secret-scanning partner program. Keys can be created and deleted by API.
-  Object storage uses static S3 keys. The vLLM app asks you to paste a Hugging Face token.
+  Every way to automate CUDO Compute runs on one static API key with its user's full permissions, no
+  expiry and no last-use record. Object storage uses static S3 keys. The vLLM app asks you to paste
+  a Hugging Face token.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static user API key sent as Authorization: Bearer, created in the console or with POST
-      /v1/api-keys; the same key configures cudoctl, the Python client and the Terraform provider.
-      Object storage takes static S3 access/secret keys per object storage user. No OIDC, workload
-      identity or token-exchange path exists.
+      A static user API key sent as a bearer token, shared by the API, cudoctl, the Python client
+      and Terraform. Object storage takes static S3 keys.
     issuers: []
     evidence:
       - url: https://docs.cudocompute.com/api/authentication.md
@@ -61,21 +58,16 @@ surfaces:
         checked_by: tehreet
         quote: "Connecting an existing GitHub, Google or Microsoft account."
     notes: >-
-      Graded on the weakest required path, which is also the only one: the control-plane API key.
-      The authentication page says there is no OAuth or refresh flow, and the OpenAPI spec defines
-      a single bearerAuth scheme. Object storage has a session-key endpoint that returns temporary
-      S3 credentials with a session token, but calling it needs the static API key, and the
-      documented path for s3cmd/s5cmd is a long-lived access/secret key pair on an object storage
-      user. GitHub, Google and Microsoft sign-in is for humans at the console and does not reach
-      workloads. There is no managed Kubernetes or container registry in the docs (clusters are
-      bare-metal machine groups), so no kubeconfig or registry auth to grade. Inbound moves off F
-      with three hygiene passes (D), or to B/A with an OIDC token exchange for API keys.
+      Graded on the only path, the control-plane API key. The docs say there is no OAuth or refresh
+      flow. Object storage can return temporary S3 credentials, but only in exchange for the static
+      API key. Social sign-in is for humans at the console. There is no managed Kubernetes or
+      registry to grade. Inbound moves off F with three hygiene passes, or to B or A with an OIDC
+      token exchange.
   outbound:
     grade: F
     mechanism: >-
-      The only documented reach-in is the vLLM one-click app, which asks you to paste a Hugging Face
-      API token that is stored as VM metadata (CUDO_HF_TOKEN). No cloud bucket, registry or
-      data-import integration exists.
+      The only reach-in is the vLLM app, which asks you to paste a Hugging Face token and stores it
+      as VM metadata.
     evidence:
       - url: https://docs.cudocompute.com/apps/vllm.md
         checked_on: 2026-10-22
@@ -94,16 +86,10 @@ surfaces:
         checked_by: tehreet
         quote: "In the Disks table open the action menu for the boot disk and select **Create image from disk**."
     notes: >-
-      Checked the full OpenAPI spec (API keys, billing, clusters, disks, images, machines,
-      networks, object storage, projects, SSH keys, VMs, volumes), the guides, tutorials and all
-      apps (Dedicated LLM Inference, Dify, JupyterHub, JupyterLab, Ollama, OpenManus, vLLM). Images
-      are created only from an existing VM disk, not imported from a customer bucket or URL, and
-      nothing pulls from S3, GCS, Azure, a private registry or W&B. The vLLM app form is the one
-      place CUDO collects a credential for a third party: a static Hugging Face token, with no
-      advice to use a read-only or fine-grained token, kept in VM metadata shown on the VM page.
-      Judgment call: the token is used by the app on your own VM, so a reviewer could argue N/A as
-      on hot-aisle (where workloads fetch with credentials you place yourself); it is graded F
-      because CUDO's own console asks for and stores it. Headline is F either way.
+      Nothing pulls from your cloud buckets, a private registry or other services. The vLLM form
+      asks for a static Hugging Face token with no least-privilege advice. A reviewer could argue
+      N/A, as on the hot-aisle card, since the token is used on your own VM. It is graded F because
+      CUDO's console asks for and stores it. The headline is F either way.
 
 hygiene:
   expiry:
@@ -118,9 +104,7 @@ hygiene:
         checked_by: tehreet
         quote: "Rotate keys regularly (e.g., every 90 days) and immediately on suspicion of compromise."
     notes: >-
-      The create request takes only apikeyId, and the ApiKey object has only id, key and
-      createTime: no expiry can be set and no org policy exists. The 90-day rotation is advice to
-      the customer, not enforcement.
+      Keys have no expiry field and no org policy. The 90-day rotation is advice, not enforcement.
   rotation_api:
     pass: true
     evidence:
@@ -137,9 +121,8 @@ hygiene:
         checked_by: tehreet
         quote: "Generates a new key for an object storage user."
     notes: >-
-      API keys can be created with an existing key and deleted by name, and the docs give a
-      create, deploy, verify, revoke rotation workflow. Object storage keys can also be generated
-      and deleted through the API.
+      Keys can be created and deleted through the API, and the docs give a rotation workflow. Object
+      storage keys can be too.
   scoping:
     pass: false
     evidence:
@@ -152,12 +135,8 @@ hygiene:
         checked_by: tehreet
         quote: "The user must already be registered on the platform before being added."
     notes: >-
-      A key carries no scope of its own and is the user. Project roles (Owner, Editor, Viewer) are
-      granted to registered human accounts by email; there is no service account or API-only
-      principal, so per the rubric a narrow role on an ordinary user does not count. The docs'
-      "create separate keys per environment or automation scope" advice cannot be enforced on the
-      key. Object storage users are a separate S3 principal per project and data center whose
-      access rights can be adjusted, but they do not cover the control plane.
+      A key is its user, with no scope of its own. Roles go to human accounts and no service account
+      exists, so a narrow role does not count. Object storage users do not cover the control plane.
   last_used:
     pass: false
     evidence:
@@ -166,9 +145,8 @@ hygiene:
         checked_by: tehreet
         quote: "List all API keys created by the requesting user."
     notes: >-
-      The ApiKey resource returned by the list call has id, key and createTime only; no last-used
-      timestamp is documented in the API or the guides. The console's API keys page is behind a
-      login and could not be checked; the public API contract shows no such field.
+      Keys show only an ID and creation time. The console keys page is behind a login, and the
+      public API shows no last-used field.
   leak_revocation:
     pass: false
     evidence:
@@ -176,14 +154,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      CUDO does not appear in GitHub's supported secret-scanning patterns table, so a key pushed to
-      a public repo is not reported to CUDO, even though the docs' example keys use a ck_live_
+      CUDO is not in GitHub's secret-scanning table, even though its example keys use a ck_live_
       prefix.
 
 notes: >-
-  One card for the whole platform: VMs, bare metal, clusters, volumes, networks and object
-  storage are all driven through the same REST API and key, and only object storage adds a second
-  (also static) credential. One of five hygiene checks passes (rotation API). The cheapest fixes
-  are an expiry field with an enforceable maximum, a last-used timestamp, a service-account or
-  per-key scope, and joining GitHub's partner program; any two of those make inbound D. Federation
-  (exchanging a GitHub Actions or other OIDC token for a short-lived key) would make it B or A.
+  One card for the whole platform, driven through one REST API and key. One of five hygiene checks
+  passes. Any two of expiry, last-used, scoping or a GitHub partnership would make inbound D.
+  Federation would make it B or A.

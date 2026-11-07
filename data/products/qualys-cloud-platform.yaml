@@ -11,20 +11,16 @@ docs: https://docs.qualys.com/en/oauth/oauth-phase2/oauth/oauth_oidc.htm
 category: security
 status: listed
 summary: >-
-  Workloads reach Qualys APIs with a user's password or a Qualys-issued client ID and secret, each
-  traded for a 4-hour JWT. Qualys Support can switch on IdP token auth that trusts your issuer's
-  JWTs, but it is not self-serve, is documented for user logins and skips Web Application
-  Scanning, so it does not count yet. Into your cloud it is keyless on AWS only; Azure, GCP and
-  OCI connectors take a client secret or private key.
+  Workloads call Qualys with a user's password or a Qualys client ID and secret, traded for a 4-hour
+  token. Support-enabled trust of your own IdP does not count yet. Qualys reaches AWS without keys,
+  but Azure, GCP and OCI take a secret or private key.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      Qualys-managed user-level or subscription-level client ID and client secret posted to
-      /auth/oauth or /auth/oidc for a 4-hour JWT; the default paths are the user's username and
-      password (basic auth, session cookie, or POST /auth for a 4-hour JWT). IdP Provider Tokens
-      (Support-enabled trust of your own issuer) exist but do not count; see notes.
+      A Qualys client ID and secret, or a user's password, traded for a 4-hour token.
+      Support-enabled IdP tokens exist but do not count.
     evidence:
       - url: https://docs.qualys.com/en/oauth/oauth-phase2/oauth/oauth_oidc.htm
         checked_on: 2026-10-22
@@ -71,26 +67,18 @@ surfaces:
         checked_by: tehreet
         quote: "Provide the Client ID and Client Secret Key for the user-level or subscription-level client in the API request."
     notes: >-
-      Graded C on Qualys-managed client credentials, short-lived tokens from a static root. Qualys
-      also documents IdP Provider Tokens: you supply the issuer's JWKS URL (or certificates),
-      issuer and audience, and a token whose sub (or a custom claim) equals a Qualys user's
-      External ID is accepted as a Bearer token. On paper that has issuer, audience and subject
-      constraints. It does not earn A or B under the wif.tax rule that federation must be
-      self-serve and documented for workloads: activation is a Qualys Support ticket, the docs frame
-      it around corporate IdPs for user authentication ("IdP is used for user authentication"),
-      whether CI or cloud workload tokens work with it is not publicly verifiable, and Total
-      AppSec/WAS, PCI and "Qualys API Integrations" are still "To be announced". Enabling it also
-      does not switch off passwords. Same call as zscaler-oneapi, whose legacy ZIA API can trust one
-      external OAuth server. Moves to A if Qualys makes IdP token trust self-serve and documents it
-      for workload issuers across all modules.
+      Graded C on Qualys client credentials: short-lived tokens from a static root. Qualys can also
+      accept JWTs from your own IdP, with issuer, audience and subject checks. That does not earn A
+      or B, because federation must be self-serve and documented for workloads. Turning it on takes
+      a Support ticket, and the docs frame it as user login. Whether CI or cloud tokens work is not
+      public, and some modules such as WAS are not covered yet. It also leaves passwords on. Same
+      call as the zscaler-oneapi card. Moves to A if IdP trust becomes self-serve and documented for
+      workloads.
   outbound:
     grade: B
     mechanism: >-
-      TotalCloud/AssetView AWS connectors assume a cross-account IAM role you create with an
-      external ID. Azure connectors take an App registration client secret (docs recommend
-      "Never" expiry), GCP connectors take an uploaded service-account JSON key (or, in beta, WIF
-      bootstrapped by an Entra ID or Okta client secret you hand Qualys), and OCI connectors take a
-      user API private key.
+      AWS connectors assume a role you create, with an External ID. Azure takes a client secret, GCP
+      a service-account key, and OCI a private API key.
     tier_gated: GCP Workload Identity Federation is beta and enabled by TAM or Qualys Support
     evidence:
       - url: https://docs.qualys.com/en/conn/latest/aws/aws_connector.htm
@@ -138,19 +126,12 @@ surfaces:
         checked_by: tehreet
         quote: "Go to Identity > Users > User Details > API Keys > Add API Key > Select Generate API Key Pair."
     notes: >-
-      Checked the TotalCloud/AssetView cloud connectors (shared with CSAM and ETM): AWS (cross-account
-      role with external ID via a Qualys CloudFormation template; keyless), Azure subscription and
-      tenant connectors (Application ID, Directory ID and an "Authentication Key" client secret,
-      with the docs recommending a never-expiring secret; Reader or a listed custom-role
-      permission set is documented), GCP individual and organization connectors (service-account
-      JSON key upload, Viewer/Security Reviewer roles documented), and OCI (user OCID plus API
-      signing private key and fingerprint). GCP Workload Identity Federation (beta) removes the
-      JSON key, but the token comes from an Entra ID or Okta app whose client ID and secret you
-      enter in TotalCloud's Identity Provider Configurations, so it is short-lived from a static
-      root you hand over (C), not keyless. AWS keyless plus static keys elsewhere is B. Ticketing,
-      SIEM and container-registry integrations were not graded here. Would rise to A if Azure
-      accepted admin consent to a Qualys multi-tenant app or a federated credential, and GCP used
-      impersonation by Qualys's own Google identity.
+      AWS is keyless through a Qualys CloudFormation template. Azure takes an app client secret, and
+      the docs recommend setting it to never expire. GCP takes an uploaded JSON key. A beta GCP
+      federation option drops the key, but it runs on an Entra ID or Okta client secret you hand
+      Qualys. That is C, not keyless. OCI takes a user's API signing key. Keyless AWS plus keys
+      elsewhere is B. Ticketing, SIEM and registry integrations were not graded. A needs admin
+      consent or a federated credential on Azure, and impersonation by Qualys's own identity on GCP.
 
 hygiene:
   expiry:
@@ -169,13 +150,9 @@ hygiene:
         checked_by: tehreet
         quote: "Set the password of such API-only access accounts to never expire."
     notes: >-
-      The credential workloads use by default is a Qualys user's password, and a Manager can enforce
-      "Password expires after N months" for every user in the subscription, which is an org policy
-      that forces expiry (unlike the changeable-default fails on elastic-cloud-api and
-      cloudflare-api). The escape hatch, "Password never expires for API access", has to be
-      activated by Qualys Support or the TAM and accepted by the Manager POC under a risk
-      agreement, so the org controls it. Not documented: any expiry or lifetime limit on
-      Qualys-managed client secrets, which would fail this check on their own.
+      Workloads default to a user password, and a Manager can force password expiry for everyone.
+      Unlike elastic-cloud-api, the never-expires exception needs Support and a signed risk
+      agreement. Client secrets show no expiry.
   rotation_api:
     pass: true
     evidence:
@@ -192,10 +169,8 @@ hygiene:
         checked_by: tehreet
         quote: "Add a user account to the API user's subscription."
     notes: >-
-      /msp/user.php creates and edits API users and /msp/password_change.php (Manager or Unit
-      Manager) or /api/2.0/fo/user/change_password/ (self) rotates passwords, so password rotation
-      can be scripted. No API for creating or revoking Qualys-managed client secrets is documented;
-      those are managed in the UI's Auth ID Client Management.
+      API users can be created and passwords changed by API, so rotation can be scripted. Client
+      secrets are managed only in the UI.
   scoping:
     pass: true
     evidence:
@@ -212,10 +187,9 @@ hygiene:
         checked_by: tehreet
         quote: "Assign required application permissions for the user-level client."
     notes: >-
-      The usual pattern is a dedicated API user (Reader or Scanner role, limited asset groups, API
-      access granted per module), a purpose-built machine principal with its own role, which the
-      rubric counts. Qualys-managed clients also take per-application permissions. Manager API
-      users get everything.
+      The usual setup is a dedicated API user with a narrow role and asset groups, which counts as a
+      machine principal. Client secrets also take per-app permissions. Manager API users get
+      everything.
   last_used:
     pass: false
     evidence:
@@ -232,12 +206,9 @@ hygiene:
         checked_by: tehreet
         quote: "By default, we show you API calls in the past week that were submitted (by users) and/or updated (by our service)."
     notes: >-
-      LAST_LOGIN_DATE on the user list is described as logins "into the service", and the activity
-      log says login events are generated only for UI logins, so an API-only account's password
-      use does not appear to be tracked there (not publicly verifiable either way). The Recent API
-      Calls view lists API calls per user but defaults to the past week. No last-used field is
-      documented for Qualys-managed clients. Judgment call: flips to pass if LAST_LOGIN_DATE is
-      shown to include API authentications.
+      Judgment call. The last login date seems to count only UI logins, and the recent API calls
+      view covers only a week. Client secrets show no last use. Flips to pass if last login includes
+      API calls.
   leak_revocation:
     pass: false
     evidence:
@@ -245,16 +216,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Qualys does not appear in GitHub's supported secret-scanning patterns table, partner or user.
-      Passwords have no detectable format, and the Qualys-managed client secret has no listed
-      pattern either.
+      Qualys is not in GitHub's secret-scanning patterns. Passwords and client secrets have no
+      detectable format.
 
 notes: >-
-  One card for the Qualys Cloud Platform APIs: VMDR/Policy Audit (/api/2.0, /msp), the gateway
-  APIs (CSAM, TotalCloud, Patch Management, Container Security, EDR and others) and the TotalCloud
-  connectors. All modules share the same Qualys user accounts and authentication options, so they
-  are not split. Inbound is A only because of the Support-enabled IdP Provider Tokens path; a
-  subscription that has not asked for it is on username/password or client secrets (three of five
-  hygiene checks pass, which would leave plain passwords at D). Hygiene describes the passwords and
-  Qualys-managed client secrets that still exist. Outbound moves to A when Azure and GCP
-  connectors stop needing a secret from you.
+  Covers all Qualys Cloud Platform module APIs and the TotalCloud connectors, which share user
+  accounts and auth. Three of five hygiene checks pass, which would put plain passwords at D.
+  Outbound moves to A when Azure and GCP stop needing your secret.

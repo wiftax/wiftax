@@ -11,21 +11,16 @@ docs: https://automate.zscaler.com/docs/getting-started/getting-started
 category: security
 status: listed
 summary: >-
-  OneAPI clients in ZIdentity get one-hour tokens by OAuth client credentials, using a client
-  secret or a private-key JWT checked against keys you upload or host at a JWKS URL. Every path
-  starts from a long-lived secret you hold, and no external OIDC token is accepted. Secrets
-  expire within 365 days, rotate by API and are role-scoped; there is no GitHub partner
-  revocation. Into AWS and GCP it is keyless; Azure wants a client secret.
+  To call Zscaler OneAPI, your code needs a long-lived client secret or private key, which it trades
+  for a one-hour token. No external OIDC token is accepted. Zscaler reaches into AWS and GCP without
+  keys, but Azure needs a client secret.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      OAuth 2.0 client_credentials at <vanity>.zslogin.net with a ZIdentity API client
-      authenticated by a client secret (SECRET), a private_key_jwt assertion checked against an
-      uploaded public key or certificate (PUBKEYCERT), or a JWKS URL you host (JWKS). Tenants not
-      yet on ZIdentity use the legacy per-product credentials: ZIA API key plus admin username and
-      password, ZPA client ID and secret.
+      OAuth client credentials with a client secret, or a JWT signed by your private key and checked
+      against a public key or JWKS URL. Legacy tenants use per-product keys and passwords.
     tier_gated: ZIdentity (Authentication Service) subscription for OneAPI
     evidence:
       - url: https://automate.zscaler.com/assets/js/ca2fd3e7.fbadb37d.js
@@ -73,33 +68,19 @@ surfaces:
         checked_by: tehreet
         quote: "OAuth 2.0 authentication is supported only for"
     notes: >-
-      Graded on OneAPI, the path Zscaler steers all new automation to (ZIA, ZPA, ZDX, Client
-      Connector, Cloud & Branch Connector, EASM and more behind one token endpoint). All three
-      ZIdentity client authentication methods start from a static root you hold: a shared secret,
-      or an RSA private key whose public half you upload or publish at a JWKS URL. The JWKS
-      option makes rotation of your own key painless, but the assertion is self-issued (iss and
-      sub are the client ID), so it is private_key_jwt, not federation: there is no token
-      exchange, no trust in GitHub Actions or cloud workload identity tokens, and no subject
-      matching. The SDK's custom TokenProvider hook only lets you supply a ZIdentity token you
-      already obtained. Nearest thing to federation: the legacy ZIA cloud service API can trust
-      one external OAuth authorization server (documented for Okta, Entra ID and PingFederate)
-      by JWKS URL with optional aud, iss and client_id checks and a scope claim naming a ZIA API
-      role, which in principle lets an Entra app with a federated credential call ZIA keylessly.
-      It does not lift this grade: it covers the ZIA cloud service API only (not ZPA, OneAPI or
-      the Sandbox API), only one server can be enabled at a time, there is no subject constraint,
-      and the documented flow uses a client secret at the IdP. Legacy credentials for tenants not
-      on ZIdentity are weaker still: one org-wide ZIA API key combined with an admin's username
-      and password, and ZPA client ID/secret pairs; the ZIA Sandbox submission API uses its own
-      static token. Inbound moves to B or A only if ZIdentity accepts tokens from an external OIDC
-      issuer (token exchange or a federated credential on the API client).
+      Graded on OneAPI, where Zscaler steers all new automation. All three login methods start from
+      a static secret or private key you hold. The JWKS option eases rotating your own key, but the
+      JWT is self-issued, so it is not federation. Nothing trusts GitHub Actions or cloud workload
+      tokens. Legacy ZIA can trust one external OAuth server, such as Entra. That does not lift the
+      grade. It covers only the ZIA API, allows one server at a time, has no subject check, and its
+      documented flow uses a client secret. Legacy credentials are weaker still, including an
+      admin's password.
   outbound:
     grade: B
     mechanism: >-
-      Cloud & Branch Connector workload discovery assumes an IAM role you create (with an External
-      ID) that trusts Zscaler's AWS role, and on GCP impersonates your service account via Service
-      Account Token Creator. Azure workload discovery, the Microsoft Defender for Cloud Apps
-      integration and Cloud NSS SIEM feeds take a client secret from your Entra app or a static
-      token in an HTTP header.
+      Zscaler assumes an AWS role you create with an External ID and impersonates your GCP service
+      account. Azure discovery, the Defender for Cloud Apps link and SIEM feeds take a client secret
+      or static token.
     evidence:
       - url: https://help.zscaler.com/zapi/fetch-data?url_alias=/cloud-branch-connector/adding-amazon-web-services-account&view_type=full&domain=help&_format=json
         checked_on: 2026-10-22
@@ -138,19 +119,11 @@ surfaces:
         checked_by: tehreet
         quote: "It receives the log stream and then forwards it to a log receiver."
     notes: >-
-      Checked: Cloud & Branch Connector partner integrations (workload and tag discovery) on AWS
-      (role with External ID trusting Zscaler's account, created by CloudFormation; keyless), GCP
-      (Zscaler's service account impersonates yours via roles/iam.serviceAccountTokenCreator;
-      keyless) and Azure (Limited Availability; you register a single-tenant Entra app, create a
-      client secret and paste tenant ID, client ID and secret into Zscaler; static); the ZIA
-      Microsoft Defender for Cloud Apps (MCAS) integration (Entra app client secret; static);
-      ZIA Cloud NSS feeds to cloud SIEMs (API URL plus header tokens such as a Splunk HEC token,
-      or OAuth 2.0 client credentials for SIEMs that use it; static); and ZPA Log Streaming
-      Service (your own App Connector pushes to your receiver over TCP or mTLS; no credential
-      handed over). Cloud & Branch Connector VMs themselves run in your account with their own
-      instance identity and provisioning keys, which are not Zscaler reaching in. An Azure
-      federated credential or multi-tenant app consent for discovery and MCAS, and keyless SIEM
-      delivery, would lift outbound to A.
+      AWS and GCP workload discovery are keyless. Azure discovery, in limited availability, needs a
+      client secret from an Entra app you create. The Defender for Cloud Apps integration also takes
+      an Entra client secret. Log feeds to cloud SIEMs take static tokens such as a Splunk HEC
+      token. ZPA log streaming hands over no credential. An Azure federated credential or
+      multi-tenant app, plus keyless SIEM delivery, would lift outbound to A.
 
 hygiene:
   expiry:
@@ -165,12 +138,9 @@ hygiene:
         checked_by: tehreet
         quote: "The expiration time of the client secret, represented as a UNIX epoch timestamp (in seconds)."
     notes: >-
-      ZIdentity client secrets always carry an expiry, capped by the platform at 365 days, and
-      expiresAt is a required field when adding a secret by API. That is an enforced maximum, not a
-      changeable default (contrast elastic-cloud-api). Uploaded public keys and JWKS URLs have no
-      Zscaler-side expiry, but the private key never leaves you. Legacy ZIA API keys and ZPA
-      client secrets have no documented expiry (ZPA's "Session Validity Interval" is the token
-      lifetime, max 3,600 seconds).
+      Client secrets always expire, with a 365-day platform cap. That is an enforced maximum, not a
+      changeable default, unlike on the elastic-cloud-api card. Legacy credentials have no
+      documented expiry.
   rotation_api:
     pass: true
     evidence:
@@ -187,9 +157,8 @@ hygiene:
         checked_by: tehreet
         quote: "You can add a maximum of two client secrets."
     notes: >-
-      The ZIdentity API has POST and DELETE on /api-clients/{id}/secrets plus create, update and
-      delete for API clients themselves, and two concurrent secrets allow overlap during
-      rotation.
+      The ZIdentity API can add and delete secrets and API clients. Two secrets can coexist, so
+      rotation can overlap.
   scoping:
     pass: true
     evidence:
@@ -202,10 +171,8 @@ hygiene:
         checked_by: tehreet
         quote: "Scope refers to the permission that limits the access to specific API resources."
     notes: >-
-      API clients are purpose-built machine principals, each given one API role per Zscaler
-      service (roles defined in that service, e.g. read-only), and an API client access policy can
-      further restrict resources and time windows. The legacy ZIA path inherits the full rights of
-      the admin whose password is used.
+      API clients are machine identities with one role per Zscaler service, and access policies can
+      narrow them further. The legacy ZIA path gets the admin's full rights.
   last_used:
     pass: true
     evidence:
@@ -222,11 +189,9 @@ hygiene:
         checked_by: tehreet
         quote: "Timestamp when the secret was created."
     notes: >-
-      Judgment call. Neither the API Clients page (name, status, client ID) nor the secrets API
-      (id, createdAt, expiresAt) has a last-used field, but the Tokens page lists every token
-      ZIdentity issued, searchable by client ID with an Issued At time, which shows when each
-      client last authenticated and exposes clients that never do. It is per client, not per
-      secret. If reviewers want a last-used field on the credential itself, flip this to fail.
+      Judgment call. Secrets have no last-used field, but the Tokens page lists each client's issued
+      tokens with times. That is per client, not per secret. Flip to fail if reviewers want it per
+      credential.
   leak_revocation:
     pass: false
     evidence:
@@ -234,13 +199,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Zscaler does not appear in GitHub's supported secret scanning patterns table at all, so a
-      ZIdentity client secret (or legacy ZIA API key or ZPA secret) pushed to a public repo is not
-      reported to Zscaler.
+      Zscaler is not in GitHub's secret scanning patterns, so leaked secrets are not reported to
+      Zscaler.
 
 notes: >-
-  One card for Zscaler's API surface: OneAPI through ZIdentity (Authentication Service), with
-  the legacy per-product ZIA and ZPA credentials noted for tenants not yet migrated. Not split,
-  per brief. Hygiene applies to ZIdentity client secrets. Four of five checks pass (last_used is a
-  judgment call, see above); GitHub partner revocation would make five. Inbound is held at C by
-  the absence of any external-issuer trust in ZIdentity.
+  Covers Zscaler's API surface through ZIdentity, with legacy ZIA and ZPA credentials noted. Hygiene
+  applies to ZIdentity client secrets. Inbound stays at C until ZIdentity trusts an external issuer.

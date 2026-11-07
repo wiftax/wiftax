@@ -6,19 +6,16 @@ docs: https://docs.semgrep.dev/deployment/tokens
 category: devtools
 status: listed
 summary: >-
-  CI scans (semgrep ci) and the Semgrep Web API accept only static tokens such as SEMGREP_APP_TOKEN.
-  No OIDC or CI token exchange exists. Tokens never expire, cannot be created through the API, show
-  no last use and are not in GitHub's partner program, though scopes such as Agent (CI) and
-  Read-only limit them. Into your repos it uses a GitHub App, but GitLab, Bitbucket and Azure DevOps
-  want access tokens.
+  CI scans and the Semgrep Web API accept only static tokens such as SEMGREP_APP_TOKEN, with no
+  OIDC. Tokens can be scoped but pass no other hygiene check. Semgrep reaches GitHub through an app,
+  but GitLab, Bitbucket and Azure DevOps want access tokens.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static deployment token sent as Authorization: Bearer. CI jobs read it from SEMGREP_APP_TOKEN
-      (Agent (CI) scope); the Web API takes a Web API or Read-only scoped API token. No OIDC, CI
-      workload identity or token-exchange path is documented.
+      A static token sent as a bearer token. CI reads it from SEMGREP_APP_TOKEN, and the Web API
+      takes a token with Web API or read-only scope.
     tier_gated: Team or Enterprise (Web API access)
     evidence:
       - url: https://docs.semgrep.dev/deployment/tokens.md
@@ -58,22 +55,17 @@ surfaces:
         checked_by: tehreet
         quote: "This article walks you through single-sign on (SSO) configuration."
     notes: >-
-      Graded on the weakest path a workload must use: both `semgrep ci` and the v1/v2 Web API take
-      only a static bearer token. The v1 and v2 OpenAPI specs declare SemgrepWebToken plus two
-      user-session JWT schemes (SemgrepJWT, SemgrepAdminJWT) used by the web app, not federation.
-      The only OIDC in the docs is SSO for human login (OpenID Connect and SAML). The GitHub Actions
-      sample reads SEMGREP_APP_TOKEN from repository secrets, and during onboarding the Semgrep GitHub
-      App writes that token into repo secrets for you; no id-token / OIDC exchange is offered. Managed
-      Scans avoid a CI token entirely by having Semgrep pull code over the SCM connection (outbound,
-      below), but anything you automate from your own CI or scripts still needs a static token.
-      CI scanning works on the free tier; Web API access needs Team or Enterprise.
+      Both semgrep ci and the Web API take only a static token. The API specs' other schemes are web
+      app sessions, not federation, and OIDC appears only for human SSO. The GitHub Actions sample
+      reads the token from repo secrets, and the GitHub App writes it there during setup. Managed
+      Scans avoid a CI token by pulling code over the repo connection. Anything run from your own CI
+      still needs a static token. Web API access needs Team or Enterprise.
   outbound:
     grade: B
     mechanism: >-
-      GitHub (Cloud and Enterprise) connects through a Semgrep GitHub App your org installs, Cursor
-      Origin through Semgrep's public app, Jira Cloud through app consent, and AWS CodeArtifact by
-      assuming your IAM role with an External ID; GitLab, Bitbucket and Azure DevOps connections
-      want a customer-created access token, and private registries and Wiz want static credentials.
+      GitHub, Cursor and Jira connect through apps you install or consent to, and AWS CodeArtifact
+      through an IAM role with an External ID. GitLab, Bitbucket and Azure DevOps want access
+      tokens.
     evidence:
       - url: https://docs.semgrep.dev/deployment/connect-scm.md
         checked_on: 2026-10-22
@@ -128,24 +120,13 @@ surfaces:
         checked_by: tehreet
         quote: "Returns the Managed Scans VPC Bootstrap CloudFormation template in JSON format for setting up cross-account infrastructure."
     notes: >-
-      Checked: GitHub Cloud (default is a private "Semgrep Code - YOUR_ORG_NAME" app created from
-      Semgrep's template, older orgs have the public semgrep-app; nothing pasted by the customer;
-      a GitHub PAT is an alternative); GitHub Enterprise Cloud with data residency and GitHub
-      Enterprise Server (app registered from Semgrep's flow on your instance); Cursor Origin (public
-      Semgrep app, keyless; a private app means handing Semgrep its private key); Jira Cloud (Atlassian
-      app consent, keyless); AWS CodeArtifact for Supply Chain dependency resolution (IAM role with
-      External ID, two-hour tokens; private beta); Managed Scans in your AWS VPC (CloudFormation
-      cross-account roles, private beta, documented only in the v2 API spec). Static: GitLab Cloud
-      and Self-Managed (group or personal access token with api scope), Bitbucket Cloud (workspace
-      access token, Premium only), Bitbucket Data Center (HTTP access token), Azure DevOps (PAT with
-      Full access during setup, narrowed afterwards), private package registries (username/password
-      or API token), Wiz (service-account client ID and secret), plus Bitbucket PR-comment tokens.
-      The v2 API spec also lists an Azure DevOps Entra service principal install where Semgrep
-      generates the key pair and you upload only the public certificate; that would be keyless from
-      your side, but it is not in the user docs, so it is not counted. The docs do give least-privilege
-      scopes per feature for the token-based SCMs. Semgrep Network Broker is a WireGuard tunnel you
-      run; its private key stays with you. B: keyless for GitHub and AWS, static tokens for the other
-      SCMs.
+      GitHub uses a Semgrep app on your org, with nothing pasted, and a personal token as an option.
+      Cursor and Jira use app consent. AWS CodeArtifact and Managed Scans in your VPC use roles,
+      both in private beta. GitLab, Bitbucket and Azure DevOps take access tokens, and Azure DevOps
+      needs full access during setup. Registries and Wiz take static credentials. The v2 API lists a
+      keyless Azure DevOps install, but it is not in the user docs, so it does not count. The docs
+      give least-privilege scopes for token-based connections. B: keyless for GitHub and AWS, static
+      tokens elsewhere.
 
 hygiene:
   expiry:
@@ -156,8 +137,8 @@ hygiene:
         checked_by: tehreet
         quote: "However, they remain valid until manually revoked, even if the creator is no longer associated with the deployment."
     notes: >-
-      The create-token steps offer scope and name only, with no expiry field, and no org policy for a
-      maximum lifetime is documented. A token minted today works until someone revokes it.
+      Creating a token sets only scope and name, with no expiry or org policy. A token minted today
+      works until revoked.
   rotation_api:
     pass: false
     evidence:
@@ -174,10 +155,8 @@ hygiene:
         checked_by: tehreet
         quote: "Go to [**Settings > Tokens > API tokens**](https://semgrep.dev/orgs/-/settings/tokens/api)."
     notes: >-
-      Tokens are created and revoked in the web app (Settings > Tokens). The only API surface is an
-      Experimental bulk DELETE on /api/tokens/v1/deployments/{id}/tokens that removes every CLI or
-      API token of a given role at once; neither v1 nor v2 has a create-token or revoke-one endpoint,
-      so rotation cannot be automated without a browser.
+      Tokens are created and revoked in the web app. The only API is an experimental bulk delete of
+      every token with one role. Nothing can create or revoke a single token.
   scoping:
     pass: true
     evidence:
@@ -194,10 +173,8 @@ hygiene:
         checked_by: tehreet
         quote: "It cannot perform write or mutate operations."
     notes: >-
-      Passes on permission scoping: each token gets one of Agent (CI), Web API, Member or Read-only,
-      and does not inherit its creator's access (it outlives the creator). There is no per-project or
-      per-repository scoping, a token covers the whole deployment, and a Web API token has full read
-      and write access.
+      Each token gets one role, such as CI or read-only, and does not inherit its creator's access.
+      Tokens cover the whole deployment, and a Web API token can read and write everything.
   last_used:
     pass: false
     evidence:
@@ -206,8 +183,7 @@ hygiene:
         checked_by: tehreet
         quote: "Each token type has its own page that lists all existing tokens of that type."
     notes: >-
-      The token pages offer search and a filter by scope or service; no last-used time is documented
-      on the token pages, the docs or either OpenAPI spec.
+      No last-used time is documented in the token pages or API specs.
   leak_revocation:
     pass: false
     evidence:
@@ -215,15 +191,11 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Semgrep does not appear in GitHub's supported secret scanning patterns table, so a leaked
-      SEMGREP_APP_TOKEN pushed to a public repo is not reported to Semgrep for revocation.
+      Semgrep is not in GitHub's secret-scanning patterns, so a leaked SEMGREP_APP_TOKEN is not
+      reported.
 
 notes: >-
-  One card for the hosted Semgrep AppSec Platform (Code, Supply Chain, Secrets, Managed Scans). The
-  open-source Semgrep CE CLI needs no credential for local scans; Semgrep Guardian (IDE and agent
-  plugins) signs developers in through browser OAuth or `semgrep login` and is a human path, not graded. Only one of five hygiene
-  checks passes, so inbound is F. Token expiry with an enforceable maximum, plus create/revoke API
-  endpoints, would lift it to D; accepting GitHub Actions or GitLab CI OIDC for `semgrep ci` would
-  remove the most widely copied static token and move inbound to B or A. Outbound reaches A if
-  GitLab, Bitbucket and Azure DevOps get app-based connections (the Entra service-principal install
-  in the v2 spec is a start).
+  Covers the hosted platform. The open-source CLI needs no credential locally, and IDE plugins use
+  human login. Expiry and a create and revoke API would lift inbound to D. Accepting CI OIDC for
+  semgrep ci would move it to B or A. Outbound reaches A with app-based GitLab, Bitbucket and Azure
+  DevOps connections.

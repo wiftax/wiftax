@@ -8,20 +8,16 @@ docs: https://docs.socket.dev/docs/api-keys
 category: devtools
 status: listed
 summary: >-
-  CI jobs, the Socket CLI and the self-hosted Socket Firewall authenticate with a static
-  organization API token stored as a CI secret; no OIDC or workload federation path exists. Tokens
-  are scoped, show last use and can be rotated or revoked by API, but cannot be given an expiry and
-  are not in GitHub's secret-scanning partner program. Outbound it uses Socket-owned apps (GitHub
-  App, Jira, Linear, Asana, ClickUp, Vanta) with no customer secret.
+  CI jobs, the Socket CLI and the self-hosted Socket Firewall log in with a static organization API
+  token. There is no OIDC login. Outbound, Socket uses its own apps, such as its GitHub App, so you
+  hand over no secret.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static organization API token sent as a Bearer token or HTTP Basic username, created in the
-      dashboard or via the API. Used by the REST API, the Socket CLI in every documented CI system
-      (GitHub Actions, GitLab, Bitbucket, Jenkins, Azure DevOps) and Socket Firewall Enterprise.
-      The only OAuth paths are browser and device-code logins for humans (remote MCP, CLI).
+      A static organization API token, used by the REST API, the CLI in every documented CI system,
+      and Socket Firewall Enterprise. OAuth exists only for human browser logins.
     evidence:
       - url: https://docs.socket.dev/reference/authentication.md
         checked_on: 2026-10-22
@@ -64,23 +60,16 @@ surfaces:
         checked_by: tehreet
         quote: "your MCP client opens a browser to authenticate with Socket on first connect, so there's no API key to copy or manage"
     notes: >-
-      The v0 OpenAPI spec defines only bearerAuth and basicAuth, both carrying the organization
-      token. The v1 API adds OAuth2, but the only grant documented is the device authorization flow
-      (/v1/oauth2/device/authorize and /verify, a user_code a person approves in a browser), used by
-      remote Socket MCP and interactive login; there is no client-credentials, JWT-bearer or token
-      exchange grant, and no CI or cloud issuer can be trusted. Every CI recipe (GitHub Actions,
-      GitLab, Bitbucket, Jenkins, Azure DevOps) stores SOCKET_SECURITY_API_KEY as a CI secret even
-      though GitHub and GitLab already issue OIDC tokens to those jobs, and the GitHub Actions
-      recipe uses GITHUB_TOKEN only for GitHub, not for Socket. The self-hosted Socket Firewall
-      Enterprise (registry and wrapper mode) also calls home with SOCKET_SECURITY_API_TOKEN.
-      `socket login` with a blank token uses Socket's "limited public token", a shared static
-      credential for public package lookups. Static tokens with three of five hygiene checks = D.
+      The API's only OAuth grant is a device-code login that a person approves in a browser, used by
+      the MCP server and interactive login. There is no machine grant and no way to trust a CI or
+      cloud issuer. Every CI recipe stores the token as a secret, even on GitHub and GitLab, which
+      already issue OIDC tokens to jobs. A blank `socket login` uses a shared public token for
+      package lookups. Static tokens passing three of five hygiene checks grade D.
   outbound:
     grade: A
     mechanism: >-
-      Socket-owned apps installed or authorized by you: the Socket Security GitHub App, the Socket
-      for Jira Atlassian Forge app, a Slack app, an Origin marketplace app, and Socket's OAuth clients
-      for Linear, Asana, ClickUp and Vanta. No customer-created key or client secret is handed over.
+      Apps you install or authorize, such as the Socket GitHub App, a Jira Forge app and OAuth
+      clients for Linear and Vanta. You hand over no key or secret.
     evidence:
       - url: https://docs.socket.dev/docs/socket-for-github-installation.md
         checked_on: 2026-10-22
@@ -131,22 +120,13 @@ surfaces:
         checked_by: tehreet
         quote: "| Data Exports | Enterprise | Export alert and dependency data to external data warehouses |"
     notes: >-
-      Checked: GitHub (Socket Security GitHub App, keyless; the only native SCM integration, with
-      GitLab, Bitbucket and Azure DevOps covered by running the CLI in your own pipeline instead);
-      Jira Cloud (Socket-owned Forge app); Linear, Asana, ClickUp (Socket's OAuth client, you
-      authorize in the browser); Vanta (OAuth, Socket keeps the refresh token from its own client,
-      not a client secret you manage); Cursor Origin (marketplace app); Slack (Socket Slack app for
-      Notifications, or a pasted incoming-webhook URL for PR alerts) and Microsoft Teams (Workflows
-      webhook URL). The webhook URLs are push-only destinations rather than access into your
-      systems, so they do not lower the grade, but they are bearer URLs worth rotating if leaked.
-      Not counted as outbound: `socket scan github` takes a GitHub PAT, but the CLI uses it on your
-      machine ("a GitHub PAT is required even for organizations that have installed the Socket
-      GitHub application"); Socket Firewall Enterprise's Artifactory, Nexus and CodeArtifact
-      credentials live in a proxy you deploy, not with Socket. Enterprise Data Exports to data
-      warehouses have no public setup doc, so how Socket authenticates to your warehouse is not
-      publicly verifiable; a pasted warehouse key or cloud access key there would drop this to B.
-      Socket reaches into no cloud account, so A rests on vendor-app consent alone (as on
-      proofpoint-tap).
+      GitHub is the only native repo integration. Other repos run the CLI in your own pipeline. For
+      Vanta, Socket keeps a refresh token from its own client, not a secret you manage. Slack and
+      Teams alerts can use pasted webhook URLs, which only receive pushes and do not lower the
+      grade. The PAT for `socket scan github` and Firewall registry credentials stay on your
+      machines. Data Exports to warehouses have no public setup doc, and a pasted key there would
+      drop this to B. Socket reaches no cloud account, so A rests on app consent alone, as on
+      proofpoint-tap.
 
 hygiene:
   expiry:
@@ -161,10 +141,8 @@ hygiene:
         checked_by: tehreet
         quote: "Ensure your API tokens are stored securely and rotate them if you have concerns about their usage."
     notes: >-
-      The Create API Token body takes name, scopes, visibility, max_quota and resource restrictions,
-      and the full v0 OpenAPI spec has no expiry or expires_at field anywhere; the only limit is a
-      monthly call quota. A token lives until someone rotates or revokes it, and no org policy can
-      force a lifetime.
+      Tokens have no expiry field, only a monthly call quota. A token lives until someone revokes
+      it, and no policy can force a lifetime.
   rotation_api:
     pass: true
     evidence:
@@ -181,9 +159,8 @@ hygiene:
         checked_by: tehreet
         quote: "The API Token created must use a subset of permissions the API token creating them."
     notes: >-
-      Create, update, rotate, revoke and list endpoints exist under /orgs/{org_slug}/api-tokens,
-      each gated by its own api-tokens:* scope. Rotation keeps the token's name, scopes and
-      visibility.
+      The API can create, update, rotate, revoke and list tokens. Rotation keeps the token's name
+      and scopes.
   scoping:
     pass: true
     evidence:
@@ -200,10 +177,8 @@ hygiene:
         checked_by: tehreet
         quote: "Tokens restricted to specific repositories may only delete resolutions anchored to a granted repository."
     notes: >-
-      Tokens are organization tokens rather than a user's personal credential, carry an explicit
-      list of 60-plus per-endpoint scopes, and can be restricted to specific repositories. Socket
-      documents a minimal CI scope set (repo, security-policy:read, triage, full-scans,
-      packages:list).
+      Tokens belong to the organization, not a person. They take from over 60 per-endpoint scopes
+      and can be limited to specific repositories.
   last_used:
     pass: true
     evidence:
@@ -216,8 +191,7 @@ hygiene:
         checked_by: tehreet
         quote: "Timestamp when the API Token was last used"
     notes: >-
-      The dashboard shows last usage, and List API Tokens returns last_used_at for every token, so
-      dead tokens can be found by script.
+      The dashboard and the list API both show when each token was last used.
   leak_revocation:
     pass: false
     evidence:
@@ -225,14 +199,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Socket does not appear in GitHub's supported secret-scanning patterns table (searched for
-      "Socket"), so a Socket token pushed to a public repo is not
-      reported to Socket. No other leak-revocation program is documented.
+      Socket is not in GitHub's secret-scanning table, and no other leak-revocation program is
+      documented.
 
 notes: >-
-  One card for Socket's API, CLI and integrations; the GitHub App, CI actions, Socket Firewall
-  Enterprise and MCP all authenticate back to the same organization API tokens, so they share this
-  grade. Hygiene is good for a static key (scopes, repository restriction, last use, full token API)
-  but misses expiry and leak revocation. Inbound moves to B or A only if the API accepts a federated
-  token, for example GitHub Actions or GitLab OIDC traded for a short-lived Socket token; adding an
-  enforceable expiry plus GitHub partner scanning would still leave it a D, with five of five checks.
+  The GitHub App, CI actions, Firewall and MCP all use the same organization tokens, so they share
+  this grade. Inbound moves to B or A only if the API accepts a federated token. Adding expiry and
+  GitHub scanning would still leave a D.

@@ -7,17 +7,16 @@ docs: https://docs.datadoghq.com/account_management/api-app-keys/
 category: observability
 status: listed
 summary: >-
-  API and application keys never expire, but Datadog now lets an AWS-identified workload skip
-  them entirely (Terraform provider for everyone, the Agent on Enterprise). Into your clouds it is
-  keyless almost everywhere; AWS China and GovCloud-on-a-commercial-site still want access keys.
+  Datadog API and application keys never expire. An AWS workload can skip them through Workload
+  Identity Federation, in Terraform for everyone and in the Agent on Enterprise. Datadog reaches
+  into your clouds without keys, except AWS China and GovCloud on a commercial site.
 
 surfaces:
   inbound:
     grade: B
     mechanism: >-
-      Workload Identity Federation maps an AWS identity (proved via a signed STS GetCallerIdentity
-      request) to a Datadog service account and issues a temporary JWT; every other client uses a
-      static API key plus a static application key.
+      An AWS identity, proved by a signed STS request, maps to a Datadog service account and gets a
+      temporary JWT. Every other client uses static API and application keys.
     issuers: ["AWS IAM (STS GetCallerIdentity)"]
     evidence:
       - url: https://docs.datadoghq.com/account_management/workload_identity_federation/
@@ -41,20 +40,16 @@ surfaces:
         checked_by: tehreet
         quote: "OAuth is available only to approved Technology Partners developing official Datadog integrations."
     notes: >-
-      WIF is documented for exactly two clients: the Terraform provider ("Available for all
-      customers" on commercial and government sites) and the Agent ("Available for Enterprise plans
-      only", not on government sites). The token-exchange endpoint is not documented for arbitrary
-      clients, so a custom workload cannot yet obviously use it; if that is what you need, you are
-      back on static keys. Custom OIDC issuers, GitHub Actions, GCP and Azure identities are not
-      accepted. OAuth2 exists but is partner-only ("Standalone OAuth clients are not supported") and
-      bootstraps from a client secret, so it does not raise the grade.
+      Federation is documented for two clients only. The Terraform provider has it on all plans, and
+      the Agent on Enterprise plans outside government sites. The exchange endpoint is not
+      documented for other clients, so a custom workload falls back to static keys. Custom OIDC
+      issuers, GitHub Actions, GCP and Azure identities are not accepted. OAuth2 is partner-only and
+      rooted in a client secret, so it does not raise the grade.
   outbound:
     grade: B
     mechanism: >-
-      Cross-account IAM role with External ID (AWS commercial), service account impersonation
-      (GCP), and a federated credential / OIDC workload identity on an app registration or the
-      Azure Native managed identity (Azure); AWS China and GovCloud-on-commercial still require
-      static access keys and Azure still offers a client-secret path.
+      Datadog assumes an AWS role with an External ID, impersonates a GCP service account, and uses
+      a federated credential on Azure. AWS China and GovCloud on commercial still need access keys.
     evidence:
       - url: https://docs.datadoghq.com/integrations/guide/aws-manual-setup/
         checked_on: 2026-09-16
@@ -85,12 +80,10 @@ surfaces:
         checked_by: tehreet
         quote: 'identity { type = "SystemAssigned" }'
     notes: >-
-      Keyless on AWS commercial, GCP (impersonation; the GCP page no longer mentions JSON keys)
-      and Azure (Datadog's "Secretless Auth" federated credential is the recommended path, client
-      secret is optional). Graded B rather than A only because the AWS China and
-      GovCloud-on-commercial-site cases still require a static access key. A strict reader may
-      call that a partition edge case; the rubric says at least one integration wanting a static
-      key is a B. Non-cloud SaaS integrations (Slack, GitHub, etc.) were not assessed.
+      Keyless on AWS commercial, GCP and Azure, where Datadog's federated credential is the
+      recommended path and a client secret is optional. Graded B, not A, only because AWS China and
+      GovCloud on a commercial site still require a static key. That is an edge case, but the rubric
+      makes any static-key integration B. SaaS integrations were not assessed.
 
 hygiene:
   expiry:
@@ -119,7 +112,8 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
         quote: "Scoped application keys → Can be assigned any Datadog permission."
-    notes: Application keys can be scoped; API keys (intake) cannot be scoped at all.
+    notes: >-
+      Application keys can be scoped. API keys, used for data intake, cannot.
   last_used:
     pass: true
     evidence:
@@ -132,8 +126,8 @@ hygiene:
         checked_by: tehreet
         quote: "Last usage timestamp of the application key."
     notes: >-
-      Application keys expose last_used_at in the API and UI. The public OpenAPI spec shows no
-      last-used field on API keys, so dead intake keys are harder to find.
+      Application keys show a last-used time. API keys show none, so dead intake keys are harder to
+      find.
   leak_revocation:
     pass: true
     evidence:
@@ -142,12 +136,10 @@ hygiene:
         checked_by: tehreet
         quote: "Datadog Application Key"
     notes: >-
-      Datadog is a GitHub partner for Application Keys, Service Account Tokens and Personal Access
-      Tokens. The plain "Datadog API Key" pattern is a non-partner (user) pattern only, so a leaked
-      API key is detected but not reported to Datadog for automatic revocation.
+      Datadog is a GitHub partner for application keys, service account tokens and personal access
+      tokens. Plain API keys are detected but not reported to Datadog for revocation.
 
 notes: >-
-  Datadog also issues Personal Access Tokens and service-account tokens; the OpenAPI spec shows
-  those carry an expiration date and last_used_at, which is better hygiene than the API/app keys
-  most integrations still require. Grade only moves if the WIF token exchange becomes usable by
-  any client or accepts non-AWS issuers.
+  Personal access tokens and service-account tokens expire and show last use, which beats the API
+  and application keys most integrations need. The grade moves only if federation opens to any
+  client or to non-AWS issuers.

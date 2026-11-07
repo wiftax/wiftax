@@ -8,20 +8,16 @@ docs: https://developer.sailpoint.com/docs/api/authentication
 category: identity
 status: listed
 summary: >-
-  Scripts call the Identity Security Cloud API by trading a client ID and secret (a personal
-  access token or an API client) for a JWT that lasts 12 hours by default. No OIDC or federation
-  path exists. Secrets can be scoped, rotated by API and show last use, but can be set to never
-  expire and are not GitHub partner-revoked. Into your clouds it is keyless on AWS; Entra, GCP,
-  GitHub and Okta sources need a secret, key or token you paste.
+  Scripts call the Identity Security Cloud API by trading a client ID and secret for a token that
+  lasts 12 hours by default. No OIDC path exists. SailPoint reaches AWS with a role, but Entra, GCP,
+  GitHub and Okta need a secret you paste.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      OAuth 2.0 client_credentials at https://[tenant].api.identitynow.com/oauth/token with the
-      client ID and secret of a personal access token (acts as the user who made it) or of an API
-      client created under API Management. The returned JWT access token lives for
-      accessTokenValiditySeconds (43200 by default).
+      OAuth client credentials from a personal access token, which acts as its creator, or from an
+      API client. The secret buys a JWT that lasts 12 hours by default.
     evidence:
       - url: https://developer.sailpoint.com/docs/api/authentication
         checked_on: 2026-10-22
@@ -52,25 +48,17 @@ surfaces:
         checked_by: tehreet
         quote: "Number of seconds an access token is valid when generated using this Personal Access Token. If no value is specified, the token will be created with the default value of 43200."
     notes: >-
-      Graded C, not D: the long-lived secret is only used at the token endpoint to mint a
-      short-lived JWT (12 hours by default, configurable per PAT or API client), which the rubric
-      and the client_credentials precedent treat as "short-lived from a static root". It is no
-      better than C because the root is still a client secret you store: SailPoint's developer
-      docs, llms.txt index and SDK models document only client_credentials, authorization_code
-      (with PKCE for the CLI) and refresh_token grants, with no token exchange, JWT bearer,
-      private_key_jwt, GitHub Actions OIDC or cloud workload identity path. Unattended automation
-      must use the client_credentials path; authorization_code needs a human at a browser. Many
-      user-context endpoints need a PAT rather than an API client, so in practice automation often
-      runs as a PAT tied to a (service) identity. Virtual Appliances authenticate back with
-      platform-generated VA keys, also static. SailPoint's separate products (IdentityIQ,
-      self-hosted; Entro, secrets security; NERM) are not graded here.
+      C, not D, because the long-lived secret only mints a short-lived token. It is no better than C
+      because the root is still a stored client secret. The docs list no token exchange, private-key
+      JWT, GitHub Actions OIDC or cloud workload path. Unattended jobs must use client credentials,
+      since the other grants need a browser. Many endpoints need a personal token, so automation
+      often runs as a user. Virtual Appliances use static keys too. IdentityIQ, Entro and NERM are
+      separate products.
   outbound:
     grade: B
     mechanism: >-
-      The AWS SaaS source assumes an IAM role you create that trusts SailPoint's ciem_universal
-      role with a SailPoint-issued External ID. Microsoft Entra ID (and Azure management), the
-      Google Workspace / GCP source, GitHub, Okta and Salesforce want a client secret, private key,
-      PAT or API token from an app or account you create.
+      The AWS source assumes an IAM role you create that trusts SailPoint, with an External ID.
+      Entra ID, GCP, GitHub, Okta and Salesforce want a secret, key or token you create.
     evidence:
       - url: https://documentation.sailpoint.com/connectors/saas/aws/help/saas_connectivity/aws/manual_configuration.html
         checked_on: 2026-10-22
@@ -113,20 +101,12 @@ surfaces:
         checked_by: tehreet
         quote: "Effective July 1, 2026, the External Client Application (ECA) is the recommended authentication method for the Salesforce connector."
     notes: >-
-      Sources checked: AWS SaaS, AWS (VA-based), Microsoft Entra ID SaaS and VA-based (which also
-      covers Azure management), Google Workspace SaaS (which carries GCP IAM and CIEM), GitHub SaaS,
-      Okta SaaS, Salesforce SaaS. Keyless: the AWS SaaS source (cross-account role trusting
-      arn:aws:iam::874540850173:role/ciem_universal, External ID required); the older VA-based AWS
-      connector offers either an IAM role used from a Virtual Appliance you run on EC2 or a pasted
-      IAM user access key. Static: Entra ID / Azure (customer app registration with client
-      secret, JWT certificate private key, SAML bearer with username/password, or refresh token;
-      no SailPoint-owned multi-tenant app or federated credential is documented), GCP (service
-      account private key generated as JSON and pasted, the only grant type CIEM supports; no
-      service-account impersonation or WIF option), GitHub (PAT by default, or the private key of
-      a GitHub App you create), Okta (SSWS API token), Salesforce (customer External Client App
-      credentials; older Basic/OAuth types deprecated). Keyless on one cloud with keys elsewhere is
-      B. The hundreds of other connectors were not individually assessed. Moves to A if SailPoint
-      ships a multi-tenant Entra app or federated credential and GCP impersonation/WIF.
+      AWS is keyless. The older appliance-based AWS connector uses either an EC2 role or a pasted
+      access key. Entra ID needs a client secret, certificate key, password or refresh token on an
+      app you create, with no SailPoint app or federated credential. GCP takes a pasted JSON key,
+      the only option. GitHub takes a personal token or the key of an app you create. Okta takes an
+      API token. Keyless on one cloud with keys elsewhere is B. Most other connectors were not
+      assessed. A needs a SailPoint Entra app or federated credential, and keyless GCP.
 
 hygiene:
   expiry:
@@ -145,11 +125,9 @@ hygiene:
         checked_by: tehreet
         quote: "There is no upper limit on how far in the future the expiration date can be set."
     notes: >-
-      PATs default to a 6-month expiry in the UI, but a never-expiring token only needs the
-      creator to set userAwareTokenNeverExpires, there is no maximum, and no org policy to forbid
-      either is documented. API clients have no secret-expiry field at all (only access- and
-      refresh-token lifetimes). A changeable default is not an enforced expiry (precedent:
-      elastic-cloud-api).
+      Personal tokens default to six months, but the creator can make one never expire, with no
+      maximum or policy against it. API client secrets have no expiry. A changeable default is not
+      enforced, same as elastic-cloud-api.
   rotation_api:
     pass: true
     evidence:
@@ -162,8 +140,7 @@ hygiene:
         checked_by: tehreet
         quote: "Delete oauth client"
     notes: >-
-      POST and DELETE /personal-access-tokens/v1 and /oauth-clients/v1 (plus PATCH, and a bulk
-      expiry update for PATs) let both credential types be created and revoked without a browser.
+      The API can create and revoke both personal tokens and API clients.
   scoping:
     pass: true
     evidence:
@@ -176,10 +153,8 @@ hygiene:
         checked_by: tehreet
         quote: "To follow the principle of least privilege, only select scopes that are needed by the application."
     notes: >-
-      Both PATs and API clients take a scope list that narrows access below the owner's user
-      level. The API default (sp:scopes:all when no scope is passed) inherits the owner's full
-      rights, and the UI default (sp:scopes:default) grants almost nothing, so least privilege is
-      available but opt-in.
+      Both credential types take a scope list narrower than the owner. Without one, the API grants
+      full rights, so least privilege is opt-in.
   last_used:
     pass: true
     evidence:
@@ -192,8 +167,7 @@ hygiene:
         checked_by: tehreet
         quote: "This property can be useful for identifying which PATs are no longer actively used and can be removed."
     notes: >-
-      lastUsed is exposed on both PATs and API clients in the UI and API, updated at most once a
-      day.
+      Both credential types show a last-used time in the UI and API, updated daily.
   leak_revocation:
     pass: false
     evidence:
@@ -201,13 +175,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      SailPoint does not appear in GitHub's supported secret scanning patterns table, so a leaked
-      PAT or API client secret is not reported to SailPoint for revocation.
+      SailPoint is not in GitHub's secret-scanning patterns, so a leaked secret is not reported.
 
 notes: >-
-  Graded on the Identity Security Cloud (formerly IdentityNow) API; IdentityIQ (self-hosted),
-  Entro and NERM are separate products. Three of five hygiene checks pass. The headline is C
-  (inbound C, outbound B). Inbound moves to B or A only if the token endpoint accepts a federated
-  JWT (GitHub Actions OIDC, cloud workload identity, or a bring-your-own issuer via token
-  exchange); expiry would pass with an enforced maximum PAT lifetime or an org policy that bans
-  non-expiring tokens.
+  Graded on the Identity Security Cloud API, formerly IdentityNow. The headline is C, from inbound C
+  and outbound B. Inbound moves to B or A only if the token endpoint accepts a federated token.
+  Expiry would pass with an enforced maximum or a ban on non-expiring tokens.

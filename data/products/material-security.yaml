@@ -7,17 +7,16 @@ docs: https://docs.material.security/reference/api-v1/authentication
 category: security
 status: listed
 summary: >-
-  Material's API accepts only a static per-account token in an x-material-client-secret header,
-  with no documented expiry, last-used timestamp, token API or leak revocation. Material reaches
-  Google Workspace through domain-wide delegation to its own app, but Okta, Duo, OneLogin, Slack
-  and SIEM connectors all want a pasted token or secret.
+  Your code calls Material's API with a static per-account token, with no documented expiry, last
+  use, token API or leak revocation. Material reaches Google Workspace through domain-wide
+  delegation, but Okta, Duo, OneLogin, Slack and SIEM connectors want a pasted token or secret.
 
 surfaces:
   inbound:
     grade: F
     mechanism: >-
-      Static API token created in the Material console, tied to one Material account and sent in
-      the x-material-client-secret header; it carries that account's current role permissions.
+      A static API token made in the Material console and tied to one account, carrying that
+      account's role permissions.
     issuers: []
     evidence:
       - url: https://docs.material.security/reference/api-v1/authentication
@@ -41,17 +40,16 @@ surfaces:
         checked_by: tehreet
         quote: "Use an API token when your AI client doesn't support OAuth, or when you'd rather manage a long-lived token yourself."
     notes: >-
-      No OIDC federation, workload identity, or client-credentials flow is documented for the REST
-      API. The Material MCP server supports OAuth, but that is an interactive per-person
-      authorization for AI clients, not a machine flow, and the MCP fallback is the same static API
-      token. The beta API predates v1 and is documented only in-app; it was not assessed. Material
-      is agent-free (no on-prem collectors). Public docs (docs.material.security) are not gated.
+      No OIDC, workload identity or client-credentials flow is documented for the REST API. The MCP
+      server's OAuth is a per-person login for AI clients, not a machine flow, and its fallback is
+      the same static token. The in-app-only beta API was not assessed. Material runs no on-prem
+      collectors.
   outbound:
     grade: B
     mechanism: >-
-      Google Workspace is connected by granting scopes to Material via domain-wide delegation and
-      Microsoft 365 by an in-app enrollment run by a Global Administrator; Okta, Duo, OneLogin,
-      Slack, PagerDuty and SIEM/SOAR/webhook destinations take customer-created static tokens.
+      Google Workspace is keyless through domain-wide delegation, and Microsoft 365 uses an in-app
+      enrollment by a Global Administrator. Okta, Duo, OneLogin, Slack, PagerDuty and SIEM
+      destinations take static tokens.
     evidence:
       - url: https://docs.material.security/working-with-issues/explorer/file-search
         checked_on: 2026-10-13
@@ -86,19 +84,12 @@ surfaces:
         checked_by: tehreet
         quote: "Your team has full access to and ownership of the underlying infrastructure. Material only has access to deploy updates."
     notes: >-
-      Connectors checked: Google Workspace (keyless: domain-wide delegation to Material, per-scope
-      grants in Google Admin); Microsoft 365 (enrollment is an in-app flow run by a Global
-      Administrator with the steps shown only in the product, so the mechanism, presumably admin
-      consent to Material's multi-tenant app, is not publicly documented; no client secret is
-      mentioned); Okta Token and Okta SSF (static Okta SSWS API token from a dedicated Okta admin,
-      with least-privilege admin roles listed); Duo Auth API (integration key + secret key);
-      OneLogin (API client ID + client secret); Slack (the customer creates its own Slack app from
-      Material's manifest and pastes the long-lived Bot User OAuth Token); PagerDuty (integration
-      key); SIEM/SOAR/custom webhooks incl. Panther and CrowdStrike NG-SIEM (customer-supplied
-      bearer/API keys in request headers). SAML identity integrations exchange only metadata. No
-      AWS, GCP or Azure cloud connectors are documented. The single-tenant "Semi-managed" and
-      "Customer Managed" deployments into customer cloud are described only on marketing pages;
-      how Material authenticates into that infrastructure to deploy updates is not public.
+      Google Workspace grants scopes to Material, with no key. Microsoft 365 enrollment steps appear
+      only in the product. It is presumably admin consent, and no client secret is mentioned. Okta
+      takes a static API token, with least-privilege roles listed. Duo and OneLogin take key and
+      secret pairs. Slack needs a bot token from an app you create. PagerDuty and SIEM or webhook
+      destinations take your keys. No cloud connectors are documented. How Material deploys updates
+      into single-tenant customer clouds is not public.
 
 hygiene:
   expiry:
@@ -113,8 +104,8 @@ hygiene:
         checked_by: tehreet
         quote: "This path uses an API token instead of OAuth, so storing and rotating it is on you."
     notes: >-
-      Token creation takes only a name; no expiry field or org-level expiry policy is documented.
-      Admins can only toggle API token creation off entirely.
+      Token creation takes only a name, with no expiry or org policy. Admins can only turn token
+      creation off entirely.
   rotation_api:
     pass: false
     evidence:
@@ -123,9 +114,8 @@ hygiene:
         checked_by: tehreet
         quote: "The Material Security API v1 includes these resources: Issues, Messages, Accounts, Groups, Roles, OAuth Apps, and Trusted Entities."
     notes: >-
-      Tokens are created and modified in the console (Integrations > API and MCP > Tokens and MCP
-      Connections). The API v1 OpenAPI spec has no token endpoints, so rotation cannot be
-      automated without a browser.
+      Tokens are managed in the console, and the API has no token endpoints. Rotation needs a
+      browser.
   scoping:
     pass: true
     evidence:
@@ -138,10 +128,9 @@ hygiene:
         checked_by: tehreet
         quote: "Global role permissions apply to all tenants. Tenant role permissions apply only to the tenant the user is assigned the role in."
     notes: >-
-      Tokens have no scopes of their own; they inherit the roles of the account that owns them.
-      Passed because Material documents a dedicated service account as the production pattern and
-      that account can be given a narrow built-in role (e.g. Analyst) limited to one tenant. A
-      token on a human admin's account carries all of that admin's permissions.
+      Tokens inherit their account's roles. It passes because Material documents a dedicated service
+      account as the production pattern, with a narrow role in one tenant. A token on an admin's
+      account carries all their permissions.
   last_used:
     pass: false
     evidence:
@@ -150,20 +139,18 @@ hygiene:
         checked_by: tehreet
         quote: "The Audit Log opens, pre-filtered to this token's events within the last week. Update the filter as needed."
     notes: >-
-      The token list links to a per-token Audit Log filter, but no last-used timestamp on the
-      token is documented. Finding dead tokens means querying the audit log per token.
+      No last-used time is documented on tokens. Finding dead ones means checking the audit log per
+      token.
   leak_revocation:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
-    notes: Material Security does not appear in GitHub's secret scanning partner list.
+    notes: >-
+      Material Security is not on GitHub's secret-scanning partner list.
 
 notes: >-
-  Graded the Material platform's API v1 (Email Security, Account Security, Google Drive Security
-  and OAuth Security all share it). Material sells single-tenant deployment options (fully managed,
-  semi-managed, customer managed in the customer's own cloud); auth for those deployments is not
-  publicly documented. Inbound improves if Material adds token expiry, a last-used field and token
-  management endpoints (D), or any federated machine flow (B or better). Outbound would reach A only
-  if Okta and Slack moved to vendor-owned apps (Okta OIN service app, Material-owned Slack app).
+  Graded on API v1, shared by all Material products. Auth for single-tenant deployments is not
+  public. Inbound reaches D with expiry, last use and token endpoints, and B or better with any
+  federated machine flow. Outbound reaches A only if Okta and Slack move to vendor-owned apps.

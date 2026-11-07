@@ -7,19 +7,16 @@ docs: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
 category: security
 status: listed
 summary: >-
-  Sola documents no API keys and no public REST API; the only programmatic door is an MCP server
-  you reach through an interactive OAuth login, so a headless workload has nothing to federate
-  with. Into your estate it uses an IAM role for AWS and its own GitHub and Slack apps, but GCP,
-  Google Workspace, Azure and Entra ID setups create long-lived secrets, and Okta wants an API token.
+  Sola has no API keys or public REST API. The only programmatic access is an MCP server behind an
+  interactive OAuth login, so headless workloads have nothing to federate with. Outbound is keyless
+  for AWS, GitHub and Slack, but GCP, Azure and Okta need long-lived secrets.
 
 surfaces:
   inbound:
     grade: C
     mechanism: >-
-      The Sola MCP server (https://api.sola.security/mcp) uses OAuth 2.1 authorization code with
-      PKCE against auth.sola.security after a human logs in; there is no documented API key,
-      service account, or workload federation, so a non-interactive client would have to hold the
-      resulting long-lived OAuth grant (or an undocumented client-credentials secret).
+      An MCP server that a person logs into with OAuth. There is no API key, service account or
+      federation, so unattended use would hold that login's long-lived grant.
     evidence:
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
         checked_on: 2026-10-13
@@ -42,24 +39,16 @@ surfaces:
         checked_by: tehreet
         quote: "[Sola MCP](https://docs.sola.security/getting-started/sola-ai/sola-mcp.md): Bring your full security environment into any AI assistant"
     notes: >-
-      The public docs index (llms.txt) lists no REST API reference, API-key page, or service-account
-      page; the MCP page is the only programmatic surface, and GitBook's own docs assistant, asked
-      directly, answered that the docs "do not document a general public REST API, Sola API keys, or
-      service-account tokens". The OAuth metadata advertises a client_credentials grant, but nothing
-      public says how to obtain a client, so it is not graded. Graded C on the logic that the MCP
-      issues bearer tokens from an interactive login, and any unattended use would rest on a stored
-      long-lived grant tied to a human user. Token lifetimes are not documented. No external OIDC
-      issuer, cloud identity, or CI identity is accepted. Sola documents no deployable on-prem agent
-      or collector; it pulls from customer sources itself. A strict reader could argue F (no
-      supported machine path at all); a reviewer with a customer login should check whether the
-      app exposes API keys behind the login.
+      Sola's public docs list no REST API, API keys or service accounts, and its docs assistant
+      confirmed this. The OAuth metadata advertises a client-credentials grant, but nothing says how
+      to get a client, so it is not graded. Graded C because unattended use would rest on a stored
+      long-lived grant tied to a person. No outside OIDC, cloud or CI identity is accepted. A strict
+      reader could argue F. Someone with a customer login should check for API keys behind it.
   outbound:
     grade: B
     mechanism: >-
-      Keyless for AWS (cross-account IAM role via CloudFormation or Terraform), GitHub (install
-      Sola's GitHub App) and Slack (install Sola's Slack App); GCP and Google Workspace use a
-      service account key, Azure and Entra ID use an app registration whose client secret the setup
-      script creates, Okta wants an API token, and Salesforce wants a customer-owned client secret.
+      Keyless for AWS through an IAM role, and for GitHub and Slack through Sola's apps. GCP, Google
+      Workspace, Azure, Entra ID, Okta and Salesforce want long-lived keys or secrets.
     evidence:
       - url: https://docs.sola.security/integrations/data-sources/aws.md
         checked_on: 2026-10-13
@@ -102,20 +91,12 @@ surfaces:
         checked_by: tehreet
         quote: "Paste the **Consumer Key**, the **Consumer Secret**, and your **Salesforce URL** in the Sola wizard."
     notes: >-
-      Checked AWS, GCP, Azure, Entra ID, Google Workspace, Okta, GitHub Cloud (data source and
-      connector), Slack and Salesforce. There is no separate Microsoft 365 data source; Entra ID is
-      the Microsoft identity connector. Keyless: AWS (IAM role is recommended, at org level via
-      StackSets or per account; the public page does not mention an External ID, which the wizard
-      may add), GitHub (Sola's GitHub App), Slack (Sola's Slack App). Static options alongside them:
-      AWS access keys, GitHub PAT or a custom GitHub App whose .pem private key you upload, and
-      custom Slack apps whose bot and user OAuth tokens you paste. Static only: GCP (service account
-      key at both org and project level; the setup script temporarily switches off the
-      iam.disableServiceAccountKeyCreation org policy to mint it), Google Workspace (service account
-      key with domain-wide impersonation, not Sola's own service account), Azure and Entra ID (an
-      app registration in your tenant with a client secret, not admin consent to a Sola
-      multi-tenant app and not a federated credential), Okta (API token from a dedicated Read-only
-      Administrator service account) and Salesforce (customer External Client App with client
-      credentials). Two of the three clouds want long-lived keys, so this is a weak B.
+      AWS uses an IAM role, though the public page does not mention an External ID. GitHub and Slack
+      use Sola's own apps. Static keys are also offered for all three. GCP and Google Workspace need
+      a service account key, and the GCP script briefly disables the org policy that blocks key
+      creation. Azure and Entra ID use a client secret on an app in your tenant, not consent to a
+      Sola app. Okta wants an API token and Salesforce a client secret. Two of three clouds want
+      keys, so this is a weak B.
 
 hygiene:
   expiry:
@@ -126,8 +107,8 @@ hygiene:
         checked_by: tehreet
         quote: "Access is scoped to the workspace the token was generated in."
     notes: >-
-      Sola documents no customer-managed credential at all, and nothing about token or grant
-      lifetime, so no expiry policy can be shown.
+      Sola documents no customer-managed credential and no token lifetime, so no expiry policy can
+      be shown.
   rotation_api:
     pass: false
     evidence:
@@ -136,8 +117,7 @@ hygiene:
         checked_by: tehreet
         quote: "Run read-only SQL queries directly against your project data source tables."
     notes: >-
-      The only documented programmatic surface is the read-only MCP; there is no documented API for
-      creating or revoking credentials.
+      The read-only MCP is the only documented surface. No API creates or revokes credentials.
   scoping:
     pass: false
     evidence:
@@ -146,8 +126,8 @@ hygiene:
         checked_by: tehreet
         quote: "MCP actions on a project are limited by your role on that project. For example, if you have Viewer access on an project, Execute SQL Query will fail for that project."
     notes: >-
-      The MCP is read-only and bound to one workspace, but the token carries the logged-in human's
-      role; there is no separate machine principal with its own least-privilege policy.
+      The MCP is read-only and tied to one workspace, but the token carries the logged-in person's
+      role. There is no machine identity.
   last_used:
     pass: false
     evidence:
@@ -155,7 +135,8 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "View and manage the settings for your Sola user, workspaces and projects"
-    notes: The settings documentation shows no list of tokens or connected clients with last-used times.
+    notes: >-
+      The settings docs show no list of tokens or clients with last-used times.
   leak_revocation:
     pass: false
     evidence:
@@ -163,12 +144,10 @@ hygiene:
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "Supported secret scanning patterns"
-    notes: Sola does not appear anywhere in GitHub's secret-scanning pattern list, partner or otherwise.
+    notes: >-
+      Sola is not in GitHub's secret-scanning pattern list.
 
 notes: >-
-  Sola's docs are public on GitBook, not gated, but they cover only the product UI, data sources and
-  the MCP; anything behind app.sola.security (an API-key screen, if one exists) could not be checked.
-  Sola also runs a Slack AI assistant, which is a chat surface for humans, not a workload API. The
-  outbound grade would reach A if GCP and Google Workspace moved to impersonating a Sola-owned
-  service account and Azure and Entra ID moved to admin consent on a Sola multi-tenant app or a
-  federated credential, with Okta on an OIN service app.
+  Sola's docs are public but cover only the UI, data sources and MCP. Anything behind the app login,
+  such as an API-key screen, could not be checked. Outbound reaches A if GCP, Workspace, Azure and
+  Entra ID move to Sola-owned identities or consent, and Okta to an OIN service app.

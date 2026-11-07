@@ -7,21 +7,16 @@ docs: https://docs.nebius.com/iam/service-accounts/authentication
 category: cloud
 status: listed
 summary: >-
-  Federated credentials let a Nebius service account trust any OIDC issuer: an external JWT is
-  exchanged at Nebius STS for a 12-hour IAM token that drives the API, CLI, Terraform, registry
-  and Kubernetes. Object Storage still runs on S3 access keys, which can be minted short-lived from
-  that token but may also never expire. Nebius is itself an OIDC issuer for GCP and others, yet
-  Data Transfer and Serverless jobs take pasted keys.
+  A Nebius service account can trust any OIDC issuer, so your code trades its JWT for a 12-hour IAM
+  token. Object Storage still uses S3 access keys, which may never expire. Nebius is itself an OIDC
+  issuer, but its Data Transfer and Serverless jobs take pasted keys.
 
 surfaces:
   inbound:
     grade: A
     mechanism: >-
-      A federated-credentials resource binds an external OIDC issuer (issuer URL, optional inline
-      JWKS) and a federated subject (the JWT's sub) to a service account; the workload posts its JWT
-      as the actor_token to Nebius STS (RFC 8693) and receives a short-lived IAM access token. The
-      static alternatives are service-account authorized keys (a private key that signs a JWT
-      exchanged for the same token) and S3-style access keys for Object Storage.
+      Your workload trades a JWT from an OIDC issuer bound to a service account for a short-lived
+      IAM token at Nebius STS. Static authorized keys and S3 access keys also exist.
     issuers:
       - any
     evidence:
@@ -78,30 +73,18 @@ surfaces:
         checked_by: tehreet
         quote: "Authentication with an IAM token is not allowed over HTTP because HTTP does not use encryption."
     notes: >-
-      Judgment call for a reviewer. The federation is real and self-serve: federated credentials
-      are a first-class IAM resource in the CLI, REST API and Terraform provider, the STS overview
-      lists "an external JWT" as an accepted token, the Go SDK ships a federated-credentials
-      tokener and CLI profiles take a federated-credentials file. Trust is pinned by issuer and
-      sub only; no audience or extra-claim condition is documented, the same gap the A on
-      keycard-agent-identity accepted. The weakness is documentation: there is no walkthrough for
-      GitHub Actions or any other issuer, only reference pages and the STS parameter table, so if
-      the reviewer reads "documented for workloads" as needing a how-to, this drops to C (the
-      authorized-key JWT flow is a static root). Data planes, graded on the weakest path a
-      workload must use: Container Registry takes the 12-hour IAM token (static keys optional);
-      kubeconfigs come from `nebius mk8s cluster get-credentials`, i.e. the same CLI identity;
-      Object Storage's documented S3 path needs an access key pair, but a federated service
-      account can create one through the IAM v2 API with an expires_at minutes away and delete it
-      after, so no long-lived secret is required, and the HTTP-access page implies IAM-token auth
-      also works over HTTPS (not documented elsewhere). Compute VMs also get ambient tokens from
-      the metadata service, which on its own would not earn the A.
+      Judgment call for a reviewer. Federation is self-serve in the CLI, REST API, Terraform and Go
+      SDK. Trust pins issuer and subject only, with no audience check, the same gap the
+      keycard-agent-identity A accepted. There is no walkthrough for GitHub Actions or any issuer,
+      only reference pages. If that fails "documented for workloads", this drops to C, since
+      authorized keys are a static root. Container Registry and Kubernetes use the same IAM token.
+      Object Storage needs an S3 key pair, but a federated service account can mint one that expires
+      in minutes. VM metadata tokens alone would not count.
   outbound:
     grade: B
     mechanism: >-
-      Nebius STS issues OIDC ID tokens (issuer https://sts.nebius.com) that a workload exchanges at
-      Google Cloud Workload Identity Federation or any OIDC-trusting system, and every Managed
-      Kubernetes cluster publishes its own OIDC discovery endpoint. Managed reach-ins do not use
-      it: Object Storage Data Transfer takes S3 access key pairs or an Azure storage account key,
-      and Serverless AI jobs take a private registry's username and password or PAT.
+      Nebius STS issues OIDC tokens that GCP or any OIDC-trusting system can accept, and each
+      Kubernetes cluster has its own issuer. Data Transfer and Serverless jobs take static keys.
     evidence:
       - url: https://docs.nebius.com/iam/wif
         checked_on: 2026-10-22
@@ -132,17 +115,11 @@ surfaces:
         checked_by: tehreet
         quote: "Personal access token, password or an API key."
     notes: >-
-      Checked: Nebius STS ID tokens (GCP guide; any OIDC Discovery consumer, so AWS and Azure
-      federated credentials work by the same mechanism though no guide exists), Managed Kubernetes
-      cluster OIDC issuers, Object Storage Data Transfer (S3-compatible sources such as AWS S3 and
-      Azure Blob), Serverless AI jobs and endpoints pulling from Docker Hub, GHCR, Azure, NGC or
-      custom registries, and the Wiz integration (Wiz reaching into Nebius, an inbound credential).
-      The keyless path is "the product is itself an OIDC issuer I can trust", for workload code you
-      write. Nebius's own managed services that reach into your clouds do not use it: Data
-      Transfer wants a static S3 key pair or an Azure storage account key (account-wide), with
-      least-privilege roles documented only for the Nebius side; registry credentials can be held
-      in SecretStash but are still static. Nebius-held cross-account roles or STS-signed tokens for
-      Data Transfer would make this A.
+      The keyless path is Nebius as an OIDC issuer, for workload code you write. A GCP guide exists,
+      and AWS and Azure work the same way without a guide. Nebius's own managed services do not use
+      it. Data Transfer wants a static S3 key pair or an account-wide Azure storage key. Serverless
+      jobs take static registry credentials. Nebius-held roles or STS tokens for Data Transfer would
+      make this A.
 
 hygiene:
   expiry:
@@ -161,11 +138,9 @@ hygiene:
         checked_by: tehreet
         quote: "By default, the key lifetime is 6 months."
     notes: >-
-      Mixed by key type. Static keys (Container Registry, Observability) default to six months and
-      are capped at three years, which would pass. But authorized keys (the control-plane static
-      root) and S3 access keys take an optional expires_at and are issued without one if it is
-      omitted, and no org policy to force an expiry is documented. Graded on the weakest key, per
-      the changeable-default precedent.
+      Registry and Observability keys default to six months with a three-year cap. Authorized keys
+      and S3 access keys never expire unless you set a date, and no org policy forces one. Graded on
+      the weakest key.
   rotation_api:
     pass: true
     evidence:
@@ -182,8 +157,8 @@ hygiene:
         checked_by: tehreet
         quote: "--url https://api.nebius.cloud/iam/v1/static-keys/revoke"
     notes: >-
-      Access keys, authorized keys and static keys all have create, list and delete/revoke (plus
-      activate/deactivate) methods in the IAM API, CLI, SDKs and Terraform provider.
+      Every key type can be created, listed, deactivated and deleted through the IAM API, CLI, SDKs
+      and Terraform.
   scoping:
     pass: true
     evidence:
@@ -200,10 +175,8 @@ hygiene:
         checked_by: tehreet
         quote: "Each static key is issued for a specific Nebius AI Cloud service and cannot be used for other services."
     notes: >-
-      Every key belongs to a service account, a purpose-built machine principal whose access comes
-      from group memberships; access permits can grant a role on a tenant, project or single
-      resource, and bucket policies narrow Object Storage further. Static keys are additionally
-      pinned to one service. Keys cannot be narrower than their service account.
+      Every key belongs to a service account, a machine identity whose roles can cover a tenant,
+      project or single resource. Static keys are also pinned to one service.
   last_used:
     pass: false
     evidence:
@@ -216,9 +189,7 @@ hygiene:
         checked_by: tehreet
         quote: "string fingerprint = 2;"
     notes: >-
-      The AccessKey, AuthPublicKey and StaticKey resources expose state, fingerprint, algorithm and
-      expiry but no last-used field, and no docs page mentions one. The console view was not
-      checked.
+      No key type shows a last-used time in the API or docs.
   leak_revocation:
     pass: false
     evidence:
@@ -226,14 +197,10 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Nebius does not appear in GitHub's supported secret-scanning patterns table, in the Partner
-      column or any other.
+      Nebius is not in GitHub's secret-scanning patterns table at all.
 
 notes: >-
-  One card for the Nebius AI Cloud platform: IAM, Compute, Managed Kubernetes, Container Registry
-  and Object Storage share one IAM and one token. Unlike CoreWeave, federation reaches the control
-  plane, so it is not split. The A rests on the federated-credentials resource, which is documented
-  only in reference pages; a published GitHub Actions or generic-OIDC walkthrough and an audience
-  condition would settle it. Two of five hygiene checks pass; mandatory expiry on authorized and
-  access keys, a last-used timestamp and a GitHub partnership would fix the rest. Nebius Token
-  Factory (formerly AI Studio) uses its own API keys and has its own card, nebius-ai-studio.
+  One card for the platform, since IAM, Compute, Kubernetes, Registry and Object Storage share one
+  IAM token. Unlike CoreWeave, federation reaches the control plane, so it is not split. A GitHub
+  Actions walkthrough and an audience condition would settle the A. Token Factory has its own card,
+  nebius-ai-studio.

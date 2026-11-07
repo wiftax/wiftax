@@ -7,20 +7,16 @@ docs: https://docs.panther.com/panther-developer-workflows/api
 category: security
 status: listed
 summary: >-
-  Panther's REST and GraphQL APIs, PAT and the Terraform provider take only a static X-API-Key
-  token; no OIDC or workload identity path exists. Tokens are permission-scoped, API-rotatable and
-  show last use, but do not expire and are not GitHub partner-revoked. Into your cloud it is
-  keyless on AWS (IAM role) and GCP (Workload Identity Federation), while Azure sources and most
-  SaaS pullers want client secrets, connection strings or API tokens.
+  To call Panther's APIs, PAT or Terraform, your code needs a static API token. There is no OIDC
+  login. Panther reaches into AWS and GCP without keys, but Azure sources and most SaaS pullers want
+  secrets you paste in.
 
 surfaces:
   inbound:
     grade: D
     mechanism: >-
-      Static Panther API token sent as the X-API-Key header, created in the Console or through the
-      API with an explicit permission list and optional CIDR allowlist. It is the only credential
-      the REST API, GraphQL API, Panther Analysis Tool (PAT) and Terraform provider accept; HTTP
-      log sources take a static shared secret, HMAC key, bearer token or basic auth.
+      A static API token in the X-API-Key header, created with its own permission list and an
+      optional IP allowlist. HTTP log sources take static shared secrets.
     evidence:
       - url: https://docs.panther.com/panther-developer-workflows/api.md
         checked_on: 2026-10-22
@@ -47,23 +43,16 @@ surfaces:
         checked_by: tehreet
         quote: "With bearer authentication, you define a bearer token value during source setup."
     notes: >-
-      Every documented automation path (REST, GraphQL, PAT in CI/CD, Terraform log-source
-      management) authenticates with the same static API token; the OpenAPI spec declares only the
-      ApiKeyAuth header scheme. No OIDC, GitHub Actions, cloud workload identity or token exchange
-      is documented for inbound calls, and the PAT CI/CD guidance is to store the token as a CI
-      secret. SAML SSO and SCIM are for humans. The Workload Identity Federation Panther documents
-      is outbound (Panther authenticating to your GCP), not your workload authenticating to
-      Panther. HTTP ingestion sources are likewise static shared secrets (shared secret, HMAC,
-      bearer, basic) or no auth. Three of five hygiene checks pass, so D rather than F.
+      Every automation path uses the same static token: REST, GraphQL, PAT in CI and Terraform. The
+      docs describe no OIDC, cloud workload identity or token exchange, and tell you to store the
+      token as a CI secret. SAML and SCIM are for humans. The Workload Identity Federation Panther
+      documents is outbound, Panther calling into your GCP. Three of five hygiene checks pass, so D
+      rather than F.
   outbound:
     grade: B
     mechanism: >-
-      AWS log sources (S3, CloudWatch, SQS) and Cloud Security Scanning assume an IAM role you
-      create that trusts your Panther instance's AWS account; GCS and Pub/Sub sources, the Pub/Sub
-      alert destination and Google Workspace logs can use Google Workload Identity Federation from
-      Panther's AWS identity. Azure Blob Storage wants an Entra app client secret, Event Hub a SAS
-      connection string, and SaaS pullers (Okta, Microsoft Graph, GitHub, Wiz and others) API
-      tokens, PATs or OAuth client secrets.
+      Panther assumes an IAM role you create in AWS and uses Workload Identity Federation into GCP.
+      Azure and most SaaS pullers want client secrets, connection strings or API tokens.
     evidence:
       - url: https://docs.panther.com/data-onboarding/data-transports/aws/s3.md
         checked_on: 2026-10-22
@@ -122,21 +111,13 @@ surfaces:
         checked_by: tehreet
         quote: "and store it in a secure location, as you will need it in a following step."
     notes: >-
-      Checked: AWS S3, CloudWatch Logs and SQS transports and Cloud Security Scanning (IAM role,
-      keyless); GCS and Pub/Sub transports, the Pub/Sub alert destination and Google Workspace logs
-      (Workload Identity Federation with Panther's AWS identity as the external issuer, keyless;
-      a service-account JSON key file is the documented alternative); Azure Blob Storage (Entra
-      app tenant ID, client ID and client secret) and Event Hub (shared access policy with Listen,
-      primary connection string), with no federated-credential option documented; SaaS pullers
-      Okta (SSWS API token), Microsoft Graph (client ID and secret), GitHub (OAuth App client
-      secret or PAT) and Wiz (service account client secret, scoped to projects). The AWS trust
-      policy names the root of the AWS account your Panther instance runs in, with an
-      aws:SecureTransport condition but no sts:ExternalId; since that account is your instance's
-      own (SaaS deployments) or yours (Cloud Connected), the confused-deputy risk is lower than with
-      a shared vendor account, but an External ID or a named Panther role would be tighter. B
-      because AWS and GCP are keyless while Azure has no keyless path; an Azure federated
-      credential would lift outbound to A for the clouds, with SaaS pullers bound by what each SaaS
-      offers.
+      AWS log sources and Cloud Security Scanning assume a role you create. GCS, Pub/Sub and Google
+      Workspace use Workload Identity Federation from Panther's AWS identity. Azure Blob Storage
+      wants an Entra app client secret and Event Hub a connection string, with no federated option.
+      SaaS pullers such as Okta, Microsoft Graph and GitHub take API tokens or client secrets. The
+      AWS trust policy names your Panther instance's account with no External ID. That account is
+      your instance's own or yours, so the risk is lower than with a shared vendor account. B
+      because Azure has no keyless path.
 
 hygiene:
   expiry:
@@ -151,10 +132,8 @@ hygiene:
         checked_by: tehreet
         quote: "Time when the API token will expire. Will be null if the token is non-expiring"
     notes: >-
-      The token schema has an expiresAt field that may be null, but neither the create nor the
-      update payload accepts an expiration, and no organization policy for a maximum lifetime is
-      documented. Panther recommends rotating every 90 days, which is advice, not enforcement (same
-      call as elastic-cloud-api).
+      Tokens cannot be given an expiry when created or updated, and no org policy caps their
+      lifetime. The 90-day rotation advice is not enforced. Same call as elastic-cloud-api.
   rotation_api:
     pass: true
     evidence:
@@ -170,9 +149,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      REST has POST /api-tokens, DELETE /api-tokens/{id} and POST /api-tokens/{id}/rotate (or
-      /self/rotate, so a token can rotate itself); GraphQL has rotateAPIToken. Rotation invalidates
-      the previous value immediately.
+      The REST and GraphQL APIs can create, delete and rotate tokens. A token can rotate itself, and
+      the old value stops working at once.
   scoping:
     pass: true
     evidence:
@@ -189,10 +167,8 @@ hygiene:
         checked_by: tehreet
         quote: "All API tokens have full access to the data lake and Saved Searches."
     notes: >-
-      Tokens are standalone principals, not tied to a user's role: each is created with its own
-      permission list (LogSourceModify, RuleRead, AlertModify and so on) and an optional CIDR
-      allowlist. Caveat: the data-lake RBAC feature does not apply to tokens, so any token with
-      query permissions sees all log data and Saved Searches.
+      Each token has its own permission list and optional IP allowlist, not tied to a user.
+      Data-lake access rules do not apply to tokens, so any token that can query sees all log data.
   last_used:
     pass: true
     evidence:
@@ -200,7 +176,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "The last time this token was used to authenticate"
-    notes: The APIToken resource returned by GET /api-tokens carries a lastUsedAt timestamp.
+    notes: >-
+      The token list API returns a last-used timestamp.
   leak_revocation:
     pass: false
     evidence:
@@ -208,12 +185,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
-      Panther does not appear in GitHub's supported secret-scanning patterns table at all, so a
-      leaked Panther API token is neither detected nor reported to Panther.
+      Panther is not in GitHub's secret-scanning patterns, so a leaked token is neither detected nor
+      reported.
 
 notes: >-
-  One card for Panther, covering both SaaS and Cloud Connected deployments (same API and token
-  model). Three of five hygiene checks pass; an enforceable token expiry and GitHub partner
-  revocation would make five. Inbound moves to B or A only if the Panther API accepts a federated
-  token (GitHub Actions OIDC, cloud workload identity or a bring-your-own issuer), which would also
-  let PAT in CI drop its stored token. Outbound moves to A with a keyless Azure option.
+  Covers SaaS and Cloud Connected deployments, which share the API and tokens. Inbound moves to B or
+  A only if Panther accepts a federated token. Outbound moves to A with a keyless Azure option.
