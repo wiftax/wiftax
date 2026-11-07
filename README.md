@@ -12,8 +12,10 @@ See [SCOREBOARD.md](SCOREBOARD.md) for the current list.
 
 1. Copy `data/products/_TEMPLATE.yaml` to `data/products/<vendor>-<product>.yaml`.
 2. Grade it per the rubric. Every grade and hygiene check needs a URL and a `checked_on` date.
-3. `npm install && npm run check`.
-4. Open a PR. Disputes are PRs too: change the grade, change the receipts.
+3. Write it plainly. Short sentences with no semicolons, few parentheses, and code names only where
+   a reader needs them. `npm run validate` enforces this on our prose (quotes are exempt).
+4. `npm install && npm run check`.
+5. Open a PR. Disputes are PRs too: change the grade, change the receipts.
 
 Vendors: if you fixed it, open a PR setting `status: graduated`. You get a permanent gold star.
 

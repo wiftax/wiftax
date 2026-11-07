@@ -48,7 +48,8 @@ surfaces:
       clients and mint a personal access token, which can be non-expiring. There is no
       client-credentials or token-exchange grant. A short-lived JWT exists only for
       HasMySecretLeaked and needs an API key to get. ggshield in CI is documented only with
-      GITGUARDIAN_API_KEY as a CI secret, though GitHub and GitLab issue OIDC tokens to those jobs.
+      GITGUARDIAN_API_KEY as a CI secret. That holds even though GitHub and GitLab issue OIDC tokens
+      to those jobs.
       The ggscout collector also calls back with a static token. Free plans get personal access
       tokens only.
   outbound:
