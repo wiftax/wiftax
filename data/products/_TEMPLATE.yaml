@@ -1,4 +1,6 @@
 # Copy to data/products/<id>.yaml. Read RUBRIC.md first. Every grade needs a receipt.
+# Prose (summary, mechanism, notes) must be plain sentences: no semicolons, at most 35 words
+# each, no more than 2 parentheticals or 3 code identifiers per sentence. Summary max 60 words.
 id: vendor-product
 vendor: Vendor
 product: Product         # short name, max 40 chars, no parentheses
