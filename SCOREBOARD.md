@@ -71,7 +71,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **🔴 D** | Veza | [Access Graph](data/products/veza.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-10-12 |
+| **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-11-09 |
 | **🟠 C** | Axonius | [Platform](data/products/axonius.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-10-22 |
 | **🟠 C** | CrowdStrike | [Falcon API](data/products/crowdstrike-falcon-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | CyberArk | [Identity Security Platform](data/products/cyberark-identity-platform.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
