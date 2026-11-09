@@ -134,14 +134,13 @@ hygiene:
       - url: https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens
         checked_on: 2026-09-16
         checked_by: tehreet
-    notes: >-
-      No last-used time is documented for tokens or kubeconfigs. Graded conservatively.
+    notes: No last-used time is documented for tokens or kubeconfigs. Graded conservatively.
   leak_revocation:
     pass: false
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
     notes: CoreWeave is not on GitHub's secret-scanning list.
 notes: >-
