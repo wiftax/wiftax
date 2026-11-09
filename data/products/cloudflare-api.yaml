@@ -10,7 +10,6 @@ summary: >-
   Your code calls the Cloudflare API with a static token that never expires by default, though it
   passes the other four hygiene checks. Logpush writes to your S3 or GCS bucket without a key, but
   the R2 migration tools want pasted keys.
-
 surfaces:
   inbound:
     grade: D
@@ -19,17 +18,23 @@ surfaces:
       and IP limits are optional.
     evidence:
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: "The token secret is only shown once. Do not store the secret in plaintext where others can access it."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: >-
+          The token secret is only shown once. Do not store the secret in plaintext where others can
+          access it.
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Account API tokens allow you to set up durable integrations that can act as service principals with their own specific set of permissions."
+        quote: >-
+          Account API tokens allow you to set up durable integrations that can act as service
+          principals with their own specific set of permissions.
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/keys/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Global API key is not recommended for new customers. Current customers using Global API key are encouraged to migrate and use API tokens instead."
+        quote: >-
+          Global API key is not recommended for new customers. Current customers using Global API
+          key are encouraged to migrate and use API tokens instead.
     notes: >-
       Cloudflare's OIDC support is for Zero Trust access and Workers. Nothing lets a workload trade
       an outside OIDC token for API access. The legacy Global API Key is an unscoped, non-expiring
@@ -43,15 +48,20 @@ surfaces:
       - url: https://developers.cloudflare.com/logs/get-started/enable-destinations/aws-s3/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Cloudflare uses Amazon Identity and Access Management (IAM) to gain access to your S3 bucket."
-      - url: https://developers.cloudflare.com/logs/get-started/enable-destinations/google-cloud-storage/
+        quote: >-
+          Cloudflare uses Amazon Identity and Access Management (IAM) to gain access to your S3
+          bucket.
+      - url: >-
+          https://developers.cloudflare.com/logs/get-started/enable-destinations/google-cloud-storage/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Cloudflare uses Google Cloud Identity and Access Management (IAM) to gain access to your bucket. The Cloudflare IAM service account needs admin permission for the bucket."
+        quote: >-
+          Cloudflare uses Google Cloud Identity and Access Management (IAM) to gain access to your
+          bucket. The Cloudflare IAM service account needs admin permission for the bucket.
       - url: https://developers.cloudflare.com/r2/data-migration/super-slurper/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Cloudflare recommends you create a user with a narrow set of permissions."
+        quote: Cloudflare recommends you create a user with a narrow set of permissions.
       - url: https://developers.cloudflare.com/r2/data-migration/sippy/
         checked_on: 2026-09-16
         checked_by: tehreet
@@ -59,7 +69,6 @@ surfaces:
     notes: >-
       Logpush never needs a secret from you. Super Slurper and Sippy have no role or federation
       option, only static keys, so the surface is B.
-
 hygiene:
   expiry:
     pass: false
@@ -67,28 +76,29 @@ hygiene:
       - url: https://developers.cloudflare.com/fundamentals/api/how-to/restrict-tokens/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "By default, tokens do not expire and are long lived."
-      - url: https://developers.cloudflare.com/api/resources/accounts/subresources/tokens/methods/create/
+        quote: By default, tokens do not expire and are long lived.
+      - url: >-
+          https://developers.cloudflare.com/api/resources/accounts/subresources/tokens/methods/create/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "expires_on"
-    notes: >-
-      A token can be given an expiry, but the default is never and no account policy forces one.
+        quote: expires_on
+    notes: A token can be given an expiry, but the default is never and no account policy forces one.
   rotation_api:
     pass: true
     evidence:
       - url: https://developers.cloudflare.com/api/resources/user/subresources/tokens/methods/create/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "POST /user/tokens"
-      - url: https://developers.cloudflare.com/api/resources/accounts/subresources/tokens/methods/create/
+        quote: POST /user/tokens
+      - url: >-
+          https://developers.cloudflare.com/api/resources/accounts/subresources/tokens/methods/create/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "POST /accounts/{account_id}/tokens"
+        quote: POST /accounts/{account_id}/tokens
       - url: https://developers.cloudflare.com/api/resources/user/subresources/tokens/methods/delete/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Destroy a token."
+        quote: Destroy a token.
     notes: >-
       User and account tokens can be created and deleted through the API. Account tokens need Super
       Administrator.
@@ -96,26 +106,35 @@ hygiene:
     pass: true
     evidence:
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: "granting Zone DNS Read access to a zone example.com will allow the token to read DNS records only for that specific zone."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: >-
+          For example, Zone DNS Read for example.com allows the token to read DNS records only for
+          that zone.
   last_used:
     pass: true
     evidence:
       - url: https://developers.cloudflare.com/api/resources/user/subresources/tokens/methods/list/
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "last_used_on"
+        quote: last_used_on
   leak_revocation:
     pass: true
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-09-16
         checked_by: tehreet
-        quote: "Cloudflare Account API Token"
+        quote: Cloudflare Account API Token
+      - url: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: >-
+          New API tokens use the cfut_ prefixed scannable format, which allows credential scanning
+          tools to detect leaked tokens.
     notes: >-
-      Cloudflare is a GitHub secret-scanning partner for its API tokens and the Global API Key.
-
+      Cloudflare is a GitHub secret-scanning partner for its API tokens and the Global API Key. New
+      tokens carry a cfut_ prefix so scanners can spot them.
 notes: >-
   The one hygiene miss, expiry, matters most. A token made today with no expiry works indefinitely.
   The Roll action rotates a token in place, but only in the dashboard.
