@@ -1,7 +1,8 @@
 id: cyera-data-security
 vendor: Cyera
 product: Data Security Platform
-aliases: ["DSPM"]
+aliases:
+  - DSPM
 website: https://www.cyera.com
 docs: https://api.cyera.io/docs
 category: security
@@ -10,7 +11,6 @@ summary: >-
   To call Cyera's API, your code swaps a client ID and secret for a short-lived JWT. The secret
   expires within 365 days. Cyera's docs are behind a login, so how it connects into your clouds can
   barely be checked.
-
 surfaces:
   inbound:
     grade: C
@@ -21,33 +21,40 @@ surfaces:
       - url: https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "To configure the Cyera side of the integration, generate an API token and retrieve the credentials you will need for the"
+        quote: >-
+          To configure the Cyera side of the integration, generate an API token and retrieve the
+          credentials you will need for the
       - url: https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "These values appear only once, make sure you save them."
+        quote: These values appear only once, make sure you save them.
       - url: https://www.elastic.co/docs/reference/integrations/cyera
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "The integration authenticates to the Cyera API using a Client ID and Client Secret, which serve as the required credentials."
-      - url: https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/CyeraDSPM/Data%20Connectors/CyeraDSPM_CCF/CyeraDSPMLogs_DataConnectorPoller.json
+        quote: >-
+          The integration authenticates to the Cyera API using a Client ID and Client Secret, which
+          serve as the required credentials.
+      - url: >-
+          https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/CyeraDSPM/Data%20Connectors/CyeraDSPM_CCF/CyeraDSPMLogs_DataConnectorPoller.json
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: '"TokenEndpoint": "https://api.cyera.io/v1/login"'
+        quote: "\"TokenEndpoint\": \"https://api.cyera.io/v1/login\""
       - url: https://github.com/cyeragit/ANONY_Terraform_Provider/blob/main/API_MAPPING.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "**POST /v1/login** — Body: `clientId`, `secret` → `jwt`, `refreshToken`, `expiresIn`"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://auth.cyera.io/.well-known/openid-configuration
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: '"grant_types_supported":["authorization_code","refresh_token","client_credentials","urn:ietf:params:oauth:grant-type:token-exchange","urn:ietf:params:oauth:grant-type:device_code"]'
+        quote: >-
+          "grant_types_supported":["authorization_code","refresh_token","client_credentials","urn:ietf:params:oauth:grant-type:token-exchange","urn:ietf:params:oauth:grant-type:device_code"]
     notes: >-
       Every public third-party connector uses this flow. Graded C because the JWT is short-lived but
       the client secret is a static root. Cyera's auth server advertises the token-exchange grant,
       but nothing public says it accepts workload tokens, so it does not count. The API reference
       and product docs are behind a login. How the on-prem connector authenticates back to Cyera is
-      not documented.
+      not documented. The cyeragit sample provider repository now returns 404. That receipt is
+      missing and needs a human replacement. The Delinea, Elastic and Sentinel receipts still carry
+      the grade on their own.
   outbound:
     grade: B
     mechanism: >-
@@ -58,30 +65,36 @@ surfaces:
       - url: https://www.cyera.com/partnership/microsoft
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "Cyera’s agentless platform connects to your multi cloud environments and deploys in minutes."
+        quote: >-
+          Cyera’s agentless platform connects to your multi cloud environments and deploys in
+          minutes.
       - url: https://www.cyera.com/partnership/google-cloud-platform
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "Cyera connects to your environment in seconds and covers your entire data landscape using native APIs"
+        quote: >-
+          Cyera connects to your environment in seconds and covers your entire data landscape using
+          native APIs
       - url: https://github.com/cyeragit/ANONY_Terraform_Provider/blob/main/README.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: 'role_arn      = "arn:aws:iam::123456789012:role/ANONYRole"'
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://github.com/cyeragit/ANONY_Terraform_Provider/blob/main/API_MAPPING.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://www.cyera.com/blog/reinventing-on-prem-data-discovery-and-classification-cyeras-connectorless-approach
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "**Accounts** (Snowflake key-rotation only)"
-      - url: https://www.cyera.com/blog/reinventing-on-prem-data-discovery-and-classification-cyeras-connectorless-approach
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Cyera’s approach eliminates these bottlenecks by securely connecting to on-prem systems from the cloud through APIs, removing the need for local agents or additional infrastructure."
+        quote: >-
+          Cyera’s approach eliminates these bottlenecks by securely connecting to on-prem systems
+          from the cloud through APIs, removing the need for local agents or additional
+          infrastructure.
     notes: >-
-      Low confidence. Connector setup guides are all behind a login. The AWS role comes from a
-      proof-of-concept provider, not an official guide, and does not show an External ID. The
-      Snowflake endpoint means Cyera holds a long-lived Snowflake credential. On-prem scanning
-      likely needs service-account credentials, but that is unconfirmed. Graded B on the AWS role
-      plus the Snowflake key. Public setup docs could move this either way.
-
+      Low confidence. Connector setup guides are all behind a login. The AWS role came from a
+      proof-of-concept provider, not an official guide, and did not show an External ID. That
+      repository now returns 404, so both the AWS role ARN receipt and the Snowflake key-rotation
+      receipt are missing. The grade is held at B pending a human search for replacement pages.
+      On-prem scanning likely needs service-account credentials, but that is unconfirmed. Public
+      setup docs could move this either way.
 hygiene:
   expiry:
     pass: true
@@ -89,11 +102,11 @@ hygiene:
       - url: https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "set the expiration length of the token. The default value is set to 1 day."
+        quote: set the expiration length of the token. The default value is set to 1 day.
       - url: https://www.elastic.co/docs/reference/integrations/cyera
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "Select a Token Expiration from the menu (1, 7, 30, 90, or 365 days)."
+        quote: Select a Token Expiration from the menu (1, 7, 30, 90, or 365 days).
     notes: >-
       Every documented flow requires an expiry, from 1 to 365 days, with no never option. That
       counts as an enforced maximum. Gated docs might allow longer tokens elsewhere.
@@ -101,46 +114,50 @@ hygiene:
     pass: false
     evidence:
       - url: https://github.com/cyeragit/ANONY_Terraform_Provider/blob/main/API_MAPPING.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "**Classifications** — GET /v1/classifications, PATCH sensitivity"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
-      Public guides create and revoke tokens only in the UI. Cyera's public summary of its API lists
-      no token endpoints. The refresh endpoint renews the JWT, not the secret.
+      Public guides create and revoke tokens only in the UI. Cyera's public summary of its API
+      listed no token endpoints. That summary now returns 404, so the receipt is missing. The check
+      still fails, because no public document shows a token create or revoke endpoint. The refresh
+      endpoint renews the JWT, not the secret.
   scoping:
     pass: false
     evidence:
       - url: https://www.elastic.co/docs/reference/integrations/cyera
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "Audit collection also requires the API token to have been generated by a user with the Admin role; tokens without it are rejected by the audit API."
+        quote: >-
+          Audit collection also requires the API token to have been generated by a user with the
+          Admin role; tokens without it are rejected by the audit API.
       - url: https://github.com/cyeragit/ANONY_Terraform_Provider/blob/main/CREDENTIALS.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Personal and API Tokens — API Tokens are role-specific, tenant-level tokens."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
-      Tokens take only a description and an expiry, and appear to inherit their creator's role. If a
-      token can carry a different role, as the gated docs hint, this would pass.
+      Tokens take only a description and an expiry, and appear to inherit their creator's role. The
+      sample repository that described tenant-level token roles now returns 404. If a token can
+      carry a different role, as the gated docs hint, this would pass.
   last_used:
     pass: false
     evidence:
       - url: https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm
         checked_on: 2026-10-13
         checked_by: tehreet
-        quote: "Click Generate Token. The Client ID and Client Secret are displayed."
+        quote: Click Generate Token. The Client ID and Client Secret are displayed.
     notes: >-
       No public doc mentions a last-used time. The audit trail logs key creation and deletion, not
       use.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-13
         checked_by: tehreet
     notes: Cyera does not appear in GitHub's supported secret-scanning patterns, partner or user.
-
 notes: >-
   Graded the Cyera platform API, which all its modules share. Its API reference, docs and support
   center need a login, so this card relies on third-party docs, public auth metadata and sample
-  repos. Cyera's Oasis acquisition runs as Cyera Identity and is not graded here. Inbound moves to A
-  or B only with documented workload federation.
+  repos. The cyeragit/ANONY_Terraform_Provider repository, which supplied five of those receipts,
+  returned 404 on 2026-11-09. Cyera's Oasis acquisition runs as Cyera Identity and is not graded
+  here. Inbound moves to A or B only with documented workload federation.
