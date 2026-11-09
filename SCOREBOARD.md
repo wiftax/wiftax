@@ -114,7 +114,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **🟢 A** | Defakto | [Mint](data/products/defakto-mint.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **🟢 A** | Google Cloud | [IAM](data/products/google-cloud-iam.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
-| **🟢 A** | Microsoft Azure | [Entra Workload ID](data/products/azure-entra-workload-identity.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
+| **🟢 A** | Microsoft Azure | [Entra Workload ID](data/products/azure-entra-workload-identity.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-11-09 |
 | **🟢 A** | Nscale | [Kubernetes Service](data/products/nscale-nks.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟢 A** | Snowflake | [Data Cloud](data/products/snowflake.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
 | **🟢 A** | Voltage Park | [Managed Kubernetes](data/products/voltage-park-kubernetes.yaml) | 🟢 A | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |

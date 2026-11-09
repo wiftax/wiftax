@@ -186,7 +186,7 @@ hygiene:
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
       - url: https://learn.microsoft.com/en-us/entra/id-protection/concept-workload-identity-risk
         checked_on: 2026-09-16
