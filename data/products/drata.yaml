@@ -9,7 +9,6 @@ summary: >-
   To call the Drata API, your code holds a static API key or an OAuth client secret that mints
   24-hour tokens. There is no federation. Drata reaches into AWS by assuming a role you create, but
   GCP needs a JSON key and Azure a client secret.
-
 surfaces:
   inbound:
     grade: C
@@ -20,11 +19,16 @@ surfaces:
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Learn how to configure and use OAuth 2.0 Client Credentials to securely authenticate API requests to Drata, which is the recommended method for machine-to-machine and enterprise integrations."
+        quote: >-
+          Learn how to configure and use OAuth 2.0 Client Credentials to securely authenticate API
+          requests to Drata, which is the recommended method for machine-to-machine and enterprise
+          integrations.
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Instead of using a long-lived API key, OAuth allows you to generate short-lived access tokens with specific permissions (scopes)."
+        quote: >-
+          Instead of using a long-lived API key, OAuth allows you to generate short-lived access
+          tokens with specific permissions (scopes).
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -32,23 +36,27 @@ surfaces:
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "OAuth Applications are created per tenant, and represent an integration identity (not an individual user)."
+        quote: >-
+          OAuth Applications are created per tenant, and represent an integration identity (not an
+          individual user).
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Store Client Secrets in a secrets manager"
+        quote: Store Client Secrets in a secrets manager
       - url: https://developers.drata.com/page-data/openapi/reference/v2/overview/page-data.json
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "OAuth 2.0 access token. For the client credentials flow, set `audience` to the API base URL without the `/public/v2` path (for example `https://public-api.drata.com`)."
+        quote: >-
+          OAuth 2.0 access token. For the client credentials flow, set `audience` to the API base
+          URL without the `/public/v2` path (for example `https://public-api.drata.com`).
       - url: https://help.drata.com/en/articles/6695964-drata-public-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "The full API key will only be shown once when you create the key."
+        quote: The full API key will only be shown once when you create the key.
       - url: https://developers.drata.com/developer-portal/v2/mcp-server/
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "This guide walks you through setting up OAuth authentication for MCP clients."
+        quote: This guide walks you through setting up OAuth authentication for MCP clients.
     notes: >-
       OAuth tokens expire after 24 hours, but each one starts from a client secret Drata generates
       and you store. No token exchange, private key JWT, or trust of GitHub Actions or cloud
@@ -61,66 +69,87 @@ surfaces:
       Drata assumes a role you create in AWS, with an external ID. GCP needs an uploaded service
       account JSON key, and Azure a client secret on your App Registration.
     evidence:
-      - url: https://help.drata.com/en/articles/5048935-aws-integration-guide-infrastructure-user-access-review
+      - url: >-
+          https://help.drata.com/en/articles/5048935-aws-integration-guide-infrastructure-user-access-review
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Read-Only Cross-Account Access: Use an IAM role (e.g., DrataAutopilotRole with SecurityAudit) to allow Drata to perform read-only audits across your AWS resources."
-      - url: https://help.drata.com/en/articles/5048935-aws-integration-guide-infrastructure-user-access-review
+        quote: >-
+          Read-Only Cross-Account Access: Use an IAM role (e.g., DrataAutopilotRole with
+          SecurityAudit) to allow Drata to perform read-only audits across your AWS resources.
+      - url: >-
+          https://help.drata.com/en/articles/5048935-aws-integration-guide-infrastructure-user-access-review
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Enter your Drata external ID into the External ID field (this is unique to your tenant, found in the AWS connection wizard in Drata)."
-      - url: https://help.drata.com/en/articles/13455825-understanding-aws-permissions-and-how-drata-integrates-with-aws-concept-guide
+        quote: >-
+          Enter your Drata external ID into the External ID field (this is unique to your tenant,
+          found in the AWS connection wizard in Drata).
+      - url: >-
+          https://help.drata.com/en/articles/13455825-understanding-aws-permissions-and-how-drata-integrates-with-aws-concept-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Drata assumes a designated IAM role in your AWS account to perform monitoring and evidence collection."
+        quote: >-
+          Drata assumes a designated IAM role in your AWS account to perform monitoring and evidence
+          collection.
       - url: https://help.drata.com/en/articles/4994112-gcp-integration-guide-manual
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "In the modal, make sure JSON is selected as the Key type and then create."
+        quote: In the modal, make sure JSON is selected as the Key type and then create.
       - url: https://help.drata.com/en/articles/4663373-gcp-integration-guide-script-setup
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "In Drata, upload the JSON key generated by the script (drata-key-file.json)."
+        quote: In Drata, upload the JSON key generated by the script (drata-key-file.json).
       - url: https://developers.drata.com/page-data/openapi/reference/v2/overview/page-data.json
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "The GCP service account key, as the raw JSON contents of the key file downloaded from GCP IAM (stringified)."
+        quote: >-
+          The GCP service account key, as the raw JSON contents of the key file downloaded from GCP
+          IAM (stringified).
       - url: https://help.drata.com/en/articles/5032404-azure-integration-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Within the Drata Entra App created in Step 1, navigate to “Certificates & secrets” and select “New client secret”"
+        quote: >-
+          Within the Drata Entra App created in Step 1, navigate to “Certificates & secrets” and
+          select “New client secret”
       - url: https://help.drata.com/en/articles/5032404-azure-integration-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Note: The integration gets disconnected when the secret expires, so we recommend setting a reminder to ensure it stays active."
+        quote: >-
+          Note: The integration gets disconnected when the secret expires, so we recommend setting a
+          reminder to ensure it stays active.
       - url: https://developers.drata.com/page-data/openapi/reference/v2/overview/page-data.json
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Create a new Azure Connection using an Azure App Registration (Service Principal) and its client secret."
+        quote: >-
+          Create a new Azure Connection using an Azure App Registration (Service Principal) and its
+          client secret.
       - url: https://help.drata.com/en/articles/4663377-github-integration-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Must have permission to install GitHub Apps on your organization’s GitHub account."
+        quote: Must have permission to install GitHub Apps on your organization’s GitHub account.
       - url: https://help.drata.com/en/articles/5188769-gitlab-integration-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "OAuth is the primary way to connect GitLab to Drata."
-      - url: https://help.drata.com/en/articles/5608136-okta-integration-guide-identity-management-provider
+        quote: OAuth is the primary way to connect GitLab to Drata.
+      - url: >-
+          https://help.drata.com/en/articles/5608136-okta-integration-guide-identity-management-provider
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Important: Treat the API token like a password."
       - url: https://help.drata.com/en/articles/6994385-jumpcloud-idp-integration-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Paste your API key when prompted."
-      - url: https://help.drata.com/en/articles/5455086-cloudflare-integration-guide-infrastructure-and-uar
+        quote: Paste your API key when prompted.
+      - url: >-
+          https://help.drata.com/en/articles/5455086-cloudflare-integration-guide-infrastructure-and-uar
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Ability to create a Custom API Token with read-only scopes."
+        quote: Ability to create a Custom API Token with read-only scopes.
       - url: https://help.drata.com/en/articles/8987822-snowflake-integration-guide
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Expected outcome: You have the Account Identifier, Client ID, Client Secret, and Warehouse needed to connect Snowflake to Drata."
+        quote: >-
+          Expected outcome: You have the Account Identifier, Client ID, Client Secret, and Warehouse
+          needed to connect Snowflake to Drata.
     notes: >-
       AWS and GovCloud are keyless: a cross-account role with a per-tenant external ID and the
       SecurityAudit policy. GCP takes a service account JSON key held by Drata, plus domain-wide
@@ -128,7 +157,6 @@ surfaces:
       disconnects when it expires. Neither offers federation or impersonation, so B, not A. GitHub,
       Bitbucket and GitLab connect through a Drata app or OAuth grant. Okta, JumpCloud and
       Cloudflare take tokens or secrets you create. Keyless GCP and Azure options would make it A.
-
 hygiene:
   expiry:
     pass: false
@@ -136,11 +164,11 @@ hygiene:
       - url: https://help.drata.com/en/articles/6695964-drata-public-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "The following options are 12 months, Never, or Custom. The default is 12 months."
+        quote: The following options are 12 months, Never, or Custom. The default is 12 months.
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Custom (recommended for most customers)"
+        quote: Custom (recommended for most customers)
     notes: >-
       API keys default to 12 months, but Never is allowed for keys and OAuth apps, and no org policy
       forbids it. A changeable default fails.
@@ -148,13 +176,13 @@ hygiene:
     pass: false
     evidence:
       - url: https://developers.drata.com/openapi/reference/v2/overview/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Please visit our help article to learn how to create an API key."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: Please visit our help articles to learn how to create an API key or set up OAuth.
       - url: https://help.drata.com/en/articles/6695964-drata-public-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Select the Create API Key button."
+        quote: Select the Create API Key button.
     notes: >-
       Keys and OAuth apps are created and revoked only in the web app. The API has no endpoints for
       them.
@@ -168,7 +196,9 @@ hygiene:
       - url: https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Best practice: Always follow least privilege — only enable the minimum scopes needed for your integration."
+        quote: >-
+          Best practice: Always follow least privilege — only enable the minimum scopes needed for
+          your integration.
     notes: >-
       Keys and OAuth apps belong to the tenant, not the creator, and carry per-resource scopes. Keys
       can be pinned to source IPs. The "All read" presets grow to include future scopes.
@@ -178,19 +208,20 @@ hygiene:
       - url: https://help.drata.com/en/articles/6695964-drata-public-api
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "You can view the API key name, the status of the key, who created the API key, when the key was last used to make a request, and when the key expires."
-    notes: >-
-      Shown for API keys. Not documented for OAuth apps.
+        quote: >-
+          You can view the API key name, the status of the key, who created the API key, when the
+          key was last used to make a request, and when the key expires.
+    notes: Shown for API keys. Not documented for OAuth apps.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
       Drata is not in GitHub's secret scanning partner list, so leaked keys and client secrets are
       not reported to Drata.
-
 notes: >-
   One card for the Drata GRC platform. SafeBase's Trust API is not graded here. Hygiene would
   improve with an enforced expiry, API key management and GitHub partner scanning. Inbound needs
