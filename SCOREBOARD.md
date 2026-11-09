@@ -54,7 +54,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🔴 D** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-09 |
 | **🔴 D** | Delinea | [Secret Server Cloud](data/products/delinea-secret-server.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | DigitalOcean | [API](data/products/digitalocean-api.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-10-22 |
 | **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
