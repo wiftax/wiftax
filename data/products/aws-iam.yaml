@@ -203,7 +203,7 @@ hygiene:
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
       - url: >-
           https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSCompromisedKeyQuarantineV3.html
@@ -215,8 +215,10 @@ hygiene:
           potential damage that may be caused by fraud-related activity leading to unauthorized
           charges, while not impacting the existing resources.
     notes: >-
-      AWS is a GitHub secret scanning partner. It quarantines rather than revokes: it attaches a
-      deny policy and opens a support case, and the key works for anything that policy misses.
+      AWS is a GitHub secret scanning partner. It quarantines rather than revokes. It attaches a
+      deny policy and opens a support case, and the key works for anything that policy misses. The
+      GitHub supported-patterns page was reorganized in November 2026 and the partner pattern table
+      was not retrievable from the fetched text. A human should confirm the AWS rows still appear.
 notes: >-
   Graded on machine access to the AWS API through IAM and STS. Cognito, IAM Identity Center and
   service-specific keys are separate products. Outbound federation is new, so re-check its regional
