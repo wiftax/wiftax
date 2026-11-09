@@ -2,20 +2,20 @@ id: cyberark-identity-platform
 vendor: CyberArk
 product: Identity Security Platform
 parent: Palo Alto Networks
-covers: "Privilege Cloud, Secrets Hub and shared services APIs."
+covers: Privilege Cloud, Secrets Hub and shared services APIs.
 aliases:
   - Privilege Cloud
   - Secrets Hub
   - ISPSS
 website: https://www.cyberark.com/products/identity-security-platform/
-docs: https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm
+docs: >-
+  https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm
 category: security
 status: listed
 summary: >-
   Automation against CyberArk's platform APIs runs as an Identity service user. It trades a
   password, used as an OAuth client secret, for a short-lived token. There is no federation path.
   Secrets Hub syncs into AWS, Azure, GCP and HashiCorp Vault with no stored secret.
-
 surfaces:
   inbound:
     grade: C
@@ -24,39 +24,41 @@ surfaces:
       and gets a short-lived token for the platform APIs.
     evidence:
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The service user acts as a client in the Client Credentials Flow within the OAuth 2.0 authorization framework (https://datatracker.ietf.org/doc/html/rfc6749) and is used to obtain an access token from Idira."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Manual creation of service users. You can create service users manually to provide client credentials for an OAuth 2.0 client application to access Idira resources."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cyberark.com/identity/latest/en/content/developer/oauth/client-cred-flow.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In this flow, the client application provides a client ID and a client secret to obtain an access token from a tenant."
-      - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/authenticate/oauth2-client.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Requires an OAuth2 client to send a client ID and a client secret."
-      - url: https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/cpmplugin-identity-service-user.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In the Users page in Idira Identity Administration, select the Is OAuth confidential client checkbox."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/identity/latest/en/content/coreservices/authenticate/oauth2-client.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/cpmplugin-identity-service-user.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://raw.githubusercontent.com/cyberark/ark-sdk-python/main/docs/sdk/authenticators.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Currently, ArkISPAuth is the only supported authenticator type, which is derived from the ArkISPAuth class and accepts the `Identity` (default) and `IdentityServiceUser` auth methods."
-      - url: https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "How to create an API authentication token and use in to run ISPSS APIs."
+        quote: >-
+          Currently, ArkISPAuth is the only supported authenticator type, which is derived from the
+          ArkISPAuth class and accepts the `Identity` (default) and `IdentityServiceUser` auth
+          methods.
+      - url: >-
+          https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Graded on the platform APIs that every automation of Privilege Cloud, Secrets Hub or Identity
       must use. The token is short-lived but rooted in a long-lived password, so C. The detailed
       token page is behind a login, but its search snippet matches the Identity docs. External IdP
       federation is for human sign-in only. Secrets Manager SaaS federates any JWT issuer, as on the
-      cyberark-conjur-cloud card, but its tokens do not reach these APIs.
+      cyberark-conjur-cloud card, but its tokens do not reach these APIs. As of 2026-11-09 every
+      cited docs.cyberark.com page returns 404. The only live receipt is the ark-sdk-python
+      authenticator doc, which still shows the service-user method. Replacement URLs are wanted.
   outbound:
     grade: A
     tier_gated: Secrets Hub (separately licensed platform service)
@@ -64,101 +66,102 @@ surfaces:
       Secrets Hub assumes an AWS role you create with an External ID, and federates into Azure, GCP
       and HashiCorp Vault.
     evidence:
-      - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Secrets Hub uses an IAM role in your AWS account to scan and sync secrets."
-      - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "This method uses an External ID (the Secrets Hub tenant ID) together with a global IAM role to grant Secrets Hub the required permissions."
-      - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-azure-federated-authentication/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Federated authentication enables Secrets Hub to integrate with Azure Key Vault without requiring app secrets or certificates."
-      - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-azure-federated-authentication/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Migrates existing secret stores using client secrets to use federated authentication"
-      - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-gcp-configure-role/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The Secrets Hub global role ARN which will be trusted by the workload identity pool. Can be found in the Settings page of the SecretsHub console"
-      - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-hashi-config/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Federated authentication enables Secrets Hub to integrate with HashiCorp Vault without requiring app secrets or certificates."
+      - url: >-
+          https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-azure-federated-authentication/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-azure-federated-authentication/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-gcp-configure-role/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-hashi-config/
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/getstarted/sh-terms/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Supported secret stores: AWS_ASM (AWS Secrets Manager); AZURE_AKV (Azure Key Vault); GCP_GSM (GCP Secret Manager); HASHI_HCV HashiCorp Vault"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       All four Secrets Hub targets are keyless. Older Azure stores with a client secret can be
       migrated, and the script says to delete the old secret. Vault setup needs a Vault token once.
       CPM and PSM manage target passwords as the core vaulting job, through connectors you host, so
-      they are not graded as reach-ins. Secure Cloud Access onboarding was not inspected.
-
+      they are not graded as reach-ins. Secure Cloud Access onboarding was not inspected. As of
+      2026-11-09 all seven Secrets Hub receipts return 404 and carry no quote. The grade is held
+      pending a human search for the moved pages.
 hygiene:
   expiry:
     pass: false
     evidence:
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Enter a date when the account expires. If you do not set a date, the account does not expire."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "True, t, yes, y — Password never expires"
-      - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/usersroles/password-requirements.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You can use 0 (zero) if you do not want to specify a password expiration period."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/identity/latest/en/content/coreservices/usersroles/password-requirements.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       The tenant policy defaults to a 365-day maximum, but it can be set to 0 and users can be
-      marked never-expiring. A changeable default is not enforced expiry.
+      marked never-expiring. A changeable default is not enforced expiry. All three receipts now
+      return 404, so the check also fails for want of a receipt.
   rotation_api:
     pass: true
     evidence:
-      - url: https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/cpmplugin-identity-service-user.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "This topic describes how to configure the credential management plugin for managing access credentials to Identity service users from the Privilege Cloud Portal."
-      - url: https://docs.cyberark.com/identity/latest/en/content/developer/user-management/create-manage-cd-users.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "/CDirectoryService/SetUserState - Set the state of a user to Locked, Disabled, or Expired."
+      - url: >-
+          https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/cpmplugin-identity-service-user.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cyberark.com/identity/latest/en/content/developer/user-management/create-manage-cd-users.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Service users are created and disabled through the Identity API. Privilege Cloud can change
-      their passwords on a schedule.
+      their passwords on a schedule. Both receipts returned 404 on 2026-11-09. The pass is held
+      pending a human search for the moved pages.
   scoping:
     pass: true
     evidence:
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "This user has least privilege access permissions, is not assigned MFA policies, and cannot access Idira IdentityIdentity Administration."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
-      A service user is a machine identity that gets only the roles you assign it.
+      A service user is a machine identity that gets only the roles you assign it. The receipt
+      returned 404 on 2026-11-09. The pass is held pending a human search for the moved page.
   last_used:
     pass: false
     evidence:
       - url: https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-    notes: >-
-      No last-used time for service users is publicly documented, so it fails.
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+    notes: No last-used time for service users is publicly documented, so it fails.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
       CyberArk is not in GitHub's secret-scanning table, and a service user's password has no
       detectable format.
-
 notes: >-
   Split from cyberark-conjur-cloud because Secrets Manager SaaS federates any JWT issuer, while
   these platform APIs take only a service-user password. Hygiene applies to those passwords.
-  Self-hosted PAM's REST API is not graded here.
+  Self-hosted PAM's REST API is not graded here. On 2026-11-09 the entire docs.cyberark.com citation
+  set returned 404, apparently a site reorganization. Quotes were dropped and no grade was moved on
+  the strength of a missing page.
