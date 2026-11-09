@@ -111,7 +111,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟢 A** | AWS | [IAM and STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
 | **🟢 A** | Chainguard | [Platform](data/products/chainguard-platform.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟢 A** | CoreWeave | [Kubernetes Service](data/products/coreweave-cks.yaml) | 🟢 A | 🟢 A | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
-| **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-05 |
+| **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-09 |
 | **🟢 A** | Defakto | [Mint](data/products/defakto-mint.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **🟢 A** | Google Cloud | [IAM](data/products/google-cloud-iam.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
 | **🟢 A** | Microsoft Azure | [Entra Workload ID](data/products/azure-entra-workload-identity.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
@@ -991,7 +991,7 @@ This card covers the cluster API server, not the control plane. In unmanaged aut
 
 This card covers object storage only. Your code can trade a token from any OIDC issuer for 30-minute S3-style keys, which CoreWeave recommends for production. Permanent keys still exist with poor hygiene, and creating them needs the static token graded F on the coreweave-api card.
 
-- **Inbound A:** Your code posts a JWT from any OIDC issuer you configure and gets 30-minute S3-style keys. SAML assertions get keys for up to 12 hours.
+- **Inbound A:** Your code posts a JWT from any OIDC issuer you configure and gets 30-minute S3-style keys. SAML assertions get keys for up to 12 hours, now by request only.
 - **Outbound N/A:** Object storage never needs access to customer infrastructure.
 - **Receipts:** [docs.coreweave.com](https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/configure-wif-for-object-storage), [docs.coreweave.com](https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about), [docs.coreweave.com](https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about), [docs.coreweave.com](https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/saml-workload-federation), [docs.coreweave.com](https://docs.coreweave.com/docs/changelog/release-notes/oidc-workload-identity-federation)
 

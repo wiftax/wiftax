@@ -14,7 +14,7 @@ surfaces:
     grade: A
     mechanism: >-
       Your code posts a JWT from any OIDC issuer you configure and gets 30-minute S3-style keys.
-      SAML assertions get keys for up to 12 hours.
+      SAML assertions get keys for up to 12 hours, now by request only.
     issuers:
       - any
     evidence:
@@ -33,13 +33,22 @@ surfaces:
           Issuer URL: Your OIDC provider's identifier URL, such as https://your-domain.okta.com or
           https://accounts.google.com.
       - url: https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
+        quote: >-
+          For production workloads, CoreWeave recommends Workload Identity Federation (WIF) to
+          obtain Access Keys. It exchanges short-lived OpenID Connect (OIDC) tokens for temporary
+          credentials, which eliminates the need to store or rotate long-lived static keys.
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: 30-minute lifespan, automatically refreshed
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: "OIDC-generated keys: 30-minute lifespan. Your application automatically refreshes them."
+      - url: >-
+          https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: CoreWeave offers SAML by request to organizations with an existing SAML requirement.
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/saml-workload-federation
         checked_on: 2026-09-16
@@ -54,15 +63,16 @@ surfaces:
     notes: >-
       Tutorials cover GitHub Actions and Kubernetes clusters outside CKS. Federation only issues
       credentials, and you still write org and bucket access policies. Trading a control-plane token
-      for 30-minute keys also works, but that is a static root and would be C alone. One cited docs
-      page returned an error and its quote needs relocating. The grade rests on the unchanged
-      federation pages.
+      for 30-minute keys also works, but that is a static root and would be C alone. The page that
+      previously returned an error now resolves and its quote is recorded. SAML is now documented as
+      available by request through the account team, which under the rubric would not lift a grade.
+      Self-serve OIDC federation from any issuer carries the A.
   outbound:
     grade: N/A
     mechanism: Object storage never needs access to customer infrastructure.
     evidence:
       - url: https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/about
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
 hygiene:
   expiry:
@@ -70,8 +80,8 @@ hygiene:
     evidence:
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: Don't expire. Require manual rotation.
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/create-keys
@@ -88,13 +98,18 @@ hygiene:
         checked_on: 2026-09-16
         checked_by: tehreet
         quote: POST https://api.coreweave.com/v1/cwobject/access-key
+      - url: >-
+          https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: "Revoke access keys: Remove keys that are no longer needed."
       - url: https://docs.coreweave.com/llms.txt
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
     notes: >-
       Keys can be created and revoked through the API, but the create call uses the static
-      control-plane token. A human should cite the revocation page directly, since the old index
-      line is gone.
+      control-plane token. The revocation receipt now comes from the access keys page rather than
+      the documentation index.
   scoping:
     pass: false
     evidence:
@@ -113,18 +128,21 @@ hygiene:
     evidence:
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
-      Access keys have no documented last-used field.
+      Access keys have no documented last-used field. The rewritten page documents identity formats
+      for auditing creation method, not last use.
   leak_revocation:
     pass: false
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
-    notes: CoreWeave is not on GitHub's secret-scanning list.
+    notes: >-
+      CoreWeave is not on GitHub's secret-scanning list. The page has been reorganized and the
+      fetched text showed navigation only, so a human should re-read the partner table.
 notes: >-
   Home team, graded on the same rubric. The A is real and the docs push production users to it. The
   remaining tax is that permanent keys are one API call away, and that call uses the control-plane
