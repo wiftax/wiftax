@@ -1,19 +1,21 @@
 id: checkpoint-infinity
 vendor: Check Point
 product: Infinity Portal and CloudGuard
-covers: "The Infinity Portal APIs and the CloudGuard CNAPP API, Terraform provider and onboarding automation."
+covers: >-
+  The Infinity Portal APIs and the CloudGuard CNAPP API, Terraform provider and onboarding
+  automation.
 aliases:
   - CloudGuard CNAPP
   - Infinity Portal APIs
 website: https://www.checkpoint.com
-docs: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+docs: >-
+  https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
 category: security
 status: listed
 summary: >-
   To automate CloudGuard, your code sends a static key ID and secret on every call. Other Infinity
   Portal APIs swap a client secret for a short-lived token. There is no OIDC login. When CloudGuard
   reaches into your cloud, it assumes an AWS role, but Azure and GCP want pasted secrets.
-
 surfaces:
   inbound:
     grade: D
@@ -24,108 +26,126 @@ surfaces:
       - url: https://docs.cgn.portal.checkpoint.com/reference/authentication.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "The CloudGuard REST API uses HTTP Basic Authentication."
+        quote: The CloudGuard REST API uses HTTP Basic Authentication.
       - url: https://docs.cgn.portal.checkpoint.com/reference/authentication.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "You will need a V2 API key and a secret in order to use the API."
+        quote: You will need a V2 API key and a secret in order to use the API.
       - url: https://raw.githubusercontent.com/dome9/dome9-sdk-go/master/dome9/client/client.go
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "req.SetBasicAuth(client.Config.AccessID, client.Config.SecretKey)"
-      - url: https://raw.githubusercontent.com/dome9/terraform-provider-dome9/master/website/docs/index.html.markdown
+        quote: req.SetBasicAuth(client.Config.AccessID, client.Config.SecretKey)
+      - url: >-
+          https://raw.githubusercontent.com/dome9/terraform-provider-dome9/master/website/docs/index.html.markdown
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "This provider requires a CloudGuard API Key and Key secret in order to manage the resources."
-      - url: https://sc1.checkpoint.com/documents/CloudGuard_Dome9/Documentation/Assets/AWS/OnboardAWS.htm
+        quote: >-
+          This provider requires a CloudGuard API Key and Key secret in order to manage the
+          resources.
+      - url: >-
+          https://sc1.checkpoint.com/documents/CloudGuard_Dome9/Documentation/Assets/AWS/OnboardAWS.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Onboard one or more AWS accounts with the CloudGuard REST API. You must first create a CloudGuard account and get an API Key and Secret in the CloudGuard web portal."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/API.htm
+        quote: >-
+          Onboard one or more AWS accounts with the CloudGuard REST API. You must first create a
+          CloudGuard account and get an API Key and Secret in the CloudGuard web portal.
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/API.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "in the Infinity Portal, see Infinity Portal Administration Guide > Account Settings > API Keys."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Secret Key - The password to get access to the Check Point Portal."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Method/URL: POST {{baseURL}}auth/external"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You get an authorization token."
+        quote: >-
+          in the Infinity Portal, see Infinity Portal Administration Guide > Account Settings > API
+          Keys.
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Graded on the weakest path a workload must use. Automating CloudGuard goes through its v2 API,
       which only accepts a long-lived key pair. The Infinity Portal flow mints a short-lived token
       from a static secret. Alone that would be C, as on the cyera-data-security card, but it does
       not cover CloudGuard. Neither side documents OIDC or workload identity. A JWT endpoint for the
       image-scan CI tool is listed, but how it authenticates is undocumented, so it does not count.
-      Static keys with 3 of 5 hygiene checks is D.
+      Static keys with 3 of 5 hygiene checks is D. The Infinity Portal API Keys page returned 404 on
+      2026-11-09. The CloudGuard receipts alone still support D.
   outbound:
     grade: B
     mechanism: >-
       CloudGuard assumes an AWS role you create, with an External ID. Azure wants a pasted app
       client secret, GCP a service account JSON key, and Alibaba an access key.
     evidence:
-      - url: https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "[Required] AWS Role ARN (to be assumed by Dome9 System)"
-      - url: https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "[Required] The AWS role External ID (Dome9 System will have to use this secret in order to assume the role)"
-      - url: https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
+        quote: >-
+          [Required] The AWS role External ID (Dome9 System will have to use this secret in order to
+          assume the role)
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "as other methods are deprecated"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/AWS/Troubleshooting-AWS-Onboarding.htm
+        quote: as other methods are deprecated
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/AWS/Troubleshooting-AWS-Onboarding.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Verify that the External ID is the same as given on the CloudGuard portal."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/AWS/Organization-Onboarding-AWS.htm
+        quote: Verify that the External ID is the same as given on the CloudGuard portal.
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/AWS/Organization-Onboarding-AWS.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Management account external ID (entered automatically)"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-Azure-single-account.htm
+        quote: Management account external ID (entered automatically)
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-Azure-single-account.htm
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Copy and paste to the CloudGuard wizard these values:"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-Azure-single-account.htm
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-Azure-single-account.htm
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Secret Key: XXXXXXXX-XXXX-XXXX-XXXXXXXXXXXX"
-      - url: https://docs.cgn.portal.checkpoint.com/reference/azurecloudaccount_post_post_v2azurecloudaccount.md
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/azurecloudaccount_post_post_v2azurecloudaccount.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: '"clientPassword": {'
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/Azure/Onboarding-Azure-Organizations.htm
+        quote: "\"clientPassword\": {"
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/Azure/Onboarding-Azure-Organizations.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "The organizational credentials are automatically managed by the CloudGuard application."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-GCP-project.htm
+        quote: The organizational credentials are automatically managed by the CloudGuard application.
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-GCP-project.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "In the CLI of the GCP project, copy the JSON (including the opening and closing brackets)."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-GCP-project.htm
+        quote: In the CLI of the GCP project, copy the JSON (including the opening and closing brackets).
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-GCP-project.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "In CloudGuard, paste the JSON into the Credentials JSON field."
-      - url: https://docs.cgn.portal.checkpoint.com/reference/googlecloudaccount_post_post_v2googlecloudaccount.md
+        quote: In CloudGuard, paste the JSON into the Credentials JSON field.
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/googlecloudaccount_post_post_v2googlecloudaccount.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "The service account JSON block (from the GCP console)"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/GCP/Google-Cloud-Platform.htm
+        quote: The service account JSON block (from the GCP console)
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/GCP/Google-Cloud-Platform.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Upload keys to CloudGuard"
-      - url: https://docs.cgn.portal.checkpoint.com/reference/alibabacloudaccount_post_post_v2alibabacloudaccount.md
+        quote: Upload keys to CloudGuard
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/alibabacloudaccount_post_post_v2alibabacloudaccount.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: '"description": "Alibaba access key",'
+        quote: "\"description\": \"Alibaba access key\","
     notes: >-
       AWS is keyless, and the legacy access-key method is deprecated. Azure subscription onboarding
       has you paste the app ID and secret the script prints. Azure organization onboarding skips the
@@ -133,92 +153,101 @@ surfaces:
       credit. GCP takes a service account JSON key with no impersonation option. OCI registers only
       a public key, so no secret is handed over. The scripts scope permissions, so this is not F.
       Keyless on AWS but static on Azure and GCP is B.
-
 hygiene:
   expiry:
     pass: false
     evidence:
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_postserviceaccount_post_v2service-account.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "It is possible, but not recommended, to create an Account API Key without an expiration date."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "By default, the expiration date is three months after the creation date."
-      - url: https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_postserviceaccount_post_v2service-account.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The name of the Service Account and the role IDs to assign it."
+        quote: The name of the Service Account and the role IDs to assign it.
     notes: >-
       Account API keys can be created with no expiry, and no policy forbids it. A changeable default
-      is not enforced expiry, as on elastic-cloud-api. CloudGuard keys have no expiry at all.
+      is not enforced expiry, as on elastic-cloud-api. CloudGuard keys have no expiry at all. The
+      Infinity Portal API Keys page returned 404 on 2026-11-09, so the expiry receipts are missing.
+      The check stays failed, because no page now documents enforced expiry.
   rotation_api:
     pass: true
     evidence:
-      - url: https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_generatesecretforserviceaccount_post_v2service-accountgenerate-key.md
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_generatesecretforserviceaccount_post_v2service-accountgenerate-key.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Generate a new access key and secret for a specific Service Account"
+        quote: Generate a new access key and secret for a specific Service Account
       - url: https://docs.cgn.portal.checkpoint.com/llms.txt
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Delete a specific Service Account by ID"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You get the Client ID and Access Key for the child account."
+        quote: Delete a specific Service Account by ID
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       The CloudGuard API can create a service account, generate a new key for it and delete it, so a
-      job can rotate keys.
+      job can rotate keys. The Infinity Portal receipt is missing pending a replacement page. The
+      CloudGuard receipts carry the check on their own.
   scoping:
     pass: true
     evidence:
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Settings/Users-Roles.htm
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Settings/Users-Roles.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "You can create a Service Account to work with CloudGuard through the API."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Settings/Users-Roles.htm
+        quote: You can create a Service Account to work with CloudGuard through the API.
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Settings/Users-Roles.htm
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "You can assign service accounts the same Roles as regular users."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Includes access to one Check Point Portal service in your Check Point Portal account."
+        quote: You can assign service accounts the same Roles as regular users.
+      - url: >-
+          https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cgn.portal.checkpoint.com/reference/authentication.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Your permissions when using the REST API with the key will be the same as the permissions of the CloudGuard user who generated the key from the CloudGuard web application."
+        quote: >-
+          Your permissions when using the REST API with the key will be the same as the permissions
+          of the CloudGuard user who generated the key from the CloudGuard web application.
     notes: >-
       CloudGuard Service Accounts are machine identities with their own roles, which can be limited
-      to environments and controls. Keys owned by a person get that person's access.
+      to environments and controls. Keys owned by a person get that person's access. The Infinity
+      Portal service-scope receipt is missing pending a replacement page.
   last_used:
     pass: true
     evidence:
-      - url: https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_getserviceaccounts_get_v2service-account.md
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_getserviceaccounts_get_v2service-account.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: '"lastUsed": {'
-      - url: https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_getserviceaccounts_get_v2service-account.md
+        quote: "\"lastUsed\": {"
+      - url: >-
+          https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_getserviceaccounts_get_v2service-account.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Get details on all service accounts in the account"
+        quote: Get details on all service accounts in the account
     notes: >-
       The CloudGuard service account list shows when each key was last used. The Infinity Portal
       keys page shows no last use. Narrow pass.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
       Check Point is not in GitHub's secret-scanning program, so a leaked key is not revoked
       automatically.
-
 notes: >-
   Covers Infinity Portal API keys and CloudGuard (formerly Dome9). Both the legacy Dome9 portal and
   the Infinity Portal use a static key pair for the CloudGuard API. Other Check Point products may
   need their own cards. Inbound moves to C if CloudGuard accepts the Portal's short-lived token, and
-  to B or A only with workload federation.
+  to B or A only with workload federation. The Infinity Portal API Keys page, cited for the inbound
+  token flow and three hygiene checks, returned 404 on 2026-11-09. A human should locate the
+  successor page.
