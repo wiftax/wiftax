@@ -13,7 +13,6 @@ summary: >-
   The Elastic Cloud API, Terraform provider and ecctl accept only a static organization API key.
   Elastic reaches your cloud keys for BYOK encryption without a secret on AWS, Azure and GCP. Custom
   snapshot repositories still want static cloud keys.
-
 surfaces:
   inbound:
     grade: F
@@ -24,23 +23,31 @@ surfaces:
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-api-keys
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "An Elastic Cloud API key belongs to the organization and is not tied to the user who created it. When a key is created, it is assigned specific roles that control its access to organizational resources."
+        quote: >-
+          An Elastic Cloud API key belongs to the organization and is not tied to the user who
+          created it. When a key is created, it is assigned specific roles that control its access
+          to organizational resources.
       - url: https://www.elastic.co/docs/api/doc/elastic-cloud-serverless.json
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "API keys are used to authenticate requests to the Elastic Cloud Serverless REST API."
+        quote: API keys are used to authenticate requests to the Elastic Cloud Serverless REST API.
       - url: https://www.elastic.co/docs/api/doc/cloud.json
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: '"securityDefinitions":{"apiKey":{"type":"apiKey","name":"Authorization","in":"header"}}'
+        quote: "\"securityDefinitions\":{\"apiKey\":{\"type\":\"apiKey\",\"name\":\"Authorization\",\"in\":\"header\"}}"
       - url: https://raw.githubusercontent.com/elastic/terraform-provider-ec/master/docs/index.md
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Elasticsearch Service (ESS) only supports `apikey`. Elastic Cloud Enterprise (ECE) supports `apikey` or a combination of `username` and `password`."
+        quote: >-
+          Elasticsearch Service (ESS) only supports `apikey`. Elastic Cloud Enterprise (ECE)
+          supports `apikey` or a combination of `username` and `password`.
       - url: https://www.elastic.co/docs/reference/ecctl/ecctl-authentication
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Elastic Cloud uses API keys to authenticate users against its API. Additionally, it supports the usage of JWT to validate authenticated clients. The preferred authentication method is API keys."
+        quote: >-
+          Elastic Cloud uses API keys to authenticate users against its API. Additionally, it
+          supports the usage of JWT to validate authenticated clients. The preferred authentication
+          method is API keys.
     notes: >-
       Covers Elastic Cloud Hosted and Serverless, which share one API and key type. The API specs
       list only the API key header. Nothing offers OIDC, GitHub Actions, cloud workload identity or
@@ -55,38 +62,61 @@ surfaces:
       Azure storage key.
     tier_gated: Enterprise (customer-managed encryption keys)
     evidence:
-      - url: https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
+      - url: >-
+          https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Encryption at rest using customer-managed keys is only available for the Enterprise subscription level."
-      - url: https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
+        quote: >-
+          Encryption at rest using customer-managed keys is only available for the Enterprise
+          subscription level.
+      - url: >-
+          https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "\"aws:PrincipalOrgPaths\": \"o-ygducmlz12/r-e5t3/ou-e5t3-fzpdq76p/ou-e5t3-ysfcmd95/ou-e5t3-hwt05su3/*\""
-      - url: https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
+        quote: >-
+          "aws:PrincipalOrgPaths":
+          "o-ygducmlz12/r-e5t3/ou-e5t3-fzpdq76p/ou-e5t3-ysfcmd95/ou-e5t3-hwt05su3/*"
+      - url: >-
+          https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Using the ID that you copied, create a new service principal for Elastic Cloud in your Azure tenant. The service principal grants Elastic Cloud access to interact with your RSA key."
-      - url: https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
+        quote: >-
+          Using the ID that you copied, create a new service principal for Elastic Cloud in your
+          Azure tenant. The service principal grants Elastic Cloud access to interact with your RSA
+          key.
+      - url: >-
+          https://www.elastic.co/docs/deploy-manage/security/encrypt-deployment-with-customer-managed-encryption-key
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Elastic Cloud uses two service principals to encrypt and decrypt data using your key. You must grant these services access to your key before you create your deployment."
-      - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-aws-custom-repository
+        quote: >-
+          Elastic Cloud uses two service principals to encrypt and decrypt data using your key. You
+          must grant these services access to your key before you create your deployment.
+      - url: >-
+          https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-aws-custom-repository
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Next, create an IAM user, copy the access key ID and secret, and configure the following user policy. This is important to make sure the access keys, which you will need to provide to your cluster, can only access the intended bucket."
+        quote: >-
+          Next, create an IAM user, copy the access key ID and secret, and configure the following
+          user policy. This is important to make sure the access keys, which you will need to
+          provide to your cluster, can only access the intended bucket.
       - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-gcs-snapshotting
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Save the service account key in JSON file format. You are going to use it later to configure your Elasticsearch deployment for snapshotting."
+        quote: >-
+          Save the service account key in JSON file format. You are going to use it later to
+          configure your Elasticsearch deployment for snapshotting.
       - url: https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-azure-snapshotting
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Follow the Microsoft documentation to set up an Azure storage account with an access key, and then create a container ."
+        quote: >-
+          Follow the Microsoft documentation to set up an Azure storage account with an access key,
+          and then create a container .
       - url: https://www.elastic.co/docs/deploy-manage/security/private-connectivity-aws
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "AWS PrivateLink connects your Virtual Private Cloud (VPC) to the AWS-hosted services that you use, treating them as if they were in your VPC."
+        quote: >-
+          AWS PrivateLink connects your Virtual Private Cloud (VPC) to the AWS-hosted services that
+          you use, treating them as if they were in your VPC.
     notes: >-
       BYOK on AWS, Azure and GCP hands over no secret. On AWS, the key policy trusts Elastic's AWS
       organization rather than a role with an external ID, which is still keyless. Private
@@ -95,7 +125,6 @@ surfaces:
       a bucket-scoped IAM policy in the docs. Elasticsearch makes those connections, so they matter
       for the elasticsearch card too. Without the Enterprise tier, the static snapshot path is the
       only reach-in.
-
 hygiene:
   expiry:
     pass: false
@@ -103,7 +132,10 @@ hygiene:
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-api-keys
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "By default, API keys expire after three months. You can set the expiration to a different preset value or to a specific date, up to one year. If you need the key to work indefinitely, you can set its expiration to Never ."
+        quote: >-
+          By default, API keys expire after three months. You can set the expiration to a different
+          preset value or to a specific date, up to one year. If you need the key to work
+          indefinitely, you can set its expiration to Never .
       - url: https://www.elastic.co/docs/api/doc/cloud.json
         checked_on: 2026-10-14
         checked_by: tehreet
@@ -118,24 +150,25 @@ hygiene:
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-api-keys
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "You can create an API key using the Create API key API."
+        quote: You can create an API key using the Create API key API.
       - url: https://www.elastic.co/docs/api/doc/cloud.json
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Delete or invalidate API keys."
-    notes: >-
-      The API can create, list and revoke keys.
+        quote: Delete or invalidate API keys.
+    notes: The API can create, list and revoke keys.
   scoping:
     pass: true
     evidence:
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-api-keys
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "You can grant a cloud API key the same types of roles that you assign to users : organization-level roles, cloud resource access roles, and connected cluster access roles."
+        quote: >-
+          You can grant a cloud API key the same types of roles that you assign to users :
+          organization-level roles, cloud resource access roles, and connected cluster access roles.
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cloud-organization/user-roles
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "Roles can be scoped to specific deployments or to all deployments."
+        quote: Roles can be scoped to specific deployments or to all deployments.
     notes: >-
       Keys belong to the organization and take roles scoped to specific deployments or projects. A
       key created without roles takes its creator's role.
@@ -145,20 +178,21 @@ hygiene:
       - url: https://www.elastic.co/docs/api/doc/cloud.json
         checked_on: 2026-10-14
         checked_by: tehreet
-        quote: "The response model for an API key."
-    notes: >-
-      Keys record creation and expiry dates but not last use.
+        quote: The response model for an API key.
+    notes: Keys record creation and expiry dates but not last use.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-14
-        checked_by: tehreet
-        quote: "| Elastic | Elastic Cloud API Key | elastic_cloud_api_key | ✗ | ✓ | ✓ | ✗ | ✗ | ✗ |"
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: Elastic Cloud API Key
     notes: >-
-      GitHub flags Elastic Cloud API keys to the repo owner and blocks pushes, but does not report
-      them to Elastic for revocation.
-
+      GitHub still lists the elastic_cloud_api_key pattern, but the fetched page no longer renders
+      the per-pattern columns that showed whether the provider is notified of a leak. Without a
+      receipt showing partner notification, the check fails. A human should confirm the column
+      values on the rendered page.
 notes: >-
   One of five Elastic cards. Deployment data, Kibana and Fleet use Elasticsearch API keys, graded
   separately. Inbound moves to B or A only if the Cloud API accepts a federated token. An org policy
