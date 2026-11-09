@@ -96,7 +96,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Zscaler | [OneAPI](data/products/zscaler-oneapi.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟡 B** | Aembit | [Workload IAM](data/products/aembit-workload-iam.yaml) | 🟢 A | 🟡 B | `· · · · ·` | listed | 2026-10-13 |
 | **🟡 B** | Akeyless | [Identity Security Platform](data/products/akeyless-platform.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-19 |
-| **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
+| **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-09 |
 | **🟡 B** | C1 | [Identity Platform](data/products/c1-identity-platform.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Datadog | [API](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
 | **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-13 |
