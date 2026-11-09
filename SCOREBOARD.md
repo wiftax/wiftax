@@ -16,7 +16,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Duo | [Admin API](data/products/cisco-duo-admin-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Elastic | [Elastic Agent and Fleet](data/products/elastic-agent-fleet.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
-| **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
+| **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-09 |
 | **💀 F** | Elastic | [Cloud Enterprise](data/products/elastic-cloud-enterprise.yaml) | 💀 F | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Fluidstack | [Atlas](data/products/fluidstack.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Fortinet | [FortiGate](data/products/fortinet-fortigate.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
