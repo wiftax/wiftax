@@ -99,7 +99,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | C1 | [Identity Platform](data/products/c1-identity-platform.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Datadog | [API](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-13 |
+| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✓` | listed | 2026-11-09 |
 | **🟡 B** | Elastic | [Elasticsearch](data/products/elasticsearch.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-04 |
 | **🟡 B** | HashiCorp | [Vault](data/products/hashicorp-vault.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-09-16 |
