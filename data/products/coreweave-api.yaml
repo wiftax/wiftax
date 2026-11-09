@@ -1,7 +1,7 @@
 id: coreweave-api
 vendor: CoreWeave
 product: Cloud API
-covers: "The control-plane API at api.coreweave.com, the Terraform provider and kubeconfigs."
+covers: The control-plane API at api.coreweave.com, the Terraform provider and kubeconfigs.
 website: https://www.coreweave.com
 docs: https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/api-access
 category: cloud
@@ -116,18 +116,19 @@ hygiene:
           https://docs.coreweave.com/support/cks/articles/where-do-i-find-my-api-access-tokens-in-the-cloud-console.md
         checked_on: 2026-09-16
         checked_by: tehreet
-    notes: >-
-      No last-used time is documented for tokens. Graded conservatively.
+    notes: No last-used time is documented for tokens. Graded conservatively.
   leak_revocation:
     pass: false
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-05
+        checked_on: 2026-11-09
         checked_by: sisyphus
     notes: >-
-      CoreWeave is not in GitHub's secret-scanning program, despite the greppable CW-SECRET- prefix.
-      The table did not load on the last fetch, so a human should re-read it.
+      No evidence places CoreWeave in GitHub's secret-scanning program, despite the greppable
+      CW-SECRET- prefix. The page was refetched on 2026-11-09 and returned only site navigation. The
+      partner pattern table did not render again, so the receipt is missing. A human should re-read
+      the page. The check fails for want of a receipt, not on a finding.
 notes: >-
   Home team, graded on the same rubric. The fix is a federated path into api.coreweave.com, the way
   Object Storage already works. Then a token API, token scoping, a last-used column and a GitHub
