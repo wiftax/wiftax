@@ -1,7 +1,7 @@
 id: cudo-compute
 vendor: CUDO Compute
 product: GPU Cloud
-covers: "The REST API, cudoctl, Python client, Terraform provider and object storage."
+covers: The REST API, cudoctl, Python client, Terraform provider and object storage.
 aliases:
   - cudoctl
 website: https://www.cudocompute.com
@@ -12,7 +12,6 @@ summary: >-
   Every way to automate CUDO Compute runs on one static API key with its user's full permissions, no
   expiry and no last-use record. Object storage uses static S3 keys. The vLLM app asks you to paste
   a Hugging Face token.
-
 surfaces:
   inbound:
     grade: F
@@ -22,47 +21,41 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.cudocompute.com/api/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "All requests to the CUDO Compute API must be authenticated with an API key in the `Authorization` header unless explicitly documented otherwise."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/api/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Currently the API uses a single global bearer scheme named `bearerAuth` with header `Authorization`. There is no separate refresh or OAuth flow."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/openapi.json
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "API key authentication. API keys should be passed using the format `Bearer API_KEY`."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/tools/cudoctl.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You will need to **[Create an API key](/docs/api/authentication#create-an-api-key)** before you can use cudoctl."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/tools/python-client.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Once cudoctl is set up the python client will use the default API key configured by cudoctl."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://raw.githubusercontent.com/CudoVentures/terraform-provider-cudo/main/docs/index.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "`api_key` (String) Your API key"
       - url: https://docs.cudocompute.com/guides/object-storage/command-line-tools.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Access & secret key: Project > Object storage > Users > select user"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/api/object-storage/get-an-object-storage-session-key.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Retrieves temporary session credentials for object storage access."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/help/compute/how-can-i-log-in-to-compute.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Connecting an existing GitHub, Google or Microsoft account."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Graded on the only path, the control-plane API key. The docs say there is no OAuth or refresh
       flow. Object storage can return temporary S3 credentials, but only in exchange for the static
       API key. Social sign-in is for humans at the console. There is no managed Kubernetes or
       registry to grade. Inbound moves off F with three hygiene passes, or to B or A with an OIDC
-      token exchange.
+      token exchange. As of 2026-11-09 every docs.cudocompute.com page cited here returns HTTP 403
+      to the crawler. The quotes have been dropped pending a human re-fetch. The grade is held on
+      the prior receipts. A block is not a change of mechanism.
   outbound:
     grade: F
     mechanism: >-
@@ -70,94 +63,88 @@ surfaces:
       as VM metadata.
     evidence:
       - url: https://docs.cudocompute.com/apps/vllm.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You will need to enter your **HuggingFace model id** and your **HuggingFace API token**."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/apps/vllm.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "`CUDO_HF_TOKEN` the HuggingFace token you provided"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/apps/index.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Quick deploy apps on CUDO Compute."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/guides/images/create.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In the Disks table open the action menu for the boot disk and select **Create image from disk**."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Nothing pulls from your cloud buckets, a private registry or other services. The vLLM form
       asks for a static Hugging Face token with no least-privilege advice. A reviewer could argue
       N/A, as on the hot-aisle card, since the token is used on your own VM. It is graded F because
-      CUDO's console asks for and stores it. The headline is F either way.
-
+      CUDO's console asks for and stores it. The headline is F either way. All four receipts now
+      return HTTP 403. The quotes are dropped pending a human re-fetch.
 hygiene:
   expiry:
     pass: false
     evidence:
       - url: https://docs.cudocompute.com/api/api-keys/create-an-api-key.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The identifier to use for the api key, which will become the final component of the api key's resource name."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/api/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Rotate keys regularly (e.g., every 90 days) and immediately on suspicion of compromise."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Keys have no expiry field and no org policy. The 90-day rotation is advice, not enforcement.
+      Both receipts return HTTP 403 as of 2026-11-09 and their quotes are dropped.
   rotation_api:
     pass: true
     evidence:
       - url: https://docs.cudocompute.com/api/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Programmatically with the `POST /v1/api-keys` endpoint"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/api/api-keys/delete-an-api-key.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Deletes an API key, revoking all access for requests that use the key."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/api/object-storage/generate-an-object-storage-key.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Generates a new key for an object storage user."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Keys can be created and deleted through the API, and the docs give a rotation workflow. Object
-      storage keys can be too.
+      storage keys can be too. All three receipts return HTTP 403 as of 2026-11-09 and their quotes
+      are dropped. The check is held on the prior receipts.
   scoping:
     pass: false
     evidence:
       - url: https://docs.cudocompute.com/api/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Your API key uniquely identifies you and inherits the permissions of your user or project context."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.cudocompute.com/help/compute/adding-a-user-to-a-project.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The user must already be registered on the platform before being added."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       A key is its user, with no scope of its own. Roles go to human accounts and no service account
       exists, so a narrow role does not count. Object storage users do not cover the control plane.
+      Both receipts return HTTP 403 as of 2026-11-09 and their quotes are dropped.
   last_used:
     pass: false
     evidence:
       - url: https://docs.cudocompute.com/api/api-keys/list-api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "List all API keys created by the requesting user."
+        checked_on: 2026-11-09
+        checked_by: sisyphus
     notes: >-
       Keys show only an ID and creation time. The console keys page is behind a login, and the
-      public API shows no last-used field.
+      public API shows no last-used field. The receipt returns HTTP 403 as of 2026-11-09 and its
+      quote is dropped.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-22
         checked_by: tehreet
     notes: >-
       CUDO is not in GitHub's secret-scanning table, even though its example keys use a ck_live_
       prefix.
-
 notes: >-
   One card for the whole platform, driven through one REST API and key. One of five hygiene checks
   passes. Any two of expiry, last-used, scoping or a GitHub partnership would make inbound D.
-  Federation would make it B or A.
+  Federation would make it B or A. On 2026-11-09 the entire docs.cudocompute.com host answered the
+  crawler with HTTP 403, so fourteen receipts are now quoteless. No grade and no hygiene check was
+  moved by the block. A human should re-fetch by hand and restore the quotes.
