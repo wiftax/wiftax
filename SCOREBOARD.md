@@ -50,7 +50,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-09 |
 | **🔴 D** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
@@ -497,7 +497,7 @@ To read or manage vault items, your code needs a static service account token or
 
 ### 🔴 D Baseten Platform
 
-Every Baseten call, from CI to inference, uses a static API key that never expires. Baseten is itself an OIDC issuer, so it pulls weights and images from your AWS and GCP storage without keys. Azure, Hugging Face, R2 and other registries take static secrets.
+Every Baseten call, from CI to inference, uses a static API key. Keys can now be given an expiration and organizations can cap it. Baseten is itself an OIDC issuer, so it pulls weights and images from your AWS and GCP storage without keys. Azure, Hugging Face, R2 and other registries take static secrets.
 
 - **Inbound D:** A static API key, personal or team-owned. Short-lived sandbox and volume tokens exist, but they are minted from that key. No federation path exists.
 - **Outbound B:** You trust Baseten's OIDC issuer from an AWS role or GCP pool, and Baseten pulls from S3, ECR, GCS and Artifact Registry with short-lived tokens. Other sources need static secrets.
