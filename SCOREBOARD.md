@@ -10,7 +10,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
-| **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-09 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
