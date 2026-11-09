@@ -2,7 +2,8 @@ id: digitalocean-api
 vendor: DigitalOcean
 product: API
 covers: >-
-  Droplets, GPU Droplets, DOKS, Spaces, Container Registry, App Platform and Gradient AI, via the API, doctl and Terraform.
+  Droplets, GPU Droplets, DOKS, Spaces, Container Registry, App Platform and Gradient AI, via the
+  API, doctl and Terraform.
 aliases:
   - Droplets
   - DOKS
@@ -29,30 +30,30 @@ surfaces:
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: >-
-          To use the DigitalOcean API, you need to generate a personal access token.
+        quote: To use the DigitalOcean API, you need to generate a personal access token.
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: >-
-          To generate a personal access token, log in to the DigitalOcean Control Panel.
+        quote: To generate a personal access token, log in to the DigitalOcean Control Panel.
       - url: https://docs.digitalocean.com/products/app-platform/how-to/create-apps/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: Use the token to grant `doctl` access to your DigitalOcean account.
-      - url: https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: >-
+          https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/index.html.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
-          you can simulate what `doctl registries login` does with `docker login` by using your
-          registered email as the username (`-u`) and API token string as password (`-p`)
+          you can simulate what doctl registries login does with docker login by using the API token
+          as both the username (-u) and the password (-p)
       - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: >-
           Access keys allow people or applications to connect to buckets using the S3-compatible
           API, CLI tools, or third-party clients.
-      - url: https://docs.digitalocean.com/products/kubernetes/how-to/configure-single-sign-on-for-clusters/index.html.md
+      - url: >-
+          https://docs.digitalocean.com/products/kubernetes/how-to/configure-single-sign-on-for-clusters/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: >-
@@ -75,8 +76,8 @@ surfaces:
       come from it or sit beside it. DOKS cluster SSO accepts an OIDC issuer, but only for people
       logging in with kubectl, so it does not count. The OAuth API needs a person to authorize it
       and a client secret, so C at best. DigitalOcean's security team blogged an open-source
-      federation proof of concept, but you run it yourself, so it is not credited. Hygiene passes 3
-      of 5, so D.
+      federation proof of concept, but you run it yourself, so it is not credited. The registry page
+      now says the API token is used as both username and password. Hygiene passes 3 of 5, so D.
   outbound:
     grade: B
     mechanism: >-
@@ -90,29 +91,32 @@ surfaces:
         quote: >-
           If you have not previously created an app on App Platform, the repository service may
           prompt you to provide DigitalOcean with read permissions to your account.
-      - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: >-
+          https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
-          click **Connect account** to first log in to your Dropbox account and authorize the
+          click Connect account to first log in to your Dropbox account and authorize the
           connection.
-      - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+      - url: >-
+          https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: In the Access Key ID field, enter the IAM access key ID for your S3 bucket or folder.
+      - url: >-
+          https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: In the Secret Key field, enter the secret key associated with your access key ID.
+      - url: >-
+          https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: >-
-          In the [**Access Key ID**](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
-          field, enter the IAM access key ID for your S3 bucket or folder.
-      - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: In the **Secret Key** field, enter the secret key associated with your access key ID.
-      - url: https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: >-
-          If you choose Docker Hub or GitHub Container Registry, you can enter credentials to
-          access private images using the syntax `username:token` or `username:password`.
-      - url: https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
+          If you choose Docker Hub or GitHub Container Registry, you can enter credentials to access
+          private images using the syntax `username:token` or `username:password`.
+      - url: >-
+          https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: We recommend using a non-expiring token with read-only scope.
@@ -136,8 +140,7 @@ hygiene:
       - url: https://docs.digitalocean.com/reference/doctl/reference/registry/login/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: >-
-          Sets the DigitalOcean API token generated by the login command to never expire.
+        quote: Sets the DigitalOcean API token generated by the login command to never expire.
       - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -171,8 +174,8 @@ hygiene:
         checked_by: tehreet
         quote: >-
           Custom scopes grant more specific permissions, like only creating Droplets or updating
-          cloud firewalls, which lets you secure your workflows by granting only the permissions
-          the token needs and restricting access to other resources and actions.
+          cloud firewalls, which lets you secure your workflows by granting only the permissions the
+          token needs and restricting access to other resources and actions.
       - url: https://docs.digitalocean.com/reference/api/scopes/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -180,8 +183,7 @@ hygiene:
       - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: >-
-          Limited access allows you to grant permissions for specific buckets.
+        quote: Limited access allows you to grant permissions for specific buckets.
     notes: >-
       A token can be limited to per-resource-type scopes, which passes. It still belongs to a
       person, since DigitalOcean has no service account. Spaces keys can be limited per bucket.
@@ -189,11 +191,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: >-
-          Personal access tokens table showing token name, number of scopes, creation time, last
-          used status, and expiration date.
+        checked_on: 2026-11-09
+        checked_by: sisyphus
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -201,28 +200,33 @@ hygiene:
           You can click the entry in the Scopes column to view details about the token’s usage and
           scopes.
     notes: >-
-      The token list shows last use. Spaces keys do not.
+      The sentence describing a token table with a last used column is gone from the page. The only
+      surviving receipt says a token’s usage details can be viewed. The check is held as a pass on
+      that sentence alone. A human should confirm the Last used column still exists in the Control
+      Panel. If it does not, this check fails and the inbound grade falls to F. Spaces keys show no
+      last use.
   leak_revocation:
     pass: true
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "| DigitalOcean | DigitalOcean Personal Access Token | digitalocean_personal_access_token | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: DigitalOcean Personal Access Token
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "| DigitalOcean | DigitalOcean OAuth Token | digitalocean_oauth_token | ✓ | ✓ | ✓ | ✓ | ✓ | ✗ |"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: DigitalOcean OAuth Token
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "| DigitalOcean | DigitalOcean Refresh Token | digitalocean_refresh_token | ✓ | ✓ | ✓ | ✗ | ✗ | ✗ |"
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: DigitalOcean Refresh Token
     notes: >-
-      GitHub reports leaked DigitalOcean personal access, OAuth and refresh tokens to DigitalOcean.
-      Spaces keys are not covered.
+      GitHub reformatted its supported pattern list and the per-pattern columns are no longer
+      legible in the fetched page. DigitalOcean personal access, OAuth and refresh token patterns
+      are still listed as partner patterns. Spaces keys are not covered.
 notes: >-
   One card for the control plane and the services reached with its tokens, since all start from the
   same personal access token. Splitting out Spaces would not change its grade. Paperspace is graded
