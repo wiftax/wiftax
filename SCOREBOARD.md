@@ -109,7 +109,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟡 B** | P0 Security | [Platform](data/products/p0-security.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Teleport | [Platform](data/products/teleport.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟢 A** | AWS | [IAM and STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
-| **🟢 A** | Chainguard | [Platform](data/products/chainguard-platform.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟢 A** | Chainguard | [Platform](data/products/chainguard-platform.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-11-09 |
 | **🟢 A** | CoreWeave | [Kubernetes Service](data/products/coreweave-cks.yaml) | 🟢 A | 🟢 A | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **🟢 A** | Defakto | [Mint](data/products/defakto-mint.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
