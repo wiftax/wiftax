@@ -1,8 +1,10 @@
 id: denvr-cloud
 vendor: Denvr Dataworks
 product: AI Cloud
-covers: "The control-plane API, Python and Go SDKs and the Terraform provider."
-aliases: ["Denvr AI Cloud", "Denvr"]
+covers: The control-plane API, Python and Go SDKs and the Terraform provider.
+aliases:
+  - Denvr AI Cloud
+  - Denvr
 website: https://www.denvr.com
 docs: https://docs.denvrdata.com/docs/platform/api-keys
 category: cloud
@@ -11,7 +13,6 @@ summary: >-
   To call Denvr AI Cloud, your code holds a static API key made in the console, or a user's email
   and password. There is no federation. Custom apps pull private images with a pasted registry
   password or token.
-
 surfaces:
   inbound:
     grade: F
@@ -23,35 +24,47 @@ surfaces:
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "API keys let you call the Denvr AI Cloud API from scripts, CI/CD pipelines, and applications without embedding your username and password, and without re-authenticating every day."
+        quote: >-
+          API keys let you call the Denvr AI Cloud API from scripts, CI/CD pipelines, and
+          applications without embedding your username and password, and without re-authenticating
+          every day.
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Long-lived, scoped credentials for API and automation access"
+        quote: Long-lived, scoped credentials for API and automation access
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Every endpoint in the API Reference accepts an API key in place of a login token, except `POST /api/TokenAuth/Authenticate` and `POST /api/TokenAuth/RefreshToken`, which exist to issue login tokens and do not need one."
+        quote: >-
+          Every endpoint in the API Reference accepts an API key in place of a login token, except
+          `POST /api/TokenAuth/Authenticate` and `POST /api/TokenAuth/RefreshToken`, which exist to
+          issue login tokens and do not need one.
       - url: https://docs.denvrdata.com/docs/api-reference/authentication
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Authenticates the user's credentials and, upon successful verification, issues an access token that can be used to authorize subsequent requests made to the API"
+        quote: >-
+          Authenticates the user's credentials and, upon successful verification, issues an access
+          token that can be used to authorize subsequent requests made to the API
       - url: https://docs.denvrdata.com/docs/overview/getting-started/api-usage-samples.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: '"refreshTokenExpireInSeconds": 31536000'
+        quote: "\"refreshTokenExpireInSeconds\": 31536000"
       - url: https://raw.githubusercontent.com/denvrdata/go-denvr/main/README.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "You can provide an `apikey` and/or `username`/`password`, however, the `apikey` will always take priority."
+        quote: >-
+          You can provide an `apikey` and/or `username`/`password`, however, the `apikey` will
+          always take priority.
       - url: https://raw.githubusercontent.com/denvrdata/denvrpy/main/denvr/auth.py
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "DENVR_APIKEY / apikey takes precedence over DENVR_USERNAME / username and DENVR_PASSWORD / password."
+        quote: >-
+          DENVR_APIKEY / apikey takes precedence over DENVR_USERNAME / username and DENVR_PASSWORD /
+          password.
       - url: https://docs.denvrdata.com/docs/platform/user-management.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Denvr AI Services supports OIDC for single-signon at a tenant level."
+        quote: Denvr AI Services supports OIDC for single-signon at a tenant level.
     notes: >-
       Graded on the control-plane API that CI, the SDKs and Terraform use. Its public spec has no
       token exchange and no way to trust an outside issuer. The password path yields 24-hour tokens,
@@ -68,23 +81,29 @@ surfaces:
       - url: https://docs.denvrdata.com/docs/platform/applications.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Username and password/token for private registries"
+        quote: Username and password/token for private registries
       - url: https://docs.denvrdata.com/docs/overview/whats-new.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "support for custom apps which are docker workloads dynamically pulled from Dockerhub, github and private container registeries."
-      - url: https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "This tutorial requires a Hugging Face token to be configured as an environment variable in your custom application."
-      - url: https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Create a new token with **Read** permissions"
+        quote: >-
+          support for custom apps which are docker workloads dynamically pulled from Dockerhub,
+          github and private container registeries.
+      - url: >-
+          https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: >-
+          This tutorial requires a Hugging Face token to be configured as an environment variable in
+          your custom application.
+      - url: >-
+          https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: Create a new token with Read permissions
       - url: https://docs.denvrdata.com/docs/platform/storage.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Denvr AI Compute provide two primary storage categories."
+        quote: Denvr AI Compute provide two primary storage categories.
     notes: >-
       The registry credential is long-lived and comes with no scoping or rotation guidance, hence F.
       The only least-privilege advice found is to give Hugging Face tokens read access. Storage is
@@ -92,7 +111,6 @@ surfaces:
       your own machines, not Denvr reaching out. No AWS role, cloud federation or GitHub App exists.
       Scoped-token and rotation guidance would make it D. Short-lived pulls using a Denvr-issued
       OIDC identity would make it A or B.
-
 hygiene:
   expiry:
     pass: true
@@ -100,15 +118,15 @@ hygiene:
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "A login access token expires after 24 hours. An API key can be valid for up to a year."
+        quote: A login access token expires after 24 hours. An API key can be valid for up to a year.
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "one week, one month, three months, six months, one year, or a custom date and time"
+        quote: one week, one month, three months, six months, one year, or a custom date and time
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Keys also stop working on their own at the expiration date."
+        quote: Keys also stop working on their own at the expiration date.
     notes: >-
       Every key expires, with a one-year maximum and no "never" option. A platform-enforced cap
       passes, as on coreweave-api. There is no org policy for a shorter cap.
@@ -118,15 +136,17 @@ hygiene:
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "In the dashboard, go to `Administration` → `API Keys` and select `Create API key`."
+        quote: In the dashboard, go to `Administration` → `API Keys` and select `Create API key`.
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Find the key by its description or token suffix."
+        quote: Find the key by its description or token suffix.
       - url: https://docs.denvrdata.com/docs/api-reference/authentication
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "This endpoint allows for the renewal of the current access token, extending its validity period"
+        quote: >-
+          This endpoint allows for the renewal of the current access token, extending its validity
+          period
     notes: >-
       Keys are created and revoked only in the dashboard. The public API has no key endpoints, and
       RefreshToken renews a login token, not a key.
@@ -136,15 +156,19 @@ hygiene:
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "A login token carries every permission your account has. An API key can be restricted to a subset of them."
+        quote: >-
+          A login token carries every permission your account has. An API key can be restricted to a
+          subset of them.
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "of the permissions selected on the key and the permissions your account holds at the time of the request"
+        quote: >-
+          of the permissions selected on the key and the permissions your account holds at the time
+          of the request
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "API keys belong to the user who created them."
+        quote: API keys belong to the user who created them.
     notes: >-
       Passes because each key can carry a hand-picked subset of permissions. There is no service
       account. Keys belong to a person, and the default gives a key that person's full access. Close
@@ -159,24 +183,24 @@ hygiene:
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "Use `Actions` → `View` to see the full details of a key."
+        quote: Use `Actions` → `View` to see the full details of a key.
     notes: >-
       The key list shows no last-used time. Users see only their own keys, so an admin cannot hunt
       for dead keys across the team.
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+      - url: >-
+          https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
         checked_on: 2026-10-22
         checked_by: tehreet
       - url: https://docs.denvrdata.com/docs/platform/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
-        quote: "If a key has been exposed publicly, revoke it first and then contact Technical support."
+        quote: If a key has been exposed publicly, revoke it first and then contact Technical support.
     notes: >-
       Denvr is not in GitHub's secret scanning partner list, so a leaked key is not reported. The
       keys are JWTs with no vendor prefix.
-
 notes: >-
   One card, since Denvr has a single control-plane API and no managed Kubernetes or object storage.
   API endpoints to create and revoke keys, plus a last-used column, would make inbound D. Service
