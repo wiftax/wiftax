@@ -20,20 +20,20 @@ surfaces:
       - any
     evidence:
       - url: https://platform.claude.com/docs/en/manage-claude/workload-identity-federation
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
           The tokens come from an identity provider (IdP) you already operate: AWS IAM, Google
           Cloud, or any standards-compliant OIDC issuer such as GitHub Actions, Kubernetes, SPIFFE,
           Microsoft Entra ID, or Okta.
       - url: https://platform.claude.com/docs/en/manage-claude/workload-identity-federation
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
-          Use `discovery` (the default) for any provider that serves
-          `/.well-known/openid-configuration` at its issuer URL. Use `explicit_url` to point at a
-          JWKS endpoint directly, or `inline` to upload the key set for issuers that are not
-          reachable from the public internet (for example, a private Kubernetes cluster).
+          Use discovery (the default) for any provider that serves /.well-known/openid-configuration
+          at its issuer URL. Use explicit_url to point at a JWKS endpoint directly. Use inline to
+          upload the key set for issuers that are not reachable from the public internet, for
+          example a private Kubernetes cluster.
       - url: https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/create
         checked_on: 2026-09-17
         checked_by: tehreet
@@ -55,14 +55,14 @@ surfaces:
           must still equal Anthropic's expected audience for the issuer; setting this field
           overrides that default.
       - url: https://platform.claude.com/docs/en/manage-claude/wif-reference
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
-          Integer between `60` and `86400` (1 minute to 24 hours). Default `3600`. Values outside
-          this range are rejected at request time.
+          Integer between 60 and 86400 (1 minute to 24 hours). Default 3600. Anthropic rejects
+          values outside this range at request time.
       - url: https://platform.claude.com/docs/en/manage-claude/authentication
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: There is no `sk-ant-api...` string to mint, distribute, or rotate.
     notes: >-
       Generally available, with no documented plan gate. Setting it up needs an admin, and the first
@@ -83,27 +83,25 @@ surfaces:
           API consumers are expected to handle the OAuth flow and obtain the access token prior to
           making the API call, and to refresh the token as needed.
       - url: https://platform.claude.com/docs/en/managed-agents/vaults
-        checked_on: 2026-10-12
+        checked_on: 2026-11-09
         checked_by: sisyphus
         quote: >-
-          Use mcp_oauth when the MCP server uses OAuth 2.0. If you supply a refresh (java, php;
-          csharp, go: Refresh) block, Anthropic refreshes the access token on your behalf when it
-          expires.
+          Use mcp_oauth when the MCP server uses OAuth 2.0. If you supply a refresh (csharp, go:
+          Refresh) block, Anthropic refreshes the access token on your behalf when it expires.
       - url: https://platform.claude.com/docs/en/managed-agents/vaults
-        checked_on: 2026-10-12
+        checked_on: 2026-11-09
         checked_by: sisyphus
         quote: >-
           Use `static_bearer` when the MCP server accepts a fixed bearer token (API key, personal
           access token, or similar). No refresh flow is needed.
       - url: https://platform.claude.com/docs/en/managed-agents/vaults
-        checked_on: 2026-10-12
+        checked_on: 2026-11-09
         checked_by: sisyphus
         quote: >-
-          Scope the API key to only the permissions the agent needs. The agent can do anything the
-          key allows, so a key with broader permissions than necessary increases the blast radius if
-          the agent behaves unexpectedly.
+          Vaults and credentials are workspace-scoped, meaning any API key with workspace access can
+          reference them when creating a session. To revoke access, delete the vault or credential.
       - url: https://platform.claude.com/docs/en/managed-agents/vaults
-        checked_on: 2026-10-12
+        checked_on: 2026-11-09
         checked_by: sisyphus
         quote: >-
           clients that compute a request signature from the secret (for example, AWS SigV4) produce
@@ -132,24 +130,23 @@ surfaces:
       Twilio and Cloudflare cards. It is C, not D, because the best path is short-lived. A stored
       refresh token and client secret is exactly the rubric's C example. The static paths, such as
       bearer tokens and GitHub PATs, come with scoping and rotation guidance, so alone they would be
-      D. Nothing is keyless. Anthropic is not an OIDC issuer you can verify and has no cloud role
-      option.
+      D. The vaults page no longer carries its blast-radius sentence about scoping the API key. The
+      GitHub and tunnels receipts still carry that guidance. Nothing is keyless. Anthropic is not an
+      OIDC issuer you can verify and has no cloud role option.
 hygiene:
   expiry:
     pass: true
     evidence:
       - url: https://platform.claude.com/docs/en/manage-claude/authentication
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
           If your organization has a maximum expiration policy, the Console limits presets and
-          custom durations to the policy maximum
+          custom durations to the policy maximum, and Never is unavailable.
       - url: https://platform.claude.com/docs/en/manage-claude/authentication
-        checked_on: 2026-09-17
-        checked_by: tehreet
-        quote: >-
-          Existing keys keep their current behavior; expiration is set at creation time and cannot
-          be changed afterward.
+        checked_on: 2026-11-09
+        checked_by: sisyphus
+        quote: Expiration is set at creation time and cannot be changed afterward.
       - url: https://platform.claude.com/docs/en/api/beta/organization/api_keys/list
         checked_on: 2026-09-17
         checked_by: tehreet
@@ -179,14 +176,14 @@ hygiene:
     pass: true
     evidence:
       - url: https://platform.claude.com/docs/en/manage-claude/authentication
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
           For shared or automated workloads (CI, production services), have an organization admin
           create a service account so the workload has its own identity.
       - url: https://platform.claude.com/docs/en/manage-claude/authentication
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
           API keys that are created for a specific workspace only work in that workspace, and API
           requests using these keys can omit the workspace ID.
@@ -208,11 +205,11 @@ hygiene:
         checked_by: tehreet
         quote: Partially redacted hint for the API key.
       - url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
-        checked_on: 2026-09-17
-        checked_by: tehreet
+        checked_on: 2026-11-09
+        checked_by: sisyphus
         quote: >-
-          API usage from playground in the Claude Console (and from the legacy Workbench before it)
-          is not associated with an API key, so `api_key_id` will be `null` even when grouping by
+          API usage from playground in the Claude Console (and from the legacy Anthropic Workbench
+          before it) is not associated with an API key, so api_key_id is null even when grouping by
           that dimension.
     notes: >-
       Keys have no last-used timestamp. The usage report can be grouped by key, but that is a usage
