@@ -1,0 +1,162 @@
+id: coreweave-forge
+vendor: CoreWeave
+product: Forge
+covers: Weave, Traces, Serverless Inference and the Weights and Biases experiment tracking SDK.
+aliases: ["Weights & Biases", "W&B", "wandb", "Weave", "W&B Inference"]
+website: https://www.coreweave.com/forge
+docs: https://docs.coreweave.com/products/inference/serverless
+category: cloud
+status: listed
+summary: >-
+  To send traces to Weave or call Serverless Inference, your code holds a static Forge API key that
+  never expires. Forge is CoreWeave's rebrand of Weights and Biases. The SDK alone can federate an
+  outside OIDC token, but only as an enterprise preview that skips inference and trace ingestion.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static Forge API key, sent as a bearer token to the inference endpoint or in a wandb-api-key
+      header to Weave. No federation covers these two paths.
+    issuers: []
+    evidence:
+      - url: https://docs.coreweave.com/products/inference/serverless/api-reference.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "All API requests require authentication using your CoreWeave Forge API key. Create an API key at forge.coreweave.com/settings."
+      - url: https://docs.coreweave.com/products/inference/serverless/api-reference.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "For direct API calls, use Authorization: Bearer [YOUR-API-KEY]."
+      - url: https://docs.coreweave.com/weave/guides/tracking/otel.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          Weave uses the `wandb-api-key` header to authenticate requests and resource attributes on
+          your `TracerProvider` to route spans to the correct entity and project.
+      - url: https://docs.coreweave.com/weave/ref-link-service-api
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: 'Include your W&B API key in the request headers:'
+      - url: https://docs.coreweave.com/products/wandb/quickstart.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          W&B shows the full API key only once, when you create it. After you close the dialog, you
+          cannot view the full API key again.
+      - url: https://docs.coreweave.com/products/wandb/platform/hosting/iam/identity_federation.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Use identity federation as an alternative to API keys."
+      - url: https://docs.coreweave.com/products/wandb/platform/hosting/iam/identity_federation.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          Identity federation is available in preview for Multi-tenant Cloud, Dedicated Cloud, and
+          Self-Managed. An Enterprise license is required.
+      - url: https://docs.coreweave.com/products/wandb/platform/hosting/iam/identity_federation.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          The Weights & Biases access token grants access to the relevant APIs for enabling your AI
+          workflows, such as logging runs, metrics, and artifacts.
+    notes: >-
+      The default across every service is a static Forge API key, which is a Weights and Biases key
+      under a new name. The SDK and CLI can instead exchange an outside OIDC token for a short-lived
+      access token, which is a true bring-your-own-issuer path. That federation is an enterprise
+      preview, and the docs scope the exchanged token to logging runs and artifacts. Neither
+      Serverless Inference nor Weave trace ingestion documents it, so both still take a static key.
+  outbound:
+    grade: N/A
+    mechanism: Weave, Traces and Serverless Inference receive data and serve responses. They never reach into customer infrastructure.
+    evidence:
+      - url: https://docs.coreweave.com/products/inference/serverless/api-reference.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Access the Serverless Inference service at: https://api.inference.wandb.ai/v1"
+    notes: >-
+      Your code calls the inference endpoint and pushes traces to Weave. Nothing in this card pulls
+      from a customer cloud. Artifact storage in your own bucket is a separate product and is not
+      graded here.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.coreweave.com/platform/hosting/iam/api-keys.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Weights & Biases has no single rotate action."
+      - url: https://docs.coreweave.com/platform/hosting/iam/api-keys.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "An exposed key stays valid until you delete it."
+    notes: >-
+      No page sets an expiration date, a time to live or an org-enforced maximum lifetime. A key is
+      valid until someone deletes it, and manual rotation is the only control.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.coreweave.com/platform/hosting/iam/api-keys.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Copy the key immediately and store it securely."
+      - url: https://docs.coreweave.com/platform/hosting/iam/api-keys.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          To delete a single key, find it in the table, click the actions menu at the end of its
+          row, then click Delete and confirm.
+    notes: >-
+      Keys are created and deleted only in the Forge console. No REST or command-line endpoint for
+      key lifecycle is documented, so rotation needs a person in a browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.coreweave.com/platform/hosting/iam/service-accounts.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          A service account represents a non-human or machine user that can automatically perform
+          common tasks across projects within a team or across teams.
+      - url: https://docs.coreweave.com/platform/hosting/iam/service-accounts.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: >-
+          A team-scoped service account can read and write in all projects within its team, except
+          to restricted projects in that team.
+    notes: >-
+      A team service account is a dedicated machine identity with its own key, scoped to one team. It
+      does not inherit a human's full permissions and consumes no user seat.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.coreweave.com/platform/hosting/iam/api-keys.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Last used: When the key most recently authenticated a request."
+      - url: https://docs.coreweave.com/platform/app/settings-page/user-settings.md
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Last used: The most recent usage timestamp."
+    notes: >-
+      The API Keys table shows a last-used time for personal and organization keys, so dead keys can
+      be found. Service account activity is tracked in audit logs instead.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns
+        checked_on: 2026-11-14
+        checked_by: tehreet
+        quote: "Weights & Biases | Weights & Biases API Key | wandb_api_key"
+    notes: >-
+      GitHub detects a leaked Forge key and can block the commit. The Partner column is unchecked, so
+      the key is not reported to the vendor for automatic revocation. A leaked key lives until a
+      human deletes it.
+
+notes: >-
+  Forge folds the former Weights and Biases into CoreWeave. The old documentation now redirects to
+  the CoreWeave domain, and keys are minted in the Forge console. The three other CoreWeave cards
+  cover the cloud control plane, not this AI platform. The grade moves to A if the SDK federation
+  leaves preview and reaches the inference endpoint and trace ingestion, so no service needs a
+  static key.

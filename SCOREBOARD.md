@@ -9,6 +9,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
+| **💀 F** | CoreWeave | [Forge](data/products/coreweave-forge.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-14 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
@@ -146,6 +147,14 @@ This card covers the control plane: the API that creates CKS clusters and VPCs, 
 - **Inbound F:** A static, user-scoped API Access Token created in the Cloud Console. Nothing federates into api.coreweave.com.
 - **Outbound N/A:** The control plane never needs access to customer infrastructure.
 - **Receipts:** [docs.coreweave.com](https://docs.coreweave.com/docs/products/cks/auth-access/managed-auth/api-access), [docs.coreweave.com](https://docs.coreweave.com/docs/products/cks/auth-access/manage-api-access-tokens), [docs.coreweave.com](https://docs.coreweave.com/support/cks/articles/what-is-the-difference-between-managed-auth-and-unmanaged-auth.md), [docs.coreweave.com](https://docs.coreweave.com/docs/products/cks/reference/cks-api)
+
+### 💀 F CoreWeave Forge
+
+To send traces to Weave or call Serverless Inference, your code holds a static Forge API key that never expires. Forge is CoreWeave's rebrand of Weights and Biases. The SDK alone can federate an outside OIDC token, but only as an enterprise preview that skips inference and trace ingestion.
+
+- **Inbound F:** A static Forge API key, sent as a bearer token to the inference endpoint or in a wandb-api-key header to Weave. No federation covers these two paths.
+- **Outbound N/A:** Weave, Traces and Serverless Inference receive data and serve responses. They never reach into customer infrastructure.
+- **Receipts:** [docs.coreweave.com](https://docs.coreweave.com/products/inference/serverless/api-reference.md), [docs.coreweave.com](https://docs.coreweave.com/weave/guides/tracking/otel.md), [docs.coreweave.com](https://docs.coreweave.com/weave/ref-link-service-api), [docs.coreweave.com](https://docs.coreweave.com/products/wandb/quickstart.md), [docs.coreweave.com](https://docs.coreweave.com/products/wandb/platform/hosting/iam/identity_federation.md)
 
 ### 💀 F Crusoe Cloud
 
