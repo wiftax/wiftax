@@ -1,6 +1,6 @@
 /* /policy/ — builds on rubric.css; same palette and tokens */
 .pol .lead p:last-child{margin-block-end:0}
-.pol .after{margin-block-start:var(--wa-space-xl)}
+.pol .after{margin-block-start:var(--wa-space-xl);max-width:none}
 
 /* dispute: two ways in */
 .doors{display:grid;gap:var(--wa-space-m)}
