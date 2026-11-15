@@ -16,6 +16,41 @@ const STALE_DAYS = 365;
 const RANK = { A: 5, B: 4, C: 3, D: 2, F: 1, "N/A": 6 };
 let failed = 0;
 
+// Receipt URLs must be pages a reader can open. A site's build files (hashed JS bundles,
+// /assets/js/, /_next/static/) change name on every deploy, so cite the page instead.
+// Source files in a repo (raw.githubusercontent.com, github.com) are fine.
+//
+// The exception: docs sites that render only in the browser, where every page is an
+// empty app shell to anything but a browser and the bundle is the only readable copy
+// of the sentence. Sisyphus follows those bundles to their new name on each deploy.
+// Add a host here only after checking that its pages have no text without JavaScript.
+const BUILD_FILE = [
+  /\/(assets|static|_next|_nuxt|build|dist)\/.*\.(m?js|css|map)$/i,
+  /[.-][0-9a-f]{8,}\.(m?js|css|map)$/i,
+];
+const BROWSER_ONLY_DOCS = new Set(["docs.upwind.io", "automate.zscaler.com"]);
+const SOURCE_HOSTS = new Set(["github.com", "raw.githubusercontent.com", "gist.githubusercontent.com"]);
+function receiptUrls(doc) {
+  const out = [];
+  const walk = (o, path) => {
+    if (!o || typeof o !== "object") return;
+    if (typeof o.url === "string" && (path.includes("evidence") || path === "vendor_statement")) out.push([path, o.url]);
+    for (const [k, v] of Object.entries(o)) walk(v, path ? `${path}.${k}` : k);
+  };
+  walk(doc, "");
+  return out
+    .filter(([, url]) => {
+      try {
+        const u = new URL(url);
+        if (SOURCE_HOSTS.has(u.hostname) || BROWSER_ONLY_DOCS.has(u.hostname)) return false;
+        return BUILD_FILE.some((re) => re.test(u.pathname));
+      } catch {
+        return false;
+      }
+    })
+    .map(([path, url]) => `${path}: ${url} is a site build file, not a page. Its name changes on every deploy. Cite the page that shows the text. If that page has no text without JavaScript, see BROWSER_ONLY_DOCS in scripts/validate.mjs`);
+}
+
 // Prose lint. Cards must read as sentences, not identifier soup strung together with
 // semicolons. Applies to our own words only; evidence quotes are verbatim and exempt.
 const PROSE_FIELDS = new Set(["summary", "mechanism", "notes", "covers", "reason"]);
@@ -66,6 +101,7 @@ for (const f of files) {
   for (const c of Object.values(hyg)) if (c && c.pass !== null && !(c.evidence?.length)) errs.push("hygiene check with a pass/fail needs evidence");
   if (doc?.status === "graduated" && !doc.graduated_on) errs.push("graduated status requires graduated_on");
   errs.push(...prose(doc));
+  errs.push(...receiptUrls(doc));
 
   // staleness
   const now = Date.now();

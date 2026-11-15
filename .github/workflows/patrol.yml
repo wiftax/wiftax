@@ -42,7 +42,7 @@ jobs:
       contents: write # push sisyphus/* branches and the sisyphus-state branch (main is protected by ruleset)
       pull-requests: write # open Notices of Assessment and the receipts refresh; close a superseded refresh
       issues: write # proposals that fail validation twice, hosts that block the crawler; create labels
-      actions: write # start the required "check" workflow on each sisyphus/* branch
+      actions: write # start the required "check" workflow on each sisyphus/* branch, and delete the held duplicate pull_request runs
       id-token: write # GitHub OIDC token, exchanged for an Anthropic access token (WIF)
     env:
       # Workload Identity Federation. None of these are secrets; they are repository variables.

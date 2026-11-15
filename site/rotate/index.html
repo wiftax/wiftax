@@ -47,6 +47,8 @@ main.wrap{padding-bottom:var(--wa-space-3xl)}
   if (r.unreachable.urls) line(`unreachable: ${n(r.unreachable.urls)} pages, ${n(r.unreachable.hosts.length)} ${s(r.unreachable.hosts.length, "host", "hosts")}`, "warn");
   if (r.notices.length) line(`notices filed: ${r.notices.length}`);
   if (r.refresh && r.refresh.cards.length) line(`refreshed: ${r.refresh.cards.length} products`);
+  if (r.moved_pages && r.moved_pages.length) line(`pages found at new addresses: ${r.moved_pages.length}`);
+  if (r.usage) line(`model: ${r.usage.calls} ${s(r.usage.calls, "call", "calls")}, $${r.usage.cost_usd.toFixed(2)} at list price`, "quiet");
   line("keys rotated: all of them, again");
 
   const fill = (id, rows) => {
