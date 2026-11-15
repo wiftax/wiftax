@@ -23,21 +23,16 @@ surfaces:
       - any
     evidence:
       - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: >-
-          Using Workload Identity Federation, you can provide on-premises or multicloud workloads
-          with access to Google Cloud resources by using federated identities instead of a service
-          account key.
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Workload Identity Federation lets you grant on-premises or multicloud workloads access to Google Cloud resources by using federated identities instead of service account keys."
       - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: >-
-          any identity provider (IdP) that supports OpenID Connect (OIDC) or Security Assertion
-          Markup Language (SAML) V2.0.
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Obtain tokens from any external identity provider (IdP) that supports OpenID Connect (OIDC) or Security Assertion Markup Language (SAML) 2.0."
       - url: https://docs.cloud.google.com/iam/docs/workload-identity-federation
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: >-
           If the attribute condition evaluates to true for a given credential, the credential is
           accepted. Otherwise, the credential is rejected.

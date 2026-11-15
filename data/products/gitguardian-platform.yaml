@@ -16,8 +16,8 @@ surfaces:
   inbound:
     grade: D
     mechanism: >-
-      A static API key only: a service account token on the Business plan, or a personal access
-      token. No workload federation is accepted.
+      A static API key only: a service account token on the Growth or Enterprise plan, or a personal
+      access token. No workload federation is accepted.
     evidence:
       - url: https://docs.gitguardian.com/api-docs/authentication
         checked_on: 2026-10-13
@@ -32,17 +32,17 @@ surfaces:
         checked_by: tehreet
         quote: "Add this API key to the GITGUARDIAN_API_KEY environment variable in your project settings."
       - url: https://docs.gitguardian.com/api-docs/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Please note that service accounts are only available for workspaces under our Business plan."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Please note that service accounts are only available for workspaces under our Growth or Enterprise plan."
       - url: https://api.gitguardian.com/v1/openapi.json
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Usage:** `Token <api-key>` in `Authorization` header."
       - url: https://api.gitguardian.com/v1/openapi.json
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Optional lifetime of the resulting personal access token, in days. `0` means it never expires."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Expiration date of the token (null if it never expires)."
     notes: >-
       The API's only security scheme is the static token. Its OAuth2 endpoints serve interactive MCP
       clients and mint a personal access token, which can be non-expiring. There is no
@@ -124,8 +124,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.gitguardian.com/api-docs/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Set an expiry date for your token (in 1 week, 1 month, 3 months, 6 months, 1 year, or never)."
       - url: https://docs.gitguardian.com/platform/enterprise-administration/workspace-settings
         checked_on: 2026-10-13
@@ -143,12 +143,12 @@ hygiene:
     pass: true
     evidence:
       - url: https://api.gitguardian.com/v1/openapi.json
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Create a new personal access token or service account token in the workspace."
       - url: https://docs.gitguardian.com/api-docs/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "A service account token can be revoked from the Service accounts page by a workspace Manager, or through the Public API by another token holding the api_tokens:write scope."
     notes: >-
       The API creates and revokes tokens. A service account token cannot revoke itself.
@@ -160,8 +160,8 @@ hygiene:
         checked_by: tehreet
         quote: "Scopes are tied to an API key and control the access to resources and scan capability."
       - url: https://docs.gitguardian.com/api-docs/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Choose one or several scopes for your service account."
     notes: >-
       Service accounts are non-human identities with per-token scopes, such as scan only. Personal
@@ -170,8 +170,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://api.gitguardian.com/v1/openapi.json
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Last usage of the API token"
     notes: >-
       The token list shows when each token was last used.

@@ -37,9 +37,9 @@ surfaces:
         checked_by: sisyphus
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: 30-minute lifespan, automatically refreshed
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "OIDC-generated keys: 30-minute lifespan. Your application automatically refreshes them."
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/saml-workload-federation
         checked_on: 2026-09-16
@@ -70,8 +70,8 @@ hygiene:
     evidence:
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: Don't expire. Require manual rotation.
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/create-keys
@@ -113,8 +113,8 @@ hygiene:
     evidence:
       - url: >-
           https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/manage-access-keys/about
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
     notes: >-
       Access keys have no documented last-used field.
   leak_revocation:

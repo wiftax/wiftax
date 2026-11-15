@@ -9,7 +9,7 @@ status: listed
 summary: >-
   P0's API accepts a short-lived Google Cloud service account token, but no other issuer. The legacy
   API key never expires and always has the Owner role. P0 reaches your clouds and most SaaS without
-  keys, but Kubernetes, Cloudflare, Tailscale and SIEM sinks want a pasted secret.
+  keys, but Kubernetes, Cloudflare and SIEM sinks want a pasted secret.
 
 surfaces:
   inbound:
@@ -20,21 +20,21 @@ surfaces:
     issuers: ["Google Cloud service-account identity tokens (accounts.google.com)"]
     evidence:
       - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "A workload running on Google Cloud can authenticate as a service account with a short-lived identity token, so no long-lived secret needs to live in your CI system. P0 accepts a Google-issued service-account identity token as a bearer token."
       - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The service account's email must be a member of your P0 organization, or P0 rejects the token."
       - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Recommended. Short-lived, no stored secret. Requires Google Cloud."
       - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "API keys are legacy and are being phased out in favor of Google Cloud service-account tokens. They still work, but prefer a service-account token for new integrations."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "API keys are legacy and are being phased out in favor of Google Cloud service-account tokens (see Google Cloud service-account token (recommended)). They still work, but prefer a service-account token for new integrations."
       - url: https://docs.p0.dev/integrations/resource-integrations/ssh/self-hosted
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -49,8 +49,8 @@ surfaces:
     grade: B
     mechanism: >-
       AWS trusts a Google-signed token, GCP and Azure use P0's identity or a federated credential,
-      and SaaS uses consent or app installs. Kubernetes, Cloudflare, Tailscale, Datadog and Splunk
-      take a token or secret.
+      and SaaS uses consent or app installs. Kubernetes, Cloudflare, Datadog and Splunk take a token
+      or secret.
     evidence:
       - url: https://docs.p0.dev/integrations/resource-integrations/aws/installation-methods
         checked_on: 2026-10-13
@@ -65,9 +65,9 @@ surfaces:
         checked_by: tehreet
         quote: "Stage the installation with p0_azure_app_staged to obtain the application name and federated credential details, create the Azure AD application and its federated credential from those outputs, then complete the installation with p0_azure_app, passing the new application's client ID."
       - url: https://docs.p0.dev/integrations/directory-integrations/okta
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Paste the public key you copied from P0 during the public key generation process, then click Done."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Paste the public key you copied from P0 during the Integrate Okta for P0 process, then click Done."
       - url: https://docs.p0.dev/integrations/directory-integrations/google-workspace
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -77,9 +77,9 @@ surfaces:
         checked_by: tehreet
         quote: "Click \"Install integration\". This will take you to Microsoft's site and present you with a consent screen."
       - url: https://docs.p0.dev/integrations/resource-integrations/github
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Review the permissions required by the P0 GitHub app and select Install."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The connector runs on AWS Lambda or Google Cloud Run, in the same cloud as the private key: AWS Secrets Manager or Google Secret Manager."
       - url: https://docs.p0.dev/integrations/resource-integrations/kubernetes
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -89,18 +89,19 @@ surfaces:
         checked_by: tehreet
         quote: "SCIM API token: a Cloudflare API token that grants P0 access to the account's SCIM API."
       - url: https://docs.p0.dev/integrations/resource-integrations/tailscale
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "The installation process involves generating an OAuth client in Tailscale and providing its Client ID and Client secret to P0."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "By default it's a Tailscale federated identity that trusts the connector's own cloud identity, so no secret is stored anywhere."
       - url: https://docs.p0.dev/integrations/siem-integrations/datadog-setup
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "You must provide a Datadog API key to authenticate log submissions."
     notes: >-
       Every cloud is keyless. For Okta, P0 holds the private key and you paste only its public key.
-      GitHub Repositories use your own GitHub App, whose key stays in your AWS account. Static:
-      Kubernetes takes a long-lived service account token, Cloudflare an API token, Tailscale an
-      all-scope OAuth secret, and Datadog and Splunk their keys. B, not A, because Kubernetes and
+      GitHub Repositories use your own GitHub App, whose key stays in your own AWS or Google Cloud
+      secret manager. Tailscale defaults to a federated identity that trusts the connector's cloud
+      identity, so no secret is stored. Static: Kubernetes takes a long-lived service account token,
+      Cloudflare an API token, and Datadog and Splunk their keys. B, not A, because Kubernetes and
       several SaaS connectors take static credentials.
 
 hygiene:
@@ -108,8 +109,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "A Google Cloud service-account token or a CLI token expires on its own; an API key does not."
       - url: https://docs.p0.dev/integrations/resource-integrations/ssh/self-hosted
         checked_on: 2026-10-13
@@ -128,8 +129,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.p0.dev/p0-api/authenticating-with-the-p0-api
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "A P0 API key carries the full Owner role and cannot be scoped to a lesser role."
       - url: https://docs.p0.dev/p0-management/management-api/api-key-management-api
         checked_on: 2026-10-13

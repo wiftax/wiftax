@@ -137,16 +137,17 @@ hygiene:
         checked_by: tehreet
         quote: "The maximum valid value is `8760h` (equivalent to 365 days), Valid unit strings range from nanoseconds to hours and are `ns`, `us`, `ms`, `s`, `m`, and `h`, for example `--ttl=24h`."
       - url: https://edu.chainguard.dev/platform/chainctl/chainctl-docs/chainctl_auth_pull-token_create.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Maximum value is 8760h or one year. (default 720h0m0s)"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The maximum depends on the organization's plan: 720h (30 days) for Starter, 168h (7 days) for Team and 8760h (one year) for other plans. (default 720h0m0s)"
       - url: https://edu.chainguard.dev/api-v1.json
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Defaults to / Maximum of 30 days after creation time."
     notes: >-
-      Pull tokens default to 30 days, and the platform caps them at one year. A platform-enforced
-      maximum passes, as on the temporal card.
+      Pull tokens default to 30 days. The platform caps them by plan, at 30 days on Starter, 7 days
+      on Team and one year on other plans. A platform-enforced maximum passes, as on the temporal
+      card.
   rotation_api:
     pass: true
     evidence:
@@ -155,8 +156,8 @@ hygiene:
         checked_by: tehreet
         quote: "To revoke a token, delete the associated identity."
       - url: https://edu.chainguard.dev/platform/chainctl/chainctl-docs/chainctl_auth_pull-token_create.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Create a pull token."
     notes: >-
       Pull tokens can be created and revoked from the CLI or API. On Catalog Starter you revoke by

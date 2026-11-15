@@ -77,9 +77,9 @@ surfaces:
         checked_by: tehreet
         quote: "trusts cannot be created via Terraform"
       - url: https://docs.vultr.com/products/compute/kubernetes/management/connection.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "including API endpoints, authentication credentials, and resource specifications."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The cluster configuration of a Vultr Kubernetes Engine (VKE) cluster is a kubeconfig file that contains the cluster's API server endpoint, such as https://{vke-id}.vultr-k8s.com:6443, and the credentials that kubectl and other Kubernetes clients use to connect to the cluster."
     notes: >-
       Vultr lets you trust an external OIDC issuer from a role, self-serve. Three things keep it
       from counting. It is documented only for people signed in to Okta, Google or Azure AD. Its

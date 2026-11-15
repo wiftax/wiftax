@@ -19,16 +19,16 @@ surfaces:
     issuers: ["any"]
     evidence:
       - url: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Register the platform as a Provider, pin a Workload Identity credential on your Application to the token's issuer and subject, and the SDK presents the platform's token instead. The steps are the same on every platform that publishes an OpenID Connect discovery document for its tokens."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Register the platform as a Provider, pin a Workload Identity credential on your Application to the token’s issuer and subject, and the SDK presents the platform’s token instead. The steps are the same on every platform whose OIDC issuer publishes a discovery document Keycard can reach."
       - url: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Leave Client ID and Client Secret empty. Keycard discovers the issuer's signing keys from its OpenID Connect discovery document."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Leave Client ID and Client Secret empty. Keycard finds the issuer’s signing keys through its OpenID Connect discovery document, <issuer-url>/.well-known/openid-configuration."
       - url: https://docs.keycard.ai/guides/authenticate-deployed-workloads/
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "A trailing * matches every subject that starts with the text before it, so workspace:<workspace-id>:* trusts every service in a Render workspace at the cost of looser pinning."
       - url: https://docs.keycard.ai/use-cases/agent-with-its-own-identity/
         checked_on: 2026-10-13

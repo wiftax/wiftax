@@ -19,8 +19,8 @@ surfaces:
       and IP limits are optional.
     evidence:
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
-        checked_on: 2026-09-16
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The token secret is only shown once. Do not store the secret in plaintext where others can access it."
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/
         checked_on: 2026-09-16
@@ -96,9 +96,9 @@ hygiene:
     pass: true
     evidence:
       - url: https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
-        checked_on: 2026-09-16
-        checked_by: tehreet
-        quote: "granting Zone DNS Read access to a zone example.com will allow the token to read DNS records only for that specific zone."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "For example, Zone DNS Read for example.com allows the token to read DNS records only for that zone."
   last_used:
     pass: true
     evidence:

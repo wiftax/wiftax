@@ -20,16 +20,16 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.runpod.io/api-reference-v2/overview.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "All requests require a [Runpod API key](/get-started/credentials.md) in the request headers."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "All requests require a Runpod API key in the request headers."
       - url: https://api.runpod.io/v2/openapi.json
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Runpod API key authentication. Generate an API key in the Runpod console and send it in the `Authorization` header as `Bearer <api_key>`."
       - url: https://docs.runpod.io/get-started/credentials.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Authenticate requests to the Runpod API, CLI, and SDKs."
       - url: https://docs.runpod.io/runpodctl/reference/runpodctl-config.md
         checked_on: 2026-10-22
@@ -92,13 +92,13 @@ surfaces:
         checked_by: tehreet
         quote: "For Google Artifact Registry or gcr.io, set `--username` to the literal `_json_key` and feed the multi-line service-account JSON key file through `--password-stdin`."
       - url: https://docs.runpod.io/get-started/credentials.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Enter a name, the registry URL, your username, and your password or access token."
       - url: https://docs.runpod.io/serverless/endpoints/model-caching.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "If you're using a gated model, you'll need to enter a [Hugging Face access token](https://huggingface.co/docs/hub/en/security-tokens)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "If you're using a gated model, you'll need to enter a Hugging Face access token."
       - url: https://docs.runpod.io/serverless/workers/github-integration.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -115,8 +115,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.runpod.io/get-started/credentials.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Give your key a name and set its permissions (**All**, **Restricted**, or **Read Only**)."
       - url: https://graphql-spec.runpod.io/
         checked_on: 2026-10-22
@@ -134,16 +134,16 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.runpod.io/get-started/credentials.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Click **Revoke Key** to confirm."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Click Revoke Key to confirm."
       - url: https://graphql-spec.runpod.io/
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "RunPod API spec includes most common GraphQL types, queries, and mutations to manage your pods."
       - url: https://docs.runpod.io/api-reference-v2/overview.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Use it to create and manage Pods, query Serverless endpoints, provision storage, and retrieve billing data"
     notes: >-
       Keys are created and revoked only in the console. Neither API can mint or revoke keys. Account
@@ -156,12 +156,12 @@ hygiene:
         checked_by: tehreet
         quote: "Keys are scoped to the permissions granted when created; requests may return `403` when a valid key lacks access to the requested resource or action."
       - url: https://docs.runpod.io/get-started/credentials.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "To improve security, generate a new key with **Restricted** permission and select the minimum permission needed for your use case."
       - url: https://docs.runpod.io/get-started/credentials.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Read/Write**: Full access to your endpoints."
     notes: >-
       There is no machine account, but each key can be narrower than its owner: read-only, or

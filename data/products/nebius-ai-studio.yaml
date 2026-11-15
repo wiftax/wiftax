@@ -23,12 +23,12 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In Nebius Token Factory, go to the [API keys](https://tokenfactory.nebius.com/project/api-keys) section."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "In Nebius Token Factory, go to the API keys section."
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Keep your keys private; do not share or expose them in client-side code."
       - url: https://docs.tokenfactory.nebius.com/quickstart.md
         checked_on: 2026-10-22
@@ -39,9 +39,9 @@ surfaces:
         checked_by: tehreet
         quote: "scheme: bearer"
       - url: https://docs.tokenfactory.nebius.com/ai-models-inference/observability-api-integrations.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Issue a [static API key in Nebius Token Factory UI](https://tokenfactory.nebius.com/project/api-keys)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Issue a static API key in Nebius Token Factory UI."
       - url: https://docs.tokenfactory.nebius.com/api-reference/sandboxes/images/import-a-container-image-from-a-registry.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -88,8 +88,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Enter the key name and then click **Create**."
     notes: >-
       Creating a key asks only for a name. No expiry or org policy is documented, and the API keys
@@ -121,8 +121,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
     notes: >-
       No last-used time is documented. The API keys page is behind a login.
   leak_revocation:
@@ -132,8 +132,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
       - url: https://docs.tokenfactory.nebius.com/api-reference/introduction.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "If a key is compromised, Nebius Token Factory can automatically revoke it"
     notes: >-
       Nebius is not in GitHub's secret-scanning table. The docs mention automatic revocation but

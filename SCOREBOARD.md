@@ -12,8 +12,8 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Duo | [Admin API](data/products/cisco-duo-admin-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Elastic | [Elastic Agent and Fleet](data/products/elastic-agent-fleet.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
@@ -24,96 +24,96 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Hot Aisle | [GPU Cloud](data/products/hot-aisle.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Hyperbolic | [GPU Cloud and Inference API](data/products/hyperbolic.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Island | [Enterprise Browser](data/products/island-enterprise-browser.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Lumos | [Identity Platform](data/products/lumos-identity-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
+| **💀 F** | Lumos | [Identity Platform](data/products/lumos-identity-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | Nebius | [Token Factory](data/products/nebius-ai-studio.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | Nightfall AI | [DLP](data/products/nightfall-dlp.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
+| **💀 F** | Nebius | [Token Factory](data/products/nebius-ai-studio.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | Nightfall AI | [DLP](data/products/nightfall-dlp.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Nscale | [Cloud](data/products/nscale.yaml) | 🔴 D | 💀 F | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Nudge Security | [Platform](data/products/nudge-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Obsidian Security | [Platform](data/products/obsidian-security.yaml) | 💀 F | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Orca Security | [Cloud Security Platform](data/products/orca-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Palo Alto Networks | [Cortex XSIAM](data/products/paloalto-cortex-xsiam.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Palo Alto Networks | [Cortex XSIAM](data/products/paloalto-cortex-xsiam.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 🟢 A | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Push Security | [Platform](data/products/push-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
+| **💀 F** | Push Security | [Platform](data/products/push-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Rapid7 | [Command Platform](data/products/rapid7-insight-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Reco | [Dynamic SaaS Security](data/products/reco-saas-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | Semgrep | [AppSec Platform](data/products/semgrep-appsec-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | SF Compute | [Object Storage](data/products/sf-compute-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Semgrep | [AppSec Platform](data/products/semgrep-appsec-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | SF Compute | [Object Storage](data/products/sf-compute-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Splunk | [Cloud Platform](data/products/splunk-cloud-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
-| **💀 F** | StrongDM | [API](data/products/strongdm.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | StrongDM | [API](data/products/strongdm.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Sysdig | [Sysdig Secure](data/products/sysdig-secure.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | TensorWave | [GPU Cloud](data/products/tensorwave.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Tines | [Platform](data/products/tines.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Together AI | [Platform](data/products/together-ai.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | Vast.ai | [GPU Cloud](data/products/vast-ai.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Together AI | [Platform](data/products/together-ai.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | Vast.ai | [GPU Cloud](data/products/vast-ai.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Voltage Park | [GPU Cloud](data/products/voltage-park.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
-| **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
+| **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Delinea | [Secret Server Cloud](data/products/delinea-secret-server.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | DigitalOcean | [API](data/products/digitalocean-api.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-10-22 |
-| **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
+| **🔴 D** | DigitalOcean | [API](data/products/digitalocean-api.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
+| **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Lambda | [Cloud](data/products/lambda-cloud.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Modal | [Platform](data/products/modal.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
-| **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Runpod | [GPU Cloud](data/products/runpod.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | SentinelOne | [Singularity](data/products/sentinelone-singularity.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-10-22 |
 | **🔴 D** | SF Compute | [GPU Cloud](data/products/sf-compute.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Socket | [Platform](data/products/socket-dev.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🔴 D** | Socket | [Platform](data/products/socket-dev.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Temporal | [Platform](data/products/temporal.yaml) | 🔴 D | 🟢 A | `✓ ✓ ✓ ✗ ✓` | listed | 2026-10-20 |
-| **🔴 D** | Tenable | [Vulnerability Management](data/products/tenable-vulnerability-management.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🔴 D** | Tenable | [Vulnerability Management](data/products/tenable-vulnerability-management.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
-| **🔴 D** | Veza | [Access Graph](data/products/veza.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-10-12 |
-| **🟠 C** | Axonius | [Platform](data/products/axonius.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-10-22 |
+| **🔴 D** | Veza | [Access Graph](data/products/veza.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-11-15 |
+| **🟠 C** | Axonius | [Platform](data/products/axonius.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-11-15 |
 | **🟠 C** | CrowdStrike | [Falcon API](data/products/crowdstrike-falcon-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | CyberArk | [Identity Security Platform](data/products/cyberark-identity-platform.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Cyera | [Data Security Platform](data/products/cyera-data-security.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
-| **🟠 C** | Drata | [Platform](data/products/drata.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Elastic | [Kibana](data/products/kibana.yaml) | 🟢 A | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
+| **🟠 C** | Drata | [Platform](data/products/drata.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Elastic | [Kibana](data/products/kibana.yaml) | 🟢 A | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | GitHub | [API and Actions](data/products/github-api.yaml) | 🟠 C | 🟢 A | `✓ ✗ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🟠 C** | Okta | [Management API](data/products/okta-management-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Oleria | [Adaptive Identity Governance](data/products/oleria-identity-governance.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
+| **🟠 C** | Okta | [Management API](data/products/okta-management-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Oleria | [Adaptive Identity Governance](data/products/oleria-identity-governance.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Palo Alto Networks | [Prisma Cloud](data/products/paloalto-prisma-cloud.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Ping Identity | [PingOne](data/products/pingone-platform.yaml) | 🟠 C | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Qualys | [Cloud Platform](data/products/qualys-cloud-platform.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | SailPoint | [Identity Security Cloud](data/products/sailpoint-identity-security-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🟠 C** | SailPoint | [Identity Security Cloud](data/products/sailpoint-identity-security-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Snyk | [Platform](data/products/snyk-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Sola Security | [Platform](data/products/sola-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
-| **🟠 C** | Torq | [Hyperautomation Platform](data/products/torq.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🟠 C** | Sola Security | [Platform](data/products/sola-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Torq | [Hyperautomation Platform](data/products/torq.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Upwind | [Cloud Security Platform](data/products/upwind.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Vanta | [Platform](data/products/vanta.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Vultr | [Cloud](data/products/vultr-cloud.yaml) | 🟠 C | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟠 C** | Vultr | [Cloud](data/products/vultr-cloud.yaml) | 🟠 C | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Wiz | [Platform](data/products/wiz-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Zenity | [AI Agent Security](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
+| **🟠 C** | Zenity | [AI Agent Security](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Zscaler | [OneAPI](data/products/zscaler-oneapi.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟡 B** | Aembit | [Workload IAM](data/products/aembit-workload-iam.yaml) | 🟢 A | 🟡 B | `· · · · ·` | listed | 2026-10-13 |
 | **🟡 B** | Akeyless | [Identity Security Platform](data/products/akeyless-platform.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-19 |
-| **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
+| **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | C1 | [Identity Platform](data/products/c1-identity-platform.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Datadog | [API](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-13 |
-| **🟡 B** | Elastic | [Elasticsearch](data/products/elasticsearch.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
-| **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-04 |
+| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
+| **🟡 B** | Elastic | [Elasticsearch](data/products/elasticsearch.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟡 B** | HashiCorp | [Vault](data/products/hashicorp-vault.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-09-16 |
-| **🟡 B** | Infisical | [Cloud](data/products/infisical-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
-| **🟡 B** | Keycard | [Agent Identity](data/products/keycard-agent-identity.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
+| **🟡 B** | Infisical | [Cloud](data/products/infisical-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟡 B** | Keycard | [Agent Identity](data/products/keycard-agent-identity.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Nebius | [AI Cloud](data/products/nebius-ai-cloud.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟡 B** | P0 Security | [Platform](data/products/p0-security.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-13 |
+| **🟡 B** | P0 Security | [Platform](data/products/p0-security.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Teleport | [Platform](data/products/teleport.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟢 A** | AWS | [IAM and STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
-| **🟢 A** | Chainguard | [Platform](data/products/chainguard-platform.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟢 A** | Chainguard | [Platform](data/products/chainguard-platform.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟢 A** | CoreWeave | [Kubernetes Service](data/products/coreweave-cks.yaml) | 🟢 A | 🟢 A | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
-| **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-05 |
+| **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟢 A** | Defakto | [Mint](data/products/defakto-mint.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
-| **🟢 A** | Google Cloud | [IAM](data/products/google-cloud-iam.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
+| **🟢 A** | Google Cloud | [IAM](data/products/google-cloud-iam.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🟢 A** | Microsoft Azure | [Entra Workload ID](data/products/azure-entra-workload-identity.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
 | **🟢 A** | Nscale | [Kubernetes Service](data/products/nscale-nks.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟢 A** | Snowflake | [Data Cloud](data/products/snowflake.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
@@ -346,7 +346,7 @@ To call the Orca API, MCP server, Terraform or CI actions, your code needs a sta
 To call the Cortex XSIAM and XDR APIs, your code needs a static API key and key ID. Cloud onboarding into AWS, Azure and GCP is keyless, but many log collectors want pasted keys or client secrets.
 
 - **Inbound F:** A static API key plus its key ID, with an assigned role. Advanced keys sign each call with a nonce, but the key is still a long-lived secret.
-- **Outbound B:** Cortex onboards AWS by role with External ID, Azure by a multi-tenant app, and GCP by impersonation. Several log collectors want JSON keys, connection strings or client secrets.
+- **Outbound B:** Cortex onboards AWS by role with External ID, Azure by a multi-tenant app, and GCP by impersonation. Several log collectors want JSON keys or client secrets.
 - **Receipts:** [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/xsiam-api/get-started-with-cortex-apis.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xdr-5.x/configure-cortex-xdr/manage-api-keys.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/amazon-web-services-cloud-onboarding/aws-security-model-and-authentication.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/google-cloud-platform-cloud-onboarding/google-cloud-platform-gcp-provider-permissions.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/create-a-workload-federated-identity-role.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/configure-data-collection-from-amazon-s3-manually.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-cloud-platform/ingest-logs-and-data-from-a-gcp-pub-sub.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-workspace/ingest-logs-and-data-from-google-workspace.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/azure-event-hub/ingest-logs-from-microsoft-azure-event-hub.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/microsoft-office-365/ingest-logs-from-microsoft-office-365.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/okta/ingest-logs-and-data-from-okta.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/salesforce/ingest-logs-and-data-from-salesforce.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/workday/ingest-report-data-from-workday.md)
 
 ### 💀 F Proofpoint Targeted Attack Protection
@@ -450,7 +450,7 @@ The Tines API, Terraform provider, webhooks and MCP servers take only a static A
 Every workload path into Together, from inference to the GPU cluster API and CI, runs on a static project API key. There is no federation for workloads. Outbound, S3 imports use presigned URLs you sign, but Hugging Face and W&B want pasted tokens.
 
 - **Inbound F:** A static project API key created in the console, used by the API, SDKs, CLI in CI and registry pushes. The CLI's device login and cluster OIDC are for humans.
-- **Outbound B:** S3 imports take a presigned URL you mint, so no credential changes hands. Hugging Face takes a pasted token, and W&B logging a pasted API key.
+- **Outbound B:** S3, Google Cloud Storage and R2 imports take a presigned URL you mint, so no credential changes hands. Hugging Face takes a pasted token, and W&B logging a pasted API key.
 - **Receipts:** [docs.together.ai](https://docs.together.ai/docs/api-keys-authentication.md), [docs.together.ai](https://docs.together.ai/reference/cli/getting-started.md), [docs.together.ai](https://docs.together.ai/reference/cli/auth.md), [docs.together.ai](https://docs.together.ai/reference/whoami.md), [docs.together.ai](https://docs.together.ai/docs/gpu-clusters-api.md), [docs.together.ai](https://docs.together.ai/reference/cli/jig.md), [docs.together.ai](https://docs.together.ai/docs/cluster-oidc.md), [docs.together.ai](https://docs.together.ai/docs/gpu-clusters-management.md), [docs.together.ai](https://docs.together.ai/docs/dedicated-endpoints/custom-models.md), [docs.together.ai](https://docs.together.ai/docs/dedicated-endpoints/adapter.md), [docs.together.ai](https://docs.together.ai/reference/dmi/model-uploads-create.md), [docs.together.ai](https://docs.together.ai/docs/fine-tuning/byom.md), [docs.together.ai](https://docs.together.ai/reference/post-fine-tunes.md)
 
 ### 💀 F Vast.ai GPU Cloud
@@ -555,7 +555,7 @@ Every automated path into DigitalOcean starts from a personal access token made 
 
 Your CI jobs call GitGuardian with a static API key. Service account keys can be set never to expire, and GitHub does not report leaked ones. GitGuardian reaches into AWS, GCP and Entra without keys, but most code hosts and registries still want a pasted token.
 
-- **Inbound D:** A static API key only: a service account token on the Business plan, or a personal access token. No workload federation is accepted.
+- **Inbound D:** A static API key only: a service account token on the Growth or Enterprise plan, or a personal access token. No workload federation is accepted.
 - **Outbound B:** GitGuardian is its own OIDC issuer for AWS, GCP and Entra, and uses app installs for GitHub, Slack and Jira. GitLab, Bitbucket, Azure Repos and several registries want a token you create.
 - **Receipts:** [docs.gitguardian.com](https://docs.gitguardian.com/api-docs/authentication), [docs.gitguardian.com](https://docs.gitguardian.com/ggshield-docs/integrations/cicd-integrations/github-actions), [docs.gitguardian.com](https://docs.gitguardian.com/api-docs/service-accounts), [api.gitguardian.com](https://api.gitguardian.com/v1/openapi.json), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/file-storage-integrations/aws-s3), [docs.gitguardian.com](https://docs.gitguardian.com/nhi-governance/aws-iam-integration), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/amazon-ecr), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/google-artifact-registry), [docs.gitguardian.com](https://docs.gitguardian.com/nhi-governance/azure-entra-integration), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/github), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/messaging-integrations/microsoft-teams), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/messaging-integrations/slack), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/gitlab), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/bitbucket-cloud), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/azure-repos), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/docker-hub), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/github-enterprise)
 
@@ -741,10 +741,10 @@ To call Okta's admin API, your code holds a static SSWS token or a private key t
 
 ### 🟠 C Oleria Adaptive Identity Governance
 
-To call the Oleria API, your code trades a static client ID and secret for a one-hour token. Oleria reaches AWS, Microsoft, Google Workspace, GitHub and Salesforce without keys, but GCP, Azure, Okta and Slack want a pasted secret.
+To call the Oleria API, your code trades a static client ID and secret for a one-hour token. Oleria reaches AWS, Microsoft, Azure, Google Workspace, GitHub and Salesforce without keys, but GCP, Okta and Slack want a pasted secret.
 
 - **Inbound C:** OAuth client credentials. A static client ID and secret from the web app buy a JWT that usually lasts one hour.
-- **Outbound B:** Oleria uses a cross-account role for AWS and its own apps for Entra, Google Workspace, GitHub and Salesforce. GCP, Azure, Okta and Slack want a key, secret or token.
+- **Outbound B:** Oleria uses a cross-account role for AWS and its own apps for Entra, Azure, Google Workspace, GitHub and Salesforce. GCP, Okta and Slack want a key, secret or token.
 - **Receipts:** [docs.oleria.com](https://docs.oleria.com/developer-docs/api-reference/generate-token), [docs.oleria.com](https://docs.oleria.com/developer-docs/api-reference/overview), [docs.oleria.com](https://docs.oleria.com/integrations/aws-iam-and-s3), [docs.oleria.com](https://docs.oleria.com/integrations/microsoft-entra-id), [docs.oleria.com](https://docs.oleria.com/integrations/google-workspace), [docs.oleria.com](https://docs.oleria.com/integrations/github), [docs.oleria.com](https://docs.oleria.com/integrations/salesforce), [docs.oleria.com](https://docs.oleria.com/integrations/gcp), [docs.oleria.com](https://docs.oleria.com/integrations/azure), [docs.oleria.com](https://docs.oleria.com/integrations/okta), [docs.oleria.com](https://docs.oleria.com/integrations/slack)
 
 ### 🟠 C Palo Alto Networks Prisma Cloud
@@ -949,10 +949,10 @@ A Nebius service account can trust any OIDC issuer, so your code trades its JWT 
 
 ### 🟡 B P0 Security Platform
 
-P0's API accepts a short-lived Google Cloud service account token, but no other issuer. The legacy API key never expires and always has the Owner role. P0 reaches your clouds and most SaaS without keys, but Kubernetes, Cloudflare, Tailscale and SIEM sinks want a pasted secret.
+P0's API accepts a short-lived Google Cloud service account token, but no other issuer. The legacy API key never expires and always has the Owner role. P0 reaches your clouds and most SaaS without keys, but Kubernetes, Cloudflare and SIEM sinks want a pasted secret.
 
 - **Inbound B:** P0 accepts a Google service account identity token as the bearer, if its audience is your org URL and its email is a P0 member. The other option is a legacy Owner key.
-- **Outbound B:** AWS trusts a Google-signed token, GCP and Azure use P0's identity or a federated credential, and SaaS uses consent or app installs. Kubernetes, Cloudflare, Tailscale, Datadog and Splunk take a token or secret.
+- **Outbound B:** AWS trusts a Google-signed token, GCP and Azure use P0's identity or a federated credential, and SaaS uses consent or app installs. Kubernetes, Cloudflare, Datadog and Splunk take a token or secret.
 - **Receipts:** [docs.p0.dev](https://docs.p0.dev/p0-api/authenticating-with-the-p0-api), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/ssh/self-hosted), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/aws/installation-methods), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/google-cloud), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/microsoft-azure/azure-app-registration), [docs.p0.dev](https://docs.p0.dev/integrations/directory-integrations/okta), [docs.p0.dev](https://docs.p0.dev/integrations/directory-integrations/google-workspace), [docs.p0.dev](https://docs.p0.dev/integrations/directory-integrations/microsoft-entra-id-legacy), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/github), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/kubernetes), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/cloudflare), [docs.p0.dev](https://docs.p0.dev/integrations/resource-integrations/tailscale), [docs.p0.dev](https://docs.p0.dev/integrations/siem-integrations/datadog-setup)
 
 ### 🟡 B Teleport Platform

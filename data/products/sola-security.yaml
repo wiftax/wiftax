@@ -19,25 +19,25 @@ surfaces:
       federation, so unattended use would hold that login's long-lived grant.
     evidence:
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "To connect your client, follow the steps below for your tool. When you connect, you'll be prompted to log in to Sola, or create a new account if you don't have one yet."
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Start a Claude session using the `claude` command and run `/mcp` to authenticate."
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "The Sola MCP server provides read-only access to your Sola workspace, including your connected data sources, projects, queries, and vendor tables. Your data can never be modified through the MCP. Access is scoped to the workspace the token was generated in."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Most Sola MCP tools provide read-only access to your Sola workspace, including your connected data sources, projects, queries, and vendor tables. Your data can never be modified through the MCP. Access is scoped to the workspace the token was generated in."
       - url: https://api.sola.security/.well-known/oauth-authorization-server
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: '"issuer":"https://auth.sola.security","authorization_endpoint":"https://auth.sola.security/oauth/authorize","token_endpoint":"https://auth.sola.security/oauth/token","response_types_supported":["code"],"grant_types_supported":["authorization_code","client_credentials"],"code_challenge_methods_supported":["S256"]'
       - url: https://docs.sola.security/llms.txt
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "[Sola MCP](https://docs.sola.security/getting-started/sola-ai/sola-mcp.md): Bring your full security environment into any AI assistant"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Sola MCP: Bring your full security environment into any AI assistant"
     notes: >-
       Sola's public docs list no REST API, API keys or service accounts, and its docs assistant
       confirmed this. The OAuth metadata advertises a client-credentials grant, but nothing says how
@@ -75,9 +75,9 @@ surfaces:
         checked_by: tehreet
         quote: "**Creating service account key** - Creates a service account key"
       - url: https://docs.sola.security/integrations/data-sources/okta.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "This method uses an [API token](https://help.okta.com/en-us/content/topics/security/api.htm?cshid=ext-create-api-token#create-okta-api-token) to securely grant Sola read-only access to your Okta services and resources."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "This method uses an API token to securely grant Sola read-only access to your Okta services and resources."
       - url: https://docs.sola.security/integrations/data-sources/github.md
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -103,8 +103,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Access is scoped to the workspace the token was generated in."
     notes: >-
       Sola documents no customer-managed credential and no token lifetime, so no expiry policy can
@@ -113,21 +113,27 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Run read-only SQL queries directly against your project data source tables."
     notes: >-
-      The read-only MCP is the only documented surface. No API creates or revokes credentials.
+      The MCP is the only documented surface. Its tools can now manage agents and skills, but none
+      creates or revokes credentials.
   scoping:
     pass: false
     evidence:
       - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "MCP actions on a project are limited by your role on that project. For example, if you have Viewer access on an project, Execute SQL Query will fail for that project."
+      - url: https://docs.sola.security/getting-started/sola-ai/sola-mcp.md
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The agent and skill tools can create, update, and delete Sola Agents and custom skills, and run agents."
     notes: >-
-      The MCP is read-only and tied to one workspace, but the token carries the logged-in person's
-      role. There is no machine identity.
+      Most MCP tools are read-only and each connection is tied to one workspace. The agent and skill
+      tools can now write. The token carries the logged-in person's role. There is no machine
+      identity.
   last_used:
     pass: false
     evidence:
