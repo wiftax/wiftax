@@ -59,7 +59,7 @@ jobs:
       IN_MAX_NOTICES: ${{ github.event.inputs.max_notices }}
     steps:
       - name: Checkout sisyphus
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           repository: wiftax/sisyphus
           ref: main
@@ -67,7 +67,7 @@ jobs:
           persist-credentials: false
 
       - name: Checkout wiftax
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           ref: main
           path: wiftax
@@ -75,13 +75,13 @@ jobs:
 
       # Page hashes from the last patrol live on their own branch, outside main.
       - name: Checkout state
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           ref: sisyphus-state
           path: state
           persist-credentials: true
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
@@ -134,7 +134,7 @@ jobs:
 
       - name: Upload dry-run proposals
         if: ${{ github.event.inputs.dry_run == 'true' }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: proposals
           path: sisyphus/out/
