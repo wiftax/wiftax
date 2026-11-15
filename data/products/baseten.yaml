@@ -7,9 +7,10 @@ docs: https://docs.baseten.co/organization/api-keys
 category: cloud
 status: listed
 summary: >-
-  Every Baseten call, from CI to inference, uses a static API key that never expires. Baseten is
-  itself an OIDC issuer, so it pulls weights and images from your AWS and GCP storage without keys.
-  Azure, Hugging Face, R2 and other registries take static secrets.
+  Every Baseten call, from CI to inference, uses a static API key. Keys can now carry an expiry, but
+  nothing accepts a federated token. Baseten is itself an OIDC issuer, so it pulls weights and
+  images from your AWS and GCP storage without keys. Azure, Hugging Face, R2 and other registries
+  take static secrets.
 
 surfaces:
   inbound:
@@ -20,13 +21,13 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Use team keys for CI/CD pipelines, production applications, and shared automation."
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Creating a key through the API requires an existing key."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Set BASETEN_API_KEY to an administrative credential that can create team keys."
       - url: https://docs.baseten.co/deployment/ci-cd.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -40,23 +41,23 @@ surfaces:
         checked_by: tehreet
         quote: "Authenticate with `BASETEN_API_KEY` in the environment, or set `api_key` on the provider."
       - url: https://docs.baseten.co/sandboxes/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "A token expires after 2 hours and can't be renewed."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "You can't renew a token."
       - url: https://docs.baseten.co/reference/management-api/volumes/create-a-volume-access-token.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Exchanges your API key for a short-lived token that authenticates against Baseten volume storage."
       - url: https://docs.baseten.co/reference/cli/truss/auth.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Best for laptops where you don't want a long-lived secret on disk."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Best for laptops where you don't want a stored secret on disk."
     notes: >-
       Every automation route takes a static API key, including CI, the CLIs, Terraform and
       inference. The CI guide stores it as a GitHub secret instead of using the job's OIDC token.
       The CLIs' browser login is for humans. Gateway "federated API keys" are keys Baseten mints for
       a lab's customers, not OIDC. Baseten's own OIDC issuer points outward only. Nothing lets the
-      API accept a token from GitHub, a cloud or your own issuer. 3 of 5 hygiene checks pass, so D.
+      API accept a token from GitHub, a cloud or your own issuer. 4 of 5 hygiene checks pass, so D.
   outbound:
     grade: B
     mechanism: >-
@@ -84,17 +85,17 @@ surfaces:
         checked_by: tehreet
         quote: "Baseten enables AWS AssumeRole by default for Enterprise organizations."
       - url: https://docs.baseten.co/development/model/bdn.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Azure sources don't support OIDC, and the secret is required even for public containers."
       - url: https://docs.baseten.co/development/model/bdn.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "OIDC is not supported for CoreWeave sources; use a secret."
       - url: https://docs.baseten.co/development/model/bdn.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "GCP supports using either [service accounts](https://cloud.google.com/iam/docs/service-account-overview) or OIDC for GCS authentication."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "GCP supports using either service accounts or OIDC for GCS authentication."
       - url: https://docs.baseten.co/engines/performance-concepts/cloud-storage-deployment.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -125,25 +126,35 @@ surfaces:
 
 hygiene:
   expiry:
-    pass: false
+    pass: true
     evidence:
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "API keys don't automatically expire."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Set an expiration when you create a key."
+      - url: https://docs.baseten.co/organization/api-keys.md
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Required, within 90 days or your organization's limit, whichever is shorter."
+      - url: https://docs.baseten.co/organization/api-keys.md
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Organization Admins can set expiration limits for new keys; changing a limit doesn't change existing keys."
       - url: https://docs.baseten.co/reference/management-api/api-keys/creates-an-api-key.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Creates an API key with the provided name and type."
     notes: >-
-      Keys have no expiry field, and no org policy caps their lifetime.
+      Keys take an expiry when they are created. Personal keys must expire within 90 days. Org
+      Admins can cap the lifetime of team and management keys. Keys made before expiry existed never
+      expire, and team keys can still be set to never when no cap applies.
   rotation_api:
     pass: true
     evidence:
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Provisioning tools can create team keys for new projects, rotate them on a schedule, and revoke them when access ends."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Use an API key management key to provision and rotate team keys without an individual's credentials."
       - url: https://docs.baseten.co/reference/management-api/api-keys/delete-an-api-key.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -155,12 +166,12 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "are not tied to an individual user. When your organization has"
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The key can only call specific models within the selected environments."
     notes: >-
       Team keys are non-human and come in fixed levels, such as full access, inference only and
@@ -170,9 +181,9 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "shows each visible key's creation date and last-used timestamp."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The API keys page shows each visible key's creation date, expiration, and last-used timestamp."
       - url: https://docs.baseten.co/reference/management-api/api-keys/lists-the-users-api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -186,8 +197,8 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
       - url: https://docs.baseten.co/organization/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Baseten API keys use the stable `b10_` prefix so secret-scanning tools can identify exposed credentials."
     notes: >-
       Baseten is not in GitHub's secret scanning list. Its new b10_ key prefix would make a
