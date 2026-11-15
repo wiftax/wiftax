@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 

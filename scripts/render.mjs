@@ -1,7 +1,7 @@
 // Renders data/products/*.yaml to SCOREBOARD.md. The site will do the same with more taste.
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 
 const root = new URL("..", import.meta.url).pathname;
 const dir = join(root, "data/products");

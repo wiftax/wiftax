@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, writeFileSync, mkdirSync, cpSync, rmSync } f
 import { join } from "node:path";
 import { existsSync } from "node:fs";
 import { createHash } from "node:crypto";
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 import { marked } from "marked";
 import { rubricPage } from "./rubric.mjs";
 
