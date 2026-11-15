@@ -7,6 +7,7 @@ import * as yaml from "js-yaml";
 import { marked } from "marked";
 import { rubricPage } from "./rubric.mjs";
 import { policyPage } from "./policy.mjs";
+import { ownTaxPage } from "./owntax.mjs";
 
 const root = new URL("..", import.meta.url).pathname;
 const out = join(root, "dist");
@@ -20,6 +21,7 @@ const FA_PRO = existsSync(join(root, "vendor/fontawesome-pro/svgs/sharp-regular"
 const FREE_ALT = { "shield-check": "shield-halved", "badge-check": "circle-check" }; // Pro-only names, swapped on the free fallback
 const icon = (name, { brand = false, solid = false, label = "", slot = "", cls = "" } = {}) => `<wa-icon${brand ? ' family="brands"' : FA_PRO ? ` family="sharp" variant="${solid ? "solid" : "regular"}"` : ""} name="${FA_PRO ? name : FREE_ALT[name] ?? name}"${label ? ` label="${esc(label)}"` : ""}${slot ? ` slot="${slot}"` : ""}${cls ? ` class="${cls}"` : ""}></wa-icon>`;
 const TIP_V = createHash("sha256").update(readFileSync(join(root, "site/tooltip.js"))).digest("hex").slice(0, 8);
+const FAV_V = createHash("sha256").update(readFileSync(join(root, "site/favicon.svg"))).digest("hex").slice(0, 8);
 const OG_V = createHash("sha256").update(readFileSync(join(root, "site/og.png"))).digest("hex").slice(0, 8);
 const CSS_V = createHash("sha256").update(readFileSync(join(root, "site/style.css"))).digest("hex").slice(0, 8);
 const THEME = WA_PRO ? { theme: "tailspin", palette: "vogue" } : { theme: "default", palette: "default" };
@@ -53,7 +55,7 @@ const counts = Object.fromEntries("ABCDF".split("").map((g) => [g, products.filt
 const layout = ({ title, desc, body, path = "/", extraHead = "" }) => `<!doctype html>
 <html lang="en" class="wa-theme-${THEME.theme} wa-palette-${THEME.palette} wa-light wa-cloak"><head><meta charset="utf-8"><link rel="stylesheet" href="${WA}/styles/webawesome.css">${THEME.theme !== "default" ? `<link rel="stylesheet" href="${WA}/styles/themes/${THEME.theme}.css">` : ""}${THEME.palette !== "default" ? `<link rel="stylesheet" href="${WA}/styles/color/palettes/${THEME.palette}.css">` : ""}<script type="importmap">{"imports":{"@floating-ui/core":"/vendor/floating-ui.core.mjs","@floating-ui/dom":"/vendor/floating-ui.dom.mjs"}}</script><script type="module" src="${WA}/webawesome.loader.js"></script><script type="module" src="/tooltip.js?v=${TIP_V}"></script>${FA_PRO ? `<script type="module">import { setIconPath } from "${WA}/webawesome.loader.js"; setIconPath("/icons");</script>` : ""}<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}">
-<link rel="canonical" href="${SITE}${path}"><link rel="stylesheet" href="/style.css?v=${CSS_V}"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="${SITE}${path}"><link rel="stylesheet" href="/style.css?v=${CSS_V}"><link rel="icon" href="/favicon.svg?v=${FAV_V}" type="image/svg+xml"><link rel="icon" href="/favicon-32.png?v=${FAV_V}" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=${FAV_V}">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:url" content="${SITE}${path}"><meta property="og:type" content="website"><meta property="og:site_name" content="wif.tax"><meta property="og:image" content="${SITE}/og.png?v=${OG_V}"><meta property="og:image:type" content="image/png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="wif.tax with grade tiles A, B, C, D and F"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${SITE}/og.png?v=${OG_V}"><meta name="twitter:image:alt" content="wif.tax with grade tiles A, B, C, D and F"><meta name="theme-color" content="#F7F6F2">${extraHead}
 </head><body><header class="top"><div class="wrap wa-split"><a class="brand" href="/">wif<span>.tax</span></a><nav class="wa-cluster wa-gap-l"><a href="/rubric/">Rubric</a><a href="/policy/">Policy</a><a href="/our-own-tax/">Our own tax</a><a href="https://github.com/wiftax/wiftax" aria-label="GitHub">${icon("github", { brand: true })}</a></nav></div></header>
 <main class="wrap">${body}</main>
@@ -186,7 +188,6 @@ for (const p of products) {
 writeFileSync(join(out, "api/products.json"), JSON.stringify({ generated: TODAY, license: "CC-BY-4.0", rubric: SITE + "/rubric/", products: products.map((p) => ({ id: p.id, vendor: p.vendor, product: p.product, headline: p.headline, inbound: p.surfaces.inbound.grade, outbound: p.surfaces.outbound.grade, hygiene: Object.fromEntries(HYG.map((k) => [k, p.hygiene[k].pass])), status: p.status, confidence: p.confidence?.level ?? "normal", checked: p.checked, summary: p.summary, url: `${SITE}/p/${p.id}/`, badge: `${SITE}/badge/${p.id}.svg` })) }, null, 2));
 
 // ---- markdown pages
-const mdPage = (slug, title, md, desc) => { mkdirSync(join(out, slug), { recursive: true }); writeFileSync(join(out, slug, "index.html"), layout({ title: `${title} — wif.tax`, desc, path: `/${slug}/`, body: `<article class="prose">${marked.parse(md)}</article>` })); };
 {
   const ex = products.find((p) => p.id === "aembit-workload-iam") ?? products[0];
   const e = ex.surfaces.inbound.evidence.find((x) => x.quote && x.quote.length < 160) ?? ex.surfaces.inbound.evidence[0];
@@ -202,7 +203,13 @@ const mdPage = (slug, title, md, desc) => { mkdirSync(join(out, slug), { recursi
   mkdirSync(join(out, "policy"), { recursive: true });
   writeFileSync(join(out, "policy", "index.html"), layout({ title: "Policy — wif.tax", desc: "How to dispute a grade, and what will and will not change one.", path: "/policy/", body, extraHead: `<link rel="stylesheet" href="/rubric.css?v=${v("rubric.css")}"><link rel="stylesheet" href="/policy.css?v=${v("policy.css")}"><script type="module" src="/rubric.js?v=${v("rubric.js")}"></script>` }));
 }
-mdPage("our-own-tax", "Our own tax", readFileSync(join(root, "site/our-own-tax.md"), "utf8"), "The static credentials wif.tax itself is forced to hold.");
+{
+  // Same frame as /rubric/ and /policy/.
+  const v = (f) => createHash("sha256").update(readFileSync(join(root, "site", f))).digest("hex").slice(0, 8);
+  const body = ownTaxPage({ md: readFileSync(join(root, "site/our-own-tax.md"), "utf8"), icon, badge, esc });
+  mkdirSync(join(out, "our-own-tax"), { recursive: true });
+  writeFileSync(join(out, "our-own-tax", "index.html"), layout({ title: "Our own tax — wif.tax", desc: "The static credentials wif.tax itself is forced to hold.", path: "/our-own-tax/", body, extraHead: `<link rel="stylesheet" href="/rubric.css?v=${v("rubric.css")}"><link rel="stylesheet" href="/owntax.css?v=${v("owntax.css")}"><script type="module" src="/rubric.js?v=${v("rubric.js")}"></script>` }));
+}
 
 // ---- misc
 writeFileSync(join(out, "404.html"), layout({ title: "Not found — wif.tax", desc: "Not found", body: `<section class="hero"><h1>404</h1><p>No such page. The key you are looking for may have been rotated.</p><p><a href="/">Back to the scoreboard</a></p></section>` }));
@@ -217,10 +224,9 @@ writeFileSync(join(out, "_redirects"), [
   "/c/:slug/ /?c=:slug 301", "/c/:slug /?c=:slug 301", "/p/* / 301",
 ].join("\n") + "\n");
 writeFileSync(join(out, "_headers"), `/*\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Referrer-Policy: strict-origin-when-cross-origin\n  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\n  Content-Security-Policy: default-src 'self'; img-src 'self' data: https://ka-f.webawesome.com https://ka-f.fontawesome.com; style-src 'self' 'unsafe-inline' https://ka-f.webawesome.com https://fonts.bunny.net https://ka-f.fontawesome.com; font-src 'self' https://ka-f.webawesome.com https://fonts.bunny.net https://ka-f.fontawesome.com; connect-src 'self' data: https://ka-f.webawesome.com https://ka-f.fontawesome.com; script-src 'self' 'unsafe-inline' https://ka-f.webawesome.com https://ka-f.fontawesome.com; frame-ancestors 'none'\n/api/*\n  Access-Control-Allow-Origin: *\n  Cache-Control: public, max-age=3600\n/badge/*\n  Access-Control-Allow-Origin: *\n  Cache-Control: public, max-age=3600\n`);
-writeFileSync(join(out, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1a1a1a"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-weight="700" font-size="17" fill="#fff">$</text></svg>`);
 cpSync(join(root, "site/style.css"), join(out, "style.css"));
 cpSync(join(root, "site/tooltip.js"), join(out, "tooltip.js"));
-for (const f of ["rubric.css", "rubric.js", "policy.css", "og.png", "pd.js"]) cpSync(join(root, "site", f), join(out, f));
+for (const f of ["rubric.css", "rubric.js", "policy.css", "owntax.css", "og.png", "pd.js", "favicon.svg", "favicon-32.png", "apple-touch-icon.png"]) cpSync(join(root, "site", f), join(out, f));
 mkdirSync(join(out, "vendor"), { recursive: true });
 for (const [pkg, f] of [["core", "floating-ui.core.mjs"], ["dom", "floating-ui.dom.mjs"]]) cpSync(join(root, `node_modules/@floating-ui/${pkg}/dist/floating-ui.${pkg}.browser.min.mjs`), join(out, "vendor", f));
 if (WA_PRO) cpSync(join(root, "vendor/webawesome-pro"), join(out, "wa"), { recursive: true });

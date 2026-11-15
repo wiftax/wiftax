@@ -203,3 +203,4 @@
 
 /* the intro and the hygiene lead run the full width of the column */
 .rubric .lead,.rubric #hygiene .rb-h{max-width:none}
+.rubric #outbound .rb-h{max-width:none}

@@ -1,0 +1,40 @@
+/* /our-own-tax/ — builds on rubric.css; same palette and tokens */
+.owntax .after{margin-block-start:var(--wa-space-l)}
+
+/* hero: the lead beside the ledger */
+.hero-split{align-items:center}
+.owntax .lead{max-width:none}
+.tax{display:grid;gap:var(--wa-space-m)}
+.tax-row{display:flex;align-items:center;justify-content:space-between;gap:var(--wa-space-m)}
+.tax-row .hl-k{margin:0}
+.tax-v{color:var(--ink);font-weight:var(--wa-font-weight-semibold)}
+.tax-grade{border-top:var(--wa-border-width-s) solid var(--border);padding-block-start:var(--wa-space-m)}
+.tax-grade .hl-k{color:var(--ink)}
+.tax-grade wa-badge.grade{font-size:var(--wa-font-size-xl);min-width:2.2em;padding-block:.35em;border-radius:var(--wa-border-radius-l);animation:pop .6s cubic-bezier(.34,1.56,.64,1) both .2s}
+
+/* what we got to zero */
+.zero-head{max-width:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--wa-space-m)}
+.zero-head h2{margin:0}
+.zero-head .legend{position:static;margin:0}
+.zeros{display:grid;gap:var(--wa-space-m)}
+@media(min-width:56rem){.zeros{grid-template-columns:1fr 1fr}}
+.zero{padding:var(--wa-space-l)}
+.zero-h{display:flex;align-items:center;gap:var(--wa-space-s);margin-block-end:var(--wa-space-s)}
+.zero-n{flex:1;color:var(--ink);font-weight:var(--wa-font-weight-semibold)}
+.zero p{margin:0;color:var(--ink-2);font-size:var(--wa-font-size-s)}
+.door-i{flex:none;width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:var(--wa-border-radius-l);background:var(--surface-2);color:var(--ink);font-size:1.05rem}
+.swap{display:inline-flex;align-items:center;gap:var(--wa-space-2xs);color:var(--ink-3);font-size:.7rem}
+.chip.struck{position:relative;top:auto;opacity:.55}
+.chip.struck::after{content:"";position:absolute;left:-15%;right:-15%;top:50%;height:2px;margin-top:-1px;background:var(--ink);transform:rotate(-35deg);border-radius:2px}
+.chip-pass{background:var(--grade-B)}
+
+/* human logins */
+.logins{display:flex;justify-content:space-around;gap:var(--wa-space-m);padding-block:var(--wa-space-xl) var(--wa-space-2xl)}
+.logins .nd{position:relative}
+.pin-pass{position:absolute;right:-.45rem;top:-.45rem;width:1.3rem;height:1.3rem;display:grid;place-items:center;border-radius:50%;background:var(--grade-B);color:var(--ink);font-size:.62rem;box-shadow:0 0 0 2px var(--surface)}
+.logins .nd:nth-child(1) .pin-pass{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both .1s}
+.logins .nd:nth-child(2) .pin-pass{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both .2s}
+.logins .nd:nth-child(3) .pin-pass{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both .3s}
+.logins .nd:nth-child(4) .pin-pass{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both .4s}
+
+@media(prefers-reduced-motion:reduce){.tax-grade wa-badge.grade,.pin-pass{animation:none!important}}

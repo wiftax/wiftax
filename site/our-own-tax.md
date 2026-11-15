@@ -17,4 +17,4 @@ A site that grades other people's authentication should publish its own. This pa
 
 Humans log in to GitHub, Cloudflare, the registrar and email with passkeys or hardware keys. The GitHub org requires 2FA. Human login is sso.tax's department, but you would ask.
 
-This page is updated whenever the list above changes. If you spot a credential we forgot, that is a valid dispute.
+This page is updated whenever the list above changes. If you spot a credential we forgot, that is a valid [dispute](/policy/#dispute).

@@ -9,7 +9,8 @@
     "check": "npm run validate && npm run render && npm run build",
     "build": "node site/build.mjs",
     "wa:pro": "node scripts/wa-pro.mjs",
-    "og": "node scripts/og.mjs"
+    "og": "node scripts/og.mjs",
+    "favicon": "node scripts/favicon.mjs"
   },
   "devDependencies": {
     "@floating-ui/dom": "^1.8.0",
