@@ -25,7 +25,7 @@ static-secret count is **zero**. Anything we cannot get to zero goes on the
 
 - [ ] Pages project for the site, connected via Cloudflare's GitHub App (no API token in our hands)
 - [ ] Custom domain wif.tax on Pages. wiftax.org → 301 to wif.tax via Redirect Rules
-- [ ] rotate.fail: parked one-pager until Sisyphus ships, then it is his home
+- [x] rotate.fail: Sisyphus's home. Shows the last patrol, open notices and unreachable hosts.
 - [ ] DNSSEC on, CAA records (letsencrypt + digicert for Cloudflare-managed certs), HSTS with preload, TLS 1.2 minimum
 - [ ] Email Routing: `hello@`, `disputes@`, `security@` → Gmail
 - [ ] Web Analytics (cookieless). No other trackers, ever.
@@ -42,11 +42,10 @@ static-secret count is **zero**. Anything we cannot get to zero goes on the
 
 ## 5. Sisyphus (crawler)
 
-- [ ] GitHub App identity ("sisyphus[bot]"), installed only on `wiftax/wiftax`, permissions: contents write, pull requests write, nothing else
-- [ ] Runs on GitHub Actions cron in `wiftax/sisyphus`
-- [ ] Anthropic auth via Workload Identity Federation: federation rule trusting the GitHub Actions OIDC issuer for this repo, `ANTHROPIC_FEDERATION_RULE_ID` / `ANTHROPIC_ORGANIZATION_ID` / `ANTHROPIC_SERVICE_ACCOUNT_ID` / `ANTHROPIC_IDENTITY_TOKEN_FILE` set in the workflow. No API key.
-- [ ] GitHub App private key is the one static secret left. Store it as an Actions secret, note it on the "our own tax" page, and open an issue asking GitHub for federated app auth.
-- [ ] It opens PRs with evidence diffs and a proposed grade. It never merges. Ever.
+- [x] Runs from this repo's `patrol` workflow on the job's `GITHUB_TOKEN`. No GitHub App, no private key.
+- [x] Anthropic auth via Workload Identity Federation, pinned to this repo's `main` branch. No API key.
+- [x] Opens a Notice of Assessment per grade change, one receipts refresh PR per patrol, and one issue per docs host that keeps blocking it. It never merges. Ever.
+- [x] rotate.fail renders `patrol.json` from the `sisyphus-state` branch.
 
 ## 6. Policy pages (plain English, short)
 

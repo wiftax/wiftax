@@ -1,6 +1,51 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>rotate.fail</title><meta name="description" content="Home of Sisyphus, the crawler that re-reads vendor auth docs for wif.tax and opens Notices of Assessment.">
-<style>:root{--bg:#fbfaf7;--fg:#1a1a1a;--muted:#6b6b6b;--accent:#0b5fff}@media(prefers-color-scheme:dark){:root{--bg:#111214;--fg:#ececec;--muted:#9a9a9a;--accent:#6ea0ff}}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.6 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;padding:16px}main{max-width:52ch}h1{font-family:ui-monospace,Menlo,monospace;font-size:1.4rem;margin:0 0 12px}p{margin:0 0 12px;color:var(--muted)}a{color:var(--accent);text-decoration:none}pre{font-size:.85rem;color:var(--fg);white-space:pre-wrap}</style></head>
-<body><main><h1>rotate.fail</h1><p>This is where Sisyphus lives. Sisyphus reads vendor authentication docs, forever, and files a <em>Notice of Assessment</em> with <a href="https://wif.tax">wif.tax</a> whenever a receipt changes.</p><p>He does not merge. A human reads the receipts first.</p><pre>$ sisyphus check
- fetching 1622 receipts across 111 products
- drift: 0
- keys rotated: all of them, again</pre><p><a href="https://github.com/wiftax/sisyphus">Source</a> · <a href="https://wif.tax/our-own-tax/">Our own tax</a></p></main></body></html>
+<style>:root{--bg:#fbfaf7;--fg:#1a1a1a;--muted:#6b6b6b;--accent:#0b5fff;--warn:#b54708}@media(prefers-color-scheme:dark){:root{--bg:#111214;--fg:#ececec;--muted:#9a9a9a;--accent:#6ea0ff;--warn:#f0a050}}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.6 system-ui,sans-serif;display:grid;place-items:center;grid-template-columns:minmax(0,60ch);justify-content:center;min-height:100vh;padding:16px;box-sizing:border-box}main{width:100%;min-width:0}h1{font-family:ui-monospace,Menlo,monospace;font-size:1.4rem;margin:0 0 12px}h2{font-family:ui-monospace,Menlo,monospace;font-size:.9rem;font-weight:600;margin:24px 0 6px}p{margin:0 0 12px;color:var(--muted)}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}pre{font:.85rem/1.5 ui-monospace,Menlo,monospace;color:var(--fg);white-space:pre-wrap;overflow-wrap:anywhere}ul{list-style:none;margin:0;padding:0;font:.85rem/1.6 ui-monospace,Menlo,monospace}li{display:flex;flex-wrap:wrap;column-gap:12px;justify-content:space-between;margin-bottom:2px}li>:first-child{overflow-wrap:anywhere}li span:last-child{color:var(--muted)}.warn{color:var(--warn)}[hidden]{display:none}</style></head>
+<body><main><h1>rotate.fail</h1><p>This is where Sisyphus lives. Sisyphus reads vendor authentication docs, forever, and files a <em>Notice of Assessment</em> with <a href="https://wif.tax">wif.tax</a> whenever a receipt changes.</p><p>He does not merge. A human reads the receipts first.</p>
+<pre id="term">$ sisyphus check</pre>
+<section id="notices" hidden><h2>Open pull requests</h2><ul></ul></section>
+<section id="hosts" hidden><h2>Unreachable hosts</h2><ul></ul></section>
+<p style="margin-top:24px"><a href="https://github.com/wiftax/sisyphus">Source</a> · <a href="https://github.com/wiftax/wiftax/tree/sisyphus-state">State</a> · <a href="https://wif.tax/our-own-tax/">Our own tax</a></p></main>
+<script>
+(async () => {
+  const term = document.getElementById("term");
+  const line = (s, cls) => { const span = document.createElement("span"); span.textContent = "\n " + s; if (cls) span.className = cls; term.append(span); };
+  let r;
+  try {
+    const res = await fetch("https://raw.githubusercontent.com/wiftax/wiftax/sisyphus-state/patrol.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error(res.status);
+    r = await res.json();
+  } catch {
+    line("no patrol report yet");
+    return;
+  }
+  const n = (x) => Number(x).toLocaleString("en-US");
+  const mins = Math.max(1, Math.round(r.duration_s / 60));
+  line(`patrol ${r.date}, ${mins} minutes`);
+  line(`fetching ${n(r.urls)} pages cited by ${n(r.cards)} products`);
+  line(`receipts found verbatim: ${n(r.receipts_found)} of ${n(r.receipts)}`);
+  line(`drift: ${n(r.drift.cards)} product${r.drift.cards === 1 ? "" : "s"}`, r.drift.cards ? "warn" : "");
+  if (r.unreachable.urls) line(`unreachable: ${n(r.unreachable.urls)} pages on ${n(r.unreachable.hosts.length)} host${r.unreachable.hosts.length === 1 ? "" : "s"}`, "warn");
+  if (r.notices.length) line(`notices filed: ${r.notices.length}`);
+  if (r.refresh && r.refresh.cards.length) line(`receipts refreshed: ${r.refresh.cards.length} products`);
+  line("keys rotated: all of them, again");
+
+  const fill = (id, rows) => {
+    if (!rows.length) return;
+    const sec = document.getElementById(id);
+    const ul = sec.querySelector("ul");
+    for (const [label, href, meta] of rows) {
+      const li = document.createElement("li");
+      const a = document.createElement(href ? "a" : "span");
+      if (href) a.href = href;
+      a.textContent = label;
+      const m = document.createElement("span");
+      m.textContent = meta;
+      li.append(a, m);
+      ul.append(li);
+    }
+    sec.hidden = false;
+  };
+  fill("notices", (r.open_prs || []).map((p) => [p.title, p.url, `#${p.number}`]));
+  fill("hosts", r.unreachable.hosts.slice(0, 12).map((h) => [h.host, null, `${h.urls} page${h.urls === 1 ? "" : "s"}, ${h.failure}, ${h.max_streak} patrol${h.max_streak === 1 ? "" : "s"}`]));
+})();
+</script></body></html>

@@ -21,6 +21,10 @@ on:
         description: "Report drift only; skip the model."
         type: boolean
         default: false
+      max_notices:
+        description: "Most Notices of Assessment to open this patrol. Receipt-only changes go in one refresh PR regardless."
+        required: false
+        default: "10"
 
 # One patrol at a time. A second trigger waits rather than racing the state commit.
 concurrency:
@@ -33,10 +37,11 @@ jobs:
   patrol:
     if: github.repository == 'wiftax/wiftax'
     runs-on: ubuntu-latest
+    timeout-minutes: 300
     permissions:
       contents: write # push sisyphus/* branches and the sisyphus-state branch (main is protected by ruleset)
-      pull-requests: write # open Notices of Assessment
-      issues: write # open an issue when a proposal fails validation twice; create labels
+      pull-requests: write # open Notices of Assessment and the receipts refresh; close a superseded refresh
+      issues: write # proposals that fail validation twice, hosts that block the crawler; create labels
       actions: write # start the required "check" workflow on each sisyphus/* branch
       id-token: write # GitHub OIDC token, exchanged for an Anthropic access token (WIF)
     env:
@@ -47,6 +52,11 @@ jobs:
       ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
       WIFTAX_DIR: ${{ github.workspace }}/wiftax
       STATE_DIR: ${{ github.workspace }}/state
+      # Inputs reach shell steps through env, never by interpolation.
+      IN_CARD: ${{ github.event.inputs.card }}
+      IN_DRY_RUN: ${{ github.event.inputs.dry_run }}
+      IN_NO_LLM: ${{ github.event.inputs.no_llm }}
+      IN_MAX_NOTICES: ${{ github.event.inputs.max_notices }}
     steps:
       - name: Checkout sisyphus
         uses: actions/checkout@v5
@@ -100,7 +110,7 @@ jobs:
         run: |
           node -e '
             const Anthropic = require("@anthropic-ai/sdk").default;
-            new Anthropic().messages.countTokens({ model: "claude-opus-5", messages: [{ role: "user", content: "sisyphus auth check" }] })
+            new Anthropic().messages.countTokens({ model: "claude-opus-5-5", messages: [{ role: "user", content: "sisyphus auth check" }] })
               .then(r => console.log("WIF exchange OK; count_tokens ->", r.input_tokens, "input tokens"))
               .catch(e => { console.error("WIF exchange FAILED:", e.status ?? "", e.message); process.exit(1); });
           '
@@ -110,14 +120,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           SISYPHUS_CHECK_WORKFLOW: check.yml
-          SISYPHUS_CARD: ${{ github.event.inputs.card }}
         run: |
           set -o pipefail
-          ARGS="--data $WIFTAX_DIR --state $STATE_DIR"
-          if [ -n "$SISYPHUS_CARD" ]; then ARGS="$ARGS --card $SISYPHUS_CARD"; fi
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
-          if [ "${{ github.event.inputs.no_llm }}" = "true" ]; then ARGS="$ARGS --no-llm"; fi
-          npx tsx src/cli.ts check $ARGS
+          ARGS=(--data "$WIFTAX_DIR" --state "$STATE_DIR" --max-notices "${IN_MAX_NOTICES:-10}")
+          if [ -n "$IN_CARD" ]; then ARGS+=(--card "$IN_CARD"); fi
+          if [ "$IN_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          if [ "$IN_NO_LLM" = "true" ]; then ARGS+=(--no-llm); fi
+          npx tsx src/cli.ts check "${ARGS[@]}"
 
       - name: Remove identity token
         if: always()
@@ -131,8 +140,10 @@ jobs:
           path: sisyphus/out/
           if-no-files-found: ignore
 
+      # Always, even when the patrol step failed: hashes, failure streaks and
+      # patrol.json (which rotate.fail renders) must survive a bad card.
       - name: Commit state
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: ${{ always() && github.event.inputs.dry_run != 'true' }}
         working-directory: state
         run: |
           git config user.name "github-actions[bot]"
@@ -142,5 +153,5 @@ jobs:
             echo "state unchanged"
             exit 0
           fi
-          git commit -m "state: patrol $(date -u +%Y-%m-%d)"
+          git commit -q -m "state: patrol $(date -u +%Y-%m-%d)"
           git push origin HEAD:sisyphus-state

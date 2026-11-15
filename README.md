@@ -38,9 +38,7 @@ scripts/render.mjs           SCOREBOARD.md
 - A single headline number, like sso.tax's percentage. Candidates: "years since a
   direct competitor shipped federation", or estimated rotation hours per year. Both
   feel made up. Suggestions welcome in issues.
-- Sisyphus, the crawler that re-reads vendor docs and opens PRs when a grade should
-  change. Not built yet. It will never merge its own PRs.
 
 ## Domains
 
-wif.tax (the list) · rotate.fail (tooling, eventually Sisyphus) · wiftax.org (redirect)
+wif.tax (the list) · rotate.fail ([Sisyphus](https://github.com/wiftax/sisyphus), the crawler that re-reads every receipt weekly) · wiftax.org (redirect)
