@@ -40,29 +40,29 @@ surfaces:
         checked_by: tehreet
         quote: "Accepts project API keys and user session JWTs."
       - url: https://docs.together.ai/docs/gpu-clusters-api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The cURL and Python examples on this page authenticate with the `TOGETHER_API_KEY` environment variable."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Scripts and CI jobs can't log in with a browser, so authenticate with the TOGETHER_API_KEY environment variable instead of running tg login."
       - url: https://docs.together.ai/docs/gpu-clusters-api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}"
       - url: https://docs.together.ai/reference/cli/jig.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Push the built image to Together's registry at `registry.together.xyz`."
       - url: https://docs.together.ai/docs/cluster-oidc.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "External OpenID Connect (OIDC) lets each team member authenticate to a GPU cluster's Kubernetes API using their own identity from your organization's identity provider (IdP), such as Google, Okta, Auth0, or Microsoft Entra ID."
       - url: https://docs.together.ai/docs/cluster-oidc.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The plugin opens the user's default browser and redirects to the IdP's authorization endpoint with a PKCE challenge."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The plugin opens the user's default browser and redirects to the IdP's authorization endpoint with a Proof Key for Code Exchange (PKCE) challenge."
       - url: https://docs.together.ai/docs/gpu-clusters-management.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "When OIDC is enabled, editors use the OIDC kubeconfig for day-to-day `kubectl` access, and project admins keep the admin kubeconfig for administrative tasks such as RBAC setup."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "To give editors kubectl access, enable OIDC on the cluster and have a project admin share the OIDC kubeconfig with them."
     notes: >-
       Graded on the weakest path a workload must use. Every control-plane and inference call takes a
       project key, and Together's GitHub Actions example stores one as a secret. The API spec
@@ -73,21 +73,25 @@ surfaces:
   outbound:
     grade: B
     mechanism: >-
-      S3 imports take a presigned URL you mint, so no credential changes hands. Hugging Face takes a
-      pasted token, and W&B logging a pasted API key.
+      S3, Google Cloud Storage and R2 imports take a presigned URL you mint, so no credential
+      changes hands. Hugging Face takes a pasted token, and W&B logging a pasted API key.
     evidence:
       - url: https://docs.together.ai/docs/dedicated-endpoints/custom-models.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "For S3, pass the presigned archive URL as `--from` (no token needed):"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "A presigned URL needs no token:"
       - url: https://docs.together.ai/docs/dedicated-endpoints/custom-models.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "A presigned https:// URL on Amazon S3, Google Cloud Storage, or Cloudflare R2."
+      - url: https://docs.together.ai/docs/dedicated-endpoints/custom-models.md
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The presigned URL must point to the archive file in S3 and have an expiration of at least 100 minutes."
       - url: https://docs.together.ai/docs/dedicated-endpoints/adapter.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Pass the source URL as `--from` (use `--token` for gated or private Hugging Face repos)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "For a gated or private Hugging Face repo, also pass a Hugging Face token with --token."
       - url: https://docs.together.ai/reference/dmi/model-uploads-create.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -109,11 +113,12 @@ surfaces:
         checked_by: tehreet
         quote: "Together creates the key in your organization's default project and sets it as the `TOGETHER_API_KEY` environment variable in the Vercel project."
     notes: >-
-      Judgment call: S3 counts as keyless because Together never holds an AWS credential, only a URL
-      you sign. There is no IAM role, GCS or Azure path. Hugging Face and W&B tokens come with only
-      a read-access hint and no rotation guidance, which caps outbound at B. The Vercel integration
-      pushes a Together key into Vercel, so Together holds no secret. Hugging Face OAuth and a W&B
-      alternative would make it A. If presigned URLs do not count as keyless, this is D or F.
+      Judgment call: presigned URLs on S3, Google Cloud Storage and R2 count as keyless because
+      Together never holds a cloud credential, only a URL you sign. There is no IAM role or Azure
+      path. Hugging Face and W&B tokens come with only a read-access hint and no rotation guidance,
+      which caps outbound at B. The Vercel integration pushes a Together key into Vercel, so
+      Together holds no secret. Hugging Face OAuth and a W&B alternative would make it A. If
+      presigned URLs do not count as keyless, this is D or F.
 
 hygiene:
   expiry:

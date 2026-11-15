@@ -98,9 +98,9 @@ hygiene:
     pass: false
     evidence:
       - url: https://pushsecurity.com/help/audience/engineering/_bundle/rest-v1.yaml?download
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "To create or manage your API keys, go to the [Settings](https://console.pushsecurity.com/app/settings/api-keys) page in the Push admin console."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "To create or manage your API keys, go to the Settings page in the Push admin console."
     notes: >-
       The API has no key endpoints. Keys are created and revoked only in the console.
   scoping:

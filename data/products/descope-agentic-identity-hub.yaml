@@ -22,17 +22,17 @@ surfaces:
       SDKs, CLI and Terraform provider.
     evidence:
       - url: https://docs.descope.com/management
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Use a management key with your [Project ID](/management/project-settings#general) to call the management SDK or [API](/api/management/users)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Use a management key with your Project ID to call the management SDK or API."
       - url: https://docs.descope.com/management
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "A management key works until it expires or is deactivated."
       - url: https://raw.githubusercontent.com/descope/terraform-provider-descope/main/docs/index.md
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "The provider authenticates with the Descope API using a management key. You can create management keys in the [Company Settings](https://app.descope.com/settings/company) section of the Descope console."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The provider authenticates with the Descope API using a management key. You can create management keys in the Company Settings section of the Descope console."
       - url: https://docs.descope.com/managing-environments/manage-envs-in-github
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -104,8 +104,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.descope.com/management
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "When you create a key, you set a name and an expiration (30, 60, or 90 days, or never)."
       - url: https://docs.descope.com/management/company-settings/mgmt-keys-sdks
         checked_on: 2026-10-13
@@ -126,9 +126,9 @@ hygiene:
         checked_by: tehreet
         quote: "You can use the Descope management SDK to create, update, delete, load, or search Management Keys."
       - url: https://docs.descope.com/management
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "The three-dot menu on an active key offers **Edit**, **Rotate**, **Deactivate**, and **Delete**, the same actions as [access keys](/management/m2m-access-keys)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The three-dot menu on an active key offers Edit, Rotate, Deactivate, and Delete, the same actions as access keys."
     notes: >-
       Keys can be created and deleted through the API and Terraform. The in-place Rotate button is
       console only.
@@ -136,12 +136,12 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.descope.com/management
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "This section defines what roles the management key has. You can choose whether these roles are defined on a company level, for specific projects or for Descopers for SCIM only usage."
       - url: https://docs.descope.com/management
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Each management key can include a list of permitted IPs. When that list is set, the key only works from those originating addresses."
     notes: >-
       Keys are their own principal, with company, project or tag-level roles and IP allowlists.

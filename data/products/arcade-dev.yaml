@@ -8,9 +8,10 @@ docs: https://docs.arcade.dev/en/get-started/setup/api-keys
 category: identity
 status: listed
 summary: >-
-  To call the Arcade Engine, your agent needs a static project API key with full admin rights. When
-  Arcade acts for your users, its own OAuth apps for Google and Microsoft need no secret from you.
-  GitHub, Slack, Salesforce, Okta and API-key toolkits do.
+  To call the Arcade Engine, your agent needs a static project API key. A key can now be limited to
+  calling tools, but it is still a long-lived secret. When Arcade acts for your users, its own OAuth
+  apps for Google and Microsoft need no secret from you. GitHub, Slack, Salesforce, Okta and API-key
+  toolkits do.
 
 surfaces:
   inbound:
@@ -21,12 +22,12 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "API keys are administrator credentials. Anyone who has your API key can make requests to Arcade as you."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Anyone who has your API key can make requests to Arcade with its role"
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Copy your API key immediately. It only shows once."
       - url: https://api.arcade.dev/v1/swagger
         checked_on: 2026-10-13
@@ -87,9 +88,9 @@ surfaces:
         checked_by: tehreet
         quote: "An Okta API token has the same permissions as the administrator who creates it. Create the token from an account whose administrator role can read users and groups, such as a service account with the Read-Only Administrator role."
       - url: https://docs.arcade.dev/en/resources/integrations/development/datadog
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "DATADOG_API_KEY — A Datadog API key that authenticates requests to the Datadog API."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "DATADOG_API_KEY — A Datadog API key that authenticates the request."
     notes: >-
       Arcade mostly stores per-user OAuth tokens rather than holding a tenant-wide connection.
       Google and Microsoft work keyless through Arcade's default apps, though Arcade recommends your
@@ -103,12 +104,12 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.arcade.dev/en/references/changelog
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Add Dashboard support for expiring API keys"
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "You can always generate new keys if needed"
     notes: >-
       A January 2026 changelog adds optional expiry in the dashboard. The API key guide does not
@@ -121,28 +122,28 @@ hygiene:
         checked_by: tehreet
         quote: "Reference Documentation for Arcade Engine API"
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Click the Create API Key button in the top right"
     notes: >-
       The public Engine API has no endpoints to create or revoke API keys. Keys come from the
       dashboard or `arcade login`, and the self-hosted Coordinator publishes no key API either.
   scoping:
-    pass: false
+    pass: true
     evidence:
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "API keys are administrator credentials. Anyone who has your API key can make requests to Arcade as you."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Under Access, turn on Call tools so your app or agent can call tools with the key, and turn off Configure the project unless the key also needs to manage the project."
     notes: >-
-      A project key is limited to one project, but has full rights inside it. Roles control which
-      humans can create keys, not what a key can do.
+      A project key is limited to one project. A key can also be limited to calling tools, with no
+      right to configure the project. The access is fixed when the key is created.
   last_used:
     pass: false
     evidence:
       - url: https://docs.arcade.dev/en/get-started/setup/api-keys
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Enter a descriptive name to help identify your key"
     notes: >-
       No last-used timestamp for API keys is documented. The "Last accessed" time in the CLI applies
@@ -158,5 +159,6 @@ hygiene:
 
 notes: >-
   Covers Arcade Cloud and the self-hosted engine. Arcade is a vault for end-user OAuth tokens, but
-  the key that unlocks it is a static, unscoped project key. The grade moves if the Engine accepts a
-  federated workload token, or adds enforced expiry, scoped keys and a key API.
+  the key that unlocks it is a static project key. Keys can be limited to calling tools, but they
+  have no enforced expiry. The grade moves if the Engine accepts a federated workload token, or if
+  two more hygiene checks pass, such as enforced expiry and a key API.

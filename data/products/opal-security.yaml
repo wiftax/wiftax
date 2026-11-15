@@ -21,13 +21,13 @@ surfaces:
       token scoped by Opal roles. The REST API has no federation.
     evidence:
       - url: https://docs.opal.dev/reference/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "When making requests to the Opal API, you must pass an authentication bearer token in the header to identify yourself as an authorized user."
       - url: https://docs.opal.dev/reference/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "API keys for service users can be created under the API Keys tab and can be set to expire. A maximum of 2 API Keys can be created for a service user."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "API keys for automations can be created under the API Keys tab and can be set to expire. A maximum of 2 API Keys can be created for an automation."
       - url: https://raw.githubusercontent.com/opalsecurity/terraform-provider-opal/main/docs/index.md
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -114,21 +114,21 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.opal.dev/api-reference/tokens/create-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Optional expiration time for the token."
       - url: https://docs.opal.dev/reference/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "API keys for service users can be created under the API Keys tab and can be set to expire."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "API keys for automations can be created under the API Keys tab and can be set to expire."
     notes: >-
       Expiry is optional, and no org setting forces a maximum token lifetime.
   rotation_api:
     pass: true
     evidence:
       - url: https://docs.opal.dev/api-reference/tokens/create-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Set `user_id` to a service user's ID to mint a token that authenticates as that service user."
       - url: https://docs.opal.dev/api-reference/tokens/delete-token
         checked_on: 2026-10-13
@@ -141,22 +141,22 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.opal.dev/reference/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Service users have their own identity in Opal and can be assigned Opal roles to scope their permissions."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Automations have their own identity in Opal and can be assigned Opal roles to scope their permissions."
       - url: https://docs.opal.dev/reference/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Read-only tokens can only perform GET requests, limited to resources you have permission to view."
     notes: >-
-      Service users are machine identities with their own roles. Personal tokens inherit their
-      creator's permissions.
+      Service users are machine identities with their own roles. The authentication page now calls
+      them automations. Personal tokens inherit their creator's permissions.
   last_used:
     pass: true
     evidence:
       - url: https://docs.opal.dev/api-reference/tokens/create-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The date and time the token was last used."
     notes: >-
       Tokens from the API include a last-used timestamp.

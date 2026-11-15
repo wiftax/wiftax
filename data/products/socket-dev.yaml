@@ -28,9 +28,9 @@ surfaces:
         checked_by: tehreet
         quote: "Authenticating requests to the Socket API can be done by passing the API token as a Bearer token in the `Authorization` header, or as the username field of an HTTP Basic authentication header."
       - url: https://docs.socket.dev/docs/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "API tokens are required to use the [Socket CLI](https://docs.socket.dev/docs/socket-cli) or [Socket REST API](https://docs.socket.dev/reference/)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "API tokens are required to use the Socket CLI or Socket REST API."
       - url: https://docs.socket.dev/docs/create-socket-api-key-for-cicd.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -72,9 +72,9 @@ surfaces:
       clients for Linear and Vanta. You hand over no key or secret.
     evidence:
       - url: https://docs.socket.dev/docs/socket-for-github-installation.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Install the [Socket Security App](https://github.com/apps/socket-security) from the GitHub Marketplace by visiting: [github.com/apps/socket-security](https://github.com/apps/socket-security)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Install the Socket Security App from the GitHub Marketplace by visiting: github.com/apps/socket-security."
       - url: https://docs.socket.dev/docs/permissions.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -100,9 +100,9 @@ surfaces:
         checked_by: tehreet
         quote: "Upon completion, Socket will store a refresh token in your organization settings for ongoing communication with Vanta."
       - url: https://docs.socket.dev/docs/socket-for-origin.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In Origin, open the **App Marketplace**, select **Socket**, and install it on the repositories you want to scan."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Install Socket for Origin from the Origin App Marketplace and connect it to your Socket organization."
       - url: https://docs.socket.dev/docs/slack-alerts.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -137,8 +137,8 @@ hygiene:
         checked_by: tehreet
         quote: "Maximum number of API calls allowed per month"
       - url: https://docs.socket.dev/docs/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Ensure your API tokens are stored securely and rotate them if you have concerns about their usage."
     notes: >-
       Tokens have no expiry field, only a monthly call quota. A token lives until someone revokes
@@ -165,8 +165,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.socket.dev/docs/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "API Tokens can individually manage the capabilities they can use in our API."
       - url: https://docs.socket.dev/reference/creating-and-managing-api-tokens.md
         checked_on: 2026-10-22
@@ -183,8 +183,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.socket.dev/docs/api-keys.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Audits of last usage and remaining quota are available on the dashboard."
       - url: https://docs.socket.dev/reference/getapitokens.md
         checked_on: 2026-10-22

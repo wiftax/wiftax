@@ -50,9 +50,9 @@ surfaces:
         checked_by: tehreet
         quote: "**Non-Interactive Access:** API Keys"
       - url: https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/insight-point.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "**Early Access**: OAuth2 client credentials provisioning for Insight Points is available on an Early Access basis."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "New Insight Points authenticate with OAuth2 client credentials. Existing Insight Points configured with a registration key continue to work without changes."
     notes: >-
       Graded on the weakest path a workload must use, as on the precedent cards. OAuth2 Client
       scopes do not cover access reviews, Lifecycle Management, user and team management, key

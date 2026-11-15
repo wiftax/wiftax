@@ -19,16 +19,16 @@ surfaces:
     tier_gated: Team or Enterprise (Web API access)
     evidence:
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "An access token is a secure credential used to authorize requests to Semgrep AppSec Platform or the Semgrep API without a username and password."
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "API tokens can be created by admins and are used for calls to the Semgrep API and to set up third-party integrations."
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "These tokens authenticate agents running automated scans."
       - url: https://semgrep.dev/docs/semgrep-ci/ci-environment-variables
         checked_on: 2026-10-22
@@ -68,16 +68,16 @@ surfaces:
       tokens.
     evidence:
       - url: https://docs.semgrep.dev/deployment/connect-scm.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "You can connect to GitHub with Semgrep's GitHub App, or with a personal access token."
       - url: https://docs.semgrep.dev/deployment/prepare/scm-permissions.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "During the connection process, your organization creates a private GitHub App from Semgrep's template, named"
       - url: https://docs.semgrep.dev/deployment/connect-scm.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "You do not need to create an app or provide credentials."
       - url: https://docs.semgrep.dev/kb/semgrep-supply-chain/connect-aws-codeartifact.md
         checked_on: 2026-10-22
@@ -92,9 +92,9 @@ surfaces:
         checked_by: tehreet
         quote: "You must provide a GitLab group access token or personal access token to Semgrep."
       - url: https://docs.semgrep.dev/deployment/connect-scm.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Your **Access token**. Semgrep requires a [workspace-level access token](https://support.atlassian.com/bitbucket-cloud/docs/create-a-workspace-access-token/), which is only available on **Bitbucket Cloud Premium**."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Your Access token. Semgrep requires a workspace-level access token, which is only available on Bitbucket Cloud Premium."
       - url: https://docs.semgrep.dev/deployment/managed-scanning/bitbucket.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -112,9 +112,9 @@ surfaces:
         checked_by: tehreet
         quote: "**Username and password**: provide the required **Username** and **Password**."
       - url: https://docs.semgrep.dev/semgrep-appsec-platform/wiz.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You can obtain the **API Endpoint URL** and the **Authentication URL** from Wiz in [Tenant Info](https://app.wiz.io/tenant-info/general), while Wiz provides the **Client ID** and **Client Secret** when you set up a service account."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "You can obtain the API Endpoint URL and the Authentication URL from Wiz in Tenant Info, while Wiz provides the Client ID and Client Secret when you set up a service account."
       - url: https://docs.semgrep.dev/public_v2.openapi.yaml
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -133,8 +133,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "However, they remain valid until manually revoked, even if the creator is no longer associated with the deployment."
     notes: >-
       Creating a token sets only scope and name, with no expiry or org policy. A token minted today
@@ -151,9 +151,9 @@ hygiene:
         checked_by: tehreet
         quote: "Only CLI and API tokens can be bulk-deleted through this RPC, so"
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Go to [**Settings > Tokens > API tokens**](https://semgrep.dev/orgs/-/settings/tokens/api)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Go to Settings > Tokens > API tokens."
     notes: >-
       Tokens are created and revoked in the web app. The only API is an experimental bulk delete of
       every token with one role. Nothing can create or revoke a single token.
@@ -161,8 +161,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Scopes are mutually exclusive."
       - url: https://docs.semgrep.dev/kb/semgrep-appsec-platform/api-404-token-scope.md
         checked_on: 2026-10-22
@@ -179,8 +179,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.semgrep.dev/deployment/tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Each token type has its own page that lists all existing tokens of that type."
     notes: >-
       No last-used time is documented in the token pages or API specs.

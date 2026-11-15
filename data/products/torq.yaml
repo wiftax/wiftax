@@ -34,8 +34,8 @@ surfaces:
         checked_by: tehreet
         quote: "The Torq REST API allows you to programmatically manage resources such as workflows, users, and secrets from outside the Torq platform."
       - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "To incorporate Torq vendor steps in your workflows or use the Torq API, you must first create a Torq integration instance or generate a bearer token. This process requires API key credentials: a client ID and a client secret."
       - url: https://kb.torq.io/en/articles/14498016-torq-api-key-rotation-full-replacement-vs-expiration-update.md
         checked_on: 2026-10-22
@@ -115,13 +115,13 @@ hygiene:
     pass: true
     evidence:
       - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "New API keys require an expiration date at the time of creation."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "New API keys require an expiration date at creation."
       - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "If any keys were previously generated without one, they will remain valid and their expiration date will be listed as"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Keys generated without one remain valid, and their expiration date is listed as Never."
       - url: https://learn.torq.io/apidocs/list-api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -152,17 +152,17 @@ hygiene:
     pass: true
     evidence:
       - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "However, they are more secure and efficient as they are not associated with any individual user."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "They are more secure and efficient because they are not associated with any individual user."
       - url: https://kb.torq.io/en/articles/9145806-torq-roles-and-scopes-manage-access-and-permissions.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "When you build a custom role or a least-privilege service API key, use this table to find the scope behind a specific action."
       - url: https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Users own the private API keys they create."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Users own the personal access keys they create."
     notes: >-
       Service API keys are machine identities with preset or custom roles, limited to chosen
       workspaces. Personal keys act as their owner.

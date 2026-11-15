@@ -24,33 +24,33 @@ surfaces:
       Hosted Platinum / Enterprise. Not available on Serverless.
     evidence:
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Elasticsearch can be configured to trust JSON Web Tokens (JWTs) issued from an external service as bearer tokens for authentication."
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "access_token : An application accesses Elasticsearch using its own identity, encoded as a JWT, e.g. The application authenticates itself to a central identity platform using an OAuth2 Client Credentials Flow and then uses the resulting JWT-based access token to connect to Elasticsearch."
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "At least one of the allowed_subjects or allowed_subject_patterns settings must be specified (and be non-empty) when token_type is access_token ."
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "required_claims Specifies a list of key/value pairs for additional verifications to be performed against a JWT."
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The file name or URL to a JSON Web Key Set (JWKS) with the public key material that the JWT Realm uses for verifying token signatures."
       - url: https://www.elastic.co/docs/reference/elasticsearch/configuration-reference/security-settings
         checked_on: 2026-10-14
         checked_by: tehreet
         quote: "Specifies whether to use shared_secret or none to authenticate incoming client requests."
       - url: https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt
-        checked_on: 2026-10-14
-        checked_by: tehreet
-        quote: "In Elastic Cloud, the realm order starts at 2 . 0 and 1 are reserved in the realm chain on Elastic Cloud."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "In Elastic Cloud, you define settings for the Elasticsearch keystore under Security in your deployment."
       - url: https://www.elastic.co/subscriptions
         checked_on: 2026-10-14
         checked_by: tehreet
@@ -127,9 +127,9 @@ hygiene:
         checked_by: tehreet
         quote: "NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys."
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elasticsearch-api-keys
-        checked_on: 2026-10-14
-        checked_by: tehreet
-        quote: "Optionally, set an expiry date. By default the API key will not expire, but it's a good security practice to give the key a limited lifespan."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Optionally, set an expiry date. By default the API key does not expire, but it's a good security practice to give the key a limited lifespan."
     notes: >-
       Expiry is optional and no setting can cap or force it. The API defaults to never, and only
       Kibana's quick-create defaults to 90 days. Service account tokens cannot expire at all.
@@ -168,8 +168,8 @@ hygiene:
         checked_by: tehreet
         quote: "Creation time for the API key in milliseconds."
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elasticsearch-api-keys
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The API Keys management page in Kibana lists your API keys, including the name, date created, and status."
     notes: >-
       The API key record has no last-used field. Usage can only be rebuilt from audit logs.

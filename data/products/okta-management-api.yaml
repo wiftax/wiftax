@@ -57,9 +57,9 @@ surfaces:
         checked_by: tehreet
         quote: "You can perform token exchange within a single authorization server or between other authorization servers under the same Okta tenant."
       - url: https://developer.okta.com/docs/guides/ai-agent-token-exchange/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Custom scopes defined in your Okta custom authorization server for each resource app where you're requesting access."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "If you're connecting to an Okta custom authorization server, define the custom scopes for each resource app where you're requesting access."
       - url: https://raw.githubusercontent.com/okta/terraform-provider-okta/master/docs/index.md
         checked_on: 2026-10-22
         checked_by: tehreet

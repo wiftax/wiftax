@@ -41,11 +41,9 @@ surfaces:
         checked_by: tehreet
         quote: Use the token to grant `doctl` access to your DigitalOcean account.
       - url: https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: >-
-          you can simulate what `doctl registries login` does with `docker login` by using your
-          registered email as the username (`-u`) and API token string as password (`-p`)
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "you can simulate what doctl registries login does with docker login by using the API token as both the username (-u) and the password (-p)"
       - url: https://docs.digitalocean.com/products/spaces/how-to/manage-access/
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -91,20 +89,18 @@ surfaces:
           If you have not previously created an app on App Platform, the repository service may
           prompt you to provide DigitalOcean with read permissions to your account.
       - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: >-
           click **Connect account** to first log in to your Dropbox account and authorize the
           connection.
       - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: >-
-          In the [**Access Key ID**](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
-          field, enter the IAM access key ID for your S3 bucket or folder.
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "In the Access Key ID field, enter the IAM access key ID for your S3 bucket or folder."
       - url: https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: In the **Secret Key** field, enter the secret key associated with your access key ID.
       - url: https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md
         checked_on: 2026-10-22
@@ -189,8 +185,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: >-
           Personal access tokens table showing token name, number of scopes, creation time, last
           used status, and expiration date.
