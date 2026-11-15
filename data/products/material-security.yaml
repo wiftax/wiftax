@@ -7,9 +7,10 @@ docs: https://docs.material.security/reference/api-v1/authentication
 category: security
 status: listed
 summary: >-
-  Your code calls Material's API with a static per-account token, with no documented expiry, last
-  use, token API or leak revocation. Material reaches Google Workspace through domain-wide
-  delegation, but Okta, Duo, OneLogin, Slack and SIEM connectors want a pasted token or secret.
+  Your code calls Material's API with a static per-account token. Tokens can expire under an org
+  policy, but no last use, token API or leak revocation is documented. Material reaches Google
+  Workspace through domain-wide delegation, but Okta, Duo, OneLogin, Slack and SIEM connectors want
+  a pasted token or secret.
 
 surfaces:
   inbound:
@@ -20,16 +21,16 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.material.security/reference/api-v1/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Each API token is tied to a specific account. You can create as many tokens as needed."
       - url: https://docs.material.security/reference/api-v1/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Requests are checked against the account's current permissions, not the permissions it had when the token was created."
       - url: https://docs.material.security/reference/api-v1/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "For production use, we recommend creating a new service account to generate the API token. Once the token is created, you can reset and discard the account's login details."
       - url: https://docs.material.security/reference/material-mcp-server
         checked_on: 2026-10-13
@@ -52,9 +53,9 @@ surfaces:
       destinations take static tokens.
     evidence:
       - url: https://docs.material.security/working-with-issues/explorer/file-search
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "File Search requires (2) additional Google Drive scopes to be granted to Material via domain-wide delegation:"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "File Search needs two additional Google Drive scopes, drive and drive.activity, granted to Material through domain-wide delegation for each Google tenant you want to sync."
       - url: https://docs.material.security/email-protections/email-threats/detections/material-email-threat-detections/calendar-invite-attacks
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -93,26 +94,35 @@ surfaces:
 
 hygiene:
   expiry:
-    pass: false
+    pass: true
     evidence:
       - url: https://docs.material.security/reference/api-v1/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Name the token descriptively, then click Create Token. It's useful to include a use case if you have many tokens stored."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Name the token descriptively, choose how long it lasts from Expires in, then click Create Token."
       - url: https://docs.material.security/reference/material-mcp-server
         checked_on: 2026-10-13
         checked_by: tehreet
         quote: "This path uses an API token instead of OAuth, so storing and rotating it is on you."
+      - url: https://docs.material.security/reference/api-v1/authentication
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Tokens can expire. You choose an expiration when you create a token, and the Expires At column in the tokens list shows when each one ends."
+      - url: https://docs.material.security/reference/api-v1/authentication
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Limit how long API tokens can stay valid, so no token outlasts your security policy."
     notes: >-
-      Token creation takes only a name, with no expiry or org policy. Admins can only turn token
-      creation off entirely.
+      Token creation now asks for an expiry. Admins can set a maximum token lifetime for the whole
+      instance or a shorter one per tenant. The limit can be applied to existing tokens. It does not
+      change MCP connections.
   rotation_api:
     pass: false
     evidence:
       - url: https://docs.material.security/reference/api-v1
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "The Material Security API v1 includes these resources: Issues, Messages, Accounts, Groups, Roles, OAuth Apps, and Trusted Entities."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "The Material Security API v1 includes these resources: Issues, Messages, Accounts, Groups, Roles, Tenants, OAuth Apps, and Trusted Entities."
     notes: >-
       Tokens are managed in the console, and the API has no token endpoints. Rotation needs a
       browser.
@@ -120,8 +130,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.material.security/reference/api-v1/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "For production use, create a dedicated service account for generating API tokens"
       - url: https://docs.material.security/administration/admin-roles/permissions-matrices
         checked_on: 2026-10-13
@@ -135,8 +145,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.material.security/reference/api-v1/authentication
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The Audit Log opens, pre-filtered to this token's events within the last week. Update the filter as needed."
     notes: >-
       No last-used time is documented on tokens. Finding dead ones means checking the audit log per
@@ -152,5 +162,6 @@ hygiene:
 
 notes: >-
   Graded on API v1, shared by all Material products. Auth for single-tenant deployments is not
-  public. Inbound reaches D with expiry, last use and token endpoints, and B or better with any
-  federated machine flow. Outbound reaches A only if Okta and Slack move to vendor-owned apps.
+  public. Inbound reaches D with either a last-used time on tokens or token endpoints in the API. It
+  reaches B or better with any federated machine flow. Outbound reaches A only if Okta and Slack
+  move to vendor-owned apps.

@@ -25,7 +25,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Hyperbolic | [GPU Cloud and Inference API](data/products/hyperbolic.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Island | [Enterprise Browser](data/products/island-enterprise-browser.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Lumos | [Identity Platform](data/products/lumos-identity-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
+| **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Nebius | [Token Factory](data/products/nebius-ai-studio.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Nightfall AI | [DLP](data/products/nightfall-dlp.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Nscale | [Cloud](data/products/nscale.yaml) | 🔴 D | 💀 F | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
@@ -285,7 +285,7 @@ To call the Lumos API, your code holds a static lsk_ token that never expires an
 
 ### 💀 F Material Security Platform
 
-Your code calls Material's API with a static per-account token, with no documented expiry, last use, token API or leak revocation. Material reaches Google Workspace through domain-wide delegation, but Okta, Duo, OneLogin, Slack and SIEM connectors want a pasted token or secret.
+Your code calls Material's API with a static per-account token. Tokens can expire under an org policy, but no last use, token API or leak revocation is documented. Material reaches Google Workspace through domain-wide delegation, but Okta, Duo, OneLogin, Slack and SIEM connectors want a pasted token or secret.
 
 - **Inbound F:** A static API token made in the Material console and tied to one account, carrying that account's role permissions.
 - **Outbound B:** Google Workspace is keyless through domain-wide delegation, and Microsoft 365 uses an in-app enrollment by a Global Administrator. Okta, Duo, OneLogin, Slack, PagerDuty and SIEM destinations take static tokens.
