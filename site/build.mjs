@@ -200,7 +200,7 @@ const mdPage = (slug, title, md, desc) => { mkdirSync(join(out, slug), { recursi
   const v = (f) => createHash("sha256").update(readFileSync(join(root, "site", f))).digest("hex").slice(0, 8);
   const body = policyPage({ md: readFileSync(join(root, "site/policy.md"), "utf8"), icon, badge, esc });
   mkdirSync(join(out, "policy"), { recursive: true });
-  writeFileSync(join(out, "policy", "index.html"), layout({ title: "Disputes and policy — wif.tax", desc: "How to dispute a grade, and what will and will not change one.", path: "/policy/", body, extraHead: `<link rel="stylesheet" href="/rubric.css?v=${v("rubric.css")}"><link rel="stylesheet" href="/policy.css?v=${v("policy.css")}"><script type="module" src="/rubric.js?v=${v("rubric.js")}"></script>` }));
+  writeFileSync(join(out, "policy", "index.html"), layout({ title: "Policy — wif.tax", desc: "How to dispute a grade, and what will and will not change one.", path: "/policy/", body, extraHead: `<link rel="stylesheet" href="/rubric.css?v=${v("rubric.css")}"><link rel="stylesheet" href="/policy.css?v=${v("policy.css")}"><script type="module" src="/rubric.js?v=${v("rubric.js")}"></script>` }));
 }
 mdPage("our-own-tax", "Our own tax", readFileSync(join(root, "site/our-own-tax.md"), "utf8"), "The static credentials wif.tax itself is forced to hold.");
 

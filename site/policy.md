@@ -1,10 +1,10 @@
-# Disputes and policy
+# Policy
 
 A grade is a reading of the vendor's own public documentation against the [rubric](/rubric/). It is not a review of the product, a comment on the people who build it, or legal advice.
 
 Every grade cites the page we read, the date we read it, and the exact sentence. A better receipt changes a grade. Nothing else does.
 
-## Dispute a grade
+## Disputes
 
 Anyone can dispute a grade. You do not have to work for the vendor, and we will not ask.
 
