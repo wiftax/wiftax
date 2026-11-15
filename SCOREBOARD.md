@@ -7,7 +7,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | Grade | Vendor | Product | Inbound | Outbound | Hygiene | Status | Checked |
 |---|---|---|---|---|---|---|---|
 | **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
+| **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
@@ -133,7 +133,7 @@ To call Abnormal's REST API, your code needs a static bearer token made in the p
 
 ### 💀 F Arcade.dev Platform
 
-To call the Arcade Engine, your agent needs a static project API key with full admin rights. When Arcade acts for your users, its own OAuth apps for Google and Microsoft need no secret from you. GitHub, Slack, Salesforce, Okta and API-key toolkits do.
+To call the Arcade Engine, your agent needs a static project API key. A key can now be limited to calling tools, but it is still a long-lived secret. When Arcade acts for your users, its own OAuth apps for Google and Microsoft need no secret from you. GitHub, Slack, Salesforce, Okta and API-key toolkits do.
 
 - **Inbound F:** A static project API key sent as a bearer token to the Engine API. No workload federation or token exchange is documented.
 - **Outbound B:** Per-user OAuth through Arcade's own OAuth apps, and dynamic registration for the AWS MCP Server, need no secret from you. Other connectors need your own app's client secret or a static key.
