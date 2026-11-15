@@ -29,9 +29,9 @@ surfaces:
         checked_by: tehreet
         quote: "The API expects an API Key to be passed via the `Authorization: Bearer <key>` HTTP header."
       - url: https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/install-nightfall-ai-agent-for-windows-os/nightfall-windows-agent-deployment-msi
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "This guide explains multiple ways to deploy the Nightfall Agent (NightfallAgent.msi) with the required API_KEY and COMPANY_ID parameters."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Every installation requires the API_KEY and COMPANY_ID properties, which connect the agent to your Nightfall account, and the REGION property."
     notes: >-
       The console API key is the only documented machine credential. The Windows endpoint agent
       installs with a static API key baked into deployment scripts, so the agent fleet also rests on
@@ -56,20 +56,20 @@ surfaces:
         checked_by: tehreet
         quote: "Nightfall accesses the container with federated identity. No long-lived secrets are exchanged."
       - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Nightfall connects to Google Workspace using a Google service account with Domain-Wide Delegation (DWD) — not an ordinary user OAuth grant."
       - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Nightfall uses that one-time consent to create dedicated Entra ID (Azure AD) app registrations inside your tenant — one per workload you enable (Teams, OneDrive, SharePoint, and exfiltration monitoring if applicable) — each with its own client secret and the Microsoft Graph application permissions it needs."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Nightfall uses that temporary, delegated access to create dedicated Entra ID (Azure AD) app registrations inside your tenant — one per workload you enable (Teams, OneDrive, SharePoint, and exfiltration monitoring if applicable) — each with its own client secret and the Microsoft Graph application permissions it needs."
       - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "All ongoing scanning authenticates with short-lived installation access tokens that Nightfall mints from the app's credentials"
       - url: https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Nightfall for Slack is installed via Slack OAuth. Two tokens are issued and stored:"
       - url: https://help.nightfall.ai/nightfall_settings/directory_sync/okta
         checked_on: 2026-10-13

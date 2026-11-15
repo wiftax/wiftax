@@ -155,9 +155,9 @@ hygiene:
         checked_by: tehreet
         quote: 'mcp.WithDescription("Delete Vision One API Keys")'
       - url: https://pypi.org/pypi/pytmv1/json
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "[Delete API keys](https://automation.trendmicro.com/xdr/api-v3#tag/API-Keys/paths/~1v3.0~1iam~1apiKeys~1delete/post)"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "api_key.delete | Delete API keys"
     notes: >-
       The API can create, list, update and delete keys, so a job can mint a replacement and delete
       the old one.

@@ -64,9 +64,9 @@ surfaces:
         checked_by: tehreet
         quote: "Britive uses the SAML protocol as the authentication mechanism to connect to AWS."
       - url: https://docs.britive.com/docs/configuring-iam-roles
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Only read-only access is needed here as the role is mainly used for scanning in Britive. Hence, write access is not required for the role."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Only read-only access is needed, as the role is mainly used for scanning in Britive. Hence, write access is not required for the role."
       - url: https://docs.britive.com/docs/gcp-workload-identity-pool-and-provider
         checked_on: 2026-10-13
         checked_by: tehreet

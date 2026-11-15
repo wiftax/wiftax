@@ -19,14 +19,12 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: >-
-          API keys let you interact with Paperspace through the Core RESTful API, the Core
-          JavaScript SDK, and Gradient command-line utility (CLI).
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "API keys let you interact with Paperspace through the Paperspace API and the pspace CLI."
       - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: On the API keys tab, enter a name and click the Add button.
       - url: https://docs.digitalocean.com/reference/paperspace/api-reference/authentication/index.html.md
         checked_on: 2026-10-22
@@ -86,8 +84,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: Make sure to copy your new API key now.
     notes: >-
       Creating a key asks only for a name. No expiry, default or policy is documented.
@@ -95,8 +93,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: You can revoke your API keys by clicking revoke in the console.
       - url: https://docs.digitalocean.com/reference/paperspace/api-reference/teams/index.html.md
         checked_on: 2026-10-22
@@ -107,8 +105,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: API Keys have team-scoped permissions and are associated with your user account.
       - url: https://docs.digitalocean.com/products/paperspace/accounts-and-teams/manage-teams/index.html.md
         checked_on: 2026-10-22
@@ -121,8 +119,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
       - url: https://docs.digitalocean.com/reference/paperspace/core/install/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet

@@ -71,16 +71,16 @@ surfaces:
         checked_by: tehreet
         quote: "This works by using an assumable IAM Role with ReadOnly permissions."
       - url: https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You may use [Common Expression Language (CEL) expressions](https://cloud.google.com/iam/docs/workload-identity-federation#mapping) to transform or combine attributes from the token issued by AWS."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "You may use Common Expression Language (CEL) expressions to transform or combine attributes from the token issued by AWS."
       - url: https://docs.panther.com/data-onboarding/data-transports/google/pubsub.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Configure Workload Identity Federation with AWS by following the"
       - url: https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "for the service account, which will be used in Panther to authenticate to the GCP infrastructure."
       - url: https://docs.panther.com/data-onboarding/supported-logs/googleworkspace.md
         checked_on: 2026-10-22

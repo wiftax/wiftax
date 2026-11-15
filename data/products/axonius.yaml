@@ -91,17 +91,17 @@ surfaces:
         checked_by: tehreet
         quote: "AWS Access Key ID (optional) - Provide AWS Access Key ID or choose to use an EC2 instance attached IAM role."
       - url: https://docs.axonius.com/docs/azure-deploying-the-adapter
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Azure Client Secret – Specify a non-expired key generated from the new client secret."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Azure Client Secret (required) – Specify a non-expired key generated from the new client secret."
       - url: https://docs.axonius.com/docs/azure-deploying-the-adapter
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Use this method to run your Axonius instance on Azure virtual machines with managed identities to authenticate without storing client secrets or certificates."
       - url: https://docs.axonius.com/docs/connecting-gcp-in-axonius
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "JSON Key pair for the service account - A JSON-document containing service-account credentials to GCP."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "JSON Key pair for the service account (required) - A JSON-document containing service-account credentials to GCP."
       - url: https://docs.axonius.com/docs/gcp-initial-setup
         checked_on: 2026-10-22
         checked_by: tehreet

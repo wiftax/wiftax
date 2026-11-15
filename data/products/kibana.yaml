@@ -194,9 +194,9 @@ hygiene:
         checked_by: tehreet
         quote: "NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys."
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elasticsearch-api-keys
-        checked_on: 2026-10-14
-        checked_by: tehreet
-        quote: "Optionally, set an expiry date. By default the API key will not expire, but it's a good security practice to give the key a limited lifespan."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Optionally, set an expiry date. By default the API key does not expire, but it's a good security practice to give the key a limited lifespan."
     notes: >-
       Same Elasticsearch API keys as the elasticsearch card. Expiry is optional and no setting
       forces it. Kibana's quick-create gives personal keys 90 days, but the API and main pane
@@ -222,8 +222,8 @@ hygiene:
         checked_by: tehreet
         quote: "If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys."
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elasticsearch-api-keys
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "For a user API key, you can opt to configure access to specific Elasticsearch APIs and resources by assigning the key with predefined roles or custom privileges."
     notes: >-
       A key's role descriptors can limit it to, say, connectors in one space. Without them the key
@@ -236,8 +236,8 @@ hygiene:
         checked_by: tehreet
         quote: "Creation time for the API key in milliseconds."
       - url: https://www.elastic.co/docs/deploy-manage/api-keys/elasticsearch-api-keys
-        checked_on: 2026-10-14
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The API Keys management page in Kibana lists your API keys, including the name, date created, and status."
     notes: >-
       Keys show creation, expiry and invalidation times but no last use. Usage can only be rebuilt

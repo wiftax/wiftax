@@ -8,8 +8,8 @@ category: identity
 status: listed
 summary: >-
   To call the Oleria API, your code trades a static client ID and secret for a one-hour token.
-  Oleria reaches AWS, Microsoft, Google Workspace, GitHub and Salesforce without keys, but GCP,
-  Azure, Okta and Slack want a pasted secret.
+  Oleria reaches AWS, Microsoft, Azure, Google Workspace, GitHub and Salesforce without keys, but
+  GCP, Okta and Slack want a pasted secret.
 
 surfaces:
   inbound:
@@ -42,8 +42,8 @@ surfaces:
   outbound:
     grade: B
     mechanism: >-
-      Oleria uses a cross-account role for AWS and its own apps for Entra, Google Workspace, GitHub
-      and Salesforce. GCP, Azure, Okta and Slack want a key, secret or token.
+      Oleria uses a cross-account role for AWS and its own apps for Entra, Azure, Google Workspace,
+      GitHub and Salesforce. GCP, Okta and Slack want a key, secret or token.
     evidence:
       - url: https://docs.oleria.com/integrations/aws-iam-and-s3
         checked_on: 2026-10-13
@@ -66,13 +66,17 @@ surfaces:
         checked_by: tehreet
         quote: "Oleria connects through an Oleria connected app that you install and assign to a dedicated permission set."
       - url: https://docs.oleria.com/integrations/gcp
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Service Account Credentials - paste the full contents of the JSON key file downloaded above"
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Service Account JSON - paste the full contents of the JSON key file downloaded above"
       - url: https://docs.oleria.com/integrations/azure
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Azure authentication uses a Microsoft Entra ID service principal, either a client secret or a client certificate."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Oleria offers three authentication methods. Authenticate via Microsoft (OAuth) is the default and needs no app registration. Client Secret Authentication and Client Certificate Authentication use a Microsoft Entra ID service principal that you register yourself."
+      - url: https://docs.oleria.com/integrations/azure
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "With Authenticate via Microsoft (OAuth), the form shows no credential fields."
       - url: https://docs.oleria.com/integrations/okta
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -82,10 +86,11 @@ surfaces:
         checked_by: tehreet
         quote: "Oleria connects using tokens issued from a Slack app that you create and install in your workspace or organization."
     notes: >-
-      Static: a GCP service account JSON key, an Azure client secret or certificate, an Okta private
-      key you generate, Slack tokens from your own app, and an AD service account password. The AWS
-      docs never mention an External ID, but the role still counts as keyless. The 150+ other
-      connectors were not assessed.
+      Static: a GCP service account JSON key, an Okta private key you generate, Slack tokens from
+      your own app, and an AD service account password. Azure now defaults to admin consent for an
+      Oleria app, with a client secret or certificate as an option. The AWS docs never mention an
+      External ID, but the role still counts as keyless. The 150+ other connectors were not
+      assessed.
 
 hygiene:
   expiry:
@@ -141,5 +146,5 @@ hygiene:
 
 notes: >-
   Graded on the public REST API, GA in August 2026. Docs are public. Inbound would move to A or B
-  only with federated workload tokens. Outbound would reach A if GCP, Azure, Okta and Slack all
-  moved to keyless setups.
+  only with federated workload tokens. Outbound would reach A if GCP, Okta and Slack all moved to
+  keyless setups.

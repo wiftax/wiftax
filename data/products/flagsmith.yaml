@@ -147,13 +147,13 @@ surfaces:
         checked_by: tehreet
         quote: "Add the Amplitude API key into Flagsmith (Integrations > Add Amplitude Integration)"
       - url: https://docs.flagsmith.com/experimentation/connect-a-warehouse
-        checked_on: 2026-11-04
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "the username and password of the user you created in step 1."
       - url: https://docs.flagsmith.com/experimentation/connect-a-warehouse
-        checked_on: 2026-11-04
-        checked_by: tehreet
-        quote: "On Flagsmith Cloud, connecting your own ClickHouse or Databricks requires a Scale-Up or Enterprise subscription."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "On Flagsmith Cloud, connecting your own ClickHouse, Databricks or PostgreSQL requires a Scale-Up or Enterprise subscription."
       - url: https://docs.flagsmith.com/experimentation/connect-databricks
         checked_on: 2026-11-04
         checked_by: tehreet

@@ -148,9 +148,9 @@ hygiene:
     pass: false
     evidence:
       - url: https://developers.drata.com/openapi/reference/v2/overview/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Please visit our help article to learn how to create an API key."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Please visit our help articles to learn how to create an API key or set up OAuth."
       - url: https://help.drata.com/en/articles/6695964-drata-public-api
         checked_on: 2026-10-22
         checked_by: tehreet

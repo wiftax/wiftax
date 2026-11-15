@@ -23,13 +23,13 @@ surfaces:
         checked_by: tehreet
         quote: "To use the StrongDM API, you need to have an API `access` and `secret` key. These keys authorize every request when managing objects with the API, so please keep them safe."
       - url: https://docs.strongdm.com/references/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Each SDK provides a client that must be constructed with an API `ID` and `Secret` (also referred to as your API key)."
       - url: https://docs.strongdm.com/references/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Instead, the StrongDM API requires the use of request signatures modeled on the [AWS V4 signing process](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Instead, the StrongDM API requires the use of request signatures modeled on the AWS V4 signing process."
       - url: https://docs.strongdm.com/admin/principals/service-accounts.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -169,8 +169,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.strongdm.com/references/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The amount of API access afforded to an API key depends entirely on what was granted to the key by the organization's administrators when the key was created."
       - url: https://docs.strongdm.com/references/cli/admin/tokens/add.md
         checked_on: 2026-10-22

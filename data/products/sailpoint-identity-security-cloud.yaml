@@ -73,8 +73,8 @@ surfaces:
         checked_by: tehreet
         quote: "This method uses the Access Key ID and Secret Access Key associated with the user."
       - url: https://documentation.sailpoint.com/connectors/saas/msentraid/help/saas_connectivity/microsoft_entra_id/prerequisites.html
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Ensure that a client application has been registered on your Azure Management portal as a web application or web API, and you have access to the Client ID and Client Secret for this application."
       - url: https://documentation.sailpoint.com/connectors/microsoft/entra_id/help/integrating_entra_id/connection_settings.html
         checked_on: 2026-10-22
@@ -85,21 +85,21 @@ surfaces:
         checked_by: tehreet
         quote: "SailPoint's Cloud Infrastructure Entitlement Management (CIEM) only supports Service Account as a grant type."
       - url: https://documentation.sailpoint.com/connectors/saas/googleworkspace/help/saas_connectivity/google_workspace/connection_settings.html
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Enter the Private Key and Private Key Password used for signing the JWT assertion."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "In the Private Key field, enter the encrypted private key generated in Generating OAuth 2.0 Credentials."
       - url: https://documentation.sailpoint.com/connectors/saas/github/help/saas_connectivity/github/connection_settings.html
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "The GitHub source uses a GitHub Personal Access Token (PAT) for authentication."
       - url: https://documentation.sailpoint.com/connectors/saas/okta/help/saas_connectivity/okta/authenticate_with_an_api_token.html
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In API Token, enter the Single Sign-On Web System (SSWS) API token required for Okta authentication."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "In the API Token field, enter the SSWS API token required for Okta authentication."
       - url: https://documentation.sailpoint.com/connectors/saas/salesforce/help/saas_connectivity/salesforce/connection_settings.html
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Effective July 1, 2026, the External Client Application (ECA) is the recommended authentication method for the Salesforce connector."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Effective July 1, 2026, the External Client Application (ECA) is the recommended authentication method for the Salesforce SaaS connector."
     notes: >-
       AWS is keyless. The older appliance-based AWS connector uses either an EC2 role or a pasted
       access key. Entra ID needs a client secret, certificate key, password or refresh token on an

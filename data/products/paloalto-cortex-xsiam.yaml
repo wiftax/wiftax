@@ -51,7 +51,7 @@ surfaces:
     grade: B
     mechanism: >-
       Cortex onboards AWS by role with External ID, Azure by a multi-tenant app, and GCP by
-      impersonation. Several log collectors want JSON keys, connection strings or client secrets.
+      impersonation. Several log collectors want JSON keys or client secrets.
     evidence:
       - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/amazon-web-services-cloud-onboarding/aws-security-model-and-authentication.md
         checked_on: 2026-10-22
@@ -90,9 +90,13 @@ surfaces:
         checked_by: tehreet
         quote: "Create a service account private key and download the private key file as a JSON file."
       - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/azure-event-hub/ingest-logs-from-microsoft-azure-event-hub.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Your storage account connection string required for partitions lease management and checkpointing in Cortex XSIAM."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Managed Identity (default): Authenticates using Microsoft Entra ID managed identity. This aligns with Microsoft's recommended security model and avoids long-lived shared secrets."
+      - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/azure-event-hub/ingest-logs-from-microsoft-azure-event-hub.md
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Connection String (SAS): Authenticates using a shared access signature."
       - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/microsoft-office-365/ingest-logs-from-microsoft-office-365.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -111,10 +115,11 @@ surfaces:
         quote: "Specify the password for the designated Integration System User that you created for accessing the custom report in Workday."
     notes: >-
       Posture and audit logs are keyless on all three clouds. S3 collectors default to workload
-      federation or a role. Static: GCP Pub/Sub and Google Workspace take service account keys, and
-      Azure Event Hub takes connection strings. Office 365, Okta, Salesforce, Box, Dropbox and
-      Workday take secrets, tokens or passwords. Each big cloud still has one static-key
-      integration, so B. Marketplace content packs were not graded.
+      federation or a role. Azure Event Hub now defaults to a managed identity with a federated
+      credential, but it still accepts connection strings. Static: GCP Pub/Sub and Google Workspace
+      take service account keys. Office 365, Okta, Salesforce, Box, Dropbox and Workday take
+      secrets, tokens or passwords. Each big cloud still has one static-key integration, so B.
+      Marketplace content packs were not graded.
 
 hygiene:
   expiry:
@@ -188,5 +193,5 @@ hygiene:
 notes: >-
   One card for Cortex XSIAM and XDR, which share the API, keys and collectors. Inbound reaches D
   with an enforced expiry, last-used time or GitHub partnership, and B or A only with federated
-  tokens. Outbound reaches A if the Pub/Sub, Event Hub and Microsoft 365 collectors go keyless.
-  Prisma Cloud and Cortex Cloud are separate products.
+  tokens. Outbound reaches A if the Pub/Sub and Microsoft 365 collectors go keyless. Prisma Cloud
+  and Cortex Cloud are separate products.

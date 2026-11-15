@@ -30,12 +30,12 @@ surfaces:
         checked_by: tehreet
         quote: "ZENITY_CLIENT_SECRET: ${{ secrets.ZENITY_CLIENT_SECRET }}"
       - url: https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "**Account API key (`client_credentials`) — the only mode.**"
       - url: https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The CLI performs the Auth0 `client_credentials` grant against the selected environment's tenant, scoped to that organization and the environment's API audience, then calls the API with the resulting bearer token (cached until it nears expiry)."
     notes: >-
       Zenity's docs are behind a customer login, so this is graded from its public GitHub template
@@ -63,9 +63,9 @@ surfaces:
         checked_by: tehreet
         quote: "Here’s what the setup looks like: Generate a secure API key from the Anthropic platform Request Compliance API access from Anthropic Create a new integration within the Zenity Platform"
       - url: https://zenity.io/use-cases/platform/claude-tag
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Setup looks like: Connect your Slack workspace within the Zenity platform."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "Zenity represents Claude Tag as a single entity within each Slack workspace, giving security teams a centralized view of the channels where it operates, the employees using it, the connectors and credentials it holds, and the MCP servers and skills in use."
       - url: https://zenity.io/press-release/zenity-announces-ai-trust-layer-the-first-agent-less-security-solution-for-microsoft-365-copilot
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -92,8 +92,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "There is no `login`, no `logout`, and no credential storage"
     notes: >-
       No public API or CLI command creates or revokes keys. The zenityctl help says keys are made in
@@ -102,8 +102,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "**`push` requires `operator`; every other `boundaries` command needs `viewer`.**"
       - url: https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/README.md
         checked_on: 2026-10-13

@@ -21,20 +21,20 @@ surfaces:
     issuers: []
     evidence:
       - url: https://docs.vast.ai/api-reference/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Every request to the Vast.ai API must include an API key."
       - url: https://docs.vast.ai/api-reference/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Include your key as a Bearer token in the `Authorization` header:"
       - url: https://docs.vast.ai/guides/reference/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "You'll need a key for any programmatic access; the web console works without one."
       - url: https://docs.vast.ai/cli/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "This is recommended for CI pipelines, Docker containers, and scripts, it avoids writing keys to disk and makes it easy to inject secrets via your platform's secret manager."
       - url: https://docs.vast.ai/api-reference/accounts/create-api-key.md
         checked_on: 2026-10-22
@@ -112,13 +112,13 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.vast.ai/api-reference/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "API keys do not expire by default."
       - url: https://docs.vast.ai/cli/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "API keys do not expire by default. You can revoke a key at any time from the [Keys page](https://cloud.vast.ai/manage-keys/) or with `vastai delete api-key`."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "API keys do not expire by default. You can revoke a key at any time from the Keys page or with vastai delete api-key."
       - url: https://docs.vast.ai/guides/reference/api-keys.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -130,9 +130,9 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.vast.ai/api-reference/authentication.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "You can also create keys programmatically via the API ([Create API Key](/api-reference/accounts/create-api-key.md)), CLI ([`vastai create api-key`](/cli/reference/create-api-key)), or SDK ([`vast.create_api_key()`](/sdk/python/reference/create-api-key))."
+        checked_on: 2026-11-15
+        checked_by: sisyphus
+        quote: "You can also create keys programmatically via the API (Create API Key), CLI (vastai create api-key), or SDK (vast.create_api_key())."
       - url: https://docs.vast.ai/api-reference/accounts/delete-api-key.md
         checked_on: 2026-10-22
         checked_by: tehreet
