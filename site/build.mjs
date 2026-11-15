@@ -6,6 +6,7 @@ import { createHash } from "node:crypto";
 import * as yaml from "js-yaml";
 import { marked } from "marked";
 import { rubricPage } from "./rubric.mjs";
+import { policyPage } from "./policy.mjs";
 
 const root = new URL("..", import.meta.url).pathname;
 const out = join(root, "dist");
@@ -194,7 +195,13 @@ const mdPage = (slug, title, md, desc) => { mkdirSync(join(out, slug), { recursi
   mkdirSync(join(out, "rubric"), { recursive: true });
   writeFileSync(join(out, "rubric", "index.html"), layout({ title: "Rubric — wif.tax", desc: "How wif.tax grades machine authentication.", path: "/rubric/", body, extraHead: `<link rel="stylesheet" href="/rubric.css?v=${v("rubric.css")}"><script type="module" src="/rubric.js?v=${v("rubric.js")}"></script>` }));
 }
-mdPage("policy", "Disputes and policy", readFileSync(join(root, "site/policy.md"), "utf8"), "How to dispute a grade, and what we will and will not change.");
+{
+  // Same frame as /rubric/: rubric.css for layout and diagrams, rubric.js for the table of contents.
+  const v = (f) => createHash("sha256").update(readFileSync(join(root, "site", f))).digest("hex").slice(0, 8);
+  const body = policyPage({ md: readFileSync(join(root, "site/policy.md"), "utf8"), icon, badge, esc });
+  mkdirSync(join(out, "policy"), { recursive: true });
+  writeFileSync(join(out, "policy", "index.html"), layout({ title: "Disputes and policy — wif.tax", desc: "How to dispute a grade, and what will and will not change one.", path: "/policy/", body, extraHead: `<link rel="stylesheet" href="/rubric.css?v=${v("rubric.css")}"><link rel="stylesheet" href="/policy.css?v=${v("policy.css")}"><script type="module" src="/rubric.js?v=${v("rubric.js")}"></script>` }));
+}
 mdPage("our-own-tax", "Our own tax", readFileSync(join(root, "site/our-own-tax.md"), "utf8"), "The static credentials wif.tax itself is forced to hold.");
 
 // ---- misc
@@ -213,7 +220,7 @@ writeFileSync(join(out, "_headers"), `/*\n  X-Content-Type-Options: nosniff\n  X
 writeFileSync(join(out, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#1a1a1a"/><text x="16" y="22" text-anchor="middle" font-family="monospace" font-weight="700" font-size="17" fill="#fff">$</text></svg>`);
 cpSync(join(root, "site/style.css"), join(out, "style.css"));
 cpSync(join(root, "site/tooltip.js"), join(out, "tooltip.js"));
-for (const f of ["rubric.css", "rubric.js", "og.png", "pd.js"]) cpSync(join(root, "site", f), join(out, f));
+for (const f of ["rubric.css", "rubric.js", "policy.css", "og.png", "pd.js"]) cpSync(join(root, "site", f), join(out, f));
 mkdirSync(join(out, "vendor"), { recursive: true });
 for (const [pkg, f] of [["core", "floating-ui.core.mjs"], ["dom", "floating-ui.dom.mjs"]]) cpSync(join(root, `node_modules/@floating-ui/${pkg}/dist/floating-ui.${pkg}.browser.min.mjs`), join(out, "vendor", f));
 if (WA_PRO) cpSync(join(root, "vendor/webawesome-pro"), join(out, "wa"), { recursive: true });

@@ -1,37 +1,42 @@
 # Disputes and policy
 
-## What a grade is
+A grade is a reading of the vendor's own public documentation against the [rubric](/rubric/). It is not a review of the product, a comment on the people who build it, or legal advice.
 
-A grade is a reading of the vendor's own public documentation against the [rubric](/rubric/). It is not a review of the product, a comment on the people who build it, or legal advice. Every grade carries the URL we read and the date we read it.
+Every grade cites the page we read, the date we read it, and the exact sentence. A better receipt changes a grade. Nothing else does.
 
-## How to dispute a grade
+## Dispute a grade
 
-1. **Open a pull request** on [github.com/wiftax/wiftax](https://github.com/wiftax/wiftax) changing the card. Change the receipts, not just the letter. If the docs say something different from what we quoted, link the page that says it.
-2. **Or email** disputes@wif.tax with the product, the claim you dispute, and the URL that contradicts it. We will open the PR for you.
-3. While a dispute is open, the card shows `disputed` with the vendor's statement verbatim.
+Anyone can dispute a grade. You do not have to work for the vendor, and we will not ask.
 
-We do not require you to prove you work for the vendor. Receipts are receipts.
+1. **Pull request.** Edit the card in `data/products/` on [GitHub](https://github.com/wiftax/wiftax). Change the receipt, not just the letter. Link the page that says something different, and quote it.
+2. **Email.** Send [disputes@wif.tax](mailto:disputes@wif.tax) the product, the claim you dispute, and the page that contradicts it. We open the pull request for you.
+
+While a dispute is open, the card is marked `disputed` and shows the vendor's statement word for word, with its link and date. A person reads the new receipt against the rubric, then changes the grade or says why it holds.
+
+## What changes a grade
+
+- A factual error, shown with a receipt.
+- Documentation that changed since we read it. Sisyphus usually notices first.
+- Anything about a person. Nothing on this site should be about a person. If something is, it comes down.
+
+## What does not
+
+- The vendor preferring a different grade.
+- A mechanism in a private beta, on a roadmap, or promised on a sales call. The bar is documented and generally available. Tier gates are recorded, not excused.
+- A rubric change for one vendor. The rubric changes for everyone at once, through a pull request on `RUBRIC.md`.
 
 ## Graduation
 
-If your product moves from D or F to A or B, open a PR setting `status: graduated`. The card keeps a permanent gold star and a date. We would rather have an empty list than a long one.
+When a product moves from D or F to A or B, its card is marked `graduated` with the date, and it keeps a gold star for good. Open a pull request with the new receipts, or email us. We would rather have a short list than a long one.
 
-## What we will change
+## Sisyphus
 
-- A factual error with a receipt. Same day, usually.
-- A stale card, when the docs have changed. Our crawler tries to catch these first.
-- Anything about a person. There should be nothing about a person on this site. If there is, it goes.
-
-## What we will not change
-
-- A grade because the vendor would prefer a different one.
-- A grade because the mechanism exists in a private beta, a roadmap, or a sales call. Documented and available is the bar. Tier gates are recorded, not excused.
-- The rubric, for one vendor. Rubric changes apply to everyone and go through a PR on `RUBRIC.md`.
-
-## Automated changes
-
-Sisyphus, our crawler, re-reads receipts and opens PRs when they drift. It does not merge. A person reads the receipts first.
+Sisyphus is our crawler. Every Monday it re-reads every page a card cites. When a cited sentence moves, or a grade should change, it opens a pull request with the old text and the new. It never merges. A person reads the receipts first. Each patrol is published on [rotate.fail](https://rotate.fail).
 
 ## Contact
 
-hello@wif.tax for everything else. security@wif.tax for problems with this site. See `/.well-known/security.txt`.
+| Address | For |
+|---|---|
+| [disputes@wif.tax](mailto:disputes@wif.tax) | A grade or a receipt you think is wrong. |
+| [security@wif.tax](mailto:security@wif.tax) | A problem with this site or its code. See [security.txt](/.well-known/security.txt). |
+| [hello@wif.tax](mailto:hello@wif.tax) | Anything else. |
