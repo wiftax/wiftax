@@ -200,3 +200,6 @@
   @keyframes tok{0%{left:0;opacity:0;transform:scale(.6)}12%{opacity:1;transform:none}66%{left:calc(100% - 1.4rem);opacity:1;transform:none}82%,100%{left:calc(100% - 1.4rem);opacity:0;transform:scale(.3) rotate(-20deg)}}
   @keyframes key{0%{left:0;opacity:0;transform:scale(.6)}12%{opacity:1;transform:none}66%{left:calc(100% - 1.4rem)}92%{left:calc(100% - 1.4rem);opacity:1;transform:none}100%{left:calc(100% - 1.4rem);opacity:0}}
 }
+
+/* the intro and the hygiene lead run the full width of the column */
+.rubric .lead,.rubric #hygiene .rb-h{max-width:none}

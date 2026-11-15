@@ -107,7 +107,7 @@ ${S.hyg.after ? `<div class="rb-notes">${P(S.hyg.after)}</div>` : ""}</section>`
     .map(([id, h]) => `<a href="#${id}" data-to="${id}">${esc(h)}</a>`).join("");
   const [t1, ver] = title.match(/^(.*?)\s*\((v\d+)\)$/)?.slice(1) ?? [title, ""];
 
-  return `<div class="rb">
+  return `<div class="rb rubric">
 <aside class="rb-toc"><nav aria-label="On this page">${toc}</nav></aside>
 <div class="rb-main">
 <section class="rb-hero"><h1>${esc(t1.replace(/^The wif\.tax /, ""))}${ver ? ` <span class="ver">${esc(ver)}</span>` : ""}</h1><div class="lead">${P(intro)}</div></section>
