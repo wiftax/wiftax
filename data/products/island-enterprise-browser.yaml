@@ -25,9 +25,9 @@ surfaces:
       A static API key made in the Island console with a chosen role, sent in an api-key header.
       Nothing public documents OIDC, workload identity or token exchange.
     evidence:
-      - url: https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/389257580612079
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/234060975999414
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "The Island API supports all the key features of the Island Management Console, including the ability to create, read, update and delete policy, policy elements (such as URL lists), users, browser configuration policies, etc."
       - url: https://raw.githubusercontent.com/elastic/integrations/main/packages/island_browser/docs/README.md
         checked_on: 2026-10-22
@@ -89,9 +89,9 @@ surfaces:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Compliance Access Keys do not expire on their own."
-      - url: https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/389257580612079
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/234060975999414
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Customers can send their logs to Amazon S3, Snowflake, Azure Blob Storage or any SIEM of their choice during their contract with Island, meaning an export should not be required."
       - url: https://docs.panther.com/data-onboarding/supported-logs/island-logs
         checked_on: 2026-10-22

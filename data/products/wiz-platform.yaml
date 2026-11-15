@@ -101,10 +101,6 @@ surfaces:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: 'source = "https://wizio-public.s3.amazonaws.com/deployment-v2/azure/wiz-azure-standard-connector-terraform-module.zip"'
-      - url: https://raw.githubusercontent.com/NandosUK/infrastructure-terraform-modules/main/gcp/wiz-security-org/examples/wiz-managed/README.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The following provides an example of integrating a Google Cloud Organization with Wiz using a Wiz-managed identity."
       - url: https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/connector_gcp.md
         checked_on: 2026-10-22
         checked_by: tehreet

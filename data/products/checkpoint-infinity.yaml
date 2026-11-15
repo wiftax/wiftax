@@ -6,7 +6,7 @@ aliases:
   - CloudGuard CNAPP
   - Infinity Portal APIs
 website: https://www.checkpoint.com
-docs: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+docs: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
 category: security
 status: listed
 summary: >-
@@ -45,17 +45,17 @@ surfaces:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "in the Infinity Portal, see Infinity Portal Administration Guide > Account Settings > API Keys."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Secret Key - The password to get access to the Check Point Portal."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Method/URL: POST {{baseURL}}auth/external"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "You get an authorization token."
     notes: >-
       Graded on the weakest path a workload must use. Automating CloudGuard goes through its v2 API,
@@ -138,13 +138,13 @@ hygiene:
   expiry:
     pass: false
     evidence:
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "It is possible, but not recommended, to create an Account API Key without an expiration date."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "By default, the expiration date is three months after the creation date."
       - url: https://docs.cgn.portal.checkpoint.com/reference/serviceaccount_postserviceaccount_post_v2service-account.md
         checked_on: 2026-10-22
@@ -164,9 +164,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Delete a specific Service Account by ID"
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "You get the Client ID and Access Key for the child account."
     notes: >-
       The CloudGuard API can create a service account, generate a new key for it and delete it, so a
@@ -182,9 +182,9 @@ hygiene:
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "You can assign service accounts the same Roles as regular users."
-      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm
+        checked_on: 2026-11-15
+        checked_by: sisyphus
         quote: "Includes access to one Check Point Portal service in your Check Point Portal account."
       - url: https://docs.cgn.portal.checkpoint.com/reference/authentication.md
         checked_on: 2026-10-22
