@@ -124,8 +124,8 @@ hygiene:
         checked_by: tehreet
         quote: "This script can be run as a cron job on any Unix OS which supports the bash shell. The service principal and secret must be customized before use."
       - url: https://help.proofpoint.com/Threat_Insight_Dashboard/Concepts/Managing_Service_Credentials
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
     notes: >-
       No public page says TAP credentials or API keys expire, or that an admin can enforce a
       lifetime. The management page is behind a login. A documented enforced lifetime would flip
@@ -156,8 +156,8 @@ hygiene:
         checked_by: tehreet
         quote: "The user is authenticated for the service but is not authorized to access data for the given customer."
       - url: https://help.proofpoint.com/Threat_Insight_Dashboard/Concepts/Managing_Service_Credentials
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
     notes: >-
       The service principal is a separate machine credential, but no public doc gives it a role or
       limits it. Third-party guides mention scopes, but Proofpoint's own page is behind a login.
@@ -165,8 +165,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://help.proofpoint.com/Threat_Insight_Dashboard/Concepts/Managing_Service_Credentials
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
     notes: >-
       No public doc shows a last-used time. The management page is behind a login.
   leak_revocation:

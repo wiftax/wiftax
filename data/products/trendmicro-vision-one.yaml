@@ -44,9 +44,9 @@ surfaces:
         checked_by: tehreet
         quote: "To ensure that only authorized applications can gain access to your TrendAI Vision One™ data, you must create a user account specifically configured to allow API usage."
       - url: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-api-key
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In Automation Center to authenticate and make API requests for automation purposes"
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "In the Automation Center to authenticate and make API requests for automation purposes"
     notes: >-
       Graded on the Vision One public API, which CI jobs, SOAR tools and SIEM connectors use. The
       docs describe only a bearer API key. The full API reference needs a console login, so anything
@@ -124,12 +124,12 @@ hygiene:
         checked_by: tehreet
         quote: '"monthsToExpiration": map[string]any{"description": "The duration of validity for the API key.", "enum": []any{1, 3, 6, 12, 0}, "type": "integer"}'
       - url: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-api-key
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "You can select from the following expiration periods when adding or updating a cloud account:"
       - url: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-api-key
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "180 months"
       - url: https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-platform-api-keys
         checked_on: 2026-10-22

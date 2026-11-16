@@ -25,8 +25,8 @@ surfaces:
         checked_on: 2026-11-15
         checked_by: sisyphus
         quote: "--data-urlencode 'client_secret=YOUR_CLIENT_SECRET'"
-      - url: https://docs.upwind.io/assets/js/e5ce9b41.4909e293.js
-        checked_on: 2026-11-15
+      - url: https://docs.upwind.io/assets/js/e5ce9b41.3a14bd02.js
+        checked_on: 2026-11-16
         checked_by: sisyphus
         quote: "--data-urlencode 'grant_type=client_credentials'"
       - url: https://docs.upwind.io/assets/js/e16b00bb.8647a8f4.js

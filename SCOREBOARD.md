@@ -9,14 +9,14 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
-| **💀 F** | CoreWeave | [Forge](data/products/coreweave-forge.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-14 |
+| **💀 F** | CoreWeave | [Forge](data/products/coreweave-forge.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Duo | [Admin API](data/products/cisco-duo-admin-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | Elastic | [Elastic Agent and Fleet](data/products/elastic-agent-fleet.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
+| **💀 F** | Elastic | [Elastic Agent and Fleet](data/products/elastic-agent-fleet.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Elastic | [Cloud Enterprise](data/products/elastic-cloud-enterprise.yaml) | 💀 F | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Fluidstack | [Atlas](data/products/fluidstack.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
@@ -33,8 +33,8 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Nudge Security | [Platform](data/products/nudge-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Obsidian Security | [Platform](data/products/obsidian-security.yaml) | 💀 F | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Orca Security | [Cloud Security Platform](data/products/orca-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Palo Alto Networks | [Cortex XSIAM](data/products/paloalto-cortex-xsiam.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 🟢 A | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Palo Alto Networks | [Cortex XSIAM](data/products/paloalto-cortex-xsiam.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
+| **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 🟢 A | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-11-16 |
 | **💀 F** | Push Security | [Platform](data/products/push-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Rapid7 | [Command Platform](data/products/rapid7-insight-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Reco | [Dynamic SaaS Security](data/products/reco-saas-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
@@ -51,7 +51,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🔴 D** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
@@ -61,7 +61,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Lambda | [Cloud](data/products/lambda-cloud.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Modal | [Platform](data/products/modal.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Runpod | [GPU Cloud](data/products/runpod.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | SentinelOne | [Singularity](data/products/sentinelone-singularity.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-10-22 |
@@ -69,7 +69,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🔴 D** | Socket | [Platform](data/products/socket-dev.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Temporal | [Platform](data/products/temporal.yaml) | 🔴 D | 🟢 A | `✓ ✓ ✓ ✗ ✓` | listed | 2026-10-20 |
 | **🔴 D** | Tenable | [Vulnerability Management](data/products/tenable-vulnerability-management.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🔴 D** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **🔴 D** | Veza | [Access Graph](data/products/veza.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-11-15 |
@@ -89,7 +89,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Snyk | [Platform](data/products/snyk-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Sola Security | [Platform](data/products/sola-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Torq | [Hyperautomation Platform](data/products/torq.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🟠 C** | Upwind | [Cloud Security Platform](data/products/upwind.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Upwind | [Cloud Security Platform](data/products/upwind.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🟠 C** | Vanta | [Platform](data/products/vanta.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Vultr | [Cloud](data/products/vultr-cloud.yaml) | 🟠 C | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Wiz | [Platform](data/products/wiz-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
@@ -100,13 +100,13 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | C1 | [Identity Platform](data/products/c1-identity-platform.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Datadog | [API](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
+| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-16 |
 | **🟡 B** | Elastic | [Elasticsearch](data/products/elasticsearch.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **🟡 B** | HashiCorp | [Vault](data/products/hashicorp-vault.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-09-16 |
 | **🟡 B** | Infisical | [Cloud](data/products/infisical-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Keycard | [Agent Identity](data/products/keycard-agent-identity.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🟡 B** | Nebius | [AI Cloud](data/products/nebius-ai-cloud.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟡 B** | Nebius | [AI Cloud](data/products/nebius-ai-cloud.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **🟡 B** | P0 Security | [Platform](data/products/p0-security.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Teleport | [Platform](data/products/teleport.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟢 A** | AWS | [IAM and STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
@@ -210,7 +210,7 @@ Agents and OpenTelemetry shippers send data to Elastic with an enrollment token,
 
 - **Inbound F:** A Fleet enrollment token is swapped for per-agent API keys. APM agents and OTLP shippers send a static APM secret token or an Elasticsearch API key.
 - **Outbound B:** An agent you host can use its machine's AWS or Azure identity, or assume an AWS role with an external ID. GCP and SaaS sources want a pasted key, secret or token.
-- **Receipts:** [www.elastic.co](https://www.elastic.co/docs/reference/fleet/fleet-enrollment-tokens), [www.elastic.co](https://www.elastic.co/docs/reference/fleet/fleet-server), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/service-accounts), [www.elastic.co](https://www.elastic.co/docs/solutions/observability/apm/secret-token), [www.elastic.co](https://www.elastic.co/docs/solutions/observability/apm/api-keys), [www.elastic.co](https://www.elastic.co/docs/reference/opentelemetry/managed-inputs/authentication-delivery-and-failure-handling), [www.elastic.co](https://www.elastic.co/docs/reference/opentelemetry/managed-inputs/managed-otlp-endpoint), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/aws), [www.elastic.co](https://www.elastic.co/docs/manage-data/ingest/managed-integrations/cloud-connector-deployment), [www.elastic.co](https://www.elastic.co/docs/manage-data/ingest/managed-integrations/cloud-connector-deployment.md), [www.elastic.co](https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-aws), [www.elastic.co](https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-azure), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/azure_metrics), [www.elastic.co](https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-gcp), [github.com](https://github.com/elastic/cloudbeat/blob/main/deploy/deployment-manager/deploy_service_account.sh), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/gcp), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/okta), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/entityanalytics_entra_id), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/github), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/google_workspace)
+- **Receipts:** [www.elastic.co](https://www.elastic.co/docs/reference/fleet/fleet-enrollment-tokens), [www.elastic.co](https://www.elastic.co/docs/reference/fleet/fleet-server), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/service-accounts), [www.elastic.co](https://www.elastic.co/docs/solutions/observability/apm/secret-token), [www.elastic.co](https://www.elastic.co/docs/solutions/observability/apm/api-keys), [www.elastic.co](https://www.elastic.co/docs/reference/opentelemetry/managed-inputs/authentication-delivery-and-failure-handling), [www.elastic.co](https://www.elastic.co/docs/reference/opentelemetry/managed-inputs/managed-otlp-endpoint), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/aws), [www.elastic.co](https://www.elastic.co/docs/manage-data/ingest/managed-integrations/cloud-connector-deployment), [www.elastic.co](https://www.elastic.co/docs/reference/managed-integrations/federated-identity), [www.elastic.co](https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-aws), [www.elastic.co](https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-azure), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/azure_metrics), [www.elastic.co](https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-gcp), [github.com](https://github.com/elastic/cloudbeat/blob/main/deploy/deployment-manager/deploy_service_account.sh), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/gcp), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/okta), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/entityanalytics_entra_id), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/github), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/google_workspace)
 
 ### 💀 F Elastic Cloud API
 
@@ -506,10 +506,10 @@ To read or manage vault items, your code needs a static service account token or
 
 ### 🔴 D Baseten Platform
 
-Every Baseten call, from CI to inference, uses a static API key. Keys can now carry an expiry, but nothing accepts a federated token. Baseten is itself an OIDC issuer, so it pulls weights and images from your AWS and GCP storage without keys. Azure, Hugging Face, R2 and other registries take static secrets.
+Every Baseten call, from CI to inference, uses a static API key. Keys can now carry an expiry, but nothing accepts a federated token. Baseten is itself an OIDC issuer, so it pulls weights and images from your AWS, GCP and Hugging Face sources without keys. Azure, R2, CoreWeave and other registries take static secrets.
 
 - **Inbound D:** A static API key, personal or team-owned. Short-lived sandbox and volume tokens exist, but they are minted from that key. No federation path exists.
-- **Outbound B:** You trust Baseten's OIDC issuer from an AWS role or GCP pool, and Baseten pulls from S3, ECR, GCS and Artifact Registry with short-lived tokens. Other sources need static secrets.
+- **Outbound B:** You trust Baseten's OIDC issuer from an AWS role, a GCP pool or Hugging Face. Baseten then pulls from S3, ECR, GCS, Artifact Registry and Hugging Face with short-lived tokens. Other sources need static secrets.
 - **Receipts:** [docs.baseten.co](https://docs.baseten.co/organization/api-keys.md), [docs.baseten.co](https://docs.baseten.co/deployment/ci-cd.md), [docs.baseten.co](https://docs.baseten.co/reference/ci/github-action.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/basetenlabs/terraform-provider-baseten/main/README.md), [docs.baseten.co](https://docs.baseten.co/sandboxes/authentication.md), [docs.baseten.co](https://docs.baseten.co/reference/management-api/volumes/create-a-volume-access-token.md), [docs.baseten.co](https://docs.baseten.co/reference/cli/truss/auth.md), [docs.baseten.co](https://docs.baseten.co/organization/oidc.md), [docs.baseten.co](https://docs.baseten.co/organization/aws-assume-role.md), [docs.baseten.co](https://docs.baseten.co/development/model/bdn.md), [docs.baseten.co](https://docs.baseten.co/engines/performance-concepts/cloud-storage-deployment.md), [docs.baseten.co](https://docs.baseten.co/development/model/dependencies.md), [docs.baseten.co](https://docs.baseten.co/development/volumes/sync.md), [docs.baseten.co](https://docs.baseten.co/organization/audit-logs.md)
 
 ### 🔴 D BeyondTrust Password Safe
@@ -818,7 +818,7 @@ To call Upwind, your code needs a long-lived OAuth client secret, which it trade
 
 - **Inbound C:** A client ID and secret traded for a 24-hour token. The API, Terraform provider, CI actions, sensors and Cloud Scanners all use this same secret type.
 - **Outbound B:** Upwind assumes AWS roles with an External ID, uses Azure multi-tenant apps with federated credentials, and federates into GCP and OCI.
-- **Receipts:** [docs.upwind.io](https://docs.upwind.io/assets/js/37ee0c64.73dd6e78.js), [docs.upwind.io](https://docs.upwind.io/assets/js/e5ce9b41.4909e293.js), [docs.upwind.io](https://docs.upwind.io/assets/js/e16b00bb.8647a8f4.js), [docs.upwind.io](https://docs.upwind.io/assets/js/250c1d76.fc51debe.js), [docs.upwind.io](https://docs.upwind.io/assets/js/3e73ea36.6344a959.js), [docs.upwind.io](https://docs.upwind.io/assets/js/cd2363d5.863607b8.js), [docs.upwind.io](https://docs.upwind.io/assets/js/df0d6700.bb802ac8.js), [docs.upwind.io](https://docs.upwind.io/assets/js/1b8afc99.d95a25d0.js), [docs.upwind.io](https://docs.upwind.io/assets/js/f32e6693.cbee5357.js), [docs.upwind.io](https://docs.upwind.io/assets/js/bcab3396.dceef2e4.js), [docs.upwind.io](https://docs.upwind.io/assets/js/8ab8e5d5.9c163a96.js), [docs.upwind.io](https://docs.upwind.io/assets/js/783173e9.fbe447f9.js), [docs.upwind.io](https://docs.upwind.io/assets/js/3e5bd4bb.add0e5d2.js), [docs.upwind.io](https://docs.upwind.io/assets/js/5f8f7541.bb055354.js), [docs.upwind.io](https://docs.upwind.io/assets/js/8894b7aa.d9394f14.js), [docs.upwind.io](https://docs.upwind.io/assets/js/0b2d58f6.278f3670.js), [docs.upwind.io](https://docs.upwind.io/assets/js/ebaae3f7.c95bf936.js), [docs.upwind.io](https://docs.upwind.io/assets/js/2661427a.1f7ca44d.js), [docs.upwind.io](https://docs.upwind.io/assets/js/e9a20b32.728db14d.js)
+- **Receipts:** [docs.upwind.io](https://docs.upwind.io/assets/js/37ee0c64.73dd6e78.js), [docs.upwind.io](https://docs.upwind.io/assets/js/e5ce9b41.3a14bd02.js), [docs.upwind.io](https://docs.upwind.io/assets/js/e16b00bb.8647a8f4.js), [docs.upwind.io](https://docs.upwind.io/assets/js/250c1d76.fc51debe.js), [docs.upwind.io](https://docs.upwind.io/assets/js/3e73ea36.6344a959.js), [docs.upwind.io](https://docs.upwind.io/assets/js/cd2363d5.863607b8.js), [docs.upwind.io](https://docs.upwind.io/assets/js/df0d6700.bb802ac8.js), [docs.upwind.io](https://docs.upwind.io/assets/js/1b8afc99.d95a25d0.js), [docs.upwind.io](https://docs.upwind.io/assets/js/f32e6693.cbee5357.js), [docs.upwind.io](https://docs.upwind.io/assets/js/bcab3396.dceef2e4.js), [docs.upwind.io](https://docs.upwind.io/assets/js/8ab8e5d5.9c163a96.js), [docs.upwind.io](https://docs.upwind.io/assets/js/783173e9.fbe447f9.js), [docs.upwind.io](https://docs.upwind.io/assets/js/3e5bd4bb.add0e5d2.js), [docs.upwind.io](https://docs.upwind.io/assets/js/5f8f7541.bb055354.js), [docs.upwind.io](https://docs.upwind.io/assets/js/8894b7aa.d9394f14.js), [docs.upwind.io](https://docs.upwind.io/assets/js/0b2d58f6.278f3670.js), [docs.upwind.io](https://docs.upwind.io/assets/js/ebaae3f7.c95bf936.js), [docs.upwind.io](https://docs.upwind.io/assets/js/2661427a.1f7ca44d.js), [docs.upwind.io](https://docs.upwind.io/assets/js/e9a20b32.728db14d.js)
 
 ### 🟠 C Vanta Platform
 

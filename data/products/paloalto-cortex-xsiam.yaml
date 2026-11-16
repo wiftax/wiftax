@@ -62,12 +62,12 @@ surfaces:
         checked_by: tehreet
         quote: "These calls include a mandatory sts:ExternalId condition to prevent \"confused deputy\" attacks, ensuring only your specific Cortex XSIAM tenant can access your roles."
       - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Before Cortex XSIAM can proceed with onboarding, the Cortex XSIAM service principal must be present in your Azure tenant."
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "Cortex XSIAM uses the service principal to discover your Azure resources and to perform actions for the security capabilities that you enable."
       - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "Cortex XSIAM creates the user-assigned managed identity (UAMI), federated identity credential, role assignments, and consumer group."
       - url: https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/google-cloud-platform-cloud-onboarding/google-cloud-platform-gcp-provider-permissions.md
         checked_on: 2026-10-22
