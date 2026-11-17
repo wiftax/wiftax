@@ -114,7 +114,7 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.opal.dev/api-reference/tokens/create-token
-        checked_on: 2026-11-15
+        checked_on: 2026-11-16
         checked_by: sisyphus
         quote: "Optional expiration time for the token."
       - url: https://docs.opal.dev/reference/authentication
@@ -127,9 +127,9 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.opal.dev/api-reference/tokens/create-token
-        checked_on: 2026-11-15
+        checked_on: 2026-11-16
         checked_by: sisyphus
-        quote: "Set `user_id` to a service user's ID to mint a token that authenticates as that service user."
+        quote: "Set user_id to a service user's ID to mint a token that authenticates as that service user."
       - url: https://docs.opal.dev/api-reference/tokens/delete-token
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -155,7 +155,7 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.opal.dev/api-reference/tokens/create-token
-        checked_on: 2026-11-15
+        checked_on: 2026-11-16
         checked_by: sisyphus
         quote: "The date and time the token was last used."
     notes: >-

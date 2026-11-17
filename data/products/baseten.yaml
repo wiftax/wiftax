@@ -9,8 +9,8 @@ status: listed
 summary: >-
   Every Baseten call, from CI to inference, uses a static API key. Keys can now carry an expiry, but
   nothing accepts a federated token. Baseten is itself an OIDC issuer, so it pulls weights and
-  images from your AWS and GCP storage without keys. Azure, Hugging Face, R2 and other registries
-  take static secrets.
+  images from your AWS, GCP and Hugging Face sources without keys. Azure, R2, CoreWeave and other
+  registries take static secrets.
 
 surfaces:
   inbound:
@@ -61,25 +61,30 @@ surfaces:
   outbound:
     grade: B
     mechanism: >-
-      You trust Baseten's OIDC issuer from an AWS role or GCP pool, and Baseten pulls from S3, ECR,
-      GCS and Artifact Registry with short-lived tokens. Other sources need static secrets.
+      You trust Baseten's OIDC issuer from an AWS role, a GCP pool or Hugging Face. Baseten then
+      pulls from S3, ECR, GCS, Artifact Registry and Hugging Face with short-lived tokens. Other
+      sources need static secrets.
     evidence:
       - url: https://docs.baseten.co/organization/oidc.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "OpenID Connect (OIDC) lets your Baseten inference deployments and training jobs authenticate to cloud resources like object storage and container registries using short-lived tokens instead of long-lived credentials."
       - url: https://docs.baseten.co/organization/oidc.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "Baseten acts as an OIDC identity provider with the following configuration:"
       - url: https://docs.baseten.co/organization/oidc.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "When using OIDC for images and weights, Baseten OIDC currently supports:"
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "When using OIDC for images and weights, Baseten OIDC supports:"
       - url: https://docs.baseten.co/organization/oidc.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Because your code handles the exchange, any OIDC-supporting provider works, not just AWS and GCP."
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "Hugging Face: Hugging Face repositories (model weights and volume sync)."
+      - url: https://docs.baseten.co/organization/oidc.md
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "Because your code handles the exchange, any OIDC-supporting provider that accepts the oidc.baseten.co audience works, not just AWS and GCP."
       - url: https://docs.baseten.co/organization/aws-assume-role.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -109,20 +114,21 @@ surfaces:
         checked_by: tehreet
         quote: "The value of a `DOCKER_REGISTRY_*` secret must be the Base64 encoding of `username:password`; a raw token or personal access token won't work."
       - url: https://docs.baseten.co/development/volumes/sync.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "For S3 and GCS, you can grant access with short-lived credentials instead of a stored secret."
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "For S3, GCS, and Hugging Face, you can grant access with short-lived credentials instead of a stored secret."
       - url: https://docs.baseten.co/organization/audit-logs.md
         checked_on: 2026-10-22
         checked_by: tehreet
         quote: "Baseten enables export and walks you through configuring your destination, including any destination-specific credentials or webhook URLs."
     notes: >-
-      AWS and GCP are keyless through Baseten's OIDC issuer, and the subject can be pinned to an
-      org, team, model or environment. AWS AssumeRole with an External ID is a second keyless route.
-      It is on by default for Enterprise and on request otherwise. Azure Blob takes only a storage
-      account key. Hugging Face, R2, CoreWeave and other registries take long-lived tokens or
-      passwords, so B, not A. Baseten can mount an OIDC token in your container, but its own pullers
-      do not use it for Azure. Audit log export credentials are not public and were not graded.
+      AWS, GCP and Hugging Face are keyless for weights through Baseten's OIDC issuer. The subject
+      can be pinned to an org, team, model or environment. AWS AssumeRole with an External ID is a
+      second keyless route. It is on by default for Enterprise and on request otherwise. Azure Blob
+      takes only a storage account key. R2, CoreWeave and other registries take long-lived tokens or
+      passwords, so B, not A. The engines guide still tells Hugging Face users to paste a token.
+      Baseten can mount an OIDC token in your container, but its own pullers do not use it for
+      Azure. Audit log export credentials are not public and were not graded.
 
 hygiene:
   expiry:

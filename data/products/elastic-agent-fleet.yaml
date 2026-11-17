@@ -78,9 +78,9 @@ surfaces:
         checked_on: 2026-10-14
         checked_by: tehreet
         quote: "Federated identity authentication currently supports deployments of Elastic's Cloud Security Posture Management (CSPM) and Asset Discovery integrations to AWS and Azure."
-      - url: https://www.elastic.co/docs/manage-data/ingest/managed-integrations/cloud-connector-deployment.md
-        checked_on: 2026-10-14
-        checked_by: tehreet
+      - url: https://www.elastic.co/docs/reference/managed-integrations/federated-identity
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "Serverless Security projects: Preview"
       - url: https://www.elastic.co/docs/solutions/security/cloud/get-started-with-cspm-for-aws
         checked_on: 2026-10-14

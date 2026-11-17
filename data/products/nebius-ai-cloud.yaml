@@ -37,13 +37,13 @@ surfaces:
         checked_by: tehreet
         quote: "// The OIDC provider does not have to be a full OIDC provider, but it must expose"
       - url: https://docs.nebius.com/iam/wif
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "Nebius STS is an HTTP-based service that exchanges identity credentials for short-lived Nebius access tokens or OIDC ID tokens."
       - url: https://docs.nebius.com/iam/wif
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "A token that represents the acting identity of the exchange flow, for example, an external JWT."
+        checked_on: 2026-11-16
+        checked_by: sisyphus
+        quote: "Token that represents the acting identity of the exchange flow, for example, an external JWT."
       - url: https://raw.githubusercontent.com/nebius/gosdk/refs/heads/main/auth/federated_credentials.go
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -87,12 +87,12 @@ surfaces:
       Kubernetes cluster has its own issuer. Data Transfer and Serverless jobs take static keys.
     evidence:
       - url: https://docs.nebius.com/iam/wif
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "Nebius AI Cloud allows you to produce ID tokens for your workloads."
       - url: https://docs.nebius.com/iam/wif
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-16
+        checked_by: sisyphus
         quote: "Any platform that supports OIDC Discovery can establish trust with this identity provider and validate the issued ID tokens."
       - url: https://docs.nebius.com/iam/wif/configure
         checked_on: 2026-10-22
