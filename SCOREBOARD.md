@@ -86,6 +86,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Ping Identity | [PingOne](data/products/pingone-platform.yaml) | 🟠 C | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Qualys | [Cloud Platform](data/products/qualys-cloud-platform.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | SailPoint | [Identity Security Cloud](data/products/sailpoint-identity-security-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Slack | [Platform](data/products/slack.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✓` | listed | 2026-11-17 |
 | **🟠 C** | Snyk | [Platform](data/products/snyk-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Sola Security | [Platform](data/products/sola-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Torq | [Hyperautomation Platform](data/products/torq.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
@@ -787,6 +788,14 @@ Scripts call the Identity Security Cloud API by trading a client ID and secret f
 - **Inbound C:** OAuth client credentials from a personal access token, which acts as its creator, or from an API client. The secret buys a JWT that lasts 12 hours by default.
 - **Outbound B:** The AWS source assumes an IAM role you create that trusts SailPoint, with an External ID. Entra ID, GCP, GitHub, Okta and Salesforce want a secret, key or token you create.
 - **Receipts:** [developer.sailpoint.com](https://developer.sailpoint.com/docs/api/authentication), [documentation.sailpoint.com](https://documentation.sailpoint.com/saas/help/common/api_keys.html), [developer.sailpoint.com](https://developer.sailpoint.com/docs/tools/sdk/python/personal-access-tokens/models/create-personal-access-token-request.md), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/aws/help/saas_connectivity/aws/manual_configuration.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/aws/help/integrating_aws/connection_settings.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/msentraid/help/saas_connectivity/microsoft_entra_id/prerequisites.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/microsoft/entra_id/help/integrating_entra_id/connection_settings.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/googleworkspace/help/saas_connectivity/google_workspace/prerequisites.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/googleworkspace/help/saas_connectivity/google_workspace/connection_settings.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/github/help/saas_connectivity/github/connection_settings.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/okta/help/saas_connectivity/okta/authenticate_with_an_api_token.html), [documentation.sailpoint.com](https://documentation.sailpoint.com/connectors/saas/salesforce/help/saas_connectivity/salesforce/connection_settings.html)
+
+### 🟠 C Slack Platform
+
+To call the Slack API, your code holds a bot token that never expires by default. Token rotation cuts it to 12 hours, but every refresh still needs the app's static client secret. There is no federation. Slack reaches your AWS KMS key through a key policy, with no secret handed over.
+
+- **Inbound C:** A bot, user or app-level token from your Slack app. With token rotation turned on, the token lasts 12 hours and is refreshed with the app's client ID, client secret and a refresh token.
+- **Outbound A:** Enterprise Key Management uses a KMS key in your AWS account. You grant Slack's AWS accounts access in the key policy and hand over no secret. Enterprise search connects GitHub, Jira and other sources by app install or member sign-in.
+- **Receipts:** [docs.slack.dev](https://docs.slack.dev/authentication/using-token-rotation/), [docs.slack.dev](https://docs.slack.dev/authentication/tokens/), [docs.slack.dev](https://docs.slack.dev/concepts/security/), [slack.com](https://slack.com/help/articles/360019110974-Slack-Enterprise-Key-Management), [d34u8crftukxnk.cloudfront.net](https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/Slack-EKM-Implementation-Guide-2.pdf), [slack.com](https://slack.com/help/articles/39044407124755-Set-up-and-manage-Slack-enterprise-search)
 
 ### 🟠 C Snyk Platform
 

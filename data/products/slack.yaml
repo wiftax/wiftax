@@ -1,0 +1,175 @@
+id: slack
+vendor: Slack
+product: Platform
+parent: Salesforce
+covers: >-
+  The Slack Web API and the tokens Slack apps use to call it, plus Enterprise Key Management and
+  enterprise search, the two features that reach into your own systems.
+aliases: ["Slack API", "Slack Web API", "Slack apps", "Slack EKM", "Enterprise Key Management"]
+website: https://slack.com
+docs: https://docs.slack.dev/authentication/tokens/
+category: comms
+status: listed
+summary: >-
+  To call the Slack API, your code holds a bot token that never expires by default. Token rotation
+  cuts it to 12 hours, but every refresh still needs the app's static client secret. There is no
+  federation. Slack reaches your AWS KMS key through a key policy, with no secret handed over.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A bot, user or app-level token from your Slack app. With token rotation turned on, the token
+      lasts 12 hours and is refreshed with the app's client ID, client secret and a refresh token.
+    issuers: []
+    evidence:
+      - url: https://docs.slack.dev/authentication/using-token-rotation/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          An access token represents an installation of your Slack app. Without token rotation, the
+          access token never expires. With token rotation, it expires every 12 hours.
+      - url: https://docs.slack.dev/authentication/using-token-rotation/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Note that client_id and client_secret are still required for this call as well."
+      - url: https://docs.slack.dev/authentication/using-token-rotation/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "The access token types that may be refreshed are granular bot, user, or app-level tokens."
+      - url: https://docs.slack.dev/authentication/tokens/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "App-level tokens do not expire by default."
+      - url: https://docs.slack.dev/concepts/security/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          Client Secret: Your client secret is used to securely identify your app's rights when
+          exchanging tokens with Slack.
+    notes: >-
+      Rotation is opt-in per app and cannot be turned off once on. It turns a token that never
+      expires into one that lasts 12 hours. The refresh still needs the client secret, which does
+      not expire, so this is C. Slack documents no way to trade an outside OIDC token for a Slack
+      token. Incoming webhook URLs are a separate static secret that also never expires.
+  outbound:
+    grade: A
+    mechanism: >-
+      Enterprise Key Management uses a KMS key in your AWS account. You grant Slack's AWS accounts
+      access in the key policy and hand over no secret. Enterprise search connects GitHub, Jira and
+      other sources by app install or member sign-in.
+    tier_gated: Enterprise Grid or Enterprise+ (EKM is a paid add-on)
+    evidence:
+      - url: https://slack.com/help/articles/360019110974-Slack-Enterprise-Key-Management
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          Use your own encryption keys (stored in Amazon's Key Management Service) to encrypt
+          messages and files.
+      - url: https://slack.com/help/articles/360019110974-Slack-Enterprise-Key-Management
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          It is available as a security add-on for the Enterprise Grid and Enterprise+ plans, and is
+          included on the GovSlack plan.
+      - url: https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/Slack-EKM-Implementation-Guide-2.pdf
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          On the Define Key Usage Permissions page under External Accounts, click Add an External
+          Account and enter 152659312504 (Slack EKM AWS account number).
+      - url: https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/Slack-EKM-Implementation-Guide-2.pdf
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Do not check the option to “Require external ID.”"
+      - url: https://slack.com/help/articles/39044407124755-Set-up-and-manage-Slack-enterprise-search
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Sign into GitHub and install the Slack enterprise search for GitHub app"
+      - url: https://slack.com/help/articles/39044407124755-Set-up-and-manage-Slack-enterprise-search
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          Once enterprise search is enabled and you’ve added at least one data source, members can
+          connect their individual accounts to start seeing content from other places in their search
+          results.
+    notes: >-
+      AWS is the only cloud Slack reaches into, and it gets there without a secret. The KMS key
+      policy trusts two Slack AWS accounts directly. The optional logging role trusts one of them,
+      and the guide says not to require an External ID. Without one, another Slack customer could
+      point Slack at your role. This rubric does not yet grade that weakness.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.slack.dev/authentication/using-token-rotation/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Without token rotation, the access token never expires."
+      - url: https://docs.slack.dev/authentication/tokens/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Token rotation may not be turned off once it's turned on."
+    notes: >-
+      The default is a token that never expires. Each app's developer can opt in to 12-hour tokens,
+      but no workspace or org policy can require it. The client secret behind every refresh has no
+      expiry either.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.slack.dev/authentication/using-token-rotation/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          In order to refresh a token, make a call to the oauth.v2.access API method, setting the new
+          grant_type parameter to your refresh token:
+      - url: https://docs.slack.dev/reference/methods/auth.revoke/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "This method revokes an access token. Use it when you no longer need a token."
+    notes: >-
+      With rotation on, new tokens come from the API and old ones are revoked through it, so no
+      browser is needed. Without rotation, a new bot token means reinstalling the app. The client
+      secret is regenerated only in app settings.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.slack.dev/authentication/tokens/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: >-
+          Bot tokens ascribe to a granular permission model to request only the scopes you need.
+      - url: https://docs.slack.dev/authentication/tokens/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Unlike user tokens, they're not tied to a user's identity; they're only tied to your app."
+    notes: >-
+      A bot token belongs to the app, not a person, and carries only the scopes the app asked for.
+      Slack can also limit a token to a list of IP addresses.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.slack.dev/authentication/tokens/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+      - url: https://docs.slack.dev/reference/methods/auth.revoke/
+        checked_on: 2026-11-17
+        checked_by: tehreet
+    notes: >-
+      Neither the token docs nor the app settings docs show when a token was last used. If Slack
+      shows it somewhere, send a receipt.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns
+        checked_on: 2026-11-17
+        checked_by: tehreet
+        quote: "Slack | Slack API Token | slack_api_token"
+    notes: >-
+      Slack is a GitHub secret scanning partner for API tokens and incoming webhook URLs. A token
+      leaked to a public repo is reported to Slack.
+
+notes: >-
+  The headline is C because of inbound. Outbound alone would be A. Slack moves to A if its token
+  endpoint accepts an OIDC token from an issuer you choose, so no client secret is needed.
