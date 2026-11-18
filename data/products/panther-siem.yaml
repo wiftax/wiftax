@@ -189,5 +189,4 @@ hygiene:
       reported.
 
 notes: >-
-  Covers SaaS and Cloud Connected deployments, which share the API and tokens. Inbound moves to B or
-  A only if Panther accepts a federated token. Outbound moves to A with a keyless Azure option.
+  Covers SaaS and Cloud Connected deployments, which share the API and tokens. Outbound moves to A with a keyless Azure option.

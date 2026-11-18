@@ -199,5 +199,4 @@ hygiene:
 
 notes: >-
   Covers Temporal Cloud and self-hosted Server. Hygiene applies to Cloud API keys, since the
-  self-hosted server issues none. Inbound moves to B or A only if Temporal Cloud accepts a federated
-  token.
+  self-hosted server issues none.

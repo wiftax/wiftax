@@ -123,5 +123,4 @@ hygiene:
 notes: >-
   Graded the Cyera platform API, which all its modules share. Its API reference, docs and support
   center need a login, so this card relies on third-party docs, public auth metadata and sample
-  repos. Cyera's Oasis acquisition runs as Cyera Identity and is not graded here. Inbound moves to A
-  or B only with documented workload federation.
+  repos. Cyera's Oasis acquisition runs as Cyera Identity and is not graded here.

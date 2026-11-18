@@ -55,7 +55,6 @@ surfaces:
       spec declares only the token header, and nothing public offers OIDC or workload identity.
       Human SSO and passwords are not workload paths. Whether federation exists behind the login is
       unknown. The Data Lake keys are a second static type, created only in the console. Inbound
-      moves to B or A only with a federated token.
   outbound:
     grade: B
     mechanism: >-

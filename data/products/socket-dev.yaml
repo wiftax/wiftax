@@ -204,5 +204,5 @@ hygiene:
 
 notes: >-
   The GitHub App, CI actions, Firewall and MCP all use the same organization tokens, so they share
-  this grade. Inbound moves to B or A only if the API accepts a federated token. Adding expiry and
+  this grade. Adding expiry and
   GitHub scanning would still leave a D.

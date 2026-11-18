@@ -214,4 +214,4 @@ hygiene:
 notes: >-
   Hygiene is graded on the REST and ACS tokens, which pass two of five, so inbound is F. A
   service-account type or an enforced lifetime cap would lift it to D. HEC tokens also pass only
-  two. Inbound moves to B or A only if the REST, ACS and HEC endpoints accept a federated token.
+  two.

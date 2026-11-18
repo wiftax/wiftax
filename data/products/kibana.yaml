@@ -260,5 +260,5 @@ hygiene:
 notes: >-
   Covers the Kibana HTTP API on every deployment type, and the connectors behind alerting, cases,
   security and AI features. Related cards: elasticsearch, elastic-cloud-api, elastic-agent-fleet and
-  elastic-cloud-enterprise. The headline is C because of outbound. Basic-tier or Serverless callers
+  elastic-cloud-enterprise. Basic-tier or Serverless callers
   use non-expiring API keys, which is F inbound.

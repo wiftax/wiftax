@@ -58,8 +58,22 @@ const MAX_SENTENCE_WORDS = 35, MAX_PARENS = 2, MAX_IDENTS = 3, MAX_SUMMARY_WORDS
 // backticked code, snake_case, SCREAMING_CASE, camelCase, a.b.c paths, scheme:value
 const IDENT = /`[^`]+`|\b[a-z]+_[a-z0-9_]+\b|\b[A-Z][A-Z0-9]*_[A-Z0-9_]+\b|\b[a-z]+[A-Z]\w*\b|\b\w+\.\w+\.\w+\b|\b[a-z]+:[a-z]+\b/g;
 const words = (s) => s.trim().split(/\s+/).length;
-function prose(doc) {
+// Card text describes the product. How a page was fetched is reviewer context and goes in
+// the PR description. The one exception is confidence.reason, which must say why.
+const PROCESS = /(without|needs?|with|requires?) JavaScript|plain (HTTP )?fetch|JSON (endpoint|file behind)|bot check|browser (check|challenge)|rendered by script|non-browser client/i;
+// Sentences that say nothing about this product. Every C, D or F card moves to A or B only
+// with federation, the page already shows the grade, and every card applies the rubric.
+const FILLER = [
+  [/moves to (A or B|B or A) only\b/i, "says the card moves to A or B only with federation, which is true of every card. Cut it"],
+  [/^the headline( grade)? is [A-F]\b(?!.*either way)(,| because)?[^.]*\.$/i, "restates the headline grade, which the page already shows. Cut it"],
+  [/rubric's rule|under the rubric\b/i, "talks about the rubric. Describe the product"],
+];
+const NUM = { no: 0, none: 0, zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5 };
+const sentences = (v) => v.split(/(?<=[.!?])\s+(?=[A-Z"`(])/);
+const norm = (s) => s.toLowerCase().replace(/[^a-z0-9 ]/g, "").replace(/\s+/g, " ").trim();
+function prose(doc, passes) {
   const out = [];
+  const seen = new Map();
   const walk = (o, path) => {
     if (!o || typeof o !== "object") return;
     for (const [k, v] of Object.entries(o)) {
@@ -68,8 +82,20 @@ function prose(doc) {
       if (!PROSE_FIELDS.has(k) || typeof v !== "string") { walk(v, p); continue; }
       if (v.includes(";")) out.push(`${p}: has a semicolon. Split it into sentences`);
       if (k === "summary" && words(v) > MAX_SUMMARY_WORDS) out.push(`${p}: ${words(v)} words, max ${MAX_SUMMARY_WORDS}`);
-      for (const s of v.split(/(?<=[.!?])\s+(?=[A-Z"`(])/)) {
+      if (p !== "confidence.reason" && PROCESS.test(v)) out.push(`${p}: says how a page was fetched (${v.match(PROCESS)[0]}). That goes in the PR description, not the card`);
+      for (const s of sentences(v)) {
         const at = `${p}: "${s.slice(0, 50)}..."`;
+        for (const [re, why] of FILLER) if (re.test(s)) out.push(`${at} ${why}`);
+        const n = s.match(/\b(none|no|one|two|three|four|five|[0-5]) (?:of (?:the )?(?:five|5) )?hygiene checks? pass(?:es)?\b(?! for)/i);
+        if (n && passes !== undefined) {
+          const claimed = NUM[n[1].toLowerCase()] ?? Number(n[1]);
+          if (claimed !== passes) out.push(`${at} says ${claimed} hygiene checks pass, but the card has ${passes}`);
+        }
+        const k = norm(s);
+        if (words(s) >= 6) {
+          if (seen.has(k) && !(p.startsWith("hygiene.") && seen.get(k).startsWith("hygiene."))) out.push(`${at} repeats a sentence from ${seen.get(k)}. Say it once`);
+          else seen.set(k, p);
+        }
         if (words(s) > MAX_SENTENCE_WORDS) out.push(`${at} ${words(s)}-word sentence, max ${MAX_SENTENCE_WORDS}`);
         if ((s.match(/\(/g) ?? []).length > MAX_PARENS) out.push(`${at} more than ${MAX_PARENS} parentheticals`);
         if ((s.match(IDENT) ?? []).length > MAX_IDENTS) out.push(`${at} more than ${MAX_IDENTS} code identifiers. Say it in words`);
@@ -100,7 +126,7 @@ for (const f of files) {
   if (inb?.grade === "F" && passes >= 3) errs.push(`inbound F with ${passes} hygiene passes should be D`);
   for (const c of Object.values(hyg)) if (c && c.pass !== null && !(c.evidence?.length)) errs.push("hygiene check with a pass/fail needs evidence");
   if (doc?.status === "graduated" && !doc.graduated_on) errs.push("graduated status requires graduated_on");
-  errs.push(...prose(doc));
+  errs.push(...prose(doc, passes));
   errs.push(...receiptUrls(doc));
 
   // staleness

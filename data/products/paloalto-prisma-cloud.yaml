@@ -186,5 +186,4 @@ hygiene:
 
 notes: >-
   Graded on Prisma Cloud Enterprise Edition SaaS, including the Compute API and cloud onboarding.
-  Self-hosted Compute Edition is not graded here. Inbound moves to B or A only if /login accepts a
-  federated token. Outbound moves to A with keyless Azure and GCP onboarding.
+  Self-hosted Compute Edition is not graded here. Outbound moves to A with keyless Azure and GCP onboarding.

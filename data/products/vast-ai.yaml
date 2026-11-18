@@ -186,6 +186,6 @@ hygiene:
       Vast.ai is not in GitHub's secret scanning patterns, so leaked keys are not reported to Vast.
 
 notes: >-
-  One card for the whole platform, which runs on one account API key. Inbound moves to B or A only
-  with federation. Before that, an enforced expiry plus a last-used time would lift it to D.
+  One card for the whole platform, which runs on one account API key. An enforced expiry plus a
+  last-used time would lift inbound to D.
   Outbound reaches A with an IAM role for S3 and token or consent flows for the rest.

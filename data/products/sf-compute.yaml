@@ -159,5 +159,5 @@ hygiene:
 
 notes: >-
   Graded on the v2 API and Rust sf CLI. An enforced maximum lifetime or GitHub scanning would add a
-  fourth hygiene pass. Inbound moves to B or A only with a federated token. Object storage, the
+  fourth hygiene pass. Object storage, the
   weakest credential here, is graded F on its own card.

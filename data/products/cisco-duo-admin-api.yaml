@@ -192,4 +192,4 @@ hygiene:
 notes: >-
   Graded on the Admin API, the documented way to automate Duo. The Auth API uses the same HMAC
   scheme and is not graded separately. Inbound moves to D with an enforced expiry and a last-used
-  timestamp. It moves to B or A only if the Admin API accepts a federated token.
+  timestamp.

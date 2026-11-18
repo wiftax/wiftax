@@ -205,7 +205,7 @@ To automate Duo, your code holds an Admin API integration key and secret that si
 - **Outbound B:** Entra ID and Google directory sync use admin consent, with no key. Device-trust integrations such as Intune, Jamf and CrowdStrike want a pasted client secret, password or API key.
 - **Receipts:** [duo.com](https://duo.com/docs/adminapi), [duo.com](https://duo.com/docs/azuresync), [duo.com](https://duo.com/docs/googlesync), [duo.com](https://duo.com/docs/adsync), [duo.com](https://duo.com/docs/oktasync), [duo.com](https://duo.com/docs/trusted-endpoints-intune), [duo.com](https://duo.com/docs/trusted-endpoints-jamf), [duo.com](https://duo.com/docs/trusted-endpoints-crowdstrike-falcon), [duo.com](https://duo.com/docs/trusted-endpoints-cisco-amp), [duo.com](https://duo.com/docs/trusted-endpoints-meraki), [duo.com](https://duo.com/docs/trusted-endpoints-workspaceone)
 
-### 💀 F Elastic Elastic Agent and Fleet
+### 💀 F Elastic Agent and Fleet
 
 Agents and OpenTelemetry shippers send data to Elastic with an enrollment token, an Elasticsearch API key or an APM secret token. Agents you host can reach AWS and Azure with their own cloud identity. GCP and SaaS sources want a pasted secret.
 
@@ -425,7 +425,7 @@ The StrongDM API, SDKs and Terraform provider take a static API key pair, and CL
 - **Outbound B:** Discovery uses StrongDM-issued OIDC tokens trusted by AWS, Entra ID and GCP. Many resources use the identity of a node you run. Azure CLI, GCP service account and GKE resources need static secrets.
 - **Receipts:** [docs.strongdm.com](https://docs.strongdm.com/references/api/api-keys.md), [docs.strongdm.com](https://docs.strongdm.com/references/api.md), [docs.strongdm.com](https://docs.strongdm.com/admin/principals/service-accounts.md), [docs.strongdm.com](https://docs.strongdm.com/admin/principals/admin-tokens.md), [docs.strongdm.com](https://docs.strongdm.com/concepts/security/authentication-and-identity-federation.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/strongdm/strongdm-sdk-go/master/models.go), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/discovery.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clouds/aws-instance-profile.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/datasources/azure-postgresql-managed-identity.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clusters/kubernetes-podidentity.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clouds/google-groups.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clouds/azure.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clouds/gcp.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clusters/gke.md), [docs.strongdm.com](https://docs.strongdm.com/admin/resources/clouds/aws.md), [docs.strongdm.com](https://docs.strongdm.com/admin/access/secret-stores/aws-secrets-manager.md)
 
-### 💀 F Sysdig Sysdig Secure
+### 💀 F Sysdig Secure
 
 Scripts, CI and Terraform call Sysdig Secure with a static token, and agents connect with a static access key. There is no OIDC login. Cloud onboarding is keyless on AWS, Azure and GCP, but registry scans, Okta and Jira take static secrets.
 
@@ -917,7 +917,7 @@ On Team and Enterprise plans, your code can trade a token from any OIDC issuer y
 - **Outbound B:** Doppler assumes an AWS role with an External ID, federates into GCP, and uses app consent or a federated credential on Azure. Most CI and hosting syncs want a pasted API token.
 - **Receipts:** [docs.doppler.com](https://docs.doppler.com/docs/service-account-identities), [docs.doppler.com](https://docs.doppler.com/reference/auth-oidc), [docs.doppler.com](https://docs.doppler.com/docs/aws-ec2-oidc), [docs.doppler.com](https://docs.doppler.com/docs/kubernetes-operator-oidc), [docs.doppler.com](https://docs.doppler.com/docs/aws-secrets-manager), [docs.doppler.com](https://docs.doppler.com/docs/gcp-secret-manager), [docs.doppler.com](https://docs.doppler.com/docs/azure-key-vault), [docs.doppler.com](https://docs.doppler.com/docs/azure-dynamic-service-principal), [docs.doppler.com](https://docs.doppler.com/docs/github-actions), [docs.doppler.com](https://docs.doppler.com/docs/vercel), [docs.doppler.com](https://docs.doppler.com/docs/gitlab-sync-integration), [docs.doppler.com](https://docs.doppler.com/docs/cloudflare-pages), [docs.doppler.com](https://docs.doppler.com/docs/ekm-aws)
 
-### 🟡 B Elastic Elasticsearch
+### 🟡 B Elasticsearch
 
 On Platinum or Enterprise, a JWT realm can trust tokens from any issuer you configure, with no shared secret. Serverless has no realms, so there your code uses API keys. Snapshots use the host's cloud identity when self-managed, but Elastic Cloud Hosted wants static keys.
 

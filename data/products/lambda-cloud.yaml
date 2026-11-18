@@ -64,8 +64,7 @@ surfaces:
       Graded on the Cloud API key, the weakest path a workload must use. The data planes do not lift
       it. S3 adapter keys are static pairs made in the console, with no documented expiry. Managed
       Kubernetes CI uses a service account token copied into a kubeconfig, which is long-lived. No
-      first-party Terraform provider was found. Moves to B or A only if the Cloud API accepts a
-      federated token.
+      first-party Terraform provider was found.
   outbound:
     grade: N/A
     mechanism: >-

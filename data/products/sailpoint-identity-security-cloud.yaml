@@ -178,6 +178,5 @@ hygiene:
       SailPoint is not in GitHub's secret-scanning patterns, so a leaked secret is not reported.
 
 notes: >-
-  Graded on the Identity Security Cloud API, formerly IdentityNow. The headline is C, from inbound C
-  and outbound B. Inbound moves to B or A only if the token endpoint accepts a federated token.
+  Graded on the Identity Security Cloud API, formerly IdentityNow.
   Expiry would pass with an enforced maximum or a ban on non-expiring tokens.

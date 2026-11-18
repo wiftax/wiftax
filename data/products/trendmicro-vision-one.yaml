@@ -209,5 +209,4 @@ hygiene:
 
 notes: >-
   Covers the Vision One API and the Cloud Accounts app, now branded TrendAI Vision One. Three of
-  five hygiene checks pass, which keeps inbound at D. Inbound moves to B or A only with a federated
-  token. A reviewer with console access should confirm what a 0-month expiry means.
+  five hygiene checks pass, which keeps inbound at D. A reviewer with console access should confirm what a 0-month expiry means.

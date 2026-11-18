@@ -171,6 +171,6 @@ hygiene:
 
 notes: >-
   One card for the whole Falcon API. The SDKs and Terraform provider all authenticate the same way.
-  Inbound moves to B or A only if /oauth2/token accepts a federated assertion. Outbound moves to A
+  Outbound moves to A
   if OCI and the registry connectors move to federation. Sensor enrollment is not API access and is
   not graded.

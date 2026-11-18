@@ -197,6 +197,5 @@ hygiene:
 
 notes: >-
   Covers Tines Stories on cloud and self-hosted, not Tines 3B. One of five hygiene checks passes, so
-  inbound is F. An enforced key lifetime and a key management API would lift it to D. Inbound moves
-  to B or A only if the API accepts a federated token. Outbound reaches A if SaaS flows move off
+  inbound is F. An enforced key lifetime and a key management API would lift it to D. Outbound reaches A if SaaS flows move off
   pasted secrets.

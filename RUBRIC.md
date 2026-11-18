@@ -41,6 +41,10 @@ Notes:
   workloads running anywhere.
 - Personal access tokens, "app passwords" and "auth tokens" are static keys, whatever
   the vendor calls them.
+- C needs a grant a workload can complete on its own, such as client credentials or a
+  JWT signed with its own key. A refresh token from a person's one-time consent, or a
+  user's password traded for a session, is no better than a key. If that is the only
+  way to get short-lived tokens, grade the static path and its hygiene checks.
 - Federation counts toward A or B only if it is **self-serve and documented for
   workloads**. If the vendor's support team has to switch it on, or it is documented
   only for human logins, the card notes it but it does not lift the grade.
@@ -60,6 +64,13 @@ SaaS) on my behalf.*
 | **N/A** | The product never needs access into my infrastructure. |
 
 A product with an N/A outbound surface is graded on inbound alone.
+
+- An integration that offers a static key next to its keyless path still wants a static
+  key, so it cannot earn A.
+- D needs all three: least-privilege guidance, scoped keys and rotation guidance. Missing
+  any one is F.
+- A means every integration the card covers was read. If some could not be read, narrow
+  `covers` or grade on what was read.
 
 For SaaS, repos and other non-cloud integrations, an app the customer installs or
 consents to counts as keyless, because no secret changes hands. Examples are a GitHub

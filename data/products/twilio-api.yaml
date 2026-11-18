@@ -133,5 +133,4 @@ hygiene:
     notes: >-
       GitHub reports leaked API keys and Account SIDs to Twilio and blocks them at push.
 notes: >-
-  The headline is D because of outbound. Inbound alone would be C. Twilio moves to B or A only if
-  its token endpoint accepts OIDC tokens.
+  Inbound alone would be C.
