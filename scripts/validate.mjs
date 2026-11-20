@@ -59,8 +59,9 @@ const MAX_SENTENCE_WORDS = 35, MAX_PARENS = 2, MAX_IDENTS = 3, MAX_SUMMARY_WORDS
 const IDENT = /`[^`]+`|\b[a-z]+_[a-z0-9_]+\b|\b[A-Z][A-Z0-9]*_[A-Z0-9_]+\b|\b[a-z]+[A-Z]\w*\b|\b\w+\.\w+\.\w+\b|\b[a-z]+:[a-z]+\b/g;
 const words = (s) => s.trim().split(/\s+/).length;
 // Card text describes the product. How a page was fetched is reviewer context and goes in
-// the PR description. The one exception is confidence.reason, which must say why.
-const PROCESS = /(without|needs?|with|requires?) JavaScript|plain (HTTP )?fetch|JSON (endpoint|file behind)|bot check|browser (check|challenge)|rendered by script|non-browser client/i;
+// the PR description. Checked in summary and notes only, so a mechanism can still say a
+// product needs JavaScript. confidence.reason is exempt, since it must say why.
+const PROCESS = /plain (HTTP )?fetch|(renders?|rendered) only (with|in)|(needs?|without) JavaScript|rendered by script|receipts? cites?|bot check|browser (check|challenge)|non-browser client/i;
 // Sentences that say nothing about this product. Every C, D or F card moves to A or B only
 // with federation, the page already shows the grade, and every card applies the rubric.
 const FILLER = [
@@ -82,7 +83,7 @@ function prose(doc, passes) {
       if (!PROSE_FIELDS.has(k) || typeof v !== "string") { walk(v, p); continue; }
       if (v.includes(";")) out.push(`${p}: has a semicolon. Split it into sentences`);
       if (k === "summary" && words(v) > MAX_SUMMARY_WORDS) out.push(`${p}: ${words(v)} words, max ${MAX_SUMMARY_WORDS}`);
-      if (p !== "confidence.reason" && PROCESS.test(v)) out.push(`${p}: says how a page was fetched (${v.match(PROCESS)[0]}). That goes in the PR description, not the card`);
+      if ((k === "summary" || k === "notes") && PROCESS.test(v)) out.push(`${p}: says how a page was fetched (${v.match(PROCESS)[0]}). That goes in the PR description, not the card`);
       for (const s of sentences(v)) {
         const at = `${p}: "${s.slice(0, 50)}..."`;
         for (const [re, why] of FILLER) if (re.test(s)) out.push(`${at} ${why}`);

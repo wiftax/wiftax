@@ -41,10 +41,16 @@ Notes:
   workloads running anywhere.
 - Personal access tokens, "app passwords" and "auth tokens" are static keys, whatever
   the vendor calls them.
-- C needs a grant a workload can complete on its own, such as client credentials or a
-  JWT signed with its own key. A refresh token from a person's one-time consent, or a
-  user's password traded for a session, is no better than a key. If that is the only
-  way to get short-lived tokens, grade the static path and its hygiene checks.
+- C needs a static root that belongs to a non-human client. That means an app's client
+  secret or private key, or the secret or password of an account type the vendor
+  documents as non-human. A key or refresh token made in a console for such a client,
+  and traded for short-lived tokens, counts.
+- A person's password, or a refresh token issued to a person through their consent, is
+  a static key, not a root. If that is the only way to get short-lived tokens, grade the
+  static path and its hygiene checks.
+- A one-time consent is fine when it only grants access to the client's own root. An
+  app that signs a JWT with its own key after an admin consents once is C, even when the
+  token acts for a user.
 - Federation counts toward A or B only if it is **self-serve and documented for
   workloads**. If the vendor's support team has to switch it on, or it is documented
   only for human logins, the card notes it but it does not lift the grade.
@@ -69,8 +75,9 @@ A product with an N/A outbound surface is graded on inbound alone.
   key, so it cannot earn A.
 - D needs all three: least-privilege guidance, scoped keys and rotation guidance. Missing
   any one is F.
-- A means every integration the card covers was read. If some could not be read, narrow
-  `covers` or grade on what was read.
+- A means every integration the card covers was read. A page you can open in a browser
+  counts as readable, so read it. If the deciding pages are behind a login, grade what is
+  public and set `confidence: low`, as for hygiene. Otherwise narrow `covers`.
 
 For SaaS, repos and other non-cloud integrations, an app the customer installs or
 consents to counts as keyless, because no secret changes hands. Examples are a GitHub

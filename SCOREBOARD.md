@@ -8,6 +8,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 |---|---|---|---|---|---|---|---|
 | **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **💀 F** | CoreWeave | [Forge](data/products/coreweave-forge.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
@@ -46,13 +47,13 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | TensorWave | [GPU Cloud](data/products/tensorwave.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Tines | [Platform](data/products/tines.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Together AI | [Platform](data/products/together-ai.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 💀 F | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **💀 F** | Vast.ai | [GPU Cloud](data/products/vast-ai.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Voltage Park | [GPU Cloud](data/products/voltage-park.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
-| **🔴 D** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
@@ -70,7 +71,6 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🔴 D** | Temporal | [Platform](data/products/temporal.yaml) | 🔴 D | 🟢 A | `✓ ✓ ✓ ✗ ✓` | listed | 2026-10-20 |
 | **🔴 D** | Tenable | [Vulnerability Management](data/products/tenable-vulnerability-management.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
-| **🔴 D** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **🔴 D** | Veza | [Access Graph](data/products/veza.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-11-15 |
 | **🟠 C** | Axonius | [Platform](data/products/axonius.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-11-15 |
@@ -140,6 +140,14 @@ To call the Arcade Engine, your agent needs a static project API key. A key can 
 - **Inbound F:** A static project API key sent as a bearer token to the Engine API. No workload federation or token exchange is documented.
 - **Outbound B:** Per-user OAuth through Arcade's own OAuth apps, and dynamic registration for the AWS MCP Server, need no secret from you. Other connectors need your own app's client secret or a static key.
 - **Receipts:** [docs.arcade.dev](https://docs.arcade.dev/en/get-started/setup/api-keys), [api.arcade.dev](https://api.arcade.dev/v1/swagger), [docs.arcade.dev](https://docs.arcade.dev/en/resources/faq), [docs.arcade.dev](https://docs.arcade.dev/en/operate/governance/mcp-gateways), [docs.arcade.dev](https://docs.arcade.dev/en/operate/deploy/architecture), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/google), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/microsoft), [docs.arcade.dev](https://docs.arcade.dev/en/operate/governance/remote-mcp-servers/aws), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/github), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/slack), [docs.arcade.dev](https://docs.arcade.dev/en/operate/governance/contextual-access/group-access), [docs.arcade.dev](https://docs.arcade.dev/en/resources/integrations/development/datadog)
+
+### 💀 F BeyondTrust Password Safe
+
+To call the Password Safe API, your code needs an OAuth client secret swapped for short-lived tokens, or a static API key. Password Safe has no federated login. To manage your clouds, it needs a static AWS key, Azure client secret or GCP key file.
+
+- **Inbound C:** An application user's OAuth client ID and secret buy a short-lived bearer token. The older path is a static API key plus a RunAs user name, restricted by required source-IP rules.
+- **Outbound F:** Cloud discovery and account management take a static AWS access key, an Azure client secret or a Google service account key file. Least-privilege permissions are documented for each.
+- **Receipts:** [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/ps-cloud-configure-api-registration), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-auth-connect-token), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-apiregistrations), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-auth-signappin), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/pathfinder-general), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/docs/workload-identities), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/docs/wlc-api), [www.beyondtrust.com](https://www.beyondtrust.com/products/workload-credentials), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/reference), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/bi-cloud-config), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/discovery-configure-bi-cloud), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/bi-cloud-configure-entra-id), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/ps-google), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-users), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/docs/wlc-on-pathfinder)
 
 ### 💀 F CoreWeave Cloud API
 
@@ -463,6 +471,14 @@ Every workload path into Together, from inference to the GPU cluster API and CI,
 - **Outbound B:** S3, Google Cloud Storage and R2 imports take a presigned URL you mint, so no credential changes hands. Hugging Face takes a pasted token, and W&B logging a pasted API key.
 - **Receipts:** [docs.together.ai](https://docs.together.ai/docs/api-keys-authentication.md), [docs.together.ai](https://docs.together.ai/reference/cli/getting-started.md), [docs.together.ai](https://docs.together.ai/reference/cli/auth.md), [docs.together.ai](https://docs.together.ai/reference/whoami.md), [docs.together.ai](https://docs.together.ai/docs/gpu-clusters-api.md), [docs.together.ai](https://docs.together.ai/reference/cli/jig.md), [docs.together.ai](https://docs.together.ai/docs/cluster-oidc.md), [docs.together.ai](https://docs.together.ai/docs/gpu-clusters-management.md), [docs.together.ai](https://docs.together.ai/docs/dedicated-endpoints/custom-models.md), [docs.together.ai](https://docs.together.ai/docs/dedicated-endpoints/adapter.md), [docs.together.ai](https://docs.together.ai/reference/dmi/model-uploads-create.md), [docs.together.ai](https://docs.together.ai/docs/fine-tuning/byom.md), [docs.together.ai](https://docs.together.ai/reference/post-fine-tunes.md)
 
+### 💀 F Twilio API
+
+To call Twilio, your code needs a static API key that never expires, or an OAuth client secret (public beta) that it trades for short-lived tokens. There is no federation. To save recordings to your S3 bucket, you hand Twilio an IAM user's access key.
+
+- **Inbound C:** An OAuth client ID and secret (public beta) traded for short-lived tokens. Otherwise a static API key and secret, or the Account SID and Auth Token.
+- **Outbound F:** To store Voice and Video recordings in S3, you give Twilio an IAM user's access key and secret.
+- **Receipts:** [www.twilio.com](https://www.twilio.com/en-us/changelog/oauth-public-beta), [www.twilio.com](https://www.twilio.com/docs/iam/oauth-apps/overview), [www.twilio.com](https://www.twilio.com/docs/iam/api-keys), [www.twilio.com](https://www.twilio.com/docs/voice/recording-settings), [www.twilio.com](https://www.twilio.com/docs/iam/credentialaws-resource), [www.twilio.com](https://www.twilio.com/docs/video/tutorials/storing-aws-s3)
+
 ### 💀 F Vast.ai GPU Cloud
 
 To call Vast.ai, your code needs a static API key that never expires. There is no OIDC login. Cloud Sync reaches Google Drive and Dropbox through OAuth consent, but S3, Backblaze, Hugging Face and private registries need pasted static credentials.
@@ -512,14 +528,6 @@ Every Baseten call, from CI to inference, uses a static API key. Keys can now ca
 - **Inbound D:** A static API key, personal or team-owned. Short-lived sandbox and volume tokens exist, but they are minted from that key. No federation path exists.
 - **Outbound B:** You trust Baseten's OIDC issuer from an AWS role, a GCP pool or Hugging Face. Baseten then pulls from S3, ECR, GCS, Artifact Registry and Hugging Face with short-lived tokens. Other sources need static secrets.
 - **Receipts:** [docs.baseten.co](https://docs.baseten.co/organization/api-keys.md), [docs.baseten.co](https://docs.baseten.co/deployment/ci-cd.md), [docs.baseten.co](https://docs.baseten.co/reference/ci/github-action.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/basetenlabs/terraform-provider-baseten/main/README.md), [docs.baseten.co](https://docs.baseten.co/sandboxes/authentication.md), [docs.baseten.co](https://docs.baseten.co/reference/management-api/volumes/create-a-volume-access-token.md), [docs.baseten.co](https://docs.baseten.co/reference/cli/truss/auth.md), [docs.baseten.co](https://docs.baseten.co/organization/oidc.md), [docs.baseten.co](https://docs.baseten.co/organization/aws-assume-role.md), [docs.baseten.co](https://docs.baseten.co/development/model/bdn.md), [docs.baseten.co](https://docs.baseten.co/engines/performance-concepts/cloud-storage-deployment.md), [docs.baseten.co](https://docs.baseten.co/development/model/dependencies.md), [docs.baseten.co](https://docs.baseten.co/development/volumes/sync.md), [docs.baseten.co](https://docs.baseten.co/organization/audit-logs.md)
-
-### 🔴 D BeyondTrust Password Safe
-
-To call the Password Safe API, your code needs an OAuth client secret swapped for short-lived tokens, or a static API key. Password Safe has no federated login. To manage your clouds, it needs a static AWS key, Azure client secret or GCP key file.
-
-- **Inbound C:** An application user's OAuth client ID and secret buy a short-lived bearer token. The older path is a static API key plus a RunAs user name, restricted by required source-IP rules.
-- **Outbound D:** Cloud discovery and account management take a static AWS access key, an Azure client secret or a Google service account key file. Least-privilege permissions are documented for each.
-- **Receipts:** [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/ps-cloud-configure-api-registration), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-auth-connect-token), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-apiregistrations), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-auth-signappin), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/pathfinder-general), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/docs/workload-identities), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/docs/wlc-api), [www.beyondtrust.com](https://www.beyondtrust.com/products/workload-credentials), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/reference), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/bi-cloud-config), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/discovery-configure-bi-cloud), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/bi-cloud-configure-entra-id), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/docs/ps-google), [docs.beyondtrust.com](https://docs.beyondtrust.com/bips/reference/post-api-public-v3-users), [docs.beyondtrust.com](https://docs.beyondtrust.com/bt-docs/docs/wlc-on-pathfinder)
 
 ### 🔴 D Check Point Infinity Portal and CloudGuard
 
@@ -658,14 +666,6 @@ Your code calls the Vision One API with a static API key. There is no federation
 - **Inbound D:** A static bearer API key with a role, an expiry and an optional IP allowlist. Older tokens for API-only accounts are the same kind of static key.
 - **Outbound B:** Cloud Accounts deploys a stack that trusts Vision One as an OIDC issuer in AWS, Azure, Google Cloud and Alibaba. OCI gets a user with an API key, and Okta takes pasted admin tokens.
 - **Receipts:** [automation.trendmicro.com](https://automation.trendmicro.com/xdr/Guides/Authentication), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-platform-api-keys), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-add-api-key), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-api-keys-third-party-apps), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-api-key), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-aws), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-aws-accounts-required-permissions), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-azure), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-azure-sub-required-permissions), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-google-cloud), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-google-cloud-required-permissions), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-resources-deployed-alibaba), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-cloud-accounts-faq-api-interrupt), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-resources-deployed-oracle), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-configuring-okta-tenants), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-okta-url-api-token), [docs.trendmicro.com](https://docs.trendmicro.com/en-us/documentation/article/trend-vision-one-integration-aad-third-party)
-
-### 🔴 D Twilio API
-
-To call Twilio, your code needs a static API key that never expires, or an OAuth client secret (public beta) that it trades for short-lived tokens. There is no federation. To save recordings to your S3 bucket, you hand Twilio an IAM user's access key.
-
-- **Inbound C:** An OAuth client ID and secret (public beta) traded for short-lived tokens. Otherwise a static API key and secret, or the Account SID and Auth Token.
-- **Outbound D:** To store Voice and Video recordings in S3, you give Twilio an IAM user's access key and secret.
-- **Receipts:** [www.twilio.com](https://www.twilio.com/en-us/changelog/oauth-public-beta), [www.twilio.com](https://www.twilio.com/docs/iam/oauth-apps/overview), [www.twilio.com](https://www.twilio.com/docs/iam/api-keys), [www.twilio.com](https://www.twilio.com/docs/voice/recording-settings), [www.twilio.com](https://www.twilio.com/docs/iam/credentialaws-resource), [www.twilio.com](https://www.twilio.com/docs/video/tutorials/storing-aws-s3)
 
 ### 🔴 D Veza Access Graph
 

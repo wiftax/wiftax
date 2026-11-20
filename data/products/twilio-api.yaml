@@ -43,7 +43,7 @@ surfaces:
       requests with a private key you hold, but that key is static with no federation, so it is also
       C. OAuth went to public beta on 2025-11-06. The docs do not state how long access tokens last.
   outbound:
-    grade: D
+    grade: F
     mechanism: >-
       To store Voice and Video recordings in S3, you give Twilio an IAM user's access key and
       secret.
@@ -69,8 +69,8 @@ surfaces:
     notes: >-
       This is the only reach into your cloud we found in the core REST API. Segment, SendGrid and
       Flex are separate products. Twilio's example IAM policy allows only s3:PutObject on one
-      prefix. That is real least-privilege guidance, so this is D, not F. There is no IAM role
-      option, and the docs give no rotation procedure.
+      prefix. That is real least-privilege guidance, but the docs give no rotation procedure, so this is F.
+      There is no IAM role option.
 hygiene:
   expiry:
     pass: false
