@@ -16,7 +16,7 @@ summary: >-
 
 surfaces:
   inbound:
-    grade: C
+    grade: F
     mechanism: >-
       A Manager user's name and password are posted to a login endpoint for a session cookie or a
       30-minute JWT.
@@ -42,8 +42,7 @@ surfaces:
         checked_by: erikng
         quote: "To calculate the refresh token expiration, multiply 86,400 by 1,800, resulting in 155,520,000 seconds or 1,800 days."
     notes: >-
-      Graded C because every API login starts from a stored user password and yields a short-lived
-      session or token. The JWT path also returns a refresh token that lasts 1,800 days by
+      Every API login starts from an ordinary user's password, and no non-human account type is documented. A short-lived session does not make that C, so inbound is F with one hygiene check passing. The JWT path also returns a refresh token that lasts 1,800 days by
       default, so a caller should ask for a short duration. JWT login needs release 20.18.1 or
       later. No OIDC, cloud workload identity or token exchange is documented for API callers.
   outbound:
@@ -75,8 +74,7 @@ surfaces:
     notes: >-
       AWS can be keyless through a role and external ID. Graded B, not A, because the same API
       still accepts an AWS access key, and Azure and Google Cloud accounts need a stored secret.
-      The grade rests on the API schema. Cisco's setup guides refuse plain HTTP fetches, so their
-      least-privilege guidance could not be cited.
+      The grade rests on the API schema. 
 
 hygiene:
   expiry:
@@ -88,8 +86,7 @@ hygiene:
         quote: '"passwordPolicy":"disabled","passwordExpirationTime":90'
     notes: >-
       The API reference shows a global password policy with an expiration time, switched off in
-      the example. The guide that explains the setting sits on a Cisco site that refuses plain
-      HTTP fetches. With no readable receipt that the policy forces an expiry, this fails.
+      the example. No receipt shows that the policy forces an expiry, so this fails.
   rotation_api:
     pass: true
     evidence:
@@ -134,7 +131,4 @@ hygiene:
       Manager pattern in GitHub's table.
 
 notes: >-
-  Receipts come from Cisco's developer site only. The configuration guides on Cisco's main site
-  refuse plain HTTP fetches, so they could not be cited. Those guides may describe API tokens for
-  Cisco-hosted tenants, which this card does not grade. Inbound moves to A or B only with
-  documented workload federation.
+  Cisco-hosted tenants may offer API tokens, which this card does not grade.

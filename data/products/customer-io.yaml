@@ -144,5 +144,5 @@ hygiene:
 notes: >-
   Two of five hygiene checks pass, so inbound is F. An enforced key lifetime or a key management API
   would lift it to D. Extending the service account JWT exchange to the Track, App and Pipelines
-  APIs would make it C. Inbound moves to A or B only if the APIs accept a federated workload token.
+  APIs would make it C.
   Legacy Track site ID and key pairs and legacy App API keys still work and are also static.

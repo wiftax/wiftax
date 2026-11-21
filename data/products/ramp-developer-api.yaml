@@ -153,7 +153,5 @@ hygiene:
       repos are reported to Ramp.
 
 notes: >-
-  Two of five hygiene checks pass. The developer docs render only with JavaScript, so receipts cite
-  the plain-text guide files Ramp publishes for the same pages. Inbound moves to A or B only if the
-  token endpoint accepts a federated workload token. Outbound reaches A when the accounting
+  Two of five hygiene checks pass.  Outbound reaches A when the accounting
   connectors stop taking pasted secrets.

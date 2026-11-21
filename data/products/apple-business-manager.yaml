@@ -46,8 +46,7 @@ surfaces:
       Graded C because the access token is short-lived but the private key is a static root. A
       client assertion may itself be valid for up to 180 days. External device management
       services use a separate downloaded token that lasts one year. No federation for workloads is
-      documented. The developer article is rendered by script, so its receipts cite the JSON file
-      behind the page.
+      documented. 
   outbound:
     grade: B
     mechanism: >-
@@ -131,5 +130,4 @@ hygiene:
 
 notes: >-
   Apple now calls the product Apple Business. Apple School Manager shares the same API and OAuth
-  article. Inbound moves to A or B only if the token endpoint accepts a federated workload token in
-  place of a JWT signed with a stored key.
+  article.

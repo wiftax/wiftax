@@ -45,8 +45,7 @@ surfaces:
       Short-lived tokens from a long-lived client secret grade C. The token endpoint documents only
       the client-credentials grant with a secret. There is no token exchange, signed-JWT or CI
       login. SSO and the Okta and Entra OIDC guides are for human login. Webhook triggers use a
-      static shared-secret header. Inbound moves to B or A only if the token endpoint accepts a
-      federated JWT.
+      static shared-secret header.
   outbound:
     grade: B
     mechanism: >-

@@ -38,7 +38,7 @@ surfaces:
       workload login is documented for the API. The org-wide access control list can limit the
       source IPs allowed to call the API.
   outbound:
-    grade: A
+    grade: B
     mechanism: >-
       On AWS, Kentik assumes a role you create that trusts its account with an external ID. On
       Google Cloud you grant its service account, on Azure its enterprise application, and on
@@ -71,8 +71,7 @@ surfaces:
     notes: >-
       Graded on the cloud exports for all four clouds, and each has a path with no secret handed
       over. Azure also offers a custom app registration, which stores a client secret you create.
-      Oracle Cloud also offers a custom user, which uses a public key Kentik gives you. Both are
-      optional. Notification channels, mitigation platforms and device credentials were not
+      Oracle Cloud also offers a custom user, which uses a public key Kentik gives you. Both are optional, but a stored-credential option means B, not A. Notification channels, mitigation platforms and device credentials were not
       assessed.
 
 hygiene:
@@ -124,5 +123,4 @@ hygiene:
 
 notes: >-
   One of five hygiene checks passes, so inbound is F. An enforced token lifetime and a documented
-  service account type would lift it to D. Inbound moves to A or B only if the API accepts a
-  federated token.
+  service account type would lift it to D.

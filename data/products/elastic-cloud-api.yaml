@@ -161,5 +161,5 @@ hygiene:
 
 notes: >-
   One of five Elastic cards. Deployment data, Kibana and Fleet use Elasticsearch API keys, graded
-  separately. Inbound moves to B or A only if the Cloud API accepts a federated token. An org policy
+  separately. An org policy
   forbidding "Never" would lift it to D.

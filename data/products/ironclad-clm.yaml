@@ -138,7 +138,5 @@ hygiene:
     notes: Ironclad does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  Covers the Ironclad CLM public API and its documented integrations. Help center articles are cited
-  through the help center's public JSON endpoint because the article pages refuse non-browser
-  clients. Inbound moves to A or B only if the token endpoint accepts a federated workload token.
+  Covers the Ironclad CLM public API and its documented integrations. 
   Outbound reaches A if webhooks and log streaming stop taking pasted secrets.

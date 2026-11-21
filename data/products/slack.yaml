@@ -171,5 +171,5 @@ hygiene:
       leaked to a public repo is reported to Slack.
 
 notes: >-
-  The headline is C because of inbound. Outbound alone would be A. Slack moves to A if its token
+  Outbound alone would be A. Slack moves to A if its token
   endpoint accepts an OIDC token from an issuer you choose, so no client secret is needed.

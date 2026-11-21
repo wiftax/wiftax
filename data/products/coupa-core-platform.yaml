@@ -124,6 +124,5 @@ hygiene:
     notes: Coupa does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  Covers the Coupa Core platform API and its file and Call Out integrations. Inbound moves to A or B
-  only if the token endpoint accepts a federated workload token. Outbound would improve if Call Outs
+  Covers the Coupa Core platform API and its file and Call Out integrations. Outbound would improve if Call Outs
   could authenticate without a stored secret.

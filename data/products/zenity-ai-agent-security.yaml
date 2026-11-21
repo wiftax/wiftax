@@ -133,4 +133,4 @@ hygiene:
 notes: >-
   Zenity's docs are all behind a login, so this card relies on public repos, the zenityctl archive
   and marketing pages. The failed hygiene checks lack public evidence rather than being confirmed
-  gaps, and they matter less at C. Inbound moves to B or A only with federated tokens.
+  gaps, and they matter less at C.

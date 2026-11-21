@@ -139,5 +139,5 @@ hygiene:
 
 notes: >-
   Inbound is C on the OAuth path. On access keys alone it would be F, with one hygiene check
-  passing. Inbound moves to A or B only if the API accepts a federated token. Collective partner
+  passing. Collective partner
   apps and the MCP server were not assessed.

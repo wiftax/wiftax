@@ -138,4 +138,4 @@ hygiene:
 notes: >-
   Four of five hygiene checks pass, so inbound is D. Expiry and last-used pass on personal access
   tokens only. Judged on internal connection tokens alone, both would fail and inbound would be
-  F. Inbound moves to A or B only if the REST API accepts a workload's federated token.
+  F.

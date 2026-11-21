@@ -152,6 +152,5 @@ hygiene:
 
 notes: >-
   Graded the ElevenLabs API across its audio and agent products, which share one key system. Inbound
-  cannot rise above D while a static key is the only credential. It moves to A or B only if the API
-  accepts a federated workload token. Outbound reaches A if Twilio, Salesforce and custom tool
+  cannot rise above D while a static key is the only credential. Outbound reaches A if Twilio, Salesforce and custom tool
   connections stop storing secrets.

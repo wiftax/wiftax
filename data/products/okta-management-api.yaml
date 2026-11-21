@@ -217,5 +217,4 @@ hygiene:
 notes: >-
   Grades the Workforce Identity Cloud Management API. Okta Privileged Access, Workflows' own API and
   Auth0 are separate products. Hygiene covers both the SSWS token and the service app key, as on
-  github-api. SSWS alone would pass only last_used. Inbound moves to B or A only if Okta accepts a
-  federated token from an external issuer.
+  github-api. SSWS alone would pass only last_used.

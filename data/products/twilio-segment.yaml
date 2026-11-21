@@ -151,5 +151,4 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass for the static Public API token. Without the Business plan the
-  inbound grade would be F. Inbound moves to A or B only if the OAuth server trusts an external
-  workload issuer. The older Config API is not graded.
+  inbound grade would be F. The older Config API is not graded.

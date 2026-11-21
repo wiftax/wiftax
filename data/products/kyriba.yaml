@@ -120,6 +120,4 @@ hygiene:
     notes: Kyriba does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  The human-readable developer portal did not render without JavaScript, so this card reads Kyriba's
-  own agent skill files. Inbound moves to A or B only with documented workload federation. Outbound
-  would rise if the service provider calls used a short-lived or signed credential.
+  Outbound would rise if the service provider calls used a short-lived or signed credential.

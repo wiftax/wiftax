@@ -184,6 +184,5 @@ hygiene:
       Leaked secrets are not reported to Vanta.
 
 notes: >-
-  Covers the Vanta platform, whose APIs and Vanta Gov share one OAuth token endpoint. Inbound moves
-  to B or A only if that endpoint accepts a federated token. Outbound reaches A if GovCloud and
+  Covers the Vanta platform, whose APIs and Vanta Gov share one OAuth token endpoint. Outbound reaches A if GovCloud and
   Oracle Cloud go keyless and the legacy GCP key and Azure secret paths are retired.

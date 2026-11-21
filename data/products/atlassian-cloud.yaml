@@ -168,6 +168,5 @@ hygiene:
 
 notes: >-
   One card for the Atlassian Cloud apps that share accounts, service accounts and the admin
-  console. Bitbucket Cloud and Marketplace apps are not graded here. Inbound moves to A or B only
-  with documented workload federation. Service accounts are free for the first five in an
+  console. Bitbucket Cloud and Marketplace apps are not graded here. Service accounts are free for the first five in an
   organization.

@@ -44,8 +44,7 @@ surfaces:
     notes: >-
       Service Apps are the machine-account path, and they still rest on a client secret and a
       stored refresh token. The docs describe no client assertion, token exchange or OIDC federation
-      for workloads. Personal access tokens last 12 hours and are for testing. This card relies on
-      text the developer site embeds in each page, which a plain fetch returns.
+      for workloads. Personal access tokens last 12 hours and are for testing. 
   outbound:
     grade: A
     mechanism: >-
@@ -66,8 +65,7 @@ surfaces:
         quote: "Webex will not attempt an outbound request with an expired token."
     notes: >-
       Graded on the developer platform only. Webex acts as the issuer and you hand over no secret.
-      Hybrid Calendar and other Control Hub connections to Microsoft 365 and Google are documented
-      on pages that need JavaScript, so they are not graded here. Webhooks to your URL are not
+      Hybrid Calendar and other Control Hub connections to Microsoft 365 and Google are not graded here. Webhooks to your URL are not
       counted as reach into your systems.
 
 hygiene:
@@ -133,6 +131,5 @@ hygiene:
     notes: Webex does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  The headline is C on inbound. It moves to B or A only if Service Apps can authenticate with a
-  workload's OIDC token instead of a client secret. The outbound A covers Bring Your Own Data
+  The outbound A covers Bring Your Own Data
   Source alone. Readable Control Hub docs could change it.

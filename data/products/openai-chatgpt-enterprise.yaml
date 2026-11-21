@@ -157,6 +157,5 @@ hygiene:
 
 notes: >-
   Four of five hygiene checks pass, so inbound is D. Enforced expiry on Admin keys would make it
-  five. Inbound moves to A or B only when the Admin and Compliance APIs accept a federated token
-  without a support request. The compliance log download redirects to a short-lived signed URL,
+  five. The compliance log download redirects to a short-lived signed URL,
   but the call that lists files still needs the key.

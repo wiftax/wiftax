@@ -47,7 +47,7 @@ surfaces:
       main Meraki region only the permanent API key works. The authorization page lists these two
       methods and no federation.
   outbound:
-    grade: D
+    grade: F
     mechanism: >-
       To link a network to Cisco Umbrella or Secure Access, an admin pastes an Umbrella API key and
       secret into the dashboard.
@@ -65,8 +65,7 @@ surfaces:
         checked_by: erikng
         quote: "If you do not use group policies, you can omit the Deployments/Policies permission."
     notes: >-
-      Graded D because the key is a narrow key type and the Secure Access steps list the minimum
-      permissions. The article does not explain rotation. This is the only outbound integration we
+      The key is a narrow key type and the Secure Access steps list the minimum permissions. The article does not explain rotation, so this is F. This is the only outbound integration we
       graded. Syslog, webhooks and device-level integrations are out of scope.
 
 hygiene:
@@ -131,5 +130,4 @@ hygiene:
 
 notes: >-
   Covers the Dashboard API v1. Two of five hygiene checks pass for the API key, so the key alone
-  would grade F. The OAuth path lifts inbound to C. Inbound moves to A or B only if the dashboard
-  accepts a workload's federated token.
+  would grade F. The OAuth path lifts inbound to C.

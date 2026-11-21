@@ -136,6 +136,5 @@ hygiene:
     notes: Anecdotes does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  The headline is C on inbound. Inbound moves to B or A only if the exchange endpoint accepts a
-  workload's OIDC token in place of the API key. Outbound reaches A if the Google Cloud and Azure
+  Outbound reaches A if the Google Cloud and Azure
   plugins move to federation or impersonation.

@@ -54,8 +54,7 @@ surfaces:
       Graded on the weakest path a workload must use. The docs name service accounts with static
       tokens as the CI answer. Signing keeps the secret off the wire, but it is still long-lived.
       StrongDM's OIDC and SAML support is human SSO. StrongDM is itself an OIDC issuer, but only for
-      its own calls into your clouds, not for your workloads logging in. Moves to B or A only if the
-      API accepts a federated token.
+      its own calls into your clouds, not for your workloads logging in.
   outbound:
     grade: B
     mechanism: >-

@@ -40,8 +40,7 @@ surfaces:
     notes: >-
       The authentication page lists the API key as the only method. No OAuth client, OIDC or
       workload federation is documented. Two of five hygiene checks pass, so the grade is F even
-      though every key expires. The help center receipts cite the public article API, because the
-      rendered help pages do not return text to a plain fetch.
+      though every key expires. 
   outbound:
     grade: B
     mechanism: >-
@@ -133,5 +132,5 @@ hygiene:
 
 notes: >-
   The API is included on all paid plans. Inbound would reach D with a key management API or
-  per-key scopes. It moves to B or A only if the API accepts a federated workload token. Outbound
+  per-key scopes. Outbound
   reaches A if the Okta, Jira Automation and Azure paths stop needing a stored secret.

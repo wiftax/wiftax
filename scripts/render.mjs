@@ -30,7 +30,7 @@ for (const r of rows) {
 md += `\n## Cards\n\n`;
 for (const r of rows) {
   const d = r.d;
-  md += `### ${badge(r.headline)} ${d.vendor} ${d.product}\n\n${d.summary.trim()}\n\n`;
+  md += `### ${badge(r.headline)} ${d.product.startsWith(d.vendor) ? d.product : `${d.vendor} ${d.product}`}\n\n${d.summary.trim()}\n\n`;
   if (d.confidence) md += `> **Low confidence:** ${d.confidence.reason}\n\n`;
   md += `- **Inbound ${r.i}:** ${d.surfaces.inbound.mechanism}${d.surfaces.inbound.tier_gated ? ` *(requires ${d.surfaces.inbound.tier_gated})*` : ""}\n`;
   md += `- **Outbound ${r.o}:** ${d.surfaces.outbound.mechanism}\n`;

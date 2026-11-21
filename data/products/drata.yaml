@@ -54,7 +54,7 @@ surfaces:
       and you store. No token exchange, private key JWT, or trust of GitHub Actions or cloud
       identity tokens is documented. A client secret root is C at best, per cohort precedent. The
       MCP server uses a per-user login, which is human, not workload, auth. The docs show no tier
-      gate. Moves to B or A only if Drata accepts tokens from an outside OIDC issuer.
+      gate.
   outbound:
     grade: B
     mechanism: >-

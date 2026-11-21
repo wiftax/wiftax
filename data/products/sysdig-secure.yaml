@@ -205,5 +205,4 @@ hygiene:
 
 notes: >-
   Sysdig Monitor uses the same credentials and would grade the same inbound. Expiry on access keys
-  and user tokens would lift inbound to D. Inbound moves to B or A only if the API and agents accept
-  a federated token. Review call: expiry fails even though service accounts require one.
+  and user tokens would lift inbound to D. Review call: expiry fails even though service accounts require one.

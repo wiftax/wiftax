@@ -43,7 +43,7 @@ surfaces:
       endpoint accepts only the client credentials grant. The API docs describe no OIDC, JWT bearer
       or cloud workload login.
   outbound:
-    grade: D
+    grade: F
     mechanism: >-
       Chains connectors store credentials the customer pastes in. Amazon S3 takes an IAM user access
       key. Google Drive and OneDrive take the client ID and secret of an OAuth app the customer
@@ -70,10 +70,7 @@ surfaces:
         checked_by: erikng
         quote: "The Azure application's scopes, appropriate for the commands the connector will perform"
     notes: >-
-      No connector we read offers a cross-account role or federation from the hosted runner. The
-      docs ask for a dedicated integration user or app, which is why this is D and not F. The S3
-      article suggests a full-access policy and none of the articles explain rotation, so D is
-      generous. A self-hosted runner on Google Cloud can use its own default service account.
+      No connector we read offers a cross-account role or federation from the hosted runner. The docs ask for a dedicated integration user or app. The S3 article suggests a full-access policy and none of the articles explain rotation, so this is F. A self-hosted runner on Google Cloud can use its own default service account.
 
 hygiene:
   expiry:
@@ -132,6 +129,4 @@ hygiene:
 
 notes: >-
   Covers the platform API on the 2026-01-01 version, plus Chains connectors. The Chains and Wdata
-  APIs use the same client credentials grant. Workiva's help center pages sit behind a bot check, so
-  outbound receipts cite the same articles through the help center's public JSON endpoint. Inbound
-  moves to A or B only if the token endpoint accepts a federated token.
+  APIs use the same client credentials grant.

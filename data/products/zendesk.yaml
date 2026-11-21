@@ -84,8 +84,7 @@ surfaces:
         checked_by: erikng
         quote: "To create an OAuth connection, you must use the OAuth Connections endpoints to complete an OAuth 2.0 flow between your ZIS integration and the system."
     notes: >-
-      Graded B on the rubric's rule that an app the customer installs or consents to counts as
-      keyless. Webhooks and Integration Services connections take static secrets, and no keyless
+      The Slack app installs by consent and hands over no secret. Webhooks and Integration Services connections take static secrets, and no keyless
       path into a cloud account is documented. Marketplace apps from other vendors are not graded.
 
 hygiene:
@@ -153,6 +152,5 @@ hygiene:
 
 notes: >-
   Inbound is graded on the client credentials grant, the documented way to get a token without a
-  person. Inbound moves to A or B only if a workload can trade its own OIDC token for a Zendesk
-  token without a stored secret. Outbound reaches A if webhooks and connections move off pasted
-  secrets. The headline grade is C.
+  person. Outbound reaches A if webhooks and connections move off pasted
+  secrets.

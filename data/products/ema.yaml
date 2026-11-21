@@ -143,4 +143,4 @@ hygiene:
 notes: >-
   Covers the builder platform documented at builder.ema.ai. An enforced key lifetime or a last-used
   time would lift inbound to D. Making the system user token exchange available everywhere would
-  lift it to C. Inbound moves to A or B only if the API accepts a federated workload token.
+  lift it to C.

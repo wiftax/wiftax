@@ -88,8 +88,7 @@ surfaces:
         checked_by: erikng
         quote: "Zapier holds the app credentials, so your MCP client never handles a third-party API key."
     notes: >-
-      Graded B on the rubric's rule that an app the customer consents to counts as keyless. Apps
-      that connect by OAuth consent hand Zapier no customer-made secret. Apps on the API key, basic
+      Apps that connect by OAuth consent hand Zapier no customer-made secret. Apps on the API key, basic
       or session schemes do. Amazon S3 wants an IAM user's access key, and no role-based or
       federated AWS connection is documented. Log streams push to a customer URL with an optional
       signing secret and no other destination auth.
@@ -163,6 +162,5 @@ hygiene:
 
 notes: >-
   Inbound is graded on the SDK client credentials, the documented way to run code on servers and in
-  CI. Inbound moves to A or B only if a workload can trade its own OIDC token for a Zapier token
-  without a stored secret. Outbound reaches A if cloud connections such as Amazon S3 move off access
-  keys. The headline grade is C.
+  CI. Outbound reaches A if cloud connections such as Amazon S3 move off access
+  keys.

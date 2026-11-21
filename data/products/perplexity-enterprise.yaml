@@ -145,4 +145,4 @@ hygiene:
 notes: >-
   Two of five hygiene checks pass, so inbound is F. Key expiry and a last-used time would lift it
   to D. Audit logs need an Enterprise organization, and Audit API key creation may need the account
-  team to enable it. Inbound moves to A or B only if the APIs accept a federated workload token.
+  team to enable it.

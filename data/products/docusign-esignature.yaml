@@ -122,5 +122,4 @@ hygiene:
 
 notes: >-
   Monitor is a separately licensed product that uses the same JWT Grant. Its caller must
-  impersonate an organization administrator or security reports administrator. Inbound moves to A
-  or B only if the token endpoint accepts a workload's OIDC token in place of the RSA-signed JWT.
+  impersonate an organization administrator or security reports administrator.

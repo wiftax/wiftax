@@ -61,9 +61,7 @@ surfaces:
         quote: "re-establish the link by entering your Company ID and the credentials of an Intacct user."
     notes: >-
       Graded B because storage uses a sign-in redirect while the ERP links hold long-lived
-      credentials. The NetSuite and other ERP setup guides are sent on request, not published. The
-      help center pages block plain fetches, so receipts cite the same articles through its JSON
-      endpoint.
+      credentials. The NetSuite and other ERP setup guides are sent on request, not published. 
 
 hygiene:
   expiry:
@@ -118,4 +116,4 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass, so inbound is F. An enforced key lifetime or a key management
-  API would lift it to D. Inbound moves to B or A only if the API accepts a federated token.
+  API would lift it to D.

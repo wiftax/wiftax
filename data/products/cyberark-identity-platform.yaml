@@ -96,7 +96,7 @@ surfaces:
       All four Secrets Hub targets are keyless. Older Azure stores with a client secret can be
       migrated, and the script says to delete the old secret. Vault setup needs a Vault token once.
       CPM and PSM manage target passwords as the core vaulting job, through connectors you host, so
-      they are not graded as reach-ins. Secure Cloud Access onboarding was not inspected.
+      they are not graded as reach-ins. Secure Cloud Access is not in this card's scope.
 
 hygiene:
   expiry:

@@ -126,5 +126,4 @@ hygiene:
 
 notes: >-
   The audit log must be enabled by Greenhouse and keeps thirty days of events. Job board, ingestion
-  and onboarding APIs use their own keys and are not graded here. Inbound moves to A or B only if
-  the token endpoint accepts a federated workload token in place of the client secret.
+  and onboarding APIs use their own keys and are not graded here.

@@ -124,5 +124,5 @@ hygiene:
 
 notes: >-
   One of five hygiene checks passes, so inbound is F. Token expiry and a token management endpoint
-  would lift it to D. Inbound moves to A or B only if the API accepts a federated token. API access
+  would lift it to D. API access
   depends on the organization's plan.

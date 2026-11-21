@@ -136,4 +136,4 @@ hygiene:
 notes: >-
   Audit log endpoints need the Forest plan or an add-on. Integration user limits vary by plan. A
   reader who discounts the OAuth app path would grade inbound F, since one of five hygiene checks
-  passes. Inbound moves to A or B only if the API accepts a federated workload token.
+  passes.

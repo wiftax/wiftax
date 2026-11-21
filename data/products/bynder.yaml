@@ -10,8 +10,7 @@ category: saas
 status: listed
 summary: >-
   To call Bynder, your code trades an OAuth client ID and secret for a one-hour token. A permanent
-  token is the static alternative. There is no federation, and the pages that explain how secrets
-  and permanent tokens are managed sit behind a browser check.
+  token is the static alternative. There is no federation.
 
 surfaces:
   inbound:
@@ -127,7 +126,4 @@ hygiene:
     notes: Bynder does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  Bynder's support articles on OAuth apps and permanent tokens return a browser challenge to a
-  plain fetch, so no receipt cites them. Three hygiene checks fail on the developer docs alone.
-  They cannot change the headline, which is C on inbound. Inbound moves to B or A only if the
-  token endpoint accepts a workload's OIDC token.
+  Three hygiene checks fail on the developer docs alone, and none of them can change the C on inbound.

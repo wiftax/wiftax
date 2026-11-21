@@ -144,5 +144,4 @@ hygiene:
 
 notes: >-
   Graded on REST web services and RESTlets with the client credentials flow, the best documented
-  path for workloads. Inbound moves to A or B only if the token endpoint accepts a federated
-  workload token in place of the certificate-signed JWT.
+  path for workloads.

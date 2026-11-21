@@ -41,9 +41,7 @@ surfaces:
         checked_by: erikng
         quote: "When using this API, you must authenticate to the API using an account-specific key."
     notes: >-
-      The GraphQL reference on the developer site renders only with JavaScript, so its
-      authentication page is not cited. The help center articles are cited through the help
-      center's public JSON endpoint. No OAuth, OIDC or workload federation is documented.
+      No OAuth, OIDC or workload federation is documented.
   outbound:
     grade: B
     mechanism: >-
@@ -127,5 +125,5 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass, so inbound is F. A required or enforced token expiry would
-  lift it to D. Inbound moves to A or B only if the APIs accept a federated token. PhishER and
+  lift it to D. PhishER and
   the other KnowBe4 products are not graded here.

@@ -147,5 +147,4 @@ hygiene:
 
 notes: >-
   Covers the Lucid REST API shared by Lucidchart, Lucidspark and Lucidscale, and the cloud imports
-  in the Lucid Data Hub. Inbound moves to A or B only if the token endpoint accepts a federated
-  workload token. Outbound reaches A if Google Cloud and Azure imports move to federation.
+  in the Lucid Data Hub. Outbound reaches A if Google Cloud and Azure imports move to federation.

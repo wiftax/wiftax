@@ -130,5 +130,4 @@ hygiene:
 notes: >-
   Covers the Metronome REST API and the integrations in its public docs. One of five hygiene checks
   passes, and that one needs a support request. An enforced token lifetime and a token management
-  API would lift inbound to D. Inbound moves to A or B only if the API accepts a federated workload
-  token.
+  API would lift inbound to D.

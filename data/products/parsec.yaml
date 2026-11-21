@@ -33,9 +33,7 @@ surfaces:
         checked_by: erikng
         quote: "Select Public API Key and Click Next"
     notes: >-
-      The Teams API reference renders only with JavaScript, so it is not cited. It describes
-      bearer authentication with these keys. The help articles are cited through the help
-      center's public JSON endpoint. No OAuth, OIDC or workload federation is documented.
+      The Teams API uses bearer authentication with these keys. No OAuth, OIDC or workload federation is documented.
   outbound:
     grade: N/A
     mechanism: >-
@@ -94,4 +92,4 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass, so inbound is F. A key expiry and a key management API would
-  lift it to D. Inbound moves to A or B only if the Teams API accepts a federated token.
+  lift it to D.

@@ -118,5 +118,5 @@ hygiene:
 notes: >-
   Covers Freshdesk, not Freshservice or Freshsales. No hygiene check passes, so inbound is F. An
   expiring, scoped key with a management API would lift it to D. OAuth documented for standalone
-  workloads would make it C. Inbound moves to A or B only if the API accepts a federated token.
+  workloads would make it C.
   Outbound reaches A if custom mail servers stop taking a stored password.

@@ -187,6 +187,5 @@ hygiene:
     notes: >-
       GitHub reports Runpod API keys pushed to public repos to Runpod. S3 keys are not covered.
 notes: >-
-  Covers the whole vendor, since every product uses the same API key. Inbound moves to B or A only
-  with federation. Outbound moves to A with keyless Cloud Sync and registry pulls, and ECR should
+  Covers the whole vendor, since every product uses the same API key. Outbound moves to A with keyless Cloud Sync and registry pulls, and ECR should
   add an External ID. REST API v1 retires on 2026-11-15, and this card grades v2.

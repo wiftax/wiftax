@@ -127,5 +127,4 @@ hygiene:
 
 notes: >-
   No hygiene check passes, so inbound is F. Three passes would lift it to D, for example an enforced
-  key expiry, per-key scopes and a key management API. Inbound moves to A or B only if the API
-  accepts a federated workload token. Self-hosted Secoda was not graded.
+  key expiry, per-key scopes and a key management API. Self-hosted Secoda was not graded.

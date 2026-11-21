@@ -146,5 +146,4 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass for the static API keys. Inbound stays C while every path starts
-  from a stored secret. It moves to A or B only if the token endpoint accepts a workload identity
-  token. Outbound reaches A if the warehouse connections gain keyless options.
+  from a stored secret. Outbound reaches A if the warehouse connections gain keyless options.

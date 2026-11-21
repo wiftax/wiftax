@@ -185,5 +185,4 @@ hygiene:
 
 notes: >-
   Covers the Axonius platform, hosted and self-hosted, which shares one API and adapter framework.
-  Three of five hygiene checks pass, so even the plain API key path would be D. Inbound moves to B
-  or A only if the API accepts a federated token.
+  Three of five hygiene checks pass, so even the plain API key path would be D.

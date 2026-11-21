@@ -143,5 +143,4 @@ hygiene:
 notes: >-
   Covers a hosted NetBox Cloud instance and the NetBox Cloud API. The token behavior is documented
   for NetBox itself, and the page marks it as available in Cloud. An enforced token lifetime would
-  add a fourth hygiene pass. Inbound moves to A or B only if the API accepts a federated workload
-  token. Outbound improves if data sources gain a role or app based option.
+  add a fourth hygiene pass. Outbound improves if data sources gain a role or app based option.

@@ -146,5 +146,4 @@ hygiene:
 notes: >-
   Graded the Console API, which CI and other workloads must use to manage a project. The scoping
   pass rests on read-only Console keys, so a stricter reading would make inbound
-  F. An enforced key lifetime would add a fourth pass. Inbound moves to B or A only if the API
-  accepts a federated workload token.
+  F. An enforced key lifetime would add a fourth pass.

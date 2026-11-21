@@ -132,5 +132,4 @@ hygiene:
 
 notes: >-
   The Audit API and audit keys need an Enterprise plan. Other API keys need Business or Enterprise.
-  An enforced key lifetime or a key management API would lift inbound to D. Inbound moves to A or B
-  only if the public API accepts a federated workload token.
+  An enforced key lifetime or a key management API would lift inbound to D.

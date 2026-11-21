@@ -139,5 +139,4 @@ hygiene:
 notes: >-
   One of five hygiene checks passes, so inbound is F. An enforced key lifetime and key management
   endpoints would lift it to D. Google Cloud also runs a separate Threat Intelligence service
-  under Google Cloud IAM. That service is a different API and is not graded here. Inbound moves to
-  A or B only if the platform API accepts a federated token.
+  under Google Cloud IAM. That service is a different API and is not graded here.

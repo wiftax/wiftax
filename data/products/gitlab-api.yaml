@@ -145,5 +145,4 @@ hygiene:
       token leaked to a public GitHub repo is not reported to GitLab for revocation.
 
 notes: >-
-  Four of five hygiene checks pass, so inbound is D. Inbound moves to B or A only if the API
-  accepts a federated token from an outside issuer. GitLab Dedicated was not checked separately.
+  Four of five hygiene checks pass, so inbound is D. GitLab Dedicated was not checked separately.

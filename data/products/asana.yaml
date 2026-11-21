@@ -62,9 +62,7 @@ surfaces:
         checked_by: erikng
         quote: "Follow the on-screen instructions to sign in to Google Drive"
     notes: >-
-      Based on a sample of Asana-built apps, all of which use a consent flow. Setup guides for the
-      Salesforce app and for customer-managed encryption keys sit on the help center, which shows
-      no text without JavaScript. They were not read. A pasted key in either would lower this to B.
+      Based on a sample of Asana-built apps, all of which use a consent flow. The Salesforce app and customer-managed encryption key guides were not read. A pasted key in either would lower this to B.
 
 hygiene:
   expiry:
@@ -75,8 +73,7 @@ hygiene:
         checked_by: erikng
         quote: "Personal access tokens are persistent by default."
     notes: >-
-      Tokens do not expire unless someone removes them. The page points to Enterprise+ admin
-      controls for tokens, but that help article shows no text without JavaScript.
+      Tokens do not expire unless someone removes them. The page mentions Enterprise+ admin controls for tokens but does not say they force an expiry.
   rotation_api:
     pass: false
     evidence:
@@ -127,5 +124,4 @@ hygiene:
 
 notes: >-
   One of five hygiene checks passes, so inbound is F. An enforced token lifetime and a token
-  management API would lift it to D. Inbound moves to A or B only if the API accepts a federated
-  workload token.
+  management API would lift it to D.

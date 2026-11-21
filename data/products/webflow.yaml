@@ -64,8 +64,7 @@ surfaces:
         checked_by: erikng
         quote: "The process prompts you to select a GitHub repository, install the GitHub app that gives Webflow access to the repository, and specify how to deploy it to Webflow Cloud."
     notes: >-
-      GitHub is the only customer system the developer docs show Webflow reaching into. An installed
-      GitHub App counts as keyless under the rubric. Webhooks only send signed requests to a
+      GitHub is the only customer system the developer docs show Webflow reaching into. An installed GitHub App hands over no secret. Webhooks only send signed requests to a
       customer URL. Marketplace apps call into Webflow, so they fall under inbound.
 
 hygiene:
@@ -133,5 +132,4 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass, so inbound is F. An enforced token lifetime and a token
-  management API would lift it to D. Inbound moves to A or B only if the Data API accepts a
-  federated workload token. The headline grade is F because inbound is the lower surface.
+  management API would lift it to D.

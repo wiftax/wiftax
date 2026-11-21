@@ -130,6 +130,6 @@ hygiene:
 
 notes: >-
   Two of five hygiene checks pass, so inbound is F. A lifetime limit that an organization can
-  enforce would lift it to D. Inbound moves to A or B only if the API accepts a federated token.
+  enforce would lift it to D.
   Webhooks are signed with a shared secret. Kiosk and reader credentials are device logins and
   are not graded here.

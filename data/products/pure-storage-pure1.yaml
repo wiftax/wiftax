@@ -119,8 +119,5 @@ hygiene:
       a generic RSA private key with no vendor pattern.
 
 notes: >-
-  Pure Storage now brands itself Everpure, and the API spec names Everpure as the developer. The
-  vendor knowledge base pages for Pure1 API registration return no text without JavaScript, so
-  hygiene rests on the API spec and a vendor blog walkthrough. Arrays have their own API clients,
-  which this card does not grade. Inbound moves to B or A only if the token exchange accepts an
-  external issuer.
+  Pure Storage now brands itself Everpure, and the API spec names Everpure as the developer. Hygiene rests on the API spec and a vendor blog walkthrough. Arrays have their own API clients,
+  which this card does not grade.

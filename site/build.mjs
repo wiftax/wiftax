@@ -100,7 +100,7 @@ const mRow = (p) => {
 };
 // Expandable receipts under each product row: the card's own summary, mechanisms and evidence quotes.
 // Evidence text comes verbatim from vendor docs (markdown, code spans, table rows, JSON). Render it readably without changing the words.
-const PRODUCT_NAME = Object.fromEntries(products.map((p) => [p.id, p.product === p.vendor ? p.vendor : `${p.vendor} ${p.product}`]));
+const PRODUCT_NAME = Object.fromEntries(products.map((p) => [p.id, p.product.startsWith(p.vendor) ? p.product : `${p.vendor} ${p.product}`]));
 const tidy = (t) => String(t).replace(/\s+/g, " ").replace(/\s+([.,;:!?)\]])/g, "$1").replace(/([(\[])\s+/g, "$1").trim();
 const inline = (t) => {
   // split out code spans first so nothing inside them is touched

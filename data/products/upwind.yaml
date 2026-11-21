@@ -192,6 +192,6 @@ hygiene:
 
 notes: >-
   One card for the whole Upwind platform, which shares one credential system and one API. Inbound
-  moves to B or A only if Upwind accepts a federated token. Hygiene fixes would not change a C.
+  Hygiene fixes would not change a C.
   Outbound reaches A for clouds if OCI drops the client secret and the classic Azure flow is
   retired.

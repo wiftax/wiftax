@@ -142,5 +142,4 @@ hygiene:
 notes: >-
   Covers Rubrik Security Cloud, the hosted control plane. Clusters that customers run have their
   own API and are not graded. The user guide at the vendor docs site was not read, so cloud
-  onboarding detail comes from the developer reference. Inbound moves to B or A only if the token
-  endpoint accepts a federated workload token.
+  onboarding detail comes from the developer reference.

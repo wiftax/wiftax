@@ -144,6 +144,6 @@ hygiene:
 
 notes: >-
   Covers the JumpCloud admin APIs and the directory, HR and SCIM integrations in the help center.
-  Inbound moves to A or B only if service accounts accept a federated workload token. The announced
+  The announced
   public key option would still be a static root. Outbound reaches A if SCIM connectors stop taking
   pasted tokens.

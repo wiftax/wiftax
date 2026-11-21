@@ -67,8 +67,7 @@ surfaces:
         quote: "For example, say you need to include an API key in a function."
     notes: >-
       Rippling's OAuth app is a consent flow, which counts as keyless. Other connectors and Rippling
-      functions store a pasted key or client secret, so the grade is B. Setup guides for App Shop
-      integrations sit in a help center that needs JavaScript and were not read.
+      functions store a pasted key or client secret, so the grade is B. App Shop integrations are not graded here.
 
 hygiene:
   expiry:
@@ -124,4 +123,4 @@ hygiene:
 notes: >-
   Two of five hygiene checks pass, so inbound is F. A settable token expiry or a token management
   API would lift it to D. The 30-day idle revocation is close to an expiry but does not bound a
-  token in active use. Inbound moves to A or B only if the API accepts a federated workload token.
+  token in active use.

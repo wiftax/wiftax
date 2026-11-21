@@ -134,6 +134,5 @@ hygiene:
 
 notes: >-
   Covers the Everbridge Suite REST API on the public developer portal. Other Everbridge products
-  were not graded. Inbound moves to A or B only with documented workload federation. The headline is
-  F only because of the outbound surface, which is graded on thin public evidence. Public
+  were not graded. The F comes only from the outbound surface, which rests on thin public evidence. Public
   integration docs showing keyless access would lift it.

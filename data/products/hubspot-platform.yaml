@@ -149,4 +149,4 @@ hygiene:
 notes: >-
   Inbound is C on the OAuth path. On static tokens alone it would be D, with three hygiene checks
   passing. Legacy private apps can no longer be created, and static token apps on the developer
-  platform replace them. Inbound moves to A or B only if the API accepts a federated token.
+  platform replace them.

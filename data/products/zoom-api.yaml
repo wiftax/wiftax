@@ -67,8 +67,7 @@ surfaces:
         quote: "Zoom encrypts these values."
     notes: >-
       Graded B because the role path is keyless but a static access key is still offered. Amazon S3
-      is the only storage target. Calendar and other Zoom Workplace integrations are documented on
-      a support site that needs JavaScript, so they are not graded here.
+      is the only storage target. Calendar and other Zoom Workplace integrations are not graded here.
 
 hygiene:
   expiry:
@@ -129,5 +128,4 @@ hygiene:
 
 notes: >-
   Covers the Zoom REST API as documented on the developer site. Webhooks to a customer endpoint are
-  verified with a static secret token and are not graded. Inbound moves to A or B only if the token
-  endpoint accepts a workload's federated token without a client secret or registered key.
+  verified with a static secret token and are not graded.
