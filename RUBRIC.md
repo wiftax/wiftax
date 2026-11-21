@@ -75,9 +75,8 @@ A product with an N/A outbound surface is graded on inbound alone.
   key, so it cannot earn A.
 - D needs all three: least-privilege guidance, scoped keys and rotation guidance. Missing
   any one is F.
-- A means every integration the card covers was read. A page you can open in a browser
-  counts as readable, so read it. If the deciding pages are behind a login, grade what is
-  public and set `confidence: low`, as for hygiene. Otherwise narrow `covers`.
+- A means every integration the card covers was read. If the setup is not public, see
+  **Docs must be public**.
 
 For SaaS, repos and other non-cloud integrations, an app the customer installs or
 consents to counts as keyless, because no secret changes hands. Examples are a GitHub
@@ -108,10 +107,16 @@ it is exactly what the crawler produces.
 
 `checked_on` must be within the last 12 months, or the card is flagged **stale**.
 
-**Login-walled documentation.** If the docs that would settle a hygiene check are
-behind a customer login, the check fails. No receipt, no pass. If those unverifiable
-items could change the headline grade, the card also gets `confidence: low` with the
-reason, and the site shows it. Vendors get credit by publishing the documentation.
+**Docs must be public.** If the docs needed to grade a surface are behind a login, or not
+online, that surface is F. The card links the wall and the site marks it. A hygiene check
+whose docs are not public fails.
+
+- Public means it loads in a normal browser without an account. Pages that need JavaScript
+  or a bot check are public.
+- The vendor's own public specs, repos, SDKs, blog and agent files count. Third-party guides
+  do not. An archived copy counts only for a page the vendor took down.
+- Outbound is F when the vendor says it connects into your systems but the setup is not
+  public.
 
 ## Status
 

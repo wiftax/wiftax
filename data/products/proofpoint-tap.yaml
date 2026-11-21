@@ -8,20 +8,17 @@ website: https://www.proofpoint.com
 docs: https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Proofpoint's credential and integration docs are behind a login. All five hygiene checks fail
-    partly for lack of public docs. Outbound A rests on a product page and a sibling product's
-    consent flow.
 summary: >-
   The TAP SIEM and related APIs take a static service principal and secret on every request. No
-  federation exists, and public docs show no hygiene check passing. Into Microsoft 365, Proofpoint
-  documents admin consent to its own app, with no secret handed over.
+  federation exists. Proofpoint's TAP admin docs need a login, so both surfaces are F.
 
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://help.proofpoint.com/Threat_Insight_Dashboard/Product_Documentation
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A static service principal and secret, sent with HTTP Basic auth to the SIEM, People,
       Forensics and Campaign APIs. Newer report APIs trade a static key for a one-hour token.
@@ -75,17 +72,18 @@ surfaces:
         checked_by: tehreet
         quote: "Credentials are provisioned through Cloud Admin UI (Threat Protection Page) > Settings > API Key Management > Threat Protection tab (generate and manage keys)."
     notes: >-
-      Graded on the path a workload must use. Pulling TAP events into a SIEM goes through the SIEM
-      API, which takes only the static principal and secret. The newer report APIs' client
-      credentials path is C at best and covers reporting only, so it does not lift the grade. No
-      OIDC or workload identity exists for any Proofpoint API. The admin guide pages on credential
-      lifetime and roles are behind a login. The Proofpoint Essentials API is weaker still, with a
-      username and password in headers.
+      TAP's admin docs, including credential lifetime and roles, need a login, so inbound is F. The
+      public API pages show the SIEM API taking only a static principal and secret. The newer report
+      APIs trade a static key for a one-hour token, but cover reporting only. No Proofpoint API
+      offers OIDC or workload identity.
   outbound:
-    grade: A
+    grade: F
+    walled:
+      url: https://help.proofpoint.com/Threat_Insight_Dashboard/Product_Documentation
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
-      Microsoft 365 protection connects through Microsoft Graph. The only public setup doc is admin
-      consent to Proofpoint's Entra app, with no customer secret.
+      Microsoft 365 protection connects through Microsoft Graph. TAP's setup steps need a login.
     evidence:
       - url: https://www.proofpoint.com/us/products/advanced-threat-protection/targeted-attack-protection
         checked_on: 2026-10-22
@@ -108,12 +106,9 @@ surfaces:
         checked_by: tehreet
         quote: "You’ll learn about deploying the products via API, how the API works and the onboarding process to get started quickly."
     notes: >-
-      Provisional, and the main call for a reviewer. TAP's own Microsoft 365 setup steps are behind
-      a login. The grade is inferred from the TAP product page and the public Essentials admin
-      consent flow to a Proofpoint-owned app. No public doc says how Google Workspace, Account
-      Takeover Protection, TRAP or CASB connect. Nothing public asks for a cloud key or client
-      secret. If gated docs show a customer app with a client secret, as older TRAP setups
-      reportedly use, this drops to C. A Google service-account key would make it B.
+      TAP's setup for Microsoft 365, Google Workspace and its other connections needs a login, so
+      outbound is F. The public Essentials flow uses admin consent to a Proofpoint app, but
+      Essentials is a sibling product.
 
 hygiene:
   expiry:
@@ -181,6 +176,4 @@ hygiene:
 
 notes: >-
   Covers TAP's APIs, including the newer report APIs. Essentials, Threat Response, CASB and other
-  siblings are not graded here. Much of the admin documentation needs a login, so this card grades
-  what is public. Inbound moves to D with three documented hygiene passes, to C if the SIEM API
-  takes the one-hour token, and to B or A with federation.
+  siblings are not graded here.

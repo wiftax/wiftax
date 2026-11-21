@@ -60,7 +60,7 @@ const IDENT = /`[^`]+`|\b[a-z]+_[a-z0-9_]+\b|\b[A-Z][A-Z0-9]*_[A-Z0-9_]+\b|\b[a-
 const words = (s) => s.trim().split(/\s+/).length;
 // Card text describes the product. How a page was fetched is reviewer context and goes in
 // the PR description. Checked in summary and notes only, so a mechanism can still say a
-// product needs JavaScript. confidence.reason is exempt, since it must say why.
+// product needs JavaScript.
 const PROCESS = /plain (HTTP )?fetch|(renders?|rendered) only (with|in)|(needs?|without) JavaScript|rendered by script|receipts? cites?|bot check|browser (check|challenge)|non-browser client/i;
 // Sentences that say nothing about this product. Every C, D or F card moves to A or B only
 // with federation, the page already shows the grade, and every card applies the rubric.
@@ -124,7 +124,8 @@ for (const f of files) {
   const staticOnly = ["D", "F"].includes(inb?.grade);
   if (staticOnly && applicable < 5) errs.push("inbound D/F means static keys exist, so every hygiene check must be true/false, not null");
   if (inb?.grade === "D" && passes < 3) errs.push(`inbound D requires >=3 hygiene passes, found ${passes}`);
-  if (inb?.grade === "F" && passes >= 3) errs.push(`inbound F with ${passes} hygiene passes should be D`);
+  if (inb?.grade === "F" && passes >= 3 && !inb.walled) errs.push(`inbound F with ${passes} hygiene passes should be D`);
+  for (const [k, sf] of Object.entries(doc?.surfaces ?? {})) if (sf?.walled && sf.grade !== "F") errs.push(`${k}: docs not public (walled), so the grade must be F`);
   for (const c of Object.values(hyg)) if (c && c.pass !== null && !(c.evidence?.length)) errs.push("hygiene check with a pass/fail needs evidence");
   if (doc?.status === "graduated" && !doc.graduated_on) errs.push("graduated status requires graduated_on");
   errs.push(...prose(doc, passes));

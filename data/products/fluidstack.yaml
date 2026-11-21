@@ -8,12 +8,6 @@ website: https://www.fluidstack.io
 docs: https://docs.fluidstack.io/kubernetes/access-clusters
 category: cloud
 status: listed
-confidence:
-  level: low
-  reason: >-
-    docs.fluidstack.io no longer resolves, so every receipt is a Wayback copy from February to July
-    2026. How OAuth client credentials are issued, scoped and expired is not public. Neither gap
-    could lift the F unless Kubernetes CI stops needing a long-lived token.
 summary: >-
   To deploy from CI to Fluidstack's managed Kubernetes, your code holds a long-lived ServiceAccount
   token that works until someone deletes it. The Atlas API takes a token from SSO login or an OAuth

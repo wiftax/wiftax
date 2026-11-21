@@ -8,19 +8,22 @@ website: https://www.axonius.com
 docs: https://docs.axonius.com/docs/manage-service-accounts
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    The API v2 reference needs a login, so it is not confirmed that every endpoint accepts the OAuth
-    token that earns the C. With only the API key and secret, inbound would be D.
 summary: >-
   To call the Axonius API, your code needs a static API key and secret, or an OAuth client secret
-  swapped for a one-hour token. There is no OIDC login. Axonius reaches AWS through a keyless
-  cross-account role, but Azure, GCP and most SaaS adapters take static secrets.
+  swapped for a one-hour token. The API reference is shared only on request, so inbound is F.
+  Axonius reaches AWS through a keyless cross-account role, but Azure, GCP and most SaaS adapters
+  take static secrets.
 
 surfaces:
   inbound:
-    grade: C
+    grade: F
+    walled:
+      url: https://docs.axonius.com/docs/axonius-rest-api
+      checked_on: 2026-11-20
+      checked_by: tehreet
+      quote: >-
+        If you do not have access to the API v2 documentation or are facing problems, open a Zendesk
+        ticket and select the API v2 option to request access.
     mechanism: >-
       A service account sends a static API key and secret on every request. It can instead swap an
       OAuth client ID and secret for a bearer token that lasts one hour.
@@ -58,12 +61,10 @@ surfaces:
         checked_by: tehreet
         quote: "With a service account. An administrator creates a service account with Allow Axonius MCP connection and gives the client its API key and secret."
     notes: >-
-      Graded C on the OAuth option. The token is short-lived, but it is minted from a client secret
-      you hold. That is C at best, as on the crowdstrike-falcon-api card. The API key path alone
-      would be D. No OIDC, GitHub Actions or cloud workload identity login exists. The API v2
-      reference needs a login, so OAuth coverage per endpoint cannot be confirmed. The MCP login
-      gives a 24-hour token tied to a human, not a workload. From v6.1.74, only service accounts can
-      reach the API.
+      The API v2 reference is shared only on request, so inbound is F. The public docs describe a
+      static key and secret, and an OAuth client secret swapped for a one-hour token. No OIDC or
+      cloud workload login exists. The MCP login gives a 24-hour token tied to a person. From
+      v6.1.74, only service accounts can reach the API.
   outbound:
     grade: B
     mechanism: >-
@@ -184,5 +185,5 @@ hygiene:
       Axonius is not in GitHub's secret scanning list, so leaked keys are not reported to Axonius.
 
 notes: >-
-  Covers the Axonius platform, hosted and self-hosted, which shares one API and adapter framework.
-  Three of five hygiene checks pass, so even the plain API key path would be D.
+  Covers the Axonius platform, hosted and self-hosted, which shares one API and adapter framework. A
+  public API reference would make inbound C on the OAuth path.

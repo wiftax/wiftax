@@ -7,20 +7,20 @@ website: https://abnormal.ai
 docs: https://app.swaggerhub.com/apis-docs/abnormal-security/abx
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Abnormal's API and token docs are behind its customer portal. The expiry pass and last-used fail
-    rest on release notes, the OpenAPI spec and a third-party guide. AWS, GCP and SaaS connector
-    setup is not public.
 summary: >-
   To call Abnormal's REST API, your code needs a static bearer token made in the portal. There is no
-  OIDC or client-credentials login. Abnormal reads Microsoft 365 and Google Workspace through OAuth
-  grants, but Okta remediation needs a pasted Okta API key.
+  OIDC or client-credentials login. Abnormal's help center, which holds its API and connector docs,
+  needs a login, so both surfaces are F.
 
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://abnormalsecurity.my.site.com/support/s/
+      checked_on: 2026-11-20
+      checked_by: tehreet
+      quote: >-
+        Sign in to the Support Portal
     mechanism: >-
       A static API token created in the Abnormal portal and sent as a bearer token, with an optional
       IP allowlist. Every API path, SCIM included, uses this one scheme.
@@ -51,13 +51,17 @@ surfaces:
         checked_by: tehreet
         quote: "\"Access Credentials\" means the necessary security keys, secrets, tokens, and other credentials to access the Abnormal APIs."
     notes: >-
-      The help center is behind a login, so this card relies on the public OpenAPI spec, release
-      notes and Expel's integration guide. No public source mentions OAuth client credentials, OIDC
-      or cloud workload identity. The IP allowlist limits where a leaked token works, but the token
-      is still a static secret. The grade uses the new self-service tokens. Legacy tokens keep
-      working until April 30, 2027.
+      Abnormal's help center needs a login, so inbound is F. The public OpenAPI spec shows one
+      bearer token for every path, with an optional IP allowlist. Nothing public mentions OAuth
+      client credentials, OIDC or workload identity.
   outbound:
-    grade: B
+    grade: F
+    walled:
+      url: https://abnormalsecurity.my.site.com/support/s/
+      checked_on: 2026-11-20
+      checked_by: tehreet
+      quote: >-
+        Sign in to the Support Portal
     mechanism: >-
       Microsoft 365 and Google Workspace connect through OAuth grants with no secret handed over.
       Okta remediation needs a static Okta API key. Other connectors' methods are not public.
@@ -91,11 +95,8 @@ surfaces:
         checked_by: tehreet
         quote: "Abnormal now simplifies integration and expands visibility with the App Store, Deployment Overview, and new Platform Integrations for Slack, Zoom, Teams, Azure AD, and Okta."
     notes: >-
-      Microsoft 365, Teams and Google Workspace are keyless OAuth grants. Okta uses OAuth for
-      monitoring, but disabling users or ending sessions needs a static Okta API key. AWS, GCP,
-      Slack, Salesforce and others are described only as "API-based", so their method cannot be
-      checked. Outbound reaches A only if Okta remediation moves to OAuth and the other connectors
-      are shown to be keyless. For AWS, that means a cross-account role with an External ID.
+      Setup for AWS, GCP, Slack, Salesforce and other connectors is behind the help center login, so
+      outbound is F.
 
 hygiene:
   expiry:
@@ -174,6 +175,5 @@ hygiene:
       if a token leaks.
 
 notes: >-
-  Covers the Abnormal platform REST API, which uses one bearer token for every path. Two of five
-  hygiene checks pass, so inbound is F. A token create and revoke API or a last-used timestamp would
-  lift it to D. B or A needs federated login.
+  Covers the platform REST API, which uses one bearer token for every path. Legacy tokens keep
+  working until April 30, 2027.

@@ -84,19 +84,21 @@ const RUBRIC_NAMES = (() => {
 const tip = (id, target, text) => `<span class="tip" tabindex="0" data-tip="${esc(text)}">${target}</span>`;
 const HYG_ICON = { expiry: "hourglass", rotation_api: "arrows-rotate", scoping: "shield-check", last_used: "clock-rotate-left", leak_revocation: "link-slash" };
 const mHygRow = (p) => HYG.map((k) => { const v = p.hygiene[k].pass; return tip(`t-${p.id}-h-${k}`, `<span class="tile ${v === null ? "hz" : v ? "hy" : "hn"}">${icon(HYG_ICON[k], { label: v === null ? "n/a" : v ? "pass" : "fail" })}</span>`, HYG_LABEL[k]); }).join("");
-// Low confidence: a small marker by the product name; the reason lives in its tooltip.
+// Docs not public: a small lock by the product name, and the wall receipt on the surface tab.
+const walledSides = (p) => ["inbound", "outbound"].filter((k) => p.surfaces[k].walled);
+const meaning = (side, s) => (s.walled ? "Docs not public" : RUBRIC_NAMES[side][s.grade]);
 const lowConf = (p, pill = false) => {
-  if (!p.confidence) return "";
-  const why = esc(String(p.confidence.reason).replace(/`/g, "").replace(/\s+/g, " ").trim());
-  // same tooltip pattern as the column-heading "?" icons
+  const w = walledSides(p);
+  if (!w.length) return "";
+  const why = w.length === 2 ? "Inbound and outbound docs are not public, so both are F." : `${w[0][0].toUpperCase() + w[0].slice(1)} docs are not public, so ${w[0]} is F.`;
   return pill
-    ? `<span class="tip lc-pill" tabindex="0" data-tip="${why}">${icon("circle-exclamation", { solid: true })}<span>Low confidence</span></span>`
-    : `<span class="q lc" tabindex="0" aria-label="Low confidence" data-tip="Low confidence. ${why}">${icon("circle-exclamation", { solid: true })}</span>`;
+    ? `<span class="tip lc-pill" tabindex="0" data-tip="${why}">${icon("lock", { solid: true })}<span>Docs not public</span></span>`
+    : `<span class="q lc" tabindex="0" aria-label="Docs not public" data-tip="${why}">${icon("lock", { solid: true })}</span>`;
 };
 const mRow = (p) => {
   const i = p.surfaces.inbound.grade, o = p.surfaces.outbound.grade;
-  const side = o !== "N/A" && RANK[o] < RANK[i] ? ["Outbound", RUBRIC_NAMES.outbound[o]] : ["Inbound", RUBRIC_NAMES.inbound[i]];
-  return `<tr data-p="${p.id}"><th scope="row"><span class="m-pn"><button type="button" class="m-open">${esc(p.product)}</button>${lowConf(p)}</span></th><td data-l="Grade" data-tab="${side[0] === "Outbound" ? "out" : "in"}">${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td data-l="Inbound" data-tab="in">${tip(`t-${p.id}-in`, badge(i), RUBRIC_NAMES.inbound[i])}</td><td data-l="Outbound" data-tab="out">${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), RUBRIC_NAMES.outbound[o])}</td><td class="m-hy" data-l="Hygiene" data-tab="hy">${mHygRow(p)}</td><td class="m-go" aria-hidden="true"></td></tr>`;
+  const side = o !== "N/A" && RANK[o] < RANK[i] ? ["Outbound", meaning("outbound", p.surfaces.outbound)] : ["Inbound", meaning("inbound", p.surfaces.inbound)];
+  return `<tr data-p="${p.id}"><th scope="row"><span class="m-pn"><button type="button" class="m-open">${esc(p.product)}</button>${lowConf(p)}</span></th><td data-l="Grade" data-tab="${side[0] === "Outbound" ? "out" : "in"}">${tip(`t-${p.id}-g`, badge(p.headline), side[1])}</td><td data-l="Inbound" data-tab="in">${tip(`t-${p.id}-in`, badge(i), meaning("inbound", p.surfaces.inbound))}</td><td data-l="Outbound" data-tab="out">${o === "N/A" ? tip(`t-${p.id}-out`, `<span class="na">—</span>`, RUBRIC_NAMES.outbound["N/A"]) : tip(`t-${p.id}-out`, badge(o), meaning("outbound", p.surfaces.outbound))}</td><td class="m-hy" data-l="Hygiene" data-tab="hy">${mHygRow(p)}</td><td class="m-go" aria-hidden="true"></td></tr>`;
 };
 // Expandable receipts under each product row: the card's own summary, mechanisms and evidence quotes.
 // Evidence text comes verbatim from vendor docs (markdown, code spans, table rows, JSON). Render it readably without changing the words.
@@ -130,7 +132,7 @@ const pdSrc = (ev) => {
   for (const e of ev) { const g = by.get(e.url) ?? by.set(e.url, { url: e.url, on: e.checked_on, qs: [] }).get(e.url); if (e.quote) g.qs.push(e); if (e.checked_on > g.on) g.on = e.checked_on; }
   return `<div class="srcs">${[...by.values()].map((g) => `<article class="src">${g.qs.map(quote).join("")}<footer><a href="${esc(g.url)}" target="_blank" rel="nofollow noopener">${esc(host(g.url))}<span aria-hidden="true">↗</span></a><time>${esc(g.on)}</time></footer></article>`).join("")}</div>`;
 };
-const pdSurf = (key, side, s) => `<div class="pd-pane" role="tabpanel" data-tab="${key}" hidden><p class="pd-mean">${badge(s.grade)}<span>${esc(RUBRIC_NAMES[side][s.grade])}</span></p>${s.tier_gated ? `<p class="pd-tier">${esc(s.tier_gated)}</p>` : ""}${pdSrc(s.evidence)}</div>`;
+const pdSurf = (key, side, s) => `<div class="pd-pane" role="tabpanel" data-tab="${key}" hidden><p class="pd-mean">${badge(s.grade)}<span>${esc(meaning(side, s))}</span></p>${s.tier_gated ? `<p class="pd-tier">${esc(s.tier_gated)}</p>` : ""}${pdSrc(s.walled ? [s.walled, ...s.evidence] : s.evidence)}</div>`;
 const pdHyg = (p) => `<div class="pd-pane" role="tabpanel" data-tab="hy" hidden><ul class="pd-hyg">${HYG.map((k) => {
   const h = p.hygiene[k], v = h.pass, cls = v === null ? "hz" : v ? "hy" : "hn", st = v === null ? "n/a" : v ? "pass" : "fail";
   const row = `<span class="tile ${cls}">${icon(HYG_ICON[k])}</span><span class="pd-hl">${HYG_LABEL[k]}</span><span class="pd-hv pd-${cls}">${st}</span>`;
@@ -185,7 +187,7 @@ for (const p of products) {
   const label = "wif.tax", g = p.headline, w1 = 52, w2 = 30;
   writeFileSync(join(out, "badge", `${p.id}.svg`), `<svg xmlns="http://www.w3.org/2000/svg" width="${w1 + w2}" height="20" role="img" aria-label="wif.tax: ${g}"><title>wif.tax: ${g}</title><rect width="${w1}" height="20" fill="#555"/><rect x="${w1}" width="${w2}" height="20" fill="${COLOR[g]}"/><g fill="#fff" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle"><text x="${w1 / 2}" y="14">${label}</text><text x="${w1 + w2 / 2}" y="14" font-weight="bold">${g}</text></g></svg>`);
 }
-writeFileSync(join(out, "api/products.json"), JSON.stringify({ generated: TODAY, license: "CC-BY-4.0", rubric: SITE + "/rubric/", products: products.map((p) => ({ id: p.id, vendor: p.vendor, product: p.product, headline: p.headline, inbound: p.surfaces.inbound.grade, outbound: p.surfaces.outbound.grade, hygiene: Object.fromEntries(HYG.map((k) => [k, p.hygiene[k].pass])), status: p.status, confidence: p.confidence?.level ?? "normal", checked: p.checked, summary: p.summary, url: `${SITE}/p/${p.id}/`, badge: `${SITE}/badge/${p.id}.svg` })) }, null, 2));
+writeFileSync(join(out, "api/products.json"), JSON.stringify({ generated: TODAY, license: "CC-BY-4.0", rubric: SITE + "/rubric/", products: products.map((p) => ({ id: p.id, vendor: p.vendor, product: p.product, headline: p.headline, inbound: p.surfaces.inbound.grade, outbound: p.surfaces.outbound.grade, hygiene: Object.fromEntries(HYG.map((k) => [k, p.hygiene[k].pass])), status: p.status, docs_not_public: walledSides(p), checked: p.checked, summary: p.summary, url: `${SITE}/p/${p.id}/`, badge: `${SITE}/badge/${p.id}.svg` })) }, null, 2));
 
 // ---- markdown pages
 {

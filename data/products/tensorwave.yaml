@@ -6,20 +6,17 @@ website: https://tensorwave.com
 docs: https://docs.tensorwave.com/kubernetes/health-overview.md
 category: cloud
 status: listed
-confidence:
-  level: low
-  reason: >-
-    TensorWave publishes no API, CLI, token or S3 key docs, and the dashboard and user-management
-    pages are login-only or empty. If those showed expiring, API-rotatable, scoped credentials,
-    inbound could move from F to D.
 summary: >-
-  TensorWave documents no public API, CLI, Terraform provider or federation. Workloads get in with
-  SSH keys and a kubeconfig downloaded from the dashboard. S3 storage keys are undocumented.
-  Outbound is not graded, since the only integration's Slack connection is undocumented.
+  TensorWave publishes no API, token or storage key docs, so both surfaces are F. Workloads get in
+  with SSH keys and a kubeconfig downloaded from the dashboard.
 
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://docs.tensorwave.com/llms.txt
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       Static credentials only: SSH keys and a kubeconfig downloaded by hand from the dashboard. No
       API, token, service account or federation is documented, nor how S3 keys are issued.
@@ -72,10 +69,17 @@ surfaces:
       account manager, so it does not lift the grade. S3-style access keys are static by nature. A
       federated API, or credential docs passing three hygiene checks for D, would move it.
   outbound:
-    grade: N/A
+    grade: F
+    walled:
+      url: https://docs.tensorwave.com/welcome-to-tensorwave/faq.md
+      checked_on: 2026-11-20
+      checked_by: tehreet
+      quote: >-
+        We provide multiple data storage and transfer options, including high-speed SSDs and cloud
+        storage integrations.
     mechanism: >-
-      Not graded. TensorWave's only integration posts alerts to your Slack, and how it connects is
-      undocumented. Registry and data pulls run in your jobs with your credentials.
+      The FAQ advertises cloud storage integrations, and alerts go to Slack. Neither connection is
+      documented.
     evidence:
       - url: https://docs.tensorwave.com/observability/notifications-and-alerts.md
         checked_on: 2026-10-22
@@ -100,11 +104,9 @@ surfaces:
           We provide multiple data storage and transfer options, including high-speed SSDs and
           cloud storage integrations.
     notes: >-
-      No receipt, no grade. Registry and Hugging Face credentials are typed into your own login pod
-      and used by your jobs. TensorWave does not hold them. The FAQ's cloud storage integrations are
-      not described anywhere public. Documenting the Slack connection would grade this. An app
-      install would be keyless, and a pasted webhook or bot token would be D or F. The headline is F
-      either way.
+      Registry and Hugging Face credentials are typed into your own pod and used by your jobs, so
+      they do not count. The cloud storage integrations and the Slack connection are not documented,
+      so outbound is F.
 
 hygiene:
   expiry:
@@ -167,7 +169,6 @@ hygiene:
       TensorWave is not in GitHub's secret-scanning table.
 
 notes: >-
-  One card, because no TensorWave product documents its own machine auth. If it publishes API or
-  storage key docs, those may get their own cards, as CoreWeave's do. The credential pages that
-  exist are empty. The fix: publish credential docs, add expiry and a revocation API, offer scoped
-  service accounts, and accept CI OIDC tokens.
+  One card, because no TensorWave product documents its own machine auth. The fix: publish
+  credential docs, add expiry and a revocation API, offer scoped service accounts, and accept CI
+  OIDC tokens.

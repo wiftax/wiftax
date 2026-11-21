@@ -6,11 +6,6 @@ website: https://sysdig.com
 docs: https://docs.sysdig.com/en/developer-tools/sysdig-api/
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Sysdig's full API reference requires a login. No last-used field is publicly documented. If one
-    exists, inbound would be D.
 summary: >-
   Scripts, CI and Terraform call Sysdig Secure with a static token, and agents connect with a static
   access key. There is no OIDC login. Cloud onboarding is keyless on AWS, Azure and GCP, but
@@ -19,6 +14,10 @@ summary: >-
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://us2.app.sysdig.com/api/public/docs/index.html
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A static bearer token from a service account or a user's API token, for the APIs, CI and
       Terraform. Agents connect with a static access key.
@@ -52,11 +51,9 @@ surfaces:
         checked_by: tehreet
         quote: "The provider needs to be configured with proper API token before it can be used."
     notes: >-
-      Graded on Sysdig Secure SaaS. The API docs list three token options, all static. The only OIDC
-      in the docs is human SSO. Graded on the weakest path: every agent needs an access key that
-      never expires, so even a well-managed service account does not lift the grade. The Next Gen
-      API reference needs a login, so it could not be checked. Sysdig Monitor shares the same
-      credentials. IBM-hosted Sysdig uses IBM IAM keys and is not graded here.
+      Sysdig's API reference needs a login, so inbound is F. The public docs list three token
+      options, all static, and every agent needs an access key that never expires. The only OIDC in
+      the docs is human SSO. IBM-hosted Sysdig uses IBM IAM keys and is not graded here.
   outbound:
     grade: B
     mechanism: >-
@@ -204,5 +201,5 @@ hygiene:
       detectable prefix.
 
 notes: >-
-  Sysdig Monitor uses the same credentials and would grade the same inbound. Expiry on access keys
-  and user tokens would lift inbound to D. Review call: expiry fails even though service accounts require one.
+  Graded on Sysdig Secure SaaS. Sysdig Monitor uses the same credentials and would grade the same
+  inbound.

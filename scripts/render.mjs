@@ -6,6 +6,7 @@ import * as yaml from "js-yaml";
 const root = new URL("..", import.meta.url).pathname;
 const dir = join(root, "data/products");
 const RANK = { A: 5, B: 4, C: 3, D: 2, F: 1 };
+const walled = (d) => ["inbound", "outbound"].filter((k) => d.surfaces[k].walled);
 const rows = readdirSync(dir).filter((f) => f.endsWith(".yaml") && !f.startsWith("_"))
   .map((f) => yaml.load(readFileSync(join(dir, f), "utf8"), { schema: yaml.CORE_SCHEMA }))
   .map((d) => {
@@ -24,14 +25,14 @@ let md = `# wif.tax scoreboard\n\nGenerated from \`data/products/\` by \`npm run
 md += `Hygiene columns: expiry · rotation API · scoping · last-used · leak revocation. "·" means no static credential exists to check.\n\n`;
 md += `| Grade | Vendor | Product | Inbound | Outbound | Hygiene | Status | Checked |\n|---|---|---|---|---|---|---|---|\n`;
 for (const r of rows) {
-  const status = (r.d.status === "graduated" ? `⭐ graduated ${r.d.graduated_on}` : r.d.status) + (r.d.confidence ? " · low confidence" : "");
+  const status = (r.d.status === "graduated" ? `⭐ graduated ${r.d.graduated_on}` : r.d.status) + (walled(r.d).length ? " · docs not public" : "");
   md += `| **${badge(r.headline)}** | ${r.d.vendor} | [${r.d.product}](data/products/${r.d.id}.yaml) | ${badge(r.i)} | ${badge(r.o)} | \`${r.hyg}\` | ${status} | ${r.latest} |\n`;
 }
 md += `\n## Cards\n\n`;
 for (const r of rows) {
   const d = r.d;
   md += `### ${badge(r.headline)} ${d.product.startsWith(d.vendor) ? d.product : `${d.vendor} ${d.product}`}\n\n${d.summary.trim()}\n\n`;
-  if (d.confidence) md += `> **Low confidence:** ${d.confidence.reason}\n\n`;
+  if (walled(d).length) md += `> **Docs not public:** ${walled(d).join(" and ")} graded F.\n\n`;
   md += `- **Inbound ${r.i}:** ${d.surfaces.inbound.mechanism}${d.surfaces.inbound.tier_gated ? ` *(requires ${d.surfaces.inbound.tier_gated})*` : ""}\n`;
   md += `- **Outbound ${r.o}:** ${d.surfaces.outbound.mechanism}\n`;
   if (d.vendor_statement) md += `- **Vendor says (${d.vendor_statement.date}):** "${d.vendor_statement.quote}" ([source](${d.vendor_statement.url}))\n`;

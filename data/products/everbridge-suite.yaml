@@ -9,11 +9,6 @@ website: https://www.everbridge.com
 docs: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types
 category: comms
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Everbridge's support center, which holds most integration setup guides, is behind a login. The
-    outbound grade rests on the one public page that shows Everbridge holding customer credentials.
 summary: >-
   To call the Everbridge Suite API, a service account swaps a client ID and secret for an
   eight-hour token. Basic auth with an API user's password also still works. Outbound, the only
@@ -70,10 +65,10 @@ surfaces:
         checked_by: erikng
         quote: "APNs supports both the Authentication Key and Certificate approach, though we recommend using the Authentication Key if possible since it will avoid any issues with expiry dates."
     notes: >-
-      Low confidence. This is the only public page found where Everbridge holds a customer
-      credential, and it applies only to customers who build their own mobile app. It gives no
-      least-privilege or rotation guidance, which is an F. Setup guides for other integrations sit
-      in the support center behind a login and could move this grade either way.
+      This is the only public page found where Everbridge holds a customer credential, and it
+      applies only to customers who build their own mobile app. It gives no least-privilege or
+      rotation guidance, so this is F. Other integration guides in the support portal were not
+      graded.
 
 hygiene:
   expiry:
@@ -134,5 +129,4 @@ hygiene:
 
 notes: >-
   Covers the Everbridge Suite REST API on the public developer portal. Other Everbridge products
-  were not graded. The F comes only from the outbound surface, which rests on thin public evidence. Public
-  integration docs showing keyless access would lift it.
+  were not graded. The F comes only from the outbound surface.

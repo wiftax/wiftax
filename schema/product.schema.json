@@ -49,16 +49,6 @@
         "quote": { "type": "string" }
       }
     },
-    "confidence": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["level", "reason"],
-      "description": "Set when vendor docs needed to verify a grade-deciding claim are not public. Absent means normal confidence.",
-      "properties": {
-        "level": { "type": "string", "enum": ["low"] },
-        "reason": { "type": "string", "maxLength": 300 }
-      }
-    },
     "notes": { "type": "string" }
   },
   "$defs": {
@@ -82,6 +72,7 @@
         "grade": { "$ref": "#/$defs/grade" },
         "mechanism": { "type": "string", "description": "The best available auth mechanism, in one sentence" },
         "tier_gated": { "type": "string", "description": "Plan or tier required for the graded mechanism, if any" },
+        "walled": { "$ref": "#/$defs/evidence", "description": "The docs needed to grade this surface are not public. Links the login wall or missing page. Forces grade F." },
         "issuers": {
           "type": "array",
           "items": { "type": "string" },

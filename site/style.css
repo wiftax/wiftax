@@ -262,7 +262,7 @@ html{scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--ink-3) 45%,var
 .m-dialog::part(dialog){margin-block:min(8vh,4.5rem) auto;max-height:calc(100dvh - 2 * min(8vh,4.5rem))}
 @media(max-width:40rem){.m-dialog::part(dialog){margin-block:var(--wa-space-m) auto;max-height:calc(100dvh - 2 * var(--wa-space-m))}}
 
-/* low-confidence marker */
+/* docs-not-public marker */
 .m-pn{display:inline-flex;align-items:center;gap:var(--wa-space-xs)}
 .m-pn .lc{margin:0;font-size:var(--wa-font-size-xs)}
 .lc-pill{display:inline-flex;align-items:center;gap:var(--wa-space-2xs);padding:.2em .6em;border-radius:var(--wa-border-radius-pill);background:var(--surface-2);color:var(--ink-2);font-size:var(--wa-font-size-xs);font-weight:var(--wa-font-weight-medium,500);letter-spacing:0}

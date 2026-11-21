@@ -8,11 +8,6 @@ website: https://www.fortinet.com
 docs: https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    The full FortiOS API reference needs a Fortinet login, so schema facts come from Fortinet's
-    Ansible docs. The last-used fail is unverified, and one more hygiene pass would make inbound D.
 summary: >-
   To call the FortiOS REST API, your code holds a static token tied to a REST API admin, which never
   expires by default. When a FortiGate-VM runs in a cloud, its connectors use that VM's own
@@ -21,6 +16,10 @@ summary: >-
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://fndn.fortinet.net/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A static token for a REST API admin, sent as a bearer token. Trusted hosts and an admin
       profile limit it, and an optional client certificate is checked alongside the token.
@@ -201,5 +200,5 @@ hygiene:
 notes: >-
   Covers FortiOS on FortiGate appliances and VMs: the REST API inbound and the SDN connectors and
   automation actions outbound. FortiManager, FortiGate Cloud and FortiSASE would be separate cards.
-  An enforced token lifetime and a last-used time would lift inbound to D. C or better needs
-  something other than a static token.
+  The full API reference needs a Fortinet login, so inbound is F. A public reference with an
+  enforced token lifetime and a last-used time would make D.

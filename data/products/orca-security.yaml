@@ -6,19 +6,17 @@ website: https://orca.security
 docs: https://docs.orcasecurity.io/docs/managing-api-tokens
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Orca's docs are behind a login. Token hygiene comes from third-party guides, the rotation and
-    last-used checks fail as unverifiable, and Azure, GCP and OCI onboarding are unverified.
 summary: >-
   To call the Orca API, MCP server, Terraform or CI actions, your code needs a static API token.
-  Orca reaches AWS and Alibaba by cross-account role, but Snyk, Cloudflare and other integrations
-  want static secrets.
+  Orca's docs need a login, so both surfaces are F.
 
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://docs.orcasecurity.io/docs/managing-api-tokens
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A static API token with a role and scope, sent directly to the API, MCP server, Terraform and
       GitHub Actions. OAuth exists only as a browser login for MCP.
@@ -52,13 +50,15 @@ surfaces:
         checked_by: tehreet
         quote: "Use this endpoint to create a new user session by providing a valid security_token."
     notes: >-
-      Orca's docs are behind a login, so this card relies on Orca's public repos and third-party
-      guides. Every automation path sends the long-lived token itself. A session endpoint can trade
-      it for a session, but Terraform, MCP and the CI actions take the raw token. So this is graded
-      as a static key, not C. No OIDC or workload identity is documented, and Orca's own actions
-      store the token in GitHub Secrets.
+      Orca's docs need a login, so inbound is F. Orca's public repos show every automation path
+      sending the long-lived token itself, and its own CI actions store the token in GitHub Secrets.
+      Nothing public offers OIDC or workload identity.
   outbound:
-    grade: B
+    grade: F
+    walled:
+      url: https://docs.orcasecurity.io/docs/managing-api-tokens
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       AWS onboarding creates a role trusting Orca's account with an External ID, and Alibaba uses a
       RAM role. Snyk, Cloudflare, Akamai, Zscaler and Terraform Cloud want static tokens or secrets.
@@ -124,11 +124,9 @@ surfaces:
         checked_by: tehreet
         quote: "`api_token` — (Required, String, Sensitive) Terraform Cloud service-account"
     notes: >-
-      AWS is keyless, per a public copy of Orca's CloudFormation template. Alibaba is keyless per
-      Orca's page. Azure, GCP and OCI onboarding are not publicly documented. B rests on AWS and
-      Alibaba being keyless while Snyk, Cloudflare, Akamai and Terraform Cloud want static tokens
-      and Zscaler ZPA a client secret. If Azure or GCP take keys, it stays B. A needs every
-      integration keyless. Ticketing and alert targets were not counted.
+      Orca's public pages show AWS and Alibaba onboarding by cross-account role, and Snyk,
+      Cloudflare, Akamai and Terraform Cloud taking static tokens. Azure, GCP and OCI onboarding is
+      behind the login, so outbound is F.
 
 hygiene:
   expiry:
@@ -164,7 +162,7 @@ hygiene:
       No public source documents creating or revoking tokens by API, and every guide uses the
       console. A citable endpoint would pass this.
   scoping:
-    pass: true
+    pass: false
     evidence:
       - url: https://support.expel.io/hc/en-us/articles/19321075551763
         checked_on: 2026-10-22
@@ -179,8 +177,7 @@ hygiene:
         checked_by: tehreet
         quote: "Determine the expiration date, role, and scope you wish to apply"
     notes: >-
-      Each token takes its own role and can be limited to specific resources. Service Tokens are not
-      tied to a user, which counts as a machine identity.
+      Only third-party guides describe a role and scope on each token. Orca's own docs need a login.
   last_used:
     pass: false
     evidence:
@@ -201,6 +198,4 @@ hygiene:
       Orca is not in GitHub's secret-scanning table, so leaked tokens are not reported to Orca.
 
 notes: >-
-  One card for the Orca platform, whose products share one token model. Only scoping passes, so
-  inbound is F. A token API, a last-used field and a lifetime cap would lift it to D. B or A needs a
-  federated login. Reviewer check: the AWS template evidence is a third-party copy.
+  One card for the Orca platform, whose products share one token model.
