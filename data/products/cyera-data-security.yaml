@@ -7,13 +7,16 @@ docs: https://api.cyera.io/docs
 category: security
 status: listed
 summary: >-
-  To call Cyera's API, your code swaps a client ID and secret for a short-lived JWT. The secret
-  expires within 365 days. Cyera's docs are behind a login, so how it connects into your clouds can
-  barely be checked.
+  Cyera's docs need a login, so both surfaces are F. Third-party connectors show your code swapping
+  a client ID and secret for a short-lived JWT.
 
 surfaces:
   inbound:
-    grade: C
+    grade: F
+    walled:
+      url: https://docs.cyera.io/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A client ID and secret, set to expire in 1 to 365 days, are posted to /v1/login for a
       short-lived JWT.
@@ -39,13 +42,15 @@ surfaces:
         checked_by: tehreet
         quote: '"grant_types_supported":["authorization_code","refresh_token","client_credentials","urn:ietf:params:oauth:grant-type:token-exchange","urn:ietf:params:oauth:grant-type:device_code"]'
     notes: >-
-      Every public third-party connector uses this flow. Graded C because the JWT is short-lived but
-      the client secret is a static root. Cyera's auth server advertises the token-exchange grant,
-      but nothing public says it accepts workload tokens, so it does not count. The API reference
-      and product docs are behind a login. How the on-prem connector authenticates back to Cyera is
-      not documented.
+      Cyera's API reference and product docs need a login, so inbound is F. Third-party connectors
+      all swap a client ID and secret for a short-lived JWT. Cyera's auth server advertises the
+      token-exchange grant, but nothing public says it accepts workload tokens.
   outbound:
-    grade: B
+    grade: F
+    walled:
+      url: https://docs.cyera.io/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       Cyera says it connects to clouds through native APIs. How it authenticates into each one is
       behind a login.
@@ -63,13 +68,12 @@ surfaces:
         checked_by: tehreet
         quote: "Cyera’s approach eliminates these bottlenecks by securely connecting to on-prem systems from the cloud through APIs, removing the need for local agents or additional infrastructure."
     notes: >-
-      Low confidence, grade held. B rested on Cyera's proof-of-concept Terraform provider, which
-      showed an AWS role and a Snowflake key-rotation endpoint. That repository has been deleted and
-      nothing public replaces it. Public setup docs could move this either way.
+      Cyera says it connects to clouds through native APIs, but how it authenticates into each one
+      needs a login, so outbound is F.
 
 hygiene:
   expiry:
-    pass: true
+    pass: false
     evidence:
       - url: https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm
         checked_on: 2026-10-13
@@ -80,8 +84,7 @@ hygiene:
         checked_by: tehreet
         quote: "Select a Token Expiration from the menu (1, 7, 30, 90, or 365 days)."
     notes: >-
-      Every documented flow requires an expiry, from 1 to 365 days, with no never option. That
-      counts as an enforced maximum. Gated docs might allow longer tokens elsewhere.
+      Only third-party guides describe a 1 to 365 day expiry. Cyera's own docs need a login.
   rotation_api:
     pass: false
     evidence:
@@ -121,6 +124,5 @@ hygiene:
     notes: Cyera does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  Graded the Cyera platform API, which all its modules share. Its API reference, docs and support
-  center need a login, so this card relies on third-party docs, public auth metadata and sample
-  repos. Cyera's Oasis acquisition runs as Cyera Identity and is not graded here.
+  Graded the Cyera platform API, which all its modules share. Cyera's Oasis acquisition runs as
+  Cyera Identity and is not graded here.

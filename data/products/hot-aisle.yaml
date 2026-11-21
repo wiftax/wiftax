@@ -6,11 +6,6 @@ website: https://hotaisle.xyz
 docs: https://admin.hotaisle.app/api/docs/
 category: cloud
 status: listed
-confidence:
-  level: low
-  reason: >-
-    API keys are managed in a login-only SSH admin tool. The public API shows no expiry or last-used
-    field. If the tool enforced either, plus one more fix, inbound would move from F to D.
 summary: >-
   Your code calls Hot Aisle with a static user API key, and there is no OIDC path. Keys can be
   rotated and scoped through the API, but have no expiry or last-used view and no GitHub leak
@@ -141,7 +136,6 @@ hygiene:
       makes a pattern harder to add.
 
 notes: >-
-  One card, since VMs and bare metal share one API. Key management is login-walled, hence low
-  confidence. Like coreweave-api it gets F for a user-owned static token, but keys here can be
-  rotated and scoped through the API. One more check, such as enforced expiry or a last-used time,
-  makes D. B or A needs an OIDC token exchange.
+  One card, since VMs and bare metal share one API. Like coreweave-api it gets F for a user-owned
+  static token, but keys here can be rotated and scoped through the API. One more check, such as
+  enforced expiry or a last-used time, makes D. B or A needs an OIDC token exchange.

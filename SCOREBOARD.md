@@ -6,9 +6,10 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 
 | Grade | Vendor | Product | Inbound | Outbound | Hygiene | Status | Checked |
 |---|---|---|---|---|---|---|---|
-| **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Asana | [Platform](data/products/asana.yaml) | 💀 F | 🟢 A | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | Axonius | [Platform](data/products/axonius.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Cisco | [Catalyst SD-WAN Manager](data/products/cisco-catalyst-sd-wan-manager.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Cisco | [Meraki Dashboard](data/products/cisco-meraki-dashboard.yaml) | 🟠 C | 💀 F | `✗ ✓ ✗ ✗ ✓` | listed | 2026-11-18 |
@@ -18,6 +19,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Customer.io | [Platform](data/products/customer-io.yaml) | 💀 F | 🔴 D | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Cyera | [Data Security Platform](data/products/cyera-data-security.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
@@ -26,22 +28,22 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Elastic | [Cloud Enterprise](data/products/elastic-cloud-enterprise.yaml) | 💀 F | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Ema | [Platform](data/products/ema.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
-| **💀 F** | Everbridge | [Everbridge Suite](data/products/everbridge-suite.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-11-18 |
+| **💀 F** | Everbridge | [Everbridge Suite](data/products/everbridge-suite.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | FloQast | [Platform](data/products/floqast.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
-| **💀 F** | Fluidstack | [Atlas](data/products/fluidstack.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Fortinet | [FortiGate](data/products/fortinet-fortigate.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Fluidstack | [Atlas](data/products/fluidstack.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Fortinet | [FortiGate](data/products/fortinet-fortigate.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Freshworks | [Freshdesk](data/products/freshworks-freshdesk.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Genesis Cloud | [Platform](data/products/genesis-cloud.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Google | [Threat Intelligence](data/products/google-threat-intelligence.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Granola | [Granola](data/products/granola.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | HackerOne | [Platform](data/products/hackerone.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
-| **💀 F** | Hot Aisle | [GPU Cloud](data/products/hot-aisle.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Hot Aisle | [GPU Cloud](data/products/hot-aisle.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Hyperbolic | [GPU Cloud and Inference API](data/products/hyperbolic.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | Island | [Enterprise Browser](data/products/island-enterprise-browser.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-11-15 |
+| **💀 F** | Island | [Enterprise Browser](data/products/island-enterprise-browser.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Kentik | [Platform](data/products/kentik-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Kisi | [Access Control](data/products/kisi.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | KnowBe4 | [KSAT](data/products/knowbe4-ksat.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
-| **💀 F** | Kyriba | [Platform](data/products/kyriba.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-11-18 |
+| **💀 F** | Kyriba | [Platform](data/products/kyriba.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Lumos | [Identity Platform](data/products/lumos-identity-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Metronome | [Billing Platform](data/products/metronome.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
@@ -50,12 +52,12 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Nightfall AI | [DLP](data/products/nightfall-dlp.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Nscale | [Cloud](data/products/nscale.yaml) | 🔴 D | 💀 F | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Nudge Security | [Platform](data/products/nudge-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | Obsidian Security | [Platform](data/products/obsidian-security.yaml) | 💀 F | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | Orca Security | [Cloud Security Platform](data/products/orca-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Obsidian Security | [Platform](data/products/obsidian-security.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
+| **💀 F** | Orca Security | [Cloud Security Platform](data/products/orca-security.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Palo Alto Networks | [Cortex XSIAM](data/products/paloalto-cortex-xsiam.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **💀 F** | Parsec | [Parsec for Teams](data/products/parsec.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Perplexity | [Enterprise](data/products/perplexity-enterprise.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
-| **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 🟢 A | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-11-16 |
+| **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Push Security | [Platform](data/products/push-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Rapid7 | [Command Platform](data/products/rapid7-insight-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Reco | [Dynamic SaaS Security](data/products/reco-saas-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
@@ -63,19 +65,21 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Rippling | [Platform](data/products/rippling-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Secoda | [Platform](data/products/secoda.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Semgrep | [AppSec Platform](data/products/semgrep-appsec-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | SentinelOne | [Singularity](data/products/sentinelone-singularity.yaml) | 🔴 D | 💀 F | `✓ ✓ ✓ ✓ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | SF Compute | [Object Storage](data/products/sf-compute-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Splunk | [Cloud Platform](data/products/splunk-cloud-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | StrongDM | [API](data/products/strongdm.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **💀 F** | Sysdig | [Sysdig Secure](data/products/sysdig-secure.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | TensorWave | [GPU Cloud](data/products/tensorwave.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
-| **💀 F** | Tines | [Platform](data/products/tines.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Sysdig | [Sysdig Secure](data/products/sysdig-secure.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
+| **💀 F** | TensorWave | [GPU Cloud](data/products/tensorwave.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
+| **💀 F** | Tines | [Platform](data/products/tines.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Together AI | [Platform](data/products/together-ai.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 💀 F | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **💀 F** | Vast.ai | [GPU Cloud](data/products/vast-ai.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **💀 F** | Voltage Park | [GPU Cloud](data/products/voltage-park.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Voltage Park | [GPU Cloud](data/products/voltage-park.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Webflow | [Platform](data/products/webflow.yaml) | 💀 F | 🟢 A | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Workiva | [Platform](data/products/workiva-platform.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | Zenity | [AI Agent Security](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
@@ -93,11 +97,10 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🔴 D** | Modal | [Platform](data/products/modal.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Notion | [Notion](data/products/notion.yaml) | 🔴 D | 🟡 B | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
-| **🔴 D** | OpenAI | [ChatGPT Enterprise](data/products/openai-chatgpt-enterprise.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed · low confidence | 2026-11-18 |
+| **🔴 D** | OpenAI | [ChatGPT Enterprise](data/products/openai-chatgpt-enterprise.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Oracle | [NetSuite](data/products/oracle-netsuite.yaml) | 🟠 C | 🔴 D | `✓ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Runpod | [GPU Cloud](data/products/runpod.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
-| **🔴 D** | SentinelOne | [Singularity](data/products/sentinelone-singularity.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-10-22 |
 | **🔴 D** | SF Compute | [GPU Cloud](data/products/sf-compute.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Socket | [Platform](data/products/socket-dev.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Statsig | [Platform](data/products/statsig.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
@@ -110,13 +113,11 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-11-15 |
 | **🟠 C** | Apple | [Apple Business](data/products/apple-business-manager.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Atlassian | [Cloud](data/products/atlassian-cloud.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
-| **🟠 C** | Axonius | [Platform](data/products/axonius.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-11-15 |
 | **🟠 C** | Bynder | [Digital Asset Management](data/products/bynder.yaml) | 🟠 C | — | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Cisco | [Webex](data/products/cisco-webex.yaml) | 🟠 C | 🟢 A | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Coupa | [Core Platform](data/products/coupa-core-platform.yaml) | 🟠 C | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | CrowdStrike | [Falcon API](data/products/crowdstrike-falcon-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | CyberArk | [Identity Security Platform](data/products/cyberark-identity-platform.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Cyera | [Data Security Platform](data/products/cyera-data-security.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | DoControl | [Platform](data/products/docontrol.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Docusign | [eSignature](data/products/docusign-esignature.yaml) | 🟠 C | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Drata | [Platform](data/products/drata.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
@@ -153,7 +154,6 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Wiz | [Platform](data/products/wiz-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Zapier | [Platform](data/products/zapier.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Zendesk | [Suite](data/products/zendesk.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
-| **🟠 C** | Zenity | [AI Agent Security](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Zoom | [Zoom API](data/products/zoom-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Zscaler | [OneAPI](data/products/zscaler-oneapi.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟡 B** | Aembit | [Workload IAM](data/products/aembit-workload-iam.yaml) | 🟢 A | 🟡 B | `· · · · ·` | listed | 2026-10-13 |
@@ -185,12 +185,12 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 
 ### 💀 F Abnormal AI Platform
 
-To call Abnormal's REST API, your code needs a static bearer token made in the portal. There is no OIDC or client-credentials login. Abnormal reads Microsoft 365 and Google Workspace through OAuth grants, but Okta remediation needs a pasted Okta API key.
+To call Abnormal's REST API, your code needs a static bearer token made in the portal. There is no OIDC or client-credentials login. Abnormal's help center, which holds its API and connector docs, needs a login, so both surfaces are F.
 
-> **Low confidence:** Abnormal's API and token docs are behind its customer portal. The expiry pass and last-used fail rest on release notes, the OpenAPI spec and a third-party guide. AWS, GCP and SaaS connector setup is not public.
+> **Docs not public:** inbound and outbound graded F.
 
 - **Inbound F:** A static API token created in the Abnormal portal and sent as a bearer token, with an optional IP allowlist. Every API path, SCIM included, uses this one scheme.
-- **Outbound B:** Microsoft 365 and Google Workspace connect through OAuth grants with no secret handed over. Okta remediation needs a static Okta API key. Other connectors' methods are not public.
+- **Outbound F:** Microsoft 365 and Google Workspace connect through OAuth grants with no secret handed over. Okta remediation needs a static Okta API key. Other connectors' methods are not public.
 - **Receipts:** [api.swaggerhub.com](https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0), [abnormal.ai](https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility), [docs.expel.io](https://docs.expel.io/connect-your-technology/a-c-integrations/abnormal-ai-setup-for-workbench), [legal.abnormalsecurity.com](https://legal.abnormalsecurity.com/legal-hub/abnormal-security-api-terms-of-service-6feee5e3), [abnormal.ai](https://abnormal.ai/learning/api-based-email-security-features), [abnormal.ai](https://abnormal.ai/resources/data-sheets/for-microsoft-365), [abnormal.ai](https://abnormal.ai/resources/data-sheets/abnormal-security-for-okta), [abnormal.ai](https://abnormal.ai/resources/data-sheets/cloud-platform-integrations), [abnormal.ai](https://abnormal.ai/resources/data-sheets/account-takeover-protection-google-cloud), [abnormal.ai](https://abnormal.ai/platform/whats-new/portal-enhancements-abnormal-app-store-deployment-overview-and-platform-integration)
 
 ### 💀 F Arcade.dev Platform
@@ -208,6 +208,16 @@ Asana's API takes static bearer tokens. Personal access tokens and service accou
 - **Inbound F:** A static bearer token, either a personal access token or an Enterprise service account token. The audit log API accepts only the service account token.
 - **Outbound A:** Asana-built integrations connect by signing in to the other service and approving access. No key is pasted into Asana.
 - **Receipts:** [developers.asana.com](https://developers.asana.com/docs/authentication.md), [developers.asana.com](https://developers.asana.com/reference/audit-log-api), [developers.asana.com](https://developers.asana.com/docs/oauth.md), [asana.com](https://asana.com/apps/jira), [asana.com](https://asana.com/apps/google-drive)
+
+### 💀 F Axonius Platform
+
+To call the Axonius API, your code needs a static API key and secret, or an OAuth client secret swapped for a one-hour token. The API reference is shared only on request, so inbound is F. Axonius reaches AWS through a keyless cross-account role, but Azure, GCP and most SaaS adapters take static secrets.
+
+> **Docs not public:** inbound graded F.
+
+- **Inbound F:** A service account sends a static API key and secret on every request. It can instead swap an OAuth client ID and secret for a bearer token that lasts one hour.
+- **Outbound B:** On hosted Axonius, the AWS adapter assumes a cross-account role you deploy, with your Customer ID as External ID. Azure, GCP and SaaS adapters need client secrets, keys or tokens.
+- **Receipts:** [docs.axonius.com](https://docs.axonius.com/docs/axonius-rest-api), [docs.axonius.com](https://docs.axonius.com/docs/manage-service-accounts), [docs.axonius.com](https://docs.axonius.com/docs/managing-api-settings), [raw.githubusercontent.com](https://raw.githubusercontent.com/Axonius/axonius_api_client/master/axonius_api_client/auth/api_key.py), [docs.axonius.com](https://docs.axonius.com/docs/connect-an-mcp-client-with-your-axonius-login), [docs.axonius.com](https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations), [docs.axonius.com](https://docs.axonius.com/docs/aws-parameters), [docs.axonius.com](https://docs.axonius.com/docs/azure-deploying-the-adapter), [docs.axonius.com](https://docs.axonius.com/docs/connecting-gcp-in-axonius), [docs.axonius.com](https://docs.axonius.com/docs/gcp-initial-setup), [docs.axonius.com](https://docs.axonius.com/docs/github), [docs.axonius.com](https://docs.axonius.com/docs/okta)
 
 ### 💀 F BeyondTrust Password Safe
 
@@ -281,6 +291,16 @@ The Customer.io APIs take a static private key that never expires. Service accou
 - **Outbound D:** Data warehouse and bucket syncs take a pasted AWS access key, Google service account key, Azure SAS URL or Snowflake private key. The docs ask for bucket-only or read-only access.
 - **Receipts:** [docs.customer.io](https://docs.customer.io/accounts-and-workspaces/managing-credentials.md), [docs.customer.io](https://docs.customer.io/accounts/audit-logs.md), [docs.customer.io](https://docs.customer.io/ai/cli/service-accounts.md), [docs.customer.io](https://docs.customer.io/integrations/data-out/connections/amazon-s3-data-out.md), [docs.customer.io](https://docs.customer.io/integrations/data-out/connections/gcs-data-out.md), [docs.customer.io](https://docs.customer.io/integrations/data-out/connections/ms-azure-data-out.md), [docs.customer.io](https://docs.customer.io/integrations/data-in/connections/reverse-etl/snowflake.md)
 
+### 💀 F Cyera Data Security Platform
+
+Cyera's docs need a login, so both surfaces are F. Third-party connectors show your code swapping a client ID and secret for a short-lived JWT.
+
+> **Docs not public:** inbound and outbound graded F.
+
+- **Inbound F:** A client ID and secret, set to expire in 1 to 365 days, are posted to /v1/login for a short-lived JWT.
+- **Outbound F:** Cyera says it connects to clouds through native APIs. How it authenticates into each one is behind a login.
+- **Receipts:** [docs.delinea.com](https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/cyera), [raw.githubusercontent.com](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/CyeraDSPM/Data%20Connectors/CyeraDSPM_CCF/CyeraDSPMLogs_DataConnectorPoller.json), [auth.cyera.io](https://auth.cyera.io/.well-known/openid-configuration), [www.cyera.com](https://www.cyera.com/partnership/microsoft), [www.cyera.com](https://www.cyera.com/partnership/google-cloud-platform), [www.cyera.com](https://www.cyera.com/blog/reinventing-on-prem-data-discovery-and-classification-cyeras-connectorless-approach)
+
 ### 💀 F Denvr Dataworks AI Cloud
 
 To call Denvr AI Cloud, your code holds a static API key made in the console, or a user's email and password. There is no federation. Custom apps pull private images with a pasted registry password or token.
@@ -349,8 +369,6 @@ Ema's API takes a long-lived workspace API key that never expires unless you set
 
 To call the Everbridge Suite API, a service account swaps a client ID and secret for an eight-hour token. Basic auth with an API user's password also still works. Outbound, the only public setup page has you hand over Apple and Firebase push credentials with no scoping guidance.
 
-> **Low confidence:** Everbridge's support center, which holds most integration setup guides, is behind a login. The outbound grade rests on the one public page that shows Everbridge holding customer credentials.
-
 - **Inbound C:** A service account's client ID and client secret are posted to the token endpoint for a bearer token that lasts eight hours.
 - **Outbound F:** For the Digital Apps API, the customer supplies Apple push and Firebase messaging credentials to Everbridge. The docs recommend the Apple key that does not expire.
 - **Receipts:** [developers.everbridge.net](https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md), [developers.everbridge.net](https://developers.everbridge.net/home/docs/ebs-gs-guide.md), [developers.everbridge.net](https://developers.everbridge.net/home/reference/ebs-v1-audit-log-api.md), [developers.everbridge.net](https://developers.everbridge.net/home/docs/overview.md)
@@ -367,8 +385,6 @@ The FloQast API takes only a static API key sent in a header. Keys can be scoped
 
 To deploy from CI to Fluidstack's managed Kubernetes, your code holds a long-lived ServiceAccount token that works until someone deletes it. The Atlas API takes a token from SSO login or an OAuth client secret that Fluidstack issues. There is no workload federation.
 
-> **Low confidence:** docs.fluidstack.io no longer resolves, so every receipt is a Wayback copy from February to July 2026. How OAuth client credentials are issued, scoped and expired is not public. Neither gap could lift the F unless Kubernetes CI stops needing a long-lived token.
-
 - **Inbound F:** The Atlas APIs take a bearer token minted from an OAuth client ID and secret. Kubernetes CI uses a long-lived ServiceAccount token, since kubeconfigs need a browser SSO login.
 - **Outbound N/A:** The current docs describe no integration that reaches into your clouds, registries or SaaS. You push into Fluidstack, not the other way round.
 - **Receipts:** [web.archive.org](https://web.archive.org/web/20260711055141/https://docs.fluidstack.io/kubernetes/access-clusters), [web.archive.org](https://web.archive.org/web/20260214010414/https://docs.fluidstack.io/cli-reference/fluidctl), [web.archive.org](https://web.archive.org/web/20260711060054/https://docs.fluidstack.io/cli-reference/auth/fluidctl_auth), [web.archive.org](https://web.archive.org/web/20260711043734id_/https://docs.fluidstack.io/redocusaurus/management-api.yaml), [web.archive.org](https://web.archive.org/web/20260711055850/https://docs.fluidstack.io/projects/manage-projects), [web.archive.org](https://web.archive.org/web/20260608212616/https://docs.fluidstack.io/lighthouse/authorization), [web.archive.org](https://web.archive.org/web/20260711045002/https://docs.fluidstack.io/getting-started/sso), [web.archive.org](https://web.archive.org/web/20260711060333/https://docs.fluidstack.io/api-reference/infrastructure-api), [web.archive.org](https://web.archive.org/web/20260214005219/https://docs.fluidstack.io/api-reference/management-api), [web.archive.org](https://web.archive.org/web/20250325074300/https://docs.fluidstack.io/atlas/surge)
@@ -377,7 +393,7 @@ To deploy from CI to Fluidstack's managed Kubernetes, your code holds a long-liv
 
 To call the FortiOS REST API, your code holds a static token tied to a REST API admin, which never expires by default. When a FortiGate-VM runs in a cloud, its connectors use that VM's own identity. Hardware and off-cloud FortiGates need static cloud keys.
 
-> **Low confidence:** The full FortiOS API reference needs a Fortinet login, so schema facts come from Fortinet's Ansible docs. The last-used fail is unverified, and one more hygiene pass would make inbound D.
+> **Docs not public:** inbound graded F.
 
 - **Inbound F:** A static token for a REST API admin, sent as a bearer token. Trusted hosts and an admin profile limit it, and an optional client certificate is checked alongside the token.
 - **Outbound B:** AWS, Azure, GCP and OCI connectors can use the FortiGate-VM's own cloud identity, but only inside that cloud. Hardware and off-cloud FortiGates must store a static key for each.
@@ -427,8 +443,6 @@ The HackerOne API takes a static API token over HTTP Basic authentication. Token
 
 Your code calls Hot Aisle with a static user API key, and there is no OIDC path. Keys can be rotated and scoped through the API, but have no expiry or last-used view and no GitHub leak revocation. Hot Aisle never reaches into your infrastructure.
 
-> **Low confidence:** API keys are managed in a login-only SSH admin tool. The public API shows no expiry or last-used field. If the tool enforced either, plus one more fix, inbound would move from F to D.
-
 - **Inbound F:** A static user API key, used by the API, the hotaisle CLI and the dstack backend. No OIDC, workload identity or token exchange exists.
 - **Outbound N/A:** Hot Aisle never needs access to your infrastructure. It provisions VMs and bare metal you then log in to.
 - **Receipts:** [admin.hotaisle.app](https://admin.hotaisle.app/api/docs/swagger.json), [github.com](https://github.com/hotaisle/hotaisle-cli), [raw.githubusercontent.com](https://raw.githubusercontent.com/hotaisle/hotaisle-cli/main/internal/config/config.go), [hotaisle.xyz](https://hotaisle.xyz/quick-start/), [dstack.ai](https://dstack.ai/docs/concepts/backends/), [hotaisle.xyz](https://hotaisle.xyz/policies/shared-responsibility-model)
@@ -443,12 +457,12 @@ Your code rents GPUs and calls the Inference API with one static sk_live_ key ma
 
 ### 💀 F Island Enterprise Browser
 
-Your code calls Island's management API and SIEM feed with a static API key, with no federation. Island's docs are login-walled, and nothing public shows expiry, a key API or last use. Outbound, Microsoft Purview uses Entra admin consent, but Google SecOps and Claude Compliance want static keys.
+Your code calls Island's management API and SIEM feed with a static API key, with no federation. Island's docs redirect to a login, so both surfaces are F.
 
-> **Low confidence:** Island's docs and API reference redirect to its console login, so grades rest on third-party integration guides. Expiry, rotation API and last-used fail as not publicly verifiable. How exports authenticate is unknown.
+> **Docs not public:** inbound and outbound graded F.
 
 - **Inbound F:** A static API key made in the Island console with a chosen role, sent in an api-key header. Nothing public documents OIDC, workload identity or token exchange.
-- **Outbound B:** Microsoft Purview connects through an Entra app your admin consents to, with no key. Google SecOps and Claude Compliance need static keys, and other export setups are login-walled.
+- **Outbound F:** Microsoft Purview connects through an Entra app your admin consents to, with no key. Google SecOps and Claude Compliance need static keys, and other export setups are login-walled.
 - **Receipts:** [www.applytosupply.digitalmarketplace.service.gov.uk](https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/234060975999414), [raw.githubusercontent.com](https://raw.githubusercontent.com/elastic/integrations/main/packages/island_browser/docs/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/ConductorOne/docs/main/baton/island.mdx), [raw.githubusercontent.com](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/Island/Data%20Connectors/IslandV2_CCP/IslandV2_connectorDefinition.json), [docs.hunters.ai](https://docs.hunters.ai/docs/island.md), [explained.tines.com](https://explained.tines.com/en/articles/8592481-island-authentication-guide), [docs.panther.com](https://docs.panther.com/data-onboarding/supported-logs/island-logs), [www.island.io](https://www.island.io/blog/microsoft-purview-dlp-enterprise-browser), [docs.cloud.google.com](https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/island-browser), [www.island.io](https://www.island.io/blog/island-integrates-with-the-claude-compliance-api), [platform.claude.com](https://platform.claude.com/docs/en/manage-claude/compliance-api-access.md)
 
 ### 💀 F Kentik Platform
@@ -479,7 +493,7 @@ Every KSAT API takes a static bearer token created in the console. Product API t
 
 To call the Kyriba API, your code swaps a client ID and secret for an access token. No workload federation is documented. When Kyriba calls a service you run, it sends a static client ID and secret as Basic auth.
 
-> **Low confidence:** Kyriba's developer portal pages need JavaScript and a login. Receipts come from its published agent skill files and one Google guide. The outbound F and three hygiene fails rest on what those files leave out.
+> **Docs not public:** outbound graded F.
 
 - **Inbound C:** An API client ID and secret are sent as Basic auth to the token endpoint, which returns an access token for API calls.
 - **Outbound F:** For payment and fraud screening, Kyriba calls a service you host and sends a client ID and secret as Basic auth. Webhooks are signed with a shared secret.
@@ -551,20 +565,22 @@ To call the Nudge Security API, your code needs a static token made in the UI. I
 
 ### 💀 F Obsidian Security Platform
 
-To call Obsidian's API, your code needs a static token an admin makes in the console, and partner docs say to set it to never expire. How Obsidian connects to your SaaS is behind a login. The one public setup, for Microsoft Sentinel, hands Obsidian an Entra client secret.
+To call Obsidian's API, your code needs a static token an admin makes in the console. Obsidian's docs need a login, so both surfaces are F.
+
+> **Docs not public:** inbound and outbound graded F.
 
 - **Inbound F:** A static API token that an admin creates in the console, sent as a bearer token to the regional API. No short-lived or federated path is public.
-- **Outbound C:** For the Microsoft Sentinel push, you create an Entra app and give Obsidian its client secret. Setup for the 200+ SaaS connectors is not public.
+- **Outbound F:** For the Microsoft Sentinel push, you create an Entra app and give Obsidian its client secret. Setup for the 200+ SaaS connectors is not public.
 - **Receipts:** [docs.datadoghq.com](https://docs.datadoghq.com/integrations/obsidian-security/), [docs.axonius.com](https://docs.axonius.com/docs/obsidian-security), [raw.githubusercontent.com](https://raw.githubusercontent.com/Obsidian-Security-Labs/obsec-codex-plugin/main/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/Obsidian-Security-Labs/obsec-codex-plugin/main/runtime/server.mjs), [raw.githubusercontent.com](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/Obsidian%20Datasharing/Data%20Connectors/ObsidianDatasharing_CCP/ObsidianDatasharing_ConnectorDefinition.json), [www.obsidiansecurity.com](https://www.obsidiansecurity.com/obsidian-integrations-hub), [www.obsidiansecurity.com](https://www.obsidiansecurity.com/blog/obsidian-expands-connector-coverage)
 
 ### 💀 F Orca Security Cloud Security Platform
 
-To call the Orca API, MCP server, Terraform or CI actions, your code needs a static API token. Orca reaches AWS and Alibaba by cross-account role, but Snyk, Cloudflare and other integrations want static secrets.
+To call the Orca API, MCP server, Terraform or CI actions, your code needs a static API token. Orca's docs need a login, so both surfaces are F.
 
-> **Low confidence:** Orca's docs are behind a login. Token hygiene comes from third-party guides, the rotation and last-used checks fail as unverifiable, and Azure, GCP and OCI onboarding are unverified.
+> **Docs not public:** inbound and outbound graded F.
 
 - **Inbound F:** A static API token with a role and scope, sent directly to the API, MCP server, Terraform and GitHub Actions. OAuth exists only as a browser login for MCP.
-- **Outbound B:** AWS onboarding creates a role trusting Orca's account with an External ID, and Alibaba uses a RAM role. Snyk, Cloudflare, Akamai, Zscaler and Terraform Cloud want static tokens or secrets.
+- **Outbound F:** AWS onboarding creates a role trusting Orca's account with an External ID, and Alibaba uses a RAM role. Snyk, Cloudflare, Akamai, Zscaler and Terraform Cloud want static tokens or secrets.
 - **Receipts:** [orca.security](https://orca.security/mcp-server/), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/orca-skills/main/.mcp.json.template), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/index.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/shiftleft-iac-action/main/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/orca-skills/main/plugins/security-engineer/skills/lib/orca_client.py), [truto.one](https://truto.one/integrations/detail/orcasecurity/), [orca.security](https://orca.security/lp/aws-activate/), [raw.githubusercontent.com](https://raw.githubusercontent.com/hisashiyamaguchi/note-orca-security-aws-onboarding/main/globalDefaultPolicy.json), [raw.githubusercontent.com](https://raw.githubusercontent.com/hisashiyamaguchi/note-orca-security-aws-onboarding/main/README.md), [orca.security](https://orca.security/partners/technology/alibaba-cloud/), [orca.security](https://orca.security/partners/technology/oracle-cloud-infrastructure/), [orca.security](https://orca.security/resources/video/azure-onboarding/), [orca.security](https://orca.security/resources/video/gcp-onboarding/), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/data-sources/integration_s3_bucket_policy.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_snyk.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_cloudflare.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_akamai.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_zscaler_zpa.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/orcasecurity/terraform-provider-orcasecurity/master/docs/resources/integration_terraform_cloud.md)
 
 ### 💀 F Palo Alto Networks Cortex XSIAM
@@ -593,12 +609,12 @@ Every Perplexity API takes a static bearer key with no expiry. Audit keys are re
 
 ### 💀 F Proofpoint Targeted Attack Protection
 
-The TAP SIEM and related APIs take a static service principal and secret on every request. No federation exists, and public docs show no hygiene check passing. Into Microsoft 365, Proofpoint documents admin consent to its own app, with no secret handed over.
+The TAP SIEM and related APIs take a static service principal and secret on every request. No federation exists. Proofpoint's TAP admin docs need a login, so both surfaces are F.
 
-> **Low confidence:** Proofpoint's credential and integration docs are behind a login. All five hygiene checks fail partly for lack of public docs. Outbound A rests on a product page and a sibling product's consent flow.
+> **Docs not public:** inbound and outbound graded F.
 
 - **Inbound F:** A static service principal and secret, sent with HTTP Basic auth to the SIEM, People, Forensics and Campaign APIs. Newer report APIs trade a static key for a one-hour token.
-- **Outbound A:** Microsoft 365 protection connects through Microsoft Graph. The only public setup doc is admin consent to Proofpoint's Entra app, with no customer secret.
+- **Outbound F:** Microsoft 365 protection connects through Microsoft Graph. TAP's setup steps need a login.
 - **Receipts:** [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/SIEM_API), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/People_API), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Forensics_API), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Campaign_API), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/URL_Decoder_API), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Reports_API), [help.proofpoint.com](https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation/Email_Bomb_Events_API), [www.proofpoint.com](https://www.proofpoint.com/us/products/advanced-threat-protection/targeted-attack-protection), [help.proofpoint.com](https://help.proofpoint.com/Essentials/Product_Documentation/Account_Management/Integrations/Microsoft_365_Integration_MX), [www.proofpoint.com](https://www.proofpoint.com/us/resources/white-papers/understanding-core-email-protection-api-and-adaptive-email-dlp)
 
 ### 💀 F Push Security Platform
@@ -657,6 +673,16 @@ CI scans and the Semgrep Web API accept only static tokens such as SEMGREP_APP_T
 - **Outbound B:** GitHub, Cursor and Jira connect through apps you install or consent to, and AWS CodeArtifact through an IAM role with an External ID. GitLab, Bitbucket and Azure DevOps want access tokens.
 - **Receipts:** [docs.semgrep.dev](https://docs.semgrep.dev/deployment/tokens.md), [semgrep.dev](https://semgrep.dev/docs/semgrep-ci/ci-environment-variables), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/add-semgrep-to-ci.md), [docs.semgrep.dev](https://docs.semgrep.dev/semgrep-ci/sample-ci-configs.md), [docs.semgrep.dev](https://docs.semgrep.dev/api-reference/v1/Authentication.md), [semgrep.dev](https://semgrep.dev/docs/semgrep-appsec-platform/semgrep-api), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/sso.md), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/connect-scm.md), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/prepare/scm-permissions.md), [docs.semgrep.dev](https://docs.semgrep.dev/kb/semgrep-supply-chain/connect-aws-codeartifact.md), [docs.semgrep.dev](https://docs.semgrep.dev/semgrep-appsec-platform/jira.md), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/managed-scanning/gitlab.md), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/managed-scanning/bitbucket.md), [docs.semgrep.dev](https://docs.semgrep.dev/deployment/managed-scanning/azure.md), [docs.semgrep.dev](https://docs.semgrep.dev/public_v2.openapi.yaml), [docs.semgrep.dev](https://docs.semgrep.dev/kb/semgrep-supply-chain/connect-a-private-registry.md), [docs.semgrep.dev](https://docs.semgrep.dev/semgrep-appsec-platform/wiz.md)
 
+### 💀 F SentinelOne Singularity
+
+Workloads call the SentinelOne Management API with a static API token, usually owned by a Service User. No OIDC path exists. Tokens must have an expiry and can be scoped and rotated by API. Cloud setup beyond AWS needs a login, so outbound is F.
+
+> **Docs not public:** outbound graded F.
+
+- **Inbound D:** A static API token, minted for a Service User with a role and a required expiry, or as a personal token. Raw log ingest uses a separate static write key.
+- **Outbound F:** SentinelOne reaches AWS by assuming an IAM role you create, with an External ID for S3 export. Repo scanning wants personal access tokens, and S3-compatible stores take static keys.
+- **Receipts:** [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json), [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/docs/credentials.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/purple-mcp/main/README.md), [www.sentinelone.com](https://www.sentinelone.com/blog/feature-spotlight-auto-discover-unprotected-amazon-ec2-instances-with-cloud-rogues/), [www.sentinelone.com](https://www.sentinelone.com/blog/cloud-native-security-prioritize-better-response-faster-with-verified-exploit-paths/), [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/pipelines/pull/object_store/aws/cloudtrail/metadata.yaml)
+
 ### 💀 F SF Compute Object Storage
 
 Buckets take static S3-style key pairs that read and write every bucket in a workspace and region. Keys can be created and revoked from the CLI, but pass no other hygiene check. The control plane is graded on the sf-compute card.
@@ -685,7 +711,7 @@ The StrongDM API, SDKs and Terraform provider take a static API key pair, and CL
 
 Scripts, CI and Terraform call Sysdig Secure with a static token, and agents connect with a static access key. There is no OIDC login. Cloud onboarding is keyless on AWS, Azure and GCP, but registry scans, Okta and Jira take static secrets.
 
-> **Low confidence:** Sysdig's full API reference requires a login. No last-used field is publicly documented. If one exists, inbound would be D.
+> **Docs not public:** inbound graded F.
 
 - **Inbound F:** A static bearer token from a service account or a user's API token, for the APIs, CI and Terraform. Agents connect with a static access key.
 - **Outbound B:** Sysdig assumes an AWS role with your External ID, uses its multi-tenant Entra app, and federates into GCP service accounts. Registry Scan Now, Okta and Jira take static secrets.
@@ -693,19 +719,17 @@ Scripts, CI and Terraform call Sysdig Secure with a static token, and agents con
 
 ### 💀 F TensorWave GPU Cloud
 
-TensorWave documents no public API, CLI, Terraform provider or federation. Workloads get in with SSH keys and a kubeconfig downloaded from the dashboard. S3 storage keys are undocumented. Outbound is not graded, since the only integration's Slack connection is undocumented.
+TensorWave publishes no API, token or storage key docs, so both surfaces are F. Workloads get in with SSH keys and a kubeconfig downloaded from the dashboard.
 
-> **Low confidence:** TensorWave publishes no API, CLI, token or S3 key docs, and the dashboard and user-management pages are login-only or empty. If those showed expiring, API-rotatable, scoped credentials, inbound could move from F to D.
+> **Docs not public:** inbound and outbound graded F.
 
 - **Inbound F:** Static credentials only: SSH keys and a kubeconfig downloaded by hand from the dashboard. No API, token, service account or federation is documented, nor how S3 keys are issued.
-- **Outbound N/A:** Not graded. TensorWave's only integration posts alerts to your Slack, and how it connects is undocumented. Registry and data pulls run in your jobs with your credentials.
+- **Outbound F:** The FAQ advertises cloud storage integrations, and alerts go to Slack. Neither connection is documented.
 - **Receipts:** [docs.tensorwave.com](https://docs.tensorwave.com/kubernetes/health-overview.md), [docs.tensorwave.com](https://docs.tensorwave.com/observability/kubernetes.md), [docs.tensorwave.com](https://docs.tensorwave.com/slurm/access.md), [docs.tensorwave.com](https://docs.tensorwave.com/welcome-to-tensorwave/bare-metal-quickstart.md), [tensorwave.com](https://tensorwave.com/products/storage/high-speed-network-storage), [docs.tensorwave.com](https://docs.tensorwave.com/llms.txt), [docs.tensorwave.com](https://docs.tensorwave.com/observability/notifications-and-alerts.md), [docs.tensorwave.com](https://docs.tensorwave.com/slurm/containers.md), [docs.tensorwave.com](https://docs.tensorwave.com/welcome-to-tensorwave/faq.md)
 
 ### 💀 F Tines Platform
 
 The Tines API, Terraform provider, webhooks and MCP servers take only a static API key. Outbound, Tines is its own OIDC issuer and reaches AWS, Google Cloud, Entra and Oracle Cloud without keys, but most SaaS connections take a pasted key or secret.
-
-> **Low confidence:** Tines' API key settings page is behind a login. Expiry and last-used fail on the public docs only. Two more passes would make inbound D.
 
 - **Inbound F:** A static Tines API key, personal or owned by a team or service account user. The same keys protect restricted webhooks and MCP servers, which also take per-webhook secrets.
 - **Outbound B:** Tines issues its own OIDC tokens, which AWS, Google Cloud, Entra and Oracle Cloud trust, plus AWS roles with External ID. Static cloud keys and most SaaS connections still take pasted secrets.
@@ -739,8 +763,6 @@ To call Vast.ai, your code needs a static API key that never expires. There is n
 
 To call the Voltage Park API, your code needs a static token from support or the dashboard. Tokens expire after one year, but cannot be managed by API, scoped or checked for last use. Voltage Park never reaches into your cloud.
 
-> **Low confidence:** Tokens are managed on a dashboard page behind a login. Scoping and last-used fail on public docs only. Two more passes would make inbound D.
-
 - **Inbound F:** A static API token sent as a Bearer token. You get it from support or the dashboard. There is no OIDC or workload identity login.
 - **Outbound N/A:** Voltage Park never needs access into your infrastructure. It has no bucket import, registry pull or data sync.
 - **Receipts:** [support.voltagepark.com](https://support.voltagepark.com/article/api), [cloud-api.voltagepark.com](https://cloud-api.voltagepark.com/api/v1/openapi.json), [support.voltagepark.com](https://support.voltagepark.com/article/deploy-storage), [support.voltagepark.com](https://support.voltagepark.com/article/example-deploying-gpt-oss-on-voltage-park)
@@ -768,6 +790,16 @@ To call the Workiva API, your code swaps a client ID and secret for a bearer tok
 - **Inbound C:** An OAuth 2.0 client credentials grant. A client ID and secret tied to an integration user are exchanged for a bearer token that expires after ten minutes.
 - **Outbound F:** Chains connectors store credentials the customer pastes in. Amazon S3 takes an IAM user access key. Google Drive and OneDrive take the client ID and secret of an OAuth app the customer registers.
 - **Receipts:** [developers.workiva.com](https://developers.workiva.com/2026-01-01/authentication.md), [developers.workiva.com](https://developers.workiva.com/2026-01-01/tokenrequest.md), [developers.workiva.com](https://developers.workiva.com/2026-01-01/iam.md), [support.workiva.com](https://support.workiva.com/api/v2/help_center/en-us/articles/360045223172.json), [support.workiva.com](https://support.workiva.com/api/v2/help_center/en-us/articles/360052106251.json), [support.workiva.com](https://support.workiva.com/api/v2/help_center/en-us/articles/360045543792.json)
+
+### 💀 F Zenity AI Agent Security
+
+To call Zenity, your code needs a long-lived client secret, which it trades for a short-lived token. There is no federation. Zenity's integration setup needs a login, so outbound is F.
+
+> **Docs not public:** outbound graded F.
+
+- **Inbound C:** An account client ID and secret, traded for a short-lived token. The client secret is the long-lived root.
+- **Outbound F:** AWS Bedrock connects with IAM roles. ChatGPT Enterprise and Claude Enterprise take an API key you generate and paste in.
+- **Receipts:** [raw.githubusercontent.com](https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/.github/workflows/boundaries-deploy.yml), [get.zenity.io](https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz), [zenity.io](https://zenity.io/use-cases/platform/aws-bedrock), [zenity.io](https://zenity.io/use-cases/platform/chatgpt-enterprise), [zenity.io](https://zenity.io/use-cases/platform/claude-enterprise), [zenity.io](https://zenity.io/use-cases/platform/claude-tag), [zenity.io](https://zenity.io/press-release/zenity-announces-ai-trust-layer-the-first-agent-less-security-solution-for-microsoft-365-copilot)
 
 ### 💀 F Zluri Identity Governance
 
@@ -909,8 +941,6 @@ To call the Opal API, Terraform provider or MCP servers, your code needs a stati
 
 The ChatGPT Admin and Compliance APIs take only a static Admin API key. Keys can be scoped, show last use, and can be made and deleted by API, but expiry is optional. Workload federation exists for Codex only, in beta, and support must enable it. Outbound, most apps connect by OAuth, but Google Cloud wants a JSON key.
 
-> **Low confidence:** OpenAI's Compliance Platform help article refuses a plain fetch. Rotation and last-used rest on the organization Admin key reference. If workspace Admin keys differ, inbound drops to F.
-
 - **Inbound D:** A static Admin API key, created in the OpenAI Admin Console and sent as a bearer token. The key carries fine-grained scopes and an optional expiry.
 - **Outbound B:** Workspace connections reach other services mostly by OAuth sign-in or app installation. Direct Google Cloud access takes a pasted service account JSON key.
 - **Receipts:** [chatgpt.com](https://chatgpt.com/public/admin/api-reference/openapi.json), [learn.chatgpt.com](https://learn.chatgpt.com/docs/enterprise/compliance-api.md), [developers.openai.com](https://developers.openai.com/api/docs/guides/workload-identity-federation.md), [learn.chatgpt.com](https://learn.chatgpt.com/docs/enterprise/shared-connections.md)
@@ -938,16 +968,6 @@ Every way you drive Runpod, including the API, CLIs and GitHub Actions, uses a s
 - **Inbound D:** A static API key sent as a bearer token to the REST and GraphQL APIs and the CLIs. The S3 API for network volumes uses a separate static key pair.
 - **Outbound B:** Private ECR pulls are keyless through a repository policy that trusts Runpod's AWS roles. Cloud Sync, other registries and Hugging Face take pasted credentials. GitHub deploys use an installed GitHub App.
 - **Receipts:** [docs.runpod.io](https://docs.runpod.io/api-reference-v2/overview.md), [api.runpod.io](https://api.runpod.io/v2/openapi.json), [docs.runpod.io](https://docs.runpod.io/get-started/credentials.md), [docs.runpod.io](https://docs.runpod.io/runpodctl/reference/runpodctl-config.md), [docs.runpod.io](https://docs.runpod.io/flash/cli/login.md), [docs.runpod.io](https://docs.runpod.io/serverless/workers/github-integration.md), [docs.runpod.io](https://docs.runpod.io/storage/s3-api.md), [docs.runpod.io](https://docs.runpod.io/llms-full.txt), [docs.runpod.io](https://docs.runpod.io/tutorials/pods/use-private-ecr-images.md), [docs.runpod.io](https://docs.runpod.io/api-reference-v2/registries/register-an-ecr-delegation.md), [docs.runpod.io](https://docs.runpod.io/pods/storage/cloud-sync.md), [docs.runpod.io](https://docs.runpod.io/runpodctl/reference/runpodctl-registry.md), [docs.runpod.io](https://docs.runpod.io/serverless/endpoints/model-caching.md)
-
-### 🔴 D SentinelOne Singularity
-
-Workloads call the SentinelOne Management API with a static API token, usually owned by a Service User. No OIDC path exists. Tokens must have an expiry and can be scoped and rotated by API. SentinelOne reaches AWS without keys, but repo scanning and some exports want static keys.
-
-> **Low confidence:** SentinelOne's docs are behind a login, so receipts come from its GitHub repos and blog. The expiry and last-used passes are thin. If both fail, inbound drops to F.
-
-- **Inbound D:** A static API token, minted for a Service User with a role and a required expiry, or as a personal token. Raw log ingest uses a separate static write key.
-- **Outbound B:** SentinelOne reaches AWS by assuming an IAM role you create, with an External ID for S3 export. Repo scanning wants personal access tokens, and S3-compatible stores take static keys.
-- **Receipts:** [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json), [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/plugins/s1-secops-skills/docs/credentials.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/purple-mcp/main/README.md), [www.sentinelone.com](https://www.sentinelone.com/blog/feature-spotlight-auto-discover-unprotected-amazon-ec2-instances-with-cloud-rogues/), [www.sentinelone.com](https://www.sentinelone.com/blog/cloud-native-security-prioritize-better-response-faster-with-verified-exploit-paths/), [raw.githubusercontent.com](https://raw.githubusercontent.com/Sentinel-One/ai-siem/main/pipelines/pull/object_store/aws/cloudtrail/metadata.yaml)
 
 ### 🔴 D SF Compute GPU Cloud
 
@@ -1045,16 +1065,6 @@ Scripts reach Jira and Confluence Cloud with a service account's client ID and s
 - **Outbound B:** Automation assumes an AWS role with an external ID, and GitHub and Azure connect through an installed app or sign-in consent. Other Automation connections take pasted API keys or client secrets.
 - **Receipts:** [support.atlassian.com](https://support.atlassian.com/user-management/docs/create-oauth-2-0-credential-for-service-accounts/), [developer.atlassian.com](https://developer.atlassian.com/cloud/admin/organization/rest/intro/), [support.atlassian.com](https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/), [support.atlassian.com](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/configure-aws-iam-for-jira-automation/), [support.atlassian.com](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-microsoft-azure/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-new-relic/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-automation-with-workato/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-automation-with-okta/)
 
-### 🟠 C Axonius Platform
-
-To call the Axonius API, your code needs a static API key and secret, or an OAuth client secret swapped for a one-hour token. There is no OIDC login. Axonius reaches AWS through a keyless cross-account role, but Azure, GCP and most SaaS adapters take static secrets.
-
-> **Low confidence:** The API v2 reference needs a login, so it is not confirmed that every endpoint accepts the OAuth token that earns the C. With only the API key and secret, inbound would be D.
-
-- **Inbound C:** A service account sends a static API key and secret on every request. It can instead swap an OAuth client ID and secret for a bearer token that lasts one hour.
-- **Outbound B:** On hosted Axonius, the AWS adapter assumes a cross-account role you deploy, with your Customer ID as External ID. Azure, GCP and SaaS adapters need client secrets, keys or tokens.
-- **Receipts:** [docs.axonius.com](https://docs.axonius.com/docs/axonius-rest-api), [docs.axonius.com](https://docs.axonius.com/docs/manage-service-accounts), [docs.axonius.com](https://docs.axonius.com/docs/managing-api-settings), [raw.githubusercontent.com](https://raw.githubusercontent.com/Axonius/axonius_api_client/master/axonius_api_client/auth/api_key.py), [docs.axonius.com](https://docs.axonius.com/docs/connect-an-mcp-client-with-your-axonius-login), [docs.axonius.com](https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations), [docs.axonius.com](https://docs.axonius.com/docs/aws-parameters), [docs.axonius.com](https://docs.axonius.com/docs/azure-deploying-the-adapter), [docs.axonius.com](https://docs.axonius.com/docs/connecting-gcp-in-axonius), [docs.axonius.com](https://docs.axonius.com/docs/gcp-initial-setup), [docs.axonius.com](https://docs.axonius.com/docs/github), [docs.axonius.com](https://docs.axonius.com/docs/okta)
-
 ### 🟠 C Bynder Digital Asset Management
 
 To call Bynder, your code trades an OAuth client ID and secret for a one-hour token. A permanent token is the static alternative. There is no federation.
@@ -1094,14 +1104,6 @@ Automation against CyberArk's platform APIs runs as an Identity service user. It
 - **Inbound C:** An Identity service user sends its login name and password as an OAuth client ID and secret, and gets a short-lived token for the platform APIs.
 - **Outbound A:** Secrets Hub assumes an AWS role you create with an External ID, and federates into Azure, GCP and HashiCorp Vault.
 - **Receipts:** [docs.cyberark.com](https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm), [docs.cyberark.com](https://docs.cyberark.com/identity/latest/en/content/developer/oauth/client-cred-flow.htm), [docs.cyberark.com](https://docs.cyberark.com/identity/latest/en/content/coreservices/authenticate/oauth2-client.htm), [docs.cyberark.com](https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/cpmplugin-identity-service-user.htm), [raw.githubusercontent.com](https://raw.githubusercontent.com/cyberark/ark-sdk-python/main/docs/sdk/authenticators.md), [docs.cyberark.com](https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm), [docs.cyberark.com](https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/), [docs.cyberark.com](https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-azure-federated-authentication/), [docs.cyberark.com](https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-gcp-configure-role/), [docs.cyberark.com](https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-hashi-config/), [docs.cyberark.com](https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/getstarted/sh-terms/)
-
-### 🟠 C Cyera Data Security Platform
-
-To call Cyera's API, your code swaps a client ID and secret for a short-lived JWT. The secret expires within 365 days. Cyera's docs are behind a login, so how it connects into your clouds can barely be checked.
-
-- **Inbound C:** A client ID and secret, set to expire in 1 to 365 days, are posted to /v1/login for a short-lived JWT.
-- **Outbound B:** Cyera says it connects to clouds through native APIs. How it authenticates into each one is behind a login.
-- **Receipts:** [docs.delinea.com](https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/cyera), [raw.githubusercontent.com](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/CyeraDSPM/Data%20Connectors/CyeraDSPM_CCF/CyeraDSPMLogs_DataConnectorPoller.json), [auth.cyera.io](https://auth.cyera.io/.well-known/openid-configuration), [www.cyera.com](https://www.cyera.com/partnership/microsoft), [www.cyera.com](https://www.cyera.com/partnership/google-cloud-platform), [www.cyera.com](https://www.cyera.com/blog/reinventing-on-prem-data-discovery-and-classification-cyeras-connectorless-approach)
 
 ### 🟠 C DoControl Platform
 
@@ -1390,14 +1392,6 @@ A workload calls the Zendesk API with an OAuth access token minted from a confid
 - **Inbound C:** A confidential OAuth client's secret is exchanged through the client credentials grant for an access token. Clients created on or after April 30, 2026 get 30-minute tokens by default.
 - **Outbound B:** The Slack integration is an app the customer installs by consent. Webhooks and Integration Services connections store an API key, password or bearer token for the destination.
 - **Receipts:** [developer.zendesk.com](https://developer.zendesk.com/api-reference/introduction/security-and-auth/), [developer.zendesk.com](https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/), [support.zendesk.com](https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API), [support.zendesk.com](https://support.zendesk.com/hc/en-us/articles/4408833756698-Understanding-and-installing-the-Slack-for-Zendesk-Support-integration), [developer.zendesk.com](https://developer.zendesk.com/documentation/webhooks/webhook-security-and-authentication/), [developer.zendesk.com](https://developer.zendesk.com/documentation/integration-services/developer-guide/understanding-connections/)
-
-### 🟠 C Zenity AI Agent Security
-
-To call Zenity, your code needs a long-lived client secret, which it trades for a short-lived token. There is no federation. Zenity connects to AWS Bedrock with an IAM role, but ChatGPT and Claude Enterprise need an API key you generate.
-
-- **Inbound C:** An account client ID and secret, traded for a short-lived token. The client secret is the long-lived root.
-- **Outbound B:** AWS Bedrock connects with IAM roles. ChatGPT Enterprise and Claude Enterprise take an API key you generate and paste in.
-- **Receipts:** [raw.githubusercontent.com](https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/.github/workflows/boundaries-deploy.yml), [get.zenity.io](https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz), [zenity.io](https://zenity.io/use-cases/platform/aws-bedrock), [zenity.io](https://zenity.io/use-cases/platform/chatgpt-enterprise), [zenity.io](https://zenity.io/use-cases/platform/claude-enterprise), [zenity.io](https://zenity.io/use-cases/platform/claude-tag), [zenity.io](https://zenity.io/press-release/zenity-announces-ai-trust-layer-the-first-agent-less-security-solution-for-microsoft-365-copilot)
 
 ### 🟠 C Zoom API
 

@@ -9,11 +9,6 @@ website: https://www.voltagepark.com
 docs: https://support.voltagepark.com/article/api
 category: cloud
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Tokens are managed on a dashboard page behind a login. Scoping and last-used fail on public docs
-    only. Two more passes would make inbound D.
 summary: >-
   To call the Voltage Park API, your code needs a static token from support or the dashboard. Tokens
   expire after one year, but cannot be managed by API, scoped or checked for last use. Voltage Park

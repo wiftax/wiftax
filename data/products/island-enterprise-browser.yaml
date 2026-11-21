@@ -6,21 +6,17 @@ website: https://www.island.io
 docs: https://documentation.island.io/apidocs/generate-and-manage-api-keys
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Island's docs and API reference redirect to its console login, so grades rest on third-party
-    integration guides. Expiry, rotation API and last-used fail as not publicly verifiable. How
-    exports authenticate is unknown.
 summary: >-
   Your code calls Island's management API and SIEM feed with a static API key, with no federation.
-  Island's docs are login-walled, and nothing public shows expiry, a key API or last use. Outbound,
-  Microsoft Purview uses Entra admin consent, but Google SecOps and Claude Compliance want static
-  keys.
+  Island's docs redirect to a login, so both surfaces are F.
 
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://documentation.island.io/apidocs/generate-and-manage-api-keys
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A static API key made in the Island console with a chosen role, sent in an api-key header.
       Nothing public documents OIDC, workload identity or token exchange.
@@ -54,13 +50,14 @@ surfaces:
         checked_by: tehreet
         quote: "Detailed instructions for configuring the Island AWS S3 integration are available in the Island Documentation Portal (requires Management Console login)."
     notes: >-
-      Island's own docs redirect to the console login and its Swagger endpoints return 401. So this
-      card rests on public sources: Island's G-Cloud listing and integrator guides such as Elastic,
-      Sentinel and Tines. Every one uses a console-made API key, and none mentions OIDC, client
-      credentials or cloud workload identity. The SIEM and management APIs take the same kind of
-      key. If the gated docs show federation, the grade moves.
+      Island's docs redirect to its console login, so inbound is F. Public integrator guides all use
+      a console-made API key, and none mentions OIDC, client credentials or cloud workload identity.
   outbound:
-    grade: B
+    grade: F
+    walled:
+      url: https://documentation.island.io/apidocs/generate-and-manage-api-keys
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       Microsoft Purview connects through an Entra app your admin consents to, with no key. Google
       SecOps and Claude Compliance need static keys, and other export setups are login-walled.
@@ -98,13 +95,9 @@ surfaces:
         checked_by: tehreet
         quote: "Island exports logs to an S3 bucket in your AWS account."
     notes: >-
-      Provisional, since Island's integration docs are login-walled. Purview uses Entra admin
-      consent, which counts as keyless, as on the proofpoint-tap card. Google SecOps needs a Google
-      Cloud API key and feed secret inside the webhook URL Island stores. The Claude Compliance API
-      takes only Anthropic keys, which never expire. S3, Azure Blob, Snowflake and Splunk exports
-      exist, but their auth is not public. Pull-based SIEMs use the inbound key. If the gated S3
-      page uses a role with external ID, this stays B. If Purview needs an app secret you create, it
-      drops to C or lower.
+      Microsoft Purview uses Entra admin consent. Google SecOps needs a Google Cloud API key and
+      feed secret, and the Claude Compliance API takes only Anthropic keys. Setup for S3, Azure
+      Blob, Snowflake and Splunk exports is behind the login, so outbound is F.
 
 hygiene:
   expiry:
@@ -129,7 +122,7 @@ hygiene:
       Elastic's guide implies only one management key can exist at a time, so rotation means
       downtime.
   scoping:
-    pass: true
+    pass: false
     evidence:
       - url: https://www.elastic.co/docs/reference/integrations/island_browser
         checked_on: 2026-10-22
@@ -140,8 +133,7 @@ hygiene:
         checked_by: tehreet
         quote: "Island API key with the Read-Only role."
     notes: >-
-      Each key gets its own role at creation, and a Read-Only role exists, which the rubric counts.
-      The roles are coarse, and the SIEM guidance asks for an admin-level account.
+      Only third-party guides describe a role on each key. Island's own docs need a login.
   last_used:
     pass: false
     evidence:
@@ -162,6 +154,4 @@ hygiene:
       reported to Island.
 
 notes: >-
-  Island's docs and API Explorer need a console login. One public hygiene pass puts inbound at F.
-  Documented expiry, last use and a key API would make D. Only a federated token path would go
-  higher. The browser's end-user SSO is human login and out of scope.
+  Covers the management API. The browser's end-user SSO is human login and out of scope.

@@ -6,13 +6,16 @@ docs: https://docs.datadoghq.com/integrations/obsidian-security/
 category: security
 status: listed
 summary: >-
-  To call Obsidian's API, your code needs a static token an admin makes in the console, and partner
-  docs say to set it to never expire. How Obsidian connects to your SaaS is behind a login. The one
-  public setup, for Microsoft Sentinel, hands Obsidian an Entra client secret.
+  To call Obsidian's API, your code needs a static token an admin makes in the console. Obsidian's
+  docs need a login, so both surfaces are F.
 
 surfaces:
   inbound:
     grade: F
+    walled:
+      url: https://docs.obsidiansecurity.com/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       A static API token that an admin creates in the console, sent as a bearer token to the
       regional API. No short-lived or federated path is public.
@@ -38,13 +41,14 @@ surfaces:
         checked_by: tehreet
         quote: "Authorization: `Bearer ${this.apiKey}`,"
     notes: >-
-      Obsidian's own API docs are gated. Partner docs from Datadog and Axonius and Obsidian's public
-      Codex plugin all describe the same static token and no alternative. Federation may exist
-      behind the login, but with nothing public the grade stays F. A blog post mentions federation
-      for Databricks Delta Sharing, but that is the Delta Sharing protocol, not an Obsidian API
-      feature.
+      Obsidian's API docs need a login, so inbound is F. Partner docs and Obsidian's public Codex
+      plugin all describe the same static token, with no alternative.
   outbound:
-    grade: C
+    grade: F
+    walled:
+      url: https://docs.obsidiansecurity.com/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       For the Microsoft Sentinel push, you create an Entra app and give Obsidian its client secret.
       Setup for the 200+ SaaS connectors is not public.
@@ -70,11 +74,9 @@ surfaces:
         checked_by: tehreet
         quote: "Obsidian now provides visibility and security posture rules across 200+ SaaS connectors, helping teams spot drift and close gaps before a breach."
     notes: >-
-      Low confidence. Sentinel is the only connector with a public setup page. There you hand
-      Obsidian a client secret for an app scoped to one data collection rule. A customer-managed
-      OAuth client secret is graded C under the cohort rule. Okta, Microsoft 365, Google Workspace,
-      GitHub and others have only marketing pages. If gated docs show consent-based app installs for
-      the core connectors, this would likely move to B. Public evidence cannot support A or B today.
+      Setup for Okta, Microsoft 365, Google Workspace, GitHub and the other connectors needs a
+      login, so outbound is F. Microsoft's public Sentinel connector hands Obsidian an Entra client
+      secret.
 
 hygiene:
   expiry:
@@ -102,7 +104,7 @@ hygiene:
       Every public source creates tokens in the console, and no token API is documented. The API
       reference is gated, so one may exist unseen.
   scoping:
-    pass: true
+    pass: false
     evidence:
       - url: https://docs.datadoghq.com/integrations/obsidian-security/
         checked_on: 2026-10-13
@@ -113,9 +115,7 @@ hygiene:
         checked_by: tehreet
         quote: "Service access: Enable Full data access to all services and tenants."
     notes: >-
-      Each token gets its own role, including a dedicated API role, and per-service and per-tenant
-      access, independent of its creator. Weak pass: this comes from the Datadog guide, not
-      Obsidian's own docs.
+      Only partner docs describe a scope on each token. Obsidian's own docs need a login.
   last_used:
     pass: false
     evidence:
@@ -135,7 +135,4 @@ hygiene:
       Obsidian Security is not in GitHub's secret-scanning patterns.
 
 notes: >-
-  Graded on the Obsidian Platform API, which SIEM and SOAR tools automate against. Obsidian puts its
-  docs behind a login, so every receipt comes from partner docs, its public GitHub plugin or
-  marketing pages. Both grades are conservative. Published consent-based connector setup would move
-  outbound to B.
+  Graded on the Obsidian Platform API, which SIEM and SOAR tools automate against.

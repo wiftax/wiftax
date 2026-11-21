@@ -9,12 +9,6 @@ website: https://www.kyriba.com
 docs: https://developer.kyriba.com/llms.txt
 category: saas
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Kyriba's developer portal pages need JavaScript and a login. Receipts come from its published
-    agent skill files and one Google guide. The outbound F and three hygiene fails rest on what
-    those files leave out.
 summary: >-
   To call the Kyriba API, your code swaps a client ID and secret for an access token. No workload
   federation is documented. When Kyriba calls a service you run, it sends a static client ID and
@@ -44,6 +38,10 @@ surfaces:
       method and do not state the token lifetime. No federation or token exchange is mentioned.
   outbound:
     grade: F
+    walled:
+      url: https://developer.kyriba.com/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       For payment and fraud screening, Kyriba calls a service you host and sends a client ID and
       secret as Basic auth. Webhooks are signed with a shared secret.
@@ -61,10 +59,9 @@ surfaces:
         checked_by: erikng
         quote: "Kyriba POSTs to your URL with kyriba-webhook-payload-signature header"
     notes: >-
-      The Basic credential is long-lived and is sent on every call. The public files give no
-      rotation or scoping guidance, so this is F and not D. The credential only opens the endpoint
-      you build, which limits the damage. Bank and ERP connectivity is not publicly documented and
-      is not graded.
+      Kyriba's developer portal shows nothing without signing in, so outbound is F. Its public agent
+      skill files show Kyriba calling a service you host with a static client ID and secret as Basic
+      auth, with no rotation or scoping guidance.
 
 hygiene:
   expiry:
@@ -120,4 +117,5 @@ hygiene:
     notes: Kyriba does not appear in GitHub's supported secret-scanning patterns, partner or user.
 
 notes: >-
-  Outbound would rise if the service provider calls used a short-lived or signed credential.
+  Inbound is graded on Kyriba's public agent skill files. Outbound would rise if the developer
+  portal were public and the service provider calls used a short-lived or signed credential.

@@ -7,8 +7,7 @@ category: security
 status: listed
 summary: >-
   To call Zenity, your code needs a long-lived client secret, which it trades for a short-lived
-  token. There is no federation. Zenity connects to AWS Bedrock with an IAM role, but ChatGPT and
-  Claude Enterprise need an API key you generate.
+  token. There is no federation. Zenity's integration setup needs a login, so outbound is F.
 
 surfaces:
   inbound:
@@ -42,10 +41,13 @@ surfaces:
       repo and the zenityctl release archive. Zenity's own GitHub Actions workflow keeps the client
       secret as a repo secret and does not request an OIDC token. The zenityctl README calls client
       credentials the only mode. The Cursor plugin trades a pasted enrollment key for a short-lived
-      device token, so endpoint agents also rest on a static root. Revisit if gated docs show a
-      federated path.
+      device token, so endpoint agents also rest on a static root.
   outbound:
-    grade: B
+    grade: F
+    walled:
+      url: https://docs.zenity.io/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       AWS Bedrock connects with IAM roles. ChatGPT Enterprise and Claude Enterprise take an API key
       you generate and paste in.
@@ -71,11 +73,8 @@ surfaces:
         checked_by: tehreet
         quote: "today announced the first agent-less security solution for Microsoft 365 Copilot with the Zenity AI Trust Layer."
     notes: >-
-      Graded from marketing pages only, because setup guides are in the gated portal. The AWS
-      Bedrock page says IAM roles but not whether it uses an External ID. ChatGPT and Claude
-      Enterprise take static API keys. Slack and the Microsoft, Salesforce, ServiceNow, Google and
-      Cursor integrations could not be classified. B rests on that single AWS statement. If the AWS
-      role turns out to need access keys, this drops to D or F.
+      Zenity's setup guides need a login, so outbound is F. Its marketing pages say AWS Bedrock
+      connects with IAM roles, and ChatGPT and Claude Enterprise take an API key you generate.
 
 hygiene:
   expiry:
@@ -131,6 +130,5 @@ hygiene:
       Zenity is not in GitHub's secret scanning patterns.
 
 notes: >-
-  Zenity's docs are all behind a login, so this card relies on public repos, the zenityctl archive
-  and marketing pages. The failed hygiene checks lack public evidence rather than being confirmed
-  gaps, and they matter less at C.
+  Inbound is graded from Zenity's public GitHub repo and the zenityctl release archive, since its
+  docs need a login.

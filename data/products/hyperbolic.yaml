@@ -158,7 +158,5 @@ hygiene:
       prefix. A leaked key works until someone revokes it in the dashboard.
 
 notes: >-
-  One card, since rentals, storage, inference, the CLI and MCP server share one key type. No
-  confidence flag: the dashboard is login-walled, but public evidence fails four checks, so it
-  cannot reach D. Inbound rises above F only with federated login to the API, or a machine path into
+  One card, since rentals, storage, inference, the CLI and MCP server share one key type. The dashboard needs a login, but public evidence already fails four checks. Inbound rises above F only with federated login to the API, or a machine path into
   Managed Kubernetes.

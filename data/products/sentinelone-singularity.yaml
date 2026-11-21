@@ -9,15 +9,10 @@ website: https://www.sentinelone.com
 docs: https://github.com/Sentinel-One/ai-siem/blob/main/plugins/s1-secops-skills/skills/mgmt-console-api/spec/swagger_2_1.json
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    SentinelOne's docs are behind a login, so receipts come from its GitHub repos and blog. The
-    expiry and last-used passes are thin. If both fail, inbound drops to F.
 summary: >-
   Workloads call the SentinelOne Management API with a static API token, usually owned by a Service
-  User. No OIDC path exists. Tokens must have an expiry and can be scoped and rotated by API.
-  SentinelOne reaches AWS without keys, but repo scanning and some exports want static keys.
+  User. No OIDC path exists. Tokens must have an expiry and can be scoped and rotated by API. Cloud
+  setup beyond AWS needs a login, so outbound is F.
 
 surfaces:
   inbound:
@@ -51,12 +46,15 @@ surfaces:
         checked_by: tehreet
         quote: "Log in to the API with a token. To learn more about temporary and 6-month tokens and how to generate them"
     notes: >-
-      SentinelOne's own docs need a login, so this card relies on its public GitHub repos. The API
-      spec declares only the token header, and nothing public offers OIDC or workload identity.
-      Human SSO and passwords are not workload paths. Whether federation exists behind the login is
-      unknown. The Data Lake keys are a second static type, created only in the console.
+      SentinelOne's portal docs need a login, but its public GitHub repos publish the API spec and
+      credential guides. The spec declares only the token header, and nothing public offers OIDC or
+      workload identity. The Data Lake keys are a second static type, created only in the console.
   outbound:
-    grade: B
+    grade: F
+    walled:
+      url: https://community.sentinelone.com/s/
+      checked_on: 2026-11-20
+      checked_by: tehreet
     mechanism: >-
       SentinelOne reaches AWS by assuming an IAM role you create, with an External ID for S3 export.
       Repo scanning wants personal access tokens, and S3-compatible stores take static keys.
@@ -103,13 +101,9 @@ surfaces:
         checked_by: tehreet
         quote: "Requires an AWS account with an IAM role that Data Pipelines can assume (auth.assume_role + auth.external_id) and an SQS queue wired to the S3 bucket(s) containing CloudTrail logs."
     notes: >-
-      AWS account connections use a role from a CloudFormation stack. Steps for Azure, GCP and other
-      clouds are behind the login, so their credentials are unknown. GitLab and Azure Repos take
-      personal tokens. The GitHub setup takes an app's private key, but whose app is unclear, so
-      GitHub is not counted. S3 exports assume your role, while R2 and similar stores take static
-      keys. B because AWS is keyless and repo scanning wants static tokens. A needs keyless Azure
-      and GCP plus app installs instead of tokens. A documented Azure secret or GCP key would not
-      drop it below B.
+      AWS account connections use a role from a CloudFormation stack, and S3 exports assume your
+      role. GitLab and Azure Repos take personal tokens, and R2 and similar stores take static keys.
+      Setup for Azure, GCP and other clouds is behind the customer portal login, so outbound is F.
 
 hygiene:
   expiry:

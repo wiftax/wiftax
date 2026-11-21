@@ -12,11 +12,6 @@ website: https://chatgpt.com
 docs: https://chatgpt.com/public/admin/api-reference
 category: saas
 status: listed
-confidence:
-  level: low
-  reason: >-
-    OpenAI's Compliance Platform help article refuses a plain fetch. Rotation and last-used rest on
-    the organization Admin key reference. If workspace Admin keys differ, inbound drops to F.
 summary: >-
   The ChatGPT Admin and Compliance APIs take only a static Admin API key. Keys can be scoped, show
   last use, and can be made and deleted by API, but expiry is optional. Workload federation exists

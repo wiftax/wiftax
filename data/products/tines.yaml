@@ -8,11 +8,6 @@ website: https://www.tines.com
 docs: https://www.tines.com/api/authentication/
 category: security
 status: listed
-confidence:
-  level: low
-  reason: >-
-    Tines' API key settings page is behind a login. Expiry and last-used fail on the public docs
-    only. Two more passes would make inbound D.
 summary: >-
   The Tines API, Terraform provider, webhooks and MCP servers take only a static API key. Outbound,
   Tines is its own OIDC issuer and reaches AWS, Google Cloud, Entra and Oracle Cloud without keys,
