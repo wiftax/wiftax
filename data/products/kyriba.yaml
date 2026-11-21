@@ -1,0 +1,125 @@
+id: kyriba
+vendor: Kyriba
+product: Platform
+covers: "The Kyriba REST API, its webhooks and the service provider interfaces."
+aliases:
+  - Kyriba API
+  - Kyriba Treasury
+website: https://www.kyriba.com
+docs: https://developer.kyriba.com/llms.txt
+category: saas
+status: listed
+confidence:
+  level: low
+  reason: >-
+    Kyriba's developer portal pages need JavaScript and a login. Receipts come from its published
+    agent skill files and one Google guide. The outbound F and three hygiene fails rest on what
+    those files leave out.
+summary: >-
+  To call the Kyriba API, your code swaps a client ID and secret for an access token. No workload
+  federation is documented. When Kyriba calls a service you run, it sends a static client ID and
+  secret as Basic auth.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An API client ID and secret are sent as Basic auth to the token endpoint, which returns an
+      access token for API calls.
+    evidence:
+      - url: https://developer.kyriba.com/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authentication: OAuth2 client credentials"
+      - url: https://developer.kyriba.com/static/llm/skills/kyriba/SKILL.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "POST {AUTH_BASE_URL}/oauth/token · Authorization: Basic base64(CLIENT_ID:CLIENT_SECRET)"
+      - url: https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/kyriba
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Privileged access to the Kyriba platform with authority to configure API access and generate OAuth2 credentials"
+    notes: >-
+      Graded C because the secret is a static root for the token. The skill files name this one
+      method and do not state the token lifetime. No federation or token exchange is mentioned.
+  outbound:
+    grade: F
+    mechanism: >-
+      For payment and fraud screening, Kyriba calls a service you host and sends a client ID and
+      secret as Basic auth. Webhooks are signed with a shared secret.
+    evidence:
+      - url: https://developer.kyriba.com/static/llm/skills/payment-initiation-spi/SKILL.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Kyriba sends Basic auth; validate it in your service"
+      - url: https://developer.kyriba.com/static/llm/skills/fraud-detection-spi/SKILL.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Kyriba sends Basic auth in the request; validate it in your service"
+      - url: https://developer.kyriba.com/static/llm/skills/kyriba-guide/SKILL.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Kyriba POSTs to your URL with kyriba-webhook-payload-signature header"
+    notes: >-
+      The Basic credential is long-lived and is sent on every call. The public files give no
+      rotation or scoping guidance, so this is F and not D. The credential only opens the endpoint
+      you build, which limits the damage. Bank and ERP connectivity is not publicly documented and
+      is not graded.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.kyriba.com/static/llm/skills/kyriba/SKILL.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Production: both provided by your Kyriba administrator."
+    notes: >-
+      No public page describes an expiry for the client secret. The admin pages where it would
+      appear are behind a login.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developer.kyriba.com/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The complete list of 44 domain skill URLs"
+    notes: >-
+      None of the 44 published API skills manages API clients or secrets. The Google guide creates
+      the client in the admin console.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.kyriba.com/static/llm/skills/audit-trail/SKILL.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This is a Kyriba access permission — not an OAuth scope parameter."
+      - url: https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/kyriba
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Verify the application has access to the"
+    notes: >-
+      Each API application is its own client and is granted access per API. This rests partly on a
+      third-party guide.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/kyriba
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Confirm the application you created is listed and has an"
+    notes: >-
+      The only public description of the API Access page mentions a status, not a last-used time.
+      The page itself is behind a login.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Kyriba does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  The human-readable developer portal did not render without JavaScript, so this card reads Kyriba's
+  own agent skill files. Inbound moves to A or B only with documented workload federation. Outbound
+  would rise if the service provider calls used a short-lived or signed credential.

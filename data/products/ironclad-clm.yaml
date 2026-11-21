@@ -1,0 +1,144 @@
+id: ironclad-clm
+vendor: Ironclad
+product: CLM
+covers: "The Ironclad public REST API, data exports, webhooks and built-in integrations."
+aliases:
+  - Ironclad Contract Lifecycle Management
+website: https://ironcladapp.com
+docs: https://developer.ironcladapp.com/reference/authentication-api
+category: saas
+status: listed
+summary: >-
+  To call Ironclad's API, your code swaps an OAuth client ID and secret for a six-hour token. The
+  secret has no documented expiry and is rotated only in the web app. Outbound, storage and
+  Salesforce links use a sign-in and consent, while webhooks take a pasted header.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth 2.0 client ID and secret, registered in Company Settings, are posted to the token
+      endpoint for a bearer token that lasts six hours.
+    tier_gated: API add-on
+    evidence:
+      - url: https://developer.ironcladapp.com/reference/client-credentials-grant.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client secret is provided when you first register your application and is unretrievable afterward."
+      - url: https://developer.ironcladapp.com/reference/client-credentials-grant.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Issued access tokens expire after 6 hours. The client credentials grant does not produce refresh tokens."
+      - url: https://developer.ironcladapp.com/reference/authentication-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "to generate API bearer tokens that can be used to authenticate API requests."
+      - url: https://developer.ironcladapp.com/reference/register-oauth-client.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The “API” tab will only be visible if you have the API add-on enabled for your instance."
+      - url: https://developer.ironcladapp.com/reference/legacy-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Legacy access tokens have been deprecated and will be disabled in the near future."
+      - url: https://support.ironcladapp.com/api/v2/help_center/en-us/articles/23134913235991.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "These integrations need an Ironclad API token to work properly with our SCIM API."
+    notes: >-
+      Graded C because the access token is short-lived but the client secret is a static root. The
+      authentication reference lists only the authorization code and client credentials grants. No
+      OIDC, CI or cloud workload login is documented. Legacy company-wide access tokens are
+      deprecated but still described. SCIM provisioning uses a separate static token made in the
+      web app.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud storage and Salesforce are linked by signing in and consenting, with no secret pasted.
+      Webhooks to customer endpoints carry a static API key, basic or bearer header that the
+      customer supplies.
+    evidence:
+      - url: https://support.ironcladapp.com/api/v2/help_center/en-us/articles/12278303005591.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This article will walk you through how to connect your Ironclad instance with various cloud storage integrations. This includes: Dropbox, Box, Google Drive, Egnyte, and OneDrive."
+      - url: https://support.ironcladapp.com/api/v2/help_center/en-us/articles/19145745771287.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Log into your service Salesforce account, and then click"
+      - url: https://developer.ironcladapp.com/reference/webhook-authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Webhooks offer three authentication methods: API key, basic, and bearer token."
+      - url: https://developer.ironcladapp.com/reference/webhook-verification.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To verify the signature, you need to grab a public key"
+      - url: https://support.ironcladapp.com/api/v2/help_center/en-us/articles/32989670632343.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select from AWS S3, Datadog, Splunk, Google Cloud Storage, or a Generic HTTPS."
+    notes: >-
+      Graded B because consent-based links count as keyless while webhooks still take a pasted
+      static header. Webhook payloads are also signed, and the public key is served by the API.
+      Audit log streaming reaches AWS S3, Google Cloud Storage, Datadog and Splunk. Its setup steps
+      appear only inside the app, so the credential each target takes is not public. Holding your
+      own key in Google Cloud is documented without saying how Ironclad authenticates to it.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.ironcladapp.com/reference/register-oauth-client.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This will generate a new client application and supply you with a client ID and secret."
+    notes: >-
+      The registration page lists every client setting and none is an expiry or lifetime for the
+      secret.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developer.ironcladapp.com/reference/client-credentials-grant.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you need to rotate or reset your secret, this can be done from the client application registration page."
+    notes: >-
+      Secrets are created and reset on a page in the web app. The API reference has no endpoint to
+      create or rotate a client.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.ironcladapp.com/reference/client-credentials-grant.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Tokens can only access a given endpoint if the associated resource scope has been granted to that token."
+      - url: https://developer.ironcladapp.com/reference/register-oauth-client.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The resource scopes allowed in authorization or token requests for this client application."
+    notes: >-
+      Each client application is registered with its own list of resource scopes. Requests also act
+      as a named user and are limited to that user's permissions.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.ironcladapp.com/reference/register-oauth-client.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Save this secret, as you will not be able to access it again."
+    notes: >-
+      The docs describe no last-used time for a client or its secret.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Ironclad does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers the Ironclad CLM public API and its documented integrations. Help center articles are cited
+  through the help center's public JSON endpoint because the article pages refuse non-browser
+  clients. Inbound moves to A or B only if the token endpoint accepts a federated workload token.
+  Outbound reaches A if webhooks and log streaming stop taking pasted secrets.

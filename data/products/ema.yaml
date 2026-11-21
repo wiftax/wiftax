@@ -1,0 +1,146 @@
+id: ema
+vendor: Ema
+product: Platform
+covers: "The Ema builder platform API, including the audit events endpoints, and its integrations and data connectors."
+aliases:
+  - Ema AI Employee
+  - Ema Builder
+website: https://www.ema.ai
+docs: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+category: saas
+status: listed
+summary: >-
+  Ema's API takes a long-lived workspace API key that never expires unless you set a date. Keys can
+  be scoped and rotated through the API. Outbound, some connectors use Ema's own OAuth apps, but
+  others take a pasted service account key, client secret or API key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static workspace API key sent in a request header. System user keys can be swapped for a
+      15-minute token, but Ema enables that exchange per environment.
+    evidence:
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "a long-lived workspace API key for programmatic, machine-to-machine access"
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Put the key in the X-API-Key header, with no Authorization header on the request"
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A system user's key works only through the token exchange described below, and Ema turns the exchange on per environment."
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The token lasts up to 15 minutes (never past the key's own expiry) and comes with no refresh token"
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "These are browser-driven flows"
+    notes: >-
+      Graded on the workspace API key, the only machine credential every workspace can use. The
+      system user exchange would be a C, but the docs say to ask an Ema representative before
+      building on it. The other credential is a user JWT from a password or SSO sign-in. OIDC
+      appears only as human SSO. Two of five hygiene checks pass, so inbound is F.
+  outbound:
+    grade: B
+    mechanism: >-
+      Box, Confluence, Google Drive and SharePoint can connect through an OAuth sign-in to Ema's
+      own app. Other modes take a Google service account key, an Entra client secret or an API
+      key.
+    evidence:
+      - url: https://builder.ema.ai/builder/v2/integrations-data/data-connectors-box.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "there are no client credentials for you to manage"
+      - url: https://builder.ema.ai/builder/v2/integrations-data/data-connectors-google-drive.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The setup form asks you to paste the entire service-account JSON key file"
+      - url: https://builder.ema.ai/builder/v2/integrations-data/data-connectors-sharepoint.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "App Credentials mode authenticates as an Azure AD app registration using the client-credentials flow, with no interactive sign-in."
+      - url: https://builder.ema.ai/builder/v2/integrations-data/data-connectors-confluence.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Basic auth uses your Atlassian account email and a scoped API token."
+      - url: https://builder.ema.ai/builder/v2/integrations-data/integrations-hub.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API key, or the username and password, is the account credential itself."
+    notes: >-
+      Consent to a vendor-run OAuth app counts as keyless. Graded B because SharePoint defaults to
+      a client secret and Google Drive offers a pasted service account key. REST API integrations
+      take OAuth client credentials, API keys or basic auth. The OAuth sign-in modes work only
+      where Ema has configured them on the platform. No cloud role or federation path is
+      documented.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "omit it for a key that never expires"
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "offers 30, 90, 180, or 365 days, or Never"
+    notes: >-
+      Expiry is optional and a key created through the API without a date never expires. The app
+      defaults system user keys to 90 days but still offers Never. No policy to force an expiry is
+      documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotating a key issues a new key with the same name, type, and owner, and keeps the old key working for an overlap period"
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Revocation is immediate."
+    notes: >-
+      Keys are created, rotated and revoked through documented API endpoints. Those calls need a
+      user JWT, not another API key.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "to narrow what the key can do, for example, restricting a key to a single AI Employee"
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A system user is an identity for an integration or script. It acts only through API keys and can't sign in."
+    notes: >-
+      A key can carry an operation scope and a resource scope. System users are a documented
+      non-human account type with their own role.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://builder.ema.ai/builder/v2/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "(never the full secret), type, owner, revocation state, and expiry date (if set)"
+    notes: The key list returns prefix, type, owner, revocation state and expiry. No last-used time is listed.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Ema does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Covers the builder platform documented at builder.ema.ai. An enforced key lifetime or a last-used
+  time would lift inbound to D. Making the system user token exchange available everywhere would
+  lift it to C. Inbound moves to A or B only if the API accepts a federated workload token.

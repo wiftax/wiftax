@@ -1,0 +1,150 @@
+id: statsig
+vendor: Statsig
+product: Platform
+covers: "The Statsig Console API and its keys, plus warehouse and storage connections."
+aliases:
+  - Statsig Console API
+  - Statsig Warehouse Native
+website: https://www.statsig.com
+docs: https://docs.statsig.com/access-management/api-keys
+category: devtools
+status: listed
+summary: >-
+  The Statsig Console API takes only a static API key that never expires, though keys can be
+  rotated by API and show a last-used time. Outbound, Statsig is keyless into BigQuery and Athena
+  but wants passwords or tokens for Snowflake, Redshift and Databricks.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static Console API key sent in a request header. SDKs use static server secret keys and
+      client keys.
+    evidence:
+      - url: https://docs.statsig.com/console-api/introduction.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All requests must include a Console API key in the `STATSIG-API-KEY` header."
+      - url: https://docs.statsig.com/access-management/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "There are three main types of API keys:"
+      - url: https://docs.statsig.com/access-management/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Console API keys (Statsig CAPI keys) are the most powerful keys in your project."
+      - url: https://docs.statsig.com/integrations/mcp/automation-examples.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A Console API key with access to the project, stored as `STATSIG_API_KEY` in your runner's secret store"
+    notes: >-
+      The key pages list the API key as the only way to call the Console API, and the CI guide stores one in the runner's secrets.
+      No OAuth client, OIDC or workload federation is documented. OIDC appears only for human
+      single sign-on. Three of five hygiene checks pass, so the grade is D.
+  outbound:
+    grade: B
+    mechanism: >-
+      BigQuery trusts a Statsig-owned service account and Athena trusts a role that Statsig
+      assumes. Snowflake, Redshift and Databricks connections take a password, private key or
+      access token.
+    evidence:
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/bigquery.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "add the Statsig service account you copied in the Statsig Console as a new principal for your project"
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/athena.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "With an IAM Role, Statsig assumes your IAM Role through a Statsig Service Account."
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/athena.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Optionally, you can add an External ID condition for added security"
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/athena.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "With an IAM User, Statsig uses AWS Access Keys to access the IAM User and runs queries on behalf of that user."
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/snowflake.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service User Password"
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/redshift.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A service user Password"
+      - url: https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/databricks.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An access token with read access on your experiment data and write access to the staging database"
+      - url: https://docs.statsig.com/data-warehouse-ingestion/s3.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Statsig provides an IAM user that you must grant S3 bucket permissions to."
+    notes: >-
+      Graded B because some warehouses are keyless and others are not. The Athena External ID is
+      optional, not required. BigQuery also accepts a pasted service account key, which Statsig
+      advises against. Snowflake takes a password or a key pair. S3 ingestion grants a bucket
+      policy to a Statsig-owned IAM user, so no customer secret changes hands.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.statsig.com/api-reference/keys/create-key.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "| description | string | Yes | — | Constraints: max length: 1000 |"
+      - url: https://docs.statsig.com/access-management/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Generate API keys in the Statsig Console by going to"
+    notes: >-
+      The create-key request takes a description, type, scopes and environments. No expiry field,
+      default lifetime or expiry policy is documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.statsig.com/api-reference/keys/create-key.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Full URL: `https://statsigapi.net/console/v1/keys`"
+      - url: https://docs.statsig.com/api-reference/keys/rotate-key.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Key rotated successfully"
+    notes: The Console API can create, rotate, deactivate and delete keys.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.statsig.com/integrations/mcp/automation-examples.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use a read-only API key for jobs that only read."
+      - url: https://docs.statsig.com/access-management/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use [target apps](https://docs.statsig.com/sdks/target-apps) with server secret keys and client keys to control which gates, configs, experiments, and layers each key can access."
+    notes: >-
+      A narrow pass. A Console key can carry a read-only scope instead of read and write, and SDK
+      keys can be limited to target apps. There is no per-resource limit on a Console key.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.statsig.com/api-reference/keys/list-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "| data.lastUsed | string | No | — | Constraints: nullable |"
+    notes: The key list returned by the Console API carries a last-used value for each key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Statsig does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Graded the Console API, which CI and other workloads must use to manage a project. The scoping
+  pass rests on read-only Console keys, so a stricter reading would make inbound
+  F. An enforced key lifetime would add a fourth pass. Inbound moves to B or A only if the API
+  accepts a federated workload token.

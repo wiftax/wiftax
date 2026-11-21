@@ -1,0 +1,122 @@
+id: freshworks-freshdesk
+vendor: Freshworks
+product: Freshdesk
+covers: The Freshdesk REST API v2 and the support mailbox connections.
+aliases:
+  - Freshdesk Omni
+website: https://www.freshworks.com/freshdesk/
+docs: https://developers.freshdesk.com/api/
+category: saas
+status: listed
+summary: >-
+  To call the Freshdesk API, your code holds an agent's personal API key that never expires and
+  carries that agent's whole role. Outbound, Freshdesk reads Gmail and Microsoft 365 mailboxes
+  through an OAuth sign-in, but other mail servers take a stored password.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A personal API key, one per agent, sent as the Basic auth username. It has no expiry and
+      acts with the agent's role.
+    evidence:
+      - url: https://developers.freshdesk.com/api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can use your personal API key to authenticate the request. If you use the API key, there is no need for a password."
+      - url: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Any activities via API are allowed as per the role assigned to the agent."
+      - url: https://developers.freshworks.com/docs/app-sdk/v3.0/support_ticket/oauth-implementation-in-apps/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Freshworks enables you to implement OAuth authorization flows in Freshworks apps and Custom apps."
+      - url: https://developers.freshworks.com/docs/app-sdk/v3.0/support_ticket/oauth-implementation-in-apps/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enables app users to authorize the app to act on their behalf to access Freshdesk data."
+    notes: >-
+      Graded on the REST API reference, which documents only the API key. Freshworks also offers
+      OAuth, but the Freshdesk guide covers apps built on its own app platform, where a signed-in
+      user approves access. No public page describes that flow for a standalone workload, so it
+      does not lift the grade. No OIDC or cloud workload login is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Freshdesk connects to Gmail and Microsoft 365 support mailboxes through an OAuth sign-in.
+      Any other mail server takes a username and password that Freshdesk stores.
+    evidence:
+      - url: https://support.freshdesk.com/en/support/solutions/articles/195170
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select Gmail,  log in with your Gmail credentials, and ensure to authorize (read/write/delete) access to Freshdesk."
+      - url: https://support.freshdesk.com/support/solutions/articles/50000002985-reauthorization-of-custom-mailbox
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "OAuth (Open Authorization) replaces it by securing access through authorization tokens rather than passwords, which significantly improves security."
+      - url: https://support.freshdesk.com/en/support/solutions/articles/195170
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the username and password of your email account."
+      - url: https://developers.freshdesk.com/api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Denotes the password that will be used to authenticate the custom mailbox."
+    notes: >-
+      Freshdesk reaches into no AWS, GCP or Azure account, so the keyless side is the consent rule
+      for Gmail and Microsoft 365. Custom mail servers want a mailbox password with no scoping
+      guidance. Marketplace apps and their credentials were not assessed.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can reset the API Key to revoke the authorization to the app connected to Freshdesk."
+    notes: >-
+      The docs show no expiry setting, default lifetime or policy for API keys. A key works until
+      someone resets it.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.freshdesk.com/api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your API key will be available below the change password section to your right"
+    notes: >-
+      The key is viewed and reset on the profile settings page, behind a captcha. The API
+      reference lists no endpoint to create, reset or revoke a key.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Any activities via API are allowed as per the role assigned to the agent."
+    notes: >-
+      The key inherits everything its agent can do. The docs describe no API-only or non-human
+      account type, and the key itself takes no scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "On the right pane, click on the View API key  option and complete the captcha verification."
+    notes: The key page is documented as showing the key and a reset control, with no last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Neither Freshworks nor Freshdesk appears in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Covers Freshdesk, not Freshservice or Freshsales. No hygiene check passes, so inbound is F. An
+  expiring, scoped key with a management API would lift it to D. OAuth documented for standalone
+  workloads would make it C. Inbound moves to A or B only if the API accepts a federated token.
+  Outbound reaches A if custom mail servers stop taking a stored password.

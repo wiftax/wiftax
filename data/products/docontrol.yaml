@@ -1,0 +1,132 @@
+id: docontrol
+vendor: DoControl
+product: Platform
+covers: "The DoControl GraphQL API and MCP server, and DoControl's connections into SaaS apps and SIEM tools."
+website: https://www.docontrol.io
+docs: https://docs.docontrol.io/docontrol-user-guide/system-management/api
+category: security
+status: listed
+summary: >-
+  To call DoControl's API, your code swaps a refresh token that lasts ten years for a five-minute
+  access token. Outbound, DoControl connects to Box and GitHub by app consent, but Google Workspace
+  takes an uploaded service account key and CrowdStrike takes a client secret.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An API key, which is a refresh token valid for ten years, is posted to the refresh endpoint
+      for an access token that lasts five minutes.
+    evidence:
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The **refresh token** is valid for 10 years, the **access token** is valid for 5 minutes."
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use the **access token** to interact with the DoControl API."
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click **Create**. A **refresh token** is shown, copy it and keep it in a safe place."
+      - url: https://docs.docontrol.io/docontrol-user-guide/saas-data-monitoring/docontrol-mcp.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authenticate with a DoControl API key, connect your AI client to dc-mcp, and start asking."
+    notes: >-
+      Graded C because the access token is short-lived but the refresh token is a static root. The
+      API page and the API keys page document no other way in. The MCP server uses the same API key.
+      No OIDC, CI or cloud workload login is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Box and GitHub connect by OAuth consent or app install. Google Workspace takes an uploaded
+      service account key file. CrowdStrike and Splunk take a pasted client secret or token.
+    evidence:
+      - url: https://docs.docontrol.io/docontrol-user-guide/integrations/github.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click **Install**. GitHub is now integrated with DoControl."
+      - url: https://docs.docontrol.io/docontrol-user-guide/integrations/box.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter your Box credentials, then click **Grant access to Box**."
+      - url: https://docs.docontrol.io/docontrol-user-guide/integrations/integrations-google-drive/upload-key-file.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you need to create a key file in Google Cloud Platform (GCP), and then upload the key file to DoControl."
+      - url: https://docs.docontrol.io/docontrol-user-guide/integrations/integrations-crowdstrike.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Copy the three field values: **client ID**, **secret**, **base URL.**"
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/connectors/siem-and-soar-connectors/splunk.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the **Splunk instance URL** and **HTTP event connector token** that you generated in the previous steps."
+    notes: >-
+      Graded B because some connections are keyless and others are not. Box and GitHub use consent
+      or an installed app, which counts as keyless. Google Workspace needs a service account JSON
+      key with domain-wide delegation, a long-lived secret held by DoControl. The Slack, Microsoft
+      and other SaaS pages were not all read.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The **refresh token** is valid for 10 years."
+    notes: >-
+      Every refresh token gets a fixed ten-year life. The docs show no way to choose a shorter one
+      or to enforce a limit, so this does not count as an expiry.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You need at least **admin** permission to create API keys."
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click **Add API key**."
+    notes: >-
+      The docs create keys only in the Settings page. No API call to create or revoke a key is
+      documented. The GraphQL schema itself is behind a login and was not inspected.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When you create an API key, you need to assign the relevant privilege level:"
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Viewer** - API key can only read data in DoControl, except for all data in Settings."
+    notes: >-
+      Each key gets its own privilege level, which can be lower than its creator's. The choice is
+      coarse, with only super admin, admin and viewer.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can add up to 10 API keys."
+    notes: The API keys page documents a name and a privilege level per key. It mentions no last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: DoControl does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Graded the DoControl GraphQL API, the only documented programmatic way in. Inbound stays C while a
+  ten-year refresh token is the root credential. It moves to A or B only with documented workload
+  federation. Outbound reaches A if the Google Workspace and CrowdStrike connections stop needing a
+  stored key or secret.

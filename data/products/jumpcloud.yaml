@@ -1,0 +1,149 @@
+id: jumpcloud
+vendor: JumpCloud
+product: Platform
+covers: "The JumpCloud admin APIs, including Directory Insights, and its directory and provisioning integrations."
+aliases:
+  - JumpCloud Directory Platform
+  - Directory Insights
+website: https://jumpcloud.com
+docs: https://jumpcloud.com/support/service-account-for-apis
+category: identity
+status: listed
+summary: >-
+  JumpCloud service accounts swap a client ID and secret for a one-hour token, and the secret must
+  expire within 365 days. Some APIs still take only an admin's static API key. Outbound, Microsoft
+  365 sync uses admin consent, while SCIM connectors take a pasted token.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A service account's client ID and secret are exchanged at an OAuth 2.0 token endpoint for an
+      access token that lasts about an hour.
+    evidence:
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Service Account uses client credentials (Client ID and Client Secret) to request an access token via an OAuth 2.0 token endpoint."
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A Service Account is a non-human identity used by automated systems (scripts, services, or CI/CD pipelines) to authenticate and interact with APIs or systems without user intervention."
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service Accounts with Public Keys is under development and will be rolled out soon."
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service account authentication is currently not supported for the following JumpCloud API endpoints:"
+      - url: https://jumpcloud.com/support/siem-integration-in-directory-insights
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authentication for v1 uses your existing customer API key. Per-integration credentials and scoped machine-to-machine tokens are not part of v1."
+      - url: https://jumpcloud.com/support/jumpcloud-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "it gives unfiltered access to your JumpCloud instance through API calls"
+    notes: >-
+      Graded C on the service account, the best documented mechanism. The token is short-lived but
+      the client secret is a static root. No OIDC, CI or cloud workload login is documented. Admin
+      API keys remain, and the Directory Insights SIEM guide names only that key. Service accounts
+      do not yet cover the multi-tenant, bulk user and custom email endpoints.
+  outbound:
+    grade: B
+    mechanism: >-
+      Microsoft 365 and Google Workspace directory sync is authorized by an admin signing in and
+      consenting. SCIM provisioning connectors take a token pasted from the target application.
+    evidence:
+      - url: https://jumpcloud.com/support/m365-sync
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Microsoft shows the items JumpCloud needs permissions to access."
+      - url: https://jumpcloud.com/support/m365-sync
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The integration now uses least-privilege Microsoft Graph permissions."
+      - url: https://jumpcloud.com/support/google-workspace-integration-overview
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Using a person's Google user account for authorizing the integration may cause the integration to break if the person leaves the org or if the roles/ privileges change."
+      - url: https://jumpcloud.com/support/integrate-with-snowflake
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Paste the authorization token generated in the previous section"
+      - url: https://jumpcloud.com/support/integrate-with-snowflake
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The access token is valid for six months"
+    notes: >-
+      Graded B because consent-based directory sync counts as keyless while SCIM connectors store a
+      static token from each application. Snowflake is one example of many. Active Directory and
+      HR imports run the other way and use a JumpCloud API key.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Client Secrets are valid for up to 365 days (one year)."
+      - url: https://jumpcloud.com/support/jumpcloud-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you generate a new API key, the default expiration for the key will be set to 90 days."
+    notes: >-
+      Client secrets must expire in 30 to 365 days. New admin API keys default to 90 days, though an
+      admin can choose no expiration.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To add a second Client Secret, open the Service Account, then click"
+      - url: https://jumpcloud.com/support/jumpcloud-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Generating a new API key will revoke access to the current API key."
+    notes: >-
+      Client secrets and API keys are created and replaced in the Admin Portal. The articles
+      describe no API call that creates or revokes either one.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Admins can also link custom admin roles to a service account."
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "These roles ensure the Service Account has just enough access needed by the workflow."
+    notes: >-
+      A service account is a machine principal with its own role, which counts. An admin API key
+      carries the full access of the admin who owns it.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://jumpcloud.com/support/service-account-for-apis
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "As of now, you can search for a Service Account by its name."
+    notes: >-
+      The docs show no last-used time for a client secret or API key. Directory Insights logs
+      attempts to use a rotated admin key, which is not the same thing.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: JumpCloud does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers the JumpCloud admin APIs and the directory, HR and SCIM integrations in the help center.
+  Inbound moves to A or B only if service accounts accept a federated workload token. The announced
+  public key option would still be a static root. Outbound reaches A if SCIM connectors stop taking
+  pasted tokens.

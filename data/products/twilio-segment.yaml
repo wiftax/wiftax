@@ -1,0 +1,155 @@
+id: twilio-segment
+vendor: Twilio
+product: Segment
+covers: >-
+  The Segment Public API, the Tracking API and the storage destinations Segment writes to. The
+  Twilio REST API has its own card.
+aliases:
+  - Segment
+  - Twilio Segment
+  - Segment CDP
+website: https://segment.com
+docs: https://www.twilio.com/docs/segment/api/public-api
+category: data
+status: listed
+summary: >-
+  On the Business plan, Segment's APIs accept a short-lived token minted from a signed JWT, so a
+  private key is still held. Other plans use a static bearer token. Outbound, the S3 destination
+  uses an assumed role, but BigQuery and Snowflake store a key.
+
+surfaces:
+  inbound:
+    grade: C
+    tier_gated: Business
+    mechanism: >-
+      An OAuth app holds an uploaded public key. The workload signs a JWT with the private key and
+      trades it for an access token that lasts 1 to 30 days.
+    evidence:
+      - url: https://www.twilio.com/docs/segment/connections/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "OAuth 2.0 is available to customers on Business tier plans."
+      - url: https://www.twilio.com/docs/segment/connections/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Upload a public key in PEM format to authenticate through the OAuth application."
+      - url: https://www.twilio.com/docs/segment/connections/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+      - url: https://www.twilio.com/docs/segment/connections/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can choose between: 1 day, 2 days, 3 days, 1 week, 2 weeks, 3 weeks, 30 days."
+      - url: https://www.twilio.com/docs/segment/connections/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "public_api:read_write"
+      - url: https://www.twilio.com/docs/segment/api/public-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Configure the Authorization Header as a Bearer Token with the value of the newly generated Public API token."
+      - url: https://www.twilio.com/docs/segment/connections/sources/catalog/libraries/server/http-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authenticate to the Tracking API by sending your project's Write Key along with a request."
+    notes: >-
+      Graded C because the access token expires but the private key is a static root. Segment
+      checks the JWT against a key the customer uploads, not against an external issuer, so this
+      is not federation. Team plan workspaces have only the static Public API token. Source write
+      keys are static on every plan.
+  outbound:
+    grade: B
+    mechanism: >-
+      The AWS S3 destination assumes a customer role locked to an external ID. BigQuery takes a
+      service account JSON key and Snowflake takes a private key.
+    evidence:
+      - url: https://www.twilio.com/docs/segment/connections/storage/catalog/aws-s3.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "It uses AWS's own IAM Roles to define access to the specified buckets."
+      - url: https://www.twilio.com/docs/segment/connections/storage/catalog/aws-s3.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter your Segment Workspace ID in the External ID field."
+      - url: https://www.twilio.com/docs/segment/connections/storage/catalog/bigquery.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The JSON credential that Segment will use to load data into your BigQuery database."
+      - url: https://www.twilio.com/docs/segment/connections/storage/catalog/snowflake.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Snowflake only supports authentication using a key pair."
+    notes: >-
+      Graded B because AWS is keyless while Google Cloud and Snowflake need a stored key. Segment
+      also has hundreds of SaaS destinations, most of which take a pasted API key. Those were not
+      read one by one.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://www.twilio.com/docs/segment/api/public-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a description for the token and assign it either Workspace Owner or Workspace Member access."
+    notes: >-
+      A Public API token takes a description and a role. The docs show no expiry setting, default
+      lifetime or workspace policy.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.segmentapis.com/tag/Getting-Started/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "follow the prompts to generate a new token."
+    notes: >-
+      Tokens are created in the Segment app. The Public API reference lists user, group and role
+      endpoints but none to create or revoke a workspace token.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://www.twilio.com/docs/segment/api/public-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a description for the token and assign it either Workspace Owner or Workspace Member access."
+      - url: https://www.twilio.com/docs/segment/segment-app/iam/roles.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Members inherit custom permissions based on"
+    notes: >-
+      A token is its own principal with its own role, not a copy of its creator's access. Member
+      tokens get only the roles assigned to them, though role detail depends on the plan.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://www.twilio.com/docs/segment/segment-app/iam/concepts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can generate tokens to programmatically access Segment resources using the"
+      - url: https://www.twilio.com/docs/segment/segment-app/iam/audit-trail.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Actors include both logged-in users and access tokens."
+    notes: >-
+      The token list is described with IDs, roles and types. The Audit Trail records actions taken
+      by tokens for 90 days, but no last-used time per token is documented.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://www.twilio.com/docs/segment/api/public-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Valid tokens are automatically revoked and workspace owners are notified."
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Segment Public API Token"
+    notes: >-
+      Segment is a GitHub secret-scanning partner for Public API tokens. Source write keys are not
+      covered.
+
+notes: >-
+  Two of five hygiene checks pass for the static Public API token. Without the Business plan the
+  inbound grade would be F. Inbound moves to A or B only if the OAuth server trusts an external
+  workload issuer. The older Config API is not graded.

@@ -1,0 +1,128 @@
+id: hackerone
+vendor: HackerOne
+product: Platform
+covers: The HackerOne customer API at api.hackerone.com and the platform's ticketing and chat integrations.
+website: https://www.hackerone.com
+docs: https://api.hackerone.com/getting-started/
+category: security
+status: listed
+summary: >-
+  The HackerOne API takes a static API token over HTTP Basic authentication. Tokens have no
+  documented expiry and are managed only in the web console. Outbound, GitHub and Slack connect by
+  consent, while GitLab, ServiceNow and Splunk need a stored secret.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API token created in organization settings. Its identifier and value are sent as the
+      username and password of HTTP Basic authentication.
+    evidence:
+      - url: https://api.hackerone.com/getting-started/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "HTTP Basic authentication is used to authenticate to the API."
+      - url: https://api.hackerone.com/getting-started/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API Token identifier and value are used as the username and password for basic authentication"
+      - url: https://docs.hackerone.com/en/articles/8544782-api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API token identifier and value are used as the username and password for HTTP Basic authentication."
+    notes: >-
+      The API reference documents no OAuth flow, OIDC login or workload federation. The audit log
+      endpoints use the same token. An optional IP allowlist can restrict where a token is used.
+  outbound:
+    grade: B
+    mechanism: >-
+      GitHub and Slack connect through an authorization screen. GitLab and ServiceNow need an OAuth
+      client ID and secret that the customer creates, and Splunk needs a pasted collector token.
+    evidence:
+      - url: https://docs.hackerone.com/en/articles/8571163-github-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click Authorize Hacker0x01 to give HackerOne access to your GitHub account."
+      - url: https://docs.hackerone.com/en/articles/12598847-new-slack-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "redirected to a Slack authorization screen where you’ll be asked to grant HackerOne Bot permissions to access your workspace."
+      - url: https://docs.hackerone.com/en/articles/10394699-gitlab-setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you were provided with after creating the OAuth 2.0 application in GitLab"
+      - url: https://docs.hackerone.com/en/articles/8575614-servicenow-incident-management-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This integration uses OAuth with a refresh token."
+      - url: https://docs.hackerone.com/en/articles/8588169-splunk-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the popup enter the Event Collector URL and the HEC token"
+    notes: >-
+      HackerOne reaches into no cloud account. Graded B because some integrations are consent-based
+      and others store a client secret or static token. Jira, Azure DevOps and the smaller tracker
+      integrations were not read in full. The AWS Security Hub integration runs in the customer's
+      account and calls HackerOne with an API token.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.hackerone.com/en/articles/8544782-api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter an identifier for the new API token."
+    notes: >-
+      Creating a token takes an identifier and groups. The docs show no expiry setting, default
+      lifetime or policy.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.hackerone.com/en/articles/8544782-api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click Create API Token."
+      - url: https://api.hackerone.com/getting-started/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "As an Admin User you can generate and manage API Tokens from your organization's settings page."
+    notes: >-
+      Tokens are created and removed in organization settings. The customer API reference lists no
+      endpoint to create or revoke an API token.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.hackerone.com/en/articles/8544782-api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API token will inherit the permissions of the group you add it to."
+      - url: https://docs.hackerone.com/en/articles/8544782-api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When no groups are selected, the user will be added to the organization without any access rights."
+    notes: >-
+      A token is its own API user. Its access comes from the groups it is placed in, not from the
+      admin who created it.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.hackerone.com/en/articles/8544782-api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "administrative users can create and manage API tokens for testing or utilizing the HackerOne API."
+    notes: >-
+      The token page and the API reference mention no last-used time. The audit log records token
+      creation and removal.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: HackerOne does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  One of five hygiene checks passes, so inbound is F. Token expiry and a token management endpoint
+  would lift it to D. Inbound moves to A or B only if the API accepts a federated token. API access
+  depends on the organization's plan.

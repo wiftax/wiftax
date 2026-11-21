@@ -1,0 +1,135 @@
+id: cisco-meraki-dashboard
+vendor: Cisco
+product: Meraki Dashboard
+covers: "The Meraki Dashboard API and the dashboard's link to Cisco Umbrella."
+aliases:
+  - Meraki Dashboard API
+  - Cisco Meraki
+website: https://meraki.cisco.com
+docs: https://developer.cisco.com/meraki/api-v1/authorization/
+category: saas
+status: listed
+summary: >-
+  The Meraki Dashboard API takes a permanent API key that inherits an admin's role, or an OAuth
+  integration that trades a client secret and refresh token for one-hour tokens. No workload
+  federation is documented. Outbound, the Umbrella link takes a pasted API key and secret.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth 2.0 integration approved once by an organization admin. Its client secret and refresh
+      token are exchanged for access tokens that last 60 minutes.
+    evidence:
+      - url: https://developer.cisco.com/meraki/api-v1/authorization/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "There are two forms of authentication and authorization for dashboard API:"
+      - url: https://developer.cisco.com/meraki/api-v1/oauth-overview/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An access token expires 60 minutes (one hour) after being generated."
+      - url: https://developer.cisco.com/meraki/api-v1/oauth-overview/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The refresh token is automatically revoked after 90 days of inactivity."
+      - url: https://developer.cisco.com/meraki/api-v1/oauth-overview/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "OAuth is currently supported in the meraki.com cluster."
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys do not expire."
+    notes: >-
+      Graded C on the OAuth path, where tokens are short-lived but the client secret and refresh
+      token are static roots. The first grant needs an admin to approve it in a browser. Outside the
+      main Meraki region only the permanent API key works. The authorization page lists these two
+      methods and no federation.
+  outbound:
+    grade: D
+    mechanism: >-
+      To link a network to Cisco Umbrella or Secure Access, an admin pastes an Umbrella API key and
+      secret into the dashboard.
+    evidence:
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Manually_Integrating_Cisco_Umbrella_and_Secure_Access_with_Meraki_Networks
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Paste the Umbrella API key and secret in the appropriate fields."
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Manually_Integrating_Cisco_Umbrella_and_Secure_Access_with_Meraki_Networks
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "link the Meraki and Umbrella dashboards by using the Umbrella Network Devices API key"
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Manually_Integrating_Cisco_Umbrella_and_Secure_Access_with_Meraki_Networks
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you do not use group policies, you can omit the Deployments/Policies permission."
+    notes: >-
+      Graded D because the key is a narrow key type and the Secure Access steps list the minimum
+      permissions. The article does not explain rotation. This is the only outbound integration we
+      graded. Syslog, webhooks and device-level integrations are out of scope.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys do not expire."
+    notes: An API key works until someone revokes it.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developer.cisco.com/meraki/api-v1/generate-administered-identities-me-api-keys/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Generates an API key for an identity"
+      - url: https://developer.cisco.com/meraki/api-v1/revoke-administered-identities-me-api-keys/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Revokes an identity's API key, using the last four characters of the key"
+    notes: >-
+      An identity can generate and revoke its own keys through the API. Each identity can hold two
+      keys at a time, which allows an overlap during rotation.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API key associates with the dashboard administrator account that generates it and inherits the same permissions as that account."
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys can access all organizations the administrator has access to."
+    notes: >-
+      A key cannot be narrowed below its admin's role. The docs describe no API-only or non-human
+      admin type. OAuth integrations do take scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.cisco.com/meraki/api-v1/get-administered-identities-me-api-keys/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "List the non-sensitive metadata associated with the API keys that belong to the user"
+      - url: https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "whose API key the application uses."
+    notes: >-
+      The key list shows a suffix and a creation date, with no last-used time. API Analytics shows
+      request history per admin, not per key, so this is a near miss.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Meraki Dashboard API Key"
+    notes: GitHub lists the Meraki Dashboard API key as a partner pattern.
+
+notes: >-
+  Covers the Dashboard API v1. Two of five hygiene checks pass for the API key, so the key alone
+  would grade F. The OAuth path lifts inbound to C. Inbound moves to A or B only if the dashboard
+  accepts a workload's federated token.

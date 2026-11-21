@@ -1,0 +1,148 @@
+id: oracle-netsuite
+vendor: Oracle
+product: NetSuite
+covers: "SuiteTalk REST web services, RESTlets and SOAP, plus outbound calls from SuiteScript."
+aliases:
+  - Oracle NetSuite
+  - SuiteTalk
+  - SuiteCloud
+website: https://www.netsuite.com
+docs: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_4369651411.html
+category: saas
+status: listed
+summary: >-
+  For machine access, NetSuite takes a JWT signed with a certificate key you hold and returns a
+  60-minute token. Certificates last at most two years and can be rotated by API. No workload
+  federation is documented. Outbound scripts use stored passwords, keys and secrets.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      The OAuth 2.0 client credentials flow. Your code signs a JWT with the private key of an
+      uploaded certificate and exchanges it for a 60-minute access token.
+    evidence:
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162730264820.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client credentials flow is machine-to-machine and doesn't require any user interaction."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162755359851.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The token is signed with the private part of the certificate used for mapping of the application."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162755359851.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The access token is valid for 60 minutes."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_4369651411.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Support for SOAP web services and TBA is ending in NetSuite 2028.2."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_4369651411.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "NetSuite supports the following methods for inbound SSO access to the NetSuite UI:"
+    notes: >-
+      Graded C because the token is short-lived but the certificate key is a static root you must
+      store. Token-based Authentication uses long-lived token secrets and stays supported until
+      release 2028.2. Inbound OIDC and SAML are for people signing in to the UI. Nothing lets an API
+      client present a token from an outside issuer.
+  outbound:
+    grade: D
+    mechanism: >-
+      SuiteScript calls out over HTTPS and SFTP with passwords, SSH keys and API secrets stored in
+      NetSuite. Each stored secret can be limited to named scripts and domains.
+    evidence:
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_160216486846.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API secrets include hashes, passwords, keys, and other secrets for managing digital authentication credentials."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4617005472.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The password GUID for the remote account."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4855401415.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The script author must specify which scripts and domains are permitted for use with the credential."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_160216498405.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "It can take up to one hour for the new password to be updated."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4855401415.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Automatic password expiration is not currently provided, nor is it possible to view an inventory of saved credentials in the user interface."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_160077062690.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You should use the NetSuite as OIDC Provider feature as an outbound single sign-on method for use with integrations."
+    notes: >-
+      Graded D because the credentials are static, but Oracle documents script and domain
+      restrictions and how to update a secret. NetSuite can act as an OIDC provider, but that
+      feature is single sign-on for users. No page shows a script using it to reach a cloud
+      without a stored secret.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/subsect_162755332391.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The maximum certificate validity is two years. If the certificate is valid for a longer time period, the system automatically shortens the validity to two years."
+    notes: >-
+      This covers the certificate used by the client credentials flow. Tokens made with Token-based
+      Authentication are a separate static credential and are not covered by this limit.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_92130837826.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "POST request that lets you set up a new certificate for a given integration record."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_92130837826.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "POST request that lets you revoke any active certificate."
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162686838198.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the popup window, choose the entity, role, and application to be mapped."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/subsect_162755332391.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "One certificate can only be used for one combination of integration record, role, and entity."
+    notes: >-
+      Each certificate is bound to one integration record and one role, so its token carries only
+      that role's permissions.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162686838198.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The list includes the data you entered, as well as the data imported from the certificate."
+      - url: https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_11111634165.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      The setup list and the certificate API return creation and validity dates and a revoked
+      flag. Neither shows when a certificate was last used.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      NetSuite does not appear in GitHub's supported secret-scanning patterns. A leaked certificate
+      key would not be reported to Oracle.
+
+notes: >-
+  Graded on REST web services and RESTlets with the client credentials flow, the best documented
+  path for workloads. Inbound moves to A or B only if the token endpoint accepts a federated
+  workload token in place of the certificate-signed JWT.

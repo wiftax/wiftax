@@ -1,0 +1,149 @@
+id: gitlab-api
+vendor: GitLab
+product: API and CI/CD
+covers: >-
+  The REST and GraphQL APIs, CI/CD ID tokens and audit event streaming, on GitLab.com and GitLab
+  Self-Managed.
+aliases:
+  - GitLab CI/CD
+  - GitLab.com
+website: https://about.gitlab.com
+docs: https://docs.gitlab.com/api/rest/authentication/
+category: devtools
+status: listed
+summary: >-
+  To call the GitLab API from outside GitLab, a workload holds a personal, group or project access
+  token. Those tokens expire, carry scopes and can be rotated through the API. GitLab CI/CD is an
+  OIDC issuer, so pipelines reach clouds without stored keys, but audit event streaming still
+  takes static cloud keys.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A personal, group or project access token sent in a request header. Service accounts hold
+      personal access tokens too.
+    evidence:
+      - url: https://docs.gitlab.com/api/rest/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can authenticate with the GitLab REST API in several ways:"
+      - url: https://docs.gitlab.com/api/rest/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can use access tokens to authenticate with the API."
+      - url: https://docs.gitlab.com/user/profile/service_accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service accounts authenticate with a personal access token"
+      - url: https://docs.gitlab.com/api/oauth2/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Device Authorization Grant (GitLab 17.1 and later): Secure flow oriented toward devices without browser access. Requires a secondary device to complete the authorization flow."
+      - url: https://docs.gitlab.com/api/rest/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In GitLab CI/CD jobs, the token is available as the CI_JOB_TOKEN variable."
+    notes: >-
+      We found no documented way to trade an outside OIDC token for GitLab API access. GitLab's
+      federation only runs outward from CI/CD. The OAuth flows issue two-hour tokens, but each
+      needs a person to approve in a browser and acts as that person. Service accounts cannot sign
+      in to the UI, so they use access tokens. The job token inside a pipeline is GitLab's own
+      ambient identity and does not count.
+  outbound:
+    grade: B
+    mechanism: >-
+      CI/CD jobs get OIDC ID tokens that AWS, Azure, Google Cloud and Vault can trust. Audit event
+      streaming to Google Cloud Logging and AWS S3 takes a service account key or an access key.
+    evidence:
+      - url: https://docs.gitlab.com/ci/secrets/id_token_authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "CI/CD jobs can use ID tokens for OIDC authentication with third-party services, including:"
+      - url: https://docs.gitlab.com/ci/cloud_services/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "ID tokens support cloud providers with OIDC, including:"
+      - url: https://docs.gitlab.com/ci/secrets/id_token_authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Cloud providers that federate with GitLab as an OIDC identity provider can validate the claims above as condition keys in trust policies."
+      - url: https://docs.gitlab.com/user/compliance/audit_event_streaming/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a JSON key for the service account."
+      - url: https://docs.gitlab.com/user/compliance/audit_event_streaming/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create an access key for AWS with the appropriate credentials and permissions."
+    notes: >-
+      Pipelines deploying into your clouds are keyless on every cloud the docs list. Graded B, not
+      A, because the audit event streaming destinations for Google Cloud Logging and AWS S3 store a
+      static key you create. That feature needs the Ultimate tier. A role or federation option
+      for those two destinations would make this A. Other project integrations were not assessed.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://docs.gitlab.com/user/profile/personal_access_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By default, new access tokens must have an expiry date."
+      - url: https://docs.gitlab.com/user/profile/personal_access_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If an expiry date isn’t explicitly set during token creation, an expiry date of 365 days from the current date is applied."
+    notes: >-
+      Expiry is the default and the default lifetime is 365 days. An administrator of a
+      self-managed instance can turn the requirement off. A shorter maximum lifetime is an
+      Ultimate setting.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.gitlab.com/api/personal_access_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotates a specified personal access token. This revokes the previous token and creates a new token"
+      - url: https://docs.gitlab.com/api/personal_access_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Revokes a specified personal access token. Administrators can revoke tokens for any user."
+    notes: >-
+      A token can rotate itself through the API, and the old token is revoked in the same call.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.gitlab.com/user/profile/service_accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service accounts are user accounts that represent non-human entities rather than individual people."
+      - url: https://docs.gitlab.com/security/tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When creating a scoped token, use the most limited scope possible to reduce the impact of an accidentally leaked token."
+    notes: >-
+      Tokens take scopes, and a service account is a documented non-human user with its own
+      membership and role. Group and project access tokens are limited to one group or project.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.gitlab.com/api/personal_access_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If defined, returns tokens last used after the specified time."
+    notes: The token API returns a last-used time and can filter and sort on it.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "GitLab Access Token"
+    notes: >-
+      GitHub detects GitLab tokens for repository owners, but the Partner column is not ticked. A
+      token leaked to a public GitHub repo is not reported to GitLab for revocation.
+
+notes: >-
+  Four of five hygiene checks pass, so inbound is D. Inbound moves to B or A only if the API
+  accepts a federated token from an outside issuer. GitLab Dedicated was not checked separately.

@@ -1,0 +1,129 @@
+id: coupa-core-platform
+vendor: Coupa
+product: Core Platform
+covers: "The Coupa Core REST API, flat-file SFTP exchange and Call Outs."
+aliases:
+  - Coupa
+  - Coupa Core API
+  - Coupa BSM
+website: https://www.coupa.com
+docs: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc
+category: saas
+status: listed
+summary: >-
+  To call the Coupa Core API, your code swaps an OAuth client ID and secret for a token that lasts
+  24 hours. File exchange over SFTP takes a password or an SSH key. No workload federation is
+  documented. Outbound Call Outs store a client secret you supply.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth client ID and secret, created in Setup, are posted to the instance token endpoint for
+      an access token that lasts about 24 hours.
+    evidence:
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Used when there is no user involved. Typically used for system-to-system integrations. (Most common)"
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Once you save the client, note the client credentials:"
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "that was generated to authorize API calls within the defined scope for the next 24 hours"
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys are deprecated. You must transition any existing keys to OAuth clients and revoke the keys under"
+      - url: https://docs.coupa.com/en/developer-documentation/coupa-core-flat-files-csv/getting-started/sftp-overview
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Coupa primarily exchanges files with customers via the SFTP protocol. We support both username/password or SSH key authentication."
+    notes: >-
+      Graded C because the token is short-lived but the client secret is a static root. The docs
+      list three grant types, and none accepts a token from an outside issuer. Flat-file exchange
+      over SFTP uses a password or an SSH key with no documented expiry. Treasury and the other
+      Coupa applications have their own integrations and are not graded here.
+  outbound:
+    grade: C
+    mechanism: >-
+      Call Outs post to an endpoint you run. Coupa stores a token URL, client ID and client secret
+      that you supply and fetches a bearer token with them.
+    evidence:
+      - url: https://compass.coupa.com/en-us/products/total-spend-management-platform/integration-playbooks-and-resources/integration-knowledge-articles/oauth-2.0-for-call-outs
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the Endpoint Detail section make sure to use HTTP and provide the Host Name, Token URL, Client ID, and Client Secret."
+      - url: https://compass.coupa.com/en-us/products/total-spend-management-platform/integration-playbooks-and-resources/integration-knowledge-articles/oauth-2.0-for-call-outs
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Client id and secret need to be configured as an auth string:"
+    notes: >-
+      The Call Outs article dates from 2021 and is the only public page found on how Coupa
+      authenticates to a customer endpoint. It shows no keyless option and no guidance on rotating
+      the stored secret.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Once you save the client, note the client credentials:"
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Refresh tokens expire every 90 days, after which you must reauthenticate."
+    notes: >-
+      The client pages describe no expiry setting or policy for the client secret. Only access and
+      refresh tokens expire.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can create, activate, or deactivate individual clients from the OpenIDConnect Clients table by going to"
+    notes: >-
+      Clients are managed in the Setup pages. The developer documentation sitemap lists no API
+      resource for OAuth clients or their secrets.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Scopes are required and determines what the client/application is allowed to do."
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Assign one or more account groups to a client. The client can only access transactional data"
+    notes: >-
+      Each client is its own principal with assigned scopes. A client can also be limited by IP
+      allowlist, account group and business group.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This data enables internal reporting on API usage patterns, request volumes, and integration activity across your instance."
+    notes: >-
+      Coupa says it collects API telemetry per client. The docs do not show a last-used time on the
+      client list.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Coupa does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers the Coupa Core platform API and its file and Call Out integrations. Inbound moves to A or B
+  only if the token endpoint accepts a federated workload token. Outbound would improve if Call Outs
+  could authenticate without a stored secret.

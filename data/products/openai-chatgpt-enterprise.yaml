@@ -1,0 +1,162 @@
+id: openai-chatgpt-enterprise
+vendor: OpenAI
+product: ChatGPT Enterprise
+covers: >-
+  The ChatGPT workspace Admin, Compliance and Analytics APIs, Codex service-account tokens and
+  workspace connections. The OpenAI API Platform is a separate product and is not graded here.
+aliases:
+  - ChatGPT Compliance API
+  - ChatGPT Edu
+  - ChatGPT Business
+website: https://chatgpt.com
+docs: https://chatgpt.com/public/admin/api-reference
+category: saas
+status: listed
+confidence:
+  level: low
+  reason: >-
+    OpenAI's Compliance Platform help article refuses a plain fetch. Rotation and last-used rest on
+    the organization Admin key reference. If workspace Admin keys differ, inbound drops to F.
+summary: >-
+  The ChatGPT Admin and Compliance APIs take only a static Admin API key. Keys can be scoped, show
+  last use, and can be made and deleted by API, but expiry is optional. Workload federation exists
+  for Codex only, in beta, and support must enable it. Outbound, most apps connect by OAuth, but
+  Google Cloud wants a JSON key.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static Admin API key, created in the OpenAI Admin Console and sent as a bearer token. The
+      key carries fine-grained scopes and an optional expiry.
+    evidence:
+      - url: https://chatgpt.com/public/admin/api-reference/openapi.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use the workspace-scoped Admin key, not an API Platform project"
+      - url: https://chatgpt.com/public/admin/api-reference/openapi.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Requests use existing Admin API keys with Compliance read or delete scope."
+      - url: https://learn.chatgpt.com/docs/enterprise/compliance-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Set `COMPLIANCE_API_KEY` to your Enterprise Compliance API key."
+      - url: https://developers.openai.com/api/docs/guides/workload-identity-federation.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Codex workload identity federation is in beta and must be enabled for your"
+      - url: https://developers.openai.com/api/docs/guides/workload-identity-federation.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Mappings can't include Admin API scopes"
+      - url: https://chatgpt.com/public/admin/api-reference/openapi.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Creates a credential for a service account. The full `access_token` is returned only in this"
+    notes: >-
+      Graded on the Admin and Compliance APIs, which a log collector or admin script must call. Every
+      security scheme in the public spec is a bearer key. Codex can federate from an outside
+      identity provider, but only after OpenAI support enables the beta, so it does not lift the
+      grade. Codex service accounts otherwise use a stored access token with a required lifetime.
+  outbound:
+    grade: B
+    mechanism: >-
+      Workspace connections reach other services mostly by OAuth sign-in or app installation. Direct
+      Google Cloud access takes a pasted service account JSON key.
+    evidence:
+      - url: https://learn.chatgpt.com/docs/enterprise/shared-connections.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If OAuth is offered, authorize the designated Gmail mailbox."
+      - url: https://learn.chatgpt.com/docs/enterprise/shared-connections.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Choose GitHub user-account sign-in and authenticate the designated account."
+      - url: https://learn.chatgpt.com/docs/enterprise/shared-connections.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If direct service-account authentication is offered, prepare an approved Google Cloud service account and JSON key."
+      - url: https://learn.chatgpt.com/docs/enterprise/shared-connections.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "It requires Google Workspace super-admin approval and an approved Google Cloud service account with its numeric OAuth client ID and complete JSON key."
+    notes: >-
+      OAuth consent counts as keyless because no secret changes hands. Graded B, not A, because the
+      Google service account and delegation paths store a long-lived JSON key. Only the workspace
+      connections guide was read. Other plugins and custom connectors may take other credentials.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/admin_api_keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The number of seconds until the API key expires. Omit this field for a key that does not expire."
+      - url: https://developers.openai.com/api/docs/guides/production-best-practices.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Administrators can enforce a maximum API key lifetime at the organization or project level in"
+    notes: >-
+      An Admin key can take an expiry, but a key without one never expires. The maximum-lifetime
+      policy is documented for API Platform keys. No public page says it binds Admin keys, so this
+      fails. Service-account tokens for Codex do require a lifetime under one year.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/admin_api_keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create an organization admin API key"
+      - url: https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/admin_api_keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Delete an organization admin API key"
+      - url: https://chatgpt.com/public/admin/api-reference/openapi.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Revokes a credential owned by a service account."
+    notes: >-
+      Admin keys can be created and deleted through the organization API. The reference does not
+      say how a workspace scope is set on a key made this way. Service-account credentials have
+      their own create and revoke endpoints.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://chatgpt.com/public/admin/api-reference/openapi.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys are authorized per requested `event_type`. The matching"
+      - url: https://chatgpt.com/public/admin/api-reference/openapi.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Create Admin API key** modal, this scope is displayed as"
+    notes: >-
+      A key can be limited to one log type or one permission category, such as read-only costs.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/admin_api_keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Unix timestamp (in seconds) of when the API key was last used"
+    notes: >-
+      The Admin key object carries a last-used timestamp. Service-account credentials list no
+      last-used field.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "OpenAI API Key"
+    notes: >-
+      OpenAI is a GitHub secret-scanning partner for its API key pattern. The table does not say
+      whether that pattern includes Admin keys.
+
+notes: >-
+  Four of five hygiene checks pass, so inbound is D. Enforced expiry on Admin keys would make it
+  five. Inbound moves to A or B only when the Admin and Compliance APIs accept a federated token
+  without a support request. The compliance log download redirects to a short-lived signed URL,
+  but the call that lists files still needs the key.

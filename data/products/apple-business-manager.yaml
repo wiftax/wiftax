@@ -1,0 +1,135 @@
+id: apple-business-manager
+vendor: Apple
+product: Apple Business
+covers: "The Apple Business API, device management service tokens and identity provider links."
+aliases:
+  - Apple Business Manager
+  - ABM
+  - Apple School Manager
+website: https://business.apple.com
+docs: https://developer.apple.com/documentation/apple-school-and-business-manager-api/implementing-oauth-for-the-apple-school-manager-and-apple-business-api
+category: saas
+status: listed
+summary: >-
+  To call the Apple Business API, your code signs a JWT with a downloaded private key and swaps it
+  for a one-hour token. The key has no documented expiry. Outbound links to Microsoft Entra ID and
+  Google Workspace use admin consent, but a custom identity provider needs a pasted client secret.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An API account's private key signs a client assertion JWT, which the token endpoint exchanges
+      for a one-hour access token.
+    evidence:
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Apple Business API supports OAuth 2 so apps authenticate with a set of credentials in exchange for an access token to make authenticated requests to the API."
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To maintain a secure connection to Apple Business, you need to generate a private key."
+      - url: https://developer.apple.com/tutorials/data/documentation/apple-school-and-business-manager-api/implementing-oauth-for-the-apple-school-manager-and-apple-business-api.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client assertion is a JWT that you create and sign with your private key."
+      - url: https://developer.apple.com/tutorials/data/documentation/apple-school-and-business-manager-api/implementing-oauth-for-the-apple-school-manager-and-apple-business-api.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The access token has an expiration of 1 hour."
+      - url: https://support.apple.com/guide/business/link-to-an-external-device-management-service-axm1c1be359d/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "External service tokens expire after one year and require replacement."
+    notes: >-
+      Graded C because the access token is short-lived but the private key is a static root. A
+      client assertion may itself be valid for up to 180 days. External device management
+      services use a separate downloaded token that lasts one year. No federation for workloads is
+      documented. The developer article is rendered by script, so its receipts cite the JSON file
+      behind the page.
+  outbound:
+    grade: B
+    mechanism: >-
+      Apple Business reads users from Microsoft Entra ID and Google Workspace after an
+      administrator signs in and consents. A custom identity provider needs a client ID and secret
+      pasted into Apple Business.
+    evidence:
+      - url: https://support.apple.com/guide/business/federated-authentication-microsoft-entra-axm8c1cac980/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You’re consenting to Microsoft giving Apple access to information found in Microsoft Entra ID."
+      - url: https://support.apple.com/guide/business/sync-user-accounts-from-microsoft-entra-id-axm3ec7b95ad/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can use OpenID Connect (OIDC) to sync user accounts to Apple Business."
+      - url: https://support.apple.com/guide/business/federated-authentication-google-workspace-axmaef1a0154/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Carefully read the agreement, then accept the Terms and Conditions, then check the following:"
+      - url: https://support.apple.com/guide/business/federated-authentication-identity-provider-axmfcab66783/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Copy the client ID and client secret values into Apple Business from the text file or spreadsheet you saved in the previous section."
+    notes: >-
+      Graded B because the two named directories connect by consent while the custom provider path
+      stores a client secret. With SCIM the direction reverses. Apple issues a client secret that
+      lasts 6, 9 or 12 months, and the identity provider pushes users to Apple.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The key’s filename ends in .pem, and you generate it only once."
+    notes: >-
+      The API account page gives the private key no expiry and no policy to set one. Only the
+      device management service token has a fixed one-year life.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select Generate & Download to generate and download the key."
+    notes: >-
+      Keys are generated in the Apple Business web console. The API account page lists what the
+      API can do, and managing API accounts or keys is not on that list.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select Add API Account, enter the name of the user and select their role, then select Next."
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can have up to 50 Apple Business API accounts."
+    notes: >-
+      An API account is a dedicated non-human account with its own role, so its key does not
+      inherit a person's access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select Edit to view the information you need to create the connection."
+    notes: The API account page does not mention a last-used time for the account or its key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      No Apple Business credential appears in GitHub's supported secret-scanning patterns, partner
+      or user.
+
+notes: >-
+  Apple now calls the product Apple Business. Apple School Manager shares the same API and OAuth
+  article. Inbound moves to A or B only if the token endpoint accepts a federated workload token in
+  place of a JWT signed with a stored key.

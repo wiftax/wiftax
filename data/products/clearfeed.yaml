@@ -1,0 +1,137 @@
+id: clearfeed
+vendor: ClearFeed
+product: Helpdesk
+covers: The ClearFeed REST API and its integrations with ticketing, identity and device tools.
+website: https://clearfeed.ai
+docs: https://docs.clearfeed.ai/api/quick-start/authentication-guide
+category: saas
+status: listed
+summary: >-
+  The ClearFeed API takes only a static bearer token with no expiry, made in the web app. Outbound,
+  GitHub and Jira connect through installed apps, but Freshdesk, Kandji, JumpCloud and BambooHR take
+  a pasted API key and Okta takes a private key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static bearer token, either a Personal Access Token tied to a user or an Account Access
+      Token owned by a bot user.
+    evidence:
+      - url: https://docs.clearfeed.ai/api/quick-start/authentication-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To access ClearFeed APIs, authentication is required using a bearer token."
+      - url: https://docs.clearfeed.ai/api/quick-start/authentication-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Both token types use the same bearer authentication header."
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Personal Access Token (PAT) is a bearer token that provides authentication for users when making API calls."
+    notes: >-
+      Both token types are static keys. The docs describe no OAuth client for the REST API and no
+      federation. The remote MCP server has an OAuth flow, but it is a human sign-in that ends in a
+      Personal Access Token. Only the scoping check passes, so this is F.
+  outbound:
+    grade: B
+    mechanism: >-
+      GitHub and Jira connect through an app you install, and Zendesk and Salesforce through an
+      admin's authorization. Freshdesk, Kandji, JumpCloud and BambooHR take a pasted API key, and
+      Okta takes a private key.
+    evidence:
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/github.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "ClearFeed's App will be installed into the GitHub organization account and you will be redirected to the ClearFeed web app to finish the setup."
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/jira.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "ClearFeed is available on the Atlassian marketplace and can be installed directly from the app store"
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/freshdesk.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You will be asked to enter the Freshdesk sub-domain, as well as the API Key of your Freshdesk Account"
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/kandji.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Make sure that the API key being created has access to list users in the account."
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/jumpcloud.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Paste the API key copied from JumpCloud."
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/okta.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "should be entered on the Connection to Okta in ClearFeed."
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/okta.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Treat the PEM Private Key as a password."
+    notes: >-
+      ClearFeed reaches into no cloud account, only other SaaS. Installed apps count as keyless.
+      Graded B, not A, because several integrations still store a long-lived key. The Okta
+      connection mints short-lived tokens, but ClearFeed holds the private key that signs for them.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For added security, consider periodically deleting and regenerating your token."
+    notes: >-
+      The docs show no expiry setting or lifetime for either token type. A Personal Access Token is
+      revoked only when its Slack user is deactivated.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click Create bot user & token, then copy the token from the list."
+      - url: https://docs.clearfeed.ai/api/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Tokens are created and deleted in Developer Settings in the web app. The API reference has no
+      endpoint for tokens or bot users.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Account Access Tokens authenticate integrations as named bot users instead of individual people."
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use the least-privileged option that fits the integration."
+    notes: >-
+      A bot user is a documented non-human principal, and its token is set to read-only or read and
+      write. That is coarse, but it is not a person's full access. Bot users need the Professional
+      or Enterprise plan.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each bot user has its own token."
+    notes: >-
+      Developer Settings documents creating, importing and deleting tokens. It mentions no last-used
+      time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: ClearFeed does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  One of five hygiene checks passes, so inbound is F. A token expiry and a token management API
+  would lift it to D. Inbound moves to B or A only if the API accepts a federated token. Outbound
+  reaches A if the key-based integrations move to installed apps.

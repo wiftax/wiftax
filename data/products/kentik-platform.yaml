@@ -1,0 +1,128 @@
+id: kentik-platform
+vendor: Kentik
+product: Platform
+covers: The Kentik V6 and V5 APIs and the cloud exports for AWS, Azure, Google Cloud and Oracle Cloud.
+aliases:
+  - Kentik API
+  - Kentik Cloud
+website: https://www.kentik.com
+docs: https://kb.kentik.com/docs/apis-overview.md
+category: observability
+status: listed
+summary: >-
+  To call the Kentik API, your code sends a user's email and that user's single API token, which
+  never expires. Outbound, Kentik reaches AWS, Azure, Google Cloud and Oracle Cloud without
+  holding a key of yours.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A per-user API token sent in a request header with the user's email. Each user has one
+      token, and it stays valid until it is reset.
+    evidence:
+      - url: https://kb.kentik.com/docs/apis-overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All Kentik API requests require authentication using standard HTTP headers."
+      - url: https://kb.kentik.com/docs/apis-overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "`X-CH-Auth-API-Token`: Your unique API token."
+      - url: https://kb.kentik.com/docs/user-profile.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A field containing a Kentik-generated string that is used to authenticate the user in an HTTP header (X-CH-Auth-API-Token)."
+    notes: >-
+      The API overview documents only the email and token headers. No OAuth client, OIDC or cloud
+      workload login is documented for the API. The org-wide access control list can limit the
+      source IPs allowed to call the API.
+  outbound:
+    grade: A
+    mechanism: >-
+      On AWS, Kentik assumes a role you create that trusts its account with an external ID. On
+      Google Cloud you grant its service account, on Azure its enterprise application, and on
+      Oracle Cloud a cross-tenancy policy.
+    evidence:
+      - url: https://kb.kentik.com/docs/metadata-configuration-aws.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Replace the editor content with a trust policy that sets the Principal to Kentik’s AWS Account"
+      - url: https://kb.kentik.com/docs/metadata-configuration-aws.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the `sts:ExternalId` field, you must replace `<your_Company_ID>` with your specific Kentik company ID"
+      - url: https://kb.kentik.com/docs/kentik-for-gcp.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click **Add Member** and enter `kentik-vpc-flow@kentik-vpc-flow.iam.gserviceaccount.com` in the **New** **members** field."
+      - url: https://kb.kentik.com/docs/azure-prerequisites-roles.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When you select this option in Kentik, you'll grant permissions to a pre-existing enterprise application."
+      - url: https://kb.kentik.com/docs/kentik-for-oci.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a policy for Kentik’s tenant to access certain resources in your tenant."
+      - url: https://kb.kentik.com/docs/kentik-export-configuration-azure.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select a credential from the **Kentik Credential** dropdown or click **Create New Secret** to create a new secret"
+    notes: >-
+      Graded on the cloud exports for all four clouds, and each has a path with no secret handed
+      over. Azure also offers a custom app registration, which stores a client secret you create.
+      Oracle Cloud also offers a custom user, which uses a public key Kentik gives you. Both are
+      optional. Notification channels, mitigation platforms and device credentials were not
+      assessed.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://kb.kentik.com/docs/user-profile.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Resets your API token. A new token will be generated and written to the API Token field."
+    notes: >-
+      The docs show no expiry setting, default lifetime or policy for API tokens. A token works
+      until someone resets it.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://kb.kentik.com/docs/user-apis.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Resets API token for a user specified by ID."
+    notes: >-
+      Each user has exactly one token, so a reset both revokes the old token and issues a new one.
+      The User API exposes that reset.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://kb.kentik.com/docs/users.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A Kentik-generated string that is used to authenticate the user in an HTTP header (X-CH-Auth-API-Token)."
+    notes: >-
+      The token authenticates as its user and takes no scopes of its own. A user can be given a
+      narrow role, but the docs describe no API-only or non-human account type.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://kb.kentik.com/docs/users.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The date of the user's most recent login."
+    notes: The Users list shows each user's last portal login, not when the API token was last used.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Kentik does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  One of five hygiene checks passes, so inbound is F. An enforced token lifetime and a documented
+  service account type would lift it to D. Inbound moves to A or B only if the API accepts a
+  federated token.

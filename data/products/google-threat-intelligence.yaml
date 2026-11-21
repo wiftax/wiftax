@@ -1,0 +1,143 @@
+id: google-threat-intelligence
+vendor: Google
+product: Threat Intelligence
+covers: >-
+  The Google Threat Intelligence platform API at virustotal.com/api/v3, including its Attack
+  Surface Management integrations.
+aliases:
+  - GTI
+  - Google TI
+  - VirusTotal Enterprise
+  - Mandiant Threat Intelligence
+website: https://cloud.google.com/security/products/threat-intelligence
+docs: https://gtidocs.virustotal.com/docs/how-get-gti-api-keys
+category: security
+status: listed
+summary: >-
+  The Google Threat Intelligence API takes only a static API key, either a personal key or a
+  service account key. Keys have no expiry. Outbound, Attack Surface Management reaches AWS and
+  Google Cloud without keys, but GitHub takes a pasted token and AWS keys are still offered.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key sent in the x-apikey header. The key belongs to a user or to a service
+      account that a group administrator creates.
+    evidence:
+      - url: https://gtidocs.virustotal.com/docs/how-get-gti-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All Google Threat Intelligence users can access their API key by"
+      - url: https://gtidocs.virustotal.com/docs/how-get-gti-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "These are ideal because they are not tied to a specific individual and do not require email addresses or the completion of invitation forms."
+      - url: https://gtidocs.virustotal.com/reference/create-a-new-service-account.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"name": "x-apikey"'
+      - url: https://gtidocs.virustotal.com/reference/get-activity-log.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint is restricted to group administrators and retrieves the group's audit logs"
+    notes: >-
+      The key page, the admin guide and the API reference document no OAuth flow, OIDC login or
+      workload federation for this API. Service account keys are still static keys. The group audit
+      log is pulled with the same key.
+  outbound:
+    grade: B
+    mechanism: >-
+      Attack Surface Management assumes an AWS role with an external ID and impersonates a Google
+      Cloud service account. Its GitHub integration takes a pasted access token, and AWS access
+      keys remain an option.
+    evidence:
+      - url: https://gtidocs.virustotal.com/docs/asm-aws-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "ASM uses the cross-account access from the preceding section to automatically generate temporary, short-lived tokens whenever it needs to integrate with your AWS account."
+      - url: https://gtidocs.virustotal.com/docs/asm-aws-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Requiring an external ID is an AWS best practice when a third party (ASM, in this case) assumes the role."
+      - url: https://gtidocs.virustotal.com/docs/asm-aws-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the AWS Access Key ID and AWS Secret Access Key into the appropriate fields."
+      - url: https://gtidocs.virustotal.com/docs/asm-google-cloud-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The ASM Google Cloud integration leverages Google Cloud's service account impersonation."
+      - url: https://gtidocs.virustotal.com/docs/asm-github-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Our token-based GitHub integration works with both GitHub organizations and accounts."
+    notes: >-
+      Graded B because AWS and Google Cloud can be keyless while GitHub needs a personal access
+      token. The other inbound integrations, such as Azure, Cloudflare and Akamai, were not read in
+      full. Customers without the Attack Surface Management module have no outbound surface.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://gtidocs.virustotal.com/docs/rotate-api-key.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can rotate your Google Threat Intelligence API key at any time to maintain account security."
+    notes: >-
+      Rotation is manual and optional. The docs show no expiry setting, default lifetime or group
+      policy for user or service account keys.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://gtidocs.virustotal.com/docs/rotate-api-key.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "From there, you can click the Rotate your API Key button at the bottom of the"
+      - url: https://gtidocs.virustotal.com/docs/admins-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each of them has a bin icon at the right, that allows group administrators to delete the specific service account."
+    notes: >-
+      A service account can be created through the API. Rotating a key and removing a service
+      account are documented only in the web interface, so a key cannot be revoked without a
+      browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://gtidocs.virustotal.com/docs/admins-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This allows administrators to apply least-privilege access across automated integrations and AI agents"
+      - url: https://gtidocs.virustotal.com/docs/admins-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "service accounts feature full Role-Based Access Control (RBAC) and Daily API cap parity with human users"
+    notes: >-
+      Service accounts are a documented non-human account type with their own roles and daily cap.
+      Personal keys inherit the user's access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://gtidocs.virustotal.com/docs/unified-user-service-account-management.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Monitor API consumption patterns regularly under My group -> Quota Consumption to detect abnormal spikes or quota bottlenecks early."
+    notes: >-
+      The docs offer quota consumption per account. They do not show a last-used time for a key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Neither Google Threat Intelligence nor VirusTotal API keys appear in GitHub's supported
+      secret-scanning patterns.
+
+notes: >-
+  One of five hygiene checks passes, so inbound is F. An enforced key lifetime and key management
+  endpoints would lift it to D. Google Cloud also runs a separate Threat Intelligence service
+  under Google Cloud IAM. That service is a different API and is not graded here. Inbound moves to
+  A or B only if the platform API accepts a federated token.

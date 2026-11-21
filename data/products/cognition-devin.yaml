@@ -1,0 +1,138 @@
+id: cognition-devin
+vendor: Cognition
+product: Devin
+covers: "The Devin API and Devin's connections to clouds and source control."
+website: https://devin.ai
+docs: https://docs.devin.ai/api-reference/authentication
+category: devtools
+status: listed
+summary: >-
+  The Devin API takes a static bearer key from a service user or a person. Service user keys
+  expire in 30 days by default and carry a role. Outbound, Devin issues OIDC tokens that AWS and
+  Google Cloud trust and uses a GitHub App, but GitLab and Bitbucket can take pasted tokens.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static API key for a service user, or a personal access token, sent as a bearer token.
+    evidence:
+      - url: https://docs.devin.ai/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All API credentials use the `cog_` prefix format. Include your token in the `Authorization` header of every request:"
+      - url: https://docs.devin.ai/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service users are non-human accounts designed for API integrations."
+      - url: https://docs.devin.ai/api-reference/v3/audit-logs/enterprise-audit-logs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "with the `ViewAccountAuditLogs` permission at the enterprise level."
+    notes: >-
+      The API reference documents only these two key types, plus deprecated legacy keys. No OIDC,
+      CI trust or token exchange is documented for callers of the API. The OIDC and SAML setup
+      pages cover human sign-in. An enterprise setting can disable static service user keys, but
+      the docs name no federated replacement.
+  outbound:
+    grade: B
+    mechanism: >-
+      Devin signs short-lived OIDC tokens that AWS, Google Cloud and other services can trust, and
+      reaches GitHub through a GitHub App. GitLab and Bitbucket can take a pasted access token.
+    evidence:
+      - url: https://docs.devin.ai/product-guides/oidc.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each Devin session receives a short-lived identity token issued by Devin, which your cloud provider verifies and exchanges for temporary credentials."
+      - url: https://docs.devin.ai/product-guides/oidc.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "No static API keys or secrets need to be stored in Devin."
+      - url: https://docs.devin.ai/integrations/gh.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When Devin's GitHub App requests new permissions, GitHub emails your organization admins to approve them in the installation settings."
+      - url: https://docs.devin.ai/integrations/gitlab.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "with a personal access token that has the `api` scope instead of the OAuth flow below"
+      - url: https://docs.devin.ai/integrations/bitbucket.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "and the token, then click **Connect**."
+      - url: https://docs.devin.ai/product-guides/secrets.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You may then save Devin's username and password as Secrets on your account"
+    notes: >-
+      AWS and Google Cloud are keyless through the session OIDC token. GitHub is an installed app
+      and GitLab can use OAuth consent. Graded B, not A, because the GitLab service account path
+      and Bitbucket workspace tokens are pasted secrets. Other tools are reached with stored
+      passwords and keys. Azure is not in the list of OIDC setup actions.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://docs.devin.ai/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "it defaults to 30 days; the other options are 7 days, 90 days, and, where your account allows it, Never"
+      - url: https://docs.devin.ai/api-reference/personal-access-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "capped by the policy's maximum lifetime"
+    notes: >-
+      Service user keys default to 30 days, and a non-expiring key is offered only where the
+      account allows it. Enterprise policy forces an expiry on personal access tokens. Teams
+      accounts may still create personal access tokens that never expire.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.devin.ai/api-reference/v3/service-users/post-enterprise-service-user-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a new API key for a service user."
+      - url: https://docs.devin.ai/api-reference/v3/service-users/rotate-enterprise-service-user-api-key.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Creates a new key. By default revokes the old key"
+    notes: >-
+      The key endpoints are in beta and work only at the enterprise level. Other accounts replace
+      a key by deleting the service user in settings and making a new one.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.devin.ai/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Permissions are controlled via RBAC — assign only what the integration needs"
+    notes: >-
+      A service user is a machine principal with its own role. A personal access token carries the
+      full access of the person who made it.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.devin.ai/api-reference/v3/service-users/get-enterprise-service-user-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "last_used_at:"
+    notes: >-
+      The beta endpoint that lists a service user's keys returns a last-used time for each key.
+      The personal access token inventory lists no such field.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
+    notes: >-
+      Neither Cognition nor Devin appears in GitHub's supported secret-scanning patterns, so a
+      leaked key is not reported to the vendor.
+
+notes: >-
+  Four of five hygiene checks pass, so inbound is D. Two of those passes lean on beta endpoints
+  that only enterprise accounts can call. Inbound moves to A or B only if the API accepts a
+  federated workload token. Outbound reaches A if source control and other tools stop taking
+  pasted secrets.

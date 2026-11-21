@@ -1,0 +1,141 @@
+id: anecdotes
+vendor: Anecdotes
+product: Platform
+covers: The Anecdotes API and the evidence-collection plugins.
+aliases:
+  - anecdotes.ai
+website: https://www.anecdotes.ai
+docs: https://help.anecdotes.ai/api/getting-started
+category: security
+status: listed
+summary: >-
+  To call Anecdotes, your code swaps a long-lived API key for a one-hour JWT. Keys can live forever
+  unless you set an expiry. Outbound, Anecdotes assumes an AWS role with an external ID, but wants a
+  service account JSON key for Google Cloud and a client secret for Azure.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A long-lived API key, created in the console or through the API, is exchanged for a JWT that
+      lasts one hour.
+    evidence:
+      - url: https://help.anecdotes.ai/api/identity/token-exchange.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Exchange an API key created in the Anecdotes platform for a short-lived JWT (valid for 1 hour)."
+      - url: https://help.anecdotes.ai/api/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Long-lived API keys are created from within the Anecdotes platform's Administration page."
+      - url: https://help.anecdotes.ai/api/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Anecdotes Service APIs require short-lived JSON Web Tokens (JWTs) that are generated from the API Key."
+    notes: >-
+      The exchange endpoint takes only an Anecdotes API key. The API docs describe no OIDC, cloud
+      identity or CI token it would accept instead. The JWT is short-lived, but the key behind it is
+      a static root, so this is C.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS plugins assume an IAM role with an external ID. Google Cloud plugins take a service account
+      JSON key, Azure plugins take a client secret, and GitHub connects by OAuth app or a pasted
+      token.
+    evidence:
+      - url: https://help.anecdotes.ai/plugins/cloud-infrastructure/aws.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use a least-privilege IAM role that includes only required collection permissions."
+      - url: https://help.anecdotes.ai/plugins/cloud-infrastructure/aws.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Add every selected plugin's external ID to the role's trust policy."
+      - url: https://help.anecdotes.ai/plugins/cloud-infrastructure/aws/aws-use-a-single-iam-role-for-multiple-plugins.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Copy the Role ARN and paste it into the ARN field in each AWS plugin in anecdotes and connect them."
+      - url: https://help.anecdotes.ai/plugins/cloud-infrastructure/gcp.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Upload its JSON key when connecting each plugin in Anecdotes."
+      - url: https://help.anecdotes.ai/plugins/cloud-infrastructure/gcp.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Store it only in approved secret-management systems and rotate it under your key-management policy."
+      - url: https://help.anecdotes.ai/plugins/cloud-infrastructure/azure/connecting-multiple-azure-plugins-using-a-single-custom-role.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create an App Registration for Anecdotes along with a Client Secret"
+      - url: https://help.anecdotes.ai/plugins/developer-tools/github-plugin.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Anecdotes uses an OAuth app and a fine-grained personal access token (PAT) to integrate with GitHub."
+    notes: >-
+      AWS is keyless. Google Cloud and Azure both need a long-lived secret uploaded to Anecdotes,
+      with least-privilege guidance. Keyless on one cloud and keys on the others is B. Only the
+      three clouds and GitHub were read. The other SaaS plugins were not checked one by one.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://help.anecdotes.ai/api/identity/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Omit for a key that never expires."
+      - url: https://help.anecdotes.ai/technical-setup/api/create-an-api-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "then assign a Name, expiration date, and Role."
+    notes: >-
+      A key can be given an expiration date, but the API lets you omit it for a key that never
+      expires. No tenant policy to force an expiry is documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://help.anecdotes.ai/api/identity/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Creates a general-purpose API key."
+      - url: https://help.anecdotes.ai/api/identity/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Deletes a general-purpose API key."
+    notes: >-
+      The Identity API creates, lists and deletes API keys, so rotation can run without a browser.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://help.anecdotes.ai/api/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "assign a predefined role that determines what the key can access and which actions can be performed"
+      - url: https://help.anecdotes.ai/technical-setup/api/create-an-api-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Be aware that API requests depend on the permissions of your API Token."
+    notes: >-
+      Each key carries its own built-in role, such as Admin, Integrator or Auditor. It does not
+      inherit its creator's access. Custom roles are rejected for keys.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://help.anecdotes.ai/api/identity/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"last_used_date":{"type":"string","format":"date-time","nullable":true}'
+    notes: >-
+      The List API keys response carries a last-used date for each key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Anecdotes does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  The headline is C on inbound. Inbound moves to B or A only if the exchange endpoint accepts a
+  workload's OIDC token in place of the API key. Outbound reaches A if the Google Cloud and Azure
+  plugins move to federation or impersonation.

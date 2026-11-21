@@ -1,0 +1,139 @@
+id: everbridge-suite
+vendor: Everbridge
+product: Everbridge Suite
+covers: "The Everbridge Suite REST API, including the audit log endpoint, and the Digital Apps API push setup."
+aliases:
+  - Everbridge
+  - EB Suite
+website: https://www.everbridge.com
+docs: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types
+category: comms
+status: listed
+confidence:
+  level: low
+  reason: >-
+    Everbridge's support center, which holds most integration setup guides, is behind a login. The
+    outbound grade rests on the one public page that shows Everbridge holding customer credentials.
+summary: >-
+  To call the Everbridge Suite API, a service account swaps a client ID and secret for an
+  eight-hour token. Basic auth with an API user's password also still works. Outbound, the only
+  public setup page has you hand over Apple and Firebase push credentials with no scoping guidance.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A service account's client ID and client secret are posted to the token endpoint for a bearer
+      token that lasts eight hours.
+    evidence:
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To call Everbridge REST endpoints using OAuth 2.0 authentication, the client first needs to call the"
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Client ID and Client Secret is obtained from the Manager Portal Self-Service Workflow for"
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Note: The token is valid for 28800 seconds (8 hours)."
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access tokens are used for programmatic machine-to-machine communication when the user token is not required."
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Everbridge Suite REST API uses Basic Authentication over HTTPS."
+      - url: https://developers.everbridge.net/home/reference/ebs-v1-audit-log-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Retrieve the audit log data over a period of time."
+    notes: >-
+      Graded C because the token is short-lived but the client secret is a static root. The password
+      grant adds an API user's password to the same exchange. Basic auth with that password on every
+      call is still accepted, and a legacy access token exists. No OIDC, CI or cloud workload login
+      is documented.
+  outbound:
+    grade: F
+    mechanism: >-
+      For the Digital Apps API, the customer supplies Apple push and Firebase messaging credentials
+      to Everbridge. The docs recommend the Apple key that does not expire.
+    evidence:
+      - url: https://developers.everbridge.net/home/docs/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Here the APNs and FCM parameters should be supplied to correctly configure the application."
+      - url: https://developers.everbridge.net/home/docs/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "APNs supports both the Authentication Key and Certificate approach, though we recommend using the Authentication Key if possible since it will avoid any issues with expiry dates."
+    notes: >-
+      Low confidence. This is the only public page found where Everbridge holds a customer
+      credential, and it applies only to customers who build their own mobile app. It gives no
+      least-privilege or rotation guidance, which is an F. Setup guides for other integrations sit
+      in the support center behind a login and could move this grade either way.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API user's password will not expire so long as the API user is not accessing the UI to trigger the accounts password policy."
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "View & Retrieve you Client Secret."
+    notes: >-
+      The docs give the client secret no expiry and say the API user's password does not expire. The
+      secret can also be viewed again after creation.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Regenerate you Client Secret in the event of a security concern."
+    notes: >-
+      Service accounts are created and their secrets regenerated in the Manager Portal. No API
+      endpoint for either is documented.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access token authentication follows a zero trust security policy where access can be scoped explicitly to the methods used in the integration."
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select the permissions you wish to enable for that resource."
+    notes: >-
+      Client credentials service accounts get their own resource and action permissions. The docs
+      warn that not every REST method supports those permissions yet.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.everbridge.net/home/docs/ebs-gs-guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Retrieve your Client ID."
+    notes: >-
+      The service account screens are described with an ID, a secret and a regenerate action. No
+      last-used time is mentioned. The Manager Portal itself is behind a login.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Everbridge does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers the Everbridge Suite REST API on the public developer portal. Other Everbridge products
+  were not graded. Inbound moves to A or B only with documented workload federation. The headline is
+  F only because of the outbound surface, which is graded on thin public evidence. Public
+  integration docs showing keyless access would lift it.

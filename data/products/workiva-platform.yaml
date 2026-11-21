@@ -1,0 +1,137 @@
+id: workiva-platform
+vendor: Workiva
+product: Platform
+covers: "The Workiva platform REST API and Chains connectors."
+aliases:
+  - Workiva API
+  - Wdesk
+  - Chain Builder
+website: https://www.workiva.com
+docs: https://developers.workiva.com/2026-01-01/authentication.md
+category: saas
+status: listed
+summary: >-
+  To call the Workiva API, your code swaps a client ID and secret for a bearer token that lasts ten
+  minutes. No federation is documented. Outbound, Chains connectors store pasted keys, such as an
+  AWS access key or a Google OAuth client secret.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth 2.0 client credentials grant. A client ID and secret tied to an integration user are
+      exchanged for a bearer token that expires after ten minutes.
+    evidence:
+      - url: https://developers.workiva.com/2026-01-01/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To authenticate requests, the Workiva API uses an"
+      - url: https://developers.workiva.com/2026-01-01/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Workiva bearer tokens expire after 10 minutes."
+      - url: https://developers.workiva.com/2026-01-01/tokenrequest.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The grant type for the Bearer token. Must be client_credentials."
+      - url: https://developers.workiva.com/2026-01-01/iam.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use the IAM REST API endpoint to exchange your OAuth credentials (clientID and clientSecret) for a token."
+    notes: >-
+      Graded C because the token is short-lived but the client secret is a static root. The token
+      endpoint accepts only the client credentials grant. The API docs describe no OIDC, JWT bearer
+      or cloud workload login.
+  outbound:
+    grade: D
+    mechanism: >-
+      Chains connectors store credentials the customer pastes in. Amazon S3 takes an IAM user access
+      key. Google Drive and OneDrive take the client ID and secret of an OAuth app the customer
+      registers.
+    evidence:
+      - url: https://support.workiva.com/api/v2/help_center/en-us/articles/360045223172.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A designated integration user created in Amazon S3 for the connector"
+      - url: https://support.workiva.com/api/v2/help_center/en-us/articles/360045223172.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the secret of the integration user's access key."
+      - url: https://support.workiva.com/api/v2/help_center/en-us/articles/360045223172.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "select a policy that supports S3 access, such as AmazonS3FullAccess"
+      - url: https://support.workiva.com/api/v2/help_center/en-us/articles/360052106251.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If OAuth consent, the application's client ID and secret"
+      - url: https://support.workiva.com/api/v2/help_center/en-us/articles/360045543792.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Azure application's scopes, appropriate for the commands the connector will perform"
+    notes: >-
+      No connector we read offers a cross-account role or federation from the hosted runner. The
+      docs ask for a dedicated integration user or app, which is why this is D and not F. The S3
+      article suggests a full-access policy and none of the articles explain rotation, so D is
+      generous. A self-hosted runner on Google Cloud can use its own default service account.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.workiva.com/2026-01-01/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "set when the grant should expire, based on your organization's security policies and preferences."
+    notes: >-
+      A grant can be given an expiry date. The docs show no default lifetime and no organization
+      policy that forces one.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.workiva.com/2026-01-01/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If they lose the secret, they'll need to regenerate the secret again."
+      - url: https://developers.workiva.com/2026-01-01/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Retrieve a token"
+    notes: >-
+      Grants are created and their secrets regenerated in the web app. The API index lists one IAM
+      endpoint, which retrieves a token.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.workiva.com/2026-01-01/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A client can only access an endpoint if they have all of the endpoint's required scopes in their OAuth grant."
+      - url: https://developers.workiva.com/2026-01-01/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For each integration, create a new unique Workiva user."
+    notes: >-
+      Each grant carries its own OAuth scopes and can be limited by IP address. Workiva documents
+      dedicated integration users for API access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.workiva.com/2026-01-01/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can edit a specific grant's details or delete the grant by clicking the respective action in the"
+    notes: The grant management docs do not mention a last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Workiva does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Covers the platform API on the 2026-01-01 version, plus Chains connectors. The Chains and Wdata
+  APIs use the same client credentials grant. Workiva's help center pages sit behind a bot check, so
+  outbound receipts cite the same articles through the help center's public JSON endpoint. Inbound
+  moves to A or B only if the token endpoint accepts a federated token.

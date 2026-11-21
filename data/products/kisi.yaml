@@ -1,0 +1,135 @@
+id: kisi
+vendor: Kisi
+product: Access Control
+covers: "The Kisi REST API, webhooks and marketplace integrations."
+website: https://www.getkisi.com
+docs: https://docs.kisi.io/platform/integrate_kisi/getting_started/generate_api_keys
+category: security
+status: listed
+summary: >-
+  The Kisi API takes a static API key tied to the admin who created it. A key in use never
+  expires and carries that admin's full rights. Outbound, Google Workspace, Entra and Slack
+  connect by consent, but Meraki, JumpCloud and Splunk take pasted keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key, which Kisi calls a login secret, sent in the Authorization header. It is
+      created in the dashboard or through the logins endpoint.
+    evidence:
+      - url: https://docs.kisi.io/platform/integrate_kisi/getting_started/generate_api_keys
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys authenticate your requests to the Kisi API."
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authorize using a login. Prefix the value with `KISI-LOGIN`"
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Logins of type `api` represent logins used by third party applications and integrations."
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Username is the client id. Password is the client secret."
+    notes: >-
+      The OpenAPI file also lists OAuth bearer tokens and a client credentials flow. No public
+      page explains how to register an OAuth client, so they are not graded. No OIDC or workload
+      federation is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Google Workspace, Entra ID and Slack connect through an admin consent screen. Cisco Meraki,
+      JumpCloud and Splunk take a pasted API key or token.
+    evidence:
+      - url: https://docs.kisi.io/marketplace/directories/google_workspace_directory
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Sign in with a Google Workspace administrator account and grant all requested permissions."
+      - url: https://docs.kisi.io/marketplace/directories/microsoft_entra_id
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click Accept to allow the integration read access"
+      - url: https://docs.kisi.io/marketplace/video_security/cisco_meraki
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API key inherits the permissions of the Meraki account that created it."
+      - url: https://docs.kisi.io/marketplace/directories/jumpcloud
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the API Key you obtained before"
+      - url: https://docs.kisi.io/marketplace/data_analytics/splunk
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "enter the token value you obtained before"
+    notes: >-
+      Kisi reaches into no cloud account. Consent apps count as keyless. Graded B because several
+      integrations still store a static key, and the Meraki key needs write access for tailgating
+      detection.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.kisi.io/platform/integrate_kisi/getting_started/generate_api_keys
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By default, API keys expire after 6 months of inactivity"
+      - url: https://docs.kisi.io/platform/apis/get_started/setup_kisi_account
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In that case, they don't expire at all."
+    notes: >-
+      Only idle keys expire. A key in use has no end date, and any creator can switch expiry off
+      through the API. No organization policy to force an expiry is documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Users can have up to 10 API logins. When the limit is exceeded, creation will fail."
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "summary: Delete login"
+    notes: >-
+      The logins endpoint creates an API key and deletes it, so rotation can be scripted.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.kisi.io/platform/integrate_kisi/getting_started/generate_api_keys
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An admin API key has full control over an organization's access, it can unlock doors, add and remove users, and modify permissions."
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "We do not allow creating API logins on behalf of other users."
+    notes: >-
+      A key inherits the rights of the admin who created it. The docs describe no per-key scopes
+      and no API-only account type.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://api.kisi.io/openapi/apps.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "description: When the login was last used."
+    notes: >-
+      The logins endpoint returns a last-used time for every key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Kisi does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. A lifetime limit that an organization can
+  enforce would lift it to D. Inbound moves to A or B only if the API accepts a federated token.
+  Webhooks are signed with a shared secret. Kiosk and reader credentials are device logins and
+  are not graded here.

@@ -1,0 +1,126 @@
+id: outreach
+vendor: Outreach
+product: Outreach
+covers: "The Outreach REST API and MCP server, plus CRM and mailbox connections."
+website: https://www.outreach.io
+docs: https://developers.outreach.io/api/oauth
+category: saas
+status: listed
+summary: >-
+  A server calls the Outreach API with a one-hour token, minted from an RSA private key you
+  hold or from an OAuth client secret and refresh token. Outbound, Salesforce and Microsoft 365
+  connect by OAuth consent, but Exchange service accounts and SMTP still store passwords.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An app signs a JWT with its RSA private key and swaps it for a one-hour server token.
+      OAuth apps use a client secret and refresh token for two-hour access tokens.
+    evidence:
+      - url: https://developers.outreach.io/api/s2s-access.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The app token authenticates your app to Outreach and you generate it using your private key and the `S2S_GUID` in this way:"
+      - url: https://developers.outreach.io/api/s2s-access.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The S2S token remains valid for one hour. There is no token refresh method like OAuth token have, you simply request a new S2S token."
+      - url: https://developers.outreach.io/api/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access token is valid for limited period only but you can refresh it using the refresh token returned in the same response."
+      - url: https://developers.outreach.io/mcp-server/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The user signs in through Outreach SSO and consents to the requested scopes."
+    notes: >-
+      Graded C because every token is short-lived but starts from a private key or client secret
+      the customer stores. The server flow reaches a limited set of endpoints. The MCP server
+      uses OAuth with a human sign-in. No OIDC or workload federation is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Salesforce and Microsoft 365 mailboxes connect through OAuth consent. Exchange service
+      accounts and SMTP sending store a username and password.
+    evidence:
+      - url: https://support.outreach.io/support/solutions/articles/159000426014-outreach-crm-connection-overview
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Outreach utilizes an OAuth connection to sync data between both platforms."
+      - url: https://support.outreach.io/support/solutions/articles/159000425773-how-to-connect-office-365-mailbox-to-outreach-using-microsoft-graph
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Microsoft provides the ability for organizations to grant tenant-wide admin consent to an application like Outreach."
+      - url: https://support.outreach.io/support/solutions/articles/159000425735-how-to-connect-exchange-master-service-account-msa-to-outreach
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "adding an Exchange Master Service account to Outreach for Exchange Impersonation"
+      - url: https://support.outreach.io/support/solutions/articles/159000425548-how-to-connect-a-primary-email-to-outreach
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "fill in the SMTP-specific password"
+    notes: >-
+      Outreach reaches into no cloud account. Consent apps count as keyless. Graded B because
+      on-premises Exchange and SMTP mailboxes need stored passwords.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.outreach.io/api/s2s-access.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Then add one or more public keys in PEM-encoded format."
+      - url: https://developers.outreach.io/api/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Please be aware that OAuth client secrets will be displayed only once, when generated."
+    notes: >-
+      No expiry is documented for the registered public key or the OAuth client secret. Both
+      work until someone replaces them.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.outreach.io/api/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: 'Use the "Regenerate" button to create new secrets if necessary.'
+    notes: >-
+      Keys and client secrets are managed only in the Developer portal. No API for rotating them
+      is documented.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.outreach.io/api/s2s-access.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "It contains identity of your application and is issued for a particular organization"
+      - url: https://developers.outreach.io/api/s2s-access.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "S2S API scopes are a subset of OAuth API scopes."
+    notes: >-
+      The server token belongs to the app, not a user, and carries only the scopes chosen for
+      that app.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.outreach.io/guides/managing-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use Development Portal to create a new app."
+    notes: >-
+      The developer docs describe no last-used time for an app's keys or client secrets.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Outreach does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Inbound stays at C until Outreach accepts a workload's own OIDC token in place of the private
+  key or client secret. Hygiene covers those two long-lived roots. Outbound reaches A if mailbox
+  connections stop storing passwords.

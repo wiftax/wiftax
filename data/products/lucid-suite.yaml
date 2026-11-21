@@ -1,0 +1,151 @@
+id: lucid-suite
+vendor: Lucid
+product: Visual Collaboration Suite
+parent: Lucid Software
+covers: "The Lucid REST API for Lucidchart, Lucidspark and Lucidscale, and cloud imports in the Lucid Data Hub."
+aliases:
+  - Lucidchart
+  - Lucidspark
+  - Lucidscale
+website: https://lucid.co
+docs: https://developer.lucid.co/reference/authentication-methods
+category: saas
+status: listed
+summary: >-
+  Lucid's API takes a long-lived API key or a one-hour OAuth token renewed with a client secret and
+  refresh token. API keys can be set to never expire. Outbound, AWS imports use a cross-account
+  role, but Google Cloud wants a service account key and Azure a client secret.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth 2.0 client ID and secret, plus a refresh token from a one-time consent, are exchanged
+      for an access token that lasts one hour. Long-lived API keys are the alternative.
+    evidence:
+      - url: https://developer.lucid.co/reference/authentication-methods.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To use the API in an application, you should always use an OAuth 2.0 client."
+      - url: https://developer.lucid.co/reference/authentication-methods.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys are long-lived tokens that enable actions to be performed on behalf of the user who created the key."
+      - url: https://developer.lucid.co/reference/refreshing-the-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All access tokens have a brief usable lifetime (currently one hour), after which they expire."
+      - url: https://developer.lucid.co/reference/refreshing-the-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "As refreshing a token does not require the user to open a browser, this indefinite access can be maintained completely programmatically (i.e. without further user intervention)."
+      - url: https://developer.lucid.co/reference/client-creation.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Obtain an OAuth 2.0 client ID and client secret from the OAuth 2.0 client page within the app."
+      - url: https://developer.lucid.co/docs/admin-controls.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For Lucid’s SCIM API, admins permit or restrict use or development by managing access to their account’s SCIM bearer token."
+    notes: >-
+      Graded C because access tokens are short-lived but the client secret and rolling refresh token
+      are static roots. The authentication page lists three methods, API keys and two kinds of
+      OAuth token. Only the authorization code flow is supported, so a person must consent once. No
+      OIDC, CI or cloud workload login is documented. SCIM uses a separate bearer token.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud imports assume a cross-account IAM role with an external ID on AWS. Google Cloud imports
+      take an uploaded service account JSON key, and Azure imports take a pasted client secret.
+    evidence:
+      - url: https://help.lucid.co/hc/en-us/articles/15682358446868
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Trusted access uses cross-account IAM roles so the Cloud Accelerator can assume read-only access to import account metadata and create data sources."
+      - url: https://help.lucid.co/hc/en-us/articles/15682358446868
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Lucid will auto-generate a unique External ID associated with your Lucid account."
+      - url: https://help.lucid.co/hc/en-us/articles/15682358446868
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Upload an IAM user key or credentials file to Lucid."
+      - url: https://help.lucid.co/hc/en-us/articles/16252835135508
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Step 3: Generate a JSON key and add the Service Account to Lucid"
+      - url: https://help.lucid.co/hc/en-us/articles/16080061445908
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Once your client secret expires, Lucid can't import or refresh your Azure data."
+    notes: >-
+      Graded B because AWS is keyless while Google Cloud and Azure need a stored key or secret. All
+      three guides recommend a read-only role and offer a custom role with minimum permissions. AWS
+      also offers a single-use import with an IAM user key, which Lucid says it does not store.
+      Connections to other SaaS tools were not reviewed.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.lucid.co/docs/admin-controls.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API Keys can be created with a predefined expiration or no expiration at all."
+      - url: https://developer.lucid.co/docs/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Set an expiration. Keys can be made to expire whenever you'd like, or to never expire."
+    notes: >-
+      An expiry is optional and the creator can choose none. Admins can only switch API keys off for
+      the whole account, not force a lifetime.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developer.lucid.co/docs/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "section of the developer portal."
+      - url: https://developer.lucid.co/reference/client-creation.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create an OAuth 2.0 client from within the settings of that app."
+    notes: >-
+      API keys and OAuth clients are created in the developer portal. The API reference has no
+      endpoint to create or delete a key or client secret. Its token endpoints cover OAuth tokens
+      only.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.lucid.co/reference/api-key-grants.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API Key grants are used to limit the permissions of an issued API Key."
+      - url: https://developer.lucid.co/reference/keeping-your-api-credentials-secure.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When creating an API key or OAuth 2.0 access token, only select the minimum grants or scopes needed"
+    notes: >-
+      Each API key carries its own list of grants, from read-only up to admin. OAuth tokens are
+      limited by scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.lucid.co/docs/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Once you exit this screen you will not be able to view this key again."
+    notes: >-
+      The API key guide describes a name, an expiry and grants. It mentions no last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Lucid does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers the Lucid REST API shared by Lucidchart, Lucidspark and Lucidscale, and the cloud imports
+  in the Lucid Data Hub. Inbound moves to A or B only if the token endpoint accepts a federated
+  workload token. Outbound reaches A if Google Cloud and Azure imports move to federation.

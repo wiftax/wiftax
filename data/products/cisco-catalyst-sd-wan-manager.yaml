@@ -1,0 +1,140 @@
+id: cisco-catalyst-sd-wan-manager
+vendor: Cisco
+product: Catalyst SD-WAN Manager
+covers: "The Manager REST API and its Cloud OnRamp cloud accounts."
+aliases:
+  - vManage
+  - Cisco SD-WAN
+website: https://www.cisco.com
+docs: https://developer.cisco.com/docs/sdwan/authentication/
+category: other
+status: listed
+summary: >-
+  The Manager's REST API logs in with a user's name and password, which buys a session or a
+  30-minute JWT. No federation is documented. Outbound, Cloud OnRamp can assume an AWS role with
+  an external ID, but Azure takes a client secret and Google Cloud takes a service account key.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A Manager user's name and password are posted to a login endpoint for a session cookie or a
+      30-minute JWT.
+    evidence:
+      - url: https://developer.cisco.com/docs/sdwan/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Cisco Catalyst SD-WAN Manager supports JSON web token (JWT) authentication for REST API access control."
+      - url: https://developer.cisco.com/docs/sdwan/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Log in with a username and password to receive a JWT token"
+      - url: https://developer.cisco.com/docs/sdwan/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The default expiration duration for the access token is 1,800 seconds (30 minutes)."
+      - url: https://developer.cisco.com/docs/sdwan/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Cisco Catalyst SD-WAN Manager still supports the traditional REST API access control that is based on sessions (JSESSIONIDs)."
+      - url: https://developer.cisco.com/docs/sdwan/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To calculate the refresh token expiration, multiply 86,400 by 1,800, resulting in 155,520,000 seconds or 1,800 days."
+    notes: >-
+      Graded C because every API login starts from a stored user password and yields a short-lived
+      session or token. The JWT path also returns a refresh token that lasts 1,800 days by
+      default, so a caller should ask for a short duration. JWT login needs release 20.18.1 or
+      later. No OIDC, cloud workload identity or token exchange is documented for API callers.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud OnRamp cloud accounts take an AWS role with an external ID or an AWS access key. Azure
+      takes a client secret and Google Cloud takes a service account private key.
+    evidence:
+      - url: https://developer.cisco.com/docs/sdwan/validate-account-add/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"awsIamCredentials":{"required":["externalId","roleArn"]'
+      - url: https://developer.cisco.com/docs/sdwan/get-multicloud-external-id/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Get AWS IAM external ID for multicloud account onboarding"
+      - url: https://developer.cisco.com/docs/sdwan/validate-account-add/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"awsKeyCredentials":{"required":["apiKey","secretKey"]'
+      - url: https://developer.cisco.com/docs/sdwan/validate-account-add/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"azureCredentials":{"required":["clientId","cloudTenantId","secretKey"]'
+      - url: https://developer.cisco.com/docs/sdwan/validate-account-add/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"private_key":{"type":"string"}'
+    notes: >-
+      AWS can be keyless through a role and external ID. Graded B, not A, because the same API
+      still accepts an AWS access key, and Azure and Google Cloud accounts need a stored secret.
+      The grade rests on the API schema. Cisco's setup guides refuse plain HTTP fetches, so their
+      least-privilege guidance could not be cited.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.cisco.com/docs/sdwan/retrieve-password-policy-from-global-settings/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"passwordPolicy":"disabled","passwordExpirationTime":90'
+    notes: >-
+      The API reference shows a global password policy with an expiration time, switched off in
+      the example. The guide that explains the setting sits on a Cisco site that refuses plain
+      HTTP fetches. With no readable receipt that the policy forces an expiry, this fails.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developer.cisco.com/docs/sdwan/create-user-administration-user-group-1104/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"description":"Create a user"'
+      - url: https://developer.cisco.com/docs/sdwan/update-password-administration-user-group-3103/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"description":"Update user password"'
+    notes: Users can be created and their passwords changed through the REST API.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://developer.cisco.com/docs/sdwan/create-user-group/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"description":"Create user group"'
+    notes: >-
+      A user group can limit an account to read or write on chosen features. The API still logs in
+      as an ordinary user, and the API reference documents no non-human or API-only account type.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.cisco.com/docs/sdwan/find-users-administration-user-group-1103/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"description":"Get all users"'
+    notes: >-
+      The user listing documents no last-login or last-used field. The audit log records logins,
+      but that is not a per-credential last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
+    notes: >-
+      The credential is a username and password, which no scanner can match. Cisco has no SD-WAN
+      Manager pattern in GitHub's table.
+
+notes: >-
+  Receipts come from Cisco's developer site only. The configuration guides on Cisco's main site
+  refuse plain HTTP fetches, so they could not be cited. Those guides may describe API tokens for
+  Cisco-hosted tenants, which this card does not grade. Inbound moves to A or B only with
+  documented workload federation.

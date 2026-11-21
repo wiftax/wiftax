@@ -1,0 +1,158 @@
+id: zendesk
+vendor: Zendesk
+product: Suite
+covers: "The Zendesk REST API, including the Audit Logs API, plus webhooks, Integration Services connections and built-by-Zendesk integrations."
+aliases:
+  - Zendesk Support
+  - Zendesk API
+website: https://www.zendesk.com
+docs: https://developer.zendesk.com/api-reference/introduction/security-and-auth/
+category: saas
+status: listed
+summary: >-
+  A workload calls the Zendesk API with an OAuth access token minted from a confidential client's
+  secret. New clients get 30-minute tokens by default. Static API tokens are deprecated. Outbound,
+  the Slack integration installs by consent, but webhooks and Integration Services connections store
+  pasted keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A confidential OAuth client's secret is exchanged through the client credentials grant for an
+      access token. Clients created on or after April 30, 2026 get 30-minute tokens by default.
+    evidence:
+      - url: https://developer.zendesk.com/api-reference/introduction/security-and-auth/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Zendesk supports using OAuth access tokens to authenticate API requests."
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client credentials grant type is intended only for confidential clients. It lets you create an access token using only the client’s secret."
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Unlike other authorization flows, this grant type does not return a refresh token and does not require user authorization."
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For clients created on or after April 30, 2026, there is a default expires_in value of 30 minutes."
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Identity Assertion JWT authorization grant lets a confidential client exchange a valid identity assertion from an identity provider configured for single sign-on (SSO) for an access token."
+      - url: https://developer.zendesk.com/api-reference/introduction/security-and-auth/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API tokens are auto-generated passwords in the Zendesk Admin Center."
+      - url: https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By April 30, 2027, all API tokens will stop working."
+    notes: >-
+      Graded C because the access token is short-lived but the client secret is a static root.
+      Clients created before April 30, 2026 have no default token expiry. The identity assertion
+      grant trades a single sign-on assertion for a token that represents a person. It still needs
+      client authentication, and it is not documented for workloads, so it does not lift the grade.
+      No OIDC, CI or cloud workload login is documented. The Audit Logs endpoints need an Enterprise
+      plan and an admin.
+  outbound:
+    grade: B
+    mechanism: >-
+      The Slack integration is an app the customer installs by consent. Webhooks and Integration
+      Services connections store an API key, password or bearer token for the destination.
+    evidence:
+      - url: https://support.zendesk.com/hc/en-us/articles/4408833756698-Understanding-and-installing-the-Slack-for-Zendesk-Support-integration
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To install the integration, you must have administrative privileges in Zendesk Support and have permission to install apps in the Slack workspace."
+      - url: https://developer.zendesk.com/documentation/webhooks/webhook-security-and-authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Webhooks support three types of authentication: API key, basic, and bearer token."
+      - url: https://developer.zendesk.com/documentation/webhooks/webhook-security-and-authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Although not recommended, it's also possible to create a webhook without authentication."
+      - url: https://developer.zendesk.com/documentation/integration-services/developer-guide/understanding-connections/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A connection stores credentials for a service or system, such as Slack, Shopify, or Zendesk."
+      - url: https://developer.zendesk.com/documentation/integration-services/developer-guide/understanding-connections/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To create an OAuth connection, you must use the OAuth Connections endpoints to complete an OAuth 2.0 flow between your ZIS integration and the system."
+    notes: >-
+      Graded B on the rubric's rule that an app the customer installs or consents to counts as
+      keyless. Webhooks and Integration Services connections take static secrets, and no keyless
+      path into a cloud account is documented. Marketplace apps from other vendors are not graded.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_clients/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client secret. Generated automatically on creation and returned in full only at that time"
+      - url: https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Starting July 28, 2026, tokens unused for 30 days will be automatically deleted."
+    notes: >-
+      Access tokens expire, but the client secret behind them has no documented expiry or lifetime
+      policy. Deprecated API tokens are deleted only when idle for 30 days.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_clients/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "PUT /api/v2/oauth/clients/{oauth_client_id}/generate_secret"
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "DELETE /api/v2/oauth/tokens/{oauth_token_id}"
+    notes: >-
+      The OAuth Clients API creates and deletes clients and generates a new client secret. The OAuth
+      Tokens API creates and revokes access tokens.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_clients/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If a client requests a scope not included in its allowed scopes, the request fails with a 400 Bad Request response and an invalid_scope error."
+      - url: https://developer.zendesk.com/api-reference/introduction/security-and-auth/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "As passwords, API tokens can be used to impersonate anyone in the account, including admins."
+    notes: >-
+      An OAuth client can be limited to a list of allowed scopes, and its tokens carry scopes. With
+      no list set, no scope restriction applies. Deprecated API tokens cannot be scoped at all.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The latest time this token was used for authentication"
+    notes: >-
+      Each OAuth token records when it was last used. The docs show no last-used time for the client
+      secret itself.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Zendesk does not appear in GitHub's supported secret-scanning patterns, so a leaked token or
+      secret is not reported to Zendesk.
+
+notes: >-
+  Inbound is graded on the client credentials grant, the documented way to get a token without a
+  person. Inbound moves to A or B only if a workload can trade its own OIDC token for a Zendesk
+  token without a stored secret. Outbound reaches A if webhooks and connections move off pasted
+  secrets. The headline grade is C.

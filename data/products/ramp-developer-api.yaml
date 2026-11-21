@@ -1,0 +1,159 @@
+id: ramp-developer-api
+vendor: Ramp
+product: Developer API
+covers: >-
+  The Ramp Developer API for a business's own integrations, plus the connections Ramp makes into
+  accounting systems and cloud billing accounts.
+aliases:
+  - Ramp API
+  - Ramp Audit Log
+website: https://ramp.com
+docs: https://docs.ramp.com/llms-guides/authorization.txt
+category: saas
+status: listed
+summary: >-
+  To call Ramp's API, your code swaps a client ID and secret for a token that lasts 10 days. No
+  federation is documented. Outbound, Ramp reads AWS, Azure and Google Cloud billing without stored
+  keys, but NetSuite and Sage Intacct connections take pasted credentials.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth client ID and secret from a developer app are exchanged at the token endpoint for an
+      access token that lasts 10 days.
+    evidence:
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Ramp uses OAuth 2.0. Your app gets an access token from `/developer/v1/token`, authenticating with its client ID and secret (typically HTTP Basic Auth), and scopes control what the token can access."
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use this flow for server-to-server integrations with your own Ramp business."
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Client Credentials access tokens last 10 days (864,000 seconds)."
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Client Credentials doesn't return a refresh token. Request a new access token when the current one expires."
+      - url: https://docs.ramp.com/llms-guides/ai-usage.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Store the key as a customer-scoped secret and use it only for that customer's usage events."
+    notes: >-
+      Graded C because the access token expires but the client secret behind it is a static root.
+      Ten days is long for a short-lived token. The authorization guide lists three grant types and
+      none accepts a workload's own identity token. Ramp MCP and the Ramp CLI sign in as a person.
+      AI usage reporting takes a separate static API key.
+  outbound:
+    grade: B
+    mechanism: >-
+      Ramp assumes an AWS role with an External ID, uses a federated credential on Azure and stores
+      no Google Cloud credentials. NetSuite and Sage Intacct connections take pasted secrets.
+    evidence:
+      - url: https://support.ramp.com/connect-aws-bedrock-ai-token-spend
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This connection does not use an API key — instead, you create a read-only IAM role in your own AWS account that Ramp is allowed to assume, then submit that role's ARN to Ramp."
+      - url: https://support.ramp.com/connect-aws-bedrock-ai-token-spend
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When Ramp needs your cost data, it assumes this role to obtain short-lived AWS credentials."
+      - url: https://support.ramp.com/connect-azure-ai-token-spend
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You create a Microsoft Entra application with a federated credential and read-only billing access; you do not need to create or share a client secret or model API key."
+      - url: https://support.ramp.com/connect-google-cloud-ai-token-spend
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Ramp reads the exported billing table and does not store any Google Cloud credentials."
+      - url: https://support.ramp.com/netsuite-api-and-authentication-requirements
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Ramp's current NetSuite connection uses Token-Based Authentication"
+      - url: https://support.ramp.com/how-to-set-up-netsuite-with-ramp-standard-no-subsidiaries
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click Save - then copy the Client ID and Client Secret codes to input into Ramp"
+      - url: https://support.ramp.com/how-to-set-up-ramp-to-sync-with-sage-intacct
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the Sage Intacct Credentials from the email into Ramp and click Connect to Sage Intacct."
+      - url: https://support.ramp.com/quickbooks-online-overview
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Step 3: Enter your QuickBooks credentials and choose your company."
+    notes: >-
+      All three cloud billing connections are keyless. Graded B, not A, because NetSuite needs a
+      pasted client secret and Sage Intacct needs a Web Services user's credentials. The NetSuite
+      guide does define a custom role with listed permissions. QuickBooks Online connects through a
+      sign-in and consent screen. Other accounting connectors were not read.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.ramp.com/llms-guides/getting-started.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Copy your **Client ID** and **Client Secret**. Store them securely – you'll need them in the next step."
+    notes: >-
+      The docs give the client secret no expiry setting, default lifetime or policy. Only the tokens
+      minted from it expire.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Send the token to `POST /developer/v1/token/revoke`, with the same Basic Auth credentials you use to create tokens."
+      - url: https://docs.ramp.com/llms-guides/getting-started.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In your Ramp account, go to **Company → Developer** (you'll need admin access)."
+    notes: >-
+      The API can revoke an access token, but it cannot create or replace a client secret. Apps and
+      their secrets are made in the dashboard.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A token can't be used beyond its granted scopes."
+      - url: https://docs.ramp.com/llms-guides/getting-started.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Under **Scopes**, click **Configure allowed scopes** and select `transactions:read`."
+    notes: >-
+      Each developer app is its own machine principal with an allowed list of scopes, such as read
+      access to transactions only.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.ramp.com/llms-guides/authorization.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Never log tokens or include them in error messages, store them encrypted, and send them only over HTTPS."
+    notes: >-
+      The token management section covers format, lifetime, scopes and environment. It does not
+      mention a last-used time for an app or its secret.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Ramp OAuth Client Secret"
+    notes: >-
+      GitHub lists Ramp client secrets and OAuth tokens as partner patterns, so leaks in public
+      repos are reported to Ramp.
+
+notes: >-
+  Two of five hygiene checks pass. The developer docs render only with JavaScript, so receipts cite
+  the plain-text guide files Ramp publishes for the same pages. Inbound moves to A or B only if the
+  token endpoint accepts a federated workload token. Outbound reaches A when the accounting
+  connectors stop taking pasted secrets.

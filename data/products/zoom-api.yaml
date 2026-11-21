@@ -1,0 +1,133 @@
+id: zoom-api
+vendor: Zoom
+product: Zoom API
+covers: "The Zoom REST API with Server-to-Server OAuth apps, and Video SDK bring-your-own storage."
+aliases:
+  - Zoom Workplace
+  - Zoom Meetings
+  - Server-to-Server OAuth
+website: https://www.zoom.com
+docs: https://developers.zoom.us/docs/internal-apps/s2s-oauth/
+category: comms
+status: listed
+summary: >-
+  To call the Zoom API without a user, your code swaps a client ID and secret for a one-hour token.
+  No workload federation is documented. Outbound, Video SDK storage can use a cross-account AWS role
+  or a pasted access key.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A Server-to-Server OAuth app. Its account ID, client ID and client secret are exchanged for an
+      access token that lasts one hour.
+    evidence:
+      - url: https://developers.zoom.us/docs/internal-apps/s2s-oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use server-to-server OAuth account credentials to authenticate with Zoom when"
+      - url: https://developers.zoom.us/docs/internal-apps/s2s-oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Encode the client ID and client secret in base64 format"
+      - url: https://developers.zoom.us/docs/internal-apps/s2s-oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The token's time to live is one hour (3600 seconds)."
+      - url: https://developers.zoom.us/docs/integrations/byok.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "With BYOK, use a JWT bearer token as the client assertion instead of a client secret."
+      - url: https://developers.zoom.us/docs/integrations/crossapp-access.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "We currently do not support self-service configuration."
+    notes: >-
+      Graded C because the token is short-lived but the client secret is a static root. General apps
+      can sign a client assertion with their own private key, which is still a static root. Cross
+      app access exchanges a user's identity token from an enterprise login, so it is not workload
+      federation. Part of it also needs Zoom support to enable.
+  outbound:
+    grade: B
+    mechanism: >-
+      Video SDK bring-your-own storage writes recordings to a customer S3 bucket. It can assume a
+      cross-account IAM role with an external ID, or use a pasted AWS access key.
+    evidence:
+      - url: https://developers.zoom.us/docs/build/storage-get-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Choose an authentication mechanism: **AWS Access Key** or **Cross Account Access**."
+      - url: https://developers.zoom.us/docs/build/storage-get-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Add the **Zoom ARN** to establish a trust relationship between your AWS account and Zoom's AWS ARN."
+      - url: https://developers.zoom.us/docs/build/storage-get-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Zoom encrypts these values."
+    notes: >-
+      Graded B because the role path is keyless but a static access key is still offered. Amazon S3
+      is the only storage target. Calendar and other Zoom Workplace integrations are documented on
+      a support site that needs JavaScript, so they are not graded here.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.zoom.us/docs/build-flow/basic-info/app-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your current secret will continue to work for 30 days after a new secret is generated."
+    notes: >-
+      A client secret has no lifetime of its own. It expires only after someone generates a
+      replacement.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developers.zoom.us/docs/api/marketplace.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create or update a marketplace application's client secret rotating schedule."
+      - url: https://developers.zoom.us/docs/api/marketplace.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Permanently delete an app on behalf of a user."
+    notes: >-
+      The Marketplace API can create and delete Server-to-Server OAuth apps and rotate a client
+      secret.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.zoom.us/docs/internal-apps/create.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Scopes define the API methods your app can call and determine the information and features available in Zoom."
+      - url: https://developers.zoom.us/docs/internal-apps/s2s-oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a unique server-to-server OAuth app for each service to best monitor permissions, usage, and logs."
+    notes: >-
+      Each app is its own registration with its own scopes. The scopes an owner can add are capped
+      by that owner's role.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developers.zoom.us/docs/api/marketplace.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The time of the last API request made within the last 30 days."
+    notes: >-
+      The list apps endpoint returns a last-used time per app. Each Server-to-Server OAuth app has
+      one client secret.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Zoom does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Covers the Zoom REST API as documented on the developer site. Webhooks to a customer endpoint are
+  verified with a static secret token and are not graded. Inbound moves to A or B only if the token
+  endpoint accepts a workload's federated token without a client secret or registered key.

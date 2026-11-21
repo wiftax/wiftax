@@ -1,0 +1,173 @@
+id: atlassian-cloud
+vendor: Atlassian
+product: Cloud
+covers: "Jira, Confluence and Jira Service Management Cloud, plus the organization admin API."
+aliases:
+  - Jira
+  - Confluence
+  - Jira Service Management
+  - JSM
+website: https://www.atlassian.com
+docs: https://support.atlassian.com/user-management/docs/understand-service-accounts/
+category: saas
+status: listed
+summary: >-
+  Scripts reach Jira and Confluence Cloud with a service account's client ID and secret, swapped
+  for a one-hour token. The organization admin API, which serves the audit log, still takes a
+  static key capped at one year. Outbound, Automation reaches AWS through a role but takes pasted
+  keys for tools like New Relic.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A service account's OAuth client ID and secret are exchanged for a one-hour access token.
+      API tokens and organization admin API keys are static and expire within a year.
+    evidence:
+      - url: https://support.atlassian.com/user-management/docs/create-oauth-2-0-credential-for-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The service account uses the OAuth 2.0 credentials which include a client ID and client secret to prove its identity."
+      - url: https://support.atlassian.com/user-management/docs/create-oauth-2-0-credential-for-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "grant_type=client_credentials"
+      - url: https://support.atlassian.com/user-management/docs/create-oauth-2-0-credential-for-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can use OAuth 2.0 credentials with Confluence Cloud, Jira Cloud and Jira Align REST APIs."
+      - url: https://developer.atlassian.com/cloud/admin/organization/rest/intro/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authentication is implemented via an API key. Use the API Key as a Bearer access token to authenticate the script and manage your organization."
+      - url: https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An API key can last no longer than a year."
+      - url: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You generate the token from your Atlassian account, then copy and paste it into a script."
+    notes: >-
+      Graded C on service account OAuth credentials, the best path for the Jira and Confluence
+      APIs. The client secret is still a static root. The organization admin API does not take
+      those credentials. It accepts only a static API key, so audit log collection sits at the
+      static-key level. No workload federation or token exchange is documented for any of these
+      APIs.
+  outbound:
+    grade: B
+    mechanism: >-
+      Automation assumes an AWS role with an external ID, and GitHub and Azure connect through an
+      installed app or sign-in consent. Other Automation connections take pasted API keys or
+      client secrets.
+    evidence:
+      - url: https://support.atlassian.com/cloud-automation/docs/configure-aws-iam-for-jira-automation/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Atlassian Automation uses IAM-based integrations for connecting to any non-SNS resource."
+      - url: https://support.atlassian.com/cloud-automation/docs/configure-aws-iam-for-jira-automation/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You should ensure you appropriately restrict the permissions the role has to the minimum set necessary to execute your flows."
+      - url: https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can connect GitHub to Jira using the GitHub for Atlassian app."
+      - url: https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-microsoft-azure/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "to give requested permissions for Atlassian Automation to access your Microsoft Azure information."
+      - url: https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-new-relic/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter a user API key of your New Relic account."
+      - url: https://support.atlassian.com/cloud-automation/docs/use-automation-with-workato/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you need to generate a Developer API token and a Platform API/auth token from Workato, then use them to create a Workato connection from Jira Automation."
+      - url: https://support.atlassian.com/cloud-automation/docs/use-automation-with-okta/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Make sure you have these three things before continuing to integrate Okta with Jira:"
+    notes: >-
+      AWS is keyless through a role that trusts Atlassian's account, with an external ID. GitHub
+      uses an installed app and Azure uses sign-in consent. Graded B, not A, because New Relic and
+      Workato connections store pasted keys, and Okta needs a client secret you manage. Marketplace
+      apps from other vendors are not graded here.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "After December 15, 2024, we set new API tokens to expire in one year by default."
+      - url: https://support.atlassian.com/user-management/docs/manage-api-tokens-for-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Token expiration can be between 1 and 365 days."
+      - url: https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keys can last no longer than a year."
+    notes: >-
+      API tokens and admin API keys are capped at one year, with no never option. The docs give no
+      expiry for a service account's OAuth client secret.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You generate the token from your Atlassian account, then copy and paste it into a script."
+      - url: https://support.atlassian.com/user-management/docs/manage-api-tokens-for-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You generate the token for your service account, then copy and paste it into a script."
+    notes: >-
+      Tokens, admin API keys and service account credentials are created in the web console. The
+      pages read describe no endpoint that creates one.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.atlassian.com/user-management/docs/manage-api-tokens-for-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API tokens for service accounts use scopes."
+      - url: https://support.atlassian.com/user-management/docs/understand-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A service account is an account that is not associated with a person."
+      - url: https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An API key without scopes can access all Atlassian Admin APIs"
+    notes: >-
+      Service accounts are machine principals with their own roles, and their tokens always carry
+      scopes. Personal API tokens and admin API keys can also be made without scopes, which gives
+      full access.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://support.atlassian.com/user-management/docs/understand-service-accounts/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can see how many active tokens exist, when they were created, when they expire, and the last time the token was used by the service account."
+    notes: The admin console shows a last-used time for each service account API token.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Atlassian API Token"
+    notes: >-
+      GitHub lists the Atlassian API token as a partner pattern, so a leaked token is reported to
+      Atlassian. The table does not say whether organization admin API keys match that pattern.
+
+notes: >-
+  One card for the Atlassian Cloud apps that share accounts, service accounts and the admin
+  console. Bitbucket Cloud and Marketplace apps are not graded here. Inbound moves to A or B only
+  with documented workload federation. Service accounts are free for the first five in an
+  organization.

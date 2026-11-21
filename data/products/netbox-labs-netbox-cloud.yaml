@@ -1,0 +1,147 @@
+id: netbox-labs-netbox-cloud
+vendor: NetBox Labs
+product: NetBox Cloud
+covers: "The NetBox REST API on a hosted NetBox Cloud instance, the NetBox Cloud API, data sources and webhooks."
+aliases:
+  - NetBox
+website: https://netboxlabs.com
+docs: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+category: devtools
+status: listed
+summary: >-
+  NetBox Cloud takes only static tokens. NetBox API tokens can be managed through the API, limited
+  to read-only and show when they were last used, but expiry is optional. Outbound, data sources
+  take git credentials or an AWS access key with no least-privilege guidance.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static NetBox API token tied to a user account, sent as a bearer token. The separate NetBox
+      Cloud API takes a static API key created in the Console.
+    evidence:
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The NetBox REST API primarily employs token-based authentication."
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A token is a secret, unique identifier mapped to a NetBox user account."
+      - url: https://netboxlabs.com/docs/cloud/cloud-api/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Include your API key in the Authorization header of every request using the Token scheme:"
+      - url: https://netboxlabs.com/docs/cloud/cloud-api/api-keys/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The key value is displayed only once when created."
+    notes: >-
+      Graded on the NetBox REST API, which automation against a hosted instance must use. The docs
+      describe only tokens, plus cookie sessions for the browsable API. No OAuth client, OIDC, CI or
+      cloud workload login is documented for either API. Three of five hygiene checks pass, so the
+      grade is D.
+  outbound:
+    grade: F
+    mechanism: >-
+      Data sources pull from a git repository with a stored username and password, or from Amazon
+      S3 with a stored AWS access key. Webhooks can carry custom headers and an optional signing
+      secret.
+    evidence:
+      - url: https://netboxlabs.com/docs/netbox/features/synchronized-data/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For instance, a git source will ask the user to specify a branch and authentication credentials."
+      - url: https://netboxlabs.com/docs/netbox/models/core/datasource/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A data source represents some external repository of data which NetBox can consume, such as a git repository."
+      - url: https://raw.githubusercontent.com/netbox-community/netbox/main/netbox/core/data_backends.py
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "label=_('AWS access key ID'),"
+      - url: https://raw.githubusercontent.com/netbox-community/netbox/main/netbox/core/data_backends.py
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "sensitive_parameters = ['aws_secret_access_key']"
+      - url: https://netboxlabs.com/docs/netbox/models/extras/webhook/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A secret string used to prove authenticity of the request (optional)."
+    notes: >-
+      Graded F because the only documented ways into a customer repository or bucket are stored
+      static credentials. The docs give no scoping or rotation guidance for them, and the S3 fields
+      appear only in the source code. No IAM role, GitHub App or federation option is documented.
+      Event Streams publish to topics that NetBox Labs provisions, so they are not graded here.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Additionally, a token can be set to expire at a specific time."
+      - url: https://netboxlabs.com/docs/cloud/cloud-api/api-keys/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Set an expiry date, or leave it blank for no expiry."
+    notes: >-
+      Expiry is optional on both NetBox tokens and Cloud API keys. The docs show no default lifetime
+      and no setting that forces one.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By default, all users can create and manage their own REST API tokens under the user control panel in the UI or via the REST API."
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "It is possible to provision authentication tokens for other users via the REST API."
+    notes: >-
+      NetBox tokens can be created and deleted through the tokens endpoint. Cloud API keys are
+      created and deleted only in the Console.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "option will restrict API requests made with the token to read operations (e.g. GET) only."
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each API token can optionally be restricted by client IP address."
+      - url: https://netboxlabs.com/docs/cloud/cloud-api/permissions/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each API key is assigned a set of permissions that control what it can do."
+    notes: >-
+      A NetBox token can be made read-only and tied to client addresses, which is narrower than its
+      owner. Otherwise it inherits the user's permissions, and no API-only account type is
+      documented. Cloud API keys carry their own read and write permissions per resource group.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://netboxlabs.com/docs/netbox/integrations/rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This allows users to determine which tokens have been active recently."
+    notes: >-
+      NetBox records a last-used time on each token. The Cloud API key list shows only a name and
+      created date.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: NetBox Labs does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers a hosted NetBox Cloud instance and the NetBox Cloud API. The token behavior is documented
+  for NetBox itself, and the page marks it as available in Cloud. An enforced token lifetime would
+  add a fourth hygiene pass. Inbound moves to A or B only if the API accepts a federated workload
+  token. Outbound improves if data sources gain a role or app based option.

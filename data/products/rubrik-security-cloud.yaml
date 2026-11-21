@@ -1,0 +1,146 @@
+id: rubrik-security-cloud
+vendor: Rubrik
+product: Security Cloud
+covers: "The Rubrik Security Cloud API, its webhooks and its cloud account connections."
+aliases:
+  - RSC
+  - Polaris
+website: https://www.rubrik.com
+docs: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+category: security
+status: listed
+summary: >-
+  To call the Rubrik Security Cloud API, a service account swaps a client ID and secret for a
+  token that lasts 12 hours by default. Outbound, Rubrik uses a cross-account role on AWS and
+  OAuth consent on Azure, but some paths still take cloud keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A service account client ID and secret are posted to a token endpoint for a short-lived
+      bearer token. Personal access tokens use the same exchange for one user.
+    evidence:
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "RSC supports two kinds of API credentials for automation: service accounts and personal access tokens (PATs). Both use the OAuth2 client credentials grant."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client posts them to a token endpoint to obtain a short-lived access token, then sends that token as a Bearer token with each API call."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This time is configurable up to 24 hours within the RSC session security settings."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client secret must be treated like a password and stored in a secure location."
+    notes: >-
+      Graded C because the access token is short-lived but the client secret is a static root. The
+      developer docs list no other credential type, and no OIDC or workload federation for the API
+      is documented. The cluster API on customer-run appliances is not graded here.
+  outbound:
+    grade: B
+    mechanism: >-
+      On AWS, Rubrik assumes a cross-account role with an external ID, deployed by CloudFormation.
+      Azure uses OAuth consent. Other paths take an AWS access key or a Google Cloud auth key.
+    evidence:
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/Data-Protection/Cloud/AWS/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rubrik orchestrates protection by calling AWS APIs on your behalf using cross-account IAM roles deployed via CloudFormation."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/Data-Protection/Cloud/AWS/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "the stack creates the cross-account IAM role Rubrik uses to manage snapshots."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/azureOauthConsentKickoff/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "AzureOAuthConsentKickoff starts the first-leg of an Azure OAuth authorization code flow."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addAwsIamUserBasedCloudAccount/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Adds an IAM user-based AWS cloud account and enables the features specified in the input after successful validation of the request."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addGcpCloudAccountManualAuthProject/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The auth key is provided either in this API or set separately via setting global credentials."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/createAwsAccount/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Creates a new AWS cloud account."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/Observability/Events/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Webhooks provide a mechanism to push events via HTTP to an external system."
+    notes: >-
+      Graded B because AWS and Azure have keyless paths while others take keys. The AWS onboarding
+      reply includes an external ID for the role. The sample input for creating an AWS account
+      carries an access key and a secret key. Google Cloud manual setup takes an auth key. Webhooks
+      to other systems send whatever static header value the receiver needs. Only the public
+      developer reference was read, so the user guide may document more keyless paths.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client credentials must be saved when they are first created as Rubrik does not provide an option to display them again."
+    notes: >-
+      The developer docs show no expiry or maximum age for a service account secret. Only personal
+      access tokens have an inactivity cutoff, 100 days by default.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotating a Service Account Secret"
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Creating a Service Account"
+    notes: >-
+      GraphQL mutations create a service account, rotate its secret and delete it, so rotation can
+      be scripted.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The role assigned to the service account should be the one with least number of privileges that would be sufficient for the client application being represented by the service account to access the Rubrik APIs."
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "But contrary to user accounts, service accounts cannot be used to access the Rubrik web UI."
+    notes: >-
+      A service account is a non-human principal with its own roles. A personal access token
+      carries its user's full permissions instead.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "name description clientId integrationName integrationId lastLogin"
+    notes: >-
+      The service account query returns a last login time for each account. Each account has one
+      secret, so this works as a last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Rubrik does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers Rubrik Security Cloud, the hosted control plane. Clusters that customers run have their
+  own API and are not graded. The user guide at the vendor docs site was not read, so cloud
+  onboarding detail comes from the developer reference. Inbound moves to B or A only if the token
+  endpoint accepts a federated workload token.

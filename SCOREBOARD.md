@@ -8,10 +8,13 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 |---|---|---|---|---|---|---|---|
 | **💀 F** | Abnormal AI | [Platform](data/products/abnormal-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Arcade.dev | [Platform](data/products/arcade-dev.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | Asana | [Platform](data/products/asana.yaml) | 💀 F | 🟢 A | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | ClearFeed | [Helpdesk](data/products/clearfeed.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **💀 F** | CoreWeave | [Forge](data/products/coreweave-forge.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | CUDO Compute | [GPU Cloud](data/products/cudo-compute.yaml) | 💀 F | 💀 F | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Customer.io | [Platform](data/products/customer-io.yaml) | 💀 F | 🔴 D | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
@@ -19,25 +22,43 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Elastic | [Elastic Agent and Fleet](data/products/elastic-agent-fleet.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
 | **💀 F** | Elastic | [Cloud Enterprise](data/products/elastic-cloud-enterprise.yaml) | 💀 F | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
+| **💀 F** | Ema | [Platform](data/products/ema.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | Everbridge | [Everbridge Suite](data/products/everbridge-suite.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-11-18 |
+| **💀 F** | FloQast | [Platform](data/products/floqast.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Fluidstack | [Atlas](data/products/fluidstack.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Fortinet | [FortiGate](data/products/fortinet-fortigate.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
+| **💀 F** | Freshworks | [Freshdesk](data/products/freshworks-freshdesk.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Genesis Cloud | [Platform](data/products/genesis-cloud.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Google | [Threat Intelligence](data/products/google-threat-intelligence.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | Granola | [Granola](data/products/granola.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | HackerOne | [Platform](data/products/hackerone.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Hot Aisle | [GPU Cloud](data/products/hot-aisle.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Hyperbolic | [GPU Cloud and Inference API](data/products/hyperbolic.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Island | [Enterprise Browser](data/products/island-enterprise-browser.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-11-15 |
+| **💀 F** | Kentik | [Platform](data/products/kentik-platform.yaml) | 💀 F | 🟢 A | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | Kisi | [Access Control](data/products/kisi.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | KnowBe4 | [KSAT](data/products/knowbe4-ksat.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Kyriba | [Platform](data/products/kyriba.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-11-18 |
 | **💀 F** | Lumos | [Identity Platform](data/products/lumos-identity-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | Metronome | [Billing Platform](data/products/metronome.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Nebius | [Token Factory](data/products/nebius-ai-studio.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | NetBox Labs | [NetBox Cloud](data/products/netbox-labs-netbox-cloud.yaml) | 🔴 D | 💀 F | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Nightfall AI | [DLP](data/products/nightfall-dlp.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Nscale | [Cloud](data/products/nscale.yaml) | 🔴 D | 💀 F | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Nudge Security | [Platform](data/products/nudge-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Obsidian Security | [Platform](data/products/obsidian-security.yaml) | 💀 F | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
 | **💀 F** | Orca Security | [Cloud Security Platform](data/products/orca-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Palo Alto Networks | [Cortex XSIAM](data/products/paloalto-cortex-xsiam.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
+| **💀 F** | Parsec | [Parsec for Teams](data/products/parsec.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Perplexity | [Enterprise](data/products/perplexity-enterprise.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 🟢 A | `✗ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-11-16 |
 | **💀 F** | Push Security | [Platform](data/products/push-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Rapid7 | [Command Platform](data/products/rapid7-insight-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Reco | [Dynamic SaaS Security](data/products/reco-saas-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
+| **💀 F** | Rewind | [Backups](data/products/rewind-backups.yaml) | 💀 F | 🟡 B | `✓ ✗ ✗ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Rippling | [Platform](data/products/rippling-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Secoda | [Platform](data/products/secoda.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Semgrep | [AppSec Platform](data/products/semgrep-appsec-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | SF Compute | [Object Storage](data/products/sf-compute-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Splunk | [Cloud Platform](data/products/splunk-cloud-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
@@ -49,52 +70,91 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Vast.ai | [GPU Cloud](data/products/vast-ai.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Voltage Park | [GPU Cloud](data/products/voltage-park.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed · low confidence | 2026-10-22 |
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Webflow | [Platform](data/products/webflow.yaml) | 💀 F | 🟢 A | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🔴 D** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Cisco | [Meraki Dashboard](data/products/cisco-meraki-dashboard.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✗ ✗ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
+| **🔴 D** | Cognition | [Devin](data/products/cognition-devin.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Delinea | [Secret Server Cloud](data/products/delinea-secret-server.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | DigitalOcean | [API](data/products/digitalocean-api.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
+| **🔴 D** | ElevenLabs | [Platform](data/products/elevenlabs.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✗ ✓` | listed | 2026-11-18 |
+| **🔴 D** | Figma | [Platform](data/products/figma.yaml) | 🔴 D | 🟢 A | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
 | **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | GitLab | [API and CI/CD](data/products/gitlab-api.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🔴 D** | Lambda | [Cloud](data/products/lambda-cloud.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Modal | [Platform](data/products/modal.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
+| **🔴 D** | Notion | [Notion](data/products/notion.yaml) | 🔴 D | 🟡 B | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
+| **🔴 D** | OpenAI | [ChatGPT Enterprise](data/products/openai-chatgpt-enterprise.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed · low confidence | 2026-11-18 |
+| **🔴 D** | Oracle | [NetSuite](data/products/oracle-netsuite.yaml) | 🟠 C | 🔴 D | `✓ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Runpod | [GPU Cloud](data/products/runpod.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | SentinelOne | [Singularity](data/products/sentinelone-singularity.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-10-22 |
 | **🔴 D** | SF Compute | [GPU Cloud](data/products/sf-compute.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Socket | [Platform](data/products/socket-dev.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Statsig | [Platform](data/products/statsig.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🔴 D** | Temporal | [Platform](data/products/temporal.yaml) | 🔴 D | 🟢 A | `✓ ✓ ✓ ✗ ✓` | listed | 2026-10-20 |
 | **🔴 D** | Tenable | [Vulnerability Management](data/products/tenable-vulnerability-management.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🔴 D** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
+| **🔴 D** | Twilio | [SendGrid](data/products/twilio-sendgrid.yaml) | 🔴 D | — | `✗ ✓ ✓ ✗ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Veza | [Access Graph](data/products/veza.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Workiva | [Platform](data/products/workiva-platform.yaml) | 🟠 C | 🔴 D | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Anecdotes | [Platform](data/products/anecdotes.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Anthropic | [Claude API](data/products/anthropic-api.yaml) | 🟢 A | 🟠 C | `✓ ✗ ✓ ✗ ✓` | listed | 2026-11-15 |
+| **🟠 C** | Apple | [Apple Business](data/products/apple-business-manager.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Atlassian | [Cloud](data/products/atlassian-cloud.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
 | **🟠 C** | Axonius | [Platform](data/products/axonius.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed · low confidence | 2026-11-15 |
+| **🟠 C** | Bynder | [Digital Asset Management](data/products/bynder.yaml) | 🟠 C | — | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Cisco | [Catalyst SD-WAN Manager](data/products/cisco-catalyst-sd-wan-manager.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Cisco | [Webex](data/products/cisco-webex.yaml) | 🟠 C | 🟢 A | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Coupa | [Core Platform](data/products/coupa-core-platform.yaml) | 🟠 C | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | CrowdStrike | [Falcon API](data/products/crowdstrike-falcon-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | CyberArk | [Identity Security Platform](data/products/cyberark-identity-platform.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Cyera | [Data Security Platform](data/products/cyera-data-security.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **🟠 C** | DoControl | [Platform](data/products/docontrol.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Docusign | [eSignature](data/products/docusign-esignature.yaml) | 🟠 C | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Drata | [Platform](data/products/drata.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Elastic | [Kibana](data/products/kibana.yaml) | 🟢 A | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Freshworks | [Freshservice](data/products/freshworks-freshservice.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | GitHub | [API and Actions](data/products/github-api.yaml) | 🟠 C | 🟢 A | `✓ ✗ ✓ ✓ ✓` | listed | 2026-09-16 |
+| **🟠 C** | Gong | [Platform](data/products/gong-platform.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✓ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Greenhouse | [Recruiting](data/products/greenhouse-recruiting.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **🟠 C** | HubSpot | [Platform](data/products/hubspot-platform.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
+| **🟠 C** | Ironclad | [CLM](data/products/ironclad-clm.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | JumpCloud | [Platform](data/products/jumpcloud.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Lucid | [Visual Collaboration Suite](data/products/lucid-suite.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Monte Carlo | [Data Observability](data/products/monte-carlo.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | NinjaOne | [Platform](data/products/ninjaone-platform.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Okta | [Management API](data/products/okta-management-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Oleria | [Adaptive Identity Governance](data/products/oleria-identity-governance.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Outreach | [Outreach](data/products/outreach.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | PagerDuty | [Operations Cloud](data/products/pagerduty-operations-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Palo Alto Networks | [Prisma Cloud](data/products/paloalto-prisma-cloud.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Ping Identity | [PingOne](data/products/pingone-platform.yaml) | 🟠 C | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟠 C** | Pure Storage | [Pure1](data/products/pure-storage-pure1.yaml) | 🟠 C | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Qualys | [Cloud Platform](data/products/qualys-cloud-platform.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟠 C** | Ramp | [Developer API](data/products/ramp-developer-api.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✓` | listed | 2026-11-18 |
+| **🟠 C** | Rubrik | [Security Cloud](data/products/rubrik-security-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🟠 C** | SailPoint | [Identity Security Cloud](data/products/sailpoint-identity-security-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Slack | [Platform](data/products/slack.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✓` | listed | 2026-11-17 |
 | **🟠 C** | Snyk | [Platform](data/products/snyk-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Sola Security | [Platform](data/products/sola-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Torq | [Hyperautomation Platform](data/products/torq.yaml) | 🟠 C | 🟡 B | `✓ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Twilio | [Segment](data/products/twilio-segment.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✓` | listed | 2026-11-18 |
 | **🟠 C** | Upwind | [Cloud Security Platform](data/products/upwind.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **🟠 C** | Vanta | [Platform](data/products/vanta.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Vultr | [Cloud](data/products/vultr-cloud.yaml) | 🟠 C | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Wiz | [Platform](data/products/wiz-platform.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **🟠 C** | Zapier | [Platform](data/products/zapier.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Zendesk | [Suite](data/products/zendesk.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Zenity | [AI Agent Security](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Zoom | [Zoom API](data/products/zoom-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Zscaler | [OneAPI](data/products/zscaler-oneapi.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🟡 B** | Aembit | [Workload IAM](data/products/aembit-workload-iam.yaml) | 🟢 A | 🟡 B | `· · · · ·` | listed | 2026-10-13 |
 | **🟡 B** | Akeyless | [Identity Security Platform](data/products/akeyless-platform.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-19 |
@@ -141,6 +201,22 @@ To call the Arcade Engine, your agent needs a static project API key. A key can 
 - **Outbound B:** Per-user OAuth through Arcade's own OAuth apps, and dynamic registration for the AWS MCP Server, need no secret from you. Other connectors need your own app's client secret or a static key.
 - **Receipts:** [docs.arcade.dev](https://docs.arcade.dev/en/get-started/setup/api-keys), [api.arcade.dev](https://api.arcade.dev/v1/swagger), [docs.arcade.dev](https://docs.arcade.dev/en/resources/faq), [docs.arcade.dev](https://docs.arcade.dev/en/operate/governance/mcp-gateways), [docs.arcade.dev](https://docs.arcade.dev/en/operate/deploy/architecture), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/google), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/microsoft), [docs.arcade.dev](https://docs.arcade.dev/en/operate/governance/remote-mcp-servers/aws), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/github), [docs.arcade.dev](https://docs.arcade.dev/en/references/auth-providers/slack), [docs.arcade.dev](https://docs.arcade.dev/en/operate/governance/contextual-access/group-access), [docs.arcade.dev](https://docs.arcade.dev/en/resources/integrations/development/datadog)
 
+### 💀 F Asana Platform
+
+Asana's API takes static bearer tokens. Personal access tokens and service account tokens are long-lived and made in the web console. OAuth exists, but a person has to sign in and consent. Asana's own integrations into Jira and Google Drive connect by sign-in, with no pasted key.
+
+- **Inbound F:** A static bearer token, either a personal access token or an Enterprise service account token. The audit log API accepts only the service account token.
+- **Outbound A:** Asana-built integrations connect by signing in to the other service and approving access. No key is pasted into Asana.
+- **Receipts:** [developers.asana.com](https://developers.asana.com/docs/authentication.md), [developers.asana.com](https://developers.asana.com/reference/audit-log-api), [developers.asana.com](https://developers.asana.com/docs/oauth.md), [asana.com](https://asana.com/apps/jira), [asana.com](https://asana.com/apps/google-drive)
+
+### 💀 F ClearFeed Helpdesk
+
+The ClearFeed API takes only a static bearer token with no expiry, made in the web app. Outbound, GitHub and Jira connect through installed apps, but Freshdesk, Kandji, JumpCloud and BambooHR take a pasted API key and Okta takes a private key.
+
+- **Inbound F:** A static bearer token, either a Personal Access Token tied to a user or an Account Access Token owned by a bot user.
+- **Outbound B:** GitHub and Jira connect through an app you install, and Zendesk and Salesforce through an admin's authorization. Freshdesk, Kandji, JumpCloud and BambooHR take a pasted API key, and Okta takes a private key.
+- **Receipts:** [docs.clearfeed.ai](https://docs.clearfeed.ai/api/quick-start/authentication-guide.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/integrations/github.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/integrations/jira.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/integrations/freshdesk.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/integrations/kandji.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/integrations/jumpcloud.md), [docs.clearfeed.ai](https://docs.clearfeed.ai/clearfeed-help-center/integrations/okta.md)
+
 ### 💀 F CoreWeave Cloud API
 
 This card covers the control plane: the API that creates CKS clusters and VPCs, the Terraform provider and kubeconfigs. Your code needs a static token made by hand in the Console, with almost no hygiene. The CKS and Object Storage cards grade differently.
@@ -172,6 +248,14 @@ Every way to automate CUDO Compute runs on one static API key with its user's fu
 - **Inbound F:** A static user API key sent as a bearer token, shared by the API, cudoctl, the Python client and Terraform. Object storage takes static S3 keys.
 - **Outbound F:** The only reach-in is the vLLM app, which asks you to paste a Hugging Face token and stores it as VM metadata.
 - **Receipts:** [docs.cudocompute.com](https://docs.cudocompute.com/api/authentication.md), [docs.cudocompute.com](https://docs.cudocompute.com/openapi.json), [docs.cudocompute.com](https://docs.cudocompute.com/tools/cudoctl.md), [docs.cudocompute.com](https://docs.cudocompute.com/tools/python-client.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/CudoVentures/terraform-provider-cudo/main/docs/index.md), [docs.cudocompute.com](https://docs.cudocompute.com/guides/object-storage/command-line-tools.md), [docs.cudocompute.com](https://docs.cudocompute.com/api/object-storage/get-an-object-storage-session-key.md), [docs.cudocompute.com](https://docs.cudocompute.com/help/compute/how-can-i-log-in-to-compute.md), [docs.cudocompute.com](https://docs.cudocompute.com/apps/vllm.md), [docs.cudocompute.com](https://docs.cudocompute.com/apps/index.md), [docs.cudocompute.com](https://docs.cudocompute.com/guides/images/create.md)
+
+### 💀 F Customer.io Platform
+
+The Customer.io APIs take a static private key that never expires. Service account tokens can be swapped for a one-hour JWT, but only for the APIs behind the CLI. Outbound, warehouse and bucket syncs take pasted cloud keys.
+
+- **Inbound F:** A static private key, created in the dashboard and sent as a bearer token on every call to the Track, App and Pipelines APIs.
+- **Outbound D:** Data warehouse and bucket syncs take a pasted AWS access key, Google service account key, Azure SAS URL or Snowflake private key. The docs ask for bucket-only or read-only access.
+- **Receipts:** [docs.customer.io](https://docs.customer.io/accounts-and-workspaces/managing-credentials.md), [docs.customer.io](https://docs.customer.io/accounts/audit-logs.md), [docs.customer.io](https://docs.customer.io/ai/cli/service-accounts.md), [docs.customer.io](https://docs.customer.io/integrations/data-out/connections/amazon-s3-data-out.md), [docs.customer.io](https://docs.customer.io/integrations/data-out/connections/gcs-data-out.md), [docs.customer.io](https://docs.customer.io/integrations/data-out/connections/ms-azure-data-out.md), [docs.customer.io](https://docs.customer.io/integrations/data-in/connections/reverse-etl/snowflake.md)
 
 ### 💀 F Denvr Dataworks AI Cloud
 
@@ -229,6 +313,32 @@ To call the self-managed ECE orchestrator API, your code holds a static API key,
 - **Outbound F:** Platform snapshot repositories take a pasted static credential: an S3 or MinIO access key, a GCS service-account JSON key with storage.admin, or an Azure SAS token.
 - **Receipts:** [www.elastic.co](https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys), [www.elastic.co](https://www.elastic.co/docs/api/doc/cloud-enterprise.json), [www.elastic.co](https://www.elastic.co/docs/reference/ecctl/ecctl-authentication), [raw.githubusercontent.com](https://raw.githubusercontent.com/elastic/terraform-provider-ec/master/docs/index.md), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/cloud-enterprise), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ece-aws-custom-repository), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/google-cloud-storage-gcs-repository), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/azure-storage-repository), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-aws-custom-repository)
 
+### 💀 F Ema Platform
+
+Ema's API takes a long-lived workspace API key that never expires unless you set a date. Keys can be scoped and rotated through the API. Outbound, some connectors use Ema's own OAuth apps, but others take a pasted service account key, client secret or API key.
+
+- **Inbound F:** A static workspace API key sent in a request header. System user keys can be swapped for a 15-minute token, but Ema enables that exchange per environment.
+- **Outbound B:** Box, Confluence, Google Drive and SharePoint can connect through an OAuth sign-in to Ema's own app. Other modes take a Google service account key, an Entra client secret or an API key.
+- **Receipts:** [builder.ema.ai](https://builder.ema.ai/builder/v2/api-reference/authentication.md), [builder.ema.ai](https://builder.ema.ai/builder/v2/integrations-data/data-connectors-box.md), [builder.ema.ai](https://builder.ema.ai/builder/v2/integrations-data/data-connectors-google-drive.md), [builder.ema.ai](https://builder.ema.ai/builder/v2/integrations-data/data-connectors-sharepoint.md), [builder.ema.ai](https://builder.ema.ai/builder/v2/integrations-data/data-connectors-confluence.md), [builder.ema.ai](https://builder.ema.ai/builder/v2/integrations-data/integrations-hub.md)
+
+### 💀 F Everbridge Everbridge Suite
+
+To call the Everbridge Suite API, a service account swaps a client ID and secret for an eight-hour token. Basic auth with an API user's password also still works. Outbound, the only public setup page has you hand over Apple and Firebase push credentials with no scoping guidance.
+
+> **Low confidence:** Everbridge's support center, which holds most integration setup guides, is behind a login. The outbound grade rests on the one public page that shows Everbridge holding customer credentials.
+
+- **Inbound C:** A service account's client ID and client secret are posted to the token endpoint for a bearer token that lasts eight hours.
+- **Outbound F:** For the Digital Apps API, the customer supplies Apple push and Firebase messaging credentials to Everbridge. The docs recommend the Apple key that does not expire.
+- **Receipts:** [developers.everbridge.net](https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md), [developers.everbridge.net](https://developers.everbridge.net/home/docs/ebs-gs-guide.md), [developers.everbridge.net](https://developers.everbridge.net/home/reference/ebs-v1-audit-log-api.md), [developers.everbridge.net](https://developers.everbridge.net/home/docs/overview.md)
+
+### 💀 F FloQast Platform
+
+The FloQast API takes only a static API key sent in a header. Keys can be scoped to services and show a last-used date, but a key may be set to never expire. Outbound, cloud storage links by sign-in, while ERP connections take a stored token or user credentials.
+
+- **Inbound F:** A static API key, created by a Manager or Admin in Admin Settings and sent in the x-api-key header.
+- **Outbound B:** Cloud storage is linked by redirecting an admin to the storage provider to sign in. ERP connections store a NetSuite token or the credentials of a Sage Intacct user.
+- **Receipts:** [developer.floqast.app](https://developer.floqast.app/guides/authentication.md), [developer.floqast.app](https://developer.floqast.app/docs/v1/getting-started.md), [developer.floqast.app](https://developer.floqast.app/_spec/api-reference/@v2/openapi.yaml), [help.floqast.com](https://help.floqast.com/api/v2/help_center/articles/28319271724187.json), [help.floqast.com](https://help.floqast.com/api/v2/help_center/articles/360002076631.json)
+
 ### 💀 F Fluidstack Atlas
 
 To deploy from CI to Fluidstack's managed Kubernetes, your code holds a long-lived ServiceAccount token that works until someone deletes it. The Atlas API takes a token from SSO login or an OAuth client secret that Fluidstack issues. There is no workload federation.
@@ -249,6 +359,14 @@ To call the FortiOS REST API, your code holds a static token tied to a REST API 
 - **Outbound B:** AWS, Azure, GCP and OCI connectors can use the FortiGate-VM's own cloud identity, but only inside that cloud. Hardware and off-cloud FortiGates must store a static key for each.
 - **Receipts:** [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator), [ansible-galaxy-fortios-docs.readthedocs.io](https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/gen/fortios_system_api_user.rst.txt), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/aws-administration-guide/619567/configuring-an-aws-sdn-connector-using-iam-roles), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/aws-administration-guide/374400/sdn-connector-support-for-aws-sts), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/7.0.0/new-features/374400), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/642352/aws-sdn-connector-using-access-keys), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/azure-administration-guide/236610/configuring-an-sdn-connector-using-a-managed-identity), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/6.4.0/new-features/44446/simplify-azure-fabric-connector-configuration-for-a-fortigate-vm-deployed-on-azure), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/azure-administration-guide/948968/azure-sdn-connector-service-principal-configuration-requirements), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/gcp-administration-guide/298652/configuring-gcp-sdn-connector-using-metadata-iam), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/gcp-administration-guide/255828/creating-a-gcp-service-account), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/oci-administration-guide/562317/configuring-an-oci-sdn-connector-using-iam-roles), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/480499/oci-sdn-connector-using-certificates), [ansible-galaxy-fortios-docs.readthedocs.io](https://ansible-galaxy-fortios-docs.readthedocs.io/en/main/_sources/gen/fortios_system_sdn_connector.rst.txt), [docs.fortinet.com](https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/545113/aws-lambda-action)
 
+### 💀 F Freshworks Freshdesk
+
+To call the Freshdesk API, your code holds an agent's personal API key that never expires and carries that agent's whole role. Outbound, Freshdesk reads Gmail and Microsoft 365 mailboxes through an OAuth sign-in, but other mail servers take a stored password.
+
+- **Inbound F:** A personal API key, one per agent, sent as the Basic auth username. It has no expiry and acts with the agent's role.
+- **Outbound B:** Freshdesk connects to Gmail and Microsoft 365 support mailboxes through an OAuth sign-in. Any other mail server takes a username and password that Freshdesk stores.
+- **Receipts:** [developers.freshdesk.com](https://developers.freshdesk.com/api/), [support.freshdesk.com](https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key), [developers.freshworks.com](https://developers.freshworks.com/docs/app-sdk/v3.0/support_ticket/oauth-implementation-in-apps/), [support.freshdesk.com](https://support.freshdesk.com/en/support/solutions/articles/195170), [support.freshdesk.com](https://support.freshdesk.com/support/solutions/articles/50000002985-reauthorization-of-custom-mailbox)
+
 ### 💀 F Genesis Cloud Platform
 
 The Compute API, Terraform, Object Storage and Inference API all take static secrets made by hand in the console, each with full account access. No hygiene check passes and there is no OIDC path. Genesis never reaches into your cloud or SaaS.
@@ -256,6 +374,30 @@ The Compute API, Terraform, Object Storage and Inference API all take static sec
 - **Inbound F:** A static API token made in the console and sent as a bearer token. Object Storage uses a static S3-style access key and secret.
 - **Outbound N/A:** Genesis never needs access to your infrastructure. Custom image import fetches a URL you supply, with no credential.
 - **Receipts:** [developers.genesiscloud.com](https://developers.genesiscloud.com/compute-api/), [web.archive.org](https://web.archive.org/web/20260211062742/https://support.genesiscloud.com/support/solutions/articles/47001126146-how-to-generate-an-api-token-), [raw.githubusercontent.com](https://raw.githubusercontent.com/genesiscloud/terraform-provider-genesiscloud/main/docs/index.md), [web.archive.org](https://web.archive.org/web/20250316115632/https://support.genesiscloud.com/support/solutions/articles/47001255868-object-storage), [developers.genesiscloud.com](https://developers.genesiscloud.com/inference-service-api/), [developers.genesiscloud.com](https://developers.genesiscloud.com/compute-api/snapshots), [web.archive.org](https://web.archive.org/web/20260130173913/https://support.genesiscloud.com/support/solutions/articles/47001260907-uploading-custom-images-using-our-api)
+
+### 💀 F Google Threat Intelligence
+
+The Google Threat Intelligence API takes only a static API key, either a personal key or a service account key. Keys have no expiry. Outbound, Attack Surface Management reaches AWS and Google Cloud without keys, but GitHub takes a pasted token and AWS keys are still offered.
+
+- **Inbound F:** A static API key sent in the x-apikey header. The key belongs to a user or to a service account that a group administrator creates.
+- **Outbound B:** Attack Surface Management assumes an AWS role with an external ID and impersonates a Google Cloud service account. Its GitHub integration takes a pasted access token, and AWS access keys remain an option.
+- **Receipts:** [gtidocs.virustotal.com](https://gtidocs.virustotal.com/docs/how-get-gti-api-keys.md), [gtidocs.virustotal.com](https://gtidocs.virustotal.com/reference/create-a-new-service-account.md), [gtidocs.virustotal.com](https://gtidocs.virustotal.com/reference/get-activity-log.md), [gtidocs.virustotal.com](https://gtidocs.virustotal.com/docs/asm-aws-integration.md), [gtidocs.virustotal.com](https://gtidocs.virustotal.com/docs/asm-google-cloud-integration.md), [gtidocs.virustotal.com](https://gtidocs.virustotal.com/docs/asm-github-integration.md)
+
+### 💀 F Granola Granola
+
+Granola's API takes only a static API key, created and revoked in the desktop app. Workspace keys never expire. Outbound, most integrations connect through an OAuth sign-in, but Affinity takes a pasted API key.
+
+- **Inbound F:** A static API key sent as a bearer token. Keys are personal, workspace-owned or audit-only, and all are created in the app settings.
+- **Outbound B:** Slack, Notion, HubSpot and Attio connect through a sign-in and consent page. Affinity takes a personal API key pasted into Granola.
+- **Receipts:** [docs.granola.ai](https://docs.granola.ai/introduction.md), [docs.granola.ai](https://docs.granola.ai/help-center/sharing/integrations/granola-api.md), [docs.granola.ai](https://docs.granola.ai/audit.md), [docs.granola.ai](https://docs.granola.ai/help-center/sharing/integrations/mcp.md), [docs.granola.ai](https://docs.granola.ai/help-center/sharing/integrations/slack.md), [docs.granola.ai](https://docs.granola.ai/help-center/sharing/notion.md), [docs.granola.ai](https://docs.granola.ai/help-center/sharing/integrations/hub-spot.md), [docs.granola.ai](https://docs.granola.ai/help-center/sharing/integrations/affinity.md)
+
+### 💀 F HackerOne Platform
+
+The HackerOne API takes a static API token over HTTP Basic authentication. Tokens have no documented expiry and are managed only in the web console. Outbound, GitHub and Slack connect by consent, while GitLab, ServiceNow and Splunk need a stored secret.
+
+- **Inbound F:** A static API token created in organization settings. Its identifier and value are sent as the username and password of HTTP Basic authentication.
+- **Outbound B:** GitHub and Slack connect through an authorization screen. GitLab and ServiceNow need an OAuth client ID and secret that the customer creates, and Splunk needs a pasted collector token.
+- **Receipts:** [api.hackerone.com](https://api.hackerone.com/getting-started/), [docs.hackerone.com](https://docs.hackerone.com/en/articles/8544782-api-tokens.md), [docs.hackerone.com](https://docs.hackerone.com/en/articles/8571163-github-integration.md), [docs.hackerone.com](https://docs.hackerone.com/en/articles/12598847-new-slack-integration.md), [docs.hackerone.com](https://docs.hackerone.com/en/articles/10394699-gitlab-setup.md), [docs.hackerone.com](https://docs.hackerone.com/en/articles/8575614-servicenow-incident-management-integration.md), [docs.hackerone.com](https://docs.hackerone.com/en/articles/8588169-splunk-integration.md)
 
 ### 💀 F Hot Aisle GPU Cloud
 
@@ -285,6 +427,40 @@ Your code calls Island's management API and SIEM feed with a static API key, wit
 - **Outbound B:** Microsoft Purview connects through an Entra app your admin consents to, with no key. Google SecOps and Claude Compliance need static keys, and other export setups are login-walled.
 - **Receipts:** [www.applytosupply.digitalmarketplace.service.gov.uk](https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/234060975999414), [raw.githubusercontent.com](https://raw.githubusercontent.com/elastic/integrations/main/packages/island_browser/docs/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/ConductorOne/docs/main/baton/island.mdx), [raw.githubusercontent.com](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/Island/Data%20Connectors/IslandV2_CCP/IslandV2_connectorDefinition.json), [docs.hunters.ai](https://docs.hunters.ai/docs/island.md), [explained.tines.com](https://explained.tines.com/en/articles/8592481-island-authentication-guide), [docs.panther.com](https://docs.panther.com/data-onboarding/supported-logs/island-logs), [www.island.io](https://www.island.io/blog/microsoft-purview-dlp-enterprise-browser), [docs.cloud.google.com](https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/island-browser), [www.island.io](https://www.island.io/blog/island-integrates-with-the-claude-compliance-api), [platform.claude.com](https://platform.claude.com/docs/en/manage-claude/compliance-api-access.md)
 
+### 💀 F Kentik Platform
+
+To call the Kentik API, your code sends a user's email and that user's single API token, which never expires. Outbound, Kentik reaches AWS, Azure, Google Cloud and Oracle Cloud without holding a key of yours.
+
+- **Inbound F:** A per-user API token sent in a request header with the user's email. Each user has one token, and it stays valid until it is reset.
+- **Outbound A:** On AWS, Kentik assumes a role you create that trusts its account with an external ID. On Google Cloud you grant its service account, on Azure its enterprise application, and on Oracle Cloud a cross-tenancy policy.
+- **Receipts:** [kb.kentik.com](https://kb.kentik.com/docs/apis-overview.md), [kb.kentik.com](https://kb.kentik.com/docs/user-profile.md), [kb.kentik.com](https://kb.kentik.com/docs/metadata-configuration-aws.md), [kb.kentik.com](https://kb.kentik.com/docs/kentik-for-gcp.md), [kb.kentik.com](https://kb.kentik.com/docs/azure-prerequisites-roles.md), [kb.kentik.com](https://kb.kentik.com/docs/kentik-for-oci.md), [kb.kentik.com](https://kb.kentik.com/docs/kentik-export-configuration-azure.md)
+
+### 💀 F Kisi Access Control
+
+The Kisi API takes a static API key tied to the admin who created it. A key in use never expires and carries that admin's full rights. Outbound, Google Workspace, Entra and Slack connect by consent, but Meraki, JumpCloud and Splunk take pasted keys.
+
+- **Inbound F:** A static API key, which Kisi calls a login secret, sent in the Authorization header. It is created in the dashboard or through the logins endpoint.
+- **Outbound B:** Google Workspace, Entra ID and Slack connect through an admin consent screen. Cisco Meraki, JumpCloud and Splunk take a pasted API key or token.
+- **Receipts:** [docs.kisi.io](https://docs.kisi.io/platform/integrate_kisi/getting_started/generate_api_keys), [api.kisi.io](https://api.kisi.io/openapi/apps.yaml), [docs.kisi.io](https://docs.kisi.io/marketplace/directories/google_workspace_directory), [docs.kisi.io](https://docs.kisi.io/marketplace/directories/microsoft_entra_id), [docs.kisi.io](https://docs.kisi.io/marketplace/video_security/cisco_meraki), [docs.kisi.io](https://docs.kisi.io/marketplace/directories/jumpcloud), [docs.kisi.io](https://docs.kisi.io/marketplace/data_analytics/splunk)
+
+### 💀 F KnowBe4 KSAT
+
+Every KSAT API takes a static bearer token created in the console. Product API tokens can be read-only and show a last-used date, but nothing forces an expiry. Outbound, Google Workspace mail injection is keyless, while Real-Time Coaching stores Okta tokens and Google service account keys.
+
+- **Inbound F:** A static API token sent as a bearer token. The Reporting, User Event and GraphQL APIs each use their own token type, all created in the KSAT console. *(requires Platinum, Diamond, SAT Foundations or SAT Advanced)*
+- **Outbound B:** Direct Message Injection for Google Workspace uses domain-wide delegation to a client ID that KnowBe4 owns. Real-Time Coaching stores vendor keys such as an Okta token or a Google service account key.
+- **Receipts:** [developer.knowbe4.com](https://developer.knowbe4.com/elvis-swagger.yml), [developer.knowbe4.com](https://developer.knowbe4.com/echelon-swagger.yml), [support.knowbe4.com](https://support.knowbe4.com/api/v2/help_center/en-us/articles/4404258222099.json), [support.knowbe4.com](https://support.knowbe4.com/api/v2/help_center/en-us/articles/115016090908.json), [support.knowbe4.com](https://support.knowbe4.com/api/v2/help_center/en-us/articles/360054494394.json), [support.knowbe4.com](https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675860417427.json), [support.knowbe4.com](https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675763215379.json), [support.knowbe4.com](https://support.knowbe4.com/api/v2/help_center/en-us/articles/6676053834131.json)
+
+### 💀 F Kyriba Platform
+
+To call the Kyriba API, your code swaps a client ID and secret for an access token. No workload federation is documented. When Kyriba calls a service you run, it sends a static client ID and secret as Basic auth.
+
+> **Low confidence:** Kyriba's developer portal pages need JavaScript and a login. Receipts come from its published agent skill files and one Google guide. The outbound F and three hygiene fails rest on what those files leave out.
+
+- **Inbound C:** An API client ID and secret are sent as Basic auth to the token endpoint, which returns an access token for API calls.
+- **Outbound F:** For payment and fraud screening, Kyriba calls a service you host and sends a client ID and secret as Basic auth. Webhooks are signed with a shared secret.
+- **Receipts:** [developer.kyriba.com](https://developer.kyriba.com/llms.txt), [developer.kyriba.com](https://developer.kyriba.com/static/llm/skills/kyriba/SKILL.md), [docs.cloud.google.com](https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/kyriba), [developer.kyriba.com](https://developer.kyriba.com/static/llm/skills/payment-initiation-spi/SKILL.md), [developer.kyriba.com](https://developer.kyriba.com/static/llm/skills/fraud-detection-spi/SKILL.md), [developer.kyriba.com](https://developer.kyriba.com/static/llm/skills/kyriba-guide/SKILL.md)
+
 ### 💀 F Lumos Identity Platform
 
 To call the Lumos API, your code holds a static lsk_ token that never expires and carries its creator's full permissions. Lumos reaches into AWS, GCP, Google Workspace and most SaaS without keys, but Okta's default setup is a pasted API token.
@@ -301,6 +477,14 @@ Your code calls Material's API with a static per-account token. Tokens can expir
 - **Outbound B:** Google Workspace is keyless through domain-wide delegation, and Microsoft 365 uses an in-app enrollment by a Global Administrator. Okta, Duo, OneLogin, Slack, PagerDuty and SIEM destinations take static tokens.
 - **Receipts:** [docs.material.security](https://docs.material.security/reference/api-v1/authentication), [docs.material.security](https://docs.material.security/reference/material-mcp-server), [docs.material.security](https://docs.material.security/working-with-issues/explorer/file-search), [docs.material.security](https://docs.material.security/email-protections/email-threats/detections/material-email-threat-detections/calendar-invite-attacks), [docs.material.security](https://docs.material.security/getting-started/deployment-guides/your-first-30-days/1-connect-and-sync), [docs.material.security](https://docs.material.security/integrations/integration-fundamentals/identity-integrations), [docs.material.security](https://docs.material.security/integrations/integration-fundamentals/identity-integrations/okta-ssf), [docs.material.security](https://docs.material.security/integrations/integration-fundamentals/messaging-and-ticketing-integrations), [docs.material.security](https://docs.material.security/integrations/integration-fundamentals/siem-integrations/crowdstrike-ng-siem), [material.security](https://material.security/products/deployment-and-security)
 
+### 💀 F Metronome Billing Platform
+
+The Metronome API takes only a static bearer token created in the web app, with no documented expiry. Narrowing a token's permissions means contacting support. Outbound, AWS and Google Cloud marketplace metering is keyless, but Azure needs a client secret.
+
+- **Inbound F:** A static bearer token created in the Metronome app under Developer, sent in the Authorization header.
+- **Outbound B:** AWS Marketplace metering assumes a cross-account role with an external ID, and Google Cloud uses Workload Identity Federation. Azure Marketplace takes a pasted client secret.
+- **Receipts:** [docs.metronome.com](https://docs.metronome.com/api-reference/authentication.md), [docs.metronome.com](https://docs.metronome.com/integrations/marketplace-integrations/aws.md), [docs.metronome.com](https://docs.metronome.com/integrations/marketplace-integrations/gcp.md), [docs.metronome.com](https://docs.metronome.com/integrations/marketplace-integrations/azure.md), [docs.metronome.com](https://docs.metronome.com/integrations/invoice-integrations/stripe.md), [docs.metronome.com](https://docs.metronome.com/integrations/invoice-integrations/netsuite.md)
+
 ### 💀 F Nebius Token Factory
 
 To call Token Factory's inference or fine-tuning APIs, your code needs a static project API key made by hand in the web UI. Only the Sandboxes API also takes a Nebius IAM token. Fine-tuning pushes to Hugging Face and W&B with tokens you paste in.
@@ -308,6 +492,14 @@ To call Token Factory's inference or fine-tuning APIs, your code needs a static 
 - **Inbound F:** A static project API key from the Token Factory UI, sent as a bearer token. Only the Sandboxes API also accepts a Nebius IAM token.
 - **Outbound F:** Fine-tuning exports to Hugging Face and Weights & Biases with tokens you paste. Sandboxes pull private images with a username and access token.
 - **Receipts:** [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/api-reference/introduction.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/quickstart.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/api-reference/fine-tuning/create-a-fine-tuning-job.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/ai-models-inference/observability-api-integrations.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/api-reference/sandboxes/images/import-a-container-image-from-a-registry.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/sandboxes/cli/commands/auth.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/post-training/how-to-fine-tune.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/sandboxes/mcp/tools/registry_auth.md), [docs.tokenfactory.nebius.com](https://docs.tokenfactory.nebius.com/ai-models-inference/dedicated-endpoints/custom-weights.md)
+
+### 💀 F NetBox Labs NetBox Cloud
+
+NetBox Cloud takes only static tokens. NetBox API tokens can be managed through the API, limited to read-only and show when they were last used, but expiry is optional. Outbound, data sources take git credentials or an AWS access key with no least-privilege guidance.
+
+- **Inbound D:** A static NetBox API token tied to a user account, sent as a bearer token. The separate NetBox Cloud API takes a static API key created in the Console.
+- **Outbound F:** Data sources pull from a git repository with a stored username and password, or from Amazon S3 with a stored AWS access key. Webhooks can carry custom headers and an optional signing secret.
+- **Receipts:** [netboxlabs.com](https://netboxlabs.com/docs/netbox/integrations/rest-api/), [netboxlabs.com](https://netboxlabs.com/docs/cloud/cloud-api/authentication/), [netboxlabs.com](https://netboxlabs.com/docs/cloud/cloud-api/api-keys/), [netboxlabs.com](https://netboxlabs.com/docs/netbox/features/synchronized-data/), [netboxlabs.com](https://netboxlabs.com/docs/netbox/models/core/datasource/), [raw.githubusercontent.com](https://raw.githubusercontent.com/netbox-community/netbox/main/netbox/core/data_backends.py), [netboxlabs.com](https://netboxlabs.com/docs/netbox/models/extras/webhook/)
 
 ### 💀 F Nightfall AI DLP
 
@@ -359,6 +551,22 @@ To call the Cortex XSIAM and XDR APIs, your code needs a static API key and key 
 - **Outbound B:** Cortex onboards AWS by role with External ID, Azure by a multi-tenant app, and GCP by impersonation. Several log collectors want JSON keys or client secrets.
 - **Receipts:** [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/xsiam-api/get-started-with-cortex-apis.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xdr-5.x/configure-cortex-xdr/manage-api-keys.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/amazon-web-services-cloud-onboarding/aws-security-model-and-authentication.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/google-cloud-platform-cloud-onboarding/google-cloud-platform-gcp-provider-permissions.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/create-a-workload-federated-identity-role.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/configure-data-collection-from-amazon-s3-manually.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-cloud-platform/ingest-logs-and-data-from-a-gcp-pub-sub.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-workspace/ingest-logs-and-data-from-google-workspace.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/azure-event-hub/ingest-logs-from-microsoft-azure-event-hub.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/microsoft-office-365/ingest-logs-from-microsoft-office-365.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/okta/ingest-logs-and-data-from-okta.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/salesforce/ingest-logs-and-data-from-salesforce.md), [cortex-docs.paloaltonetworks.com](https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/workday/ingest-report-data-from-workday.md)
 
+### 💀 F Parsec Parsec for Teams
+
+The Parsec Teams API takes a static API key created in the admin panel. Keys carry their own permissions and show when they were last used, but they have no expiry and no rotation API. Parsec does not reach into customer clouds or SaaS.
+
+- **Inbound F:** A static API key created by a Super Admin in the Parsec for Teams admin panel and sent as a bearer token. *(requires Enterprise)*
+- **Outbound N/A:** Parsec never needs access to customer clouds, repos or SaaS. Its other keys enroll team computers and receive SCIM calls from an identity provider.
+- **Receipts:** [support.parsec.app](https://support.parsec.app/api/v2/help_center/en-us/articles/32361397624084.json), [support.parsec.app](https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json)
+
+### 💀 F Perplexity Enterprise
+
+Every Perplexity API takes a static bearer key with no expiry. Audit keys are read-only and platform keys can be rotated by API, but nothing shows last use and leaks are not reported to Perplexity. Outbound, connectors use OAuth sign-in, but the audit webhook, custom connectors and the Snowflake service account store a secret.
+
+- **Inbound F:** A static API key sent as a bearer token. The Audit API, the Analytics API and the developer APIs each use their own kind of key.
+- **Outbound B:** Connectors reach other services through OAuth grants that members complete. The audit webhook, custom connectors and the Snowflake service account each store a static secret.
+- **Receipts:** [docs.perplexity.ai](https://docs.perplexity.ai/docs/admin/audit-api.md), [docs.perplexity.ai](https://docs.perplexity.ai/docs/admin/api-key-management.md), [docs.perplexity.ai](https://docs.perplexity.ai/docs/admin/computer-analytics-api.md), [www.perplexity.ai](https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md), [www.perplexity.ai](https://www.perplexity.ai/help-center/en/articles/2026100201-role-based-access-control-for-connectors.md), [www.perplexity.ai](https://www.perplexity.ai/help-center/en/articles/14017006-connecting-perplexity-with-snowflake.md), [docs.perplexity.ai](https://docs.perplexity.ai/docs/agent-api/tools/connectors.md)
+
 ### 💀 F Proofpoint Targeted Attack Protection
 
 The TAP SIEM and related APIs take a static service principal and secret on every request. No federation exists, and public docs show no hygiene check passing. Into Microsoft 365, Proofpoint documents admin consent to its own app, with no secret handed over.
@@ -392,6 +600,30 @@ Reco's API takes only a static access key made in the UI, with a role and an opt
 - **Inbound F:** A static access key created by an admin in the Reco UI, optionally tied to a role, an expiry and allowed IPs. No federation or short-lived token is documented.
 - **Outbound B:** Reco installs its own apps for Google Workspace, Microsoft 365, GitHub, Slack and Salesforce, and assumes an AWS role for S3 export. Okta, GitHub Enterprise and many security tools want pasted secrets.
 - **Receipts:** [web.archive.org](https://web.archive.org/web/20250105152050/https://docs.reco.ai/en/articles/10285332-reco-onboarding-guide), [docs.blinkops.com](https://docs.blinkops.com/docs/integrations/reco), [readme.reco.ai](https://readme.reco.ai/docs/creating-and-managing-custom-roles-rbac), [web.archive.org](https://web.archive.org/web/20250105151109/https://docs.reco.ai/en/articles/8672500-onboarding-guide-google-workspace), [web.archive.org](https://web.archive.org/web/20250105151129/https://docs.reco.ai/en/articles/8828435-onboarding-guide-microsoft-ad), [web.archive.org](https://web.archive.org/web/20250105152019/https://docs.reco.ai/en/articles/10153612-onboarding-guide-github), [web.archive.org](https://web.archive.org/web/20250105151214/https://docs.reco.ai/en/articles/8766084-onboarding-guide-slack-enterprise), [web.archive.org](https://web.archive.org/web/20250105151206/https://docs.reco.ai/en/articles/6928334-onboarding-guide-salesforce), [web.archive.org](https://web.archive.org/web/20250105151814/https://docs.reco.ai/en/articles/9847699-integration-guide-reco-s3-bring-your-own-bucket), [web.archive.org](https://web.archive.org/web/20240919131748/https://docs.reco.ai/en/articles/8890934-okta-onboarding-guide), [web.archive.org](https://web.archive.org/web/20250105152014/https://docs.reco.ai/en/articles/10153598-onboarding-guide-github-enterprise), [web.archive.org](https://web.archive.org/web/20250105151355/https://docs.reco.ai/en/articles/9351989-onboarding-guide-microsoft-with-your-app), [web.archive.org](https://web.archive.org/web/20250105151445/https://docs.reco.ai/en/articles/9543752-onboarding-guide-datadog), [web.archive.org](https://web.archive.org/web/20250105151224/https://docs.reco.ai/en/articles/7851638-onboarding-guide-wiz)
+
+### 💀 F Rewind Backups
+
+The Rewind API and MCP server take only a static organization API key, though every key must expire within a year. Outbound, Rewind uses app installs, consent and federation for some services, but Okta, Jira Automation and Azure storage sync still need a pasted secret.
+
+- **Inbound F:** A static organization API key, created in the Rewind app and sent in a request header. Keys expire after 90 days by default and after one year at most.
+- **Outbound B:** Rewind reaches GitHub through an installed app, Microsoft through Entra consent and Google Cloud storage through workload identity federation. Okta, Jira Automation and Azure storage sync take a pasted secret.
+- **Receipts:** [docs.developer.rewind.com](https://docs.developer.rewind.com/authentication), [docs.developer.rewind.com](https://docs.developer.rewind.com/mcp), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/28773774205467.json), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/57456063676699.json), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/30468763050395.json), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/29326725327643.json), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/49993169157531.json), [help.rewind.com](https://help.rewind.com/api/v2/help_center/en-us/articles/28786333674139.json)
+
+### 💀 F Rippling Platform
+
+Rippling's API takes a static bearer token tied to the person who created it. The token has scopes and a last-accessed time, but no set expiry and no management API. Outbound, MCP Gateway connectors use OAuth consent or a pasted key.
+
+- **Inbound F:** A static API token, created in the Developer app and sent as a bearer token. It is owned by the person who created it.
+- **Outbound B:** MCP Gateway connectors authorize through Rippling's own OAuth app, a customer OAuth app, or a pasted API key or personal access token.
+- **Receipts:** [developer.rippling.com](https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md), [developer.rippling.com](https://developer.rippling.com/llms.txt), [developer.rippling.com](https://developer.rippling.com/documentation/developer-portal/v2-guides/oauth.md), [developer.rippling.com](https://developer.rippling.com/documentation/rippling-platform/mcp-gateway/setup.md), [developer.rippling.com](https://developer.rippling.com/documentation/rippling-platform/developer/custom-settings.md)
+
+### 💀 F Secoda Platform
+
+Secoda's API takes a static API key that carries its creator's full access. The docs show no expiry, no key management API and no last-used time. Outbound, Secoda can assume an AWS role with an External ID, but BigQuery and Snowflake take a stored key or password.
+
+- **Inbound F:** A static API key generated in workspace settings and sent as a bearer token. It has the same access as the user who created it.
+- **Outbound B:** AWS integrations can use a cross-account role with an External ID. BigQuery takes a service account JSON key and Snowflake takes a password or private key.
+- **Receipts:** [docs.secoda.co](https://docs.secoda.co/api/authentication.md), [docs.secoda.co](https://docs.secoda.co/api/reference/getting-started.md), [docs.secoda.co](https://docs.secoda.co/features/ai-assistant/secoda-mcp-server.md), [docs.secoda.co](https://docs.secoda.co/integrations/security/connecting-via-aws-cross-account-role.md), [docs.secoda.co](https://docs.secoda.co/integrations/data-pipeline-tools/aws-glue-integration.md), [docs.secoda.co](https://docs.secoda.co/integrations/data-warehouses/bigquery-integration.md), [docs.secoda.co](https://docs.secoda.co/integrations/data-warehouses/snowflake-integration.md), [docs.secoda.co](https://docs.secoda.co/integrations/data-warehouses/redshift-integration.md)
 
 ### 💀 F Semgrep AppSec Platform
 
@@ -489,6 +721,14 @@ This card covers object storage only. Apps use the subscription's static S3 acce
 - **Outbound N/A:** Object Storage never needs access into your infrastructure.
 - **Receipts:** [docs.vultr.com](https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md), [docs.vultr.com](https://docs.vultr.com/products/storage/object-storage/faq.md), [www.vultr.com](https://www.vultr.com/api/), [docs.vultr.com](https://docs.vultr.com/platform/iam/policies/iam-policy-actions-map/storage-actions.md), [docs.vultr.com](https://docs.vultr.com/how-to-migrate-amazon-s3-storage-to-vultr-object-storage.md)
 
+### 💀 F Webflow Platform
+
+The Webflow Data API takes only a static bearer token. Site and workspace tokens are made in the dashboard and stay valid until revoked or unused for 365 days. Outbound, Webflow Cloud reads GitHub repositories through a GitHub App, so no key changes hands.
+
+- **Inbound F:** A static site token or workspace token, created in the dashboard and sent as a bearer token. OAuth apps are the other option and need a person to approve them in a browser.
+- **Outbound A:** Webflow Cloud reads customer repositories through a GitHub App the customer installs, plus a short GitHub OAuth step. No customer-made key is pasted into Webflow.
+- **Receipts:** [developers.webflow.com](https://developers.webflow.com/data/reference/authentication.md), [developers.webflow.com](https://developers.webflow.com/data/reference/authentication/site-token.md), [developers.webflow.com](https://developers.webflow.com/data/reference/authentication/workspace-token.md), [developers.webflow.com](https://developers.webflow.com/data/reference/enterprise/workspace-audit-logs/get.md), [developers.webflow.com](https://developers.webflow.com/data/reference/oauth-app.md), [developers.webflow.com](https://developers.webflow.com/webflow-cloud/github-app-permissions.md), [developers.webflow.com](https://developers.webflow.com/webflow-cloud/bring-your-own-app.md)
+
 ### 💀 F Zluri Identity Governance
 
 To call Zluri, your code needs a static API key that you get from Zluri Support. Zluri reaches into AWS, GCP, Entra and most SaaS without keys, but Okta and GitHub Enterprise need a pasted token or key.
@@ -529,6 +769,14 @@ To automate CloudGuard, your code sends a static key ID and secret on every call
 - **Outbound B:** CloudGuard assumes an AWS role you create, with an External ID. Azure wants a pasted app client secret, GCP a service account JSON key, and Alibaba an access key.
 - **Receipts:** [docs.cgn.portal.checkpoint.com](https://docs.cgn.portal.checkpoint.com/reference/authentication.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/dome9/dome9-sdk-go/master/dome9/client/client.go), [raw.githubusercontent.com](https://raw.githubusercontent.com/dome9/terraform-provider-dome9/master/website/docs/index.html.markdown), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/CloudGuard_Dome9/Documentation/Assets/AWS/OnboardAWS.htm), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/API.htm), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/Infinity-Portal-MSSP-Admin-Guide/Content/Topics-Infinity-Portal/API-Keys.htm), [docs.cgn.portal.checkpoint.com](https://docs.cgn.portal.checkpoint.com/reference/cloudaccounts_post_post_v2cloudaccounts.md), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/AWS/Troubleshooting-AWS-Onboarding.htm), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/AWS/Organization-Onboarding-AWS.htm), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-Azure-single-account.htm), [docs.cgn.portal.checkpoint.com](https://docs.cgn.portal.checkpoint.com/reference/azurecloudaccount_post_post_v2azurecloudaccount.md), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/Azure/Onboarding-Azure-Organizations.htm), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Getting-Started/Onboarding-GCP-project.htm), [docs.cgn.portal.checkpoint.com](https://docs.cgn.portal.checkpoint.com/reference/googlecloudaccount_post_post_v2googlecloudaccount.md), [sc1.checkpoint.com](https://sc1.checkpoint.com/documents/Infinity_Portal/WebAdminGuides/EN/CloudGuard-PM-Admin-Guide/Documentation/Assets/GCP/Google-Cloud-Platform.htm), [docs.cgn.portal.checkpoint.com](https://docs.cgn.portal.checkpoint.com/reference/alibabacloudaccount_post_post_v2alibabacloudaccount.md)
 
+### 🔴 D Cisco Meraki Dashboard
+
+The Meraki Dashboard API takes a permanent API key that inherits an admin's role, or an OAuth integration that trades a client secret and refresh token for one-hour tokens. No workload federation is documented. Outbound, the Umbrella link takes a pasted API key and secret.
+
+- **Inbound C:** An OAuth 2.0 integration approved once by an organization admin. Its client secret and refresh token are exchanged for access tokens that last 60 minutes.
+- **Outbound D:** To link a network to Cisco Umbrella or Secure Access, an admin pastes an Umbrella API key and secret into the dashboard.
+- **Receipts:** [developer.cisco.com](https://developer.cisco.com/meraki/api-v1/authorization/), [developer.cisco.com](https://developer.cisco.com/meraki/api-v1/oauth-overview/), [documentation.meraki.com](https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API), [documentation.meraki.com](https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Manually_Integrating_Cisco_Umbrella_and_Secure_Access_with_Meraki_Networks)
+
 ### 🔴 D Cloudflare API
 
 Your code calls the Cloudflare API with a static token that never expires by default, though it passes the other four hygiene checks. Logpush writes to your S3 or GCS bucket without a key, but the R2 migration tools want pasted keys.
@@ -536,6 +784,14 @@ Your code calls the Cloudflare API with a static token that never expires by def
 - **Inbound D:** A static API token, owned by a user or the account, scoped by permission and resource. Expiry and IP limits are optional.
 - **Outbound B:** For Logpush, you grant a Cloudflare-owned AWS or GCP identity write access to your bucket. R2 Super Slurper and Sippy want a static AWS access key or GCP JSON key.
 - **Receipts:** [developers.cloudflare.com](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/), [developers.cloudflare.com](https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/), [developers.cloudflare.com](https://developers.cloudflare.com/fundamentals/api/get-started/keys/), [developers.cloudflare.com](https://developers.cloudflare.com/logs/get-started/enable-destinations/aws-s3/), [developers.cloudflare.com](https://developers.cloudflare.com/logs/get-started/enable-destinations/google-cloud-storage/), [developers.cloudflare.com](https://developers.cloudflare.com/r2/data-migration/super-slurper/), [developers.cloudflare.com](https://developers.cloudflare.com/r2/data-migration/sippy/)
+
+### 🔴 D Cognition Devin
+
+The Devin API takes a static bearer key from a service user or a person. Service user keys expire in 30 days by default and carry a role. Outbound, Devin issues OIDC tokens that AWS and Google Cloud trust and uses a GitHub App, but GitLab and Bitbucket can take pasted tokens.
+
+- **Inbound D:** A static API key for a service user, or a personal access token, sent as a bearer token.
+- **Outbound B:** Devin signs short-lived OIDC tokens that AWS, Google Cloud and other services can trust, and reaches GitHub through a GitHub App. GitLab and Bitbucket can take a pasted access token.
+- **Receipts:** [docs.devin.ai](https://docs.devin.ai/api-reference/authentication.md), [docs.devin.ai](https://docs.devin.ai/api-reference/v3/audit-logs/enterprise-audit-logs.md), [docs.devin.ai](https://docs.devin.ai/product-guides/oidc.md), [docs.devin.ai](https://docs.devin.ai/integrations/gh.md), [docs.devin.ai](https://docs.devin.ai/integrations/gitlab.md), [docs.devin.ai](https://docs.devin.ai/integrations/bitbucket.md), [docs.devin.ai](https://docs.devin.ai/product-guides/secrets.md)
 
 ### 🔴 D CyberArk Secrets Manager SaaS
 
@@ -561,6 +817,22 @@ Every automated path into DigitalOcean starts from a personal access token made 
 - **Outbound B:** App Platform pulls from GitHub, GitLab and Bitbucket after you grant access, and Knowledge Bases connect Dropbox by OAuth. S3 indexing and private Docker Hub or GHCR pulls take pasted keys.
 - **Receipts:** [docs.digitalocean.com](https://docs.digitalocean.com/reference/api/create-personal-access-token/), [docs.digitalocean.com](https://docs.digitalocean.com/products/app-platform/how-to/create-apps/index.html.md), [docs.digitalocean.com](https://docs.digitalocean.com/products/container-registry/how-to/use-registry-docker-kubernetes/index.html.md), [docs.digitalocean.com](https://docs.digitalocean.com/products/spaces/how-to/manage-access/), [docs.digitalocean.com](https://docs.digitalocean.com/products/kubernetes/how-to/configure-single-sign-on-for-clusters/index.html.md), [docs.digitalocean.com](https://docs.digitalocean.com/reference/api/oauth/index.html.md), [digitalocean.com](https://digitalocean.com/blog/oauth-app-workload-identity-droplets), [docs.digitalocean.com](https://docs.digitalocean.com/products/knowledge-bases/how-to/manage-data-sources/index.html.md), [docs.digitalocean.com](https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-container-images/index.html.md), [docs.digitalocean.com](https://docs.digitalocean.com/products/custom-images/how-to/upload/index.html.md)
 
+### 🔴 D ElevenLabs Platform
+
+The ElevenLabs API takes only a static API key. Hygiene is good. Keys can be scoped, created and deleted by API, forced to expire, and disabled when leaked on GitHub. Outbound, agents reach Slack, Zendesk and Google Drive by consent, but Twilio and Salesforce take stored secrets.
+
+- **Inbound D:** A static API key, owned by a user or a service account, sent in a header on every request.
+- **Outbound B:** ElevenAgents connects to Slack, Zendesk and Google Drive through OAuth consent. Twilio takes a pasted SID and token, and Salesforce takes a client ID and secret.
+- **Receipts:** [elevenlabs.io](https://elevenlabs.io/docs/api-reference/authentication.md), [elevenlabs.io](https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md), [elevenlabs.io](https://elevenlabs.io/docs/overview/administration/workspaces/audit-logs.md), [elevenlabs.io](https://elevenlabs.io/docs/eleven-agents/customization/integrations/slack.md), [elevenlabs.io](https://elevenlabs.io/docs/eleven-agents/customization/integrations/google_drive.md), [elevenlabs.io](https://elevenlabs.io/docs/eleven-agents/customization/integrations/zendesk.md), [elevenlabs.io](https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/native-integration.md), [elevenlabs.io](https://elevenlabs.io/docs/eleven-agents/customization/integrations/salesforce.md), [elevenlabs.io](https://elevenlabs.io/docs/eleven-agents/customization/tools/webhook-tools.md)
+
+### 🔴 D Figma Platform
+
+The Figma REST API takes a static token for workloads. Plan access tokens and personal access tokens both expire, carry scopes and are covered by GitHub secret scanning. OAuth apps need a person to approve them. Outbound, Figma reads GitHub repositories through a GitHub App.
+
+- **Inbound D:** A static plan access token or personal access token with scopes and an expiry. OAuth apps are the other option and need a person to approve them in a browser.
+- **Outbound A:** Code Connect reads customer repositories through the Figma GitHub App, which an admin installs on the GitHub account or organization.
+- **Receipts:** [developers.figma.com](https://developers.figma.com/docs/rest-api/authentication/), [developers.figma.com](https://developers.figma.com/docs/rest-api/plan-access-tokens/), [developers.figma.com](https://developers.figma.com/docs/rest-api/personal-access-tokens/), [developers.figma.com](https://developers.figma.com/docs/rest-api/oauth-apps/), [developers.figma.com](https://developers.figma.com/docs/rest-api/activity-logs/), [developers.figma.com](https://developers.figma.com/docs/code-connect/code-connect-ui-github/), [developers.figma.com](https://developers.figma.com/docs/code-connect/code-connect-ui-setup/)
+
 ### 🔴 D GitGuardian Platform
 
 Your CI jobs call GitGuardian with a static API key. Service account keys can be set never to expire, and GitHub does not report leaked ones. GitGuardian reaches into AWS, GCP and Entra without keys, but most code hosts and registries still want a pasted token.
@@ -568,6 +840,14 @@ Your CI jobs call GitGuardian with a static API key. Service account keys can be
 - **Inbound D:** A static API key only: a service account token on the Growth or Enterprise plan, or a personal access token. No workload federation is accepted.
 - **Outbound B:** GitGuardian is its own OIDC issuer for AWS, GCP and Entra, and uses app installs for GitHub, Slack and Jira. GitLab, Bitbucket, Azure Repos and several registries want a token you create.
 - **Receipts:** [docs.gitguardian.com](https://docs.gitguardian.com/api-docs/authentication), [docs.gitguardian.com](https://docs.gitguardian.com/ggshield-docs/integrations/cicd-integrations/github-actions), [docs.gitguardian.com](https://docs.gitguardian.com/api-docs/service-accounts), [api.gitguardian.com](https://api.gitguardian.com/v1/openapi.json), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/file-storage-integrations/aws-s3), [docs.gitguardian.com](https://docs.gitguardian.com/nhi-governance/aws-iam-integration), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/amazon-ecr), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/google-artifact-registry), [docs.gitguardian.com](https://docs.gitguardian.com/nhi-governance/azure-entra-integration), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/github), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/messaging-integrations/microsoft-teams), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/messaging-integrations/slack), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/gitlab), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/bitbucket-cloud), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/azure-repos), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/docker-hub), [docs.gitguardian.com](https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/github-enterprise)
+
+### 🔴 D GitLab API and CI/CD
+
+To call the GitLab API from outside GitLab, a workload holds a personal, group or project access token. Those tokens expire, carry scopes and can be rotated through the API. GitLab CI/CD is an OIDC issuer, so pipelines reach clouds without stored keys, but audit event streaming still takes static cloud keys.
+
+- **Inbound D:** A personal, group or project access token sent in a request header. Service accounts hold personal access tokens too.
+- **Outbound B:** CI/CD jobs get OIDC ID tokens that AWS, Azure, Google Cloud and Vault can trust. Audit event streaming to Google Cloud Logging and AWS S3 takes a service account key or an access key.
+- **Receipts:** [docs.gitlab.com](https://docs.gitlab.com/api/rest/authentication/), [docs.gitlab.com](https://docs.gitlab.com/user/profile/service_accounts/), [docs.gitlab.com](https://docs.gitlab.com/api/oauth2/), [docs.gitlab.com](https://docs.gitlab.com/ci/secrets/id_token_authentication/), [docs.gitlab.com](https://docs.gitlab.com/ci/cloud_services/), [docs.gitlab.com](https://docs.gitlab.com/user/compliance/audit_event_streaming/)
 
 ### 🔴 D Lambda Cloud
 
@@ -585,6 +865,14 @@ Your CI jobs drive Modal with a static token id and secret, with no OIDC login. 
 - **Outbound B:** Modal is an OIDC issuer, and S3 mounts and ECR pulls use its tokens to assume an AWS role. GCS, R2, Artifact Registry, Azure, Docker Hub and OpenTelemetry take static keys.
 - **Receipts:** [modal.com](https://modal.com/docs/reference/modal.config), [modal.com](https://modal.com/docs/sdk/py/latest/Client.md), [modal.com](https://modal.com/docs/guide/service-users), [modal.com](https://modal.com/docs/guide/continuous-deployment), [modal.com](https://modal.com/docs/guide/workspaces), [modal.com](https://modal.com/docs/cli/latest/workspace.md), [modal.com](https://modal.com/docs/guide/oidc-integration), [modal.com](https://modal.com/docs/guide/cloud-bucket-mounts), [modal.com](https://modal.com/docs/sdk/py/latest/CloudBucketMount.md), [modal.com](https://modal.com/docs/guide/private-registries), [modal.com](https://modal.com/docs/sdk/py/latest/Image.md), [modal.com](https://modal.com/docs/guide/datadog-integration), [modal.com](https://modal.com/docs/guide/otel-integration)
 
+### 🔴 D Notion Notion
+
+A workload calls the Notion API with a static token. Internal connection tokens never expire. Personal access tokens expire within a year and can be scoped and tracked. Outbound, Notion AI connectors use consent apps, but SIEM streaming to Splunk or Sumo Logic stores a pasted token.
+
+- **Inbound D:** A static bearer token. It is either an internal connection token owned by a bot user or a personal access token that expires within one year.
+- **Outbound B:** Notion AI connectors for Slack and Google Drive are installed as consent apps. SIEM streaming to Splunk, Sumo Logic or Panther stores a token or shared secret.
+- **Receipts:** [developers.notion.com](https://developers.notion.com/guides/connections-and-tokens/internal-connections.md), [developers.notion.com](https://developers.notion.com/guides/connections-and-tokens/personal-access-tokens.md), [developers.notion.com](https://developers.notion.com/guides/authorization/credential-security.md), [developers.notion.com](https://developers.notion.com/guides/mcp/enterprise-managed-authorization.md), [developers.notion.com](https://developers.notion.com/reference/admin/intro.md), [www.notion.com](https://www.notion.com/help/notion-ai-connectors-for-google-drive), [www.notion.com](https://www.notion.com/help/notion-ai-connectors-for-slack), [www.notion.com](https://www.notion.com/help/add-security-and-compliance-integrations)
+
 ### 🔴 D Opal Security Platform
 
 To call the Opal API, Terraform provider or MCP servers, your code needs a static bearer token. Opal reaches AWS with a role, but GCP, Google Workspace, Azure, Okta and most SaaS connectors want a pasted key or secret.
@@ -592,6 +880,24 @@ To call the Opal API, Terraform provider or MCP servers, your code needs a stati
 - **Inbound D:** A static bearer token, either a personal token with the user's permissions or a service user token scoped by Opal roles. The REST API has no federation.
 - **Outbound B:** AWS uses a cross-account role with External ID and GitHub uses a GitHub App. GCP, Google Workspace, Azure and Okta want a service account key, client secret, private key or API token.
 - **Receipts:** [docs.opal.dev](https://docs.opal.dev/reference/authentication), [raw.githubusercontent.com](https://raw.githubusercontent.com/opalsecurity/terraform-provider-opal/main/docs/index.md), [docs.opal.dev](https://docs.opal.dev/docs/mcp/overview), [docs.opal.dev](https://docs.opal.dev/docs/mcp/okta-cross-app-access), [docs.opal.dev](https://docs.opal.dev/integrations/setting-up-your-aws-organization-in-opal), [docs.opal.dev](https://docs.opal.dev/integrations/aws-integration-on-prem-setup), [docs.opal.dev](https://docs.opal.dev/integrations/google-cloud-platform), [docs.opal.dev](https://docs.opal.dev/integrations/google), [docs.opal.dev](https://docs.opal.dev/integrations/azure), [docs.opal.dev](https://docs.opal.dev/integrations/okta), [docs.opal.dev](https://docs.opal.dev/integrations/github), [docs.opal.dev](https://docs.opal.dev/integrations/github-enterprise), [docs.opal.dev](https://docs.opal.dev/integrations/slack), [docs.opal.dev](https://docs.opal.dev/integrations/salesforce)
+
+### 🔴 D OpenAI ChatGPT Enterprise
+
+The ChatGPT Admin and Compliance APIs take only a static Admin API key. Keys can be scoped, show last use, and can be made and deleted by API, but expiry is optional. Workload federation exists for Codex only, in beta, and support must enable it. Outbound, most apps connect by OAuth, but Google Cloud wants a JSON key.
+
+> **Low confidence:** OpenAI's Compliance Platform help article refuses a plain fetch. Rotation and last-used rest on the organization Admin key reference. If workspace Admin keys differ, inbound drops to F.
+
+- **Inbound D:** A static Admin API key, created in the OpenAI Admin Console and sent as a bearer token. The key carries fine-grained scopes and an optional expiry.
+- **Outbound B:** Workspace connections reach other services mostly by OAuth sign-in or app installation. Direct Google Cloud access takes a pasted service account JSON key.
+- **Receipts:** [chatgpt.com](https://chatgpt.com/public/admin/api-reference/openapi.json), [learn.chatgpt.com](https://learn.chatgpt.com/docs/enterprise/compliance-api.md), [developers.openai.com](https://developers.openai.com/api/docs/guides/workload-identity-federation.md), [learn.chatgpt.com](https://learn.chatgpt.com/docs/enterprise/shared-connections.md)
+
+### 🔴 D Oracle NetSuite
+
+For machine access, NetSuite takes a JWT signed with a certificate key you hold and returns a 60-minute token. Certificates last at most two years and can be rotated by API. No workload federation is documented. Outbound scripts use stored passwords, keys and secrets.
+
+- **Inbound C:** The OAuth 2.0 client credentials flow. Your code signs a JWT with the private key of an uploaded certificate and exchanges it for a 60-minute access token.
+- **Outbound D:** SuiteScript calls out over HTTPS and SFTP with passwords, SSH keys and API secrets stored in NetSuite. Each stored secret can be limited to named scripts and domains.
+- **Receipts:** [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162730264820.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162755359851.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_4369651411.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_160216486846.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4617005472.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4855401415.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_160216498405.html), [docs.oracle.com](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_160077062690.html)
 
 ### 🔴 D Panther SIEM
 
@@ -635,6 +941,14 @@ CI jobs, the Socket CLI and the self-hosted Socket Firewall log in with a static
 - **Outbound A:** Apps you install or authorize, such as the Socket GitHub App, a Jira Forge app and OAuth clients for Linear and Vanta. You hand over no key or secret.
 - **Receipts:** [docs.socket.dev](https://docs.socket.dev/reference/authentication.md), [docs.socket.dev](https://docs.socket.dev/docs/api-keys.md), [docs.socket.dev](https://docs.socket.dev/docs/create-socket-api-key-for-cicd.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-for-github-actions.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-in-your-gitlab-pipeline.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-login.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-firewall-enterprise-registry-mode-codeartifact-configuration.md), [api.socket.dev](https://api.socket.dev/v1/openapi.json), [docs.socket.dev](https://docs.socket.dev/docs/remote-socket-mcp.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-for-github-installation.md), [docs.socket.dev](https://docs.socket.dev/docs/permissions.md), [docs.socket.dev](https://docs.socket.dev/docs/jira-integration.md), [docs.socket.dev](https://docs.socket.dev/docs/linear-integration.md), [docs.socket.dev](https://docs.socket.dev/docs/asana-integration.md), [docs.socket.dev](https://docs.socket.dev/docs/clickup-integration.md), [docs.socket.dev](https://docs.socket.dev/docs/vanta-integration.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-for-origin.md), [docs.socket.dev](https://docs.socket.dev/docs/slack-alerts.md), [docs.socket.dev](https://docs.socket.dev/docs/notifications.md), [docs.socket.dev](https://docs.socket.dev/docs/socket-firewall-enterprise-registry-mode-artifactory-configuration.md), [docs.socket.dev](https://docs.socket.dev/docs/integrations.md)
 
+### 🔴 D Statsig Platform
+
+The Statsig Console API takes only a static API key that never expires, though keys can be rotated by API and show a last-used time. Outbound, Statsig is keyless into BigQuery and Athena but wants passwords or tokens for Snowflake, Redshift and Databricks.
+
+- **Inbound D:** A static Console API key sent in a request header. SDKs use static server secret keys and client keys.
+- **Outbound B:** BigQuery trusts a Statsig-owned service account and Athena trusts a role that Statsig assumes. Snowflake, Redshift and Databricks connections take a password, private key or access token.
+- **Receipts:** [docs.statsig.com](https://docs.statsig.com/console-api/introduction.md), [docs.statsig.com](https://docs.statsig.com/access-management/api-keys.md), [docs.statsig.com](https://docs.statsig.com/integrations/mcp/automation-examples.md), [docs.statsig.com](https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/bigquery.md), [docs.statsig.com](https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/athena.md), [docs.statsig.com](https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/snowflake.md), [docs.statsig.com](https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/redshift.md), [docs.statsig.com](https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/databricks.md), [docs.statsig.com](https://docs.statsig.com/data-warehouse-ingestion/s3.md)
+
 ### 🔴 D Temporal Platform
 
 To call Temporal Cloud, your code needs a long-lived API key. There is no OIDC login, and the mTLS option covers Namespaces but not the admin API, tcld or Terraform. When Temporal writes into your AWS or GCP account, it assumes a role you grant.
@@ -667,6 +981,14 @@ To call Twilio, your code needs a static API key that never expires, or an OAuth
 - **Outbound D:** To store Voice and Video recordings in S3, you give Twilio an IAM user's access key and secret.
 - **Receipts:** [www.twilio.com](https://www.twilio.com/en-us/changelog/oauth-public-beta), [www.twilio.com](https://www.twilio.com/docs/iam/oauth-apps/overview), [www.twilio.com](https://www.twilio.com/docs/iam/api-keys), [www.twilio.com](https://www.twilio.com/docs/voice/recording-settings), [www.twilio.com](https://www.twilio.com/docs/iam/credentialaws-resource), [www.twilio.com](https://www.twilio.com/docs/video/tutorials/storing-aws-s3)
 
+### 🔴 D Twilio SendGrid
+
+To call SendGrid, your code holds a static API key that never expires. Keys can be scoped, created and revoked through the API, and GitHub reports leaked ones. There is no OAuth or federation option.
+
+- **Inbound D:** A static API key sent as a Bearer token, or as the password in Basic authentication for some services.
+- **Outbound N/A:** SendGrid never needs access to your infrastructure. It only posts events and parsed mail to a URL you supply.
+- **Receipts:** [www.twilio.com](https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication.md), [www.twilio.com](https://www.twilio.com/docs/sendgrid/api-reference/how-to-use-the-sendgrid-v3-api/authentication.md), [www.twilio.com](https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys.md), [www.twilio.com](https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features.md)
+
 ### 🔴 D Veza Access Graph
 
 Most Veza automation needs a static personal API key that never expires and carries its creator's access. OAuth2 Clients cover only a few scopes, and nothing accepts a federated token. Veza reaches into AWS and GCP without keys, but Azure, Okta, Snowflake and GitHub need a secret or key.
@@ -675,6 +997,22 @@ Most Veza automation needs a static personal API key that never expires and carr
 - **Outbound B:** Veza assumes an AWS role with an External ID and federates into GCP. Azure, Okta, Snowflake and GitHub need a client secret, private key, password or token.
 - **Receipts:** [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth2-clients.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth-scopes.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/security/security-faq-2.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/insight-point.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/aws.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/google.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/azure.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/okta.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/snowflake.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/snowflake/export-to-snowflake.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/github.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/administration/administration/customer-managed-encryption-keys/customer-provided-keys-setup.md), [docs.veza.com](https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/secrets-vaults.md)
 
+### 🔴 D Workiva Platform
+
+To call the Workiva API, your code swaps a client ID and secret for a bearer token that lasts ten minutes. No federation is documented. Outbound, Chains connectors store pasted keys, such as an AWS access key or a Google OAuth client secret.
+
+- **Inbound C:** An OAuth 2.0 client credentials grant. A client ID and secret tied to an integration user are exchanged for a bearer token that expires after ten minutes.
+- **Outbound D:** Chains connectors store credentials the customer pastes in. Amazon S3 takes an IAM user access key. Google Drive and OneDrive take the client ID and secret of an OAuth app the customer registers.
+- **Receipts:** [developers.workiva.com](https://developers.workiva.com/2026-01-01/authentication.md), [developers.workiva.com](https://developers.workiva.com/2026-01-01/tokenrequest.md), [developers.workiva.com](https://developers.workiva.com/2026-01-01/iam.md), [support.workiva.com](https://support.workiva.com/api/v2/help_center/en-us/articles/360045223172.json), [support.workiva.com](https://support.workiva.com/api/v2/help_center/en-us/articles/360052106251.json), [support.workiva.com](https://support.workiva.com/api/v2/help_center/en-us/articles/360045543792.json)
+
+### 🟠 C Anecdotes Platform
+
+To call Anecdotes, your code swaps a long-lived API key for a one-hour JWT. Keys can live forever unless you set an expiry. Outbound, Anecdotes assumes an AWS role with an external ID, but wants a service account JSON key for Google Cloud and a client secret for Azure.
+
+- **Inbound C:** A long-lived API key, created in the console or through the API, is exchanged for a JWT that lasts one hour.
+- **Outbound B:** AWS plugins assume an IAM role with an external ID. Google Cloud plugins take a service account JSON key, Azure plugins take a client secret, and GitHub connects by OAuth app or a pasted token.
+- **Receipts:** [help.anecdotes.ai](https://help.anecdotes.ai/api/identity/token-exchange.md), [help.anecdotes.ai](https://help.anecdotes.ai/api/getting-started.md), [help.anecdotes.ai](https://help.anecdotes.ai/plugins/cloud-infrastructure/aws.md), [help.anecdotes.ai](https://help.anecdotes.ai/plugins/cloud-infrastructure/aws/aws-use-a-single-iam-role-for-multiple-plugins.md), [help.anecdotes.ai](https://help.anecdotes.ai/plugins/cloud-infrastructure/gcp.md), [help.anecdotes.ai](https://help.anecdotes.ai/plugins/cloud-infrastructure/azure/connecting-multiple-azure-plugins-using-a-single-custom-role.md), [help.anecdotes.ai](https://help.anecdotes.ai/plugins/developer-tools/github-plugin.md)
+
 ### 🟠 C Anthropic Claude API
 
 Your code can trade a JWT from any OIDC issuer you register for a short-lived token tied to a service account, so no API key has to exist. Anthropic-hosted agents reach your systems only with bearer tokens you hand over. wif.tax runs on this API, graded like everything else.
@@ -682,6 +1020,22 @@ Your code can trade a JWT from any OIDC issuer you register for a short-lived to
 - **Inbound A:** Workload Identity Federation exchanges your issuer's JWT for a short-lived access token. A federation rule matches subject, audience, claims or a CEL condition and binds it to a service account.
 - **Outbound C:** Every path back into your systems uses a bearer credential you give Anthropic. The best case is an OAuth credential Anthropic refreshes, or a short-lived token you pass per request.
 - **Receipts:** [platform.claude.com](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation), [platform.claude.com](https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/create), [platform.claude.com](https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create), [platform.claude.com](https://platform.claude.com/docs/en/manage-claude/wif-reference), [platform.claude.com](https://platform.claude.com/docs/en/manage-claude/authentication), [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector), [platform.claude.com](https://platform.claude.com/docs/en/managed-agents/vaults), [platform.claude.com](https://platform.claude.com/docs/en/managed-agents/github), [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview), [platform.claude.com](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/security)
+
+### 🟠 C Apple Apple Business
+
+To call the Apple Business API, your code signs a JWT with a downloaded private key and swaps it for a one-hour token. The key has no documented expiry. Outbound links to Microsoft Entra ID and Google Workspace use admin consent, but a custom identity provider needs a pasted client secret.
+
+- **Inbound C:** An API account's private key signs a client assertion JWT, which the token endpoint exchanges for a one-hour access token.
+- **Outbound B:** Apple Business reads users from Microsoft Entra ID and Google Workspace after an administrator signs in and consents. A custom identity provider needs a client ID and secret pasted into Apple Business.
+- **Receipts:** [support.apple.com](https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web), [developer.apple.com](https://developer.apple.com/tutorials/data/documentation/apple-school-and-business-manager-api/implementing-oauth-for-the-apple-school-manager-and-apple-business-api.json), [support.apple.com](https://support.apple.com/guide/business/link-to-an-external-device-management-service-axm1c1be359d/web), [support.apple.com](https://support.apple.com/guide/business/federated-authentication-microsoft-entra-axm8c1cac980/web), [support.apple.com](https://support.apple.com/guide/business/sync-user-accounts-from-microsoft-entra-id-axm3ec7b95ad/web), [support.apple.com](https://support.apple.com/guide/business/federated-authentication-google-workspace-axmaef1a0154/web), [support.apple.com](https://support.apple.com/guide/business/federated-authentication-identity-provider-axmfcab66783/web)
+
+### 🟠 C Atlassian Cloud
+
+Scripts reach Jira and Confluence Cloud with a service account's client ID and secret, swapped for a one-hour token. The organization admin API, which serves the audit log, still takes a static key capped at one year. Outbound, Automation reaches AWS through a role but takes pasted keys for tools like New Relic.
+
+- **Inbound C:** A service account's OAuth client ID and secret are exchanged for a one-hour access token. API tokens and organization admin API keys are static and expire within a year.
+- **Outbound B:** Automation assumes an AWS role with an external ID, and GitHub and Azure connect through an installed app or sign-in consent. Other Automation connections take pasted API keys or client secrets.
+- **Receipts:** [support.atlassian.com](https://support.atlassian.com/user-management/docs/create-oauth-2-0-credential-for-service-accounts/), [developer.atlassian.com](https://developer.atlassian.com/cloud/admin/organization/rest/intro/), [support.atlassian.com](https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/), [support.atlassian.com](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/configure-aws-iam-for-jira-automation/), [support.atlassian.com](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-microsoft-azure/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-new-relic/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-automation-with-workato/), [support.atlassian.com](https://support.atlassian.com/cloud-automation/docs/use-automation-with-okta/)
 
 ### 🟠 C Axonius Platform
 
@@ -692,6 +1046,38 @@ To call the Axonius API, your code needs a static API key and secret, or an OAut
 - **Inbound C:** A service account sends a static API key and secret on every request. It can instead swap an OAuth client ID and secret for a bearer token that lasts one hour.
 - **Outbound B:** On hosted Axonius, the AWS adapter assumes a cross-account role you deploy, with your Customer ID as External ID. Azure, GCP and SaaS adapters need client secrets, keys or tokens.
 - **Receipts:** [docs.axonius.com](https://docs.axonius.com/docs/axonius-rest-api), [docs.axonius.com](https://docs.axonius.com/docs/manage-service-accounts), [docs.axonius.com](https://docs.axonius.com/docs/managing-api-settings), [raw.githubusercontent.com](https://raw.githubusercontent.com/Axonius/axonius_api_client/master/axonius_api_client/auth/api_key.py), [docs.axonius.com](https://docs.axonius.com/docs/connect-an-mcp-client-with-your-axonius-login), [docs.axonius.com](https://docs.axonius.com/docs/connecting-the-aws-adapter-using-cf-organizations), [docs.axonius.com](https://docs.axonius.com/docs/aws-parameters), [docs.axonius.com](https://docs.axonius.com/docs/azure-deploying-the-adapter), [docs.axonius.com](https://docs.axonius.com/docs/connecting-gcp-in-axonius), [docs.axonius.com](https://docs.axonius.com/docs/gcp-initial-setup), [docs.axonius.com](https://docs.axonius.com/docs/github), [docs.axonius.com](https://docs.axonius.com/docs/okta)
+
+### 🟠 C Bynder Digital Asset Management
+
+To call Bynder, your code trades an OAuth client ID and secret for a one-hour token. A permanent token is the static alternative. There is no federation, and the pages that explain how secrets and permanent tokens are managed sit behind a browser check.
+
+- **Inbound C:** An OAuth client ID and secret, registered in the portal, are exchanged through the client credentials grant for a bearer token that lasts an hour.
+- **Outbound N/A:** Bynder never needs credentials for your infrastructure. Its webhooks publish events to an endpoint you subscribe.
+- **Receipts:** [developers.bynder.com](https://developers.bynder.com/getting-started.md), [api.bynder.com](https://api.bynder.com/reference/post_v6-authentication-oauth2-token-client-credentials.md), [api.bynder.com](https://api.bynder.com/reference/get_v7-analytics-api-v2-user-logins.md), [api.bynder.com](https://api.bynder.com/reference/createwebhookconfiguration.md)
+
+### 🟠 C Cisco Catalyst SD-WAN Manager
+
+The Manager's REST API logs in with a user's name and password, which buys a session or a 30-minute JWT. No federation is documented. Outbound, Cloud OnRamp can assume an AWS role with an external ID, but Azure takes a client secret and Google Cloud takes a service account key.
+
+- **Inbound C:** A Manager user's name and password are posted to a login endpoint for a session cookie or a 30-minute JWT.
+- **Outbound B:** Cloud OnRamp cloud accounts take an AWS role with an external ID or an AWS access key. Azure takes a client secret and Google Cloud takes a service account private key.
+- **Receipts:** [developer.cisco.com](https://developer.cisco.com/docs/sdwan/authentication/), [developer.cisco.com](https://developer.cisco.com/docs/sdwan/validate-account-add/), [developer.cisco.com](https://developer.cisco.com/docs/sdwan/get-multicloud-external-id/)
+
+### 🟠 C Cisco Webex
+
+To call Webex without a person, you register a Service App and hold its client secret and a refresh token to mint access tokens. Bots use a static token. There is no federation. Outbound, Webex signs a short-lived token that your endpoint can verify against Cisco's public keys.
+
+- **Inbound C:** A Service App or Integration holds an OAuth client secret and a refresh token, which it trades for expiring access tokens. Bots use a static access token.
+- **Outbound A:** For Bring Your Own Data Source, Webex calls your registered URL with a token it signs. The token lasts at most 24 hours and verifies against Cisco's published keys.
+- **Receipts:** [developer.webex.com](https://developer.webex.com/admin/docs/service-apps), [developer.webex.com](https://developer.webex.com/docs/bots), [developer.webex.com](https://developer.webex.com/docs/bring-your-own-datasource)
+
+### 🟠 C Coupa Core Platform
+
+To call the Coupa Core API, your code swaps an OAuth client ID and secret for a token that lasts 24 hours. File exchange over SFTP takes a password or an SSH key. No workload federation is documented. Outbound Call Outs store a client secret you supply.
+
+- **Inbound C:** An OAuth client ID and secret, created in Setup, are posted to the instance token endpoint for an access token that lasts about 24 hours.
+- **Outbound C:** Call Outs post to an endpoint you run. Coupa stores a token URL, client ID and client secret that you supply and fetches a bearer token with them.
+- **Receipts:** [docs.coupa.com](https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients), [docs.coupa.com](https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client), [docs.coupa.com](https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc), [docs.coupa.com](https://docs.coupa.com/en/developer-documentation/coupa-core-flat-files-csv/getting-started/sftp-overview), [compass.coupa.com](https://compass.coupa.com/en-us/products/total-spend-management-platform/integration-playbooks-and-resources/integration-knowledge-articles/oauth-2.0-for-call-outs)
 
 ### 🟠 C CrowdStrike Falcon API
 
@@ -717,6 +1103,22 @@ To call Cyera's API, your code swaps a client ID and secret for a short-lived JW
 - **Outbound B:** Cyera says it connects to clouds through native APIs. How it authenticates into each one is behind a login.
 - **Receipts:** [docs.delinea.com](https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm), [www.elastic.co](https://www.elastic.co/docs/reference/integrations/cyera), [raw.githubusercontent.com](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/CyeraDSPM/Data%20Connectors/CyeraDSPM_CCF/CyeraDSPMLogs_DataConnectorPoller.json), [auth.cyera.io](https://auth.cyera.io/.well-known/openid-configuration), [www.cyera.com](https://www.cyera.com/partnership/microsoft), [www.cyera.com](https://www.cyera.com/partnership/google-cloud-platform), [www.cyera.com](https://www.cyera.com/blog/reinventing-on-prem-data-discovery-and-classification-cyeras-connectorless-approach)
 
+### 🟠 C DoControl Platform
+
+To call DoControl's API, your code swaps a refresh token that lasts ten years for a five-minute access token. Outbound, DoControl connects to Box and GitHub by app consent, but Google Workspace takes an uploaded service account key and CrowdStrike takes a client secret.
+
+- **Inbound C:** An API key, which is a refresh token valid for ten years, is posted to the refresh endpoint for an access token that lasts five minutes.
+- **Outbound B:** Box and GitHub connect by OAuth consent or app install. Google Workspace takes an uploaded service account key file. CrowdStrike and Splunk take a pasted client secret or token.
+- **Receipts:** [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/system-management/api.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/saas-data-monitoring/docontrol-mcp.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/integrations/github.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/integrations/box.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/integrations/integrations-google-drive/upload-key-file.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/integrations/integrations-crowdstrike.md), [docs.docontrol.io](https://docs.docontrol.io/docontrol-user-guide/system-management/settings/connectors/siem-and-soar-connectors/splunk.md)
+
+### 🟠 C Docusign eSignature
+
+A service calls Docusign by signing a JWT with an RSA private key and swapping it for a one-hour token. The private key never expires and is managed only in the console. No workload federation is documented.
+
+- **Inbound C:** JWT Grant. The integration signs a JWT with an RSA private key held by the customer and exchanges it for a one-hour access token that impersonates a consenting user.
+- **Outbound C:** Docusign Connect posts event notifications to a customer listener. With OAuth for Connect, the customer gives Docusign a client ID and secret for its own authorization server.
+- **Receipts:** [developers.docusign.com](https://developers.docusign.com/platform/auth/jwt/), [developers.docusign.com](https://developers.docusign.com/platform/configure-app/), [developers.docusign.com](https://developers.docusign.com/docs/monitor-api/monitor101/auth/), [developers.docusign.com](https://developers.docusign.com/platform/auth/), [developers.docusign.com](https://developers.docusign.com/platform/webhooks/connect/validation-and-security/oauth-connect/), [developers.docusign.com](https://developers.docusign.com/platform/webhooks/connect/validation-and-security/)
+
 ### 🟠 C Drata Platform
 
 To call the Drata API, your code holds a static API key or an OAuth client secret that mints 24-hour tokens. There is no federation. Drata reaches into AWS by assuming a role you create, but GCP needs a JSON key and Azure a client secret.
@@ -733,6 +1135,14 @@ Kibana relays your Authorization header to Elasticsearch. On Platinum or Enterpr
 - **Outbound C:** GA connectors use secrets you create and paste. The best run OAuth client credentials from your secret or private key. Bedrock wants AWS access keys and Gemini a service-account JSON key.
 - **Receipts:** [www.elastic.co](https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/kibana-authentication), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/configuration-reference/security-settings), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/configuration-reference/general-settings), [github.com](https://github.com/elastic/kibana/blob/main/x-pack/platform/test/security_api_integration/tests/http_bearer/jwt.ts), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/users-roles/cluster-or-deployment-auth/jwt), [github.com](https://github.com/elastic/terraform-provider-elasticstack/blob/main/docs/index.md), [github.com](https://github.com/elastic/kibana/blob/main/x-pack/platform/plugins/shared/security/server/routes/tags.ts), [www.elastic.co](https://www.elastic.co/subscriptions), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/deploy/elastic-cloud/differences-from-other-elasticsearch-offerings), [www.elastic.co](https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-api-keys), [www.elastic.co](https://www.elastic.co/docs/api/doc/kibana/authentication), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/bedrock-action-type), [www.elastic.co](https://www.elastic.co/docs/explore-analyze/ai-features/llm-guides/connect-to-amazon-bedrock), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/gemini-action-type), [www.elastic.co](https://www.elastic.co/docs/explore-analyze/ai-features/llm-guides/connect-to-google-vertex), [www.elastic.co](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-amazonbedrock), [www.elastic.co](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-googlevertexai), [www.elastic.co](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-azureopenai), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/openai-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/servicenow-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/email-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/defender-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/crowdstrike-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/sentinelone-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/webhook-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/jira-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/slack-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/pagerduty-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/slack-v2-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/okta-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/aws-cloudwatch-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/gcp-iam-action-type), [www.elastic.co](https://www.elastic.co/docs/reference/kibana/connectors-kibana/github-action-type)
 
+### 🟠 C Freshworks Freshservice
+
+Freshservice's API takes a static API key or an OAuth access token. The OAuth path needs an app with a client secret and a one-time admin consent. Outbound, an older AWS app uses a role with an external ID, but current AWS, Azure and Google Cloud discovery take stored keys.
+
+- **Inbound C:** An OAuth app registered with Freshworks uses its client secret and a refresh token to get short-lived access tokens after an admin consents. Scripts can also send a static API key.
+- **Outbound B:** The Amazon Web Services app assumes a customer role with an external ID. Current AWS discovery takes an access key, Azure a client secret and Google Cloud a service account key.
+- **Receipts:** [api.freshservice.com](https://api.freshservice.com/), [community.freshworks.dev](https://community.freshworks.dev/t/freshworks-introduces-multi-oauth-functionality-for-app-developers-and-oauth-support-for-freshservice-apis/12798), [support.freshservice.com](https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice), [support.freshservice.com](https://support.freshservice.com/support/solutions/articles/211309-freshservice-integration-with-amazon-web-services-aws-), [support.freshservice.com](https://support.freshservice.com/support/solutions/articles/50000012093-aws-autodiscovery), [support.freshservice.com](https://support.freshservice.com/support/solutions/articles/50000011917-microsoft-azure-autodiscovery), [support.freshservice.com](https://support.freshservice.com/support/solutions/articles/50000009163-freshservice-cloud-discovery-gcp-integration)
+
 ### 🟠 C GitHub API and Actions
 
 To call the GitHub API from outside GitHub, you hold a personal access token or a GitHub App private key. The App key at least yields one-hour tokens. GitHub Actions is an OIDC issuer, so workflows reach AWS, GCP, Azure and Vault without stored keys.
@@ -740,6 +1150,70 @@ To call the GitHub API from outside GitHub, you hold a personal access token or 
 - **Inbound C:** A GitHub App signs a JWT with its long-lived private key and trades it for a one-hour installation token. Personal access tokens are static keys.
 - **Outbound A:** GitHub Actions is an OIDC issuer that AWS, GCP, Azure and Vault can trust. They hand back short-lived credentials, so no cloud secret is stored in GitHub.
 - **Receipts:** [docs.github.com](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app), [docs.github.com](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/managing-private-keys-for-github-apps), [docs.github.com](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens), [docs.github.com](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
+
+### 🟠 C Gong Platform
+
+To call the Gong API, your code holds an access key and secret, or an OAuth client secret and refresh token that yield one-day tokens. Outbound, Gong reads Google Workspace through an installed app and Salesforce through a sign-in, but many telephony connections take pasted keys, passwords or AWS access keys.
+
+- **Inbound C:** An OAuth integration trades its client secret and a refresh token for a bearer token that lasts one day by default. Static access keys with a secret are the other option.
+- **Outbound B:** Google Workspace connects through a domain-installed Marketplace app and Salesforce through an integration user's sign-in. Telephony providers take API keys, passwords or AWS access keys.
+- **Receipts:** [help.gong.io](https://help.gong.io/apidocs.md), [help.gong.io](https://help.gong.io/docs/create-an-app-for-gong.md), [help.gong.io](https://help.gong.io/docs/what-the-gong-api-provides.md), [help.gong.io](https://help.gong.io/docs/connect-google-workspace-company-wide.md), [help.gong.io](https://help.gong.io/docs/connect-gong-to-salesforce.md), [help.gong.io](https://help.gong.io/docs/what-you-need-from-your-telephony-provider.md)
+
+### 🟠 C Greenhouse Recruiting
+
+A custom integration swaps an OAuth client ID and secret for a short-lived Harvest v3 token. The secret has no expiry and is rotated only in the console. Outbound, calendars connect by OAuth consent, but some integrations take a pasted API key.
+
+- **Inbound C:** OAuth 2.0 client credentials. A client ID and secret created in the Dev Center are exchanged for a bearer token. The Audit Log API swaps a Harvest API key for a 24-hour JWT.
+- **Outbound B:** Google Calendar connects through a per-user OAuth consent. The BambooHR integration takes a BambooHR API key pasted into Greenhouse Recruiting.
+- **Receipts:** [harvestdocs.greenhouse.io](https://harvestdocs.greenhouse.io/docs/authentication.md), [docs.greenhouse.io](https://docs.greenhouse.io/audit-log.html), [support.greenhouse.io](https://support.greenhouse.io/hc/en-us/articles/360021799232-Google-Calendar-integration), [support.greenhouse.io](https://support.greenhouse.io/hc/en-us/articles/201177624-BambooHR-integration)
+
+### 🟠 C HubSpot Platform
+
+To call the HubSpot API, your app holds either a static access token or an OAuth client secret and refresh token that yield 30-minute tokens. Outbound, HubSpot reaches Amazon S3 through a role with an external ID and Gmail through consent, but IMAP, Exchange and many data sync apps take passwords or keys.
+
+- **Inbound C:** An OAuth app trades its client secret and a long-term refresh token for an access token that lasts 30 minutes. Single-account apps use a static access token instead.
+- **Outbound B:** The Amazon S3 integration assumes an IAM role with an external ID, and Gmail connects through Google consent. Exchange, IMAP and many data sync apps take a password, API key or client secret.
+- **Receipts:** [developers.hubspot.com](https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview.md), [developers.hubspot.com](https://developers.hubspot.com/docs/api-reference/latest/authentication/manage-oauth-tokens.md), [developers.hubspot.com](https://developers.hubspot.com/docs/api-reference/latest/account/audit-logs/guide.md), [developers.hubspot.com](https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/account-service-keys.md), [knowledge.hubspot.com](https://knowledge.hubspot.com/integrations/sync-hubspot-data-to-amazon-s3), [knowledge.hubspot.com](https://knowledge.hubspot.com/connected-email/connect-your-inbox-to-hubspot), [knowledge.hubspot.com](https://knowledge.hubspot.com/integrations/data-sync-authentication)
+
+### 🟠 C Ironclad CLM
+
+To call Ironclad's API, your code swaps an OAuth client ID and secret for a six-hour token. The secret has no documented expiry and is rotated only in the web app. Outbound, storage and Salesforce links use a sign-in and consent, while webhooks take a pasted header.
+
+- **Inbound C:** An OAuth 2.0 client ID and secret, registered in Company Settings, are posted to the token endpoint for a bearer token that lasts six hours. *(requires API add-on)*
+- **Outbound B:** Cloud storage and Salesforce are linked by signing in and consenting, with no secret pasted. Webhooks to customer endpoints carry a static API key, basic or bearer header that the customer supplies.
+- **Receipts:** [developer.ironcladapp.com](https://developer.ironcladapp.com/reference/client-credentials-grant.md), [developer.ironcladapp.com](https://developer.ironcladapp.com/reference/authentication-api.md), [developer.ironcladapp.com](https://developer.ironcladapp.com/reference/register-oauth-client.md), [developer.ironcladapp.com](https://developer.ironcladapp.com/reference/legacy-access-token.md), [support.ironcladapp.com](https://support.ironcladapp.com/api/v2/help_center/en-us/articles/23134913235991.json), [support.ironcladapp.com](https://support.ironcladapp.com/api/v2/help_center/en-us/articles/12278303005591.json), [support.ironcladapp.com](https://support.ironcladapp.com/api/v2/help_center/en-us/articles/19145745771287.json), [developer.ironcladapp.com](https://developer.ironcladapp.com/reference/webhook-authentication.md), [developer.ironcladapp.com](https://developer.ironcladapp.com/reference/webhook-verification.md), [support.ironcladapp.com](https://support.ironcladapp.com/api/v2/help_center/en-us/articles/32989670632343.json)
+
+### 🟠 C JumpCloud Platform
+
+JumpCloud service accounts swap a client ID and secret for a one-hour token, and the secret must expire within 365 days. Some APIs still take only an admin's static API key. Outbound, Microsoft 365 sync uses admin consent, while SCIM connectors take a pasted token.
+
+- **Inbound C:** A service account's client ID and secret are exchanged at an OAuth 2.0 token endpoint for an access token that lasts about an hour.
+- **Outbound B:** Microsoft 365 and Google Workspace directory sync is authorized by an admin signing in and consenting. SCIM provisioning connectors take a token pasted from the target application.
+- **Receipts:** [jumpcloud.com](https://jumpcloud.com/support/service-account-for-apis), [jumpcloud.com](https://jumpcloud.com/support/siem-integration-in-directory-insights), [jumpcloud.com](https://jumpcloud.com/support/jumpcloud-apis), [jumpcloud.com](https://jumpcloud.com/support/m365-sync), [jumpcloud.com](https://jumpcloud.com/support/google-workspace-integration-overview), [jumpcloud.com](https://jumpcloud.com/support/integrate-with-snowflake)
+
+### 🟠 C Lucid Visual Collaboration Suite
+
+Lucid's API takes a long-lived API key or a one-hour OAuth token renewed with a client secret and refresh token. API keys can be set to never expire. Outbound, AWS imports use a cross-account role, but Google Cloud wants a service account key and Azure a client secret.
+
+- **Inbound C:** An OAuth 2.0 client ID and secret, plus a refresh token from a one-time consent, are exchanged for an access token that lasts one hour. Long-lived API keys are the alternative.
+- **Outbound B:** Cloud imports assume a cross-account IAM role with an external ID on AWS. Google Cloud imports take an uploaded service account JSON key, and Azure imports take a pasted client secret.
+- **Receipts:** [developer.lucid.co](https://developer.lucid.co/reference/authentication-methods.md), [developer.lucid.co](https://developer.lucid.co/reference/refreshing-the-access-token.md), [developer.lucid.co](https://developer.lucid.co/reference/client-creation.md), [developer.lucid.co](https://developer.lucid.co/docs/admin-controls.md), [help.lucid.co](https://help.lucid.co/hc/en-us/articles/15682358446868), [help.lucid.co](https://help.lucid.co/hc/en-us/articles/16252835135508), [help.lucid.co](https://help.lucid.co/hc/en-us/articles/16080061445908)
+
+### 🟠 C Monte Carlo Data Observability
+
+Monte Carlo's API takes a static API key or an OAuth client secret swapped for a short-lived JWT. No workload federation is documented. Outbound, AWS access uses an assumed role with an external ID, but BigQuery, Snowflake and Redshift connections store a key or password.
+
+- **Inbound C:** An OAuth 2.0 client ID and secret are exchanged at the token URL for a short-lived JWT. Static API keys with a key ID and secret are also accepted.
+- **Outbound B:** Monte Carlo's collector assumes an AWS role, optionally locked to an external ID, and GitHub connects as an installed app. Warehouse connections store a JSON key, key pair or password.
+- **Receipts:** [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/api-authentication.md), [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/audit-logging.md), [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/creating-iam-roles.md), [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/github.md), [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/bigquery.md), [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/snowflake.md), [docs.getmontecarlo.com](https://docs.getmontecarlo.com/docs/redshift.md)
+
+### 🟠 C NinjaOne Platform
+
+A workload swaps a client ID and client secret for a NinjaOne API token that lasts one hour. The secret has no documented expiry or rotation API. Outbound, the Microsoft 365 mail link uses admin consent, but CrowdStrike, SentinelOne and the SIEM webhook take pasted tokens.
+
+- **Inbound C:** A machine-to-machine client app posts its client ID and client secret to the token endpoint and gets a bearer token that expires after one hour.
+- **Outbound B:** The Microsoft 365 mail integration uses an app that an administrator consents to. CrowdStrike, SentinelOne and the activity webhook each take a pasted API secret, token or header value.
+- **Receipts:** [app.ninjarmm.com](https://app.ninjarmm.com/apidocs-beta/articles/authorization/flows/client-credentials-flow.md), [app.ninjarmm.com](https://app.ninjarmm.com/apidocs-beta/articles/authorization/create-applications/machine-to-machine-apps.md), [www.ninjaone.com](https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/), [www.ninjaone.com](https://www.ninjaone.com/docs/application-programming-interface-api/public-api-2-0-authorization/), [www.ninjaone.com](https://www.ninjaone.com/docs/endpoint-management/ticketing/microsoft-365-integration/), [www.ninjaone.com](https://www.ninjaone.com/docs/integrations/how-to-connect-crowdstrike/), [www.ninjaone.com](https://www.ninjaone.com/docs/integrations/antivirus/sentinelone/understanding-sentinelone-api-tokens/), [app.ninjarmm.com](https://app.ninjarmm.com/apidocs/NinjaRMM-API-v2.yaml)
 
 ### 🟠 C Okta Management API
 
@@ -757,6 +1231,22 @@ To call the Oleria API, your code trades a static client ID and secret for a one
 - **Outbound B:** Oleria uses a cross-account role for AWS and its own apps for Entra, Azure, Google Workspace, GitHub and Salesforce. GCP, Okta and Slack want a key, secret or token.
 - **Receipts:** [docs.oleria.com](https://docs.oleria.com/developer-docs/api-reference/generate-token), [docs.oleria.com](https://docs.oleria.com/developer-docs/api-reference/overview), [docs.oleria.com](https://docs.oleria.com/integrations/aws-iam-and-s3), [docs.oleria.com](https://docs.oleria.com/integrations/microsoft-entra-id), [docs.oleria.com](https://docs.oleria.com/integrations/google-workspace), [docs.oleria.com](https://docs.oleria.com/integrations/github), [docs.oleria.com](https://docs.oleria.com/integrations/salesforce), [docs.oleria.com](https://docs.oleria.com/integrations/gcp), [docs.oleria.com](https://docs.oleria.com/integrations/azure), [docs.oleria.com](https://docs.oleria.com/integrations/okta), [docs.oleria.com](https://docs.oleria.com/integrations/slack)
 
+### 🟠 C Outreach Outreach
+
+A server calls the Outreach API with a one-hour token, minted from an RSA private key you hold or from an OAuth client secret and refresh token. Outbound, Salesforce and Microsoft 365 connect by OAuth consent, but Exchange service accounts and SMTP still store passwords.
+
+- **Inbound C:** An app signs a JWT with its RSA private key and swaps it for a one-hour server token. OAuth apps use a client secret and refresh token for two-hour access tokens.
+- **Outbound B:** Salesforce and Microsoft 365 mailboxes connect through OAuth consent. Exchange service accounts and SMTP sending store a username and password.
+- **Receipts:** [developers.outreach.io](https://developers.outreach.io/api/s2s-access.md), [developers.outreach.io](https://developers.outreach.io/api/oauth.md), [developers.outreach.io](https://developers.outreach.io/mcp-server/authentication.md), [support.outreach.io](https://support.outreach.io/support/solutions/articles/159000426014-outreach-crm-connection-overview), [support.outreach.io](https://support.outreach.io/support/solutions/articles/159000425773-how-to-connect-office-365-mailbox-to-outreach-using-microsoft-graph), [support.outreach.io](https://support.outreach.io/support/solutions/articles/159000425735-how-to-connect-exchange-master-service-account-msa-to-outreach), [support.outreach.io](https://support.outreach.io/support/solutions/articles/159000425548-how-to-connect-a-primary-email-to-outreach)
+
+### 🟠 C PagerDuty Operations Cloud
+
+A workload can swap an app's client ID and secret for a PagerDuty token that lasts one day. Static account and user API keys are still offered and never expire. Outbound, PagerDuty reaches AWS through a role with an external ID and GitHub through an app, but Datadog, Azure Functions and Dynatrace take pasted secrets.
+
+- **Inbound C:** A Scoped OAuth app posts its client ID and client secret to the token endpoint and gets an app token that expires after one day.
+- **Outbound B:** Incident Workflows assume an AWS role with an external ID and reach GitHub through the PagerDuty GitHub App. Datadog, Azure Functions and Dynatrace connections take a pasted key or client secret.
+- **Receipts:** [docs.pagerduty.com](https://docs.pagerduty.com/developer/private-apps.md), [docs.pagerduty.com](https://docs.pagerduty.com/developer/oauth-functionality.md), [docs.pagerduty.com](https://docs.pagerduty.com/developer/authentication.md), [docs.pagerduty.com](https://docs.pagerduty.com/developer/pagerduty-openid-token.md), [docs.pagerduty.com](https://docs.pagerduty.com/ai-automation/automation/incident-workflows/workflow-integrations.md)
+
 ### 🟠 C Palo Alto Networks Prisma Cloud
 
 To call the Prisma Cloud API, your code trades a static access key for a 10-minute token. No OIDC path exists. Prisma reaches AWS and Alibaba by role, but Azure wants an app client secret and GCP a service account JSON key.
@@ -773,6 +1263,14 @@ Automation calls the PingOne Management API as a Worker app holding a client sec
 - **Outbound C:** Provisioning pushes users into SaaS directories with credentials you create in the target and paste into PingOne. The best case is an OAuth client secret.
 - **Receipts:** [developer.pingidentity.com](https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-and-authentication-by-application-type/worker-applications.md), [developer.pingidentity.com](https://developer.pingidentity.com/pingone-api/platform/application-management.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/applications/p1_edit_application_worker.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/pingidentity/terraform-provider-pingone/main/docs/index.md), [developer.pingidentity.com](https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-flow-by-grant-type/token-exchange-grant-type.md), [developer.pingidentity.com](https://developer.pingidentity.com/pingone-api/auth/openid-connect-oauth-2/token/token-token_exchange.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/use_cases/p1_oauth_2_token_exchange_machine_to_machine.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_azure_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_connection_entra_id.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_google_workspace_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_salesforce_workforce_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_creating_zoom_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_scim_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_github_emu_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_creating_slack_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_creating_a_servicenow_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_workday_connection.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_provisioning_connection_snowflake.md), [docs.pingidentity.com](https://docs.pingidentity.com/pingone/integrations/p1_create_webhook.md)
 
+### 🟠 C Pure Storage Pure1
+
+To call the Pure1 API, your code signs a JWT with an RSA private key and swaps it for an access token that lasts about ten hours. The public key is registered by hand in the Pure1 web console. Pure1 does not reach into customer clouds.
+
+- **Inbound C:** A customer-held RSA private key signs a JWT, which the token endpoint exchanges for a short-lived access token. The matching public key is registered as an application in Pure1.
+- **Outbound N/A:** Pure1 never connects into customer clouds, repos or SaaS. Arrays send their own telemetry to Pure1, and the API only reads it back.
+- **Receipts:** [static.pure1.purestorage.com](https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml), [blog.everpuredata.com](https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/)
+
 ### 🟠 C Qualys Cloud Platform
 
 Workloads call Qualys with a user's password or a Qualys client ID and secret, traded for a 4-hour token. Support-enabled trust of your own IdP does not count yet. Qualys reaches AWS without keys, but Azure, GCP and OCI take a secret or private key.
@@ -780,6 +1278,22 @@ Workloads call Qualys with a user's password or a Qualys client ID and secret, t
 - **Inbound C:** A Qualys client ID and secret, or a user's password, traded for a 4-hour token. Support-enabled IdP tokens exist but do not count.
 - **Outbound B:** AWS connectors assume a role you create, with an External ID. Azure takes a client secret, GCP a service-account key, and OCI a private API key.
 - **Receipts:** [docs.qualys.com](https://docs.qualys.com/en/oauth/oauth-phase2/oauth/oauth_oidc.htm), [docs.qualys.com](https://docs.qualys.com/en/oauth/oauth-phase2/oauth/onboard_oauth.htm), [docs.qualys.com](https://docs.qualys.com/en/oauth/oauth-phase2/oauth/custom_claim.htm), [docs.qualys.com](https://docs.qualys.com/en/oauth/oauth-phase2/oauth/use_oauth.htm), [docs.qualys.com](https://docs.qualys.com/en/oauth/oauth-phase2/oauth/support_matrix.htm), [docs.qualys.com](https://docs.qualys.com/en/vm/qweb-all-api/get_started/authentication.htm), [docs.qualys.com](https://docs.qualys.com/en/csam/api/get_started/API_Authentication.htm), [docs.qualys.com](https://docs.qualys.com/en/oauth/oauth-phase2/oauth_ui/generate_authentication_token.htm), [docs.qualys.com](https://docs.qualys.com/en/conn/latest/aws/aws_connector.htm), [docs.qualys.com](https://docs.qualys.com/en/cloudview/latest/onboarding/azure_onboarding.htm), [docs.qualys.com](https://docs.qualys.com/en/conn/latest/azure/azure_auth_details.htm), [docs.qualys.com](https://docs.qualys.com/en/conn/latest/gcp/gcp_config_download.htm), [docs.qualys.com](https://docs.qualys.com/en/etm/latest/mergedProjects/etm_connectors/authentication/wif_authentication.htm), [docs.qualys.com](https://docs.qualys.com/en/conn/release-notes/connector/release_2_19.htm), [docs.qualys.com](https://docs.qualys.com/en/conn/latest/oci/oci_connectors.htm)
+
+### 🟠 C Ramp Developer API
+
+To call Ramp's API, your code swaps a client ID and secret for a token that lasts 10 days. No federation is documented. Outbound, Ramp reads AWS, Azure and Google Cloud billing without stored keys, but NetSuite and Sage Intacct connections take pasted credentials.
+
+- **Inbound C:** An OAuth client ID and secret from a developer app are exchanged at the token endpoint for an access token that lasts 10 days.
+- **Outbound B:** Ramp assumes an AWS role with an External ID, uses a federated credential on Azure and stores no Google Cloud credentials. NetSuite and Sage Intacct connections take pasted secrets.
+- **Receipts:** [docs.ramp.com](https://docs.ramp.com/llms-guides/authorization.txt), [docs.ramp.com](https://docs.ramp.com/llms-guides/ai-usage.txt), [support.ramp.com](https://support.ramp.com/connect-aws-bedrock-ai-token-spend), [support.ramp.com](https://support.ramp.com/connect-azure-ai-token-spend), [support.ramp.com](https://support.ramp.com/connect-google-cloud-ai-token-spend), [support.ramp.com](https://support.ramp.com/netsuite-api-and-authentication-requirements), [support.ramp.com](https://support.ramp.com/how-to-set-up-netsuite-with-ramp-standard-no-subsidiaries), [support.ramp.com](https://support.ramp.com/how-to-set-up-ramp-to-sync-with-sage-intacct), [support.ramp.com](https://support.ramp.com/quickbooks-online-overview)
+
+### 🟠 C Rubrik Security Cloud
+
+To call the Rubrik Security Cloud API, a service account swaps a client ID and secret for a token that lasts 12 hours by default. Outbound, Rubrik uses a cross-account role on AWS and OAuth consent on Azure, but some paths still take cloud keys.
+
+- **Inbound C:** A service account client ID and secret are posted to a token endpoint for a short-lived bearer token. Personal access tokens use the same exchange for one user.
+- **Outbound B:** On AWS, Rubrik assumes a cross-account role with an external ID, deployed by CloudFormation. Azure uses OAuth consent. Other paths take an AWS access key or a Google Cloud auth key.
+- **Receipts:** [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/), [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/Data-Protection/Cloud/AWS/), [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/azureOauthConsentKickoff/), [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addAwsIamUserBasedCloudAccount/), [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addGcpCloudAccountManualAuthProject/), [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/createAwsAccount/), [developer.rubrik.com](https://developer.rubrik.com/Rubrik-Security-Cloud-API/Observability/Events/)
 
 ### 🟠 C SailPoint Identity Security Cloud
 
@@ -821,6 +1335,14 @@ Your code calls the Torq API by trading a static client ID and secret for a one-
 - **Outbound B:** AWS steps assume a role you create that trusts Torq with an External ID. Slack and Microsoft 365 delegated access use Torq's apps. GCP, Azure and AWS SigV4 steps take static keys or secrets.
 - **Receipts:** [learn.torq.io](https://learn.torq.io/apidocs/authentication), [learn.torq.io](https://learn.torq.io/apidocs/overview.md), [kb.torq.io](https://kb.torq.io/en/articles/9145827-create-a-torq-api-key-enable-programmatic-access.md), [kb.torq.io](https://kb.torq.io/en/articles/14498016-torq-api-key-rotation-full-replacement-vs-expiration-update.md), [kb.torq.io](https://kb.torq.io/en/articles/9138309-amazon-web-services-aws.md), [kb.torq.io](https://kb.torq.io/en/articles/9024670-assume-different-roles-via-the-sts-assume-role-command-in-aws-cli-steps.md), [kb.torq.io](https://kb.torq.io/en/articles/11079835-aws-sigv4-authorization-utilize-aws-calls-in-http-steps.md), [kb.torq.io](https://kb.torq.io/en/articles/9297304-google-cloud-platform-gcp.md), [kb.torq.io](https://kb.torq.io/en/articles/9138424-azure.md), [kb.torq.io](https://kb.torq.io/en/articles/10287213-microsoft-365.md), [kb.torq.io](https://kb.torq.io/en/articles/9138305-microsoft-365-delegated-access.md), [kb.torq.io](https://kb.torq.io/en/articles/9138337-slack-bot.md), [kb.torq.io](https://kb.torq.io/en/articles/9138417-github.md), [kb.torq.io](https://kb.torq.io/en/articles/9139783-okta.md), [kb.torq.io](https://kb.torq.io/en/articles/9140088-hashicorp-vault-approle.md)
 
+### 🟠 C Twilio Segment
+
+On the Business plan, Segment's APIs accept a short-lived token minted from a signed JWT, so a private key is still held. Other plans use a static bearer token. Outbound, the S3 destination uses an assumed role, but BigQuery and Snowflake store a key.
+
+- **Inbound C:** An OAuth app holds an uploaded public key. The workload signs a JWT with the private key and trades it for an access token that lasts 1 to 30 days. *(requires Business)*
+- **Outbound B:** The AWS S3 destination assumes a customer role locked to an external ID. BigQuery takes a service account JSON key and Snowflake takes a private key.
+- **Receipts:** [www.twilio.com](https://www.twilio.com/docs/segment/connections/oauth.md), [www.twilio.com](https://www.twilio.com/docs/segment/api/public-api.md), [www.twilio.com](https://www.twilio.com/docs/segment/connections/sources/catalog/libraries/server/http-api.md), [www.twilio.com](https://www.twilio.com/docs/segment/connections/storage/catalog/aws-s3.md), [www.twilio.com](https://www.twilio.com/docs/segment/connections/storage/catalog/bigquery.md), [www.twilio.com](https://www.twilio.com/docs/segment/connections/storage/catalog/snowflake.md)
+
 ### 🟠 C Upwind Cloud Security Platform
 
 To call Upwind, your code needs a long-lived OAuth client secret, which it trades for a 24-hour token. There is no OIDC login. Upwind reaches into AWS, Azure and GCP without keys, but OCI, classic Azure and several SaaS integrations still take static secrets.
@@ -853,6 +1375,22 @@ To call Wiz, your code needs a long-lived service account secret, which it trade
 - **Outbound B:** Wiz assumes an AWS role with an External ID, uses its multi-tenant Entra app on Azure, and gets roles granted to its own GCP service account. Jira and ServiceNow take static secrets.
 - **Receipts:** [docs.databricks.com](https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/wiz-audit-logs-source-setup), [product-docs-repo.illumio.com](https://product-docs-repo.illumio.com/Tech-Docs/Integrations/out/en/wiz-connector-for-illumio-integration-guide/add-a-wiz-service-account.html), [raw.githubusercontent.com](https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/index.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/wiz-training/wiz-cli-terraform/main/.github/workflows/wiz-cli.yml), [raw.githubusercontent.com](https://raw.githubusercontent.com/wiz-sec-public/wiz-sensor-github-action/main/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/wiz-sec/charts/master/wiz-kubernetes-connector/values.yaml), [auth.wiz.io](https://auth.wiz.io/.well-known/openid-configuration), [www.wiz.io](https://www.wiz.io/blog/wiz-extends-support-to-okta), [wizio-public.s3.amazonaws.com](https://wizio-public.s3.amazonaws.com/deployment-v2/aws/wiz-aws-standard.json), [raw.githubusercontent.com](https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/connector_aws.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/integration_aws_sns.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/mozilla-platform-ops/relops_infra_as_code/master/terraform/azure_infrasec/wiz_azure_outpost_connector/variables.tf), [raw.githubusercontent.com](https://raw.githubusercontent.com/Karthickramasamy007/lz/main/azure-landing-zone-main/wiz-connection/wiz_azure_connector.tf), [raw.githubusercontent.com](https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/connector_gcp.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/mozilla-platform-ops/relops_infra_as_code/master/terraform/azure_infrasec/wiz_azure_outpost/variables.tf), [raw.githubusercontent.com](https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/integration_jira.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/integration_servicenow.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/wiz-sec/charts/master/wiz-outpost-lite/values.yaml), [www.wiz.io](https://www.wiz.io/blog/the-wiz-approach-to-agentless-scanning)
 
+### 🟠 C Zapier Platform
+
+Code reaches Zapier with a client ID and secret that are swapped for an access token. The secret has no expiry. Zapier MCP also offers a long-lived connection token. Outbound, many apps connect by OAuth consent, but others, Amazon S3 among them, take a pasted key.
+
+- **Inbound C:** A client ID and client secret, created with the SDK or CLI, are exchanged at Zapier's token endpoint for a bearer access token.
+- **Outbound B:** Zapier stores one connection per app account. OAuth consent is the preferred scheme, and other apps take a pasted API key, password or cloud access key.
+- **Receipts:** [docs.zapier.com](https://docs.zapier.com/sdk/deploy.md), [docs.zapier.com](https://docs.zapier.com/white-label/trigger-inbox/trigger-inbox-quickstart.md), [docs.zapier.com](https://docs.zapier.com/powered-by-zapier/authentication/methods/app-access-token.md), [docs.zapier.com](https://docs.zapier.com/api-reference/overview.md), [docs.zapier.com](https://docs.zapier.com/mcp/overview/how-connections-work.md), [docs.zapier.com](https://docs.zapier.com/white-label/implementation/token-exchange.md), [docs.zapier.com](https://docs.zapier.com/integrations/build/auth.md), [help.zapier.com](https://help.zapier.com/hc/en-us/articles/8495975749005)
+
+### 🟠 C Zendesk Suite
+
+A workload calls the Zendesk API with an OAuth access token minted from a confidential client's secret. New clients get 30-minute tokens by default. Static API tokens are deprecated. Outbound, the Slack integration installs by consent, but webhooks and Integration Services connections store pasted keys.
+
+- **Inbound C:** A confidential OAuth client's secret is exchanged through the client credentials grant for an access token. Clients created on or after April 30, 2026 get 30-minute tokens by default.
+- **Outbound B:** The Slack integration is an app the customer installs by consent. Webhooks and Integration Services connections store an API key, password or bearer token for the destination.
+- **Receipts:** [developer.zendesk.com](https://developer.zendesk.com/api-reference/introduction/security-and-auth/), [developer.zendesk.com](https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/), [support.zendesk.com](https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API), [support.zendesk.com](https://support.zendesk.com/hc/en-us/articles/4408833756698-Understanding-and-installing-the-Slack-for-Zendesk-Support-integration), [developer.zendesk.com](https://developer.zendesk.com/documentation/webhooks/webhook-security-and-authentication/), [developer.zendesk.com](https://developer.zendesk.com/documentation/integration-services/developer-guide/understanding-connections/)
+
 ### 🟠 C Zenity AI Agent Security
 
 To call Zenity, your code needs a long-lived client secret, which it trades for a short-lived token. There is no federation. Zenity connects to AWS Bedrock with an IAM role, but ChatGPT and Claude Enterprise need an API key you generate.
@@ -860,6 +1398,14 @@ To call Zenity, your code needs a long-lived client secret, which it trades for 
 - **Inbound C:** An account client ID and secret, traded for a short-lived token. The client secret is the long-lived root.
 - **Outbound B:** AWS Bedrock connects with IAM roles. ChatGPT Enterprise and Claude Enterprise take an API key you generate and paste in.
 - **Receipts:** [raw.githubusercontent.com](https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/README.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/zenitysec/boundaries-as-code-template/HEAD/.github/workflows/boundaries-deploy.yml), [get.zenity.io](https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz), [zenity.io](https://zenity.io/use-cases/platform/aws-bedrock), [zenity.io](https://zenity.io/use-cases/platform/chatgpt-enterprise), [zenity.io](https://zenity.io/use-cases/platform/claude-enterprise), [zenity.io](https://zenity.io/use-cases/platform/claude-tag), [zenity.io](https://zenity.io/press-release/zenity-announces-ai-trust-layer-the-first-agent-less-security-solution-for-microsoft-365-copilot)
+
+### 🟠 C Zoom Zoom API
+
+To call the Zoom API without a user, your code swaps a client ID and secret for a one-hour token. No workload federation is documented. Outbound, Video SDK storage can use a cross-account AWS role or a pasted access key.
+
+- **Inbound C:** A Server-to-Server OAuth app. Its account ID, client ID and client secret are exchanged for an access token that lasts one hour.
+- **Outbound B:** Video SDK bring-your-own storage writes recordings to a customer S3 bucket. It can assume a cross-account IAM role with an external ID, or use a pasted AWS access key.
+- **Receipts:** [developers.zoom.us](https://developers.zoom.us/docs/internal-apps/s2s-oauth.md), [developers.zoom.us](https://developers.zoom.us/docs/integrations/byok.md), [developers.zoom.us](https://developers.zoom.us/docs/integrations/crossapp-access.md), [developers.zoom.us](https://developers.zoom.us/docs/build/storage-get-started.md)
 
 ### 🟠 C Zscaler OneAPI
 

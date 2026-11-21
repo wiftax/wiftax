@@ -1,0 +1,138 @@
+id: cisco-webex
+vendor: Cisco
+product: Webex
+covers: The Webex REST API, including Service Apps, Integrations, bots and Bring Your Own Data Source.
+aliases:
+  - Webex Control Hub
+  - Webex Service Apps
+website: https://www.webex.com
+docs: https://developer.webex.com/docs/authentication
+category: comms
+status: listed
+summary: >-
+  To call Webex without a person, you register a Service App and hold its client secret and a
+  refresh token to mint access tokens. Bots use a static token. There is no federation. Outbound,
+  Webex signs a short-lived token that your endpoint can verify against Cisco's public keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A Service App or Integration holds an OAuth client secret and a refresh token, which it trades
+      for expiring access tokens. Bots use a static access token.
+    evidence:
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Register the Service App with a client secret. This creates an OAuth client, as it does for an Integration."
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Instead, the actor for the API calls is a powerful machine account provisioned in the customer's org"
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Refresh it using that organization's refresh token and the Service App's"
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Use the returned `expires_in` and `refresh_token_expires_in` values to manage token expiration instead of assuming fixed lifetimes."
+      - url: https://developer.webex.com/docs/bots
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This access token will be used to authenticate your bot with the Webex REST API."
+    notes: >-
+      Service Apps are the machine-account path, and they still rest on a client secret and a
+      stored refresh token. The docs describe no client assertion, token exchange or OIDC federation
+      for workloads. Personal access tokens last 12 hours and are for testing. This card relies on
+      text the developer site embeds in each page, which a plain fetch returns.
+  outbound:
+    grade: A
+    mechanism: >-
+      For Bring Your Own Data Source, Webex calls your registered URL with a token it signs. The
+      token lasts at most 24 hours and verifies against Cisco's published keys.
+    evidence:
+      - url: https://developer.webex.com/docs/bring-your-own-datasource
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "the data source entry contains information for composing a JSON Web Signature (JWS) token used to authenticate requests when Webex invokes the URL."
+      - url: https://developer.webex.com/docs/bring-your-own-datasource
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "identifies which Cisco public key should be used to verify the token's signature."
+      - url: https://developer.webex.com/docs/bring-your-own-datasource
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Webex will not attempt an outbound request with an expired token."
+    notes: >-
+      Graded on the developer platform only. Webex acts as the issuer and you hand over no secret.
+      Hybrid Calendar and other Control Hub connections to Microsoft 365 and Google are documented
+      on pages that need JavaScript, so they are not graded here. Webhooks to your URL are not
+      counted as reach into your systems.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client secret is shown once, so copy it and keep it safe."
+      - url: https://developer.webex.com/docs/bots
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The bot's access token will only be displayed once."
+    notes: >-
+      The docs give no expiry setting or lifetime policy for a client secret or a bot token. Refresh
+      tokens renew for as long as they keep being used.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you can copy your client secret into the provided field and retrieve and copy the access and refresh tokens for the org."
+      - url: https://developer.webex.com/docs/bots
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "from the edit page."
+    notes: >-
+      A client secret or bot token is regenerated in the developer portal. The token API mints
+      Service App tokens but needs the existing secret, and no documented endpoint replaces the
+      secret itself.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Request only the scopes required for those operations so administrators can assess the access they are granting."
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The machine account created during authorization is deleted, and the tokens are invalidated."
+    notes: >-
+      A Service App acts as its own machine account, limited to the scopes a Full Admin authorized.
+      It does not inherit a person's access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developer.webex.com/admin/docs/service-apps
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "There is a drop-down list for all the orgs that authorized your Service App."
+    notes: >-
+      The Service App page lists authorizations. The docs mention no last-used time for a client
+      secret, refresh token or bot token.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Webex does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  The headline is C on inbound. It moves to B or A only if Service Apps can authenticate with a
+  workload's OIDC token instead of a client secret. The outbound A covers Bring Your Own Data
+  Source alone. Readable Control Hub docs could change it.

@@ -1,0 +1,131 @@
+id: asana
+vendor: Asana
+product: Platform
+covers: "The Asana REST API, audit log API and Asana-built app integrations."
+website: https://asana.com
+docs: https://developers.asana.com/docs/authentication
+category: saas
+status: listed
+summary: >-
+  Asana's API takes static bearer tokens. Personal access tokens and service account tokens are
+  long-lived and made in the web console. OAuth exists, but a person has to sign in and consent.
+  Asana's own integrations into Jira and Google Drive connect by sign-in, with no pasted key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static bearer token, either a personal access token or an Enterprise service account token.
+      The audit log API accepts only the service account token.
+    evidence:
+      - url: https://developers.asana.com/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "PATs are long-lived tokens allowing programmatic authentication to the API and should be stored securely."
+      - url: https://developers.asana.com/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "(SAs) are long-lived tokens that provide programmatic access to the API."
+      - url: https://developers.asana.com/reference/audit-log-api
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authentication with a Service Account Token is required."
+      - url: https://developers.asana.com/docs/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "this is a long-lived token that can be used to get new access tokens when older ones expire"
+      - url: https://developers.asana.com/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you want to allow users to log into your app using their Asana account, the OpenID Connect protocol is a great way to have your apps users authenticate."
+    notes: >-
+      Graded on the tokens a script or pipeline can use without a person. OAuth gives one-hour
+      access tokens, but it starts with a user consent screen and leaves a long-lived refresh token.
+      That is no better than a key. OpenID Connect here is sign-in with Asana for people. No
+      workload federation, CI trust or token exchange is documented.
+  outbound:
+    grade: A
+    mechanism: >-
+      Asana-built integrations connect by signing in to the other service and approving access. No
+      key is pasted into Asana.
+    evidence:
+      - url: https://asana.com/apps/jira
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click Connect to Jira Cloud and authorize your Jira account"
+      - url: https://asana.com/apps/jira
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Sign in with your Jira account and click Allow"
+      - url: https://asana.com/apps/google-drive
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Follow the on-screen instructions to sign in to Google Drive"
+    notes: >-
+      Based on a sample of Asana-built apps, all of which use a consent flow. Setup guides for the
+      Salesforce app and for customer-managed encryption keys sit on the help center, which shows
+      no text without JavaScript. They were not read. A pasted key in either would lower this to B.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.asana.com/docs/personal-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Personal access tokens are persistent by default."
+    notes: >-
+      Tokens do not expire unless someone removes them. The page points to Enterprise+ admin
+      controls for tokens, but that help article shows no text without JavaScript.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.asana.com/docs/personal-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can generate a personal access token from the Asana"
+      - url: https://developers.asana.com/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click the **Add Service Account** button"
+    notes: >-
+      Both token types are created in the web console. The API reference has no endpoint to create
+      or revoke them. The OAuth revoke endpoint takes only refresh tokens.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.asana.com/docs/oauth-scopes.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Service Accounts include an additional security layer through **authorization scopes**, allowing fine-grained control over what each Service Account can access."
+      - url: https://developers.asana.com/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Unlike PATs, SAs provide complete access to all data within your Asana account, including private user data."
+    notes: >-
+      A service account is a machine principal and can be limited to scopes such as audit logs or
+      SCIM. Without a scope it sees the whole organization. Service accounts need the Enterprise
+      tier. A personal access token inherits its owner's access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.asana.com/docs/personal-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For security, you should regularly review the list of personal access tokens you have created and deauthorize those that you no longer need."
+    notes: The docs tell you to review your tokens but show no last-used time for any token type.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Asana Personal Access Token"
+    notes: >-
+      GitHub detects Asana personal access tokens for repository owners, but the pattern is not a
+      partner pattern. A leaked token is not reported to Asana.
+
+notes: >-
+  One of five hygiene checks passes, so inbound is F. An enforced token lifetime and a token
+  management API would lift it to D. Inbound moves to A or B only if the API accepts a federated
+  workload token.

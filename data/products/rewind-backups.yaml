@@ -1,0 +1,137 @@
+id: rewind-backups
+vendor: Rewind
+product: Backups
+covers: "The Rewind public API and MCP server, plus how Rewind connects to backed-up services."
+aliases:
+  - Rewind API
+  - Rewind MCP
+website: https://rewind.com
+docs: https://docs.developer.rewind.com/authentication
+category: saas
+status: listed
+summary: >-
+  The Rewind API and MCP server take only a static organization API key, though every key must
+  expire within a year. Outbound, Rewind uses app installs, consent and federation for some
+  services, but Okta, Jira Automation and Azure storage sync still need a pasted secret.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static organization API key, created in the Rewind app and sent in a request header. Keys
+      expire after 90 days by default and after one year at most.
+    evidence:
+      - url: https://docs.developer.rewind.com/authentication
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Rewind Public API uses API key authentication with the"
+      - url: https://docs.developer.rewind.com/authentication
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All requests must include a valid API key in the"
+      - url: https://docs.developer.rewind.com/mcp
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The MCP server authenticates with the same API key as the REST API."
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keys are organization-level, so one key works across all of your organization's accounts."
+    notes: >-
+      The authentication page lists the API key as the only method. No OAuth client, OIDC or
+      workload federation is documented. Two of five hygiene checks pass, so the grade is F even
+      though every key expires. The help center receipts cite the public article API, because the
+      rendered help pages do not return text to a plain fetch.
+  outbound:
+    grade: B
+    mechanism: >-
+      Rewind reaches GitHub through an installed app, Microsoft through Entra consent and Google
+      Cloud storage through workload identity federation. Okta, Jira Automation and Azure storage
+      sync take a pasted secret.
+    evidence:
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/28773774205467.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "can install the Rewind app and create, access and restore all backups of an organization."
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/57456063676699.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Review the permissions Rewind requests and select"
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/30468763050395.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "take note of the Rewind AWS Account ID, which will be used in the next few steps when configuring Workload Identity Federation."
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/29326725327643.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you will need to input this secret in Rewind App to link your Okta’s instance."
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/49993169157531.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This token is used specifically for Jira Automation access and needs to be refreshed every 365 days, which is the longest expiration period Atlassian allows."
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/28786333674139.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Ensure that the other settings match the ones in the following screenshot. In particular, ensure to set a reasonable"
+    notes: >-
+      Graded B because some paths are keyless and others are not. The Okta integration stores an
+      Okta client secret in Rewind. Jira Automation backups need an Atlassian API token that
+      inherits its creator's permissions. Azure storage sync takes a SAS URL with an expiry. Not
+      every supported service was reviewed.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keys expire after 90 days by default, and you can choose a longer period up to one year."
+      - url: https://docs.developer.rewind.com/authentication
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each key requires a name and an expiration date."
+    notes: Every key must carry an expiry, with a default of 90 days and a maximum of one year.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.developer.rewind.com/authentication
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keys can be created, viewed, and revoked through the Rewind app"
+    notes: >-
+      Keys are created and revoked only in the Rewind app. The API has a token lookup endpoint but
+      no endpoint to create or revoke a key.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.developer.rewind.com/authentication
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys inherit the permissions of the user who created them and provide access to:"
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A key is tied to the role of the person who created it."
+    notes: >-
+      A key covers the whole organization and inherits the owner or admin who created it. There are
+      no per-key scopes and no service account type.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API Keys page lists each key's name, creation date, expiry date, and when it was last used."
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Rewind does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  The API is included on all paid plans. Inbound would reach D with a key management API or
+  per-key scopes. It moves to B or A only if the API accepts a federated workload token. Outbound
+  reaches A if the Okta, Jira Automation and Azure paths stop needing a stored secret.

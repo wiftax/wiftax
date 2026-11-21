@@ -1,0 +1,150 @@
+id: monte-carlo
+vendor: Monte Carlo
+product: Data Observability
+covers: >-
+  The Monte Carlo GraphQL API, REST API v2, CLI, SDKs and Terraform provider, plus the warehouse
+  and cloud connections Monte Carlo collects from.
+aliases:
+  - Monte Carlo Data
+  - MCD
+website: https://www.montecarlodata.com
+docs: https://docs.getmontecarlo.com/docs/api-authentication
+category: data
+status: listed
+summary: >-
+  Monte Carlo's API takes a static API key or an OAuth client secret swapped for a short-lived JWT.
+  No workload federation is documented. Outbound, AWS access uses an assumed role with an external
+  ID, but BigQuery, Snowflake and Redshift connections store a key or password.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth 2.0 client ID and secret are exchanged at the token URL for a short-lived JWT.
+      Static API keys with a key ID and secret are also accepted.
+    evidence:
+      - url: https://docs.getmontecarlo.com/docs/api-authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "As an alternative to API keys, Monte Carlo supports OAuth 2.0 client credentials."
+      - url: https://docs.getmontecarlo.com/docs/api-authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "your application exchanges a client ID and secret for a short-lived JWT access token and sends it as a Bearer token."
+      - url: https://docs.getmontecarlo.com/docs/api-authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Monte Carlo supports both personal and account-level keys."
+      - url: https://docs.getmontecarlo.com/docs/audit-logging.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "requires the Audit Logging feature on your account and the dashboard/access permission."
+    notes: >-
+      Graded C because the JWT is short-lived but the client secret is a static root. The auth
+      guide and the API reference document no OIDC or workload identity login for the API. The
+      CLI, SDKs and Terraform provider take the same two credential types.
+  outbound:
+    grade: B
+    mechanism: >-
+      Monte Carlo's collector assumes an AWS role, optionally locked to an external ID, and GitHub
+      connects as an installed app. Warehouse connections store a JSON key, key pair or password.
+    evidence:
+      - url: https://docs.getmontecarlo.com/docs/creating-iam-roles.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Allow Monte Carlo's data collector to assume them while making API calls to access your resources."
+      - url: https://docs.getmontecarlo.com/docs/creating-iam-roles.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The following steps are optional, but are recommended if you want to limit the role by an external ID."
+      - url: https://docs.getmontecarlo.com/docs/github.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Monte Carlo GitHub App cannot push commits, create branches, or merge pull requests."
+      - url: https://docs.getmontecarlo.com/docs/bigquery.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "then upload the service account's JSON key in the onboarding wizard."
+      - url: https://docs.getmontecarlo.com/docs/snowflake.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This script will create a Service User that requires a private key for authentication."
+      - url: https://docs.getmontecarlo.com/docs/redshift.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Strong password to be used by the service account user."
+    notes: >-
+      Graded B because AWS and GitHub are keyless while BigQuery, Snowflake and Redshift need a
+      stored secret. A customer-hosted agent can keep those secrets in the customer's own store.
+      The Azure, Databricks and BI tool connections were not read in full.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.getmontecarlo.com/docs/api-authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "then select the key type and expiration period for your new key."
+      - url: https://apidocs.getmontecarlo.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "expirationInDays - Int Number of days before the token auto expires groups - [String] Names of the groups for the API token"
+    notes: >-
+      Personal keys must be created with an expiry. The service token mutation makes the expiry
+      optional, and no account policy that forces one is documented. A documented enforced maximum
+      would make this pass.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://apidocs.getmontecarlo.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Generate an API Access Token and associate to user"
+      - url: https://apidocs.getmontecarlo.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Delete an API Access Token by ID"
+      - url: https://apidocs.getmontecarlo.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Add a second secret to an OAuth client for zero-downtime rotation"
+    notes: >-
+      The GraphQL API has mutations to create and delete API keys and to add and delete OAuth
+      client secrets.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.getmontecarlo.com/docs/api-authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "an account-level OAuth client not tied to a person, with its own authorization groups."
+      - url: https://docs.getmontecarlo.com/docs/authorization.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Roles are assigned to groups, and users are added as members of groups."
+    notes: >-
+      Service keys and service OAuth clients carry their own authorization groups, which hold
+      roles and optional domain limits. Personal keys act as the person.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://apidocs.getmontecarlo.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Retrieve access token metadata for current user or account"
+    notes: >-
+      The token metadata type lists creation and expiration times, owner and groups. It has no
+      last-used field, and the settings page docs do not mention one.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Monte Carlo does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Two of five hygiene checks pass for the static API keys. Inbound stays C while every path starts
+  from a stored secret. It moves to A or B only if the token endpoint accepts a workload identity
+  token. Outbound reaches A if the warehouse connections gain keyless options.

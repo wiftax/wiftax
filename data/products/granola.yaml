@@ -1,0 +1,136 @@
+id: granola
+vendor: Granola
+product: Granola
+covers: "The Granola public API, including the Audit API, and Granola's built-in integrations."
+website: https://www.granola.ai
+docs: https://docs.granola.ai/introduction.md
+category: saas
+status: listed
+summary: >-
+  Granola's API takes only a static API key, created and revoked in the desktop app. Workspace keys
+  never expire. Outbound, most integrations connect through an OAuth sign-in, but Affinity takes a
+  pasted API key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key sent as a bearer token. Keys are personal, workspace-owned or audit-only,
+      and all are created in the app settings.
+    evidence:
+      - url: https://docs.granola.ai/introduction.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "takes an API key as a Bearer token"
+      - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "unlike personal API keys they don't expire and aren't tied to anyone's account"
+      - url: https://docs.granola.ai/audit.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A workspace admin creates an Audit API key in"
+      - url: https://docs.granola.ai/help-center/sharing/integrations/mcp.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "there is no API key or service account access method for MCP"
+    notes: >-
+      Graded on the public API, which scripts and log collectors must use. The MCP server uses a
+      browser OAuth sign-in for a person, not a workload. Its Enterprise-Managed Authorization
+      option lets an identity provider vouch for users, and Granola registers the issuer. Neither
+      is federation a workload can set up. Two of five hygiene checks pass, so inbound is F.
+  outbound:
+    grade: B
+    mechanism: >-
+      Slack, Notion, HubSpot and Attio connect through a sign-in and consent page. Affinity takes
+      a personal API key pasted into Granola.
+    evidence:
+      - url: https://docs.granola.ai/help-center/sharing/integrations/slack.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You'll be prompted via a webpage to connect your Slack workspace to Granola."
+      - url: https://docs.granola.ai/help-center/sharing/notion.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "redirected to your browser to authorize Granola"
+      - url: https://docs.granola.ai/help-center/sharing/integrations/hub-spot.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This will launch a webpage for you to connect HubSpot to Granola."
+      - url: https://docs.granola.ai/help-center/sharing/integrations/affinity.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "paste your Affinity API key in the box provided"
+    notes: >-
+      Consent to a vendor-run app counts as keyless. Graded B, not A, because Affinity needs a
+      pasted static key. Granola reaches into no cloud account.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "unlike personal API keys they don't expire and aren't tied to anyone's account"
+    notes: >-
+      Workspace keys never expire. The docs imply personal keys expire but give no lifetime, and
+      no setting or policy to enforce one is documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Find the key you want to revoke and click"
+      - url: https://docs.granola.ai/audit.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To rotate a key, create its replacement first and then revoke the old one"
+      - url: https://docs.granola.ai/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Keys are created and revoked in the desktop app settings. The API reference lists no
+      endpoint to create or revoke a key.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Admins can instead limit a key to selected spaces."
+      - url: https://docs.granola.ai/audit.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An audit key reads the audit log and nothing else."
+    notes: >-
+      Workspace keys belong to the workspace and can be limited to chosen spaces. Audit keys read
+      only the audit log. Personal keys take note access scopes.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.granola.ai/audit-events.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A five-minute summary of requests authenticated with a public API key."
+      - url: https://docs.granola.ai/audit-events.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A public API key made its earliest recorded authenticated request for the workspace."
+    notes: >-
+      The audit log records each key's use in five-minute summaries, naming the key. That is
+      enough to find a dead key, but the Audit API needs an Enterprise plan. The docs do not say
+      whether the key list in the app shows a last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Granola does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  The Audit API and audit keys need an Enterprise plan. Other API keys need Business or Enterprise.
+  An enforced key lifetime or a key management API would lift inbound to D. Inbound moves to A or B
+  only if the public API accepts a federated workload token.

@@ -1,0 +1,148 @@
+id: customer-io
+vendor: Customer.io
+product: Platform
+covers: "The Customer.io Track, App and Pipelines APIs, the audit log endpoints, the CLI, and data warehouse syncs."
+aliases:
+  - Customer.io Journeys
+  - Customer.io Data Pipelines
+website: https://customer.io
+docs: https://docs.customer.io/accounts-and-workspaces/managing-credentials/
+category: saas
+status: listed
+summary: >-
+  The Customer.io APIs take a static private key that never expires. Service account tokens can be
+  swapped for a one-hour JWT, but only for the APIs behind the CLI. Outbound, warehouse and bucket
+  syncs take pasted cloud keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static private key, created in the dashboard and sent as a bearer token on every call to the
+      Track, App and Pipelines APIs.
+    evidence:
+      - url: https://docs.customer.io/accounts-and-workspaces/managing-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you call our APIs directly, you’ll use the key as a bearer token in the"
+      - url: https://docs.customer.io/accounts-and-workspaces/managing-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A private key grants access to all of our APIs. You should only use it in backend or server-side integrations where it won’t be exposed to your users."
+      - url: https://docs.customer.io/accounts/audit-logs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An audit log key is a private key that can only read audit logs: it can’t read profiles or other workspace data, send data, or make changes."
+      - url: https://docs.customer.io/ai/cli/service-accounts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "They provide long-lived tokens with fine-grained access controls—ideal for AI coding assistants, CI/CD pipelines, and automation scripts."
+      - url: https://docs.customer.io/ai/cli/service-accounts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The CLI exchanges it for a short-lived (1 hour) JSON Web Token (JWT) and sends the JWT as the bearer credential instead."
+      - url: https://docs.customer.io/ai/cli/service-accounts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you want to integrate directly with the APIs exposed by our CLI, you’ll need to exchange your service account token for a JWT yourself."
+    notes: >-
+      Graded on the Track, App and Pipelines APIs, which a workload must use to send data, trigger
+      messages or read audit logs. Those take the static key directly. Service account tokens are
+      also long-lived. They can be exchanged for a one-hour JWT, which would be a C, but the docs
+      offer that only for the APIs behind the CLI. No OIDC or cloud workload login is documented.
+  outbound:
+    grade: D
+    mechanism: >-
+      Data warehouse and bucket syncs take a pasted AWS access key, Google service account key,
+      Azure SAS URL or Snowflake private key. The docs ask for bucket-only or read-only access.
+    evidence:
+      - url: https://docs.customer.io/integrations/data-out/connections/amazon-s3-data-out.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create an Access Key and a Service Key with read/write permissions to your S3 or Yandex bucket."
+      - url: https://docs.customer.io/integrations/data-out/connections/gcs-data-out.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To use a GCS storage bucket, you must set up a service account key (JSON) that grants read/write permissions to the bucket."
+      - url: https://docs.customer.io/integrations/data-out/connections/ms-azure-data-out.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Shared Access Signature grants Customer.io access to your Azure blob container, but typically has a limited expiration date"
+      - url: https://docs.customer.io/integrations/data-in/connections/reverse-etl/snowflake.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Customer.io authenticates with Snowflake using a key pair, not a password. You’ll generate a private key that you give to Customer.io and a public key that you register on the Snowflake user."
+      - url: https://docs.customer.io/integrations/data-in/connections/reverse-etl/snowflake.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Implement a database user with minimal privileges specifically for Customer.io import/sync operations."
+    notes: >-
+      Every cloud path found takes a long-lived key. No AWS role, Google impersonation or Azure
+      federated credential is documented. Graded D, not F, because the docs name the bucket
+      permissions needed and ask for a dedicated low-privilege database user. Rotation guidance is
+      thin. The docs only say to enter the key again when editing a sync.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.customer.io/accounts-and-workspaces/managing-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To revoke a key, delete it on the"
+      - url: https://docs.customer.io/ai/cli/service-accounts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "No expiration, 30, 60, 90 days, or 1 year."
+    notes: >-
+      Private keys have no expiry setting and last until deleted. Service account tokens can be
+      given an expiry, but no expiration is allowed and no policy to force one is documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.customer.io/accounts-and-workspaces/managing-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To rotate a key, add a new key and switch your integration to it before you revoke the old one."
+    notes: >-
+      Keys are created and deleted on the API Credentials page. The published App API spec has no
+      endpoint to create or revoke keys.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.customer.io/accounts-and-workspaces/managing-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Choose the workspace the key sends data to."
+      - url: https://docs.customer.io/accounts/audit-logs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An audit log key is a private key that can only read audit logs: it can’t read profiles or other workspace data, send data, or make changes."
+      - url: https://docs.customer.io/ai/cli/service-accounts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Tokens get their permissions from a role you select at creation time, and those permissions apply to all workspaces in the account."
+    notes: >-
+      A coarse pass. A private key is tied to one workspace and can be limited to audit logs, and a
+      system service account token carries its own role. An ordinary private key still reaches every
+      API in its workspace.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://docs.customer.io/accounts-and-workspaces/managing-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "column on the API Credentials page shows the last time Customer.io received a request with a key."
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Customer.io does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. An enforced key lifetime or a key management API
+  would lift it to D. Extending the service account JWT exchange to the Track, App and Pipelines
+  APIs would make it C. Inbound moves to A or B only if the APIs accept a federated workload token.
+  Legacy Track site ID and key pairs and legacy App API keys still work and are also static.

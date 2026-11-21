@@ -1,0 +1,139 @@
+id: freshworks-freshservice
+vendor: Freshworks
+product: Freshservice
+covers: "The Freshservice REST API, including the audit log endpoints, and its cloud discovery integrations."
+website: https://www.freshworks.com/freshservice/
+docs: https://api.freshservice.com/
+category: saas
+status: listed
+summary: >-
+  Freshservice's API takes a static API key or an OAuth access token. The OAuth path needs an app
+  with a client secret and a one-time admin consent. Outbound, an older AWS app uses a role with an
+  external ID, but current AWS, Azure and Google Cloud discovery take stored keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth app registered with Freshworks uses its client secret and a refresh token to get
+      short-lived access tokens after an admin consents. Scripts can also send a static API key.
+    evidence:
+      - url: https://api.freshservice.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Freshservice APIs support Oauth authentication."
+      - url: https://api.freshservice.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API request is made with an expired Oauth access token. Obtain a new access token using the refresh token and retry the request."
+      - url: https://community.freshworks.dev/t/freshworks-introduces-multi-oauth-functionality-for-app-developers-and-oauth-support-for-freshservice-apis/12798
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client ID and client secret are generated for the app."
+      - url: https://api.freshservice.com/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "supports Basic Access Authorization only with API key."
+      - url: https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "They execute background tasks and public API calls without consuming paid agent licenses or requiring interactive web portal logins."
+    notes: >-
+      Graded C on the OAuth path, where the client secret and refresh token are the static root.
+      It is an authorization code flow built for app developers, so a person must consent once. No
+      client credentials grant is documented. The path Freshservice documents for server-to-server
+      scripts is the static API key of an integration user. No workload federation is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      The Amazon Web Services app assumes a customer role with an external ID. Current AWS
+      discovery takes an access key, Azure a client secret and Google Cloud a service account
+      key.
+    evidence:
+      - url: https://support.freshservice.com/support/solutions/articles/211309-freshservice-integration-with-amazon-web-services-aws-
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You will be prompted to enter the External ID."
+      - url: https://support.freshservice.com/support/solutions/articles/50000012093-aws-autodiscovery
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An AWS Access Key ID and Secret Key with appropriate permissions."
+      - url: https://support.freshservice.com/support/solutions/articles/50000012093-aws-autodiscovery
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Dynamic discovery does not currently support External IDs."
+      - url: https://support.freshservice.com/support/solutions/articles/50000011917-microsoft-azure-autodiscovery
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This is used as the Client Secret ID for discovery."
+      - url: https://support.freshservice.com/support/solutions/articles/50000009163-freshservice-cloud-discovery-gcp-integration
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Copy the entire service account credentials from the downloaded JSON file and paste them inside the Service Account Credentials installation parameter"
+    notes: >-
+      Graded B because one AWS path is keyless and the rest store keys. The role and external ID
+      articles date from 2017 and 2019. The current AWS discovery guide starts from an access key
+      and reaches other accounts by assuming roles. It avoids a stored key only when the
+      customer's own collector runs on EC2. Marketplace and orchestration apps were not graded.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This will break any apps or automations using the current API key. You'll need to update them with the new key."
+    notes: >-
+      API keys are replaced only by a manual reset. No expiry setting or policy is documented for
+      agent or integration user keys.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "menu inside the API key card."
+      - url: https://support.freshservice.com/support/solutions/articles/50000000306-where-do-i-find-my-api-key-
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your API key will be available below the Delegate Approvals section to your right"
+    notes: >-
+      Keys are viewed and reset in the web console. The API reference documents no endpoint to
+      create or reset an API key.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Integration users are dedicated, non-interactive system accounts created specifically for server-to-server automations, API scripts, and third-party integrations"
+      - url: https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Permissions are limited to Workspace or Account-wide roles."
+    notes: >-
+      Integration users are a documented non-human account type with their own roles. A personal
+      agent key inherits everything that agent can do. OAuth apps request per-endpoint scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "displays the integration user name tagged as"
+    notes: >-
+      The audit log shows admin changes an integration user made. No last-used time for an API key
+      is documented.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Freshservice and Freshworks do not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Audit log endpoints need the Forest plan or an add-on. Integration user limits vary by plan. A
+  reader who discounts the OAuth app path would grade inbound F, since one of five hygiene checks
+  passes. Inbound moves to A or B only if the API accepts a federated workload token.

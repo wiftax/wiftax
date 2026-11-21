@@ -1,0 +1,148 @@
+id: perplexity-enterprise
+vendor: Perplexity
+product: Enterprise
+covers: >-
+  The Perplexity Enterprise Audit and Analytics APIs, the audit log webhook, Perplexity API
+  Platform keys and connectors.
+aliases:
+  - Perplexity Enterprise Pro
+  - Perplexity Enterprise Max
+  - Perplexity API
+  - Sonar API
+website: https://www.perplexity.ai
+docs: https://docs.perplexity.ai/docs/admin/api-key-management
+category: saas
+status: listed
+summary: >-
+  Every Perplexity API takes a static bearer key with no expiry. Audit keys are read-only and
+  platform keys can be rotated by API, but nothing shows last use and leaks are not reported to
+  Perplexity. Outbound, connectors use OAuth sign-in, but the audit webhook, custom connectors and
+  the Snowflake service account store a secret.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key sent as a bearer token. The Audit API, the Analytics API and the developer
+      APIs each use their own kind of key.
+    evidence:
+      - url: https://docs.perplexity.ai/docs/admin/audit-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Audit API uses a dedicated **audit log API key**, separate from the Sonar API keys used for chat completions, search, and other developer endpoints."
+      - url: https://docs.perplexity.ai/docs/admin/audit-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Send the key as a bearer token to `GET https://api.perplexity.ai/v1/admin/audit-events`."
+      - url: https://docs.perplexity.ai/docs/admin/api-key-management.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys are essential for authenticating requests to the Perplexity API."
+      - url: https://docs.perplexity.ai/docs/admin/computer-analytics-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Set `PERPLEXITY_ANALYTICS_API_KEY` to your organization's Analytics API key and pass it as a bearer token."
+      - url: https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keys belong to your organization, not their creator. Removing the creator or changing their permissions does not revoke a key."
+    notes: >-
+      The key management, Audit API and Analytics API pages describe only static keys. None
+      mentions OAuth client credentials, OIDC or any token exchange for workloads. Audit API key
+      creation may first need to be enabled by the account team.
+  outbound:
+    grade: B
+    mechanism: >-
+      Connectors reach other services through OAuth grants that members complete. The audit webhook,
+      custom connectors and the Snowflake service account each store a static secret.
+    evidence:
+      - url: https://www.perplexity.ai/help-center/en/articles/2026100201-role-based-access-control-for-connectors.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Removing a role from a connector does not revoke third-party OAuth grants members have already completed."
+      - url: https://www.perplexity.ai/help-center/en/articles/14017006-connecting-perplexity-with-snowflake.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "| **Service account** | One shared service account | Key pair | Shared identity | Users query through a single account |"
+      - url: https://docs.perplexity.ai/docs/agent-api/tools/connectors.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Register your remote MCP server once and let Perplexity store its API key."
+      - url: https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Unless you specify an authorization scheme, Perplexity sends the value you enter as a Bearer token."
+    notes: >-
+      OAuth consent counts as keyless because no secret changes hands. Graded B, not A, because
+      three paths keep a long-lived secret. The audit webhook sends a fixed header value and does
+      not sign requests. Snowflake user OAuth also needs a client secret from a Snowflake security
+      integration.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.perplexity.ai/docs/admin/audit-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Org admins can revoke a key from the same page. Revoked keys stop working immediately"
+      - url: https://docs.perplexity.ai/docs/admin/api-key-management.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotate your API keys regularly (e.g., every 90 days) to minimize the impact of potential compromises."
+    notes: >-
+      Keys take only a name and stay valid until revoked. The docs advise rotating by hand and
+      describe no expiry setting or lifetime policy.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.perplexity.ai/docs/admin/api-key-management.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Perplexity provides two endpoints for managing API keys programmatically:"
+      - url: https://docs.perplexity.ai/api-reference/revoke-auth-token-post.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Revokes an existing authentication token."
+    notes: >-
+      Platform API keys can be generated and revoked by API once a first key exists. Audit and
+      Analytics keys are created and revoked only in organization settings.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.perplexity.ai/docs/admin/audit-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keys are read-only and limited to the `audit_logs:read` scope. They cannot change settings, manage members, or call other Perplexity APIs."
+      - url: https://docs.perplexity.ai/docs/admin/computer-analytics-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "the key authenticates analytics endpoints only; it cannot call other Perplexity APIs and has no billing attached."
+    notes: >-
+      Audit and Analytics keys are each locked to one read-only purpose and belong to the
+      organization, not a person. Platform API keys are grouped by Project and have no finer scopes.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.perplexity.ai/docs/admin/audit-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The full key is shown only once; afterward the list shows only the key's name and creation date."
+    notes: >-
+      The key list shows a name and a creation date. Each audit read is logged as an event with the
+      key ID, but no page shows a last-used time per key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Perplexity API Key"
+    notes: >-
+      GitHub lists the Perplexity API key as a user-alert pattern, not a partner pattern. A leaked
+      key is flagged to the repository owner but is not reported to Perplexity for revocation.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. Key expiry and a last-used time would lift it
+  to D. Audit logs need an Enterprise organization, and Audit API key creation may need the account
+  team to enable it. Inbound moves to A or B only if the APIs accept a federated workload token.

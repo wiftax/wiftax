@@ -1,0 +1,121 @@
+id: floqast
+vendor: FloQast
+product: Platform
+covers: "The FloQast API, versions 1 and 2, plus the ERP and cloud storage connections."
+aliases:
+  - FloQast Close
+  - FloQast API
+website: https://www.floqast.com
+docs: https://developer.floqast.app/guides/authentication
+category: saas
+status: listed
+summary: >-
+  The FloQast API takes only a static API key sent in a header. Keys can be scoped to services and
+  show a last-used date, but a key may be set to never expire. Outbound, cloud storage links by
+  sign-in, while ERP connections take a stored token or user credentials.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key, created by a Manager or Admin in Admin Settings and sent in the x-api-key
+      header.
+    evidence:
+      - url: https://developer.floqast.app/guides/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To utilize FloQast API services, you must generate an API key."
+      - url: https://developer.floqast.app/docs/v1/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "All FloQast API requests require a valid API key passed in the"
+      - url: https://developer.floqast.app/_spec/api-reference/@v2/openapi.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API key for server-to-server access."
+      - url: https://developer.floqast.app/_spec/api-reference/@v2/openapi.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "OAuth callers are additionally authorized against the signed-in"
+    notes: >-
+      Both OpenAPI files define one security scheme, an API key in a header. The version 2 file
+      mentions OAuth callers who act as a signed-in user, but no OAuth flow is documented. No
+      federation or token exchange for workloads appears anywhere in the developer portal.
+  outbound:
+    grade: B
+    mechanism: >-
+      Cloud storage is linked by redirecting an admin to the storage provider to sign in. ERP
+      connections store a NetSuite token or the credentials of a Sage Intacct user.
+    evidence:
+      - url: https://help.floqast.com/api/v2/help_center/articles/28319271724187.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You will be redirected to your cloud storage provider and will be able to complete the authentication with the same account that was previously synced."
+      - url: https://help.floqast.com/api/v2/help_center/articles/360002076631.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "FloQast requires token-based authentication, eliminating the need for Admin users to update their passwords."
+      - url: https://help.floqast.com/api/v2/help_center/articles/360002076631.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "re-establish the link by entering your Company ID and the credentials of an Intacct user."
+    notes: >-
+      Graded B because storage uses a sign-in redirect while the ERP links hold long-lived
+      credentials. The NetSuite and other ERP setup guides are sent on request, not published. The
+      help center pages block plain fetches, so receipts cite the same articles through its JSON
+      endpoint.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.floqast.app/guides/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can choose from 365 days, 90 days, 60 days, 30 days, a custom date, or no expiration."
+    notes: >-
+      A key can be given an expiry, but no expiration is also offered. The docs show no setting
+      that forces one.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developer.floqast.app/guides/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Managers and Admins in FloQast can access the API Keys settings tab in their Admin Settings."
+      - url: https://developer.floqast.app/_spec/api-reference/@v1/openapi.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This API endpoint retrieves audit logs for all API keys within a"
+    notes: >-
+      Keys are created and deleted in Admin Settings. The API can read key usage logs, but neither
+      OpenAPI file has an endpoint to create or revoke a key.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.floqast.app/guides/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Choose which API services this key should have access to."
+      - url: https://developer.floqast.app/quick-start/scopes.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Scopes control the API services that your API key has access to."
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developer.floqast.app/guides/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "the Admin who created the key, and the creation, last used, and expiration dates."
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: FloQast does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. An enforced key lifetime or a key management
+  API would lift it to D. Inbound moves to B or A only if the API accepts a federated token.

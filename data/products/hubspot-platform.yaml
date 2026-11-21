@@ -1,0 +1,152 @@
+id: hubspot-platform
+vendor: HubSpot
+product: Platform
+covers: >-
+  The HubSpot REST APIs, the connected inbox, HubSpot data sync and the Amazon S3 storage
+  integration.
+aliases:
+  - HubSpot CRM
+  - HubSpot API
+website: https://www.hubspot.com
+docs: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview.md
+category: saas
+status: listed
+summary: >-
+  To call the HubSpot API, your app holds either a static access token or an OAuth client secret
+  and refresh token that yield 30-minute tokens. Outbound, HubSpot reaches Amazon S3 through a
+  role with an external ID and Gmail through consent, but IMAP, Exchange and many data sync apps
+  take passwords or keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth app trades its client secret and a long-term refresh token for an access token that
+      lasts 30 minutes. Single-account apps use a static access token instead.
+    evidence:
+      - url: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "There are two authentication types available based on how you plan to distribute your app: OAuth is required for multiple accounts, while static auth access tokens are used for installing in a single account at a time."
+      - url: https://developers.hubspot.com/docs/api-reference/latest/authentication/manage-oauth-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access tokens are short-lived (30 minutes), and you can check the `expires_in` parameter when generating an access token to determine its lifetime (in seconds)."
+      - url: https://developers.hubspot.com/docs/api-reference/latest/authentication/manage-oauth-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Refresh token: your app's long-term authentication credential that you can use to generate a new access token after the previous one expires."
+      - url: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Unlike the OAuth tokens used for app authentication, client credential tokens aren't used to act on behalf of users who install your app."
+      - url: https://developers.hubspot.com/docs/api-reference/latest/account/audit-logs/guide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint is available for Enterprise accounts only."
+      - url: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/account-service-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If your key is lost or otherwise compromised, you can rotate it. A new service key will be created and the original one will expire."
+    notes: >-
+      Graded C because the access token is short-lived but the client secret and refresh token are
+      static roots. A user installs the app once, and after that no person is in the loop. The
+      client credentials grant covers only the webhooks journal API. The audit log endpoint needs
+      an Enterprise account. Service keys are a newer account-level static key with scopes and
+      optional automatic rotation. No OIDC or cloud workload login is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      The Amazon S3 integration assumes an IAM role with an external ID, and Gmail connects
+      through Google consent. Exchange, IMAP and many data sync apps take a password, API key or
+      client secret.
+    evidence:
+      - url: https://knowledge.hubspot.com/integrations/sync-hubspot-data-to-amazon-s3
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An external ID is used to grant access to your AWS resources to a third-party app like HubSpot."
+      - url: https://knowledge.hubspot.com/integrations/sync-hubspot-data-to-amazon-s3
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the ARN value from the AWS IAM role in the Role ARN field."
+      - url: https://knowledge.hubspot.com/connected-email/connect-your-inbox-to-hubspot
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You'll be prompted to log in to your Gmail account."
+      - url: https://knowledge.hubspot.com/connected-email/connect-your-inbox-to-hubspot
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your Exchange email address and password are required to connect your inbox."
+      - url: https://knowledge.hubspot.com/integrations/data-sync-authentication
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Depending on the app, you may need to provide credentials, API keys, OAuth information, URLs, or other connection settings during setup."
+    notes: >-
+      Keyless: Amazon S3 by role and external ID, and Gmail by consent. Static: Exchange and IMAP
+      inboxes store a mailbox password or app password. Several data sync apps want an API token,
+      a username and password, or a client secret. Snowflake, BigQuery and Redshift connections
+      were not assessed. Consent or a role for every connection would make this A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/manage-apps-in-hubspot.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "It's recommended you rotate your token every 6 months for security purposes."
+    notes: >-
+      Static access tokens have no expiry setting. Rotation every six months is advice, not a
+      limit, and no policy enforces it.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/manage-apps-in-hubspot.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To view or rotate your access token, you must be a super admin or have a developer seat for the associated account."
+      - url: https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Next to your access token, click **Rotate**:"
+    notes: >-
+      Static tokens are shown and rotated in the app settings. The docs list no API endpoint that
+      creates, rotates or revokes one.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Based on the HubSpot data and functionality that your app will require access to, you'll provide a list of scopes in your app's `app-hsmeta.json` authentication config."
+    notes: >-
+      A token belongs to an app, not a person, and carries only the scopes that app declares.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To review the API calls your app has made in the past 30 days:"
+    notes: >-
+      There is no last-used field, but each legacy private app has a log of its calls for the past
+      30 days. An equivalent log for newer static token apps was not confirmed.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Hubspot Private Apps User Token"
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Partner alerts: Reported directly to secret providers that are part of secret scanning's partner program."
+    notes: >-
+      GitHub lists the private app token with the Partner column ticked, so a leak in a public
+      repo is reported to HubSpot.
+
+notes: >-
+  Inbound is C on the OAuth path. On static tokens alone it would be D, with three hygiene checks
+  passing. Legacy private apps can no longer be created, and static token apps on the developer
+  platform replace them. Inbound moves to A or B only if the API accepts a federated token.

@@ -1,0 +1,142 @@
+id: ninjaone-platform
+vendor: NinjaOne
+product: Platform
+covers: >-
+  The NinjaOne Public API 2.0, its activity webhook and the antivirus and Microsoft 365
+  integrations.
+aliases:
+  - NinjaRMM
+  - NinjaOne RMM
+  - NinjaOne Public API
+website: https://www.ninjaone.com
+docs: https://app.ninjarmm.com/apidocs-beta/authorization/overview
+category: saas
+status: listed
+summary: >-
+  A workload swaps a client ID and client secret for a NinjaOne API token that lasts one hour. The
+  secret has no documented expiry or rotation API. Outbound, the Microsoft 365 mail link uses admin
+  consent, but CrowdStrike, SentinelOne and the SIEM webhook take pasted tokens.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A machine-to-machine client app posts its client ID and client secret to the token endpoint
+      and gets a bearer token that expires after one hour.
+    evidence:
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/flows/client-credentials-flow.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Machine-to-machine (M2M) apps use the Client Credentials Flow in which they pass along their Client ID and Client Secret to authenticate themselves and get a token."
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/flows/client-credentials-flow.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "\"expires_in\": 3600,"
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/create-applications/machine-to-machine-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Client Credentials** is the appropriate grant type for the API services application platform."
+      - url: https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The NinjaOne Public API uses OAuth 2.0 to authenticate requests."
+      - url: https://www.ninjaone.com/docs/application-programming-interface-api/public-api-2-0-authorization/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The NinjaOne Public API 2.0 requires either an authentication token or an API session key to send the API request."
+    notes: >-
+      Graded C because the access token is short-lived but the client secret is a static root. The
+      authorization articles cover four OAuth flows and refresh tokens. None describes OIDC
+      federation or any exchange of a workload's own token. The interactive API docs render only in
+      a browser, so receipts cite the Markdown files that site loads.
+  outbound:
+    grade: B
+    mechanism: >-
+      The Microsoft 365 mail integration uses an app that an administrator consents to. CrowdStrike,
+      SentinelOne and the activity webhook each take a pasted API secret, token or header value.
+    evidence:
+      - url: https://www.ninjaone.com/docs/endpoint-management/ticketing/microsoft-365-integration/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You must have an administrator account with permission to give consent to the NinjaOne–SMTP Microsoft 365 Application."
+      - url: https://www.ninjaone.com/docs/integrations/how-to-connect-crowdstrike/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "CrowdStrike integrations can be seamlessly enabled within the NinjaOne administration interface using an API token from CrowdStrike."
+      - url: https://www.ninjaone.com/docs/integrations/antivirus/sentinelone/understanding-sentinelone-api-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can also leverage tokens to activate the SentinelOne integration with NinjaOne."
+      - url: https://app.ninjarmm.com/apidocs/NinjaRMM-API-v2.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "description: Custom HTTP Headers (i.e. Authorization)"
+    notes: >-
+      Admin consent counts as keyless because no secret changes hands. Graded B, not A, because the
+      antivirus integrations and the webhook store long-lived secrets. NinjaOne documents no cloud
+      account integration with a role or federation. Its older SIEM webhook guide now points to a
+      SIEM Exporter integration whose page was not found.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/create-applications/machine-to-machine-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Allowed Grant Types**: defines the authentication process for your application."
+    notes: >-
+      The client app form has a name, redirect addresses, scopes and grant types. No expiry for the
+      client secret is documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Only system administrators may configure OAuth tokens for the NinjaOne Public API."
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/create-applications/machine-to-machine-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you must first register your app within the NinjaOne web application."
+    notes: >-
+      Client apps and their secrets are created, edited and deleted in the web application. No
+      endpoint for managing them was found in the public API articles.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/create-applications/machine-to-machine-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Monitoring**: grants read-only access to monitoring data and organization structure."
+      - url: https://app.ninjarmm.com/apidocs-beta/articles/authorization/flows/client-credentials-flow.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "the system authenticates and authorizes the app rather than a user."
+    notes: >-
+      A client app is its own machine principal limited to its chosen scopes. There are only three
+      broad scopes, so a read-only app can still read every organization.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To edit or delete a client app ID, move your mouse cursor over the row and select the applicable option."
+    notes: >-
+      The client app list offers edit and delete. No page describes a last-used time for a client
+      app or its secret.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      NinjaOne does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  NinjaOne's own setup article says the API supports only authorization code and implicit grants,
+  then lists client credentials as an allowed grant. The API docs settle it in favor of client
+  credentials. Inbound moves to A or B only if the token endpoint accepts a federated workload
+  token in place of the client secret.

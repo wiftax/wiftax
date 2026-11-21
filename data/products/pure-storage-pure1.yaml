@@ -1,0 +1,126 @@
+id: pure-storage-pure1
+vendor: Pure Storage
+product: Pure1
+covers: "The Pure1 public REST API for fleet, metrics and array audit data."
+aliases:
+  - Everpure
+  - Pure1 Manage
+website: https://www.purestorage.com
+docs: https://static.pure1.purestorage.com/api-swagger/index.html
+category: other
+status: listed
+summary: >-
+  To call the Pure1 API, your code signs a JWT with an RSA private key and swaps it for an access
+  token that lasts about ten hours. The public key is registered by hand in the Pure1 web console.
+  Pure1 does not reach into customer clouds.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A customer-held RSA private key signs a JWT, which the token endpoint exchanges for a
+      short-lived access token. The matching public key is registered as an application in Pure1.
+    evidence:
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Pure1 REST API 1.latest offers one single form of authentication: OAuth 2.0 via the"
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The token must be issued by a trusted identity provider which must be either a registered application in Pure1 or an enabled API client on the array."
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each token must also be signed with the private key that is paired with the API client's public key."
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Exchanges an ID Token for an OAuth 2.0 access token."
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The duration after which the access token will expire."
+      - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authentication is different than what is used with the FlashArray REST. It is RSA SSL key based, not username/password based."
+    notes: >-
+      Graded C because the access token is short-lived but the private key is a static root. The
+      exchange uses the OAuth token exchange grant, but the only issuer it trusts is an application
+      registered in Pure1 with a public key. No external OIDC issuer, CI or cloud workload identity
+      is documented. The spec's example token lifetime is 35999 seconds.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Pure1 never connects into customer clouds, repos or SaaS. Arrays send their own telemetry to
+      Pure1, and the API only reads it back.
+    evidence:
+      - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This is something we host, and all of your dial-home information gets fed into it."
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Provides information about FlashArray and FlashBlade appliances."
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The above steps will never need to be done again, unless the SSL key changes, or you want to authenticate a new one."
+    notes: >-
+      Only the JWT carries an expiry, and the caller sets it. No public doc shows an expiry or a
+      maximum lifetime for the registered key.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you must be an administrator in your Pure1 organization to be able to do this step."
+      - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Handles authorization access to other API endpoints through OAuth 2.0 Token Exchange."
+    notes: >-
+      Keys are registered in the Pure1 web console by an administrator. The API spec has a token
+      endpoint but no endpoint to register, list or remove an application key.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Now, enter in a friendly name for the application or user."
+    notes: >-
+      The public registration walkthrough takes only a name and a public key. No public doc shows a
+      role or resource limit on a registered application.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You should then see it listed in Pure1."
+    notes: No public doc shows a last-used time for a registered application key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Neither Pure Storage nor Everpure appears in GitHub's secret-scanning table. The credential is
+      a generic RSA private key with no vendor pattern.
+
+notes: >-
+  Pure Storage now brands itself Everpure, and the API spec names Everpure as the developer. The
+  vendor knowledge base pages for Pure1 API registration return no text without JavaScript, so
+  hygiene rests on the API spec and a vendor blog walkthrough. Arrays have their own API clients,
+  which this card does not grade. Inbound moves to B or A only if the token exchange accepts an
+  external issuer.

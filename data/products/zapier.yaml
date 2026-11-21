@@ -1,0 +1,168 @@
+id: zapier
+vendor: Zapier
+product: Platform
+covers: "The Zapier SDK and CLI, the public APIs on api.zapier.com, Zapier MCP, and app connections used by Zaps."
+aliases:
+  - Zapier SDK
+  - Zapier MCP
+  - Zapier Workflow API
+website: https://zapier.com
+docs: https://docs.zapier.com/sdk/deploy
+category: saas
+status: listed
+summary: >-
+  Code reaches Zapier with a client ID and secret that are swapped for an access token. The secret
+  has no expiry. Zapier MCP also offers a long-lived connection token. Outbound, many apps connect
+  by OAuth consent, but others, Amazon S3 among them, take a pasted key.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A client ID and client secret, created with the SDK or CLI, are exchanged at Zapier's token
+      endpoint for a bearer access token.
+    evidence:
+      - url: https://docs.zapier.com/sdk/deploy.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A **client ID** and **client secret** pair that let a headless script, app, CI job, or agent authenticate to Zapier without opening a browser."
+      - url: https://docs.zapier.com/white-label/trigger-inbox/trigger-inbox-quickstart.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Trigger Inbox API requires an access token to authenticate your requests. For local testing, use SDK client credentials."
+      - url: https://docs.zapier.com/white-label/trigger-inbox/trigger-inbox-quickstart.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Exchange your credentials for an access token:"
+      - url: https://docs.zapier.com/powered-by-zapier/authentication/methods/app-access-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Exchange client ID and secret for a Bearer token with 36,000s expiration."
+      - url: https://docs.zapier.com/api-reference/overview.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Most use OAuth 2.0: pass your access token in the `Authorization: Bearer <token>` header on every request."
+      - url: https://docs.zapier.com/mcp/overview/how-connections-work.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The token is long-lived, tied to that one server, and grants whoever holds it the ability to run the server's tools and read the data they return."
+      - url: https://docs.zapier.com/white-label/implementation/token-exchange.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Zapier validates the signature using the public keys from your registered JWKS URL."
+    notes: >-
+      Graded C because the access token is short-lived but the client secret is a static root. The
+      10-hour lifetime is documented for Workflow API tokens. The SDK docs do not state a token
+      lifetime. Zapier MCP for custom code uses a long-lived connection token, which is a static
+      key. White Label partners can exchange their own signed JWT for a token. That path is set up
+      with Zapier during partner onboarding and still needs a client secret, so it does not lift the
+      grade.
+  outbound:
+    grade: B
+    mechanism: >-
+      Zapier stores one connection per app account. OAuth consent is the preferred scheme, and other
+      apps take a pasted API key, password or cloud access key.
+    evidence:
+      - url: https://docs.zapier.com/integrations/build/auth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Where possible, OAuth v2 authentication is the preferred scheme to simplify a user's account connection and minimize set up time."
+      - url: https://docs.zapier.com/integrations/build/auth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API Key authentication is next best. Users must be able to obtain their API key from your app without human intervention."
+      - url: https://docs.zapier.com/integrations/build/auth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Zapier will have access to the account until the authorization expires, is revoked, or credentials are changed."
+      - url: https://help.zapier.com/hc/en-us/articles/8495975749005
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A dedicated IAM user created specifically for Zapier with appropriate S3 permissions."
+      - url: https://help.zapier.com/hc/en-us/articles/8495975749005
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "AWS Access Key ID and AWS Secret Access Key for the IAM user."
+      - url: https://docs.zapier.com/mcp/overview/how-connections-work.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Zapier holds the app credentials, so your MCP client never handles a third-party API key."
+    notes: >-
+      Graded B on the rubric's rule that an app the customer consents to counts as keyless. Apps
+      that connect by OAuth consent hand Zapier no customer-made secret. Apps on the API key, basic
+      or session schemes do. Amazon S3 wants an IAM user's access key, and no role-based or
+      federated AWS connection is documented. Log streams push to a customer URL with an optional
+      signing secret and no other destination auth.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.zapier.com/sdk/deploy.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotate when a secret may have been exposed, or as part of routine key hygiene."
+      - url: https://docs.zapier.com/sdk/reference.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Human-readable name for the client credentials"
+    notes: >-
+      Creating client credentials takes a name and optional scopes, with no expiry field. Rotation
+      is a manual practice, and the docs show no default lifetime or policy.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://docs.zapier.com/sdk/reference.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create new client credentials for the authenticated user"
+      - url: https://docs.zapier.com/sdk/reference.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Delete client credentials by client ID"
+      - url: https://docs.zapier.com/sdk/deploy.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The SDK can also create credentials."
+    notes: >-
+      The SDK and CLI can create, list and delete client credentials. The docs show this from a
+      CLI login and do not say whether a client-credential session can mint its replacement.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.zapier.com/sdk/reference.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Scopes to allow for these credentials"
+      - url: https://docs.zapier.com/sdk/reference.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "List of OAuth scopes that this application is allowed to request"
+    notes: >-
+      Client credentials can be limited to a list of allowed scopes. They still act as the Zapier
+      user who created them, and no separate machine account type is documented.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.zapier.com/sdk/reference.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When the application was last updated (ISO 8601)"
+    notes: >-
+      Listing client credentials returns created and updated times only. No last-used time is
+      documented.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Zapier does not appear in GitHub's supported secret-scanning patterns, so a leaked secret is
+      not reported to Zapier.
+
+notes: >-
+  Inbound is graded on the SDK client credentials, the documented way to run code on servers and in
+  CI. Inbound moves to A or B only if a workload can trade its own OIDC token for a Zapier token
+  without a stored secret. Outbound reaches A if cloud connections such as Amazon S3 move off access
+  keys. The headline grade is C.

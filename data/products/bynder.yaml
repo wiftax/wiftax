@@ -1,0 +1,133 @@
+id: bynder
+vendor: Bynder
+product: Digital Asset Management
+covers: The Bynder REST API, including the Analytics and Webhooks APIs.
+aliases:
+  - Bynder DAM
+website: https://www.bynder.com
+docs: https://developers.bynder.com/getting-started
+category: saas
+status: listed
+summary: >-
+  To call Bynder, your code trades an OAuth client ID and secret for a one-hour token. A permanent
+  token is the static alternative. There is no federation, and the pages that explain how secrets
+  and permanent tokens are managed sit behind a browser check.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth client ID and secret, registered in the portal, are exchanged through the client
+      credentials grant for a bearer token that lasts an hour.
+    evidence:
+      - url: https://developers.bynder.com/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Bynder uses OAuth 2.0 for all API access."
+      - url: https://developers.bynder.com/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Server-to-server or automated workflows."
+      - url: https://api.bynder.com/reference/post_v6-authentication-oauth2-token-client-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint supports the Authorization Code grant, the Refresh Token grant and the Client Credentials grant."
+      - url: https://api.bynder.com/reference/post_v6-authentication-oauth2-token-client-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"description": "Application client secret."'
+      - url: https://api.bynder.com/reference/post_v6-authentication-oauth2-token-client-credentials.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"expires_in": 3600'
+      - url: https://api.bynder.com/reference/get_v7-analytics-api-v2-user-logins.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"permanentToken": { "type": "apiKey", "in": "header", "name": "Authorization" }'
+    notes: >-
+      The token endpoint takes three grants and all of them need the client secret. No token
+      exchange, JWT bearer grant or OIDC federation is documented. The token is short-lived but the
+      secret is a static root, so this is C. Permanent tokens are plain static keys.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Bynder never needs credentials for your infrastructure. Its webhooks publish events to an
+      endpoint you subscribe.
+    evidence:
+      - url: https://api.bynder.com/reference/createwebhookconfiguration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: 'Protocol for the Webhooks subscription. Possible values: "http", "https", "email", "email-json", "sqs".'
+      - url: https://api.bynder.com/reference/createwebhookconfiguration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Endpoint for the Webhooks subscription."
+    notes: >-
+      A webhook subscription takes an endpoint, a protocol and an event list, with no credential
+      field. One protocol is an Amazon SQS queue, and how the queue admits Bynder is not in the API
+      reference. Marketplace integrations call Bynder, so they fall under inbound.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://api.bynder.com/reference/get_v7-analytics-api-v2-user-logins.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: '"permanentToken": { "type": "apiKey", "in": "header", "name": "Authorization" }'
+      - url: https://developers.bynder.com/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Register an OAuth client application in your Bynder portal settings to obtain a client ID and client secret."
+    notes: >-
+      The readable docs give no lifetime or expiry policy for client secrets, and the static token
+      is named permanent.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.bynder.com/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Register an OAuth2 client in your Bynder portal settings to get a client ID and secret."
+      - url: https://api.bynder.com/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      OAuth clients are registered in the portal settings. The API index lists token and scope
+      endpoints only, with none to create or revoke a client or a permanent token.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.bynder.com/integrate.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Every token carries a fixed set of scopes."
+      - url: https://developers.bynder.com/integrate.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "We only grant scopes that match the user's underlying permissions, so a token can never exceed what its user could already do."
+    notes: >-
+      An OAuth app is limited to the scopes chosen for it, out of 29 published scopes. Whether a
+      permanent token can be scoped the same way is not in the readable docs.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.bynder.com/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Register an OAuth2 client in your Bynder portal settings to get a client ID and secret."
+    notes: >-
+      Nothing in the readable docs shows a last-used time for a client secret or permanent token.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Bynder does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Bynder's support articles on OAuth apps and permanent tokens return a browser challenge to a
+  plain fetch, so no receipt cites them. Three hygiene checks fail on the developer docs alone.
+  They cannot change the headline, which is C on inbound. Inbound moves to B or A only if the
+  token endpoint accepts a workload's OIDC token.

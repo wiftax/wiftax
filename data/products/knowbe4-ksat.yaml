@@ -1,0 +1,131 @@
+id: knowbe4-ksat
+vendor: KnowBe4
+product: KSAT
+covers: "The KSAT console's Reporting, User Event and GraphQL APIs, plus Direct Message Injection and Real-Time Coaching integrations."
+aliases:
+  - KMSAT
+  - Security Awareness Training
+  - SecurityCoach
+website: https://www.knowbe4.com
+docs: https://developer.knowbe4.com
+category: security
+status: listed
+summary: >-
+  Every KSAT API takes a static bearer token created in the console. Product API tokens can be
+  read-only and show a last-used date, but nothing forces an expiry. Outbound, Google Workspace
+  mail injection is keyless, while Real-Time Coaching stores Okta tokens and Google service
+  account keys.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API token sent as a bearer token. The Reporting, User Event and GraphQL APIs each
+      use their own token type, all created in the KSAT console.
+    tier_gated: Platinum, Diamond, SAT Foundations or SAT Advanced
+    evidence:
+      - url: https://developer.knowbe4.com/elvis-swagger.yml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Authenticate your account by including your secret API key in the request."
+      - url: https://developer.knowbe4.com/echelon-swagger.yml
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Please note that Reporting APIs and User Event APIs do not share an API key."
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/4404258222099.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can create a Read Only access token or a Read/Write access token."
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/115016090908.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When using this API, you must authenticate to the API using an account-specific key."
+    notes: >-
+      The GraphQL reference on the developer site renders only with JavaScript, so its
+      authentication page is not cited. The help center articles are cited through the help
+      center's public JSON endpoint. No OAuth, OIDC or workload federation is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Direct Message Injection for Google Workspace uses domain-wide delegation to a client ID
+      that KnowBe4 owns. Real-Time Coaching stores vendor keys such as an Okta token or a Google
+      service account key.
+    evidence:
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/360054494394.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To connect DMI to Google Workspace, you will need to add a client ID and scopes to your Google Workspace Admin console."
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675860417427.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you'll need to create a read-only administrator account in Okta and create an API token"
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675763215379.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You'll need this JSON file to set up the integration in Real-Time Coaching"
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6676053834131.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "you'll first need to create an OAuth Client in your CrowdStrike admin console"
+    notes: >-
+      KSAT reaches into no cloud account. The Google mail path exchanges no secret, which counts
+      as keyless. Graded B because Real-Time Coaching takes pasted keys, though its guides do
+      ask for read-only roles.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select the date when the API token should expire."
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/115016090908.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In this field, enter a descriptive name for this API token."
+    notes: >-
+      Product API tokens have an expiration date field, but no default, maximum or account
+      policy is documented. Reporting API tokens take only a name and a status.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you lose a token, you’ll need to create a new one."
+    notes: >-
+      Tokens are created, edited and deleted only in the Account Settings page of the console.
+      No API for managing tokens is documented.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select whether you want your users to have Read Only access, or the ability to make edits with the Read/Write permission."
+    notes: >-
+      A Product API token is tied to one product and can be read-only. It is an account token,
+      not a person's login. The Reporting API only pulls data.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This column displayed the date that the API token was last used."
+    notes: >-
+      Only the Product API token list shows a last-used date. The Reporting API token list shows
+      who generated a token and when.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: KnowBe4 does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. A required or enforced token expiry would
+  lift it to D. Inbound moves to A or B only if the APIs accept a federated token. PhishER and
+  the other KnowBe4 products are not graded here.

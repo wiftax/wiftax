@@ -1,0 +1,130 @@
+id: greenhouse-recruiting
+vendor: Greenhouse
+product: Recruiting
+covers: "The Harvest v3 API and the Audit Log API, plus integrations Greenhouse Recruiting connects out to."
+aliases:
+  - Greenhouse Harvest API
+  - Greenhouse Audit Log
+website: https://www.greenhouse.com
+docs: https://harvestdocs.greenhouse.io/docs/authentication.md
+category: saas
+status: listed
+summary: >-
+  A custom integration swaps an OAuth client ID and secret for a short-lived Harvest v3 token. The
+  secret has no expiry and is rotated only in the console. Outbound, calendars connect by OAuth
+  consent, but some integrations take a pasted API key.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      OAuth 2.0 client credentials. A client ID and secret created in the Dev Center are exchanged
+      for a bearer token. The Audit Log API swaps a Harvest API key for a 24-hour JWT.
+    evidence:
+      - url: https://harvestdocs.greenhouse.io/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For a customer-built integration used only within their own Greenhouse account"
+      - url: https://harvestdocs.greenhouse.io/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Keep your Client Secret confidential."
+      - url: https://harvestdocs.greenhouse.io/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access tokens expire."
+      - url: https://docs.greenhouse.io/audit-log.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You'll need a Harvest API key to generate an access token"
+      - url: https://docs.greenhouse.io/audit-log.html
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "valid for 24 hours from the time of creation."
+    notes: >-
+      Graded C because tokens are short-lived but the client secret or API key is a static root.
+      Partner integrations use the authorization code flow. The MCP server registers public
+      clients for a person's sign-in. Harvest v1 and v2 API keys are being retired. No grant that
+      accepts a workload's OIDC token is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Google Calendar connects through a per-user OAuth consent. The BambooHR integration takes a
+      BambooHR API key pasted into Greenhouse Recruiting.
+    evidence:
+      - url: https://support.greenhouse.io/hc/en-us/articles/360021799232-Google-Calendar-integration
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "to give Greenhouse Recruiting access to your Google Calendar."
+      - url: https://support.greenhouse.io/hc/en-us/articles/201177624-BambooHR-integration
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Paste your BambooHR API key and company subdomain."
+    notes: >-
+      Consent to a vendor-run app counts as keyless. Graded B because at least one integration
+      stores a pasted static key. Only these two integrations were read. Most partner integrations
+      run the other way, with the partner calling Harvest. Greenhouse Recruiting reaches into no
+      cloud account.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.greenhouse.io/hc/en-us/articles/115000521723-Manage-Harvest-API-credentials-permissions
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotating the client secret generates a new credential and immediately invalidates the previous one."
+    notes: >-
+      A client secret lasts until someone rotates or revokes it. No expiry setting or policy is
+      documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.greenhouse.io/hc/en-us/articles/115000521723-Manage-Harvest-API-credentials-permissions
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This is accessed within the same Manage Permissions page and choosing the Client secret tab."
+    notes: >-
+      Credentials are created, rotated and revoked in the Dev Center console. No API endpoint for
+      managing them is documented.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.greenhouse.io/hc/en-us/articles/115000521723-Manage-Harvest-API-credentials-permissions
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Site Admins can assign permissions to specific endpoints or scopes, limit usage to trusted IP addresses, and revoke/re-enable credentials as needed."
+      - url: https://harvestdocs.greenhouse.io/docs/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "an integration service user (ISU) is automatically generated and associated with these credentials"
+    notes: >-
+      Each credential takes its own endpoint permissions or OAuth scopes and an optional IP
+      allowlist. A v3 credential gets its own integration service user.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://support.greenhouse.io/hc/en-us/articles/360029266032-Harvest-API-overview
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The usage tab in API Credentials gives technical administrators visibility into how Harvest v3 credentials are being used."
+      - url: https://support.greenhouse.io/hc/en-us/articles/115000521723-Manage-Harvest-API-credentials-permissions
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The most recent date the credential was used for a write operation."
+    notes: >-
+      The usage tab reports request volume per v3 credential by month, which is enough to spot an
+      unused one. It is not an exact last-used time. The v1 and v2 export lists only the last
+      write date.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Greenhouse does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  The audit log must be enabled by Greenhouse and keeps thirty days of events. Job board, ingestion
+  and onboarding APIs use their own keys and are not graded here. Inbound moves to A or B only if
+  the token endpoint accepts a federated workload token in place of the client secret.

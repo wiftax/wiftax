@@ -1,0 +1,160 @@
+id: pagerduty-operations-cloud
+vendor: PagerDuty
+product: Operations Cloud
+covers: >-
+  The PagerDuty REST API, including the Audit Records API, and Incident Workflow integrations.
+aliases:
+  - PagerDuty REST API
+  - PagerDuty Incident Management
+website: https://www.pagerduty.com
+docs: https://docs.pagerduty.com/developer/authentication
+category: observability
+status: listed
+summary: >-
+  A workload can swap an app's client ID and secret for a PagerDuty token that lasts one day.
+  Static account and user API keys are still offered and never expire. Outbound, PagerDuty reaches
+  AWS through a role with an external ID and GitHub through an app, but Datadog, Azure Functions
+  and Dynatrace take pasted secrets.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      A Scoped OAuth app posts its client ID and client secret to the token endpoint and gets an
+      app token that expires after one day.
+    evidence:
+      - url: https://docs.pagerduty.com/developer/private-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An app token is obtained by making an OAuth 2.0 client credentials request."
+      - url: https://docs.pagerduty.com/developer/private-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A secret issued when the Scoped OAuth client was added to a PagerDuty App"
+      - url: https://docs.pagerduty.com/developer/private-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "\"expires_in\": 86400"
+      - url: https://docs.pagerduty.com/developer/oauth-functionality.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "because the client credentials grant needs a `client_secret`."
+      - url: https://docs.pagerduty.com/developer/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The PagerDuty REST API supports authenticating via an account or user API token."
+      - url: https://docs.pagerduty.com/developer/pagerduty-openid-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The ID token will be returned with the access token on a successful call to `oauth/token`:"
+    notes: >-
+      Graded C because the app token is short-lived but the client secret is a static root. Account
+      and user API keys remain available and are plain static keys. The Events API uses a static
+      integration key per service. PagerDuty issues OpenID ID tokens with its own access tokens,
+      but no page describes accepting a token from an outside issuer.
+  outbound:
+    grade: B
+    mechanism: >-
+      Incident Workflows assume an AWS role with an external ID and reach GitHub through the
+      PagerDuty GitHub App. Datadog, Azure Functions and Dynatrace connections take a pasted key or
+      client secret.
+    evidence:
+      - url: https://docs.pagerduty.com/ai-automation/automation/incident-workflows/workflow-integrations.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This secure, credential-less authentication method allows PagerDuty to access your AWS resources without requiring long-lived access keys."
+      - url: https://docs.pagerduty.com/ai-automation/automation/incident-workflows/workflow-integrations.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "New GitHub connections use the PagerDuty GitHub App."
+      - url: https://docs.pagerduty.com/ai-automation/automation/incident-workflows/workflow-integrations.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Tools that use API keys or tokens require you to generate a credential in the external tool and enter it directly into PagerDuty."
+      - url: https://docs.pagerduty.com/ai-automation/automation/incident-workflows/workflow-integrations.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The API Key for your Azure Function."
+      - url: https://docs.pagerduty.com/ai-automation/automation/incident-workflows/workflow-integrations.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The OAuth2 client secret paired with the client ID. PagerDuty stores it securely."
+    notes: >-
+      AWS has a keyless path. Azure Functions takes a function API key. Graded
+      B, not A, because several workflow connections store a long-lived key or secret. Only the
+      Workflow Integrations guide was read. Other integrations, such as ServiceNow and Jira, were
+      not checked.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.pagerduty.com/account-admin/api-access-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter a **Description** to help you identify the key later. Optionally, check **Read-only API Key** to restrict the key to `GET` calls only."
+      - url: https://docs.pagerduty.com/account-admin/security-hygiene-for-the-current-cyber-threat-landscape.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotate API keys periodically."
+    notes: >-
+      A new API key takes a description and an optional read-only flag. No expiry setting or
+      lifetime policy is documented for API keys or for an app's client secret.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.pagerduty.com/account-admin/api-access-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the web app, navigate to **Integrations** > **Developer Tools** > **API Access Keys**."
+      - url: https://docs.pagerduty.com/account-admin/security-hygiene-for-the-current-cyber-threat-landscape.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Generate a new key from the administrative account."
+    notes: >-
+      API keys are created and deleted in the web app. The docs index lists no REST endpoint that
+      creates or revokes API keys or app client secrets.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.pagerduty.com/developer/private-apps.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "With an **app token**, access is limited only by the scopes granted to the app."
+      - url: https://docs.pagerduty.com/developer/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Account API tokens have access to all of the data on an account"
+    notes: >-
+      A Scoped OAuth app is its own machine principal with per-resource scopes. Account API keys
+      are all-or-nothing apart from a read-only option.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.pagerduty.com/account-admin/api-access-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The key will appear in the API Access Keys table with the following information: description, creation date, API version, access level, and disabled status"
+      - url: https://docs.pagerduty.com/account-admin/api-access-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The key will appear in the API Access table with the following information: creation date, last used date, and API version."
+    notes: >-
+      A last used date is shown for personal user keys only. The account key table does not list
+      one, and nothing shows last use of an app's client secret.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "PagerDuty OAuth Secret"
+    notes: >-
+      GitHub lists PagerDuty OAuth secrets and tokens as user-alert patterns, not partner patterns.
+      A leaked secret is flagged to the repository owner but is not reported to PagerDuty. REST API
+      keys are not listed.
+
+notes: >-
+  The Audit Records API is part of the REST API and needs a paid plan. An admin-wide audit pull
+  needs a global API key or a token for an admin user. Inbound moves to A or B only if the token
+  endpoint accepts a federated workload token in place of the client secret.

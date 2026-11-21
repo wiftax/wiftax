@@ -1,0 +1,134 @@
+id: metronome
+vendor: Metronome
+product: Billing Platform
+covers: "The Metronome REST API and its marketplace, invoicing and tax integrations."
+website: https://metronome.com
+docs: https://docs.metronome.com/api-reference/authentication
+category: saas
+status: listed
+summary: >-
+  The Metronome API takes only a static bearer token created in the web app, with no documented
+  expiry. Narrowing a token's permissions means contacting support. Outbound, AWS and Google Cloud
+  marketplace metering is keyless, but Azure needs a client secret.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static bearer token created in the Metronome app under Developer, sent in the Authorization
+      header.
+    evidence:
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Metronome’s API uses bearer tokens to authenticate requests."
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API tokens can be created through the Metronome app."
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Be sure to save the token you create. You cannot view the full token again."
+    notes: >-
+      The authentication page documents only this bearer token, and the SDKs read it from an
+      environment variable. No OAuth client, OIDC, CI or cloud workload login is documented. One of
+      five hygiene checks passes, so the grade is F.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS Marketplace metering assumes a cross-account role with an external ID, and Google Cloud
+      uses Workload Identity Federation. Azure Marketplace takes a pasted client secret.
+    evidence:
+      - url: https://docs.metronome.com/integrations/marketplace-integrations/aws.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To make API calls to AWS on your behalf, Metronome needs a role with the right permissions."
+      - url: https://docs.metronome.com/integrations/marketplace-integrations/aws.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Copy Metronome's AWS account ID and the unique external ID generated on step 1"
+      - url: https://docs.metronome.com/integrations/marketplace-integrations/gcp.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "which allows federated access to your project by Metronome without the need to store long-lived tokens or keys."
+      - url: https://docs.metronome.com/integrations/marketplace-integrations/azure.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "to generate and copy a"
+      - url: https://docs.metronome.com/integrations/marketplace-integrations/azure.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To invoice through the Azure Marketplace, set up authentication credentials for Metronome using your"
+      - url: https://docs.metronome.com/integrations/invoice-integrations/stripe.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Connecting involves granting Metronome the permissions to write and read data on your behalf to your Stripe account."
+      - url: https://docs.metronome.com/integrations/invoice-integrations/netsuite.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Provide Metronome with the generated credentials to access your NetSuite account"
+    notes: >-
+      Graded B because two clouds are keyless while Azure and NetSuite take stored credentials. The
+      Azure guide asks for a tenant ID, client ID and client secret. Stripe is connected through a
+      wizard that grants permissions. Data export destinations were not graded.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter a descriptive name for the token and click"
+    notes: >-
+      A token takes only a name at creation. The docs show no expiry setting, default lifetime or
+      policy.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To do this, simply hit the Trash icon next to the relevant token in the Metronome UI."
+    notes: >-
+      Tokens are created and archived in the web app. The API reference lists no endpoint to create
+      or revoke a token.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Metronome API tokens can also be limited in scope to reduce risk and follow the principle of least privilege."
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By default, Metronome API tokens will retain the same permissions as the user that created them."
+    notes: >-
+      Tokens can be limited by access level, environment and endpoint. The limit is not self-serve,
+      because the page says to contact support to adjust permissions. Without that, a token
+      inherits its creator's permissions.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.metronome.com/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The token's name is associated with API calls made using it"
+    notes: >-
+      Audit logs record the token name on each call. The docs show no last-used time on the token
+      list.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Metronome does not appear in GitHub's supported secret-scanning patterns, partner or user.
+
+notes: >-
+  Covers the Metronome REST API and the integrations in its public docs. One of five hygiene checks
+  passes, and that one needs a support request. An enforced token lifetime and a token management
+  API would lift inbound to D. Inbound moves to A or B only if the API accepts a federated workload
+  token.

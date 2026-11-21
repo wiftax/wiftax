@@ -1,0 +1,131 @@
+id: secoda
+vendor: Secoda
+product: Platform
+covers: >-
+  The Secoda API, including the audit log endpoints and the MCP server, plus the integrations
+  Secoda uses to read data warehouses and cloud services.
+aliases:
+  - Secoda API
+  - Secoda Data Catalog
+website: https://www.secoda.co
+docs: https://docs.secoda.co/api/authentication.md
+category: data
+status: listed
+summary: >-
+  Secoda's API takes a static API key that carries its creator's full access. The docs show no
+  expiry, no key management API and no last-used time. Outbound, Secoda can assume an AWS role
+  with an External ID, but BigQuery and Snowflake take a stored key or password.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key generated in workspace settings and sent as a bearer token. It has the same
+      access as the user who created it.
+    evidence:
+      - url: https://docs.secoda.co/api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Click on “Generate New API Key” button and then write down the generated key."
+      - url: https://docs.secoda.co/api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To make an authenticated request to your Secoda workspace. Please include an `Authorization` header with your HTTP request with the following format `Bearer <Your API Key>`"
+      - url: https://docs.secoda.co/api/reference/getting-started.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Secoda API's require an Authorization header with a Bearer token."
+      - url: https://docs.secoda.co/features/ai-assistant/secoda-mcp-server.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API token for authentication with the Secoda API"
+    notes: >-
+      The API docs describe one credential, the API key. The MCP server uses the same key. No OAuth
+      client, service account or workload federation is documented for the API.
+  outbound:
+    grade: B
+    mechanism: >-
+      AWS integrations can use a cross-account role with an External ID. BigQuery takes a service
+      account JSON key and Snowflake takes a password or private key.
+    evidence:
+      - url: https://docs.secoda.co/integrations/security/connecting-via-aws-cross-account-role.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Neither the Account ID nor the External ID are secrets, so don't worry about keeping them somewhere secure."
+      - url: https://docs.secoda.co/integrations/data-pipeline-tools/aws-glue-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If using a AWS IAM User, copy the Access Key ID and Secret Access Key that is generated for the user. If using the Role, input the role ARN."
+      - url: https://docs.secoda.co/integrations/data-warehouses/bigquery-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter in the project name and paste the JSON key file contents that was downloaded"
+      - url: https://docs.secoda.co/integrations/data-warehouses/snowflake-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you would like you use key-pair authentication instead of a password you will need to:"
+      - url: https://docs.secoda.co/integrations/data-warehouses/redshift-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When connecting to Redshift in Secoda, use the username/password you’ve created here instead of your admin account."
+    notes: >-
+      AWS is keyless when the role option is used, though a static access key is also offered.
+      Google Cloud and Snowflake need a stored key or password. The guides do give least-privilege
+      roles and policies for each source. Only six of the many integrations were read.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://docs.secoda.co/api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Please keep this key somewhere safe and do not share with others."
+    notes: >-
+      The authentication page shows no expiry setting, default lifetime or policy for API keys.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://docs.secoda.co/api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Navigate to your workspace settings on Secoda. Click on the “API” to get a list of your API Keys."
+      - url: https://docs.secoda.co/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Keys are made in workspace settings. The API reference index lists no section for creating or
+      revoking API keys.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://docs.secoda.co/api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This key will have the same access to your Secoda workspace as the user who created it."
+    notes: >-
+      A key inherits its creator's access. The docs show no per-key scopes and no machine account
+      type.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://docs.secoda.co/api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Navigate to your workspace settings on Secoda. Click on the “API” to get a list of your API Keys."
+    notes: >-
+      The docs describe a list of keys but do not mention a last-used time.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Secoda is not in GitHub's secret-scanning table, so a leaked API key is not reported to
+      Secoda.
+
+notes: >-
+  No hygiene check passes, so inbound is F. Three passes would lift it to D, for example an enforced
+  key expiry, per-key scopes and a key management API. Inbound moves to A or B only if the API
+  accepts a federated workload token. Self-hosted Secoda was not graded.

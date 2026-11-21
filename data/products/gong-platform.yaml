@@ -1,0 +1,143 @@
+id: gong-platform
+vendor: Gong
+product: Platform
+covers: The Gong public API and the data capture integrations for mail, calendar, CRM and telephony.
+aliases:
+  - Gong API
+  - Gong Revenue AI
+website: https://www.gong.io
+docs: https://help.gong.io/apidocs.md
+category: saas
+status: listed
+summary: >-
+  To call the Gong API, your code holds an access key and secret, or an OAuth client secret and
+  refresh token that yield one-day tokens. Outbound, Gong reads Google Workspace through an
+  installed app and Salesforce through a sign-in, but many telephony connections take pasted keys,
+  passwords or AWS access keys.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      An OAuth integration trades its client secret and a refresh token for a bearer token that
+      lasts one day by default. Static access keys with a secret are the other option.
+    evidence:
+      - url: https://help.gong.io/apidocs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "There are two ways to retrieve credentials to the Gong Public API:"
+      - url: https://help.gong.io/apidocs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To create the basic token, combine the Access Key and the Access Key Secret with colon (:) and then encode in Base64 as following:"
+      - url: https://help.gong.io/docs/create-an-app-for-gong.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To create the basic token, combine the client_id and the client_secret you received from Gong with a colon (:), and then encode in Base64 as shown here:"
+      - url: https://help.gong.io/docs/create-an-app-for-gong.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This returns the access token which by default is valid for 1 day."
+      - url: https://help.gong.io/docs/create-an-app-for-gong.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Gong doesn’t support user level OAuth. Authentication happens once on a global level."
+      - url: https://help.gong.io/docs/what-the-gong-api-provides.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Gong API is available to all partners and customers and enables them to:"
+    notes: >-
+      Graded C because the bearer token is short-lived but the client secret and refresh token are
+      static roots. A tech admin approves the integration once, and after that no person is in the
+      loop. The OAuth guide is written mainly for partner apps and starts with a request for a
+      developer instance. No OIDC or cloud workload login is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      Google Workspace connects through a domain-installed Marketplace app and Salesforce through
+      an integration user's sign-in. Telephony providers take API keys, passwords or AWS access
+      keys.
+    evidence:
+      - url: https://help.gong.io/docs/connect-google-workspace-company-wide.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the Google Workspace marketplace, click Domain Install to install the"
+      - url: https://help.gong.io/docs/connect-gong-to-salesforce.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "In the Salesforce integration settings page, click Connect and log into your Salesforce account using the credentials of the integration user you set up."
+      - url: https://help.gong.io/docs/what-you-need-from-your-telephony-provider.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access key ID, secret access key, S3 path, speaker channel"
+      - url: https://help.gong.io/docs/what-you-need-from-your-telephony-provider.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "| Aircall | API keys, token |"
+    notes: >-
+      The keyless side is the consent rule for Google Workspace and Salesforce. Amazon Connect and
+      RingDNA recordings are read from S3 with an IAM access key, with no role option documented.
+      Other telephony systems want API keys, tokens or an admin's username and password. A role
+      for the S3 paths and consent-based telephony connections would make this A.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://help.gong.io/docs/receive-access-to-the-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the number of days until the key expires in the TTL (days) field. Leave this field empty if the key should not expire."
+    notes: >-
+      A key can be given a lifetime in days, but the field is optional and empty means it never
+      expires. The docs show no policy that forces one.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://help.gong.io/docs/receive-access-to-the-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can create new keys, update existing ones, and delete keys that are no longer needed."
+    notes: >-
+      Keys are created, edited and deleted in the Admin center. The public docs list no API
+      endpoint for managing keys. OAuth client secrets are also rotated in the Admin center.
+  scoping:
+    pass: false
+    evidence:
+      - url: https://help.gong.io/docs/receive-access-to-the-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API keys give external systems access to your company's Gong data through the public API."
+      - url: https://help.gong.io/docs/receive-access-to-the-api.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each key can be restricted to specific IP addresses and given an expiration date."
+    notes: >-
+      A key takes a name, a lifetime and trusted IPs. Trusted IPs limit where a key works, not what
+      it can read. Only OAuth integrations take scopes.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://help.gong.io/docs/generate-an-api-and-mcp-usage-report.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each row covers one hour of calls to one API endpoint or MCP tool, from one caller, for one team member."
+      - url: https://help.gong.io/docs/generate-an-api-and-mcp-usage-report.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The ID of the integration or API key that made the calls."
+    notes: >-
+      There is no last-used column on the key list. The usage report shows calls per key for each
+      hour, over up to three months, which is enough to find a dead key.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Gong does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Inbound is C on the OAuth path. On access keys alone it would be F, with one hygiene check
+  passing. Inbound moves to A or B only if the API accepts a federated token. Collective partner
+  apps and the MCP server were not assessed.

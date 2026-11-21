@@ -1,0 +1,137 @@
+id: webflow
+vendor: Webflow
+product: Platform
+covers: "The Webflow Data API, including the Enterprise workspace audit log endpoint, and Webflow Cloud's GitHub connection."
+aliases:
+  - Webflow Data API
+  - Webflow Cloud
+website: https://webflow.com
+docs: https://developers.webflow.com/data/reference/authentication
+category: saas
+status: listed
+summary: >-
+  The Webflow Data API takes only a static bearer token. Site and workspace tokens are made in the
+  dashboard and stay valid until revoked or unused for 365 days. Outbound, Webflow Cloud reads
+  GitHub repositories through a GitHub App, so no key changes hands.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static site token or workspace token, created in the dashboard and sent as a bearer token.
+      OAuth apps are the other option and need a person to approve them in a browser.
+    evidence:
+      - url: https://developers.webflow.com/data/reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To access the Webflow API, you need to authenticate your requests using a bearer token, which must be included in the authorization header of each API request."
+      - url: https://developers.webflow.com/data/reference/authentication/site-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Site tokens are valid until they're manually revoked or after 365 days of inactivity."
+      - url: https://developers.webflow.com/data/reference/authentication/workspace-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Workspace tokens are valid until they're manually revoked or after 365 days of inactivity."
+      - url: https://developers.webflow.com/data/reference/enterprise/workspace-audit-logs/get.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint requires an Enterprise workspace and a workspace token with the `workspace_activity:read` scope."
+      - url: https://developers.webflow.com/data/reference/oauth-app.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Now that you have the authorization code you can exchange it for an access token."
+    notes: >-
+      The authentication guide lists site tokens, workspace tokens and OAuth tokens, and nothing
+      else. The OAuth flow starts with a person approving the app and uses a client secret. No OIDC,
+      CI or cloud workload login is documented. Workspace tokens need an Enterprise workspace.
+  outbound:
+    grade: A
+    mechanism: >-
+      Webflow Cloud reads customer repositories through a GitHub App the customer installs, plus a
+      short GitHub OAuth step. No customer-made key is pasted into Webflow.
+    evidence:
+      - url: https://developers.webflow.com/webflow-cloud/github-app-permissions.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Ongoing deployments read the connected repository through the App installation."
+      - url: https://developers.webflow.com/webflow-cloud/github-app-permissions.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You install the Webflow Cloud GitHub App on a personal account or organization and grant repository access"
+      - url: https://developers.webflow.com/webflow-cloud/bring-your-own-app.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The process prompts you to select a GitHub repository, install the GitHub app that gives Webflow access to the repository, and specify how to deploy it to Webflow Cloud."
+    notes: >-
+      GitHub is the only customer system the developer docs show Webflow reaching into. An installed
+      GitHub App counts as keyless under the rubric. Webhooks only send signed requests to a
+      customer URL. Marketplace apps call into Webflow, so they fall under inbound.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.webflow.com/data/reference/authentication/site-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API tokens expire after 365 consecutive days of inactivity."
+      - url: https://developers.webflow.com/data/reference/authentication/site-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Any API call made with the token before expiry will reset the inactivity period."
+    notes: >-
+      The only expiry is for idle tokens. A token in use never expires, and the docs show no way to
+      set a lifetime or enforce one.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.webflow.com/data/reference/authentication/site-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Yes, you can generate a new token at any time from the API access section in your site settings."
+      - url: https://developers.webflow.com/data/reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Webflow users can remove Site Tokens from the Site Settings."
+    notes: >-
+      Site and workspace tokens are created and revoked only in the dashboard. The API can revoke an
+      OAuth access token, but it cannot create or revoke site or workspace tokens.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.webflow.com/data/reference/authentication/site-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter a name for your token, and choose the [scopes](/data/reference/scopes) needed for your use case."
+      - url: https://developers.webflow.com/data/reference/authentication/workspace-token.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Choose the permissions you want the API token to have for each [scope](/data/reference/scopes)."
+    notes: >-
+      Each token is tied to one site or one workspace and carries only the scopes picked when it was
+      created.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developers.webflow.com/data/docs/migrating-to-v2.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "First, check to see if the token is still needed by seeing if the \"Last used\" date is recent."
+    notes: >-
+      The migration guide tells admins to read the Last used date in the site's API access list. The
+      token pages themselves do not describe the column.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Webflow does not appear in GitHub's supported secret-scanning patterns, so a leaked token is
+      not reported to Webflow.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. An enforced token lifetime and a token
+  management API would lift it to D. Inbound moves to A or B only if the Data API accepts a
+  federated workload token. The headline grade is F because inbound is the lower surface.

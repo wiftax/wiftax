@@ -1,0 +1,97 @@
+id: parsec
+vendor: Parsec
+product: Parsec for Teams
+parent: Unity
+covers: "The Parsec Teams API and the keys issued in the Parsec for Teams admin panel."
+website: https://parsec.app
+docs: https://parsec.app/docs/teams-api
+category: other
+status: listed
+summary: >-
+  The Parsec Teams API takes a static API key created in the admin panel. Keys carry their own
+  permissions and show when they were last used, but they have no expiry and no rotation API.
+  Parsec does not reach into customer clouds or SaaS.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API key created by a Super Admin in the Parsec for Teams admin panel and sent as
+      a bearer token.
+    tier_gated: Enterprise
+    evidence:
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361397624084.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You must be logged in as a Super Admin to generate an API key."
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access Controls for API Keys is an Enterprise Level Feature"
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select Public API Key and Click Next"
+    notes: >-
+      The Teams API reference renders only with JavaScript, so it is not cited. It describes
+      bearer authentication with these keys. The help articles are cited through the help
+      center's public JSON endpoint. No OAuth, OIDC or workload federation is documented.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      Parsec never needs access to customer clouds, repos or SaaS. Its other keys enroll team
+      computers and receive SCIM calls from an identity provider.
+    evidence:
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your API Keys, Team Computer Key and SCIM Key can all be listed here."
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Name Your Key. It is best practice to name it something descriptive."
+    notes: >-
+      Creating a key asks for a name and permissions only. No expiry setting or policy is
+      documented.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Navigate to the Parsec for Teams Admin Panel"
+    notes: >-
+      Keys are created, duplicated, disabled and deleted in the admin panel. The help articles
+      describe no API for managing keys.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Set the Permissions for the key."
+    notes: >-
+      Each key belongs to the team, not a person, and gets its own set of permissions.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When and Where the Key was last used"
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Parsec does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. A key expiry and a key management API would
+  lift it to D. Inbound moves to A or B only if the Teams API accepts a federated token.

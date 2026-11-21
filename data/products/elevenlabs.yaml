@@ -1,0 +1,157 @@
+id: elevenlabs
+vendor: ElevenLabs
+product: Platform
+covers: "The ElevenLabs API, including the workspace audit log endpoint, and ElevenAgents integrations."
+aliases:
+  - ElevenAPI
+  - ElevenAgents
+website: https://elevenlabs.io
+docs: https://elevenlabs.io/docs/api-reference/authentication
+category: saas
+status: listed
+summary: >-
+  The ElevenLabs API takes only a static API key. Hygiene is good. Keys can be scoped, created and
+  deleted by API, forced to expire, and disabled when leaked on GitHub. Outbound, agents reach
+  Slack, Zendesk and Google Drive by consent, but Twilio and Salesforce take stored secrets.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static API key, owned by a user or a service account, sent in a header on every request.
+    evidence:
+      - url: https://elevenlabs.io/docs/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The ElevenLabs API uses API keys for authentication. Every request to the API must include your API key, used to authenticate your requests and track usage quota."
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "They are recommended for backend systems, automation, and production workloads."
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/audit-logs.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Requests authenticate with a workspace API key."
+      - url: https://elevenlabs.io/docs/api-reference/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "These tokens are valid for a limited time and can be used to connect to the API without exposing your API key, for example from the client side."
+    notes: >-
+      The authentication page documents only API keys. Single-use tokens are minted with an API key
+      for client-side use on certain endpoints, so they do not replace it. No OAuth client
+      credentials, OIDC or cloud workload login is documented. Four of five hygiene checks pass, so
+      the grade is D. Service accounts need a multi-seat plan.
+  outbound:
+    grade: B
+    mechanism: >-
+      ElevenAgents connects to Slack, Zendesk and Google Drive through OAuth consent. Twilio takes a
+      pasted SID and token, and Salesforce takes a client ID and secret.
+    evidence:
+      - url: https://elevenlabs.io/docs/eleven-agents/customization/integrations/slack.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "install the shared ElevenLabs Slack app into your workspace."
+      - url: https://elevenlabs.io/docs/eleven-agents/customization/integrations/google_drive.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Access is granted per-user through the standard Google OAuth consent flow and can be revoked at any time from your"
+      - url: https://elevenlabs.io/docs/eleven-agents/customization/integrations/zendesk.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This integration supports three authentication methods: the ElevenLabs OAuth app, your own OAuth client, and an API token."
+      - url: https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/native-integration.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your Twilio Auth Token or API Key Secret."
+      - url: https://elevenlabs.io/docs/eleven-agents/customization/integrations/salesforce.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This integration uses **Salesforce OAuth 2.0 Client Credentials** for authentication. You will need to create an External Client App in Salesforce."
+      - url: https://elevenlabs.io/docs/eleven-agents/customization/tools/webhook-tools.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Configure with your client ID, client secret, and token URL"
+    notes: >-
+      Graded B because some integrations are consent-based apps and others store a secret. No cloud
+      account integration with an AWS role or Google impersonation was found. The Twilio page does
+      recommend a limited API key over the account-wide token. Only a sample of integration pages
+      was read.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/create.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "When set, it must be at least 15 minutes and at most 90 days in the future."
+      - url: https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/create.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A workspace may disallow never-expiring keys, or allow them only on service account API keys"
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "choose a preset ranging from 15 minutes to 30 days, or leave it as **Never** (the default)."
+    notes: >-
+      Keys can carry an expiry of up to 90 days, and the API reference says a workspace can disallow
+      keys that never expire. The default is still never. The API keys guide says service account
+      keys do not expire, which conflicts with the API reference. Where the workspace setting lives
+      is not documented.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/create.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Create a new API key for a service account"
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Service account API keys** can be rotated from the dashboard or via the API:"
+    notes: Service account keys only. User API keys are rotated in the dashboard.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "**Scope restriction:** limit which API endpoints the key can access."
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/service-accounts.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A service account acts as a workspace member. When originally created, they do not have access to any resources."
+  last_used:
+    pass: false
+    evidence:
+      - url: https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/list.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Credits already used in the current billing period."
+    notes: >-
+      The key listing returns creation time, expiry and credits used. It has no last-used time, and
+      the API keys guide does not mention one.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If an ElevenLabs API key is committed to a public GitHub repository, GitHub notifies ElevenLabs and the key is automatically disabled to prevent unauthorized use."
+      - url: https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By default, this is enabled for non-Enterprise plans and disabled for Enterprise plans."
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Passes on ElevenLabs' own statement. GitHub's supported patterns table does not list
+      ElevenLabs. Automatic disabling is off by default on Enterprise plans until an admin allows
+      it.
+
+notes: >-
+  Graded the ElevenLabs API across its audio and agent products, which share one key system. Inbound
+  cannot rise above D while a static key is the only credential. It moves to A or B only if the API
+  accepts a federated workload token. Outbound reaches A if Twilio, Salesforce and custom tool
+  connections stop storing secrets.

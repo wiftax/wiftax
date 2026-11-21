@@ -1,0 +1,127 @@
+id: rippling-platform
+vendor: Rippling
+product: Platform
+covers: >-
+  The Rippling REST API v2 with its API tokens, and the connections Rippling makes outward through
+  MCP Gateway connectors and functions.
+aliases:
+  - Rippling API
+  - Rippling Activity Log
+website: https://www.rippling.com
+docs: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+category: saas
+status: listed
+summary: >-
+  Rippling's API takes a static bearer token tied to the person who created it. The token has
+  scopes and a last-accessed time, but no set expiry and no management API. Outbound, MCP Gateway
+  connectors use OAuth consent or a pasted key.
+
+surfaces:
+  inbound:
+    grade: F
+    mechanism: >-
+      A static API token, created in the Developer app and sent as a bearer token. It is owned by
+      the person who created it.
+    evidence:
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rippling’s REST API uses API tokens to authenticate requests and determine what data can be accessed."
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API tokens are Bearer tokens passed in the `Authorization` header:"
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API tokens are personal credentials tied to the person who created them, not company assets that can be reassigned."
+      - url: https://developer.rippling.com/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rippling has three authentication paths. Pick one and do not mix them."
+      - url: https://developer.rippling.com/documentation/developer-portal/v2-guides/oauth.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Each credential is comprised of a **client ID** and **client secret**."
+    notes: >-
+      The docs name three paths. Customers use API tokens. App Shop partners use OAuth with a client
+      secret. The Rippling MCP runs as a signed-in employee. None accepts a workload's own identity
+      token, and no service account type is documented.
+  outbound:
+    grade: B
+    mechanism: >-
+      MCP Gateway connectors authorize through Rippling's own OAuth app, a customer OAuth app, or a
+      pasted API key or personal access token.
+    evidence:
+      - url: https://developer.rippling.com/documentation/rippling-platform/mcp-gateway/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Built-in connectors can authorize with Rippling’s OAuth app, a custom OAuth app, or a personal access token (PAT) or API key."
+      - url: https://developer.rippling.com/documentation/rippling-platform/mcp-gateway/setup.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For a custom OAuth app, API key, or PAT, click **Continue** and enter the credentials."
+      - url: https://developer.rippling.com/documentation/rippling-platform/developer/custom-settings.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For example, say you need to include an API key in a function."
+    notes: >-
+      Rippling's OAuth app is a consent flow, which counts as keyless. Other connectors and Rippling
+      functions store a pasted key or client secret, so the grade is B. Setup guides for App Shop
+      integrations sit in a help center that needs JavaScript and were not read.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Since each API token is associated with an owner, it is automatically revoked or expired if the owner is terminated or the token remains unused for over 30 days."
+    notes: >-
+      A token that stays in use never expires. Rippling revokes idle tokens after 30 days, which is
+      useful but is not an expiry date an admin can set or enforce.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Tokens are generated in the API credentials tab of the Developer app."
+      - url: https://developer.rippling.com/llms.txt
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Tokens are created and revoked in the web app. The API reference index lists no endpoint to
+      create, list or revoke API tokens.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A token can only access data permitted by both the user’s permission profile **and** the token’s scopes."
+    notes: >-
+      Scopes chosen at creation narrow a token below its owner's permissions. The token is still
+      tied to a person, not a machine account.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can refer to the `Last accessed` field to see when an API token was last used."
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: >-
+      Rippling is not in GitHub's secret-scanning table, so a leaked API token is not reported to
+      Rippling.
+
+notes: >-
+  Two of five hygiene checks pass, so inbound is F. A settable token expiry or a token management
+  API would lift it to D. The 30-day idle revocation is close to an expiry but does not bound a
+  token in active use. Inbound moves to A or B only if the API accepts a federated workload token.

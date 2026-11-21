@@ -1,0 +1,141 @@
+id: notion
+vendor: Notion
+product: Notion
+covers: "The Notion REST API, Admin API and Notion MCP, plus SIEM and Notion AI connector integrations."
+website: https://www.notion.com
+docs: https://developers.notion.com/guides/authorization/overview
+category: saas
+status: listed
+summary: >-
+  A workload calls the Notion API with a static token. Internal connection tokens never expire.
+  Personal access tokens expire within a year and can be scoped and tracked. Outbound, Notion AI
+  connectors use consent apps, but SIEM streaming to Splunk or Sumo Logic stores a pasted token.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static bearer token. It is either an internal connection token owned by a bot user or a
+      personal access token that expires within one year.
+    evidence:
+      - url: https://developers.notion.com/guides/connections-and-tokens/internal-connections.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Internal connections use a static credential called an internal connection API token."
+      - url: https://developers.notion.com/guides/connections-and-tokens/personal-access-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Personal access tokens (PATs) let one Notion user call the Notion API or work with Notion Workers."
+      - url: https://developers.notion.com/guides/authorization/credential-security.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "OAuth code exchange requires a client secret and must run on a server."
+      - url: https://developers.notion.com/guides/mcp/enterprise-managed-authorization.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An ID-JAG is a short-lived JWT that your company's identity provider (IdP) signs for one user and one MCP client."
+      - url: https://developers.notion.com/reference/admin/intro.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Every request is authenticated with an organization bot token tied to your Notion organization."
+    notes: >-
+      OAuth integrations need a person to approve access, and the docs give no access token
+      lifetime, so they are not graded C. Notion MCP accepts an identity provider assertion on
+      the Enterprise plan. That assertion is issued for one signed-in user and covers MCP only,
+      so it does not count as workload federation. The Admin API takes a static organization
+      token.
+  outbound:
+    grade: B
+    mechanism: >-
+      Notion AI connectors for Slack and Google Drive are installed as consent apps. SIEM
+      streaming to Splunk, Sumo Logic or Panther stores a token or shared secret.
+    evidence:
+      - url: https://www.notion.com/help/notion-ai-connectors-for-google-drive
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A Google Workspace Super Admin installs the Notion AI app from the Google Workspace Marketplace."
+      - url: https://www.notion.com/help/notion-ai-connectors-for-slack
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You must be a Slack workspace owner and a Notion workspace owner."
+      - url: https://www.notion.com/help/add-security-and-compliance-integrations
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Enter the HTTP Event Collector (HEC) URL in the Webhook URL field and the HTTP Event Collector (HEC) token in the Token field."
+      - url: https://www.notion.com/help/add-security-and-compliance-integrations
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The Webhook URL and Token are not required."
+    notes: >-
+      Notion reaches into no cloud account. Consent apps count as keyless, and the Datadog SIEM
+      connection signs in to Datadog instead of taking a token. Graded B because the other SIEM
+      connections need a pasted token. The custom SIEM webhook takes only a URL.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://developers.notion.com/guides/connections-and-tokens/personal-access-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "If you don't choose an expiration, the token expires after 1 year."
+      - url: https://developers.notion.com/guides/authorization/credential-security.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "PATs expire on the date chosen when the token is created, up to one year later."
+    notes: >-
+      Passes on personal access tokens, which cannot outlive one year. Internal connection tokens
+      have no documented expiry and stay valid until someone refreshes them.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.notion.com/guides/authorization/credential-security.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select **Refresh** for an internal connection, or revoke the personal access token."
+      - url: https://developers.notion.com/reference/admin/list-personal-access-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint returns personal access token (PAT) records, but never returns token values."
+    notes: >-
+      The Admin API can list and revoke personal access tokens on the Enterprise plan. Creating
+      a token, or refreshing an internal connection token, is done only in the Developer portal.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.notion.com/guides/connections-and-tokens/internal-connections.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An internal connection operates as its own **bot user**. It is not tied to any specific workspace member."
+      - url: https://developers.notion.com/reference/capabilities.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "These capabilities when put together enforce which API endpoints a connection or token can call, and what content and user related information they are able to see."
+    notes: >-
+      An internal connection is a bot user that sees only the pages shared with it. Capabilities
+      limit both token types to reading, updating or inserting content.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developers.notion.com/reference/admin/list-personal-access-tokens.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Most recent recorded time the token authenticated a request, in epoch milliseconds."
+    notes: >-
+      Passes on personal access tokens, whose last-used time the Enterprise Admin API returns.
+      Internal connections show request counts for the last 24 hours, not a last-used time.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Notion API Token"
+    notes: >-
+      GitHub lists the Notion API Token as a partner pattern, so leaks in public repositories
+      are reported to Notion.
+
+notes: >-
+  Four of five hygiene checks pass, so inbound is D. Expiry and last-used pass on personal access
+  tokens only. Judged on internal connection tokens alone, both would fail and inbound would be
+  F. Inbound moves to A or B only if the REST API accepts a workload's federated token.

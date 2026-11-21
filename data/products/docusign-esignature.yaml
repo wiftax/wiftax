@@ -1,0 +1,126 @@
+id: docusign-esignature
+vendor: Docusign
+product: eSignature
+covers: >-
+  The eSignature REST API and the Monitor API, which share one OAuth service. Outbound covers
+  Docusign Connect webhooks.
+aliases:
+  - DocuSign
+  - Docusign Monitor
+  - Docusign Connect
+website: https://www.docusign.com
+docs: https://developers.docusign.com/platform/auth/
+category: saas
+status: listed
+summary: >-
+  A service calls Docusign by signing a JWT with an RSA private key and swapping it for a one-hour
+  token. The private key never expires and is managed only in the console. No workload federation
+  is documented.
+
+surfaces:
+  inbound:
+    grade: C
+    mechanism: >-
+      JWT Grant. The integration signs a JWT with an RSA private key held by the customer and
+      exchanges it for a one-hour access token that impersonates a consenting user.
+    evidence:
+      - url: https://developers.docusign.com/platform/auth/jwt/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The access token granted by the JWT Grant flow expires after one hour, and no refresh token is provided."
+      - url: https://developers.docusign.com/platform/configure-app/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An RSA key pair is required to use the JWT Grant authentication flow."
+      - url: https://developers.docusign.com/docs/monitor-api/monitor101/auth/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The JWT Grant is the only OAuth2 Grant that enables you to impersonate a consenting user when making API calls"
+      - url: https://developers.docusign.com/platform/auth/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "require that the user be present when your session starts, but are simpler to implement than JWT Grant and provide a refresh token that you can use to remain authenticated."
+    notes: >-
+      Graded C because the access token is short-lived but the RSA private key is a static root.
+      The other grants are authorization code and implicit, which need a person to sign in. The
+      Monitor API accepts only JWT Grant. The auth overview lists no grant that takes a token from
+      an external OIDC issuer.
+  outbound:
+    grade: C
+    mechanism: >-
+      Docusign Connect posts event notifications to a customer listener. With OAuth for Connect,
+      the customer gives Docusign a client ID and secret for its own authorization server.
+    evidence:
+      - url: https://developers.docusign.com/platform/webhooks/connect/validation-and-security/oauth-connect/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Your existing OAuth service or authorization server (IDP) that implements OAuth uses these credentials to authenticate that the"
+      - url: https://developers.docusign.com/platform/webhooks/connect/validation-and-security/oauth-connect/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The client secret will not be provided for security reasons."
+      - url: https://developers.docusign.com/platform/webhooks/connect/validation-and-security/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "As a best practice for apps in production, use both HMAC and OAuth 2.0 to secure your messages."
+    notes: >-
+      Graded on Connect only, the documented way Docusign calls into customer systems. Connect can
+      also sign messages with an HMAC key, send a basic auth header or present a Docusign
+      certificate for mutual TLS. Cloud storage and other end-user integrations are documented on
+      the support site and were not graded.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://developers.docusign.com/platform/configure-app/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotate your RSA key pairs periodically, store them in a secure system or library if available, and do not include them in software repositories."
+    notes: >-
+      Rotation is a recommendation only. The docs show no expiry setting or policy for RSA key
+      pairs or secret keys.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.docusign.com/platform/configure-app/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You are only able to view your RSA key pair immediately after creating it"
+      - url: https://developers.docusign.com/platform/auth/jwt-get-token/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can define a maximum of 5 RSA key pairs."
+    notes: >-
+      Key pairs are generated and deleted on the Apps and Keys page in the console. No API for
+      creating or deleting them is documented.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.docusign.com/platform/auth/consent/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "that user will be asked to grant consent for the set of scopes (sets of permissions) that the application has requested"
+    notes: >-
+      Tokens carry only the OAuth scopes the impersonated user or an admin consented to. Within
+      those scopes the integration acts with that user's permissions.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://developers.docusign.com/platform/configure-app/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "An RSA key pair is used to encrypt your token in the"
+    notes: The app configuration docs describe no last-used time for RSA key pairs or secret keys.
+  leak_revocation:
+    pass: false
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+    notes: Docusign does not appear in GitHub's supported secret-scanning patterns.
+
+notes: >-
+  Monitor is a separately licensed product that uses the same JWT Grant. Its caller must
+  impersonate an organization administrator or security reports administrator. Inbound moves to A
+  or B only if the token endpoint accepts a workload's OIDC token in place of the RSA-signed JWT.
