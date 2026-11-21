@@ -1,0 +1,131 @@
+id: twilio-sendgrid
+vendor: Twilio
+product: SendGrid
+covers: The SendGrid v3 Web API and SMTP relay.
+aliases:
+  - Twilio SendGrid
+  - SendGrid Email API
+website: https://sendgrid.com
+docs: https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication
+category: comms
+status: listed
+summary: >-
+  To call SendGrid, your code holds a static API key that never expires. Keys can be scoped,
+  created and revoked through the API, and GitHub reports leaked ones. There is no OAuth or
+  federation option.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static API key sent as a Bearer token, or as the password in Basic authentication for some
+      services.
+    evidence:
+      - url: https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Twilio SendGrid supports API keys delivered via Bearer token or Basic authentication, depending on the Twilio SendGrid functionality you are using."
+      - url: https://www.twilio.com/docs/sendgrid/api-reference/how-to-use-the-sendgrid-v3-api/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "To authenticate, add an HTTP `Authorization` header to your API request that contains an"
+      - url: https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "We suggest that you use API keys for connecting to all of SendGrid's services."
+    notes: >-
+      The SendGrid authentication pages document API keys only. They describe no OAuth client, no
+      token exchange and no OIDC or cloud identity federation. Three of five hygiene checks pass, so
+      this is D rather than F. Twilio's OAuth apps belong to the core Twilio API, which has its own
+      card.
+  outbound:
+    grade: N/A
+    mechanism: >-
+      SendGrid never needs access to your infrastructure. It only posts events and parsed mail to a
+      URL you supply.
+    evidence:
+      - url: https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Twilio SendGrid provides two methods for securing the Event Webhook: cryptographic signing and"
+      - url: https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "The private key will be used to generate a signature that is posted to your HTTP webhook"
+    notes: >-
+      Webhook delivery is not graded as reach into your systems. The Signed Event Webhook needs no
+      secret from you. The optional OAuth mode stores a client ID and secret for your own
+      authorization server.
+
+hygiene:
+  expiry:
+    pass: false
+    evidence:
+      - url: https://www.twilio.com/docs/sendgrid/api-reference/api-keys/create-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A JSON request body containing a `name` property is required when making requests to this endpoint."
+      - url: https://www.twilio.com/docs/sendgrid/concepts/security/secure-account.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Rotate keys at least once a quarter."
+    notes: >-
+      A key takes a name and scopes, with no expiry field and no account policy to force one.
+      Rotation is advice, not a control.
+  rotation_api:
+    pass: true
+    evidence:
+      - url: https://www.twilio.com/docs/sendgrid/api-reference/api-keys/create-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint allows you to create a new API Key for the user."
+      - url: https://www.twilio.com/docs/sendgrid/api-reference/api-keys/delete-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "This endpoint allows you to revoke an existing API Key using an"
+      - url: https://www.twilio.com/docs/sendgrid/api-reference/api-keys/create-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Once you have a key with permissions to manage other keys, you can use the endpoints documented as part of this API."
+    notes: >-
+      The first key must be made in the console. After that, a key with key-management scopes can
+      create and revoke the rest.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "API key permissions can be set to provide access to different functions of your account, without providing access to your account as a whole."
+      - url: https://www.twilio.com/docs/sendgrid/api-reference/api-keys/create-api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "omitting the `scopes` field from your request will create a key with \"Full Access\" permissions by default"
+    notes: >-
+      Custom Access keys carry a chosen list of scopes. A key created through the API without
+      scopes gets Full Access.
+  last_used:
+    pass: false
+    evidence:
+      - url: https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys.md
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "page displays your current API keys with the following parameters:"
+    notes: >-
+      The console lists a key's name, ID and actions. The API returns name, ID and scopes. Neither
+      shows when a key was last used.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: SendGrid API Key
+    notes: >-
+      GitHub lists the SendGrid API key as a partner pattern for public repositories, with push
+      protection and a validity check. SendGrid's own docs do not say what it does with a report.
+
+notes: >-
+  Inbound is D because three hygiene checks pass. An enforced key lifetime or a last-used time
+  would not change the letter. Inbound moves to C with an OAuth client that mints short-lived
+  tokens, and to B or A only with workload federation.

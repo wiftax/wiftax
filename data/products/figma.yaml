@@ -1,0 +1,153 @@
+id: figma
+vendor: Figma
+product: Platform
+covers: "The Figma REST API, including the Enterprise Activity Logs API, and the Code Connect GitHub connection."
+aliases:
+  - Figma REST API
+  - Figma Design
+website: https://www.figma.com
+docs: https://developers.figma.com/docs/rest-api/authentication/
+category: saas
+status: listed
+summary: >-
+  The Figma REST API takes a static token for workloads. Plan access tokens and personal access
+  tokens both expire, carry scopes and are covered by GitHub secret scanning. OAuth apps need a
+  person to approve them. Outbound, Figma reads GitHub repositories through a GitHub App.
+
+surfaces:
+  inbound:
+    grade: D
+    mechanism: >-
+      A static plan access token or personal access token with scopes and an expiry. OAuth apps are
+      the other option and need a person to approve them in a browser.
+    evidence:
+      - url: https://developers.figma.com/docs/rest-api/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can authenticate requests to the Figma REST API in three ways:"
+      - url: https://developers.figma.com/docs/rest-api/authentication/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "They're useful for needs like CI/CD implementations, logging, creating user-agnostic webhooks, and other tasks that you normally wouldn't want gated by a single individual in your organization."
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Unlike personal access tokens and OAuth apps, plan access tokens are not tied to an individual user account."
+      - url: https://developers.figma.com/docs/rest-api/personal-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A personal access token gives the holder access to an account through the API as if they were the user who generated the token."
+      - url: https://developers.figma.com/docs/rest-api/oauth-apps/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "By default, access tokens expire after 90 days."
+      - url: https://developers.figma.com/docs/rest-api/oauth-apps/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "A refresh token can be reused as many times as necessary to obtain a replacement access token."
+      - url: https://developers.figma.com/docs/rest-api/activity-logs/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Only organization admins in Figma Enterprise organizations can authenticate OAuth 2 requests on behalf of their organizations."
+    notes: >-
+      Graded D on plan and personal access tokens, the documented choices for CI and automation.
+      Four of five hygiene checks pass. OAuth apps were not graded C. They have no client
+      credentials flow, need a person to consent, and issue access tokens that last 90 days. The
+      Activity Logs API accepts only an OAuth token approved by an Enterprise admin. No OIDC or
+      cloud workload login is documented. Plan access tokens need an Organization or Enterprise
+      plan.
+  outbound:
+    grade: A
+    mechanism: >-
+      Code Connect reads customer repositories through the Figma GitHub App, which an admin installs
+      on the GitHub account or organization.
+    evidence:
+      - url: https://developers.figma.com/docs/code-connect/code-connect-ui-github/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "to finish connecting the GitHub account. You must connect the GitHub account or organization that has access to the repository you want to connect to your library file."
+      - url: https://developers.figma.com/docs/code-connect/code-connect-ui-github/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "For an overview of the permissions requested when authorizing with GitHub, visit"
+      - url: https://developers.figma.com/docs/code-connect/code-connect-ui-setup/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Connecting to GitHub is optional."
+    notes: >-
+      An installed GitHub App counts as keyless, because no secret changes hands. This is the only
+      connection into customer systems found in the developer docs. GitHub Enterprise Server is not
+      supported. Figma reaches into no cloud accounts. Other Figma products and plugins were not
+      surveyed.
+
+hygiene:
+  expiry:
+    pass: true
+    evidence:
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Select the expiration period (up to 365 days)."
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "While your plan access token will expire automatically after a given amount of time, there may be times you want to revoke a plan access token early."
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Max expiration of 90 days"
+    notes: >-
+      Every plan access token expires within 365 days, and personal access tokens within 90 days.
+      That counts as an enforced maximum. OAuth refresh tokens are reusable with no stated expiry.
+  rotation_api:
+    pass: false
+    evidence:
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Organization administrators can create plan access tokens on the developer hub at"
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can refresh a plan access token as long as it is active and has not been revoked or expired."
+    notes: >-
+      Tokens are created, refreshed and revoked in the developer hub or account settings. Creating a
+      plan access token also requires multi-factor authentication. No REST endpoint for tokens is
+      documented.
+  scoping:
+    pass: true
+    evidence:
+      - url: https://developers.figma.com/docs/rest-api/plan-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "lets you provide a list of links to resources in your organization, including files, folders, teams, and workspaces."
+      - url: https://developers.figma.com/docs/rest-api/personal-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Set the expiration and scopes for the token. The scopes will determine which endpoints the token has access to."
+    notes: >-
+      Plan access tokens take scopes and an optional resource allowlist. Personal access tokens take
+      scopes but still reach everything their user can.
+  last_used:
+    pass: true
+    evidence:
+      - url: https://developers.figma.com/docs/rest-api/personal-access-tokens/
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "You can also see when the token was last used (give or take a few minutes)."
+    notes: Documented for personal access tokens. The plan access token page does not mention a last-used time.
+  leak_revocation:
+    pass: true
+    evidence:
+      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
+        checked_on: 2026-11-18
+        checked_by: erikng
+        quote: "Figma Personal Access Token"
+    notes: >-
+      GitHub lists the Figma personal access token and SCIM token as partner patterns. Whether plan
+      access tokens match the same pattern is not stated.
+
+notes: >-
+  Graded the Figma REST API. Inbound cannot rise above D while a static token is the only choice for
+  an unattended workload. It moves to C with a client credentials flow, and to A or B only if the
+  API accepts a federated workload token. SCIM uses its own static token and was not graded.
