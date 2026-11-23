@@ -1,20 +1,20 @@
 {
   "card": "voltage-park-kubernetes",
-  "updated_at": "2026-11-16T19:17:16.946Z",
+  "updated_at": "2026-11-23T20:59:49.799Z",
   "urls": {
     "https://support.voltagepark.com/article/add-on-managed-kubernetes": {
       "hash": "e049223b247d62b17a9f4cd40d078539ab5b980166b41ad7f00a4d267ef362ef",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:14.398Z",
+      "checked_at": "2026-11-23T20:58:26.411Z",
       "quotes_found": 9,
       "quotes_total": 9
     },
     "https://cloud-api.voltagepark.com/api/v1/openapi.json": {
-      "hash": "6ab84747143c03c1ddb46c6ed309c60d63835e14f61e08a9392a519e8f290e5e",
+      "hash": "e13d0b913e9af700404cfd5cdf10f5591550541e6cf874c85e653926301df9ae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:15.217Z",
+      "checked_at": "2026-11-23T20:58:26.993Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,7 +22,7 @@
       "hash": "d997cbe7fc8df722269b7939af72331ec520f57a776610ae024e17b207792f43",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:15.470Z",
+      "checked_at": "2026-11-23T20:58:27.260Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "42e2e75c1c80afb4cad6883fdb6319ed0a7a3deec45ce29bada690d6213ffe1e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:15.516Z",
+      "checked_at": "2026-11-23T20:58:27.555Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,17 +38,22 @@
       "hash": "3bd4a568aab2e9fc42d5bc2951800c1f6bec997c12c821b2b32739d5cd0a777f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:16.515Z",
+      "checked_at": "2026-11-23T20:58:28.555Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "40fb4f8a28eb93b46a45338de534d78a8fa3181b05d4f931457e7c51c7003cb4",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

@@ -1,0 +1,110 @@
+{
+  "card": "oracle-netsuite",
+  "updated_at": "2026-11-23T20:59:38.526Z",
+  "urls": {
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162730264820.html": {
+      "hash": "86f72bf6844196f01ca655a210229e12f880eac1c984106cf676a4ecaecf35ef",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:52.615Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162755359851.html": {
+      "hash": "797e575272122a672dab57937df7a25d221d77cef730875efb20751245afc47a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:53.615Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_4369651411.html": {
+      "hash": "f21e284081371e7d448f9dd23303f774ba84388e112383af94a993864e27a491",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:54.615Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_160216486846.html": {
+      "hash": "613af8264c2ceb6c08c1bfd2d4df70db8903a2233dc88e53dc0b0dbe447981f0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:55.615Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4617005472.html": {
+      "hash": "b7db5882b8844e5d9646c3f8cdd014ffde16a4f2959b93216ebce1c372435dc9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:56.616Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_4855401415.html": {
+      "hash": "0387b4715c7530ebba819c0f3e88ec97700d3b1bf855f9d81e2664b3d657b9a3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:57.616Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_160216498405.html": {
+      "hash": "a080443290fbd4a7b702db4668e3e46a5764bb8060266a0504b869a854ec4392",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:58.616Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_160077062690.html": {
+      "hash": "65612327bd447a9a9fc2544ec99a3c3830ef1b58170e0ef1fee3228e0f4259f7",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:59.617Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/subsect_162755332391.html": {
+      "hash": "02edf5c17c58e006118caef0f51b2953f33132f40ecfc429bdd7d04bd693d790",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:00.618Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_92130837826.html": {
+      "hash": "6b4808680ac66b4b8c47fdc6c7a95b31659d4fb8a5d67fefa625809d34dac929",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:01.619Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_162686838198.html": {
+      "hash": "eeeb48fdf4259dbb13345e7dbc554d5bed9de63ba4f3a67d591452680c6357b6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:02.620Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/article_11111634165.html": {
+      "hash": "6bdcd3851af1e0acba68b87fe25abc32dc3b08c9b3a178f9c3c30c539faafee2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:03.620Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

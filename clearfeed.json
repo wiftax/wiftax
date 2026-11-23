@@ -1,0 +1,92 @@
+{
+  "card": "clearfeed",
+  "updated_at": "2026-11-23T20:59:29.678Z",
+  "urls": {
+    "https://docs.clearfeed.ai/api/quick-start/authentication-guide.md": {
+      "hash": "73f27720096858bcee4347b78b25fb73823ed2c9aff1c521658d56a476bf9d44",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:53.433Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/account-setup/developer-settings.md": {
+      "hash": "97ad936e721e673aaab2bd080a49d3d747815247c2d3238578a76229f14e1fe5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:54.455Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/integrations/github.md": {
+      "hash": "d7347ea64e33dc5381bf6c9f3e083ba8cfd0be6b0bc02cd0263255a64c41e905",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:55.455Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/integrations/jira.md": {
+      "hash": "64bc08649b5f1eda5a1f1df34ec9f40f63c0760863282c9dbe1e797674a824ce",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:56.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/integrations/freshdesk.md": {
+      "hash": "d060248a6dbd772a3ffe3a6159b309e73634c883552696223cecb29ddf2eb9ec",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:57.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/integrations/kandji.md": {
+      "hash": "5d09d8ada6a52145f50c9005c429fa45c825d2e78d46c459d7816ab3b23c628f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:58.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/integrations/jumpcloud.md": {
+      "hash": "5713fb69fb0817a04f9a757bbb215e90125e3c52ce0dce653d216d1e2e0f7e2f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:59.482Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.clearfeed.ai/clearfeed-help-center/integrations/okta.md": {
+      "hash": "d7ecdcd4cad66a0abdbef94fd8679669eb80bf48d730379a899f47cfe24e6759",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:00.482Z",
+      "quotes_found": 1,
+      "quotes_total": 2
+    },
+    "https://docs.clearfeed.ai/api/llms.txt": {
+      "hash": "b98f0390943430760688a54218705d47bdad17ffbd492820a77536bb32068026",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:01.482Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "87dc53b4553e6026823e0484148c96a298f2e43f6f07241d54dd9706bb8056b9",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

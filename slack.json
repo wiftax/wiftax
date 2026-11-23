@@ -1,0 +1,75 @@
+{
+  "card": "slack",
+  "updated_at": "2026-11-23T20:59:49.197Z",
+  "urls": {
+    "https://docs.slack.dev/authentication/using-token-rotation/": {
+      "hash": "20c68f5b2ee9588cda485ae841ab025e69715f444bfe55c518fcf4bd3ac149b8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:24.260Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://docs.slack.dev/authentication/tokens/": {
+      "hash": "2d943e5c8fdb812a36377257614c19d84cbd97e2389e1974a0d98daab10358ad",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:25.260Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://docs.slack.dev/concepts/security/": {
+      "hash": "1abedab2f4c50265e6848ddb84adae687a39580fd08186a6cadf842dd55396b3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:26.260Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://slack.com/help/articles/360019110974-Slack-Enterprise-Key-Management": {
+      "hash": "a98a651ec8fd72fdf0ba9cbf45a3c796e2f54f12f88de4340196dbec8cd06d80",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:25.024Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/Slack-EKM-Implementation-Guide-2.pdf": {
+      "hash": "67e76ed2df49bf8b24c3ce57023ec92b5802e490d6ab33bfc89a907f306ef3f6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:25.098Z",
+      "quotes_found": 0,
+      "quotes_total": 2
+    },
+    "https://slack.com/help/articles/39044407124755-Set-up-and-manage-Slack-enterprise-search": {
+      "hash": "e194ecbb96dda7336784ca774bede8db496a10215ddd9954fe35e29692272d87",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:26.120Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.slack.dev/reference/methods/auth.revoke/": {
+      "hash": "5332039696b991e11af66134795e4748598840df9a126dc0d4f31921ac747b9d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:27.261Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:18.335Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "4cdccda439d5b15065770c354e99f763d001cc634eccdffb6681361d19c2749a",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
+  }
+}

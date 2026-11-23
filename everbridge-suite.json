@@ -1,0 +1,46 @@
+{
+  "card": "everbridge-suite",
+  "updated_at": "2026-11-23T20:59:32.148Z",
+  "urls": {
+    "https://developers.everbridge.net/home/docs/ebs-gs-guide-authentication-types.md": {
+      "hash": "17e9bb5c8230b145baacbe566927e53ce1a10180c733310b83d0f789671e069c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:10.545Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://developers.everbridge.net/home/docs/ebs-gs-guide.md": {
+      "hash": "2bf2d6d1ee142358751cef6454c3ea6760186425e455463508ffc0d6bd89a21f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:11.546Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://developers.everbridge.net/home/reference/ebs-v1-audit-log-api.md": {
+      "hash": "0d46866a67fe38d8a1ac05cd9d037dcdcf589fe0edf8599a47fc98430cce2817",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:12.546Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.everbridge.net/home/docs/overview.md": {
+      "hash": "b021953f5071ae15d673ef2e570876811bbc4838bfd14e801216b75c3884bc58",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:13.546Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

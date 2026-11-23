@@ -1,20 +1,20 @@
 {
   "card": "descope-agentic-identity-hub",
-  "updated_at": "2026-11-16T19:17:07.464Z",
+  "updated_at": "2026-11-23T20:59:31.561Z",
   "urls": {
     "https://docs.descope.com/management": {
       "hash": "10b03d7d3e52d5e2bd1534a8be1689d7a0963259341f498afccd1daae88cde84",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:22.658Z",
+      "checked_at": "2026-11-23T20:47:42.054Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
     "https://raw.githubusercontent.com/descope/terraform-provider-descope/main/docs/index.md": {
-      "hash": "a65618fe32fc5137e4df14e0ce9fb0c6d71b89066f12862d27928e76263afd0a",
+      "hash": "df449e13eb4b5226b1e1e1ed104a7461f04dd768b34981b765f122c3d0048566",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:22.991Z",
+      "checked_at": "2026-11-23T20:47:42.313Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "8eb6acc3e83efbdfa960ee18a392a4d5901af90049b5b381907951c073f4bcb2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:23.658Z",
+      "checked_at": "2026-11-23T20:47:43.054Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "1e1c3e981c200ca726c041eba2314124131704349effeb373c53bc0b283c67fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:24.661Z",
+      "checked_at": "2026-11-23T20:47:44.054Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,23 +38,23 @@
       "hash": "4f4cde29f62ca7881fb9ab4b9c787b3f7048c91709439e9b179799d9fb81feea",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:25.662Z",
+      "checked_at": "2026-11-23T20:47:45.055Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.descope.com/connectors/connector-configuration-guides/audit-and-troubleshooting/aws-eventbridge": {
-      "hash": "fa122c8524f78473efa9cf10ebca8c3115963ea6eb1294099aebfc422ac84644",
+      "hash": "4683abe54d9702cd3b8e0c40e106a86f6d1da455f527b0bab7e0e386ad15c382",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:26.662Z",
+      "checked_at": "2026-11-23T20:47:46.056Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.descope.com/connectors/connector-configuration-guides/audit-and-troubleshooting/aws-s3": {
-      "hash": "8afafd6f284b2f4c8f9b5b233c9b4be39d157425c7e5d7e5f2c26939317d1bee",
+      "hash": "c05e290da57a18c5c3a7d1fd0e223258e0681207d857048bad2a227cd016787d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:27.663Z",
+      "checked_at": "2026-11-23T20:47:47.055Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "9b925208cccb1545d15dd12eeea8971d8206642211fec24ad9a9aa8498c7b57c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:28.663Z",
+      "checked_at": "2026-11-23T20:47:48.057Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "4183709d8f4955e5710b0b0eccaa7d9e71836b80d9aacd2a7612df7fd6df2b35",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:29.664Z",
+      "checked_at": "2026-11-23T20:47:49.057Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "b366efea76c0698a43b934606d5a54846926ddeb4b054b394ed49bc70cd14d48",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:30.665Z",
+      "checked_at": "2026-11-23T20:47:50.057Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,23 +86,23 @@
       "hash": "8d816376fa9fd6125efcdc80be7b571b4c2e09a64066c0769c9bb90b68cac603",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:31.665Z",
+      "checked_at": "2026-11-23T20:47:51.059Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.descope.com/connectors/connector-configuration-guides/audit-and-troubleshooting/datadog": {
-      "hash": "58b8058d887a73d6dba69a5def3371b9e8db505c48ae64fafc96aa05f1d48d72",
+      "hash": "bfff8b8694eae340a99ee27040cfb1ce6df196f7b14f8707baeb5135dc83fc4c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:32.666Z",
+      "checked_at": "2026-11-23T20:47:52.059Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.descope.com/identity-federation/outbound-apps/creating-outbound-apps": {
-      "hash": "bc918ef8e25ce1d3ee6683b391502013bc8a515d41a591b3f19bfa24fcf42829",
+      "hash": "4827f1587f8393b6b9a5858cb623c786a3f12c1903b5950f811be5e757f39b84",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:33.667Z",
+      "checked_at": "2026-11-23T20:47:53.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "e9dc40f1cb4d4883ec6a1fc7f4b48715b01b1304b908fd15e1247f6c1d17706b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:34.666Z",
+      "checked_at": "2026-11-23T20:47:54.061Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -118,23 +118,22 @@
       "hash": "202202eb07e77a63e03de3fe3b7e1ab6d5ab2d5d4007c33ec9e220e2141b58ae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:27.992Z",
+      "checked_at": "2026-11-23T20:47:47.383Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "95b8e5534e75b309ad7019906a01954d786e2a058e295ca94cf875217ee46a6f",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "9a81f56b9e6acd2ee25996c7ce7e02b6f6f322e5e77015b212ce4292e6ccde24",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

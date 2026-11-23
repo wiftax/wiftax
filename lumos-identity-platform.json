@@ -1,12 +1,12 @@
 {
   "card": "lumos-identity-platform",
-  "updated_at": "2026-11-16T19:17:09.625Z",
+  "updated_at": "2026-11-23T20:59:36.005Z",
   "urls": {
     "https://developers.lumos.com/docs/quick-start.md": {
       "hash": "654e3083e1dfa557d18ac98778f128f5183eca09a8a46b24faec7032aedc6dfe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:06.604Z",
+      "checked_at": "2026-11-23T20:51:22.980Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -14,7 +14,7 @@
       "hash": "2c75a81bf95bf85919aa7ccc2bc3e62f0c4db1e30b0deaca6307d53a32992c43",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:07.609Z",
+      "checked_at": "2026-11-23T20:51:23.979Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,15 +22,15 @@
       "hash": "58cd99cddf959e351e28caf95fce97b973c1443377adc06cf640ef6382b7857b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:08.608Z",
+      "checked_at": "2026-11-23T20:51:24.980Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://developers.lumos.com/docs/managing-integrations-via-terraform.md": {
-      "hash": "e98fdfe90d27d14f19ff2eff68706fb0514b5ffefcaee73bab5b17b25cf1a9be",
+      "hash": "0018bf9d40ea80928029650a2f628745d744b9d5a01794aeefde9b92f49bef8c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:09.609Z",
+      "checked_at": "2026-11-23T20:51:25.980Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,15 +38,15 @@
       "hash": "a62eadf4954c0b5d05e4d5d1615d3e12ee8dad31bb8e373e2c9fdc0550a3579e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:10.609Z",
+      "checked_at": "2026-11-23T20:51:26.980Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://support.lumos.com/articles/5045479970-connecting-aws-nhi": {
-      "hash": "97690713dcc2ed9b61a7b7dbbb3eeb62cbfe07c547c6d6e416dd5955c384c066",
+      "hash": "d551b7c7d38dd2fa3380eb5e5f362d15903d7caaa6cc51f1cdd2b4ab41a36d9b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:08.070Z",
+      "checked_at": "2026-11-23T20:51:24.044Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "09901ec086bc4085529077a06799d14efc31d2e1426c2fcfa333e4991b1730c3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:09.070Z",
+      "checked_at": "2026-11-23T20:51:25.045Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "70ae6136dce117aafdb038ffd3bb5bca0b06ecdacede6252e6e11524deb0fa97",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:10.071Z",
+      "checked_at": "2026-11-23T20:51:26.045Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "85794fa96fd5ea23dd01e9a31fab921bef98f8df627af10112b94ed446cb6158",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:11.071Z",
+      "checked_at": "2026-11-23T20:51:27.045Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "bc894d8da8394c67fd5fc2741545dbb6d1d7bb0568ccf7620cc7425f5137b582",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:12.072Z",
+      "checked_at": "2026-11-23T20:51:28.045Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "3ee76dae49ffc6ab77751104132d21c966f76e601bba59ca8ec10fef252a770a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:13.072Z",
+      "checked_at": "2026-11-23T20:51:29.045Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "22815984492a9c96a3e70b76c1df43885a93ad5ba91083c92c09db9bef541207",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:14.073Z",
+      "checked_at": "2026-11-23T20:51:30.045Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "150f7e4938db98d2a7d798485a0a92c5dbe77418c53c3d555fd073998fe7e094",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:15.074Z",
+      "checked_at": "2026-11-23T20:51:31.046Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -110,7 +110,7 @@
       "hash": "c71d4d4cc0af246e0ef8e9fda569e476fe22ad1fcd2530af1626e68fb4090c53",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:16.073Z",
+      "checked_at": "2026-11-23T20:51:32.046Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,23 +118,22 @@
       "hash": "09ac6c677b881ca62f69e3cd729fc17b34fa93fab6d5d523abbe5fb295fa2199",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:11.610Z",
+      "checked_at": "2026-11-23T20:51:27.980Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "f6e24128b321262e44128ee0a0748de4f08609db79e42559eabb9bf55972600d",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "0e7571471e0925d996569c0e11dabb8ffc026db0c6001d4a5b8170ed1963e166",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

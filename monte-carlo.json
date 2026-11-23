@@ -1,0 +1,86 @@
+{
+  "card": "monte-carlo",
+  "updated_at": "2026-11-23T20:59:36.046Z",
+  "urls": {
+    "https://docs.getmontecarlo.com/docs/api-authentication.md": {
+      "hash": "f24eabe3af4638aac2f531e08d65ffc38c0700218f3124c517ee976990bf52cd",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:44.752Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://docs.getmontecarlo.com/docs/audit-logging.md": {
+      "hash": "c6fb6248224d66a492803be2b12bcc6c939ffad664f19106f481b61998ddd00e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:45.751Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.getmontecarlo.com/docs/creating-iam-roles.md": {
+      "hash": "62ef7fa84fe85697206da98b5804fbdcb382e9b0cea5793254f45ee179318c4d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:46.754Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.getmontecarlo.com/docs/github.md": {
+      "hash": "65e3da9bebffeab9d82aff12f7ec54f0b3d221f644a93d911fdc2a25385c2f35",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:47.753Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.getmontecarlo.com/docs/bigquery.md": {
+      "hash": "13cb59829ab1227edf743291ad201e9ada57430fc79de706fdd068a34eaa7977",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:57.247Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.getmontecarlo.com/docs/snowflake.md": {
+      "hash": "3678d5d60a71ed7558c19db38aa9dcc3bdc269c7d6f993991eb8301ec98d31c5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:58.248Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.getmontecarlo.com/docs/redshift.md": {
+      "hash": "630bf95d155d82a089e399e2f91348f8baed68b3eef0b407f1ac42409bc10e0a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:59.249Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://apidocs.getmontecarlo.com/": {
+      "hash": "05981ce2a93056f91a4513a7da23b18b31b52d8423bf9683006cb82c2deb9ee6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:48.002Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://docs.getmontecarlo.com/docs/authorization.md": {
+      "hash": "5d9d2ba9070e7be06705cd5a111e8b3732371b28da686e11c8521b1efb3903eb",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:00.249Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

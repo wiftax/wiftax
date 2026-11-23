@@ -1,0 +1,78 @@
+{
+  "card": "kisi",
+  "updated_at": "2026-11-23T20:59:35.468Z",
+  "urls": {
+    "https://docs.kisi.io/platform/integrate_kisi/getting_started/generate_api_keys": {
+      "hash": "b5729372c716192afa82c8471c673f0d868019cac095d0d8c37515802d9d3823",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:10.780Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://api.kisi.io/openapi/apps.yaml": {
+      "hash": "363beb3c8bad190da94b156942a054b7b6c71079bf4b881b93e96a395c945c32",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:10.848Z",
+      "quotes_found": 7,
+      "quotes_total": 7
+    },
+    "https://docs.kisi.io/marketplace/directories/google_workspace_directory": {
+      "hash": "77b7e86352050a1ce198740df9da43fab2692f1e3a18411f3f989af2c59b658f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:11.779Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.kisi.io/marketplace/directories/microsoft_entra_id": {
+      "hash": "81827518096a6c37f5b46fae10ad77d14391a047b675596a65f837bfaa8a247c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:12.780Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.kisi.io/marketplace/video_security/cisco_meraki": {
+      "hash": "80e0e388cf919cd8500aecfe36387742bb03dc815c44f4d25b1007129f37d49b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:13.780Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.kisi.io/marketplace/directories/jumpcloud": {
+      "hash": "f8f4469befae8da0a9df7a356e9823af287bf25242fa6caf96b5b114334970ee",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:14.781Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.kisi.io/marketplace/data_analytics/splunk": {
+      "hash": "595fef74b41b65bb46aa966076b3b929c0fbb65d2aee1e9d0b5fe12e72d574af",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:15.781Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.kisi.io/platform/apis/get_started/setup_kisi_account": {
+      "hash": "99fdbf932d3d8662da8b91a18a8c1ed3e484b0d854e60c1ce5855ad898c95791",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:16.818Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

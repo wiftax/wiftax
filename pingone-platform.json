@@ -1,12 +1,12 @@
 {
   "card": "pingone-platform",
-  "updated_at": "2026-11-16T19:17:10.131Z",
+  "updated_at": "2026-11-23T20:59:38.641Z",
   "urls": {
     "https://developer.pingidentity.com/pingone-api/foundations/authentication-concepts/authorization-and-authentication-by-application-type/worker-applications.md": {
       "hash": "e756df497a9062277757ae36d5125bf20682143e5c50fbbdcf4d9726722b1b61",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:07.390Z",
+      "checked_at": "2026-11-23T20:53:54.302Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -14,7 +14,7 @@
       "hash": "df1eee3d41f6596248142bdd108483ff3ddd40d15ee6dc60515cab4db178dfd7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:08.391Z",
+      "checked_at": "2026-11-23T20:53:55.303Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "e012145756ebb28dfea9f06007bc20f374ea3b0e91b84f836d94898b94487479",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:07.807Z",
+      "checked_at": "2026-11-23T20:53:54.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "b60a6589b3da79267e5469dc96a057e1875e27cb13e044fd08764f236f4a31bd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:08.043Z",
+      "checked_at": "2026-11-23T20:53:54.706Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "6d06442f3a27c2cacfeaa1c3cfabca6ffe64364950840b86b7f02cb3ff357335",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:09.392Z",
+      "checked_at": "2026-11-23T20:53:56.304Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "b593585ec5b578c93d278b4d892c4c947cb728db46b4660379d47527ce6e46e3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:10.392Z",
+      "checked_at": "2026-11-23T20:53:57.304Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "8be7ffc2d159c963cb16f255acf41565a2c307dd9f7020dc0a0f32d761a3d29b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:08.807Z",
+      "checked_at": "2026-11-23T20:53:55.626Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,7 +62,7 @@
       "hash": "30474bdc698e0f1732a9d3bc0b175bbb4e72a748e80f0ca43a9e730335fc7d08",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:09.807Z",
+      "checked_at": "2026-11-23T20:53:56.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "e22c98dc25c2c5ca699a4beeec0f40e118728f72ea0e9a4356b34b42f34f8bb7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:10.808Z",
+      "checked_at": "2026-11-23T20:53:57.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "11bfd4b5c296236a6e36604cd52522ca817c64aa148e97db149eda24db011417",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:11.809Z",
+      "checked_at": "2026-11-23T20:53:58.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "13e9eef87133ec5ea2ef6f65439a0106a2ad60c5c58e982b18dc3cfec58384e6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:12.810Z",
+      "checked_at": "2026-11-23T20:53:59.628Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,15 +94,15 @@
       "hash": "6652f5dc4f1f01ff5f2d18936d484877739bd8c93a1a58daab7de7068d605adb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:13.811Z",
+      "checked_at": "2026-11-23T20:54:00.628Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.pingidentity.com/pingone/integrations/p1_create_scim_connection.md": {
-      "hash": "ab46f23d3ef7fa373dfe1ac2750b5bdd840c969131ec10ab9b5cb4fa4c9c3c5c",
+      "hash": "95d98590fbaee4cbb71ca4b7c96a0ce87a034377eb5e7b5602c2f7ad928ff385",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:14.812Z",
+      "checked_at": "2026-11-23T20:54:01.629Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "51d78daa7f59d029c995f520a3a1043fc46ed6edba7680d83eb55c8e21bfbd55",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:15.812Z",
+      "checked_at": "2026-11-23T20:54:02.630Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,7 +118,7 @@
       "hash": "498dfa8a0248361ddee164b957f59e055fc2b50a4a25ef28483c6dd5735f11a3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:16.813Z",
+      "checked_at": "2026-11-23T20:54:03.630Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "4bca9bffb3745476ee56e0636c73f80dcafa69aefd3edf5c73b52547d6043f51",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:17.813Z",
+      "checked_at": "2026-11-23T20:54:04.631Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,7 +134,7 @@
       "hash": "01e7e891b7b545d0fa0e6b24f4072244ae0775f15b4fbdf9115a1209061847a1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:18.813Z",
+      "checked_at": "2026-11-23T20:54:05.632Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,23 +142,23 @@
       "hash": "a0d8c469f49df60f357a90103420622b28616ac29b2783e73089fab3b74817eb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:19.814Z",
+      "checked_at": "2026-11-23T20:54:06.632Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.pingidentity.com/pingone/integrations/p1_create_webhook.md": {
-      "hash": "48aba2979ac38d7c1c3124da24ec667c1b5e232de7bfefe223709df907877344",
+      "hash": "6a1f1db77f5067212b159d48243a35aa14a74e2c1114ddaa6a1aec1c47326052",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:20.854Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:54:07.633Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://developer.pingidentity.com/pingone-api/platform/applications/application-secret/index.md": {
       "hash": "3b6c7de2c7637226c9d46093f92dea21c3afcc8ed03a7a389e6bfff1ccead89a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:13.951Z",
+      "checked_at": "2026-11-23T20:54:00.808Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -166,7 +166,7 @@
       "hash": "3471e8556cf963b60f3ac122a37fa05e352b3ebda567e695f829645f085ed2ce",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:21.855Z",
+      "checked_at": "2026-11-23T20:54:08.633Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -174,7 +174,7 @@
       "hash": "f061f6da03f8efb09ea7f5f27acf39e873cc42851af69da98875c44e7a306065",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:15.065Z",
+      "checked_at": "2026-11-23T20:54:01.809Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -182,7 +182,7 @@
       "hash": "32c824693007c164c1e71907ee661a6cdb88bc4ceec559d01a0300330b5aeb4b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:16.066Z",
+      "checked_at": "2026-11-23T20:54:02.809Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -190,17 +190,23 @@
       "hash": "6d956c3ef2ec5a390e1a712a00b59d00984778e3066357615702475778258b7c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:22.873Z",
+      "checked_at": "2026-11-23T20:54:09.634Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "7b779319b5762eb2918763088e76f164b46cc895012f3b5e089b67b54dee34a4",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

@@ -1,12 +1,12 @@
 {
   "card": "nscale-nks",
-  "updated_at": "2026-11-16T19:17:09.660Z",
+  "updated_at": "2026-11-23T20:59:37.747Z",
   "urls": {
     "https://docs.nscale.com/docs/platform-services/managed-kubernetes.md": {
-      "hash": "1aeff693d16d2fe545188dd7e20923267990227a10de17426d9ae57c323fa587",
+      "hash": "a90414bf53347656bcaa14e44e40fd956f5b0b902bbec5a6d6c4885bf8102f4d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:45.240Z",
+      "checked_at": "2026-11-23T20:52:23.048Z",
       "quotes_found": 8,
       "quotes_total": 8
     },
@@ -14,7 +14,7 @@
       "hash": "cf74686da13d536aaad48af1057a63bea2af5b926d9376b96ec2be00ba20aa74",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:45.747Z",
+      "checked_at": "2026-11-23T20:52:23.496Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -22,7 +22,7 @@
       "hash": "879d4cdbd1cceacf3dfec15c036403a45a9d97abf6d188d34ca75bd26cc8bccb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:46.239Z",
+      "checked_at": "2026-11-23T20:52:24.261Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -30,7 +30,7 @@
       "hash": "e2fb5b98e4545dcfc2e5c69e6f2432a769e580f2b08dfc4d1041aa2d5faa8773",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:46.746Z",
+      "checked_at": "2026-11-23T20:52:24.496Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,7 +38,7 @@
       "hash": "b6b4cfea0a5757a8d72fb9a6e654e344982cffc8c1a8a8faa0205bbe4ef5420c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:47.813Z",
+      "checked_at": "2026-11-23T20:52:25.497Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "21cd7c3b8b985990ae50b39b95794f816856db991666e4ac191ce7caf90c3502",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:47.239Z",
+      "checked_at": "2026-11-23T20:52:25.260Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,17 +54,22 @@
       "hash": "667ea2f9fa8bc9ff790360ab0ef463b4c6a3496e05be8095f85840ab1ee70ce6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:48.240Z",
+      "checked_at": "2026-11-23T20:52:26.261Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "12b3504770cf5dc0349919aab8aa002ee83f6e40c94cd7f8f9661c2f9e6fc7be",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

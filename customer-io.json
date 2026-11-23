@@ -1,0 +1,70 @@
+{
+  "card": "customer-io",
+  "updated_at": "2026-11-23T20:59:29.840Z",
+  "urls": {
+    "https://docs.customer.io/accounts-and-workspaces/managing-credentials.md": {
+      "hash": "3a2e7139b28aef82cc184a5375ced1c0f4893c7196832d4571919862bfd39839",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:44.939Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://docs.customer.io/accounts/audit-logs.md": {
+      "hash": "c81c62cb96acfb5ee06188a3cdb603dafbac3419d901629eb767c3011678281c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:45.940Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.customer.io/ai/cli/service-accounts.md": {
+      "hash": "dccde73907ad1d4d4416549217ea269285b858704f805eb28f6b5b63d2813055",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:46.940Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://docs.customer.io/integrations/data-out/connections/amazon-s3-data-out.md": {
+      "hash": "be41f8dcabcfe24fe1dc3f0cfedb9070e121b15465052b7d72d4cb7fcc4bacd2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:47.941Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.customer.io/integrations/data-out/connections/gcs-data-out.md": {
+      "hash": "1eeffe8d038f285054e3236cf83f7fb9f3bcf143c63a6a4623802946d3327dba",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:48.941Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.customer.io/integrations/data-out/connections/ms-azure-data-out.md": {
+      "hash": "35aca725646da87485e9ccbdc80995fa0514b78dce0a7d2b8c0579cb0126b812",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:49.941Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.customer.io/integrations/data-in/connections/reverse-etl/snowflake.md": {
+      "hash": "a4de8bd1ffcfd6e5edb258a6a7e33ea6ee787f9ce39ed95fdf854467255c0fb0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:50.941Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

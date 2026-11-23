@@ -1,20 +1,20 @@
 {
   "card": "paperspace",
-  "updated_at": "2026-11-16T19:17:10.129Z",
+  "updated_at": "2026-11-23T20:59:38.621Z",
   "urls": {
     "https://docs.digitalocean.com/reference/paperspace/api-keys/index.html.md": {
       "hash": "ee419771319391c4e017b21698b6f4a1f1b253d89136cf19391b62e69b7dfc10",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:02.168Z",
+      "checked_at": "2026-11-23T20:53:47.257Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.digitalocean.com/reference/paperspace/api-reference/authentication/index.html.md": {
-      "hash": "02861a4f21fcde8a05f0b637e66c2f7d9aab0b638c5239211faa58842f8cae3b",
+      "hash": "e9c764d6a7ad9de1fd6be7764a5fda591875e1fc3167bbad8fa54ec9204661ec",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:03.169Z",
+      "checked_at": "2026-11-23T20:53:48.257Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,23 +22,23 @@
       "hash": "d311077504ca11261c866496a3a9752c59a3bc48236899c0d16b8fa4dfadd1bf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:03.448Z",
+      "checked_at": "2026-11-23T20:53:48.232Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.digitalocean.com/products/paperspace/workflows/how-to/connect-to-github-app/index.html.md": {
-      "hash": "bbc0061ae93cd4b23c50ca9c9349c6a59b597f4a294c87ff6721fa616f40249e",
+      "hash": "209995ec6a68cd076237374d5c21f4528ecedb0f427895b6f68f05af898e81be",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:04.168Z",
+      "checked_at": "2026-11-23T20:53:49.257Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.digitalocean.com/products/paperspace/notebooks/how-to/add-storage-providers/index.html.md": {
-      "hash": "be95287b20becb26c05f832c38d52fefa2af477406ea2fddc791e2299d291439",
+      "hash": "75e183bfbf99e58a77ff26bd68d1a3f5bddca8cde722ae3b87e9957effd95f1b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:05.169Z",
+      "checked_at": "2026-11-23T20:53:50.257Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,63 +46,63 @@
       "hash": "bca1e52ae68e6e268d9f69211fd791d260f3ac6504af0586a80250fef7e89816",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:06.170Z",
+      "checked_at": "2026-11-23T20:53:51.257Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.digitalocean.com/reference/paperspace/api-reference/storage/index.html.md": {
-      "hash": "2ba57fd98fd8d2fbc90837e9723a25b443ebc690b258e0cfbbf347554b5ee963",
+      "hash": "4c866c46794e11539c01b8d5a3c329fd39af9a6f1d0b3d7b3e82c1bf3b855e52",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:07.171Z",
+      "checked_at": "2026-11-23T20:53:52.257Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.digitalocean.com/reference/paperspace/api-reference/container-registries/index.html.md": {
-      "hash": "f06a43fc96db4842764d00b2b1279532c8796c3f289d0d296ae15acc7c8503d7",
+      "hash": "f07d5b1df65ac3eac3d858f281854a88f4870a2cc75b923b0a4baa4a0ccd7db9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:08.172Z",
+      "checked_at": "2026-11-23T20:53:53.257Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.digitalocean.com/reference/paperspace/api-reference/teams/index.html.md": {
-      "hash": "cb41eb30d5be221afc7c61a35c6ff12ffee8e6b474f38293b35e6022c73bf7b6",
+      "hash": "3b9db2dabc34ad7cf3f619379f7948648ad2581f6275ab6b39cac264e1f83852",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:09.170Z",
+      "checked_at": "2026-11-23T20:53:54.257Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.digitalocean.com/products/paperspace/accounts-and-teams/manage-teams/index.html.md": {
-      "hash": "e033315eefd36af42e63479a14798cb608eacee8f2e5763a0c4d23d18bd00a1b",
+      "hash": "f8d2f24ebc13ec3a9f12d81f204e0fd958d39b2838ca8bea9eff8ebc2f4d088f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:10.171Z",
+      "checked_at": "2026-11-23T20:53:55.256Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.digitalocean.com/reference/paperspace/core/install/index.html.md": {
-      "hash": "a6e9a6d546ac25bc84d6b77949db2ab76c9cdc6d2fe0b0adffb4c8c2b007025b",
+      "hash": "c59ae2434654d97736a5506f31f5242712c29fd84e53c0a0691b6c4ab1c8a1b1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:11.172Z",
+      "checked_at": "2026-11-23T20:53:56.256Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "c4d4f829ded6174c658bc75f04864cf5dfc37f9666470ab43a0a6e0a6117bb8d",
+    "fingerprint": "ea5390b64e1d178fb1d2ad2fa7956d31a31bdd5b90848d66d6144df4429d5515",
     "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

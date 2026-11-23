@@ -1,0 +1,100 @@
+{
+  "card": "granola",
+  "updated_at": "2026-11-23T20:59:33.686Z",
+  "urls": {
+    "https://docs.granola.ai/introduction.md": {
+      "hash": "4d58cc51f8b54a3c76367546e95b6d34c97bc8c954f8a7f68fdb5fb74ea5d8d4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:14.108Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://docs.granola.ai/help-center/sharing/integrations/granola-api.md": {
+      "hash": "681ca1c5073fc4db0ddcd3ac02c3d5a3f9a69b3eeca59290de2a631bb60f86c5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:15.107Z",
+      "quotes_found": 2,
+      "quotes_total": 4
+    },
+    "https://docs.granola.ai/audit.md": {
+      "hash": "d28295b29cf5a9acb9eac79fb4cc4980a27700a41a36fd144343d608f3af187d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:16.108Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.granola.ai/help-center/sharing/integrations/mcp.md": {
+      "hash": "376d318ccd45faeefefa257df2f0e5af7ba56e082854dbd32b545bd14ecde080",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:17.109Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://docs.granola.ai/help-center/sharing/integrations/slack.md": {
+      "hash": "982db2a3d87c1576554746c1f46cf8e7bd61b414b358ee534ea3da9f8ef24c14",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:18.110Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://docs.granola.ai/help-center/sharing/notion.md": {
+      "hash": "4e0ab488bb17c39c3d66e503ceab685dbfa211f9e700f0ce4381edbbdbbe80fb",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:19.110Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://docs.granola.ai/help-center/sharing/integrations/hub-spot.md": {
+      "hash": "bc0f246653661bca2bac0cb81ef054da7a4f5cc28ca50cccb44a0623180cb0d6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:20.110Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://docs.granola.ai/help-center/sharing/integrations/affinity.md": {
+      "hash": "122d094e0843ac46cff89af16a3b54c8e1776d3a946b78c585ae1b7b0c3a46ab",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:21.110Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.granola.ai/llms.txt": {
+      "hash": "ecacf26fbc62b4c7bfe567e270e74fd101321a65e8bb3af2074213681d71f747",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:22.111Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    },
+    "https://docs.granola.ai/audit-events.md": {
+      "hash": "eab5880aadaf564f5df2de952caec581248a7705791ff9c7077aed981f8d2b56",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:23.111Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "d4e5dbaa57413124cbb83d339ce3c8a5b4b189ef1999ba46454d8c80efe57909",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

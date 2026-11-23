@@ -1,0 +1,84 @@
+{
+  "card": "docontrol",
+  "updated_at": "2026-11-23T20:59:31.612Z",
+  "urls": {
+    "https://docs.docontrol.io/docontrol-user-guide/system-management/api.md": {
+      "hash": "b5ca5591b4351b7d952b24036bab63fed42859f6bfec8f581207d20d83d6f5ea",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:54.415Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md": {
+      "hash": "1dd8fe098b4694f63170b1db888ae86818b474d8064f72e42b070364d40d9d88",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:55.414Z",
+      "quotes_found": 6,
+      "quotes_total": 7
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/saas-data-monitoring/docontrol-mcp.md": {
+      "hash": "9322124e01739314be2d1dcc3d9ecdb4fcafc0e31e7690a4938673c34c17f4fb",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:56.415Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/integrations/github.md": {
+      "hash": "f34b68ea117abfe54618bcbffc6744295b47cd0fc7ed8ef633c34432d35d5294",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:57.415Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/integrations/box.md": {
+      "hash": "33c831d6511a2c945814600c954b3fa2e80ed83c428414f08cceb8b2dc2f456e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:58.414Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/integrations/integrations-google-drive/upload-key-file.md": {
+      "hash": "f2f28908a1406250ddce912e4fcecf6b382fa3f0b605f70cd0260cc8247b39b3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:59.414Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/integrations/integrations-crowdstrike.md": {
+      "hash": "0c6714b8c896290c762e826ac7be4f62b41e40cbe5df66099bcc045d7e523b4f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:00.415Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.docontrol.io/docontrol-user-guide/system-management/settings/connectors/siem-and-soar-connectors/splunk.md": {
+      "hash": "d7dc38bad9421168ffa2caf679d29e0d84739ecc22c54787ba62f5a4348f04aa",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:01.416Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "93390fb92572b35371d3cbe2713eb416f3fccf2b47a66d638a710c035e9bfced",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

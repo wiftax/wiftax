@@ -1,12 +1,12 @@
 {
   "card": "hashicorp-vault",
-  "updated_at": "2026-11-16T19:17:08.538Z",
+  "updated_at": "2026-11-23T20:59:33.709Z",
   "urls": {
     "https://developer.hashicorp.com/vault/docs/auth/jwt": {
       "hash": "57c1b959ed2c7c07c76b1ecb296fd22abce8bcf6237c546648076c0d95a462fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:20.766Z",
+      "checked_at": "2026-11-23T20:50:21.161Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "8eec92ccde77053b855edbf5941ec84ec747fbbc9bcd4e3143c41792065c3cf5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:21.766Z",
+      "checked_at": "2026-11-23T20:50:22.160Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "1f46084993fc4624799241c937aef05310d4ada7d1c144957f29d189ca30414a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:22.766Z",
+      "checked_at": "2026-11-23T20:50:23.161Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "ecee9f41a60202b3e71d44e39d6d9277304915d9d079b172218a744c06d86dbe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:23.766Z",
+      "checked_at": "2026-11-23T20:50:24.161Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "3a3b7ee2e3bd0884ab8dd1036077eb7f1d0bf934623b595f1fd2f67cad4cb5cd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:24.767Z",
+      "checked_at": "2026-11-23T20:50:25.160Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "4fe1a5aa3ade81b9245f520411e612becb65de66c6753b62c2847670b8d81615",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:25.767Z",
+      "checked_at": "2026-11-23T20:50:26.161Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "d0d3895ac7bca66730c68a4119e3190cde5d6f25541b1e4f9d5564c63d1b0216",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:26.767Z",
+      "checked_at": "2026-11-23T20:50:27.162Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "3d04b84d693fc7c6dc416eb273038fb8dea8d9279dc98e844f53f56d8fdccfe7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:27.767Z",
+      "checked_at": "2026-11-23T20:50:28.162Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "dff5acfddc52877a8f17f7734294efe2b947759bb4ec91c14bd2bd22e60fee3d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:28.768Z",
+      "checked_at": "2026-11-23T20:50:29.161Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "20f2bc566eb9d1129562837e9c7f09f7d16e0e69d27ebf70d4c1e00fe946b95d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:29.769Z",
+      "checked_at": "2026-11-23T20:50:30.162Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,23 +86,23 @@
       "hash": "230c33457a16eef505910c09ea20c1efdec347dc7436741b1b6457b86da4c541",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:30.769Z",
+      "checked_at": "2026-11-23T20:50:31.163Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://developer.hashicorp.com/vault/docs/concepts/policies": {
-      "hash": "11610209ab8e66827db8a0ca890d70012cb44af1a9de6ed4659de29870c16de1",
+      "hash": "548090d31f22972304c1a4c9b960e562ae1be80f47ce17947650250d80d18268",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:31.770Z",
+      "checked_at": "2026-11-23T20:50:32.163Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

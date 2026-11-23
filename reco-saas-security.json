@@ -1,12 +1,12 @@
 {
   "card": "reco-saas-security",
-  "updated_at": "2026-11-16T19:17:10.208Z",
+  "updated_at": "2026-11-23T20:59:38.846Z",
   "urls": {
     "https://web.archive.org/web/20250105152050/https://docs.reco.ai/en/articles/10285332-reco-onboarding-guide": {
       "hash": "5ccd42c266726f84d74f7022472799d7a26f23953ad717036b6a7000d845b94e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:52.342Z",
+      "checked_at": "2026-11-23T20:54:42.236Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -14,7 +14,7 @@
       "hash": "f5a0539cd96647926dc54dde34a0d302050403076a1a5034862667919dbfbaba",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:53.025Z",
+      "checked_at": "2026-11-23T20:54:42.913Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
@@ -23,9 +23,9 @@
       "status": 200,
       "ok": false,
       "failure": "empty",
-      "fail_streak": 2,
+      "fail_streak": 3,
       "last_ok_at": "2026-11-15T01:00:59.246Z",
-      "checked_at": "2026-11-16T19:12:53.373Z",
+      "checked_at": "2026-11-23T20:54:42.923Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
@@ -33,7 +33,7 @@
       "hash": "3368f35e8b426c1d6474fb7bbe48fdde51ed9eff53300d5f0a954aefc3c0dd65",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:53.782Z",
+      "checked_at": "2026-11-23T20:54:43.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -41,7 +41,7 @@
       "hash": "45362afafd675c4f464f7212adf5ae543a75dfde1bb8a17f55c29e74378092ef",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:54.781Z",
+      "checked_at": "2026-11-23T20:54:44.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -49,7 +49,7 @@
       "hash": "373952e0c76e275443ba479b39cfd922b093b6e9ba42c25d02370b65343dbc6a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:55.781Z",
+      "checked_at": "2026-11-23T20:54:45.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -57,7 +57,7 @@
       "hash": "5e323ea9879220308b11091275e68bc1ada12140d7dc348032249d5f35ef761c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:56.782Z",
+      "checked_at": "2026-11-23T20:54:46.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -65,7 +65,7 @@
       "hash": "b539ca409bcc9c823aacece09d9c1c8f54fb22085bdd18380910104b68e6a0c3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:57.782Z",
+      "checked_at": "2026-11-23T20:54:47.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -73,7 +73,7 @@
       "hash": "74679a2d9784ed940fee8dc74fa9ddb386eff2f4dc8e84955b4e4ab33acf10a5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:58.782Z",
+      "checked_at": "2026-11-23T20:54:48.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -81,7 +81,7 @@
       "hash": "44a21fc5507d8ccef7d90e235122cbf2168d1bc22fda3dd12bea6efbb87ad880",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:59.782Z",
+      "checked_at": "2026-11-23T20:54:49.438Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -89,7 +89,7 @@
       "hash": "882bb63212c14219d0809d3a515ae7176e5703e9683c15462608d2c77160904e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:00.782Z",
+      "checked_at": "2026-11-23T20:54:50.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -97,7 +97,7 @@
       "hash": "7772db99e1008dc48885f096a978248d3b123166733dae9116e770d63fb7011a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:01.783Z",
+      "checked_at": "2026-11-23T20:54:51.438Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -105,7 +105,7 @@
       "hash": "2cb8c01bf0e3f62b87527bfcad50645be234e9780041f996e4a2cae1fe019fe1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:02.784Z",
+      "checked_at": "2026-11-23T20:54:52.438Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -113,17 +113,22 @@
       "hash": "82ee9bf012c6965fdffcd77335a493e90fde6a88d95cca79be75df91d41d070c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:03.785Z",
+      "checked_at": "2026-11-23T20:54:53.438Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "8584b16b25d83a84eddc04f8ef02fbb6a4d48525006c577f06c1a8617eab7dc3",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

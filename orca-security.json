@@ -1,12 +1,12 @@
 {
   "card": "orca-security",
-  "updated_at": "2026-11-16T19:17:10.086Z",
+  "updated_at": "2026-11-23T20:59:38.529Z",
   "urls": {
     "https://orca.security/mcp-server/": {
       "hash": "c5ec7c0a58bd576e945e7052b556a8059b743e9aedefe8a4b94f5bc3b50fe25f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:13.451Z",
+      "checked_at": "2026-11-23T20:52:57.526Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "56cb44828d9a3624810082711a9bfa6c296bad57dc20c7a138dd682a2064db75",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:14.379Z",
+      "checked_at": "2026-11-23T20:52:57.733Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "b326f97000774d57fce76cd33c4f7974df06cc209b8bb72059cfb3243b120ada",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:15.379Z",
+      "checked_at": "2026-11-23T20:52:58.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "049b02c87f194e999a57c2e341302e012d38f3b6cc4eaed967f08570255e73b3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:16.379Z",
+      "checked_at": "2026-11-23T20:52:59.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "1cb2547afed1d40853db6619a0a2b1f50f9c9591b758edc8ed7d9f39f02a9427",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:17.380Z",
+      "checked_at": "2026-11-23T20:53:00.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,15 +46,15 @@
       "hash": "3b03422f43bcea5f67def121087616468e0e57c031361ec22c54957e4c16c467",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:15.744Z",
+      "checked_at": "2026-11-23T20:52:58.804Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://orca.security/lp/aws-activate/": {
-      "hash": "2d9fe7199faaa610467f6b7486b595397af278f43e5cfd63a11eaa6debef3274",
+      "hash": "01cb9593c831e8103b3f31b0b8ccb9353a367d2bd0936f7e0934bb63700a4ecf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:15.937Z",
+      "checked_at": "2026-11-23T20:52:58.932Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,7 +62,7 @@
       "hash": "91071ae0edb2a93f0eff5ff26ace07773651af305243ae8256a93adb11f35af3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:18.379Z",
+      "checked_at": "2026-11-23T20:53:01.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,23 +70,23 @@
       "hash": "59f1de1e3841fb160e78ed2a310719e1cf9d98b1a27c25113213ab8de3e25e33",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:19.378Z",
+      "checked_at": "2026-11-23T20:53:02.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://orca.security/partners/technology/alibaba-cloud/": {
-      "hash": "f42219af512d005045901bf50290efc2e5ca782b219bbf5cddc1a334e8ba0dde",
+      "hash": "f12942bcc727c8f3558d4169f988efac0f52d09f5f650cf2b6cf3c633174c88c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:16.938Z",
+      "checked_at": "2026-11-23T20:52:59.932Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://orca.security/partners/technology/oracle-cloud-infrastructure/": {
-      "hash": "d51aaad01856ea4e4b1759f25975f643f0ef38b0cf18a89feded262f7c00f78e",
+      "hash": "8573eb068b8cd4a7f0f7e4c681ea43fecaf6128f65970129ff080fc38dca9bf5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:17.938Z",
+      "checked_at": "2026-11-23T20:53:00.932Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "3fcb94327b9406f780f7cde167a3c97fb50b20246010f39a907a18952c33489d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:18.938Z",
+      "checked_at": "2026-11-23T20:53:01.932Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "156eb4e1e2a3e1a7c6ee3b19a78c9b5c30579137a8260b83eec877b50e6a9405",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:19.938Z",
+      "checked_at": "2026-11-23T20:53:02.932Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "c4061d3a733ef1bf4739defd388a3c5524fcb2fb87042f2c5deae8b58758b791",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:20.379Z",
+      "checked_at": "2026-11-23T20:53:03.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,7 +118,7 @@
       "hash": "cf221ba7d34ad936296fb914a9258b8474c1dd26ae6a3933c43e7c5c98fb5b0b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:21.381Z",
+      "checked_at": "2026-11-23T20:53:04.758Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "774244c2f7f7c4878909e9f805c2fd85ae74138a90e92094ce700b140dc7250e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:22.380Z",
+      "checked_at": "2026-11-23T20:53:05.759Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,7 +134,7 @@
       "hash": "91715bd139e593310ab5f43a0c70da006f58de8a72195dee9d9b6ff836841778",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:23.380Z",
+      "checked_at": "2026-11-23T20:53:06.759Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,7 +142,7 @@
       "hash": "54bcc1999ababaf057a3e305fe159b3e5d224f62f7f81724eb195586411ae03c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:24.381Z",
+      "checked_at": "2026-11-23T20:53:07.759Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -150,7 +150,7 @@
       "hash": "d6fabf300ee161eb4bbb6a81d11100fbf0ce9e05d406e838d1c74eeeb8ef36c2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:25.382Z",
+      "checked_at": "2026-11-23T20:53:08.759Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -159,8 +159,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:11:20.101Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:53:03.021Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
@@ -168,15 +168,15 @@
       "hash": "6c3ca33632f3d8aca8cf00c9d19b5a09946d74697ce44f0c8f26d25947a62541",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:20.294Z",
+      "checked_at": "2026-11-23T20:53:03.123Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.observeinc.com/docs/install-the-orca-security-app": {
-      "hash": "7bccc172c8fc907d8b028f545ad2377fab675919b169ae97f50e40797434adb2",
+      "hash": "a6cd188828b36ad51d46ef96c4c600ac01e75a40bb4911ab0f3264bd4ee4f5c8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:20.449Z",
+      "checked_at": "2026-11-23T20:53:03.536Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -184,7 +184,7 @@
       "hash": "e0142aac274042fd31bbc309152ef496d5ab963fbef4eee279a6b8491d2feaae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:26.382Z",
+      "checked_at": "2026-11-23T20:53:09.817Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -192,17 +192,22 @@
       "hash": "1f049bce40635fb6e4bc32e37e8bf755806047072c9487cae2d5886af5584252",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:21.076Z",
+      "checked_at": "2026-11-23T20:53:03.814Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "a4e767a4279c6640917936e4a5b14f1869cbfb5d4f6aa9dfc7f4bc337f6faca2",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

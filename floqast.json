@@ -1,0 +1,70 @@
+{
+  "card": "floqast",
+  "updated_at": "2026-11-23T20:59:32.340Z",
+  "urls": {
+    "https://developer.floqast.app/guides/authentication.md": {
+      "hash": "56341ce7bd9b00e322e9b82892fcfc9ace44f6312b49808872247f406aa93849",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:25.524Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://developer.floqast.app/docs/v1/getting-started.md": {
+      "hash": "0fdd8ad75bcaeaa62610384a9a2c2230d47e59a35609b152c568f0490012b1f3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:26.573Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.floqast.app/_spec/api-reference/@v2/openapi.yaml": {
+      "hash": "50facdbb420c28ae8ae8ac1d197606c5b3107a9cbccf50e13413f3f6a87890d8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:27.573Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://help.floqast.com/api/v2/help_center/articles/28319271724187.json": {
+      "hash": "5023a2bf55ef35d9b8dfd6bd86fb507b989641ed4afd1f16541bd8b6aff9587d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:26.617Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.floqast.com/api/v2/help_center/articles/360002076631.json": {
+      "hash": "6b6042d64035d640fb26e2363f2fe935ce7733694f27357236708abaa9b07c1f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:27.617Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.floqast.app/_spec/api-reference/@v1/openapi.yaml": {
+      "hash": "f314cf03daee239fce1a81b172bbd59ce738980f2f0ad9e429fdf7c614322ffc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:28.573Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.floqast.app/quick-start/scopes.md": {
+      "hash": "1f58c1f26575e39300ac97ad6f861b0e1d96a43a3c2a7697c5aebb6cf70536b1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:29.572Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

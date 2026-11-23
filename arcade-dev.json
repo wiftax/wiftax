@@ -1,123 +1,123 @@
 {
   "card": "arcade-dev",
-  "updated_at": "2026-11-16T19:17:05.947Z",
+  "updated_at": "2026-11-23T20:59:28.935Z",
   "urls": {
     "https://docs.arcade.dev/en/get-started/setup/api-keys": {
-      "hash": "e7be8562691bfa6bb7291fec25aef132984d0be79335ce36f9776c42ab502c28",
+      "hash": "ca5334d19acd53faf99a8b96a969bb929f6d30d83266c3a1d572b53a2085278b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:17.167Z",
+      "checked_at": "2026-11-23T20:44:06.278Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
     "https://api.arcade.dev/v1/swagger": {
-      "hash": "f21800437f0debad81f01016250612b5311d95b46e1303a331d48461e795e2f8",
+      "hash": "ee90747d514626362caafbb3f46ca3bf98c2fc7b51e082d4a4761b9a86eba6aa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:17.492Z",
+      "checked_at": "2026-11-23T20:44:06.486Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.arcade.dev/en/resources/faq": {
-      "hash": "d8546e27e18da48e51c039815d9fdf7ceeeed690b34454c933e465c6aabbe369",
+      "hash": "82c6e6922db304f5ae1623cb59ab92fc3b18b629fc7c4eb865e72552e92aa135",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:18.166Z",
+      "checked_at": "2026-11-23T20:44:07.278Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/operate/governance/mcp-gateways": {
-      "hash": "90d1625b88b630be7eb34f05f795e8d57d2143324a8c4852ac541b1830a16c6e",
+      "hash": "811665e538a1c0f6d8ba640773a69ff273b27266fb6e2d2a910705295d6af4b9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:19.167Z",
+      "checked_at": "2026-11-23T20:44:08.277Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/operate/deploy/architecture": {
-      "hash": "bbfcb0b2c351b1892de50511a8bcb2ba3757c94c382dff20cb92eca80b47429e",
+      "hash": "4b6dce58e5fc1a0508849124314a776d2b8d6257d3c4f5bd3bdaf41c13821a1b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:20.166Z",
+      "checked_at": "2026-11-23T20:44:09.278Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/references/auth-providers/google": {
-      "hash": "56b21bd23efafda8cdfcf0bb77e0138fcc4cc9d551e543c03c94d6e5c239cdde",
+      "hash": "21cd3d66a9aee727ca3c48c504b0c919d69e28241adc8233770827c424059344",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:21.167Z",
+      "checked_at": "2026-11-23T20:44:10.279Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.arcade.dev/en/references/auth-providers/microsoft": {
-      "hash": "dcecc8c85b6b4303438f4b453868c106f52ddf93a8d5b1067a12e8ef871d9a68",
+      "hash": "11b924e18699083bbe61318c3d89ee13dfe387e64869d1eb08fef82fdecf6189",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:22.168Z",
+      "checked_at": "2026-11-23T20:44:11.279Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/operate/governance/remote-mcp-servers/aws": {
-      "hash": "b44f026ecf1bff6d3a18df0e81206c5f391e05f0c74ee35c4ba6ef64ee8262aa",
+      "hash": "076d3719cc4cbc3f54c7d368102630acc57a2cd2a8fa1d712d6c2f88647272b1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:23.167Z",
+      "checked_at": "2026-11-23T20:44:12.279Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/references/auth-providers/github": {
-      "hash": "26fd1a6be47ad6444c664a19b658e14157790ffb4fd3e59770ac13d9e6e71923",
+      "hash": "01569acb29a28c931d9f1be1313c9dc6d511e82f7f53c64b5293d9989cb5047e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:24.168Z",
+      "checked_at": "2026-11-23T20:44:13.279Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/references/auth-providers/slack": {
-      "hash": "ae17409dd25e9327fa35684d33abf1e278dfee21444cff7078b26758b4df8de6",
+      "hash": "7a202af6376e0443c108105aa092d03023a779a495cc4ecfb3fa8785d28eca01",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:25.169Z",
+      "checked_at": "2026-11-23T20:44:14.279Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/operate/governance/contextual-access/group-access": {
-      "hash": "528ad487bcb7beee7afd053a3a9542ed1b9864058bf3e0abf44fa0ff81912382",
+      "hash": "f3edc1754f6b1785a4787cbd862139b8b521c94984e9e0305da5d03001335d56",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:26.169Z",
+      "checked_at": "2026-11-23T20:44:15.279Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/resources/integrations/development/datadog": {
-      "hash": "524c726fb5d1be9db35373e275c794ceb34065ec4db9bed000a015699ecd70c4",
+      "hash": "2af7387156009966501d30b57bb7c24986cbacce49a3d2d5e6037f868eadd0d9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:27.169Z",
+      "checked_at": "2026-11-23T20:44:16.280Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.arcade.dev/en/references/changelog": {
-      "hash": "a370f50aafbda09b08940740bf1e12edd3e52b1f5db1599afa7dbdda4cacc2ed",
+      "hash": "23623f5b7e78a0f61b0d21c9432fe62936392097499f146ce95780d5746990bd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:28.169Z",
+      "checked_at": "2026-11-23T20:44:17.280Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "82867f1f7b49b17a6ee0b935b889c49704a5970b7ab5f06ac8a89d43fda6bf03",
+    "fingerprint": "30c43c005b756bce26b7058e16eee945a5dd4274c1a5baeefa3f2e9e5a929841",
     "outcome": "no_change",
-    "at": "2026-11-16T19:03:37.140Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

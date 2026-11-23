@@ -1,0 +1,110 @@
+{
+  "card": "atlassian-cloud",
+  "updated_at": "2026-11-23T20:59:28.978Z",
+  "urls": {
+    "https://support.atlassian.com/user-management/docs/create-oauth-2-0-credential-for-service-accounts/": {
+      "hash": "6b4d0abecd2b237eed237607225bbbeec186c0175daa4d70001f9dd6315b1f1c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:13.471Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.atlassian.com/cloud/admin/organization/rest/intro/": {
+      "hash": "a764f387d32f2edbd42ae3bebfbf063bf1cdba2e25a8b742b3d92b1b28220c25",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:13.692Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.atlassian.com/organization-administration/docs/manage-an-organization-with-the-admin-apis/": {
+      "hash": "a2a3347c00e498c1652f960a4fa1fc3e125b88147e10912e22ea92cac33735b6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:14.471Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/": {
+      "hash": "6cf61c47fbb8a5d50bd8d91723b6a806ab90965aadaeab9100a5f295100a49c6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:15.472Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://support.atlassian.com/cloud-automation/docs/configure-aws-iam-for-jira-automation/": {
+      "hash": "28331d3dbd301e4109aa4065c3e324a3543e664ba26440f42ecea1a1f00f7239",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:16.473Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/": {
+      "hash": "9cabccf154d8554bcff4fa881e9ae119465279ffe7fa6805ec3432bc8ea0a1c8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:17.472Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-microsoft-azure/": {
+      "hash": "08cb38ef9b3ef646d95ce36e2039bd0e12be8c742adb2e74cc84dc2a9980bc3e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:18.473Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.atlassian.com/cloud-automation/docs/use-jira-automation-with-new-relic/": {
+      "hash": "741bca3001ebb0001d1f892fc6487248463c89881fb4ad2d93dd0e92733b44ae",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:19.473Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.atlassian.com/cloud-automation/docs/use-automation-with-workato/": {
+      "hash": "431563c8e0146495d54b73858212e9d045bc61a2ef71f464d3309bef661b0bb1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:20.474Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.atlassian.com/cloud-automation/docs/use-automation-with-okta/": {
+      "hash": "8f8c919db66c69e4c72ecaa921754dcca70d95f2b104e6a97803d0cfb6a695ae",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:21.475Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.atlassian.com/user-management/docs/manage-api-tokens-for-service-accounts/": {
+      "hash": "efaf9e3d39190d451362c74db418c419afd1ed857e55a41228e60be450e853c8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:22.475Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://support.atlassian.com/user-management/docs/understand-service-accounts/": {
+      "hash": "507a2882beb065dc468fb43ef84c684364184b9b377541d4d1840ff85a7fca7f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:23.477Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

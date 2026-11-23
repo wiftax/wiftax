@@ -1,0 +1,62 @@
+{
+  "card": "coupa-core-platform",
+  "updated_at": "2026-11-23T20:59:29.761Z",
+  "urls": {
+    "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/openid-connect-clients": {
+      "hash": null,
+      "status": 200,
+      "ok": false,
+      "failure": "empty",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:46:23.169Z",
+      "quotes_found": 0,
+      "quotes_total": 4
+    },
+    "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc/set-up-an-openid-connect-client": {
+      "hash": null,
+      "status": 200,
+      "ok": false,
+      "failure": "empty",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:46:24.169Z",
+      "quotes_found": 0,
+      "quotes_total": 3
+    },
+    "https://docs.coupa.com/en/developer-documentation/the-coupa-core-api/oauth-2.0-and-oidc": {
+      "hash": null,
+      "status": 200,
+      "ok": false,
+      "failure": "empty",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:46:25.169Z",
+      "quotes_found": 0,
+      "quotes_total": 3
+    },
+    "https://docs.coupa.com/en/developer-documentation/coupa-core-flat-files-csv/getting-started/sftp-overview": {
+      "hash": null,
+      "status": 200,
+      "ok": false,
+      "failure": "empty",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:46:26.168Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://compass.coupa.com/en-us/products/total-spend-management-platform/integration-playbooks-and-resources/integration-knowledge-articles/oauth-2.0-for-call-outs": {
+      "hash": "802033afbeb17bf59a0d044f8e2ec0f4497490152532fdaa35a9babaff788037",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:25.448Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

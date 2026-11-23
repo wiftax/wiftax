@@ -1,0 +1,78 @@
+{
+  "card": "outreach",
+  "updated_at": "2026-11-23T20:59:38.539Z",
+  "urls": {
+    "https://developers.outreach.io/api/s2s-access.md": {
+      "hash": "2e7791709fe7e281a71deb372d56d7e7423dae1f9130048e92a9c7f546370a3b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:04.125Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://developers.outreach.io/api/oauth.md": {
+      "hash": "26094431ab46997f7f58a0cdf3dd40509331b728749e5cd31e4a6903d9520220",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:05.126Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.outreach.io/mcp-server/authentication.md": {
+      "hash": "fae3d3b0ade8caf2d2ccd1372ef57d8ca641f31e48d475d649c204e42a5d4d9f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:06.126Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.outreach.io/support/solutions/articles/159000426014-outreach-crm-connection-overview": {
+      "hash": "cb68532fc51763cb5a55e641004d229c097397a52047a510672912b64740a539",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:04.828Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.outreach.io/support/solutions/articles/159000425773-how-to-connect-office-365-mailbox-to-outreach-using-microsoft-graph": {
+      "hash": "5521ff20332e74a43d5a726beef12b7c1182e92f9ff65a1db06f99d7ec8df229",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:05.828Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.outreach.io/support/solutions/articles/159000425735-how-to-connect-exchange-master-service-account-msa-to-outreach": {
+      "hash": "3e26cce8948246c69d82f053124a025d3db4c7d6fd8c4136ee8ce9a090b49a1f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:06.829Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.outreach.io/support/solutions/articles/159000425548-how-to-connect-a-primary-email-to-outreach": {
+      "hash": "bcc7f2858a40a6d80076bdd49ebe812b53056f6e3eb02026b6fa343811112738",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:07.828Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.outreach.io/guides/managing-apps.md": {
+      "hash": "d939297ea1fa4b687aab349b6e89bdfc60608f1360f91cc288f88198360038c0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:07.127Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

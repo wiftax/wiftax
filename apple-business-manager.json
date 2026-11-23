@@ -1,0 +1,70 @@
+{
+  "card": "apple-business-manager",
+  "updated_at": "2026-11-23T20:59:28.926Z",
+  "urls": {
+    "https://support.apple.com/guide/business/create-an-apple-business-api-account-axm33189f66a/web": {
+      "hash": "534d5ba986671ca05fa880955141dfd607b0da99c3121e2f083d02b75dbcae88",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:03.290Z",
+      "quotes_found": 7,
+      "quotes_total": 7
+    },
+    "https://developer.apple.com/tutorials/data/documentation/apple-school-and-business-manager-api/implementing-oauth-for-the-apple-school-manager-and-apple-business-api.json": {
+      "hash": "e0e20bd057477f8bec6c1e513251b129089a877c7d4a80fa217672cc8bfe228a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:03.959Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.apple.com/guide/business/link-to-an-external-device-management-service-axm1c1be359d/web": {
+      "hash": "97b985055f8b69427ba498f11e7097306f126b605742b33da0c7b190e1efd59b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:04.290Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.apple.com/guide/business/federated-authentication-microsoft-entra-axm8c1cac980/web": {
+      "hash": "0da2ecd315551297b5c25be995b7c4859234e2f354d9384f59093b560161a9e6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:05.290Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.apple.com/guide/business/sync-user-accounts-from-microsoft-entra-id-axm3ec7b95ad/web": {
+      "hash": "f4c6c834ee0fd0ba730fab71edb04ab100d861059a4933fd0854ada2365c7083",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:06.290Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.apple.com/guide/business/federated-authentication-google-workspace-axmaef1a0154/web": {
+      "hash": "a61ddc88aa00d3f046f34b359a750df01868e38ce23a18c7d9c109be5cdc8bf4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:07.290Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.apple.com/guide/business/federated-authentication-identity-provider-axmfcab66783/web": {
+      "hash": "8823c7a275170ecd549cbea4aabdb53aea5df1ef581c712b0c928c53fef3481d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:08.290Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

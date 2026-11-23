@@ -1,0 +1,62 @@
+{
+  "card": "openai-chatgpt-enterprise",
+  "updated_at": "2026-11-23T20:59:38.366Z",
+  "urls": {
+    "https://chatgpt.com/public/admin/api-reference/openapi.json": {
+      "hash": "e4f6cccea3d2749642313f2c3d040b78ec36eb25247ff0539e9381ce9451690a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:50.485Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://learn.chatgpt.com/docs/enterprise/compliance-api.md": {
+      "hash": "d38e1c55e77195d28461d1da7165bd6db407a3c4d3712d9059173e0158521884",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:51.500Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.openai.com/api/docs/guides/workload-identity-federation.md": {
+      "hash": "4b36a51c796ec90629b7a25aaa72b6f58b94dea6e1dfc6e36402715219171beb",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:51.648Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://learn.chatgpt.com/docs/enterprise/shared-connections.md": {
+      "hash": "5d671c843f49b70794cf838f72faf9b4de28eb05b92c8128a0ee54b5796a0458",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:52.532Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/admin_api_keys.md": {
+      "hash": "17810ed28ec6e61c5c229aff4891c4a81d0687dfae7691b844ffbe8c7ee69b1c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:52.648Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developers.openai.com/api/docs/guides/production-best-practices.md": {
+      "hash": "f6dd47395672d42217270b45feda1b9247abd50821be7c0bdf19e2d33c3a260c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:53.648Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

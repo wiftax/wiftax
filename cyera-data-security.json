@@ -1,12 +1,12 @@
 {
   "card": "cyera-data-security",
-  "updated_at": "2026-11-16T19:17:06.456Z",
+  "updated_at": "2026-11-23T20:59:29.957Z",
   "urls": {
     "https://docs.delinea.com/online-help/integrations/cyera/cyera-configuration.htm": {
       "hash": "5f8a341bdb15ba4e4567d17c1d471b281c15f09110c66ac75e2de7c8383b2b06",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:51.859Z",
+      "checked_at": "2026-11-23T20:47:12.199Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -14,7 +14,7 @@
       "hash": "88a451d8e9dc074cecddf2e582a83a6a5aed0f5fc9a9191f67543fdd7766e121",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:52.285Z",
+      "checked_at": "2026-11-23T20:47:12.404Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -22,7 +22,7 @@
       "hash": "286b8d20b9575dc5e70f5b16c878ed5427f1441ba5751c8d823e72d4e5c4d8c7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:52.833Z",
+      "checked_at": "2026-11-23T20:47:12.560Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,41 +30,46 @@
       "hash": "a8fadf5f4392ccae514371cf4c6b5a5e0d4f423fe47a08116f53afefd2ad97f1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:52.986Z",
+      "checked_at": "2026-11-23T20:47:12.665Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.cyera.com/partnership/microsoft": {
-      "hash": "5867b583e39b2b6cb2535b661abea872a78ac058ec2a2529810e820968f846d2",
+      "hash": "7acac88771ae1bd56e847f223c7e4c69760f6c75cc51ac67dba32284b7159aee",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:53.014Z",
+      "checked_at": "2026-11-23T20:47:12.782Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.cyera.com/partnership/google-cloud-platform": {
-      "hash": "5bf717aa5be8c532f31ba7d6a100e1fcaaaaf8566d193a5a7d39697081921bd0",
+      "hash": "4fefe420989377545834de3059f6dadfa83920e911a7660393c3142d373c663d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:54.014Z",
+      "checked_at": "2026-11-23T20:47:13.782Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.cyera.com/blog/reinventing-on-prem-data-discovery-and-classification-cyeras-connectorless-approach": {
-      "hash": "44c59955b7551d2c01b378366b77921ee8fe477a1f2557cd0356cf9ca47bc108",
+      "hash": "1ff7a388cc4698db9b99f594af428e9ed1aee96737cdce9f0aa0dc95237c67f1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:55.014Z",
+      "checked_at": "2026-11-23T20:47:14.782Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "06d0d504d856d1ac5d6cc0506f8672ad20aced9fcefe88073132a3214d158a21",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

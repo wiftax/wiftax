@@ -1,0 +1,92 @@
+{
+  "card": "rewind-backups",
+  "updated_at": "2026-11-23T20:59:38.850Z",
+  "urls": {
+    "https://docs.developer.rewind.com/authentication": {
+      "hash": "587dfea98095ab6139e728744b741423fdc4c2b0f5980fe365b5eaa2d87399e6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:47.916Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://docs.developer.rewind.com/mcp": {
+      "hash": "5bea3b59b6c25d75c0bef404979a7ab6e1f87ce042587a36f298333e6cdbb17f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:48.935Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json": {
+      "hash": "0430360811cac41e1c4321780d1fe1c98ffc4b1ce4c7f853282e4d6aa6d55108",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:48.934Z",
+      "quotes_found": 3,
+      "quotes_total": 4
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/28773774205467.json": {
+      "hash": "01fe4dc72edfabbade1112f82fa5e281e922b815e0dac9c61db7c59d524e6990",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:49.935Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/57456063676699.json": {
+      "hash": "ede338b48cf09d30646bfbde255a9231a1d7965d2aa1645450035396dcae5002",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:50.936Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/30468763050395.json": {
+      "hash": "11412da473e25791011340a706aba9b1365597725ca80054acc9f236dcfb85f1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:51.936Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/29326725327643.json": {
+      "hash": "45e781ee733a33582f44cf359b5ae6d0febc7212a7a8b5e5f9f50ff8468751b6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:52.937Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/49993169157531.json": {
+      "hash": "7252f2d19dbee8b386cad9ba52f92f9afe2dc14ab81847ab94cd03fb6cb81ef7",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:53.937Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://help.rewind.com/api/v2/help_center/en-us/articles/28786333674139.json": {
+      "hash": "034ac182c17603ab8e1d58ffe941826b290c67a5fa4e41dca4878efee35e68f9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:54.936Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "169a05f1f0a2c2dda2ddaff3c915dce35502ea43e4eab3a8b214232f9e0740de",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

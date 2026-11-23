@@ -1,0 +1,62 @@
+{
+  "card": "greenhouse-recruiting",
+  "updated_at": "2026-11-23T20:59:33.697Z",
+  "urls": {
+    "https://harvestdocs.greenhouse.io/docs/authentication.md": {
+      "hash": "99e4f6f6319ecc4d56489ec04da9694ed0be01d51e918efd18a2662df3323994",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:17.520Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://docs.greenhouse.io/audit-log.html": {
+      "hash": "5acaf1c5cbfcafd10937ac7f4fb9356eac701804a62313bdf91c82761c6988a6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:17.832Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.greenhouse.io/hc/en-us/articles/360021799232-Google-Calendar-integration": {
+      "hash": "d404655d0fdc44e6a505f1fa1c0fefa70bf6bf22910e77868e25b0ddeaf0d7a4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:18.064Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.greenhouse.io/hc/en-us/articles/201177624-BambooHR-integration": {
+      "hash": "286c4cbe11959b2c2203b7e027f328f3778bc9e6d7ee7b711cbfe75936f86afd",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:19.063Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.greenhouse.io/hc/en-us/articles/115000521723-Manage-Harvest-API-credentials-permissions": {
+      "hash": "50940a1fe1abf0569cbd3b6ca0cb1aa2f9b56c111f333ec4093bce5c4dcf10a4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:20.064Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://support.greenhouse.io/hc/en-us/articles/360029266032-Harvest-API-overview": {
+      "hash": "b1d7556367ee61842fa64d3b6dea86f99d0ed85e7ef148fe5c9c091733b1001f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:21.064Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

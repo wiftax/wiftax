@@ -1,0 +1,78 @@
+{
+  "card": "workiva-platform",
+  "updated_at": "2026-11-23T20:59:49.841Z",
+  "urls": {
+    "https://developers.workiva.com/2026-01-01/authentication.md": {
+      "hash": "0e4fdabb5c325d1f054e2a9e4727059664513565a51dcf8cf6a72a439450541b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:53.953Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.workiva.com/2026-01-01/tokenrequest.md": {
+      "hash": "39dd31a466210f7d8068bad7490a71dd0575be567e2cac68b02ae6e63184ffc7",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:54.954Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.workiva.com/2026-01-01/iam.md": {
+      "hash": "7dc297ad4301aeaf01cb2925280a891e2059710b5a3b76a6d47bba03032c0605",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:55.954Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.workiva.com/api/v2/help_center/en-us/articles/360045223172.json": {
+      "hash": "cf6b25018a7b16ec6cb64dd14ce30bbebb37743ee0b37c564c369615fa4db2e9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:55.083Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://support.workiva.com/api/v2/help_center/en-us/articles/360052106251.json": {
+      "hash": "2ea6e415569716a9d4361c7683711bb7e9deb056a796d371331bf52dec7d5597",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:56.082Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.workiva.com/api/v2/help_center/en-us/articles/360045543792.json": {
+      "hash": "b4c9f7e40255e5119f606faaf6981218b5b4de775c2956b2404eafc2c52c324f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:57.083Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.workiva.com/2026-01-01/setup.md": {
+      "hash": "283c697246ba0555dbfe41f7cfe25dac248899c15c0413bd7ab5d77f7fe3c385",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:56.954Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://developers.workiva.com/2026-01-01/llms.txt": {
+      "hash": "6555d291498b6458825cfc5e511f5c8ac61c3602a51e6952b8481c684e696274",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:57.953Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "card": "zapier",
+  "updated_at": "2026-11-23T20:59:49.845Z",
+  "urls": {
+    "https://docs.zapier.com/sdk/deploy.md": {
+      "hash": "3e5240e9ca8f626f45e175123f87553b642a08c9f95deb50772718ab46bd9c51",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:56.666Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.zapier.com/white-label/trigger-inbox/trigger-inbox-quickstart.md": {
+      "hash": "0a4bef27f5ef3a2fc7f396c5dc44eb0f48792fb96ec345f885ba2fd563a3da30",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:57.666Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.zapier.com/powered-by-zapier/authentication/methods/app-access-token.md": {
+      "hash": "637e4c879ff030145366d37a24d5bd601580b738ab98c91fcdf8fd66ce6ed8a3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:58.667Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.zapier.com/api-reference/overview.md": {
+      "hash": "81cd189609e9d844be2b8d56c0e6c7011bec6c1406ff2e54bce1b48deee1ba88",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:59.668Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.zapier.com/mcp/overview/how-connections-work.md": {
+      "hash": "f64ba6e7291276f4fb6c08483ed2cc3af73b29787363d090e5e0cee673325f3b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:00.668Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.zapier.com/white-label/implementation/token-exchange.md": {
+      "hash": "58bee7e6b3ea2287b7d2ac374b6c8194d55521c7c4e881cebc9925f4ea3eaf0d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:01.668Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.zapier.com/integrations/build/auth.md": {
+      "hash": "bf78e95782821b18d9435adfa367a4657b051e372427241577e2fcb2bc9f5ac1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:02.667Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://help.zapier.com/hc/en-us/articles/8495975749005": {
+      "hash": "b6247d6c6ba9c14f9686c79930dbec0ea3d0488307e49dedf02df88556204646",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:58.692Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.zapier.com/sdk/reference.md": {
+      "hash": "903d134c3334dc207728ee73ebb7eba7c60db856d6875b962f4ac1b02f4a308d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:03.668Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

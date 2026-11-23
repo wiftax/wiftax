@@ -1,12 +1,12 @@
 {
   "card": "crowdstrike-falcon-api",
-  "updated_at": "2026-11-16T19:17:06.379Z",
+  "updated_at": "2026-11-23T20:59:29.762Z",
   "urls": {
     "https://developer.crowdstrike.com/llms.txt": {
       "hash": "22bb78c0213404de5d26c6ca44393c092b5a1352864a239dbcff8c86d844b75f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:06.972Z",
+      "checked_at": "2026-11-23T20:46:26.207Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "ef40fc49cf2bfde7909c2737b320f76e08e864bf7cb844d6a0e937a06729ab0e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:07.973Z",
+      "checked_at": "2026-11-23T20:46:27.232Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,7 +22,7 @@
       "hash": "9a02d531150710543de7c1a78980db4b4b75c7cb244483d489ce1e7ee7851796",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:08.004Z",
+      "checked_at": "2026-11-23T20:46:26.512Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "6d2e6701f8c1a1c1f4a494ec259829ac668575bbe402a7f0ba0b333ba0bed029",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:08.974Z",
+      "checked_at": "2026-11-23T20:46:28.232Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "62af10ebae271c8b1f478192ec56f4b5dbe3417c5309cb5f4dacb5769446b862",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:09.974Z",
+      "checked_at": "2026-11-23T20:46:29.233Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -46,7 +46,7 @@
       "hash": "8d0294a8e4b79cff77bce60c88ceb03e9ead6f8e17531fe8183d81f35939929a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:10.974Z",
+      "checked_at": "2026-11-23T20:46:30.232Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "c92dd38f8afc6f5ab4fac7f1e3959e5a1c9b551360d30787633b46c32aa05620",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:11.975Z",
+      "checked_at": "2026-11-23T20:46:31.233Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,7 +62,7 @@
       "hash": "ef607504cd0dd6aaf8c8613ba7200d7add135f3f37078e60a18b19a38f2542a5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:12.975Z",
+      "checked_at": "2026-11-23T20:46:32.233Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -70,7 +70,7 @@
       "hash": "9d765f3f30af7e8e8681be94fe320d30df6c7ee6fbd90abfea28e3a0b71d9370",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:13.975Z",
+      "checked_at": "2026-11-23T20:46:33.233Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "573541111e7e75f29c48eb525eb81591f21e22a977e0330d22ac2e04703a4aca",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:14.975Z",
+      "checked_at": "2026-11-23T20:46:34.234Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -86,7 +86,7 @@
       "hash": "a046e6c9c24d5284f16cff52808d426201a7995892081de71a564d5894021981",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:15.975Z",
+      "checked_at": "2026-11-23T20:46:35.235Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -94,17 +94,22 @@
       "hash": "2bc09fd912e15c438392de97f7008f4a64d58eb6324b11342e0cfbd6c24fec64",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:16.975Z",
+      "checked_at": "2026-11-23T20:46:36.236Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "b41c32acab3f61bba6c02c0291a97771aa2f0f32d4d3299fdf2ef8ff195c5af3",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

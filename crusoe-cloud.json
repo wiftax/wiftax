@@ -1,36 +1,36 @@
 {
   "card": "crusoe-cloud",
-  "updated_at": "2026-11-16T19:17:06.382Z",
+  "updated_at": "2026-11-23T20:59:29.767Z",
   "urls": {
     "https://docs.crusoecloud.com/reference/api.md": {
-      "hash": "bbe6235492d5c87b51b740c5ac612b9c1497174dd7573991fa84cdbbca82b249",
+      "hash": "5d1b0c44fe5c5c3527f5c9790f041a7896c25ba81a6b57ff5c0c44d7d86ca9f6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:12.490Z",
+      "checked_at": "2026-11-23T20:46:30.648Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.crusoecloud.com/identity-and-security/managing-api-keys.md": {
-      "hash": "967928bb7fa1040363185d5233cd8ca2e04325e26ced57680776560c98e7c49e",
+      "hash": "8c188522535a077c35007fd94c365a8b1c8358646785a729a5a7654b223149d0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:13.489Z",
+      "checked_at": "2026-11-23T20:46:31.648Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.crusoecloud.com/installing-the-cli.md": {
-      "hash": "7365753bc47b0c2685e8dcbe7ac418810f707e98612d86b8f091c5b5d22224f0",
+      "hash": "727fb2ef946351f400073d5c337ed38916ad8bc10c1ad6a80872c3ac63a474e9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:14.490Z",
+      "checked_at": "2026-11-23T20:46:32.648Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.crusoecloud.com/infrastructure-cloud/terraform.md": {
-      "hash": "2ffb5e620e267d753e6369edc6b2a2ef6e53e792de3b60819dbebc39bce19c5d",
+      "hash": "11d05baf45415e5313df1638f569e675262b0794419d81bbc75c420e5416e8b3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:15.491Z",
+      "checked_at": "2026-11-23T20:46:33.649Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,39 +38,39 @@
       "hash": "ae49aea9c97d785ed808226c9e55ba8c82434f3ef0a1fea62e256d9fce3a2d5c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:13.685Z",
+      "checked_at": "2026-11-23T20:46:31.865Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.crusoecloud.com/storage/object-storage/overview.md": {
-      "hash": "ba0f82f74829a81b92b7569601b131e9f3c2bdfefacf71c366ca83c6067c942d",
+      "hash": "09ddf512a406bedc0e4db002138a62536b0e8cb7534845d6003b7c62af7b89ab",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:16.492Z",
+      "checked_at": "2026-11-23T20:46:34.650Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.crusoecloud.com/container-registry/using-with-k8s.md": {
-      "hash": "86ff331178115b6ed595f33b9ea6fe487abf02d73172eeb408a675f86be26711",
+      "hash": "588ce9e5683cdb1444375cb4f214f19441dc53f32ed69f50adfc29ee05718dad",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:17.492Z",
+      "checked_at": "2026-11-23T20:46:35.650Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.crusoecloud.com/container-registry/token-rotator.md": {
-      "hash": "50c57d46dd3ccbd029c7b3b3246b01451d89b5e02ef530de65f895df8b7bed77",
+      "hash": "6689125747a79b90adf08725aba69d0beba65f0cc0c99c87a24a3bd05c4d620d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:18.492Z",
+      "checked_at": "2026-11-23T20:46:36.651Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.crusoecloud.com/orchestration/cmk/cluster-details.md": {
-      "hash": "ebd56ec71623a2c8f79c6101f3706b29a4e7b291f33c7de12f5fa90c346c8a79",
+      "hash": "68abbab1522dade8409d0ab938dd0c22c11d4af1d18bbe53d01cbf7d98ea2c03",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:19.492Z",
+      "checked_at": "2026-11-23T20:46:37.650Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,39 +78,39 @@
       "hash": "72f1f2898335bc9077d75d2503cc91872da5e0c5278b25dc40117aba97dcb436",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:20.493Z",
+      "checked_at": "2026-11-23T20:46:38.650Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.crusoecloud.com/container-registry/managing-repositories.md": {
-      "hash": "ab1e0322749a864c95f3f599172b23d7c12f8700ed23c4eb52c18216ee6e71c9",
+      "hash": "2619fc29b3c060fdc084fe4041f72f43323c325d1fa33cb00cce4f7f0ab6b9fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:21.614Z",
+      "checked_at": "2026-11-23T20:46:39.721Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.crusoecloud.com/identity-and-security/customer-managed-keys.md": {
-      "hash": "b9c9ae93acf3cfaa2cfeaab641f10d1627d1dad765633c1d69c63ba9bfbfd5de",
+      "hash": "10a7a2a59af5c36ae74951f61287bd452df7eaca9170585b324196b82ba84f20",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:22.614Z",
+      "checked_at": "2026-11-23T20:46:40.721Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.crusoecloud.com/command-center/telemetry-conduit.md": {
-      "hash": "ca8838c0003bd8a57fda8dad6855f9ad4c35273638e1faa5cbaab6522f6b8d32",
+      "hash": "d4353ff22ce54835197dda048eede5f98741da0261af902be7ff3b8bf4391da9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:23.616Z",
+      "checked_at": "2026-11-23T20:46:41.721Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.crusoecloud.com/storage/object-storage/managing-storage-api-keys.md": {
-      "hash": "ed574b90c20246d0b4913efc7306d6160b9eb550164d08f9f1a9eadd955833a8",
+      "hash": "f8c2378b0138087dce93896fd1b5f35bb0c6839525ecf335e2d7afd6af074195",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:24.614Z",
+      "checked_at": "2026-11-23T20:46:42.720Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -118,25 +118,30 @@
       "hash": "65b44ea2b137bb3918424a68fb315139abc297bcca7e3a30059c5c3937316ba2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:25.616Z",
+      "checked_at": "2026-11-23T20:46:43.720Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.crusoecloud.com/identity-and-security/managing-organization-users.md": {
-      "hash": "6d2d41a5f5e65586ac5e9a141578b40effac5ecf7c510a13ec818a953818d3d1",
+      "hash": "76eb9c29c5ac95add57608c4154dbb56c607f850d19e7c7186767d81f5b2b437",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:26.656Z",
+      "checked_at": "2026-11-23T20:46:44.795Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "60ae7da965868deeb865b3179c44ccd4aaef09b1fa535aaa99b972ffe829a85c",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

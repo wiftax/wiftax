@@ -1,20 +1,20 @@
 {
   "card": "hot-aisle",
-  "updated_at": "2026-11-16T19:17:08.549Z",
+  "updated_at": "2026-11-23T20:59:33.730Z",
   "urls": {
     "https://admin.hotaisle.app/api/docs/swagger.json": {
-      "hash": "2fdbc8bbeb0160808e1db9b4fb36604a0b43af34c2de95d36b14588d70fa982a",
+      "hash": "d681f59b1611ee9579480465e8c265379479ebaf6897b121221225e1af670b3c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:26.631Z",
-      "quotes_found": 9,
+      "checked_at": "2026-11-23T20:50:25.285Z",
+      "quotes_found": 8,
       "quotes_total": 9
     },
     "https://github.com/hotaisle/hotaisle-cli": {
-      "hash": "823df7c275d7e9c4dcd649c79b791727f13ddd5bad89eeb1fc37fdeadd58708b",
+      "hash": "87df1c424e0f8d222d210d4adaba4959081addfe826891158f69dbb68d348de4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:27.069Z",
+      "checked_at": "2026-11-23T20:50:25.542Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "fc2518bd46093787bb728b4b9923da633b79a03df467081063d2b6179222ed1c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:27.084Z",
+      "checked_at": "2026-11-23T20:50:26.346Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,23 +30,23 @@
       "hash": "3756c86c8120731411af5c256784d0277d3c0db7b06879dec074035bd2b46eef",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:27.116Z",
+      "checked_at": "2026-11-23T20:50:26.416Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://dstack.ai/docs/concepts/backends/": {
-      "hash": "8ac37314080a57fdfa533cfcbe009bb871c7995a0fab3630e755c40ee4fdf6cd",
+      "hash": "b59184d3772da6b04e97eeb7e17befb4c6144c1552fe43b3e6ad1bdc2bc41150",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:27.373Z",
+      "checked_at": "2026-11-23T20:50:26.524Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://hotaisle.xyz/policies/shared-responsibility-model": {
-      "hash": "b0feb9273a773b0e80ebd2212d2fe47aac8545a388ea4975b26e8ddc3c927abb",
+      "hash": "fb85d09e738f8fb431dfa3d837496ea58b51d3074f9ddf31fc12e481a37c50e1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:28.117Z",
+      "checked_at": "2026-11-23T20:50:27.416Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,17 +54,22 @@
       "hash": "f13114d1d0f8357f097bf42b34f2bcd2d162486317a81ff5f358e79bb3271aea",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:28.084Z",
+      "checked_at": "2026-11-23T20:50:27.345Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "d15b24f432935078d83378c300fbfd89759400f59ff36ecf71cb6d45ac9c9f70",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

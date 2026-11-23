@@ -1,76 +1,76 @@
 {
   "card": "anthropic-api",
-  "updated_at": "2026-11-16T19:17:05.934Z",
+  "updated_at": "2026-11-23T20:59:28.901Z",
   "urls": {
     "https://platform.claude.com/docs/en/manage-claude/workload-identity-federation": {
-      "hash": "3234c44e090e668c11c3b9f9d40135e99cc2a2162b5e52b438264cf9b732a4dc",
+      "hash": "6fcfe1a4df5c74ff1c32c8c0170ad0e7f84261889814194e99a7047283f2fdfa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:09.956Z",
+      "checked_at": "2026-11-23T20:43:56.189Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/create": {
-      "hash": "aa82dc14449d901342cfe394c07995d012b774d4fb4bb61284b3dcb72f86ec07",
+      "hash": "a388ca5ca041c430996eb064a648a6246a3215c53d59fc3c104b3528a387a4b6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:10.956Z",
+      "checked_at": "2026-11-23T20:43:57.189Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create": {
-      "hash": "523d202ec31264093c3bb4958de3b4c08eeea13101b41f8f2b90603921c01418",
+      "hash": "c5227fc6132ee2757125dbbea22768117271ad2b9c4c21a84451040f9ce66d5c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:11.956Z",
+      "checked_at": "2026-11-23T20:43:58.190Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://platform.claude.com/docs/en/manage-claude/wif-reference": {
-      "hash": "14a4356094381dc395f3c4093cfbd37fa8e4310b8e259447b2bb8f6639bdd224",
+      "hash": "3392648175ebfaf2df2eb50b5a4238ae151e0744e812f801b27bdd74f788d5cb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:12.958Z",
+      "checked_at": "2026-11-23T20:43:59.190Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/manage-claude/authentication": {
-      "hash": "d9d07abcf733cbb31db8316c9d2b5c957acc9b868e5b0f1e0cc5babd39fa89e6",
+      "hash": "11914bbf6e2a3bbfc36c5189d131529860ebef2c1b395cea3e8d3a2d363f0664",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:13.959Z",
+      "checked_at": "2026-11-23T20:44:00.189Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://platform.claude.com/docs/en/agents-and-tools/mcp-connector": {
-      "hash": "c1f21f77d5367d9ad50cfefaa35c2c173b3927cbd2fedeed8aa8c308edf24837",
+      "hash": "882ea95c56f233d9d0f63bb27e1a2e54e97c307f58407d450aeb16bf5c7e7689",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:14.981Z",
+      "checked_at": "2026-11-23T20:44:01.190Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/managed-agents/vaults": {
-      "hash": "88be535c3719722205bc97c9d0fb5e3cfa355aa78137d2d6c5c9b0c566b02e32",
+      "hash": "f877395f08e64b021a9298386cbb91f17ede489338202d1ee8415a8175d7dcfe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:15.982Z",
+      "checked_at": "2026-11-23T20:44:02.191Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://platform.claude.com/docs/en/managed-agents/github": {
-      "hash": "f889ea252ee5873b5fa2ba3e2ef13c0005557ac2ce31050a4bdf56dd86699e19",
+      "hash": "c9c614ee6f255bd7a4bb5bfdfe1738a5befc08945b84bb610cd1b05cdf1b9f10",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:16.983Z",
+      "checked_at": "2026-11-23T20:44:03.191Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview": {
-      "hash": "e9726818e894adc73341478fe552bd5422898b8da586121b3b76b12e4080f8fc",
+      "hash": "b5ec74c4f8f68f20b7b0984ecee524e9ef9a4b11cbd0cea7f81fe0cff78a468a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:17.983Z",
+      "checked_at": "2026-11-23T20:44:04.192Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "3e6183b224f1420eabba6c1a341fe8ba61b4ef4c1cd90c1a495afe075042f67e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:18.983Z",
+      "checked_at": "2026-11-23T20:44:05.193Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,15 +86,15 @@
       "hash": "1bb14317491ec0a4aae02b9891d97fee8ea4c18bfc36122e76ef72943814cf8d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:19.984Z",
+      "checked_at": "2026-11-23T20:44:06.194Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://platform.claude.com/docs/en/manage-claude/admin-api": {
-      "hash": "4207bab27b5d6d2d75e1c52dff7176a3e6ab9367351182ed70e9de57996e89e6",
+      "hash": "2dac3727cfb10d9cb59ffe93fff127017edcebc1837bacb8c6892c32dd86b85f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:20.985Z",
+      "checked_at": "2026-11-23T20:44:07.195Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,31 +102,31 @@
       "hash": "7f9b0a0cdc4d377b0b6788c6c68d1a2bce21dab28bc4b3927291e5702bfe5bbe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:21.986Z",
+      "checked_at": "2026-11-23T20:44:08.196Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/manage-claude/admin-api-keys": {
-      "hash": "8ec0556f13a97a3a4f8b4db1075b6eed23d05e264205d3f4950fe4148dfa1e31",
+      "hash": "693025cfc0f05088d180908feeecefd3f9b9173031f87f3ba635553fea5f1734",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:22.985Z",
+      "checked_at": "2026-11-23T20:44:09.196Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/manage-claude/usage-cost-api": {
-      "hash": "88bb874c51f71afdf2e0d8f4ae9e7e29796c3cfda8d27e69e019620bbf667876",
+      "hash": "d4fc65812335d98fcf5da364c0dc563af891be0a0d150636d347bad9f4e7353f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:23.986Z",
+      "checked_at": "2026-11-23T20:44:10.197Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 2,
       "quotes_total": 2
     }

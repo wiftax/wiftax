@@ -1,12 +1,12 @@
 {
   "card": "tines",
-  "updated_at": "2026-11-16T19:17:16.838Z",
+  "updated_at": "2026-11-23T20:59:49.603Z",
   "urls": {
     "https://www.tines.com/api/authentication/": {
       "hash": "22465f2e274aece6a848b9ba86d9a8f994b5d3fbfd88fc5bfdf69ae0c2e4fb76",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:00.502Z",
+      "checked_at": "2026-11-23T20:57:01.290Z",
       "quotes_found": 7,
       "quotes_total": 7
     },
@@ -14,7 +14,7 @@
       "hash": "a9de44269768b4b3417dac9802b4d2895a386d16fd567d91381a4232803350d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:00.965Z",
+      "checked_at": "2026-11-23T20:57:01.533Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "169faaa338550e2f662358ca3104a55bba7dbb57ecbf6dc9993d039283e478e4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:01.502Z",
+      "checked_at": "2026-11-23T20:57:02.290Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -30,7 +30,7 @@
       "hash": "d1fc59037cdfb7af43c6765c4d288cf8afd70699ea384349fd3cee28c7cddc80",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:02.505Z",
+      "checked_at": "2026-11-23T20:57:03.290Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,7 +38,7 @@
       "hash": "63c5a479ac6b770953d50d3ab7fd295435a05c82c1efbbc4cbc317ce948605f3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:03.505Z",
+      "checked_at": "2026-11-23T20:57:04.289Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -46,7 +46,7 @@
       "hash": "f3399534b40054eba84d69ac6aabe7bcdc5d6de0020ed9e5316261fff793d95c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:04.506Z",
+      "checked_at": "2026-11-23T20:57:05.290Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "16266e92a2de7ccfb00a7a6fd5fc8337b34e2dd1664831e6a42fc6d90086d792",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:05.507Z",
+      "checked_at": "2026-11-23T20:57:06.291Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "f86922f926b5940926c446bcbd692d2ddbeb0e26f519cc77b2bbaa6dfc9bdc25",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:06.507Z",
+      "checked_at": "2026-11-23T20:57:07.292Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "a3369fec26b210a0a02769d213122eb9c400ea565fe721aa757beb7de977a59c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:07.508Z",
+      "checked_at": "2026-11-23T20:57:08.293Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "3d41e2c4a16ff3d04b8f3c7a152a6420365199e2b4950c2bdd60d55974c5376a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:08.509Z",
+      "checked_at": "2026-11-23T20:57:09.294Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "0fe5a8ce525acb606cbe9b587a60945c5c1743e94a3cef305fcaa13a2dc38007",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:09.509Z",
+      "checked_at": "2026-11-23T20:57:10.295Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "47200abc20e1a9eb5db1e44383c694c7f5bb05a95f01744cb05d4b9dd9c49e8b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:10.510Z",
+      "checked_at": "2026-11-23T20:57:11.296Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "38259cf3d09d36f334129c54b15f779cdb6ee2411fcf875fa7e129419996892b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:11.510Z",
+      "checked_at": "2026-11-23T20:57:12.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "b431bbf6aaacd8365d84d25db15d478afc65ebbc97b3e9bf3be19f1ece257655",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:12.510Z",
+      "checked_at": "2026-11-23T20:57:13.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,15 +118,15 @@
       "hash": "ee66c02898f060300d1863739cca39a25e7ff261748b08955b93321cee8e3a0b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:13.511Z",
+      "checked_at": "2026-11-23T20:57:14.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.tines.com/stories/docs/api/llms.txt": {
-      "hash": "de44ad3381ac02c3dc1f2d734f61dd4b67555bb096390bee830f1a974efec159",
+      "hash": "c25ad798a58616fe775fa3c7bd71512dea3bca4c052c7ca20c008f236c9b2b09",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:14.512Z",
+      "checked_at": "2026-11-23T20:57:15.297Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -134,7 +134,7 @@
       "hash": "b938e991413bd8b68ac42d0e02d1e8aebe2532b1547147e2b80cfe732da7d70b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:15.512Z",
+      "checked_at": "2026-11-23T20:57:16.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,17 +142,23 @@
       "hash": "6d2fab4173fd46743be3d1273d0acb202de0efd3edeebfb203dc8d4b24c344d6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:16.512Z",
+      "checked_at": "2026-11-23T20:57:17.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "5b8e4de3063be18c43314207554a3382f3b8c5f4011ed559d54fd1523623b45b",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

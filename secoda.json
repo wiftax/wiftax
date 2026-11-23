@@ -1,0 +1,86 @@
+{
+  "card": "secoda",
+  "updated_at": "2026-11-23T20:59:39.060Z",
+  "urls": {
+    "https://docs.secoda.co/api/authentication.md": {
+      "hash": "0a82139eadfe9f4548e7a916a1f787b76cc17ee53ee8e460324cbd4372271e43",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:06.246Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://docs.secoda.co/api/reference/getting-started.md": {
+      "hash": "1b5d7e4d94d0262c9f892863a5da034972fdb9780794f19b46cb2ced48076896",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:07.246Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/features/ai-assistant/secoda-mcp-server.md": {
+      "hash": "e61123825e77c5720515307eb0ad57d1ee26c760c38aa7f6d6fccc9f18cfcdcc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:08.246Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/integrations/security/connecting-via-aws-cross-account-role.md": {
+      "hash": "e1dfb8b29446ca3c51ed699d634499ee6250052191d68f778a60faf16ef0a8a5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:09.245Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/integrations/data-pipeline-tools/aws-glue-integration.md": {
+      "hash": "2d399bcdc856910acef75bca56c762ef4fb7c415dd7c916e7c33c402ec9d80a8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:10.245Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/integrations/data-warehouses/bigquery-integration.md": {
+      "hash": "511c087f8bd04a3b6ca73b6089201c66df4c304236c3ac5f829ee4a466fbc15e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:11.245Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/integrations/data-warehouses/snowflake-integration.md": {
+      "hash": "3dba500cefa6fca20609e213fd0532cf4bf4a20d16ec942470206fe8cd2a05de",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:12.245Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/integrations/data-warehouses/redshift-integration.md": {
+      "hash": "240723fac01e207b9c53189788c97988898a8b9d891091a8680781160a4fa431",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:13.246Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.secoda.co/llms.txt": {
+      "hash": "220cb4c9b1670f21e021803864e91ac373f0231fde7c8c08bf7edea1bbcd6d80",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:55:14.247Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

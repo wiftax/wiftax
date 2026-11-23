@@ -1,20 +1,20 @@
 {
   "card": "runpod",
-  "updated_at": "2026-11-16T19:17:10.211Z",
+  "updated_at": "2026-11-23T20:59:38.869Z",
   "urls": {
     "https://docs.runpod.io/api-reference-v2/overview.md": {
       "hash": "cf67727d55bee15f5d720cfecdd10e3ac851bf1639bd4b7c299bd8f4a43527ef",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:59.129Z",
+      "checked_at": "2026-11-23T20:54:55.187Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://api.runpod.io/v2/openapi.json": {
-      "hash": "a9b3c74cddf492378e907b04274f1467e6ac26d7d54c43dab84304e863e30be7",
+      "hash": "b589bdac0481235fa4f29aa86207081a1b5ad3d13c906c61a5f02c8bca983dc1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:59.159Z",
+      "checked_at": "2026-11-23T20:54:55.322Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,15 +22,15 @@
       "hash": "986a15de9c290011baada530c3bc3cca401477ee61a4e3f49d7d797bff36be10",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:00.127Z",
+      "checked_at": "2026-11-23T20:54:56.186Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
     "https://docs.runpod.io/runpodctl/reference/runpodctl-config.md": {
-      "hash": "2c92ce45694cf382c2b5e5824839efd81671cfd4519973a8ef3a84cd251ff478",
+      "hash": "6c6e5ef24c1d126462337585b344bb839f12cc6dd6cf2cebaf45852479583634",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:01.128Z",
+      "checked_at": "2026-11-23T20:54:57.186Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "1fbd7ce771ad143a9b138c7af49dc5feaadffb9530f917c81b2e6ae2f14e1d0a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:02.129Z",
+      "checked_at": "2026-11-23T20:54:58.187Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "149d92d062056ad1041e3529bafc375bb8b47ef0544d453d77309aab27593513",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:03.130Z",
+      "checked_at": "2026-11-23T20:54:59.187Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -54,15 +54,15 @@
       "hash": "7dbac753ac061e9edbd333a1899ec0949759f6911a048d9dc285df80ed35b223",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:04.130Z",
+      "checked_at": "2026-11-23T20:55:00.187Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.runpod.io/llms-full.txt": {
-      "hash": "c7f537831656f8e913dd95d5b466cf99691a9b2300938153b2ab31ed5f602ee9",
+      "hash": "410e31340a9bf04d571c9702e73db224b886092b59a6f71ff5d44387432b6076",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:05.131Z",
+      "checked_at": "2026-11-23T20:55:01.187Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -70,15 +70,15 @@
       "hash": "8a4ae567430698829c5d07de3a06c2c44a2c9f6d216c0f81e38adfa23685618c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:06.132Z",
+      "checked_at": "2026-11-23T20:55:02.187Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.runpod.io/api-reference-v2/registries/register-an-ecr-delegation.md": {
-      "hash": "acc28855a6cdfcc49d9ae29c5482cb9379799f993af04a1ddaa58451f04769b4",
+      "hash": "78c33c4f7b4378bb1ab1e0471e0e9205cf388186a23ac08fd5d9e3bf9b80d1bd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:07.133Z",
+      "checked_at": "2026-11-23T20:55:03.188Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "ca5ddb17f7583cdf7a08216f62971a5637fe5613cbb2b1c5a627712597b32d01",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:08.133Z",
+      "checked_at": "2026-11-23T20:55:04.189Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -94,7 +94,7 @@
       "hash": "e8087fb60c412f6a5dd31b74bfa8e2df87fdcf1035131764c9d4abb4d0c876bb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:09.135Z",
+      "checked_at": "2026-11-23T20:55:05.190Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "8313a528d95d524f749135222ddf4415b9a4dabc65c0354d115d5391d0566093",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:10.135Z",
+      "checked_at": "2026-11-23T20:55:06.190Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -111,31 +111,31 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:13:04.177Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:54:59.911Z",
       "quotes_found": 0,
       "quotes_total": 3
     },
     "https://docs.runpod.io/release-notes.md": {
-      "hash": "b184b2967dea1c2b8803c92f37376c04ab466ae7d23844732c79ab6234b13131",
+      "hash": "f0317350c60768353d65388e625d54c343bf9abd348505f509063ace0f593825",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:11.135Z",
+      "checked_at": "2026-11-23T20:55:07.191Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
   },
   "last_assessment": {
-    "fingerprint": "5d02661af0a9a746f8380b762498c94d519be79510031886e8dad1b1cd0f966f",
+    "fingerprint": "068095040d3c03bf7cb5b4ed46faa9ed6f5d8f94da1561df01037bcd3644d3c8",
     "outcome": "no_change",
-    "at": "2026-11-16T19:03:37.140Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

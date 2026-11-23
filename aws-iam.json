@@ -1,68 +1,68 @@
 {
   "card": "aws-iam",
-  "updated_at": "2026-11-16T19:17:05.965Z",
+  "updated_at": "2026-11-23T20:59:28.992Z",
   "urls": {
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html": {
-      "hash": "523a5d67c28e053cd417f89d073ab23a6e41c55c7e66578c6217331594dd525a",
+      "hash": "58b92e5e853183bfb0831b5a22554b85ae93cb5955302a5b7372152b64bed32d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:23.155Z",
+      "checked_at": "2026-11-23T20:44:17.555Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html": {
-      "hash": "6e8ce2cfe4b5514ad6ec3075158396cdb19fb00b789d34a42a178df0052e039d",
+      "hash": "2b91d977ccbe0081cd8492f0c1e97d15de82cd67f125c71bf1085d9246a6cbd0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:24.156Z",
+      "checked_at": "2026-11-23T20:44:18.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRoleWithWebIdentity.html": {
-      "hash": "40c06b5e6b01b48caeec7b85669e42eb6c15879dd4323af3bcb95529123e2bfc",
+      "hash": "e81e2798a6d3ea4df4ba74152e5b05d2d5a48de2efe61c9fc0de541c7b29ae4b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:25.155Z",
+      "checked_at": "2026-11-23T20:44:19.555Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html": {
-      "hash": "3e12824b11b029d4ef7451992a7a84e8914ff317ca499595b9e1cd0b9ef526a6",
+      "hash": "0306d7ec7e0068cafd165cd0e99d110236c185761566b2b818bad5b8a261fcf2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:26.156Z",
+      "checked_at": "2026-11-23T20:44:20.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound.html": {
-      "hash": "da23bf252b3f54199830b96e17526abfd09752b482825070ab2452537fbb3675",
+      "hash": "9360ea6aeb687824503256d07c5f4ee61751d161170e827c1f5cd5ca77d2bed3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:27.157Z",
+      "checked_at": "2026-11-23T20:44:21.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/STS/latest/APIReference/API_GetWebIdentityToken.html": {
-      "hash": "31c41b10d5b55307ab3a06b638f14a54f0b68bff0c1c54ab91fd48a9d2895e01",
+      "hash": "ee5e7f78971ce8d634a70116f16782e91c785d08d2e428a0c64fcd18069c0ec4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:28.157Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:44:22.556Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound_getting_started.html": {
-      "hash": "302a1ce404d5f857dc675f81ccc7e423e3047581ec67c8d4979e7a883c45afa8",
+      "hash": "f6efb51d66ac1aa1521cc70d585cd5f448edbcda5f8a858953e9b92394439a56",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:29.157Z",
+      "checked_at": "2026-11-23T20:44:23.557Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_outbound_token_claims.html": {
-      "hash": "f284347ee0bd5339e54af2f7cddfd72849e13ffb2fdc76278bc38d5d7b120116",
+      "hash": "18b96313b785159e04db4ab29648b4675080859ab77de626e3947e31435a3360",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:30.157Z",
+      "checked_at": "2026-11-23T20:44:24.558Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,94 +70,95 @@
       "hash": "1f017e03a58a9057cdd2a1af3e743f9cf62ac50a39addd647775ebad32558d17",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:26.206Z",
+      "checked_at": "2026-11-23T20:44:21.176Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html": {
-      "hash": "2c9780e46a997773d2946be6dd2be18e6bf8b6dae9060904f26bd68e67aef2bd",
+      "hash": "365c257bc5cc5ace460c935eedb91f679ce09ce2252268b95dcae47d37489145",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:31.158Z",
+      "checked_at": "2026-11-23T20:44:25.558Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds": {
-      "hash": "ab0385176b977b9677632458ca73954aad152043e5405fd45285d3b69732ef50",
+      "hash": "5f5e4b941bde2af4ebfd548a37e9f31ab87f9ba9053c27b5523ed9f7233f265c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:26.735Z",
+      "checked_at": "2026-11-23T20:44:21.709Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/securing_access-keys.html": {
-      "hash": "d978d07d8f0617110d392d21d2be40d66a01dd987680e4384d68b924faa5ced9",
+      "hash": "95ce1516f3314893ad4e7fa392f44b7b268dacee86a0a1d76a610237c963c009",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:32.158Z",
+      "checked_at": "2026-11-23T20:44:26.559Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-keys_inline-policy.html": {
-      "hash": "0f1a93007e4a32746766b5cd064f6b50092f6601a28400d56e10e477e8f667ca",
+      "hash": "6924f854f82f1155cb08787636dce16ba43fe6b756dbde2162d289cba6aeab1f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:33.159Z",
+      "checked_at": "2026-11-23T20:44:27.968Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateAccessKey.html": {
-      "hash": "e0760f5a12e7bf05b4d3b67caa1b2973e5383e96b878ff95af666bd21b18c62b",
+      "hash": "a1b27d1ec9aed8c5af81366f31f7dbfdc4deda20ca8e77e43f1e1a391045c1b2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:34.254Z",
+      "checked_at": "2026-11-23T20:44:29.238Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteAccessKey.html": {
-      "hash": "7e92a65e4c442fc2a5e503bc3d53096b54b14c2730f68c30f95da2f8286288e7",
+      "hash": "b1ab7e423f5f5f63471a6dc866fd76aea028da56819790462dccd9ac78ccc482",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:35.254Z",
+      "checked_at": "2026-11-23T20:44:30.657Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccessKeyLastUsed.html": {
-      "hash": "31423de43e0a05ffb47389882a68981284fb6b298869313eadd707c24b9862aa",
+      "hash": "0b7eb1b7b1a680c3138287bd3400124ad46a1155b8202aab6bda7d367be33b0b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:36.254Z",
+      "checked_at": "2026-11-23T20:44:31.657Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html": {
-      "hash": "3253d81a7896e3f7d4b80748d70844ad8efbd082c7609a03265598e9e75d7b98",
+      "hash": "fd1f76228c748c4f57128f2766d2f1ba6db4862d41f603db2aff1a4dbb1d7843",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:37.255Z",
+      "checked_at": "2026-11-23T20:44:33.048Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSCompromisedKeyQuarantineV3.html": {
-      "hash": "18dc166259a3e1bb1f82909ce5bf2c15bd6aeef690844767134c84d7e4a6c08d",
+      "hash": "333edaf47b477b1f3dee574b3eab6de45974bd0137ee46e74751eefa98c9907f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:38.256Z",
+      "checked_at": "2026-11-23T20:44:34.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
   },
   "last_assessment": {
-    "fingerprint": "18165871488557bf500607d65d3982b7e590297977f2409737f99c5f77410ec0",
-    "outcome": "no_change",
-    "at": "2026-11-15T00:52:00.208Z"
+    "fingerprint": "ddc1ba4e2bfe20bdd6bebedba2dfef153eed3db84b91e85c88d5ed9298dd54f4",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

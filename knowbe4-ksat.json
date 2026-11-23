@@ -1,0 +1,92 @@
+{
+  "card": "knowbe4-ksat",
+  "updated_at": "2026-11-23T20:59:35.920Z",
+  "urls": {
+    "https://developer.knowbe4.com/elvis-swagger.yml": {
+      "hash": "fd5b5c83628d5ee08e233014cab59896ad3abf706e08b785d43bd16c112bac95",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:13.899Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.knowbe4.com/echelon-swagger.yml": {
+      "hash": "3d96e43e4aedd9244344c35d67a3020989c853aae2e80a777d76c29463e6bbe2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:14.900Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/4404258222099.json": {
+      "hash": "a9ff13d5fe05663ae5c3a559332e8121972d42bb68338c22bf8e095b63694e01",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:13.956Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/115016090908.json": {
+      "hash": "2fc2d1cae5eae8e2dead0d28c4e739eed573c8f97a717ffac1560f6602a1cdc7",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:14.957Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/360054494394.json": {
+      "hash": "07dba80774a4fa882e40920c6397a32d33ff2315af3a06981d15976808be2f14",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:15.957Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675860417427.json": {
+      "hash": "563d58dedc97536b016381a78e200cdc9c4913fc0cae3a48f1ca44b13b91fa5d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:16.958Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675763215379.json": {
+      "hash": "958b592392628d8d9449bca39b3b2498ede70da2d347953ebfeb40139421816d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:17.959Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/6676053834131.json": {
+      "hash": "92ba40a221e4604550ee9d77a569396deded4df6c54b339d49bf4a5b33f66414",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:19.324Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json": {
+      "hash": "244a99cf7666b7a25ee1425f904e14aef9f7a46377ce4a22b53eb255066696a8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:20.324Z",
+      "quotes_found": 3,
+      "quotes_total": 4
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "8e5f91ac94d1ac4a42f876f232c4e1d6e2f0baa89659b633262c382909f59379",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

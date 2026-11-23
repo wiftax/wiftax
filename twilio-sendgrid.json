@@ -1,0 +1,70 @@
+{
+  "card": "twilio-sendgrid",
+  "updated_at": "2026-11-23T20:59:49.693Z",
+  "urls": {
+    "https://www.twilio.com/docs/sendgrid/for-developers/sending-email/authentication.md": {
+      "hash": "4f3ae9873b20000f1959128f03b192fa8353e398e46385d5168b99aac8a7d7be",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:55.710Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://www.twilio.com/docs/sendgrid/api-reference/how-to-use-the-sendgrid-v3-api/authentication.md": {
+      "hash": "18c82b998ca8f5d0cc3e648e45f4de69df86b2370da3300cd4ae5eaac797629a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:56.711Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys.md": {
+      "hash": "adda09e424b86961ccfadc5a0bfff83c6dd2b67d62e521ef35a0dcf9d5330c74",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:57.712Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://www.twilio.com/docs/sendgrid/for-developers/tracking-events/getting-started-event-webhook-security-features.md": {
+      "hash": "f8e4997e64d48cfc0bedc535cef2591785785f89ba7277a198bf739f7d5d3901",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:58.713Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://www.twilio.com/docs/sendgrid/api-reference/api-keys/create-api-keys.md": {
+      "hash": "fc2246cf3098a22f41355ee226b63ac6677d914cdc50882589a562b3245fabd3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:59.714Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://www.twilio.com/docs/sendgrid/concepts/security/secure-account.md": {
+      "hash": "c468f68df2719b2e4904dfc323345144a346e169923f101b131c36b590dfc012",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:00.715Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/sendgrid/api-reference/api-keys/delete-api-keys.md": {
+      "hash": "1fe11fb6d5fd05b6f8635ef39a5af5a52b01b81392990e62ee6fd99f27494f75",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:01.715Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

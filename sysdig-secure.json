@@ -1,44 +1,44 @@
 {
   "card": "sysdig-secure",
-  "updated_at": "2026-11-16T19:17:16.775Z",
+  "updated_at": "2026-11-23T20:59:49.497Z",
   "urls": {
     "https://docs.sysdig.com/en/developer-tools/sysdig-api/": {
-      "hash": "807d07195b092e9011990fd1a05559efb95ee4fa4218cf7a5f4e0924538545f6",
+      "hash": "9b604d4b3ffa1e45e82c64c95cdb469b3a97fc4f3d215f8d01571a30b735e8b1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:24.612Z",
+      "checked_at": "2026-11-23T20:56:25.950Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.sysdig.com/en/administration/retrieve-the-sysdig-api-token/": {
-      "hash": "dfe7f67c8530b22e931ded587fd3831c2814ad7f86db366fd88dc539596bd333",
+      "hash": "6ff7db64cab7ca9313f1c56b0bd55c5f4d7537d08b22f8aff249d65c6a6873c4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:25.613Z",
+      "checked_at": "2026-11-23T20:56:26.950Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.sysdig.com/en/developer-tools/managing-access-keys/": {
-      "hash": "4efe4e7aecb1b84b964fc16a16aa15601e773b2143001ae2164f17d32d26e24e",
+      "hash": "9f3f768c4d1da4cb5b3c0783495dc29f15dbafb93b7059545ce4c7f58b3faa7e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:26.613Z",
+      "checked_at": "2026-11-23T20:56:27.950Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.sysdig.com/en/administration/teams-administration/": {
-      "hash": "15e5bd010b34334a57a22d4fa21c5eb808a0b5b8fe9b675141c356a53c7e83ea",
+      "hash": "7ca18dea3c90bb0bcb9937db28436ff53dad263a0fa83dce2e6d29a0b9e0dd49",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:27.613Z",
+      "checked_at": "2026-11-23T20:56:28.951Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.sysdig.com/en/sysdig-secure/github-action-integration/": {
-      "hash": "943a7ff3b78184e2469823b17c84676d472c9d5510134375ceb98b6bbb06c6e6",
+      "hash": "cf877b199e55d1e66e760675e22be7a5526f257e82c674826251943c935b4bec",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:28.614Z",
+      "checked_at": "2026-11-23T20:56:29.951Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,23 +46,23 @@
       "hash": "9dd15d5e228942e65e1cc2061810b3a699a4f170d9c3a8a21195cc867525e1dd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:27.434Z",
+      "checked_at": "2026-11-23T20:56:28.276Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/connect-aws/": {
-      "hash": "b2fd7d1e2800c6266e12920bf4a8820eace2e61e6cd503dfc80d1b2511815252",
+      "hash": "2d9d6afec47711a1823ab808ae9e8ba4e8669c09fb5c90971faec1301e61fb92",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:29.615Z",
+      "checked_at": "2026-11-23T20:56:30.952Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://raw.githubusercontent.com/sysdiglabs/terraform-aws-secure/master/modules/onboarding/main.tf": {
-      "hash": "89f42c09bf500b5fc6504f6905e293840c037fe21ea8bb5027521b4e17461b47",
+      "hash": "377a44e79d30efc2c39a688d16f593a7ae54c671f77e9815b632fd36edfc544d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:28.434Z",
+      "checked_at": "2026-11-23T20:56:29.276Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,23 +70,23 @@
       "hash": "6c7effd30ab9f61c4d948ee8fe7c2874d59f8e62ff2637587d03314ffe459393",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:29.434Z",
+      "checked_at": "2026-11-23T20:56:30.280Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/azure-permissions-and-resources/": {
-      "hash": "f91122e3cff062ad3634a3bcfcf35eb95651a41b24a792a5a8c51d18a73c8b08",
+      "hash": "28be5dfd551268a6161f532e0b0d8e68cf1296c31fa6708a894d05c5990f5f5d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:30.614Z",
+      "checked_at": "2026-11-23T20:56:31.952Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/gcp-permissions-and-resources/": {
-      "hash": "2ac83dfb3316c465e82bc57fde76a6f5c5bac35827a2017f822e19be9962b46a",
+      "hash": "b2a582d1a5ad0b6bd4d5459f29d59eddb43f2fb3a071140cb92114b4ba040cc8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:31.614Z",
+      "checked_at": "2026-11-23T20:56:32.952Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,47 +94,47 @@
       "hash": "09b2cbfe2db5754133258b0127a9aec6d498151d6f27d4e81d4e282a0ba5a145",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:30.435Z",
+      "checked_at": "2026-11-23T20:56:31.308Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/vm-registry/": {
-      "hash": "19681eb671691725966b440f4ec67224e14aec9609b284c931d0fa5a93a64441",
+      "hash": "006c523225c187b4ac16878af13b2f3e1d6475c4d9abf2163b445fd81f756e1b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:32.615Z",
+      "checked_at": "2026-11-23T20:56:33.952Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.sysdig.com/en/sysdig-secure/integrations-okta/": {
-      "hash": "53740f7e95b065528624c411c228f86c7e8bc4788ebf64429221ed48e59285b9",
+      "hash": "92ce69e131780a3ea9bceada717ee9d222f84fc21ab22295e5e0e10ff4d6b8c9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:33.614Z",
+      "checked_at": "2026-11-23T20:56:34.953Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/integrations-jira-ticketing/": {
-      "hash": "0b249b5028650302510c2db010c1ae82f0bff13c3acbc57aac8c6a4153257ede",
+      "hash": "d16ea81495a7ed60570b2847f8e059fce314c227d0dfe5132722dfd8ed5d3478",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:34.615Z",
+      "checked_at": "2026-11-23T20:56:35.954Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/aws-elastic-container-registry/": {
-      "hash": "07d22d1202727c1d46e9665472598b427019c48cdd23ec6d0fdabeac0611ed3e",
+      "hash": "8a2f774be06749c0beabfc759fb3f155b8c1a70ac821bf4ccb91c802f0969134",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:35.616Z",
+      "checked_at": "2026-11-23T20:56:36.954Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sysdig.com/en/sysdig-secure/google-registry/": {
-      "hash": "3e4954f5dda2a43f726bcb7aeb618da61d2b1a98f62a97abf57bb13c05684896",
+      "hash": "8cbfb0fd6b57cfe710e177cc503aa511dd64c4da74fc097dbbc241d25145ebb3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:36.616Z",
+      "checked_at": "2026-11-23T20:56:37.954Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,7 +142,7 @@
       "hash": "00b1ded749e1248d712c83fdd62dcd3251b381fb30dfb899c0f7905d7f9f4a11",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:31.434Z",
+      "checked_at": "2026-11-23T20:56:32.309Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -150,25 +150,30 @@
       "hash": "b555cfc6c65fbee288263874d3f61cca50032d1bb2e37a324278144fc4262b8b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:32.434Z",
+      "checked_at": "2026-11-23T20:56:33.309Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.sysdig.com/en/developer-tools/global-service-accounts/": {
-      "hash": "ad2b945711f5f51269d8a9d76d4ba2576e99324befed01d22aa90d4bfe017165",
+      "hash": "b1842484d38b792020d7e13d5d6c6b573207d22899c1cd99a6098960f166f0c0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:37.616Z",
+      "checked_at": "2026-11-23T20:56:38.955Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "f688dbe5961e98c0006bad9d7e7daa6e9c72d40d471d72a606d1b9ed8361c621",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

@@ -1,0 +1,78 @@
+{
+  "card": "ninjaone-platform",
+  "updated_at": "2026-11-23T20:59:37.707Z",
+  "urls": {
+    "https://app.ninjarmm.com/apidocs-beta/articles/authorization/flows/client-credentials-flow.md": {
+      "hash": "126132fee2466ae78935d4e2fd70c5e9f6587fbe0f354ec652a9f27710655f8c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:18.911Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://app.ninjarmm.com/apidocs-beta/articles/authorization/create-applications/machine-to-machine-apps.md": {
+      "hash": "c8b84a97254acefd3d7d39b29a4a2969f58ecc2b458d3370c814c6f38a491213",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:19.911Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://www.ninjaone.com/docs/application-programming-interface-api/oauth-token-configuration/": {
+      "hash": "838deea93369c51b4fee2fb9226274df389f26fc5fe9ffa2d41ec3c901b09711",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:19.239Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://www.ninjaone.com/docs/application-programming-interface-api/public-api-2-0-authorization/": {
+      "hash": "8160832a90cf28386f69d9b57ebdf4d0ce2e3da7d5acd1251898f4f40b01639a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:20.239Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.ninjaone.com/docs/endpoint-management/ticketing/microsoft-365-integration/": {
+      "hash": "4fa1ffda26c775d5ed48d70d72669308cb99447a32fc9f6755c257a542cabd02",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:21.239Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.ninjaone.com/docs/integrations/how-to-connect-crowdstrike/": {
+      "hash": "3adaba23816664b0594369e950cc4a33766decbd849d3f1a33be4a8b4d9d3378",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:22.338Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.ninjaone.com/docs/integrations/antivirus/sentinelone/understanding-sentinelone-api-tokens/": {
+      "hash": "4162e2f0180429a7434b7868cedd2707d3759991fc9964f96893bc7580d79e33",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:23.338Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://app.ninjarmm.com/apidocs/NinjaRMM-API-v2.yaml": {
+      "hash": "fcc0bde87ead6965b2bf615ce4625541ed7cdb8e68737982b8852c02dec5ee01",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:20.910Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

@@ -1,116 +1,116 @@
 {
   "card": "akeyless-platform",
-  "updated_at": "2026-11-16T19:17:05.922Z",
+  "updated_at": "2026-11-23T20:59:28.874Z",
   "urls": {
     "https://docs.akeyless.io/docs/auth-with-oauth-jwt": {
-      "hash": "18c98d333c4114e0cb543111f6b9c9aa2496d339842714e52ca0d38c1c035631",
+      "hash": "1029e0604e3a03759a9c902de24bd9ac1a5a5816064c61c34056c2f41b55fd22",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:02.676Z",
+      "checked_at": "2026-11-23T20:43:44.361Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/cli-ref-auth": {
-      "hash": "b68a4919fc52cc95ba8904f1077a22f5f0a6db028b48a25d9c582bd7cc60c1d0",
+      "hash": "ff21e40bfba59d4568e76dc69eac96d15a3ed0b21a50c354143b5c1db37e5ae1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:03.675Z",
+      "checked_at": "2026-11-23T20:43:45.361Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.akeyless.io/docs/sub-claims": {
-      "hash": "3d760e999a71cb48dd341ce42e8edb8e7aa89b4c31ff8e92ef26e8193b87e353",
+      "hash": "121d7ec6482cc13662cc9907cff06dfbe63cb7e0c98f8aebe884685d944efbd2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:04.676Z",
+      "checked_at": "2026-11-23T20:43:46.361Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/github-action": {
-      "hash": "9fa0cef3d395c7702849e8367c84012767ceeb35f4847c3c7a7d53bba06f9f82",
+      "hash": "e0e1e9ebf254ce93fcf3b6a5b953009e4a7e397087ee654235adc3c236cdd572",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:05.676Z",
+      "checked_at": "2026-11-23T20:43:47.361Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/access-and-authentication-methods": {
-      "hash": "43d76d4e4a4e81d3d3e658f9c5b6cae41579ab759ec4a6703b56155418a0ca04",
+      "hash": "af006e8ae75d155492dd9b04bc7b98c47aaffd79a3e20f642a6e95105058075e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:06.676Z",
+      "checked_at": "2026-11-23T20:43:48.379Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/aws-targets": {
-      "hash": "2eb29b960f3d61bcbc877fba849afb5bf4e29d9895e25bbfc520321d1ed6ebcd",
+      "hash": "7cbd361f725b59926cd6ba3646d148bf1e60f9eb04c4954a014ec38bab87c5b4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:07.721Z",
+      "checked_at": "2026-11-23T20:43:49.447Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.akeyless.io/docs/gcp-targets": {
-      "hash": "004e18f9a23a9545002f7527b6fa24638c4afc494423e01f61941b330b8494a9",
+      "hash": "2d806245fa2575bffaa3a14ce99f882340f994314e69155dda726c489f623345",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:08.719Z",
+      "checked_at": "2026-11-23T20:43:50.483Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/azure-targets": {
-      "hash": "514e710009bc1500273267f3bb7497919a1c9e8b0645d1a89ccbc96e35e05a5f",
+      "hash": "ec731f5a9a0318abc646b0d8865021e170db32fa518df63008048d3acf90f7c4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:09.720Z",
+      "checked_at": "2026-11-23T20:43:51.483Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/okta-target": {
-      "hash": "5b3d73c02066633a3287af82f9b687f2852e7e60ff33475734cf7ad7193800d4",
+      "hash": "29deed475cd5bb612e891f7567e806012ff5e34a35931f2b09b4ebd1e19b63b1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:10.720Z",
+      "checked_at": "2026-11-23T20:43:52.493Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/github-target": {
-      "hash": "bd69bb13c94f4e42086fe5e55be7b2fa56f6f5fb102206a4d7e7f0187514d026",
+      "hash": "31d20da404072f46706c993d98bbf74d43f03799d7c3c13d1c1088f4695994eb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:11.720Z",
+      "checked_at": "2026-11-23T20:43:53.493Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/salesforce-target": {
-      "hash": "1f541a986a2ebc4d8ac8b10d3e71418c32d02c7393ec08bb354fd246978da1e3",
+      "hash": "2af966cfd2388b4020305fffe012c7c8de4f85d00a83a7384f66f96aba5a3c1a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:12.728Z",
+      "checked_at": "2026-11-23T20:43:54.492Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/database-targets": {
-      "hash": "fe37e453341fe2537cdb215b531bb7142e7d09599333103c13dbc303c6120cd1",
+      "hash": "6f06044bcf891116cbe665da1f3b98e353b0d799c3f1d26a36bd7b6e4d642e63",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:13.727Z",
+      "checked_at": "2026-11-23T20:43:55.493Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.akeyless.io/docs/account-settings": {
-      "hash": "dfd26fb3e722a26b509dcdca3096263aa887e013c1330f7d053b9e8574df6249",
+      "hash": "483118f271c7c7309ae475a3eb6f792e827c53ac651c63895a5a8875f4ad0a72",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:14.727Z",
+      "checked_at": "2026-11-23T20:43:56.493Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.akeyless.io/docs/auth-with-api-key": {
-      "hash": "b56a5731b9e341e1e30815725faab8c65e4af8cea19ac82e95c3ef10cb4c1bf0",
+      "hash": "c575fbc7912f8ccb406efde43f1e1b1fe2e109a1ac0c6c9b59476c7169e6e72f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:15.728Z",
+      "checked_at": "2026-11-23T20:43:57.494Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -118,15 +118,15 @@
       "hash": "8a7e46140b9a44b687a4b2e1231ebc0cd4c4ae114cea419e81f9804abf5bbf17",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:09.589Z",
+      "checked_at": "2026-11-23T20:43:51.420Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

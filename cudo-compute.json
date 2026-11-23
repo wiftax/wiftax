@@ -1,14 +1,14 @@
 {
   "card": "cudo-compute",
-  "updated_at": "2026-11-16T19:17:06.423Z",
+  "updated_at": "2026-11-23T20:59:29.839Z",
   "urls": {
     "https://docs.cudocompute.com/api/authentication.md": {
       "hash": null,
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:19.733Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:37.791Z",
       "quotes_found": 0,
       "quotes_total": 5
     },
@@ -17,8 +17,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:20.733Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:38.792Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -27,8 +27,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:21.731Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:39.793Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -37,8 +37,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:22.731Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:40.794Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "20cc2b32f27993ace1c1feb776e84ebeb65ecc983b9d93e59d8bad2f28cf9b90",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:21.839Z",
+      "checked_at": "2026-11-23T20:46:39.829Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -55,8 +55,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:23.732Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:41.795Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -65,8 +65,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:24.732Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:42.795Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -75,8 +75,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:25.734Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:43.795Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -85,8 +85,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:26.734Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:44.796Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
@@ -95,8 +95,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:27.735Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:45.796Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -105,8 +105,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:28.736Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:46.797Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -115,8 +115,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:29.736Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:47.797Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -125,8 +125,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:30.736Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:48.797Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -135,8 +135,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:31.738Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:49.797Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -145,8 +145,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:32.738Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:50.798Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -155,18 +155,23 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:06:33.738Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:46:51.799Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "db1600dcdbbcbc40a2bac4c7af73d6b6c599538b635a79edac32f5d0c7f551a6",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

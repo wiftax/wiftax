@@ -1,20 +1,20 @@
 {
   "card": "fortinet-fortigate",
-  "updated_at": "2026-11-16T19:17:07.899Z",
+  "updated_at": "2026-11-23T20:59:32.368Z",
   "urls": {
     "https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/940602/using-apis": {
-      "hash": "6d7a8eb82fd2fe98a81a2421cead316f0c40fd9fadea31dca22939f019115464",
+      "hash": "adb1a5b84c3a6608741cc8afe737571eb339fd78b15138247c3f3d17250772f6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:55.449Z",
+      "checked_at": "2026-11-23T20:49:32.496Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/399023/rest-api-administrator": {
-      "hash": "04707987ebd1e8d2072810aa6bd5f8c0583765d8bb9ab838f68bdb629d9190f2",
+      "hash": "d0aacfe766f1173ee03b33d811802a9e96f27a89068d69bc81d1f6deed17fbaa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:56.449Z",
+      "checked_at": "2026-11-23T20:49:33.495Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
@@ -22,95 +22,95 @@
       "hash": "5cc4bcd879447c8b0a70bb215a1e794b032e49288e84e02ba6c48a749630ccf4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:55.887Z",
+      "checked_at": "2026-11-23T20:49:33.455Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/aws-administration-guide/619567/configuring-an-aws-sdn-connector-using-iam-roles": {
-      "hash": "b43ed9652fa9470fd594e7ee042c4c46065ffab17d09035ee2a10a11a3bf252f",
+      "hash": "6064ad4e0ce5ef312d73abfb34d49a02f6756c3c82a0d6449f53aa373978873e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:57.450Z",
+      "checked_at": "2026-11-23T20:49:34.495Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/aws-administration-guide/374400/sdn-connector-support-for-aws-sts": {
-      "hash": "e9e859aeff968fd653c3018f0ed9b9b3d6c98630dd55503f84fda0aa412b7210",
+      "hash": "f0bfba99643d70db051fe128fe59364d336a0f51873a1c8aa8d5c5f7516dc0a9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:58.452Z",
+      "checked_at": "2026-11-23T20:49:35.495Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate/7.0.0/new-features/374400": {
-      "hash": "68d54a8f77caf62f18cbaefca789fd72c7f550d210c94e53ea3f9aed8e7ad0b3",
+      "hash": "3bd86c6f454504d90265f3199c04d306eeac67bb55fa3bdc11cfc3b7f765e283",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:59.453Z",
+      "checked_at": "2026-11-23T20:49:36.496Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/642352/aws-sdn-connector-using-access-keys": {
-      "hash": "25214d33c402fd57367c1b27a671c04005414a087f1c78106e479b82e46489a2",
+      "hash": "941266ec717c06e547ab76f748e741e83bf44f6d58278bab0e7cc9613238048c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:00.455Z",
+      "checked_at": "2026-11-23T20:49:37.521Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/azure-administration-guide/236610/configuring-an-sdn-connector-using-a-managed-identity": {
-      "hash": "d6a7649290534e34b0b3f88c665aa34804b4c811898ce7a672b9fa2dc405a76c",
+      "hash": "d43e9f8d60a257c33ffd2e431fdf7bce4093f71a874561d044cbff3b6fecb490",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:01.455Z",
+      "checked_at": "2026-11-23T20:49:38.522Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate/6.4.0/new-features/44446/simplify-azure-fabric-connector-configuration-for-a-fortigate-vm-deployed-on-azure": {
-      "hash": "b6e321fd8479090040c2e2516b2d2ed217174cd61c30bebc007d993e85a3d136",
+      "hash": "11d891d249fcdcced6c658af9b0df29698523fb8fb32f70e28dabf7adf06f1df",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:02.456Z",
+      "checked_at": "2026-11-23T20:49:39.521Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/azure-administration-guide/948968/azure-sdn-connector-service-principal-configuration-requirements": {
-      "hash": "e081c74295a2df3cc4bf3bb2d906dba5e593e458c37f0059e7d6285848741f55",
+      "hash": "0ebf7b9ffa23d4a3b9788b8b4fd576dd61d738c72215bbe2780ab8f2ad31ca2e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:03.457Z",
+      "checked_at": "2026-11-23T20:49:40.772Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/gcp-administration-guide/298652/configuring-gcp-sdn-connector-using-metadata-iam": {
-      "hash": "4d59c102daa2228ad9e06fa13ee3a974f87103bc736b8dc01ca315affd3ed416",
+      "hash": "748f51129bcf3fe143dfef29f15ef95abbbfd1fbba0cdc9b21bb798571ebed1b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:04.457Z",
+      "checked_at": "2026-11-23T20:49:43.789Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/gcp-administration-guide/255828/creating-a-gcp-service-account": {
-      "hash": "94583b8f6087383aded533d47644da2c2f2d2cd5fc67dfbf812a0a606f7f7c6e",
+      "hash": "5b07a8ceae4acb4a100ae745c6690282c0aca668f0e82cf0572fd7f9ce84e16d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:05.458Z",
+      "checked_at": "2026-11-23T20:49:44.789Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate-public-cloud/7.6.0/oci-administration-guide/562317/configuring-an-oci-sdn-connector-using-iam-roles": {
-      "hash": "3acf011653b14cdcd29d1d83b1f58c463543f0b0c6e839999727c64e7c1bdf89",
+      "hash": "24bc983e10cb13e915348cb2bd68a35652b811be73530663bcef9fda100414c2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:06.459Z",
+      "checked_at": "2026-11-23T20:49:45.789Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/480499/oci-sdn-connector-using-certificates": {
-      "hash": "0202b6e2fad1dd5a5a952bda694b71779d403046ed4fe5883cbcd824fe6b6bde",
+      "hash": "c370203e62995a0041a8fca9d1b13fdab460f2be6b43acf334a2f59da26d3a14",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:07.460Z",
+      "checked_at": "2026-11-23T20:49:46.808Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,15 +118,15 @@
       "hash": "1ab90d714fed3d2354d34cd023cdc55aa60825364cf0689ff2192003c95b85ee",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:00.839Z",
+      "checked_at": "2026-11-23T20:49:38.296Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.fortinet.com/document/fortigate/8.0.2/administration-guide/545113/aws-lambda-action": {
-      "hash": "49a0da472fa73682930205188b6310d37d8f109fece5b6a8390eeba9d5f43c10",
+      "hash": "11e29e796838d647a8a0f55e6c0c0182fdb7242b2b83b310d545c57b383cf94c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:08.459Z",
+      "checked_at": "2026-11-23T20:49:47.809Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,17 +134,22 @@
       "hash": "23ba2a865cdb754508f49b69116b2fc1e57690fc02c1c782e2714118197b6ba1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:01.839Z",
+      "checked_at": "2026-11-23T20:49:39.296Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "1572bc424167c4f349da49023cfe91db29fb2afcc321a5f91985a8d140f21365",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

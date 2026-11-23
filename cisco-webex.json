@@ -1,0 +1,38 @@
+{
+  "card": "cisco-webex",
+  "updated_at": "2026-11-23T20:59:29.670Z",
+  "urls": {
+    "https://developer.webex.com/admin/docs/service-apps": {
+      "hash": "5d8a6e293413afa61bf3879966657ecccb27f67935a88e2f2c63b0c81d704238",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:52.373Z",
+      "quotes_found": 9,
+      "quotes_total": 9
+    },
+    "https://developer.webex.com/docs/bots": {
+      "hash": "a683087ad42fec7600ea70b229735615b7aed8e79d989246a5cbb10b9036c577",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:53.408Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.webex.com/docs/bring-your-own-datasource": {
+      "hash": "9cac09be5ae889f869df9f2a5c30406d906e407faa928f86db615534f9ebf99d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:54.408Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

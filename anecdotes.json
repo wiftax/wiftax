@@ -1,0 +1,86 @@
+{
+  "card": "anecdotes",
+  "updated_at": "2026-11-23T20:59:28.897Z",
+  "urls": {
+    "https://help.anecdotes.ai/api/identity/token-exchange.md": {
+      "hash": "d37574f1d0e00c1997552325110ac428855f748268c4a9a36425268a6819f383",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:51.541Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.anecdotes.ai/api/getting-started.md": {
+      "hash": "cc94523dda27c8492e51d2d67de7323e7e526f28e943a118d09ac1cfc4da7f7d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:52.541Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://help.anecdotes.ai/plugins/cloud-infrastructure/aws.md": {
+      "hash": "100adb3bbded391a3d6496c46ed1276f9755f4686fd88408e3ec5a05dfdeeb50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:53.541Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://help.anecdotes.ai/plugins/cloud-infrastructure/aws/aws-use-a-single-iam-role-for-multiple-plugins.md": {
+      "hash": "33ef14f6bb57abb7bec516ddcb9f75987e9cb66d3062322d69269472dc862bfe",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:54.542Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.anecdotes.ai/plugins/cloud-infrastructure/gcp.md": {
+      "hash": "31fa8353218e457d71ddbf8b212667b734c99f6f9d843d24e847fa33e5df590b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:55.542Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://help.anecdotes.ai/plugins/cloud-infrastructure/azure/connecting-multiple-azure-plugins-using-a-single-custom-role.md": {
+      "hash": "085c0f5145128372b31d20589b46f900de8a71679d43ae21ee07c953a8562da4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:56.543Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.anecdotes.ai/plugins/developer-tools/github-plugin.md": {
+      "hash": "4172b8179a471bef169b2dec44251a44a237343eb154c36422bf7c3422704cd5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:57.544Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.anecdotes.ai/api/identity/api-keys.md": {
+      "hash": "7b2b074301239237e15e60fb6bf938e076f665221c2d079063f90884f4165a37",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:58.615Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://help.anecdotes.ai/technical-setup/api/create-an-api-token.md": {
+      "hash": "01ba6836386a0729ebe593f3891fb7d765b7ebedca76075f830144ca41fb2ab2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:59.616Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

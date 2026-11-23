@@ -1,0 +1,62 @@
+{
+  "card": "bynder",
+  "updated_at": "2026-11-23T20:59:29.177Z",
+  "urls": {
+    "https://developers.bynder.com/getting-started.md": {
+      "hash": "1a59d29e0cc4c7c6f428da498e709b774b2dac7ba9f9a7ce7e26b8c00afec7f0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:14.828Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://api.bynder.com/reference/post_v6-authentication-oauth2-token-client-credentials.md": {
+      "hash": "dc17a780a90674b77ef84b7f49d0626c1820e1288d94817a2d89562219677623",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:15.557Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://api.bynder.com/reference/get_v7-analytics-api-v2-user-logins.md": {
+      "hash": "5f121363bb44a48e76c6c7921a8a86bcd1ca80032e3552cca4f4df3599899b41",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:16.558Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://api.bynder.com/reference/createwebhookconfiguration.md": {
+      "hash": "950e1e8c363f284837bca68aa506ee42d2b0901afb14ab5a3bcd3cde0c3a57c4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:17.559Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://api.bynder.com/llms.txt": {
+      "hash": "f8517e716859a68fe98d53a534de170b6645afc759cca14b0129f9f31c55c329",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:18.560Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    },
+    "https://developers.bynder.com/integrate.md": {
+      "hash": "0a48fe89d2a1c905c854bef176a777ca724b0d279250df4af366e4403c187b3d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:17.066Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

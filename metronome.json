@@ -1,0 +1,62 @@
+{
+  "card": "metronome",
+  "updated_at": "2026-11-23T20:59:36.026Z",
+  "urls": {
+    "https://docs.metronome.com/api-reference/authentication.md": {
+      "hash": "3345f2778a826d8943a482aa703117aa295c244842ce9a134cf64860c653df2b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:32.545Z",
+      "quotes_found": 8,
+      "quotes_total": 8
+    },
+    "https://docs.metronome.com/integrations/marketplace-integrations/aws.md": {
+      "hash": "2325b4c68eefec31a853ecda932eb3aacf519d16d63abc2f54abeacd24b9f19a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:33.546Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.metronome.com/integrations/marketplace-integrations/gcp.md": {
+      "hash": "c1f5e633df77184317f55b73091127be9703f48cb668a2832cc115ae98257856",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:34.546Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.metronome.com/integrations/marketplace-integrations/azure.md": {
+      "hash": "ae930ae7bbb3fbf1afa655c306fb37b83973519e433c228a59eb2ea374a87a14",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:35.548Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.metronome.com/integrations/invoice-integrations/stripe.md": {
+      "hash": "fec5d4fa9b8a9e0f6c07ee94068c6d45d7e74503609063b05fa44357861c239f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:36.548Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.metronome.com/integrations/invoice-integrations/netsuite.md": {
+      "hash": "d8d82b0b2ba933d8b94befbc561f7d7142a31a03aaaba728e84ab8cbb7c43975",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:37.548Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

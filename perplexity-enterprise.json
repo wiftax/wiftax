@@ -1,0 +1,78 @@
+{
+  "card": "perplexity-enterprise",
+  "updated_at": "2026-11-23T20:59:38.627Z",
+  "urls": {
+    "https://docs.perplexity.ai/docs/admin/audit-api.md": {
+      "hash": "a4e0818b41786f5252001272815a63a9503c3080daca9b817f7cb7c89a41aff6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:52.519Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://docs.perplexity.ai/docs/admin/api-key-management.md": {
+      "hash": "d00b4f247f2d7b3fbcfa10235b2ac870f54ba8a6d36cce27c04d3e08d64df783",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:53.519Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.perplexity.ai/docs/admin/computer-analytics-api.md": {
+      "hash": "3d759794e8b9036288b66eac57abafc77a156dc39f1a309d9c847604beedcbc3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:54.519Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://www.perplexity.ai/help-center/en/articles/11652747-audit-logs.md": {
+      "hash": "da75e274cf340e1916501dba9dc84b6889b44505579caf72b63bc00a08a6ece3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:53.397Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://www.perplexity.ai/help-center/en/articles/2026100201-role-based-access-control-for-connectors.md": {
+      "hash": "ed21f53997cf3e6bee221f52756569805a39eeaa0ef42247edc633efb0b96c1c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:54.398Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.perplexity.ai/help-center/en/articles/14017006-connecting-perplexity-with-snowflake.md": {
+      "hash": "d794e1c830b48a3b4dcd1b59b0e65c21b23afc9d1174ac3e64a5cfecd226e657",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:55.399Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.perplexity.ai/docs/agent-api/tools/connectors.md": {
+      "hash": "dc17c7e75b5cdfccbf01de204c604410a6a340655f0ce0ec47e077b27c4a78a4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:55.520Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.perplexity.ai/api-reference/revoke-auth-token-post.md": {
+      "hash": "b7bd607c4b9cbf46c2973461c9bea798034044288c332bd523294a1c6a6b2681",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:56.520Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

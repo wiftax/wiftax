@@ -1,0 +1,70 @@
+{
+  "card": "kyriba",
+  "updated_at": "2026-11-23T20:59:35.930Z",
+  "urls": {
+    "https://developer.kyriba.com/llms.txt": {
+      "hash": "a16259a221fa138a1dcbdb9ba02c46d48e326f10b568e623d297752256d103b9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:15.988Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.kyriba.com/static/llm/skills/kyriba/SKILL.md": {
+      "hash": "a2a08fa2c8ece4bb95cc0f005f8d1673e2f05683738e66688a47b05a56a44915",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:16.989Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/kyriba": {
+      "hash": "b182133a5deb20492bdb972416dfe11fd1210d3322e0a67fd565fc58af39d6f9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:16.346Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.kyriba.com/static/llm/skills/payment-initiation-spi/SKILL.md": {
+      "hash": "4aba5e3c4cb8b6e587d680d599f67583a4429cb79e2756663168ce049061a592",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:17.990Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.kyriba.com/static/llm/skills/fraud-detection-spi/SKILL.md": {
+      "hash": "758b27a605ee948523dbf5016a37b197310b847f9ae74cb0021d34a5ca47cd76",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:19.324Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.kyriba.com/static/llm/skills/kyriba-guide/SKILL.md": {
+      "hash": "6921e13662123eb536cdcfec4e3304055f1dea61112c0a5d72e8624e622735dc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:20.324Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.kyriba.com/static/llm/skills/audit-trail/SKILL.md": {
+      "hash": "7fe8cc7b7018ce4e1f9ceb9ecc9e27fb71925ddb5ea47667d4adac50099822d0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:21.325Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "card": "hackerone",
+  "updated_at": "2026-11-23T20:59:33.703Z",
+  "urls": {
+    "https://api.hackerone.com/getting-started/": {
+      "hash": "4d9e215fc68519875bf79c42083b53d9a5d4ae04a2faf15cf30d76ec3cd33f1d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:19.168Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.hackerone.com/en/articles/8544782-api-tokens.md": {
+      "hash": "27ae6bee46d4997c0ddd0dcd785d7ef00dbe30b54384a9619ad8d893534b703f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:19.199Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://docs.hackerone.com/en/articles/8571163-github-integration.md": {
+      "hash": "2231062f62b26388c9fb570f37c0bf5c251c8d2471dd2fb9ad92d2abaff718b5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:20.199Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.hackerone.com/en/articles/12598847-new-slack-integration.md": {
+      "hash": "ce4b16ba86914541b2fba6264f53b38f21961ea41bc0ffa4447dc3c59a407146",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:21.200Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.hackerone.com/en/articles/10394699-gitlab-setup.md": {
+      "hash": "e30c1dc27bc60109485ea9c92cc1de5a00a27e41baed0705bcd4f66c9444d519",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:22.200Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.hackerone.com/en/articles/8575614-servicenow-incident-management-integration.md": {
+      "hash": "41509213dde986a2335a98969c77730840530d8bbb9cc0e07a41418bf1a72a8d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:23.200Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.hackerone.com/en/articles/8588169-splunk-integration.md": {
+      "hash": "b5eccc4b29f6cb30b5e19c378ae317617dd75045bd9d89ffdf3fa6e8216af0ff",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:24.200Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

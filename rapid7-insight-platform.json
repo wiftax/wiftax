@@ -1,28 +1,28 @@
 {
   "card": "rapid7-insight-platform",
-  "updated_at": "2026-11-16T19:17:10.181Z",
+  "updated_at": "2026-11-23T20:59:38.798Z",
   "urls": {
     "https://docs.rapid7.com/insight/api-overview/": {
-      "hash": "4afef2b8d2691f5f11afa99a17202e61952eb3642e215ad6248c19909384bdce",
+      "hash": "5e83ed3d1ba3f7e298ab474f16dd306d7d0f089b2dacc15f97b2dbeec13ff59f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:39.960Z",
+      "checked_at": "2026-11-23T20:54:30.334Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insight/managing-platform-api-keys/": {
-      "hash": "804795cc3412fd53c2c22710ba4401cccf07ef3766f82208291b96185d7adcef",
+      "hash": "e739aaee7b2d284c3894806a36d835b5a17e65e17a3676de81bc6564fdc4fe46",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:40.961Z",
+      "checked_at": "2026-11-23T20:54:31.334Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.rapid7.com/insight/managing-multi-tenant-api-keys/": {
-      "hash": "ca79490af178b2dd2de1a525e0f37e79b664e5879a89759241cf1434bdd3bd98",
+      "hash": "2d24f4bd6a1313648557e27fc34fe236ca7881595892b1916ec7d2b5eda01f9a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:41.961Z",
+      "checked_at": "2026-11-23T20:54:32.334Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,119 +30,119 @@
       "hash": "c8a2e1dd0a174234521cbb916275b809e383f33287950deca0c6775ea5df7104",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:41.467Z",
+      "checked_at": "2026-11-23T20:54:31.276Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.rapid7.com/insightcloudsec/api-documentation/": {
-      "hash": "053931eb274f52b7a28b613f75843531d49af88efcddb114824cc1a71e8146ad",
+      "hash": "ee0af2c9ce4613d3db898d35d0e53c7e78b71b6bbc383dc8ac5c18241d67214d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:42.962Z",
-      "quotes_found": 2,
+      "checked_at": "2026-11-23T20:54:33.343Z",
+      "quotes_found": 1,
       "quotes_total": 2
     },
     "https://docs.rapid7.com/insightcloudsec/github-actions-integration/": {
-      "hash": "5893b28bafc475cb843b8adedc73d501ea36f21cb02632597fd94f49e9a23071",
+      "hash": "c1c1f28c1d55742b3dd8d0f1dbeb6d61f60c4b4018310a725468384f68a746d5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:43.962Z",
+      "checked_at": "2026-11-23T20:54:34.343Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightcloudsec/saas-aws-cloud-setup-single-cloud/": {
-      "hash": "3ebd01d9f7b66c2f4179b864f718a04b061609a944a316145a5c5ee7b7473133",
+      "hash": "94a37e163845652ccd31c326239ad255b4c6945325042553698bd5a9fa7368a5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:44.973Z",
+      "checked_at": "2026-11-23T20:54:35.343Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.rapid7.com/insightcloudsec/aws-cloud-onboarding/": {
-      "hash": "434979e2c64f9ee1f24b76e4c1e8784028b802e1985b4cd7573dcda445321ec6",
+      "hash": "e80bee33cdd6e0248cce9d222a9d026bf1f2b4a722cb94f7049d92f741184a56",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:45.973Z",
+      "checked_at": "2026-11-23T20:54:36.344Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightcloudsec/manual-onboarding-azure-console/": {
-      "hash": "a27441c7a244fa32791f32ad0a1ee806ef8cf76e1870f9ccd2473214ea279fe4",
+      "hash": "487c6733a8e98f4be1a9c0ba9361c17498df2ebeaaa0a52ba8f3503378b32b3e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:46.974Z",
+      "checked_at": "2026-11-23T20:54:37.344Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightcloudsec/gcp-onboarding/": {
-      "hash": "a378369dd6ab7bf41307067658c2dbc55c8be767e08172036ea8c96346ddde12",
+      "hash": "ec6a4294dba1c6e8b145f46bced973ffe2a325bd3e3896f3bba4bb546e668cd7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:47.974Z",
+      "checked_at": "2026-11-23T20:54:38.345Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightcloudsec/oracle-cloud-onboarding/": {
-      "hash": "397d5da05ad6efee90b6a23385a97a6695cd8c2743fb61eddd52bb98ba6ada3e",
+      "hash": "135371f26a1c517798b76ad8263e2f52a4660d1aaa12d634289e7412cb881431",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:48.976Z",
+      "checked_at": "2026-11-23T20:54:39.346Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightcloudsec/alibaba-cloud-onboarding/": {
-      "hash": "e0acdc210d330c5a152aac1b7f96746b7bf1c887bd2912808e7ab66c63b74142",
+      "hash": "a3682e712b8965edd3d9229446a5de4468fd972c04dae08c89a16714268bf822",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:50.021Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:54:40.347Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightidr/aws-cloudtrail-sqs/": {
-      "hash": "82f8ee68a019ca6b66184d017536f22b88e7de71b432f32fd6924d98861389a6",
+      "hash": "0db9e3c3121af20a33659c77894d751f79d696b8e26878876c8347e1e5231586",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:51.021Z",
+      "checked_at": "2026-11-23T20:54:41.348Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightidr/access-aws-resources-with-ec2-iam-roles/": {
-      "hash": "614787ecaeebf51080bc1a2982dd49502cad23e03d0a43697845f0aa6aab0c9f",
+      "hash": "1f437565a791dacb843f556295a3ebca74729c3ed8f3d95081dc7fa0671e82c7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:52.021Z",
+      "checked_at": "2026-11-23T20:54:42.348Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightidr/microsoft-azure/": {
-      "hash": "2cb6dabe79adf883b0fd908370b150e83ca04b54c796f28a76e628bacfa938fa",
+      "hash": "382d8c54a3e3b12e855964cb106806501ee0cfbb50bb03e2659065e99274a9a7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:53.026Z",
+      "checked_at": "2026-11-23T20:54:43.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightidr/microsoft-office-365/": {
-      "hash": "3e662ed79b0e5aee2e9fab0ffb6605c35b5b528ead9e38a4cc68f5a98d8b62e9",
+      "hash": "89ddae7570331e7067e3a86da4ccf1de04ad89dbba8ab2bc5d5f65f65b15b67f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:54.133Z",
+      "checked_at": "2026-11-23T20:54:44.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightidr/google-cloud-platform/": {
-      "hash": "b0d7fb470e8430aa98eaf2bf96da6a053eca122821300b638c5859e3aecd4aab",
+      "hash": "eb8683df3fb38d915564626ba5a3f9832c311728fec6a6cf8e6dd7b7e8ee461e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:55.134Z",
+      "checked_at": "2026-11-23T20:54:45.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.rapid7.com/insightidr/okta/": {
-      "hash": "6bc0fa6caa1a530734f8c50621095c2572ecab1b23e300c1d77dd5252c3c45fd",
+      "hash": "d3e46a984ae08ae512c1baf1385889fbe9d84f725c705fbcf51b78dfc9d279b4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:56.157Z",
+      "checked_at": "2026-11-23T20:54:46.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -150,7 +150,7 @@
       "hash": "80ceaee064470f57edb86a5bb23d51e31b99c9a22d81df96f070b1e8cb13892c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:57.157Z",
+      "checked_at": "2026-11-23T20:54:47.437Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -158,25 +158,31 @@
       "hash": "27f8acf8d679e7c3af32a6b269ea03d3b9ba7a56527d0f3ae5f019f74428ad46",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:58.157Z",
+      "checked_at": "2026-11-23T20:54:48.438Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://discuss.rapid7.com/t/56971.json": {
-      "hash": "719665cd321c33cc82716de125331fcff6c6cc8d282caae6c8beee7f437d2903",
+      "hash": "d128aa1ac09ffbc8b460226cb06acd1efcf4b6c4ab39ecce3f16cbda64967db5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:52.000Z",
+      "checked_at": "2026-11-23T20:54:41.946Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "594aa9e37c60604a0bf7697cda45d37733701d4df53c29340bd56e393811e862",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

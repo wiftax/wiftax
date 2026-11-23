@@ -1,12 +1,12 @@
 {
   "card": "nebius-ai-cloud",
-  "updated_at": "2026-11-16T19:17:09.643Z",
+  "updated_at": "2026-11-23T20:59:37.667Z",
   "urls": {
     "https://docs.nebius.com/cli/reference/iam/federated-credentials/create": {
-      "hash": "42d1c86c5a77b83892fab3ba413cb0b065747b96162f52117828c83a79c6abe8",
+      "hash": "a097c0c4c6f5d81aee6bad25a77b0d31997cd6cc522706a4c9fe725c085b96e2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:25.869Z",
+      "checked_at": "2026-11-23T20:51:57.309Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "ee9698f488a5839bb3eea4dfe0bfa31df83e8eb46c79924be7a30855c2eb47a7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:26.870Z",
+      "checked_at": "2026-11-23T20:51:58.309Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "3c3758f1f8fa49bcc9caa080f9757a006caa891f3ed30ae4ec50a3a26d42ff9f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:26.931Z",
+      "checked_at": "2026-11-23T20:51:57.574Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,23 +30,23 @@
       "hash": "e3ce07e72b6c068b6a6d496c9285286ee64bf3a6dbc04c9898935bab9876ac30",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:27.870Z",
-      "quotes_found": 3,
+      "checked_at": "2026-11-23T20:51:59.309Z",
+      "quotes_found": 4,
       "quotes_total": 4
     },
     "https://raw.githubusercontent.com/nebius/gosdk/refs/heads/main/auth/federated_credentials.go": {
       "hash": "65322cb48d691d4cbb7064ed26303045af1388ec2166319b522c221c84fb564f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:27.931Z",
+      "checked_at": "2026-11-23T20:51:58.574Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.nebius.com/cli/reference/profile/create": {
-      "hash": "2c9a9bc4c7c1c1230978b730ba45e4b1126fcb18069d3a672f8b64512ed12792",
+      "hash": "90b5bcba7594018b514e5cc71283c4e69a69bfd947b5baef7a800f050411d2bc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:28.869Z",
+      "checked_at": "2026-11-23T20:52:00.309Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,23 +54,23 @@
       "hash": "9827648877a094c062da7a8733ce49b7c9d42ff4c9c784eb3b78c0478071f5e3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:29.870Z",
+      "checked_at": "2026-11-23T20:52:01.310Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.nebius.com/container-registry/authentication": {
-      "hash": "f797d7db8bf1869a36435b418489256c9e086d87fa03ce7740438f899de26258",
+      "hash": "ebee666fb604b0eed08f52e18c5cf6f60ee4d087804d0cacd6e509bfae223291",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:30.870Z",
+      "checked_at": "2026-11-23T20:52:02.311Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.nebius.com/iam/service-accounts/access-keys": {
-      "hash": "5c5ae0078e0fbc483617eb50eeade83e55bf0fd0cbcf8ea33b4f6ab6e4cd8fa7",
+      "hash": "93d9d64a7ec9f472c2368f1cbbb9868c720225b09fcb2008dbee79f8c35d084f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:31.871Z",
+      "checked_at": "2026-11-23T20:52:03.313Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -78,7 +78,7 @@
       "hash": "1697d65767cdcc4fdae81702ceff1d5354b818ac2846f8252bc527bfd16b508e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:32.872Z",
+      "checked_at": "2026-11-23T20:52:04.312Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,39 +86,39 @@
       "hash": "3b0aefb6f0402eb26059bddff46ac6444c76d356f1710b3642496c787054719f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:33.872Z",
+      "checked_at": "2026-11-23T20:52:05.313Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.nebius.com/kubernetes/networking/oidc-public-endpoint": {
-      "hash": "d4836bfb43490693c5f140b1827e6a1df7a4ef15f51e4a59ee61dec85d3cacd3",
+      "hash": "35417876e0efe3f37bc2a5b2369d1c8590e975eb86215aa21e9ec6148d8cc620",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:34.872Z",
+      "checked_at": "2026-11-23T20:52:06.313Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.nebius.com/object-storage/transfer/access": {
-      "hash": "3768fbbc86a40ca1afa1d6471c2625a5292d284389cba3c558650090d303c5ae",
+      "hash": "4889becdc84d717340dc859ec2156af3527b3d832b829da97f93c65aba4c93f0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:35.873Z",
+      "checked_at": "2026-11-23T20:52:07.313Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.nebius.com/serverless/jobs/manage": {
-      "hash": "d4f77e2f9f9c1e28f4d74074ca499e8322a0275442f07eec857c53302c9716af",
+      "hash": "de43d6dead03e56db6c81e1b2820ae7775fff7d805f4b1cad1a728027d2dd837",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:36.873Z",
+      "checked_at": "2026-11-23T20:52:08.314Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.nebius.com/iam/service-accounts/authorized-keys": {
-      "hash": "890afc2ff77bcb28b6efe089038a0410d99ca97fcab1d0d0886cc2c20785b7ef",
+      "hash": "3c7d0582c564f7a11e1d6fc1a2355cb3a7725d400886423123e36f3960b9b611",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:37.874Z",
+      "checked_at": "2026-11-23T20:52:09.315Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "e32fdbf535ad46d6b49d14509ad873332288d9054456c4750ea82b31cdeb0db9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:38.875Z",
+      "checked_at": "2026-11-23T20:52:10.315Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,7 +134,7 @@
       "hash": "e3fa70786fa360dc23c9e514150745bf2c8deed15125da2b06bd2a82b49aacef",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:39.876Z",
+      "checked_at": "2026-11-23T20:52:11.315Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,7 +142,7 @@
       "hash": "a091a9ce81d6feaaaf5c0ab84f15d01f478de4a1e67bdabd5f78406aa8c7f7ad",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:40.876Z",
+      "checked_at": "2026-11-23T20:52:12.316Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -150,7 +150,7 @@
       "hash": "4f96c5ce1196c9be540efc45b44211463e760a9f8a27e6657fad5253b43cf5c2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:41.877Z",
+      "checked_at": "2026-11-23T20:52:13.316Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -158,7 +158,7 @@
       "hash": "136b12a85d675fdf49b3d08f58b3315625c4186463a8e0b7dfc907aee5d030e4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:42.877Z",
+      "checked_at": "2026-11-23T20:52:14.316Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -166,7 +166,7 @@
       "hash": "e3b2c25b802edffbff41ea2d5d8f912996f49b6c721ac5de2e50444dbc995a57",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:36.009Z",
+      "checked_at": "2026-11-23T20:52:07.458Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -174,23 +174,22 @@
       "hash": "3e67541c63762fbe26d111ab1bc398053a7d653adc59945e9909b0794a8433f6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:37.084Z",
+      "checked_at": "2026-11-23T20:52:08.555Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "5de215ecebed0fdc93c02c8ba84f4654c02bd524cdb0cc883e6d4772bf044719",
-    "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "fingerprint": "77e84039337134eaabd3914c04dc62c49d51223c505149e1bc43dc66c4c7b39e",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

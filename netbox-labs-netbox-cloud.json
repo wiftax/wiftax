@@ -1,0 +1,78 @@
+{
+  "card": "netbox-labs-netbox-cloud",
+  "updated_at": "2026-11-23T20:59:37.689Z",
+  "urls": {
+    "https://netboxlabs.com/docs/netbox/integrations/rest-api/": {
+      "hash": "5dd229799676789fbe6af6f0ec8753dc33a1613e2712c16c8b5fb6a35046222a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:13.754Z",
+      "quotes_found": 8,
+      "quotes_total": 8
+    },
+    "https://netboxlabs.com/docs/cloud/cloud-api/authentication/": {
+      "hash": "6754eb99e183df034656b7d67d344ed73336e9c38b042a0dac584d83d5c5b215",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:14.755Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://netboxlabs.com/docs/cloud/cloud-api/api-keys/": {
+      "hash": "37ca7869ec5e092c168ae2f5fb6df18609997be34afa90d95a46c54b975b9932",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:15.756Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://netboxlabs.com/docs/netbox/features/synchronized-data/": {
+      "hash": "e2e3ef3d30e400f79c2e6472836b530fca4ff6a8e1968fddd28b096fe99069e2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:16.757Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://netboxlabs.com/docs/netbox/models/core/datasource/": {
+      "hash": "55ef2628865c6262d5f34806fdd5d5584c28b0f35d92c9602b5ec862bc726f46",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:17.757Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://raw.githubusercontent.com/netbox-community/netbox/main/netbox/core/data_backends.py": {
+      "hash": "39ae9b9a40a97327d2b887003cb53a0cb27c6af0f022dd4e5a2c2952e341779b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:15.817Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://netboxlabs.com/docs/netbox/models/extras/webhook/": {
+      "hash": "7052bdaa3d0a6ce0205e7f5087a62c2201e216eba6b528cbfcd6b995341f05e3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:18.757Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://netboxlabs.com/docs/cloud/cloud-api/permissions/": {
+      "hash": "0c9254ead5accf1b3cb93d0edd8100bed4ea351340947bf5f2e160ef12bea76e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:19.756Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

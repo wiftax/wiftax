@@ -1,0 +1,70 @@
+{
+  "card": "zoom-api",
+  "updated_at": "2026-11-23T20:59:50.985Z",
+  "urls": {
+    "https://developers.zoom.us/docs/internal-apps/s2s-oauth.md": {
+      "hash": "2a6ec973d142327f8f7d958f05cdf419c51793548ffaa6475ec5c85f576ba6bb",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:12.190Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developers.zoom.us/docs/integrations/byok.md": {
+      "hash": "ed956d8c1429b253b25eb149838fed4c3623c782f3d5aa34c6c9d02a7d920849",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:13.190Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.zoom.us/docs/integrations/crossapp-access.md": {
+      "hash": "fc6df622fb2da2bad7cbaa8a1a53127d42e935de121a5e508513b96efc0e732d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:14.191Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.zoom.us/docs/build/storage-get-started.md": {
+      "hash": "c26704797fa521e638123c7c7d99b9acc42e0f8675cb14654694834af99faa6e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:15.192Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.zoom.us/docs/build-flow/basic-info/app-credentials.md": {
+      "hash": "526f99992d583e798785477e23efaa65642e466bf193d470fffd7a57601c3660",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:16.193Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.zoom.us/docs/api/marketplace.md": {
+      "hash": "8f29990bc98ada9621191bf5d56750ae0a4b11fe74bb4a5057761fbc1f85d759",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:17.193Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.zoom.us/docs/internal-apps/create.md": {
+      "hash": "f964d83baf7b31691c56a3139246336a47b3646f47c3a44d4acb0cd9df4dafdc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:18.219Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

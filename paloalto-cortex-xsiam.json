@@ -1,156 +1,155 @@
 {
   "card": "paloalto-cortex-xsiam",
-  "updated_at": "2026-11-16T19:17:10.099Z",
+  "updated_at": "2026-11-23T20:59:38.569Z",
   "urls": {
     "https://cortex-docs.paloaltonetworks.com/xsiam-api/get-started-with-cortex-apis.md": {
-      "hash": "08c951ebced1baf041e98484f609ffc8673d7c9912affea83a61ea44dd6f025d",
+      "hash": "baeab6cfcbcf160516f9eff50e64db230d502b743bd1773dbcdbd28eb85e889a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:29.819Z",
+      "checked_at": "2026-11-23T20:53:16.625Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/learn-about-cortex-xsiam/manage-api-keys.md": {
-      "hash": "825ca39dab88970c5a3cc9658d8ff2a6ea5502d4316e684592c2e261255156a6",
+      "hash": "2f3e8f4b25b117f862653417c67bbc76e6c329845a09ea5394a737185f10ab3a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:30.819Z",
+      "checked_at": "2026-11-23T20:53:17.626Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xdr-5.x/configure-cortex-xdr/manage-api-keys.md": {
-      "hash": "f13230baa1395e4cb8d3830f313d66868861f3ec2970f963a669eee68f7c0d08",
+      "hash": "963ed80a287c036f9b62afe4fd164dc5cd6cfda584c3fafee353c1d9d107f4ac",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:31.820Z",
+      "checked_at": "2026-11-23T20:53:18.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/amazon-web-services-cloud-onboarding/aws-security-model-and-authentication.md": {
-      "hash": "5158c3f4cefa93dd1ae5427dc0d459f8f58be66831993e2ce9724ec2182133ff",
+      "hash": "0520f72bd29e9a3e0b41013d914b73477c147c17814c597a04dad3fb749ace2b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:32.821Z",
+      "checked_at": "2026-11-23T20:53:19.627Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/microsoft-azure-cloud-onboarding/how-to-onboard-microsoft-azure.md": {
-      "hash": "f893789c993d233fd6223a070c5f8e1b12aabeee96179b7d9c800bd7a8f5b539",
+      "hash": "18d49c6d3f3bac75901d4066549ac3cd901ddde57cb76e338e256838666d12f2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:33.821Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:53:20.626Z",
+      "quotes_found": 2,
       "quotes_total": 2
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/cloud-service-provider-csp-onboarding/google-cloud-platform-cloud-onboarding/google-cloud-platform-gcp-provider-permissions.md": {
-      "hash": "b479bdeea10a445df9e6cc079f838174f13fa016a9a45870810982036d5218f7",
+      "hash": "012822ce05250a2faa83d782635f142125b7bb3b25a3cb99981c4a72f7d3080a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:34.835Z",
+      "checked_at": "2026-11-23T20:53:21.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/create-a-workload-federated-identity-role.md": {
-      "hash": "8cc03d0bcdef42b9ee6dd1a9fbacc4518db22df7aa2232611faa02dae5ebad84",
+      "hash": "b506bc493dcfa8ff5a563ce3cda1b22294b13119717d0ce7691c39e11d7905d3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:35.834Z",
+      "checked_at": "2026-11-23T20:53:22.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/amazon/amazon-s3/configure-data-collection-from-amazon-s3-manually.md": {
-      "hash": "b77d9610eed8f764cf95f44f4de5ad05c787ec2b1c55373d68e05aef9102b058",
+      "hash": "768db21ccfe0aa8ffec900f4ae6bf76a897aa7505ca4de4682cd693055dac8fa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:36.835Z",
+      "checked_at": "2026-11-23T20:53:23.628Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-cloud-platform/ingest-logs-and-data-from-a-gcp-pub-sub.md": {
-      "hash": "ab31256b8c725a361f4f44aba298491fcc08640005628efae969bb8d122470b9",
+      "hash": "fdb2b19d36b05e6561ff44a8d9bfd03505225d817499304e50f18b5a55434430",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:37.835Z",
+      "checked_at": "2026-11-23T20:53:24.627Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/google/google-workspace/ingest-logs-and-data-from-google-workspace.md": {
-      "hash": "10558ad5362d9d2f85c819f29bc37bf049357a4c35a44b7e3bcbaefba5144ec2",
+      "hash": "081b5cb6f4972f149cc1600f60122b08c7fd6a5d68d981a640444758963c3a86",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:38.836Z",
+      "checked_at": "2026-11-23T20:53:25.628Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/azure-event-hub/ingest-logs-from-microsoft-azure-event-hub.md": {
-      "hash": "19c40509fb174d89b9e01fbad7dbb888b351226827dfc9fbb85554dcfa2edf78",
+      "hash": "4d62edd929e3079df0f4621e579d354c6be9140906930131e404114c19dc3cc0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:39.836Z",
+      "checked_at": "2026-11-23T20:53:26.629Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/microsoft/microsoft-office-365/ingest-logs-from-microsoft-office-365.md": {
-      "hash": "c003167936f4b0a28fba11f2691bd8b047ec4bf290db4c3f0e2f77a55573dc0d",
+      "hash": "6ed1805d0aa29f8a707673571c8fa028d6d622fdc81204fcde3f71b5ddeda1b5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:40.837Z",
+      "checked_at": "2026-11-23T20:53:27.629Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/okta/ingest-logs-and-data-from-okta.md": {
-      "hash": "c997fa1c61434190997128b1cbc05748ad12422b918c06ac3280551704855ff3",
+      "hash": "3003bcbc08de95392e6051b0b596b0f37f01eef6e9f40774b93e3d41b6af3d24",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:41.838Z",
+      "checked_at": "2026-11-23T20:53:28.630Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/salesforce/ingest-logs-and-data-from-salesforce.md": {
-      "hash": "2aeb68de18b1aac8e2ecc43877da600a44ef39f296b6f0920ce7afbd7843acf3",
+      "hash": "6cf3563fa76f0e9aea57f4ff492edad7d69f08fc2adb1a8ff9947cd7091efd94",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:42.838Z",
+      "checked_at": "2026-11-23T20:53:29.630Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/cortex-xsiam/configure-cortex-xsiam/cortex-xsiam-data-sources/vendor-specific-data-sources-and-connectors/workday/ingest-report-data-from-workday.md": {
-      "hash": "039ec45b66f251d31a4b61bd0362250084f5abbac4406dc46113bf67716930d0",
+      "hash": "5a3631b7f6ce381c3edf1dc33a8bfbfdcb2931ce1a50eca5ca8b56d98cbf6151",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:43.839Z",
+      "checked_at": "2026-11-23T20:53:30.631Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://cortex-docs.paloaltonetworks.com/xsiam-api/cortex-platform/api-keys.md": {
-      "hash": "8be273b94632fef4c295448d115cf6568d9d8aef681de6852758f8403547bba6",
+      "hash": "1c65be22526ec3fcb0588a942d8dd050f09c1c1d29b6d5fe0cd195d2a135fb9e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:44.840Z",
+      "checked_at": "2026-11-23T20:53:31.630Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://cortex-docs.paloaltonetworks.com/xdr-5-api/cortex-platform/api-keys.md": {
-      "hash": "3e2c2b61b32fb98fbe65f717a2445dbcf37d20be879b95ed67523e9c16fccdbf",
+      "hash": "13dbe126004a0c398e6c2678712cd8faa8925ae37ed9657949862081cbad1d3b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:45.841Z",
+      "checked_at": "2026-11-23T20:53:32.630Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "57c52c74d623ada9cccb11454ee77e056fffd03fb907034a7d1dc586fb3e308b",
-    "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "fingerprint": "0184e40dcdc2e58c6832164ca31a2dd780a5207813c2b4d25e3f3f2c7ba72e46",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

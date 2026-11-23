@@ -1,20 +1,20 @@
 {
   "card": "baseten",
-  "updated_at": "2026-11-16T19:17:06.034Z",
+  "updated_at": "2026-11-23T20:59:29.116Z",
   "urls": {
     "https://docs.baseten.co/organization/api-keys.md": {
-      "hash": "45695b94917d515c076ffd8b239d1d5407f94072062f029e7e5ab90c069fa005",
+      "hash": "55cbe47cf63ce84723e3f85094741c7f50c329da507b38cfcbc2a6e7fdeaf992",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:43.563Z",
-      "quotes_found": 10,
+      "checked_at": "2026-11-23T20:44:39.522Z",
+      "quotes_found": 8,
       "quotes_total": 10
     },
     "https://docs.baseten.co/deployment/ci-cd.md": {
-      "hash": "6d98f81e3812014025f1067c02bb18dcf2880d00a4ca743b9ac20476ee29e041",
+      "hash": "97509dc38934abcc0d4c9606617399288f4153e5d5dd27552efa5dddec778d66",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:44.562Z",
+      "checked_at": "2026-11-23T20:44:40.522Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "12fb6179422028fe78a147b901760547fb998da541f4e8ad17d38304b7990afd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:45.563Z",
+      "checked_at": "2026-11-23T20:44:41.522Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "ffbfcbf209570a5f04366985de82839084966ac353cae50a82a185cd8335d2bd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:44.695Z",
+      "checked_at": "2026-11-23T20:44:40.397Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,15 +38,15 @@
       "hash": "013710713ae239199a912d1fdd273da9b9362bf06acc6b7bb10b0d7636b987fb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:46.564Z",
+      "checked_at": "2026-11-23T20:44:42.523Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.baseten.co/reference/management-api/volumes/create-a-volume-access-token.md": {
-      "hash": "bd16b032bb837209ea204ce3fb929ce28f3698964c5619a01c8a4dc991d76cec",
+      "hash": "b3636d480c1f4a029ace2df9dffd7b7003f87a4f18ab0dd8c8a49df13db9f8cf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:47.565Z",
+      "checked_at": "2026-11-23T20:44:43.523Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,31 +54,31 @@
       "hash": "6c19de918b925e98da61d4c5cc18653126b20ed9a609bfa89a03bf5f3cd93dc8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:48.565Z",
+      "checked_at": "2026-11-23T20:44:44.523Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.baseten.co/organization/oidc.md": {
-      "hash": "8f22bebb1b0ac32e4a593d10604c1e55e86635611c86312f22978eeb0f0c5562",
+      "hash": "cc63ed882ffe2a767cc8e84a63cb4b58f49e132bf9275ca16441f2f0c759ca0a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:49.565Z",
-      "quotes_found": 2,
-      "quotes_total": 4
+      "checked_at": "2026-11-23T20:44:45.524Z",
+      "quotes_found": 0,
+      "quotes_total": 5
     },
     "https://docs.baseten.co/organization/aws-assume-role.md": {
       "hash": "eb88f31254df0b02b75e2675aa5de56b64396eb347ccaaeb9683769fc22401b9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:50.567Z",
+      "checked_at": "2026-11-23T20:44:46.525Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.baseten.co/development/model/bdn.md": {
-      "hash": "c53a0f1d7367167f5c988e68fbdbedfde4c85089acade4d0090c7b7420ea730e",
+      "hash": "073e7f8a36e4e9fbc8a7d71990961c9af294aaeecd3e59f2d8018e369f66203f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:51.567Z",
+      "checked_at": "2026-11-23T20:44:47.525Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -86,39 +86,39 @@
       "hash": "d1fa6680e270477797b0d7f34a16b32d816828b9fb2f355585c899599b3d65c1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:52.567Z",
+      "checked_at": "2026-11-23T20:44:48.526Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.baseten.co/development/model/dependencies.md": {
-      "hash": "42b9ec0e53971760e0f189b4ff1a8d14ab2adfcd296ff1f3363321719966ef68",
+      "hash": "20e0612879e47ec78d0ec5cc8f3d5927f13dc220e9d8f566cf1357aac22181f0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:53.575Z",
+      "checked_at": "2026-11-23T20:44:49.599Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.baseten.co/development/volumes/sync.md": {
-      "hash": "9d3516dd449dd1aacbf676f5661c3e3218b87247a1b24c397ce46f9559a13e2a",
+      "hash": "0f0e1b8879afcb0e4558d5ec1aa66bb93985aa5143c31201345b19058111dfc5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:54.576Z",
+      "checked_at": "2026-11-23T20:44:50.599Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.baseten.co/organization/audit-logs.md": {
-      "hash": "2938ed2f6cd560c4137a88e0edd09dc1d961db6562a8cb00bba970eaa2f595de",
+      "hash": "2972cb81891a84262bccef98baf60389829b9b804a34ac19b9a8e78e096beca0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:55.576Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:44:51.599Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.baseten.co/reference/management-api/api-keys/creates-an-api-key.md": {
       "hash": "433d58b5e5cb6cbee77be31cc9f4c8abe53e763bd82dddc2367f0ca03170fd62",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:56.577Z",
+      "checked_at": "2026-11-23T20:44:53.060Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "e02b4dc16985c863a260ed2d50295aa91afd37f06e883bc00b0374d1651a5313",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:57.577Z",
+      "checked_at": "2026-11-23T20:44:54.060Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,23 +134,23 @@
       "hash": "994c49ada07eb443d546f37f47e11131d2ff3caa997f53157e1696f89d27b70e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:58.578Z",
+      "checked_at": "2026-11-23T20:44:55.339Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "44e2724037a6a5adbaf52fa720c98d2b3ea0c7312031bc3ea4e43b66c1f2756e",
+    "fingerprint": "2428a40a59b8286cd399e2584264d3a57726f7bf01dad723a6edc8881a8437cf",
     "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

@@ -1,20 +1,20 @@
 {
   "card": "obsidian-security",
-  "updated_at": "2026-11-16T19:17:09.700Z",
+  "updated_at": "2026-11-23T20:59:37.819Z",
   "urls": {
     "https://docs.datadoghq.com/integrations/obsidian-security/": {
       "hash": "7b1fe12fdf0bc6f417c424c8914324d5d79fdc7d60fe54c60355f5babb6461de",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:54.817Z",
+      "checked_at": "2026-11-23T20:52:31.894Z",
       "quotes_found": 7,
       "quotes_total": 7
     },
     "https://docs.axonius.com/docs/obsidian-security": {
-      "hash": "2cc3187785099a1fcd190c1e5be150847959b43186b660082ce4ee3d4ceeed5f",
+      "hash": "b986cd554b0d5690a9f2233877170d6e30a24e0a2eb04b98bbd5f66b772e94c0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:55.209Z",
+      "checked_at": "2026-11-23T20:52:32.127Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,7 +22,7 @@
       "hash": "3cdea609610e690a1b76cf7b756dd4a48c0793f3ce378842dd3f3a12e8cd3a32",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:55.348Z",
+      "checked_at": "2026-11-23T20:52:32.702Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "bbdbf382287a132af0fffbf618ba89493757e9dbec212d7fdec506079ffa5a70",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:56.347Z",
+      "checked_at": "2026-11-23T20:52:33.702Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "79d545da17818bf6f6f7f566ce084246618d08cdf71687a351a8142886af24c0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:57.347Z",
+      "checked_at": "2026-11-23T20:52:34.723Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -46,7 +46,7 @@
       "hash": "ae550c79999a1030c1167812bdb2b8509181f21281703ab2a97f65f4c1582719",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:55.729Z",
+      "checked_at": "2026-11-23T20:52:33.631Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,17 +54,22 @@
       "hash": "2fac930ab49d8f56406c4a38e320793dabcc89734c9dbcf484d455c4435aaf6b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:56.729Z",
+      "checked_at": "2026-11-23T20:52:34.637Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "d9810ca6ced3dbebfdaa89a90e51217a80dcdc35dced253aa1bca1dc17846576",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

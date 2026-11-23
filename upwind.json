@@ -1,38 +1,42 @@
 {
   "card": "upwind",
-  "updated_at": "2026-11-16T19:17:16.886Z",
+  "updated_at": "2026-11-23T20:59:49.700Z",
   "urls": {
     "https://docs.upwind.io/assets/js/37ee0c64.73dd6e78.js": {
       "hash": "8bac64cb8d1d444d8e541372a232d00566ef210d021c4af37282cd7c148b4dbb",
       "status": 200,
-      "ok": true,
-      "checked_at": "2026-11-16T19:15:41.942Z",
-      "quotes_found": 2,
-      "quotes_total": 2
-    },
-    "https://docs.upwind.io/assets/js/e5ce9b41.4909e293.js": {
-      "hash": null,
-      "status": 200,
       "ok": false,
       "failure": "empty",
       "fail_streak": 1,
-      "checked_at": "2026-11-16T19:15:42.943Z",
+      "last_ok_at": "2026-11-16T19:15:41.942Z",
+      "checked_at": "2026-11-23T20:57:54.721Z",
       "quotes_found": 0,
+      "quotes_total": 2
+    },
+    "https://docs.upwind.io/assets/js/e5ce9b41.3a14bd02.js": {
+      "hash": "e3d043afb06ac92fdd34cb53da3be2b8a12acb5badde507bdd57846fbe9e9a09",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:55.720Z",
+      "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.upwind.io/assets/js/e16b00bb.8647a8f4.js": {
       "hash": "9acc1a229d5f9462713e186b5e447c358176e4c699530bbe37f25959b942a814",
       "status": 200,
-      "ok": true,
-      "checked_at": "2026-11-16T19:15:43.943Z",
-      "quotes_found": 8,
+      "ok": false,
+      "failure": "empty",
+      "fail_streak": 1,
+      "last_ok_at": "2026-11-16T19:15:43.943Z",
+      "checked_at": "2026-11-23T20:57:56.721Z",
+      "quotes_found": 0,
       "quotes_total": 8
     },
     "https://docs.upwind.io/assets/js/250c1d76.fc51debe.js": {
       "hash": "8f58387088b0af572fced500adc41c1951cec9cb9f5598c3878735f522f3f997",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:44.943Z",
+      "checked_at": "2026-11-23T20:57:57.721Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -40,7 +44,7 @@
       "hash": "baf7fdbf84a7139cfe843fd3162982d3342ee581b1741e60c4763e39713471b4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:45.945Z",
+      "checked_at": "2026-11-23T20:57:58.721Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -48,7 +52,7 @@
       "hash": "121aca8c90c816dd217a0337f527ee0fc2a2171962121c6662957162411c3bcc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:46.944Z",
+      "checked_at": "2026-11-23T20:57:59.721Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -56,7 +60,7 @@
       "hash": "82abb59e6689ecc1d880e009b824a71664be34482b58183c5786f9e126d57787",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:47.944Z",
+      "checked_at": "2026-11-23T20:58:00.721Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -64,7 +68,7 @@
       "hash": "6a09425052f75adb42efbe61f5356e0092ab41d947d90f41fa9e5bb5a0ef2f82",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:48.944Z",
+      "checked_at": "2026-11-23T20:58:01.721Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -72,7 +76,7 @@
       "hash": "23122b70fb4eeba20f777dece8f7993e45347f76abf6f509a9282a178c9ec0ec",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:49.944Z",
+      "checked_at": "2026-11-23T20:58:02.722Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -80,7 +84,7 @@
       "hash": "866e2d874ddc57636c76e5d40328a9ed21ce1fbda9a9288fc65c2c9158fa2a87",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:50.944Z",
+      "checked_at": "2026-11-23T20:58:03.722Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -88,7 +92,7 @@
       "hash": "300a3f760c976c32349c50745e31be8b76af5c97b64228ea21c2ea74f083b56e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:51.945Z",
+      "checked_at": "2026-11-23T20:58:04.722Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -96,7 +100,7 @@
       "hash": "f11dc2c92b87f7bfb3fe242ac59fa268405e33b925b7ba05ceef934a590afae2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:52.945Z",
+      "checked_at": "2026-11-23T20:58:05.723Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -104,7 +108,7 @@
       "hash": "8f3668844b8e01f2ad7958982e266db0d75acb94a614d01bc8230d591d92eaaf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:53.945Z",
+      "checked_at": "2026-11-23T20:58:06.723Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -112,7 +116,7 @@
       "hash": "fb866b74e75f36811e5305d0b76e97eaba91a74ef91f012334b3e86fed30dfaa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:54.945Z",
+      "checked_at": "2026-11-23T20:58:07.724Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -120,7 +124,7 @@
       "hash": "160f086356636a4bffd611a9baf7750ba026582ae5a56ab6b66e80ac55e4a27a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:55.946Z",
+      "checked_at": "2026-11-23T20:58:08.724Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -128,23 +132,26 @@
       "hash": "d7d324455cae460a6cdc2e77b844fdfe9b6d4e66f5a99e6641cc91477fe5c6b7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:56.946Z",
+      "checked_at": "2026-11-23T20:58:09.725Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.upwind.io/assets/js/ebaae3f7.c95bf936.js": {
       "hash": "c1af61dd3d724a3d926a54e5ef7a719f2602647b4deaf9176fd4be418d13e9ed",
       "status": 200,
-      "ok": true,
-      "checked_at": "2026-11-16T19:15:57.946Z",
-      "quotes_found": 1,
+      "ok": false,
+      "failure": "empty",
+      "fail_streak": 1,
+      "last_ok_at": "2026-11-16T19:15:57.946Z",
+      "checked_at": "2026-11-23T20:58:10.725Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.upwind.io/assets/js/2661427a.1f7ca44d.js": {
       "hash": "257c37cbcfa961b41b6a1d6759c2a9719ff3985c4caa947cec08bad89d269afa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:58.946Z",
+      "checked_at": "2026-11-23T20:58:11.725Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -152,23 +159,22 @@
       "hash": "35a57474b084b34fbf8126283121324c90b1a47d645cea059b87fef48b529e3a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:59.946Z",
+      "checked_at": "2026-11-23T20:58:12.726Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "46b212340870594a7fe69527631e4bdf485e2d868be9575323bca08e91f42e08",
-    "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "fingerprint": "865da6aa07b46fdfcaecf5bcede9ebc91f1fb66d332a2601c6f91265d128f264",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

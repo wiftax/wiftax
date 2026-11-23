@@ -1,12 +1,12 @@
 {
   "card": "torq",
-  "updated_at": "2026-11-16T19:17:16.862Z",
+  "updated_at": "2026-11-23T20:59:49.645Z",
   "urls": {
     "https://learn.torq.io/apidocs/authentication": {
       "hash": "ecd3998666ef415f6241bd6df048ac83b96a9f4d70c9f165a79a8a78f6a7c536",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:17.929Z",
+      "checked_at": "2026-11-23T20:57:18.520Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -14,7 +14,7 @@
       "hash": "6f64c1a05e8d65b36f08219d01c3c36f3cff54bc13c430bcc08aef4527405d45",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:18.939Z",
+      "checked_at": "2026-11-23T20:57:19.540Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "4e251b7c0e3f09fc2c9f280c97e7c4bcdbea670d660269f612d056cb07282645",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:19.477Z",
+      "checked_at": "2026-11-23T20:57:19.555Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -30,7 +30,7 @@
       "hash": "8be55417900d697333a0e6ee94d4fb3dbffff885c31a44f06bf0ec810d40daa3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:20.477Z",
+      "checked_at": "2026-11-23T20:57:20.555Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -38,7 +38,7 @@
       "hash": "a674a2094a0ebeaf00467073fa131b64f686b44d332747ffd7978420c69b4dfd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:21.477Z",
+      "checked_at": "2026-11-23T20:57:21.555Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -46,7 +46,7 @@
       "hash": "711616693b5fd955d484f09332ad1a30262c623d56f8c990fa7694198c8fe9aa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:22.478Z",
+      "checked_at": "2026-11-23T20:57:22.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "148c0e657aa77397cf2b6ea9ccdc3d816c5c56ec88cc45208e0b16c67421a032",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:23.478Z",
+      "checked_at": "2026-11-23T20:57:23.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "a6f10d1c897552b4d8822dba3da4f5809b4dfa6cd1beba9fe995e176a0ddc85b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:24.479Z",
+      "checked_at": "2026-11-23T20:57:24.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "8f1351a4b8f5afad30adf3a074ae3d92c6a2d616629cc7d5ddadedcf448f4a3b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:25.479Z",
+      "checked_at": "2026-11-23T20:57:25.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "cc98e0902c841c3370483b7a2898374fc172e618b7643774bdc2720088f10753",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:26.479Z",
+      "checked_at": "2026-11-23T20:57:26.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "9b5c4796095510bf1fe4a68143554c392ae991f7c34a569d5e1f890f3f59a538",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:27.480Z",
+      "checked_at": "2026-11-23T20:57:27.555Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "6fa67943d2456f08ae3e9ded299b8f1baa6caada577425fc6231d35d9df4e45c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:28.479Z",
+      "checked_at": "2026-11-23T20:57:28.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "6d709c715f796f07bf2c91b23a612178a31bc9ee54226611358ed35930c1d039",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:29.480Z",
+      "checked_at": "2026-11-23T20:57:29.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "031e56adcef13cb1e7c38ee7bdcb3ab0ffc645caac6e8e6d02ccb7ed0ca0d017",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:30.480Z",
+      "checked_at": "2026-11-23T20:57:30.557Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,7 +118,7 @@
       "hash": "4ac9bdc9106a454a5b6d89c88c63ada8b98544df6d90e2e4d45b53c8ac481e19",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:31.482Z",
+      "checked_at": "2026-11-23T20:57:31.557Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "5d4294cae9ef5db5f02357d11463cda1554ea69164ba5a38880ff8fff2615062",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:25.847Z",
+      "checked_at": "2026-11-23T20:57:25.534Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -134,23 +134,22 @@
       "hash": "f948929631f7d33c39de473ae342406d22f2fdd786c47ac954d30877454b9f9a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:32.482Z",
+      "checked_at": "2026-11-23T20:57:32.558Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "78a51b6a5c8551da73967accbf0a79c88cf1ced3e71d13694ac68a00d0a6e0db",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "1eb85999a2cd5403d25c396547b2647988f88094cef8c63a49387700dace5553",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

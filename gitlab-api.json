@@ -1,0 +1,86 @@
+{
+  "card": "gitlab-api",
+  "updated_at": "2026-11-23T20:59:33.622Z",
+  "urls": {
+    "https://docs.gitlab.com/api/rest/authentication/": {
+      "hash": "30c9134ed5e518ff6ae3aadf40e3cf1d5346bd0abe64f316587c639aa62e4742",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:00.709Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.gitlab.com/user/profile/service_accounts/": {
+      "hash": "ca72a81682360362178ebaeffa6fbf464e3cdb41b6e6cbd68ad6f21ae8a0a319",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:01.709Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.gitlab.com/api/oauth2/": {
+      "hash": "0ea34f7aa5b03bb423ca5ef046848540711b00ee83b0cdf16ba9081ab97b1d95",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:02.710Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.gitlab.com/ci/secrets/id_token_authentication/": {
+      "hash": "6cc24f0455b249e9c11e5d7070e154bc6c2758df6060cfe7b8ea4109f95a71a4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:03.710Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.gitlab.com/ci/cloud_services/": {
+      "hash": "bd53407147eb61cb8b2e38a1726736c56b8245bb2610a526dd5e9f5fe953bba9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:04.711Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.gitlab.com/user/compliance/audit_event_streaming/": {
+      "hash": "5a17534aa30899122d99d0244711ea9c09fd44aebe036acd4af493cb578d98fa",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:05.711Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.gitlab.com/user/profile/personal_access_tokens/": {
+      "hash": "c935326f38b3e392aebb72bdf21c5e6312c7ede97e7dc0c7e8b44e0cf09cca3a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:06.710Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.gitlab.com/api/personal_access_tokens/": {
+      "hash": "4fac0497216a1e67c9798ec4585dc2c979bac50ca305fef8c5625bae1c13121b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:07.711Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.gitlab.com/security/tokens/": {
+      "hash": "e15b96d316b1fb4de18a604cad65921300bbb3251534be1d31424f1d0fdc0496",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:08.712Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

@@ -1,12 +1,12 @@
 {
   "card": "sf-compute",
-  "updated_at": "2026-11-16T19:17:16.629Z",
+  "updated_at": "2026-11-23T20:59:49.192Z",
   "urls": {
     "https://docs.sfcompute.com/preview/using-the-api.md": {
       "hash": "a12feb5f71a194430e65df5e8e2e2d938659ee859ebe4aed235e6f2b8fd1b225",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:24.010Z",
+      "checked_at": "2026-11-23T20:55:22.017Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -14,7 +14,7 @@
       "hash": "6feec19ce6103d1d3220ba1815724cb3e44e64fe9207986d4a06f5fe9f513b96",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:25.011Z",
+      "checked_at": "2026-11-23T20:55:23.017Z",
       "quotes_found": 7,
       "quotes_total": 7
     },
@@ -22,7 +22,7 @@
       "hash": "887c7814df60ac63ec302025416ebb14d877d0627b23e791f86995939dcdb767",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:26.011Z",
+      "checked_at": "2026-11-23T20:55:24.019Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "08ba35de388c203e77deb7dd7ed1fa45ba7572e7ef90d737ddd92dc7618b3ae0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:27.046Z",
+      "checked_at": "2026-11-23T20:55:25.023Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "f04e6aadff1aac06b8b50d328047d56039892d81e9415b0c1a583b894b660818",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:25.637Z",
+      "checked_at": "2026-11-23T20:55:23.939Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "ccf51768257488fd2a65f17ce8bed20703b9e238d61c88957421e85f69d3d9d3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:23.009Z",
+      "checked_at": "2026-11-23T20:55:21.017Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,15 +54,15 @@
       "hash": "f6302e318b29b56bfd0df7fe2f09b31f03da5e4b0d1ec04a90a9de5ee7642cc2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:28.046Z",
+      "checked_at": "2026-11-23T20:55:26.120Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sfcompute.com/llms.txt": {
-      "hash": "8b858f043a15492db936f2699160b78658d806f53712f3f3ad51d5ac91dcce12",
+      "hash": "ea2c4cb00d22f63c67db71d212036688b425e2b23010e841b32526d4e6ca14d0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:29.046Z",
+      "checked_at": "2026-11-23T20:55:27.120Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -71,9 +71,9 @@
       "status": 200,
       "ok": false,
       "failure": "empty",
-      "fail_streak": 2,
+      "fail_streak": 3,
       "last_ok_at": "2026-11-15T01:01:32.999Z",
-      "checked_at": "2026-11-16T19:13:25.583Z",
+      "checked_at": "2026-11-23T20:55:23.246Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -81,7 +81,7 @@
       "hash": "799b5911f697dd3c9515208f0b59e092c316edb18a1354c93b22906ff4558b01",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:26.638Z",
+      "checked_at": "2026-11-23T20:55:24.939Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -89,7 +89,7 @@
       "hash": "90a45269690d882b5b64e2e51642c993c9f158de5032a99269a4419cd3b502df",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:30.047Z",
+      "checked_at": "2026-11-23T20:55:28.120Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -97,22 +97,22 @@
       "hash": "f7736d6f9e538de1dac177d80cdb4560f08bf6c9e190ce0589e7db27471f2cf4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:31.047Z",
+      "checked_at": "2026-11-23T20:55:29.120Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "f3c0d3ca7ff3d05281a0aa6ac48a63b4dfa09fce030dacb8398d4757dadd4f29",
+    "fingerprint": "8ec857c4a815c47e7dbf5fac19d39a4daf7d3d9a306fed8cac0eef77532492e5",
     "outcome": "no_change",
-    "at": "2026-11-15T00:52:00.208Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

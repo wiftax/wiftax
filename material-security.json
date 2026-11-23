@@ -1,76 +1,76 @@
 {
   "card": "material-security",
-  "updated_at": "2026-11-16T19:17:09.630Z",
+  "updated_at": "2026-11-23T20:59:36.015Z",
   "urls": {
     "https://docs.material.security/reference/api-v1/authentication": {
-      "hash": "0b00e63365445d6abe6e9b0be7528132a0c7578b88353f7f5685098180b9cd24",
+      "hash": "7129ce42f06b38cd27ee2cafcb4a7b9098b33c12bded65f667497d655c89af19",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:11.121Z",
+      "checked_at": "2026-11-23T20:51:27.185Z",
       "quotes_found": 8,
       "quotes_total": 8
     },
     "https://docs.material.security/reference/material-mcp-server": {
-      "hash": "afce413ca8c7343e4fc8101a177b3160f7687c4b0345947082b6254667234620",
+      "hash": "4b1abdadd09fcc2e8ca2d96c97feeef8bf74f772c6beb60e2470b4cddf5e0ca1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:12.121Z",
+      "checked_at": "2026-11-23T20:51:28.185Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.material.security/working-with-issues/explorer/file-search": {
-      "hash": "46dec709937157e04e044600e6b6d3a9f7a2844d549c857212e4e8a23dbf7ca8",
+      "hash": "626240c9a1eea5060f818a14b1b23cf12502cb03e50303cb7ec9b644ebd545c4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:13.121Z",
+      "checked_at": "2026-11-23T20:51:29.185Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.material.security/email-protections/email-threats/detections/material-email-threat-detections/calendar-invite-attacks": {
-      "hash": "21af10174b6d165fe52b9d8b4ac54e96b2612f1b857192a5fd56b8d77fa5f48b",
+      "hash": "3a64a063116ba3866c9d8626a934fe97a1052c6a512f3d4ab290a3c5b5f8896b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:14.122Z",
+      "checked_at": "2026-11-23T20:51:30.185Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.material.security/getting-started/deployment-guides/your-first-30-days/1-connect-and-sync": {
-      "hash": "8a2a621ed1f27087464826c240784cde74c3b3fb3ddf74f0b81adde338766da1",
+      "hash": "e3048c2e059e0da5ea04442428f7d66154ec3ef53a73e910fc19233526f8d33b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:15.121Z",
+      "checked_at": "2026-11-23T20:51:31.185Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.material.security/integrations/integration-fundamentals/identity-integrations": {
-      "hash": "6ca26fbcd11b7fd47c5073981d63ea88efd483298a708b21b34f77120ccf6eca",
+      "hash": "7cef9016a0f9c3936334bb24dc5222b4b0c7bd3d5a9f315259909757ee766b98",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:16.121Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:51:32.185Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.material.security/integrations/integration-fundamentals/identity-integrations/okta-ssf": {
-      "hash": "587c3db0d780f86de4d950db7c4acc11d6672bd4c8700bbc7a6301ca43fef33a",
+      "hash": "150f20e1a855f83ce36286448590d59e8fdd7f84eab5ab251ce85c2ef35b6d76",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:17.121Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:51:33.186Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.material.security/integrations/integration-fundamentals/messaging-and-ticketing-integrations": {
-      "hash": "cd60603386b4d9db9de8317bf91e4ccbe84275959ba230fb3468b6db40e4999e",
+      "hash": "cc18ff4e848cb1505b6f2827bc35aa78ca08f3255151dace141b7c3b2472058d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:18.122Z",
+      "checked_at": "2026-11-23T20:51:34.186Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.material.security/integrations/integration-fundamentals/siem-integrations/crowdstrike-ng-siem": {
-      "hash": "b53c7a1b1a76b68f93a1af36dcbd32eb3a9de1991522d9af15f82b134e13a2a1",
+      "hash": "9dfcc395e4e3b6f3f3b30613835a6fd10cb6adfef633958f329b1ced127063cb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:19.122Z",
+      "checked_at": "2026-11-23T20:51:35.186Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,39 +78,39 @@
       "hash": "c6f5c979d813ed1e4452c3d5e55cb763c84e30917d3456c87ce5944c60477842",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:14.506Z",
+      "checked_at": "2026-11-23T20:51:30.515Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.material.security/reference/api-v1": {
-      "hash": "af116f1c4243e957ea650800cbc110c2c8bdc5f65d38fe0af7df7647a94c4c64",
+      "hash": "5184741cc33a4c2aa7481a85180ea478f352e7cb012ceba68a19a5a3f1c650d6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:20.122Z",
+      "checked_at": "2026-11-23T20:51:36.187Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.material.security/administration/admin-roles/permissions-matrices": {
-      "hash": "40e11c91928fec88ca6d719a156e19ff761a76b1db565dbf5fdf2c6386ced020",
+      "hash": "afa890f174f6f4cbefc3e661bde0ccb89478c3aaca976775eb3660077e523029",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:21.122Z",
+      "checked_at": "2026-11-23T20:51:37.187Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "a280419e42a49580f8a55645b147b6f683df6a86c2e295056666a1ecb99cd242",
-    "outcome": "notice",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/57"
+    "fingerprint": "0c9e74caa929b34f0c674841dac520ca6290f2da0bb146e33d95b2bdf0fe9a58",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

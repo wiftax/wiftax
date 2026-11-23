@@ -1,0 +1,116 @@
+{
+  "card": "statsig",
+  "updated_at": "2026-11-23T20:59:49.367Z",
+  "urls": {
+    "https://docs.statsig.com/console-api/introduction.md": {
+      "hash": "8716e63f0b4a6a30d5dc74dde36529020f30ded41cb7ee70f6e9da2299320af9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:12.465Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/access-management/api-keys.md": {
+      "hash": "f9fd8a7435487ea2d4690beb2557c9c7ef9f79c8672ed9889b3fb50eea5c518a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:13.465Z",
+      "quotes_found": 3,
+      "quotes_total": 4
+    },
+    "https://docs.statsig.com/integrations/mcp/automation-examples.md": {
+      "hash": "850cb17f67fabd01762e7a8210378073f74e7f94386407663336c1a733506d2d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:14.465Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/bigquery.md": {
+      "hash": "577f25968af1c5f3fb5a03efd4d1d016df41328eebb2175a8331a48a2818b9b6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:15.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/athena.md": {
+      "hash": "ca964692dc02503026f8cd0cc392fdfa05699ae11cfb1be46a5f24497d3896ef",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:16.465Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/snowflake.md": {
+      "hash": "de809be7dd2ad7e9711706f8519ca213445ca7aac689ffc294a9af474a92f9db",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:17.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/redshift.md": {
+      "hash": "6388e11426e2c5c17db11ed5c39203a2fd9ee3f8c022b1d8ad75b7fa3250bc5e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:18.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/statsig-warehouse-native/connecting-your-warehouse/databricks.md": {
+      "hash": "d412ba987b73277e200c1612bf9b3b0b68ecd5da08695211e530215083547685",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:19.467Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/data-warehouse-ingestion/s3.md": {
+      "hash": "c6c71a9ce9d552151bd32c3ec4260d88bd9272a314087fcc7c3c7be4dd9207fc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:20.467Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/api-reference/keys/create-key.md": {
+      "hash": "88f8b1c2430eebc832f56adce6d6b89a66eb376019e0a78aa904359448dfd4ff",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:21.467Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.statsig.com/api-reference/keys/rotate-key.md": {
+      "hash": "399e52ce9b694dd61c8257cdc3d2a4102fd44a8cbac539a28a978bcfe13fdc8e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:22.466Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.statsig.com/api-reference/keys/list-keys.md": {
+      "hash": "711d1d3b6ad9917fa79ceec44f76c16e9e1953c3e40bb8b26c8e782b68fe9e7d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:56:23.467Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "c98fd45f97c4f143d11022d35071cbbd241fcfb17bada0f6a191fd5fd70a9df9",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

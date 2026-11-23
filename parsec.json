@@ -1,0 +1,30 @@
+{
+  "card": "parsec",
+  "updated_at": "2026-11-23T20:59:38.624Z",
+  "urls": {
+    "https://support.parsec.app/api/v2/help_center/en-us/articles/32361397624084.json": {
+      "hash": "35856dff196c4950cb5b6d07f74109d9c998929a4c3506f59d907dc4cba51ab1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:52.244Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.parsec.app/api/v2/help_center/en-us/articles/32361349089044.json": {
+      "hash": "55d80b89765a526be56b200eb48c7610f58d6c1ac698c6804ca37afafdccaaa9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:53:53.244Z",
+      "quotes_found": 7,
+      "quotes_total": 7
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

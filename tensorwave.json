@@ -1,94 +1,100 @@
 {
   "card": "tensorwave",
-  "updated_at": "2026-11-16T19:17:16.836Z",
+  "updated_at": "2026-11-23T20:59:49.600Z",
   "urls": {
     "https://docs.tensorwave.com/kubernetes/health-overview.md": {
-      "hash": "bc4162f3557a3927a841d249ea154a370a2d1b378872aef009c3aa7cd2ddd546",
+      "hash": "69b854b39ef0bbf798e219c36e4eb1e1bce55fbe705165e6d91480f183e0bbdd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:56.677Z",
+      "checked_at": "2026-11-23T20:56:57.768Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.tensorwave.com/observability/kubernetes.md": {
-      "hash": "b31fb43ef47d9f0947d3b232adb264a3d73fbc9140a956095a49f908a0fc6e44",
+      "hash": "63d5bf132effe2ae1c95fcc1b7024ca535fffa8bb844a796eb8c55531044f7cc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:57.677Z",
+      "checked_at": "2026-11-23T20:56:58.768Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.tensorwave.com/slurm/access.md": {
-      "hash": "62c300c3c92f9934fd72194b1f672a3176ba61f522c2cf2d37916008879d8f8a",
+      "hash": "a89efab534c4f543ee29235195c275a1500bfea7ff32f7765723df7606801534",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:58.678Z",
+      "checked_at": "2026-11-23T20:56:59.769Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.tensorwave.com/welcome-to-tensorwave/bare-metal-quickstart.md": {
-      "hash": "137cc97a54e3c1c02e05c7abe2804facac81e6af09331bac2ff53fb704b195e3",
+      "hash": "b5fa6fc8146a7011cc7df02070dd8d4f4c23c65cae79102f2f4d7848a248f8e8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:59.678Z",
+      "checked_at": "2026-11-23T20:57:00.770Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://tensorwave.com/products/storage/high-speed-network-storage": {
-      "hash": "80cd05e74acbc2efe2d821167a4425c8100265021b0ace5aab3df9686bdfd04c",
+      "hash": "2d550698ded734f2b7ddf30cfaa7e4152809e8bad43317ccc1813d11041aa2f2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:57.886Z",
+      "checked_at": "2026-11-23T20:56:59.029Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.tensorwave.com/llms.txt": {
-      "hash": "1748cce9a6b10eca401ce80f189dedd7ab8ee4ffdd958f1f43be33f1a08de5a1",
+      "hash": "da98167bdf781a1dda707ab6f19c9ad6cd42f4a9fab2c9f92dd724919d3ce9ab",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:00.679Z",
+      "checked_at": "2026-11-23T20:57:01.771Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.tensorwave.com/observability/notifications-and-alerts.md": {
-      "hash": "43742e92dc7bdedffa7f83d672ec9ac0634eafe8782b0a0dad331b93f06f749e",
+      "hash": "997349c777738ad64ff10a28ed12d4bbaf707313b954c8f431f4ca7504d73c74",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:01.678Z",
+      "checked_at": "2026-11-23T20:57:02.771Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.tensorwave.com/slurm/containers.md": {
-      "hash": "b5e78f270668239912e2bddc9bbdecf2fa057dbf11b1fd8d78cb7a7e12e31ece",
+      "hash": "a515fd007918d12a2d4bd22d037a706a1b2917f1e6f9ae7c40e0fee89d7e9e8f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:02.679Z",
+      "checked_at": "2026-11-23T20:57:03.771Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.tensorwave.com/welcome-to-tensorwave/faq.md": {
-      "hash": "918f881d3ea253dee04488ac4870f45a9079054b98b6840b2e1b2d3bb975f3a1",
+      "hash": "73157bee9518a2a5ba487bfd0ca6a68398f55353bbccf0be5e46c7097c6b7196",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:03.680Z",
+      "checked_at": "2026-11-23T20:57:04.772Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.tensorwave.com/user-and-team-management/managing-team-member-access.md": {
-      "hash": "b099b84ccb695301e690172cbdf8f3225827645cfa883479830b7544a0b4e949",
+      "hash": "7bd94eef5212d47c9e76750d4870324b40effdfdab18c0ddf91bfb56fc73e105",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:04.681Z",
+      "checked_at": "2026-11-23T20:57:05.773Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "372ca46ea3ddaa2d34f2af4aebd873c4b1521547a44abcc466002127ad90c747",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

@@ -1,12 +1,12 @@
 {
   "card": "genesis-cloud",
-  "updated_at": "2026-11-16T19:17:07.988Z",
+  "updated_at": "2026-11-23T20:59:32.896Z",
   "urls": {
     "https://developers.genesiscloud.com/compute-api/": {
       "hash": "54d7df6e4144dabd928da4f63d610607584745a300cb57d6c5624212fee08577",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:02.051Z",
+      "checked_at": "2026-11-23T20:49:45.187Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
@@ -14,7 +14,7 @@
       "hash": "44fe26851b50a805ed8e76dd87e2ed9a5c5366bcdc7a9f1bbcd5cf41bdd499b1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:02.368Z",
+      "checked_at": "2026-11-23T20:49:45.334Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -22,7 +22,7 @@
       "hash": "9d94358e715325f7008322e45c8f09e0182ecb4077e46f02b28d5d18d519047b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:02.690Z",
+      "checked_at": "2026-11-23T20:49:45.875Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "de4ae5d4b1e5c429dab703b4a12caae2ccff73012497a2696c428793551a809d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:03.368Z",
+      "checked_at": "2026-11-23T20:49:46.335Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "172fe52c6c93609bead537ebfb456665f7f2f1d5446be8ef1cb5ede707def89c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:03.051Z",
+      "checked_at": "2026-11-23T20:49:46.187Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "09411771871e262447c266b02cec4e6539c54139c0c346e0d0c71ebeb95c4b80",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:04.051Z",
+      "checked_at": "2026-11-23T20:49:47.373Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -54,7 +54,7 @@
       "hash": "c6d13b6f4aa4cbd68d2c945e3525b9ecc83970579b1403c4c9bcb8c87ce15b18",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:04.368Z",
+      "checked_at": "2026-11-23T20:49:47.374Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "d125ed737532ac6cd5bc65cd7485b4a275c8477b658cd047de11cff33fd18bde",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:03.806Z",
+      "checked_at": "2026-11-23T20:49:46.875Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -70,17 +70,22 @@
       "hash": "710610f49f33e7bde74da42abb56c3d025c19f830dc2ee63b067ac8abbc71111",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:05.368Z",
+      "checked_at": "2026-11-23T20:49:48.374Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "f4d256ae1c857a25debc1320ccc31f6df9dd30fb7efb59fc0cfd27071e19a0e0",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

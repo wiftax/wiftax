@@ -1,0 +1,78 @@
+{
+  "card": "gong-platform",
+  "updated_at": "2026-11-23T20:59:33.635Z",
+  "urls": {
+    "https://help.gong.io/apidocs.md": {
+      "hash": "061274ffb39b543222ef8a45f0a750fa231a8af8dc67c7ad8c129ebd3dfb9b1c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:03.492Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://help.gong.io/docs/create-an-app-for-gong.md": {
+      "hash": "0fc1a41925c60c69409579680919d16612b8848276b7e63e3b38c519e7531c06",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:04.492Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://help.gong.io/docs/what-the-gong-api-provides.md": {
+      "hash": "34cd9dc77f89c04ac2ee249e96ece66ec0c880217c84c67282758698aa8634c2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:05.493Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.gong.io/docs/connect-google-workspace-company-wide.md": {
+      "hash": "22f2d9341a91cbaa8fdb8ae5645bb5d99e138a02cc72e85c47486c006f3533dc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:06.493Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.gong.io/docs/connect-gong-to-salesforce.md": {
+      "hash": "d07c1b9837a69023074848285a000af7bc2b123a314aadffa1d6948a5e758065",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:07.493Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.gong.io/docs/what-you-need-from-your-telephony-provider.md": {
+      "hash": "aee8d2574d9baa7ee556ec5177518835c62062228f8cb0ed95c96f5b4cb7b5f3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:08.494Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://help.gong.io/docs/receive-access-to-the-api.md": {
+      "hash": "2246035439b70c37afcb966707b80c056a7abd687441e9c26e8a5427f6c17983",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:09.495Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://help.gong.io/docs/generate-an-api-and-mcp-usage-report.md": {
+      "hash": "39df5b3d882bf33cbb80d34987c5670c9da5fb7a2cf67af7ea68208e83b14545",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:10.496Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

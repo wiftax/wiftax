@@ -1,0 +1,94 @@
+{
+  "card": "twilio-segment",
+  "updated_at": "2026-11-23T20:59:49.679Z",
+  "urls": {
+    "https://www.twilio.com/docs/segment/connections/oauth.md": {
+      "hash": "af29972abe2cb754f18b5f08a38ddd86a20a7c4fddbd544eedd1faa80d5f9ed2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:46.704Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://www.twilio.com/docs/segment/api/public-api.md": {
+      "hash": "d48336ade95f2973f68d73534870602cd170c7f6a0249d2efa30be0f1762845b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:47.705Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://www.twilio.com/docs/segment/connections/sources/catalog/libraries/server/http-api.md": {
+      "hash": "80d9b2c3af0729982c02ebf403d64dea4e235cffd64626a24897af69eeacc1a5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:48.706Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/segment/connections/storage/catalog/aws-s3.md": {
+      "hash": "9a2c57e6deda46faf2b474538207e1edcea9db99ea9a1c03a83f3829413e120e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:49.706Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://www.twilio.com/docs/segment/connections/storage/catalog/bigquery.md": {
+      "hash": "f8df3a76c8ffb6475c622f28bf03bcf8279d8c1cbc34015d05578d1de474f041",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:50.707Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/segment/connections/storage/catalog/snowflake.md": {
+      "hash": "c09678f78691f4e35586b586238220819c83f93a8408c7ba6aff024b2c1dac74",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:51.707Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.segmentapis.com/tag/Getting-Started/": {
+      "hash": "8f7c95dbfafcdb094edb9b60cb325061e10c730ff9e05c9b05377a0c0dc3b225",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:45.552Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/segment/segment-app/iam/roles.md": {
+      "hash": "8968d0ae639e31b36350cb80ccec3f72dc67f1795eae24cfd8efe92470bfdf0f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:52.708Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/segment/segment-app/iam/concepts.md": {
+      "hash": "f4b2b20bb5a3e15d8ac63c3dbbf56aee93524f38e7d07878a82fe4d64384492b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:53.708Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.twilio.com/docs/segment/segment-app/iam/audit-trail.md": {
+      "hash": "409aaadbf856649a7fc191880f985cbae3e5d31109c988ae32534c47dc4d5819",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:57:54.710Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

@@ -1,28 +1,28 @@
 {
   "card": "denvr-cloud",
-  "updated_at": "2026-11-16T19:17:07.460Z",
+  "updated_at": "2026-11-23T20:59:31.552Z",
   "urls": {
     "https://docs.denvrdata.com/docs/platform/api-keys.md": {
-      "hash": "15810a6ee283aa5d861ed9b20d81cd0bb73fed3fa295cd2b48cc6c7d11cfc26e",
+      "hash": "8332ab8fffbbf5339159049273f64443b79550576e6658c8ddea939d739381a9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:19.373Z",
+      "checked_at": "2026-11-23T20:47:38.582Z",
       "quotes_found": 14,
       "quotes_total": 14
     },
     "https://docs.denvrdata.com/docs/api-reference/authentication": {
-      "hash": "d80b0aef293dbc91734b55548bcaf4e2f27c0e37a53733e5082aba7dfb0c17b9",
+      "hash": "d669bf68b79ef0cd469c41773de99ca4eebe90e2b43ed70cd992885760e89b48",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:20.373Z",
+      "checked_at": "2026-11-23T20:47:39.583Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.denvrdata.com/docs/overview/getting-started/api-usage-samples.md": {
-      "hash": "e1286226b197657a341e812ebb20bd2301d9075e9023942f05799611c89caa2d",
+      "hash": "0e9644975f1f6e32c8517979ed00efc738bd3348587c7241cfd0319ff5aeefb7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:21.373Z",
+      "checked_at": "2026-11-23T20:47:40.583Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "0cfd4671006255b99e7efff7c731d8d926338bd2e3f2cd24d1e1f205a5e5a70a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:20.604Z",
+      "checked_at": "2026-11-23T20:47:39.826Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,57 +38,62 @@
       "hash": "71cac6fe9640642b1ef47fee6d2084de722b2177da1e99ee2a4e351c802605f9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:21.605Z",
+      "checked_at": "2026-11-23T20:47:40.827Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.denvrdata.com/docs/platform/user-management.md": {
-      "hash": "b1ce4e480d007da23f14e6f140b05edfa19030e9de99a1113648b84dd75d32dc",
+      "hash": "3895f2dcf48fd00b7bbd60141822eefe069759c01ad0bf1f53289d3e870ff203",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:22.373Z",
+      "checked_at": "2026-11-23T20:47:41.583Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.denvrdata.com/docs/platform/applications.md": {
-      "hash": "53eef0453d5ff2ec20a3ef7db68508b353b77dee2a4548b618450c7691dc48b4",
+      "hash": "625e2b3e7e20a8edb638d9a94e2b02b7c0d9115f4caedb93f72f657ed5f40488",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:23.373Z",
+      "checked_at": "2026-11-23T20:47:42.583Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.denvrdata.com/docs/overview/whats-new.md": {
-      "hash": "ff90b1aacc087c51c55bda735f7dc65418ef6785ad1725cce4d0ba24193ebf72",
+      "hash": "121c78b3ab712eea2c235233e6633df95ea777b860bbad1c4a6bcc2d52e34ce9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:24.373Z",
+      "checked_at": "2026-11-23T20:47:43.584Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.denvrdata.com/docs/overview/getting-started/launch-vllm-as-a-custom-application.md": {
-      "hash": "7e9964034bdde99c27b14ef5d33415d4f571358fde77d9685496e6a8b7582250",
+      "hash": "a89fdc03dbaa88456354565f2b4e2160d9da50c12851496faa655073040e1766",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:25.373Z",
+      "checked_at": "2026-11-23T20:47:44.585Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.denvrdata.com/docs/platform/storage.md": {
-      "hash": "538e5dd55f1bd3a1a7906f1ed112b756f095aed4b90cf7512c3fee070b7d03fa",
+      "hash": "2ffccf83a84677b530a9df544fb9d5df64bae56c57048147ef3b0a65a7c1b0e4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:26.374Z",
+      "checked_at": "2026-11-23T20:47:45.585Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "e0554e27d3ff3f65904e27f85cb860e09dab9dffb7dc4130e923d08751b8fc0c",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

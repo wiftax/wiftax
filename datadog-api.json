@@ -1,12 +1,12 @@
 {
   "card": "datadog-api",
-  "updated_at": "2026-11-16T19:17:06.465Z",
+  "updated_at": "2026-11-23T20:59:29.973Z",
   "urls": {
     "https://docs.datadoghq.com/account_management/workload_identity_federation/": {
       "hash": "5038942de28b02d2ba419f05cc74a8b62518605fa3bd47631576a3e084e580d9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:54.083Z",
+      "checked_at": "2026-11-23T20:47:13.860Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -14,7 +14,7 @@
       "hash": "5095009320ead6b98687d9dce0680fb69408f9d3e1c402c881c261ae26c39e7e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:55.084Z",
+      "checked_at": "2026-11-23T20:47:14.860Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -22,7 +22,7 @@
       "hash": "6d425327e0240ede592db8dcf05fcddf10d2aff900a209b00d4edad59511705b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:56.084Z",
+      "checked_at": "2026-11-23T20:47:15.860Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,15 +30,15 @@
       "hash": "2a917e7e4e3fe49c8df445b676afd23ca43748ee567f6d2cfc62e7318e15e2b4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:57.084Z",
+      "checked_at": "2026-11-23T20:47:16.861Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.datadoghq.com/integrations/amazon_web_services/": {
-      "hash": "0b0bb704169dabe7aac5eac367de917158f3cb4b568a88b52cf78e054a114424",
+      "hash": "b8183fb911981eb71f5b9a544ac34c7979a981ed8ed73da5b9573f2a692d0d40",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:58.085Z",
+      "checked_at": "2026-11-23T20:47:17.861Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "41496c0254d74ca9d6859b818b81cf343e5069edd301f32f82d8040b3870ac21",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:59.143Z",
+      "checked_at": "2026-11-23T20:47:18.860Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "6c1020e2b528dd420735d254f14722f69d1dd711baa77274ae5dbee612e2373e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:00.143Z",
+      "checked_at": "2026-11-23T20:47:19.861Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,39 +62,39 @@
       "hash": "684516c8b7a74b15cfb01db44c55693de926cea514314091a625a3df8a010dda",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:01.144Z",
+      "checked_at": "2026-11-23T20:47:20.862Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.datadoghq.com/api/latest/key-management/": {
-      "hash": "15178e85efcd669ba16fd32af112d94245aa6fd678b814eff267c3af9e311a35",
+      "hash": "0968eaa4a0e369e79eb108082f656cc82a6301864e840f551ef779841fbf2ab0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:02.146Z",
+      "checked_at": "2026-11-23T20:47:21.862Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.datadoghq.com/api/latest/scopes/": {
-      "hash": "2c533f6029ec9418ef4bca29513400102b15d20361dc41fa0962e5cb898f8fc5",
+      "hash": "8e5b688aacf9c0fbc88cb4558463d30319a21e337c8cfb9946d1da474c36ed2b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:03.146Z",
+      "checked_at": "2026-11-23T20:47:22.863Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://raw.githubusercontent.com/DataDog/datadog-api-client-python/master/.generator/schemas/v2/openapi.yaml": {
-      "hash": "cb31ab36db98b28314a502927dbedd9ea57fe760061133e704eca85ea3b959e7",
+      "hash": "72eb301f32c9d2a7c49dfafd2fe81eb590c52e98399147fee577faae11a492cf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:58.075Z",
+      "checked_at": "2026-11-23T20:47:17.892Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

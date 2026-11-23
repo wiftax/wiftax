@@ -1,20 +1,20 @@
 {
   "card": "voltage-park",
-  "updated_at": "2026-11-16T19:17:16.953Z",
+  "updated_at": "2026-11-23T20:59:49.810Z",
   "urls": {
     "https://support.voltagepark.com/article/api": {
       "hash": "72de96727bc954e40b490e8d45fdc8f7739d2d455e2d6e88c6d4015f1d884f55",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:17.515Z",
+      "checked_at": "2026-11-23T20:58:29.555Z",
       "quotes_found": 8,
       "quotes_total": 8
     },
     "https://cloud-api.voltagepark.com/api/v1/openapi.json": {
-      "hash": "6ab84747143c03c1ddb46c6ed309c60d63835e14f61e08a9392a519e8f290e5e",
+      "hash": "e13d0b913e9af700404cfd5cdf10f5591550541e6cf874c85e653926301df9ae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:15.217Z",
+      "checked_at": "2026-11-23T20:58:26.993Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -22,7 +22,7 @@
       "hash": "6989e9c7666ed2424f315b50d89833928ccd617ec1b5c5b45569d56ebf26a03d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:18.515Z",
+      "checked_at": "2026-11-23T20:58:30.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "04eaeadbfaebd766d6e9e361da3fb6ee10103ea6488f9cb87e051c609bdc42c9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:19.516Z",
+      "checked_at": "2026-11-23T20:58:31.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,17 +38,22 @@
       "hash": "892b594e79ae78dcd9719f94e694f9b2fa8d6245480acbd7096709680e54b662",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:20.516Z",
+      "checked_at": "2026-11-23T20:58:32.555Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "a33850e8770a8a505cab312788aac0673ebe0461c74cdc7aceb12f4a4aebb1d1",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

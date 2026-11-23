@@ -1,12 +1,12 @@
 {
   "card": "flagsmith",
-  "updated_at": "2026-11-16T19:17:07.795Z",
+  "updated_at": "2026-11-23T20:59:32.162Z",
   "urls": {
     "https://docs.flagsmith.com/integrating-with-flagsmith/flagsmith-api-overview/management-api/authentication": {
       "hash": "9ac93c668547200d1f669d9356378114febd1ff87c9ebb843de3b2999c323951",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:37.403Z",
+      "checked_at": "2026-11-23T20:49:13.480Z",
       "quotes_found": 8,
       "quotes_total": 8
     },
@@ -14,15 +14,15 @@
       "hash": "836248c065a6f4d9265877c48a39e8739e0e5ac37c2ffa923492022d08b5b793",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:38.404Z",
+      "checked_at": "2026-11-23T20:49:14.481Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://api.flagsmith.com/api/v1/swagger.json": {
-      "hash": "6f5894f6959292255835a4065c02f74e754072d9e881af5540ee681508229746",
+      "hash": "2bff40b536996344e5470dca3cc61291042d1f64275d0ddae1aef535d329c7f8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:38.653Z",
+      "checked_at": "2026-11-23T20:49:13.659Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
@@ -30,7 +30,7 @@
       "hash": "21bedb32e376326024dc16ba836d23b9db31d236ba4248bf00ce8635093a924f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:39.404Z",
+      "checked_at": "2026-11-23T20:49:15.481Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -38,7 +38,7 @@
       "hash": "623b0d348823da30d8a099f5199b5f62b4a468570645e1b16c0e6bd445d09635",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:40.404Z",
+      "checked_at": "2026-11-23T20:49:16.481Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,23 +46,23 @@
       "hash": "c68b1ea01e8a90dc8a06292a91a698f9cd498c7cb66ca4c1acaa4fcfb2b3f2f6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:41.405Z",
+      "checked_at": "2026-11-23T20:49:17.480Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://github.com/Flagsmith/terraform-provider-flagsmith/blob/main/docs/index.md": {
-      "hash": "41883ca7f15d97446c048fa1fe2128b23a54b3428d31e88e7de1fd711839f16a",
+      "hash": "fe4cd4c65d790db99335cfedc1d14d0649d5356cd362431083b1527e62081b6b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:40.547Z",
+      "checked_at": "2026-11-23T20:49:14.960Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.flagsmith.com/deployment-self-hosting/core-configuration/environment-variables": {
-      "hash": "9db1f951c5c6a76f68b70f6c5734edde9e4b3ba6c05434f10ea33b477d96ab7f",
+      "hash": "134c5b9841e8b03eb0a8df2584cacd665fd050c1148f233c7d467d931367c7ea",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:42.406Z",
+      "checked_at": "2026-11-23T20:49:18.481Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "977fdd4950f41eb0c724e40275d5e20a026166c26fa25b5eabf5edfcfb096d1d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:43.405Z",
+      "checked_at": "2026-11-23T20:49:19.481Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "ced1140a1aa9a2171e4c90da0b02951295668281d128ae94f5e912b57e1042c5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:44.406Z",
+      "checked_at": "2026-11-23T20:49:20.481Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "2d664576711d6a59a408a2d500484f40a5f565397c9a7c2d42c3322d01ed5b07",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:45.407Z",
+      "checked_at": "2026-11-23T20:49:21.482Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "c81986a33c6b345b2248ec77a549bc6dd0e8e59611ed09483ff710026d87c3b3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:46.407Z",
+      "checked_at": "2026-11-23T20:49:22.482Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "df1990f03f9922c65e5385995056a172d2eb0e182e06382d9ed8a178e3f30534",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:47.408Z",
+      "checked_at": "2026-11-23T20:49:23.483Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "00fa3752088b3c1a229b69170eeb8bec4627d3936ac3af1a86865132d1b024ae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:48.408Z",
+      "checked_at": "2026-11-23T20:49:24.484Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,7 +118,7 @@
       "hash": "6cf3b3bd2d69c2e547c2b0e126e6bd8a01750aeff9e46bad4ec8f847502d2667",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:49.409Z",
+      "checked_at": "2026-11-23T20:49:25.485Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -126,7 +126,7 @@
       "hash": "ebd73eb3e6337d2bd57760c51adca583f00757906152455257cf4737a0ddcb2c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:50.409Z",
+      "checked_at": "2026-11-23T20:49:26.485Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,7 +134,7 @@
       "hash": "59aad966df8825fa398d0bd72234be97259637de675692012e4889caf0853e61",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:51.409Z",
+      "checked_at": "2026-11-23T20:49:27.486Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,7 +142,7 @@
       "hash": "6a0ddb563e0ca5830f6139090ae88a01535cc8da7b689b7bf521d264f65a93c7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:52.409Z",
+      "checked_at": "2026-11-23T20:49:28.487Z",
       "quotes_found": 1,
       "quotes_total": 2
     },
@@ -150,15 +150,15 @@
       "hash": "7c2ff33ebf3dd6f47f989f170d5d90fc9c215f65b5e0d049de493dd39849c782",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:53.411Z",
+      "checked_at": "2026-11-23T20:49:29.488Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.flagsmith.com/third-party-integrations/webhook": {
-      "hash": "7d3b55e6da127a9d742382549ecb6c393d6c3fec2500e4bceec5c88ec27aefca",
+      "hash": "75cc6f8b3e2c06e297bbc7e1335fcf44b450d74b7548ead5a7bc5c8d12615f5b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:54.410Z",
+      "checked_at": "2026-11-23T20:49:30.489Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -166,7 +166,7 @@
       "hash": "c175841f5cdbb57fb70e67675e8a03a9f22749575cdcf7541c65fbfdc0c2b9f7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:55.410Z",
+      "checked_at": "2026-11-23T20:49:31.488Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -174,23 +174,23 @@
       "hash": "bda105d2b2b52ca1cc313cf32e287b20cc7a8888cabfa823c4fe9c7782a542fa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:56.410Z",
+      "checked_at": "2026-11-23T20:49:32.497Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "bd83517e1b275df78349007367680a34a68995eb3d7ecfc641621c5a9745547a",
+    "fingerprint": "5593f2a07e44187a2b31dc766f9a6a3569840447bed69a3f8fb58a61865fc2c8",
     "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

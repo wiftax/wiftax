@@ -1,14 +1,14 @@
 {
   "card": "vultr-cloud",
-  "updated_at": "2026-11-16T19:17:16.957Z",
+  "updated_at": "2026-11-23T20:59:49.817Z",
   "urls": {
     "https://www.vultr.com/api/": {
       "hash": null,
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:16:18.296Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:58:30.043Z",
       "quotes_found": 0,
       "quotes_total": 7
     },
@@ -16,7 +16,7 @@
       "hash": "e62d9cea0c9db96ba3c55d22ed8e5d2ca331dc205c0037cce02a3c98dc2e5c2f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:18.304Z",
+      "checked_at": "2026-11-23T20:58:30.160Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -24,7 +24,7 @@
       "hash": "a17030fac57c60793a9300b4165e1665cfc58bd211d1ef0e2594d31bc7ea7aca",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:19.302Z",
+      "checked_at": "2026-11-23T20:58:31.160Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -32,7 +32,7 @@
       "hash": "29265096cd0176133ab28e924beedef99120a17f6bc9d8cb6e7080c2d109b499",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:20.304Z",
+      "checked_at": "2026-11-23T20:58:32.171Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -40,7 +40,7 @@
       "hash": "1b7736c50bdb917adc5eaceb46ba0615a3ca14f4866b7f78d04dd210998e2cda",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:21.304Z",
+      "checked_at": "2026-11-23T20:58:33.171Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -48,7 +48,7 @@
       "hash": "938ed71e82a61da3aaa811235b6d8b3f69b59d0cea679ea855eb5d8a55f7cb77",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:22.305Z",
+      "checked_at": "2026-11-23T20:58:34.171Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -56,7 +56,7 @@
       "hash": "94367ebe8fd35e1dae46d60cdabd6a1499c84dee8301b83b8f616e1f8e7d5699",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:23.305Z",
+      "checked_at": "2026-11-23T20:58:35.171Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -64,7 +64,7 @@
       "hash": "b53eef264b4c9aa71453982259ff345ec42cff11fa7d622342c8d11c0dd82865",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:24.307Z",
+      "checked_at": "2026-11-23T20:58:36.171Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -72,7 +72,7 @@
       "hash": "75cbc3ad22bb9bb6528600f99f4a70e492d1f2fa134acde017aaefcae7849735",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:25.308Z",
+      "checked_at": "2026-11-23T20:58:37.172Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -80,7 +80,7 @@
       "hash": "d99365f00bde641df2b649414dcd72faff7c4348357afaa78d53cc6c173a7786",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:26.309Z",
+      "checked_at": "2026-11-23T20:58:38.172Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -88,7 +88,7 @@
       "hash": "8d140ff7725ce5cc3e05ffb63f529fec8f3b131079aa6c4a4190a877e0e6f2a0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:27.309Z",
+      "checked_at": "2026-11-23T20:58:39.172Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -96,7 +96,7 @@
       "hash": "2ee6cf6cc1061e0d0267ecde9b7e015351062104ea2429768310eb9f8af2e545",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:28.309Z",
+      "checked_at": "2026-11-23T20:58:40.173Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -104,7 +104,7 @@
       "hash": "3e32c7c2c96ebd56fa16b7d0b30f3e9b0740a409d85957dce584f866eeeffdf6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:29.309Z",
+      "checked_at": "2026-11-23T20:58:41.173Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -112,7 +112,7 @@
       "hash": "d1b72c458f322fafab1ae9cf37cef49571972db7b85f4def45568a13e4bde9c3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:30.311Z",
+      "checked_at": "2026-11-23T20:58:42.173Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -120,7 +120,7 @@
       "hash": "80f6d3c13117df614aea18f8959a73b84e6336f6fd728e75838c47aaf9f655ac",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:31.312Z",
+      "checked_at": "2026-11-23T20:58:43.174Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -128,23 +128,22 @@
       "hash": "2818e8b64719ade4d2310ebd358143530393f4a138c86c637e6dae771b948860",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:32.313Z",
+      "checked_at": "2026-11-23T20:58:44.176Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "97cb577b39d41ccd2fd246a9d40bea7d841738fad304eedc8b1815412182b372",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "f616091eb653a13c7279a85753e3b5af88d47d6065ffe51d2f8b4b0f3522b2ae",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

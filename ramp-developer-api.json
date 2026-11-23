@@ -1,0 +1,94 @@
+{
+  "card": "ramp-developer-api",
+  "updated_at": "2026-11-23T20:59:38.787Z",
+  "urls": {
+    "https://docs.ramp.com/llms-guides/authorization.txt": {
+      "hash": "9b12dc0f8f165dc7e9e498f95855bb3378f5dbe474ed9da495b64cca6fce0f34",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:26.336Z",
+      "quotes_found": 7,
+      "quotes_total": 7
+    },
+    "https://docs.ramp.com/llms-guides/ai-usage.txt": {
+      "hash": "db9a4f6e6d478eeb1dc9abe60e26bc72d29654dff9aed8d9f5ff88934d57629f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:27.336Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ramp.com/connect-aws-bedrock-ai-token-spend": {
+      "hash": "65b683ae310e559fe68758bec0202e0cd5144085b70fe399b0c28135d7894c0c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:27.266Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.ramp.com/connect-azure-ai-token-spend": {
+      "hash": "2f674157380a9e624757998b100aad8f510b60850af6a793384369216b4fb9bf",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:28.266Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ramp.com/connect-google-cloud-ai-token-spend": {
+      "hash": "f2c91bc3347aa30119695f9c19f33302512247705ffc73e0f278196190329c96",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:29.265Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ramp.com/netsuite-api-and-authentication-requirements": {
+      "hash": "ae4f8e5dace473b112b29b1b2af40dcbfcba93d7034a694cc79d9a57d74118c4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:30.266Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ramp.com/how-to-set-up-netsuite-with-ramp-standard-no-subsidiaries": {
+      "hash": "e4ebf2dd227a8cb277ab8a0c4831b68340f5b8fb0160681ade068394daa544a6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:31.266Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ramp.com/how-to-set-up-ramp-to-sync-with-sage-intacct": {
+      "hash": "4300431e31e0de10751a158a01fb006d56760944f32ab4490e524f058ddbdb65",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:32.265Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ramp.com/quickbooks-online-overview": {
+      "hash": "6827ff9d86080e919ff05f92ce78e20467ff28987a690c5425a52c681e934dfe",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:33.266Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.ramp.com/llms-guides/getting-started.txt": {
+      "hash": "25c81f22bbcadb1ea4d66456d3a86bfde311780fb441bfcb0ea77f10f525749c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:30.271Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

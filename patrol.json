@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "date": "2026-11-16",
-  "started_at": "2026-11-16T19:03:37.140Z",
-  "finished_at": "2026-11-16T19:21:18.264Z",
-  "duration_s": 1061,
+  "date": "2026-11-23",
+  "started_at": "2026-11-23T20:43:16.596Z",
+  "finished_at": "2026-11-23T21:10:01.985Z",
+  "duration_s": 1605,
   "dry_run": false,
   "partial": false,
   "sisyphus": {
@@ -11,124 +11,167 @@
   },
   "model": "claude-opus-5-5",
   "usage": {
-    "calls": 15,
-    "input_tokens": 122924,
-    "output_tokens": 59429,
-    "cache_read_tokens": 51656,
-    "cache_write_tokens": 18784,
-    "cost_usd": 1.78,
+    "calls": 106,
+    "input_tokens": 1206883,
+    "output_tokens": 201906,
+    "cache_read_tokens": 521220,
+    "cache_write_tokens": 20440,
+    "cost_usd": 9.07,
     "unpriced_models": []
   },
   "moved_pages": [
     {
-      "card": "elastic-agent-fleet",
-      "from": "https://www.elastic.co/docs/manage-data/ingest/managed-integrations/cloud-connector-deployment.md",
-      "to": "https://www.elastic.co/docs/reference/managed-integrations/federated-identity"
+      "card": "upwind",
+      "from": "https://docs.upwind.io/assets/js/37ee0c64.73dd6e78.js",
+      "to": "https://docs.upwind.io/assets/js/37ee0c64.eee168e4.js"
     },
     {
       "card": "upwind",
-      "from": "https://docs.upwind.io/assets/js/e5ce9b41.4909e293.js",
-      "to": "https://docs.upwind.io/assets/js/e5ce9b41.3a14bd02.js"
+      "from": "https://docs.upwind.io/assets/js/e16b00bb.8647a8f4.js",
+      "to": "https://docs.upwind.io/assets/js/e16b00bb.7ff4e1b5.js"
+    },
+    {
+      "card": "upwind",
+      "from": "https://docs.upwind.io/assets/js/ebaae3f7.c95bf936.js",
+      "to": "https://docs.upwind.io/assets/js/ebaae3f7.e60a681a.js"
     }
   ],
-  "cards": 113,
-  "urls": 1651,
-  "urls_ok": 1610,
-  "receipts": 2763,
-  "receipts_found": 2672,
+  "cards": 174,
+  "urls": 2127,
+  "urls_ok": 2074,
+  "receipts": 3730,
+  "receipts_found": 3560,
   "drift": {
-    "cards": 18,
-    "urls": 19
+    "cards": 105,
+    "urls": 150
   },
   "unreachable": {
-    "urls": 41,
+    "urls": 53,
     "hosts": [
       {
         "host": "docs.cudocompute.com",
         "urls": 15,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
       },
       {
         "host": "docs.splunk.com",
         "urls": 11,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
       },
       {
         "host": "help.splunk.com",
         "urls": 5,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
+      },
+      {
+        "host": "docs.coupa.com",
+        "urls": 4,
+        "failure": "empty",
+        "max_streak": 1
+      },
+      {
+        "host": "support.ironcladapp.com",
+        "urls": 4,
+        "failure": "gone",
+        "max_streak": 1
+      },
+      {
+        "host": "github.com",
+        "urls": 2,
+        "failure": "server",
+        "max_streak": 1
       },
       {
         "host": "www.sentinelone.com",
         "urls": 2,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
       },
       {
         "host": "blog.51sec.org",
         "urls": 1,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
       },
       {
         "host": "graphql-spec.runpod.io",
         "urls": 1,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
+      },
+      {
+        "host": "raw.githubusercontent.com",
+        "urls": 1,
+        "failure": "gone",
+        "max_streak": 1
       },
       {
         "host": "readme.reco.ai",
         "urls": 1,
         "failure": "empty",
-        "max_streak": 2
+        "max_streak": 3
       },
       {
         "host": "sfcompute.com",
         "urls": 1,
         "failure": "empty",
-        "max_streak": 2
+        "max_streak": 3
       },
       {
         "host": "support.expel.io",
         "urls": 1,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
       },
       {
         "host": "www.vultr.com",
         "urls": 1,
         "failure": "blocked",
-        "max_streak": 3
+        "max_streak": 4
       }
     ]
   },
-  "assessed": 17,
+  "assessed": 105,
   "notices": [],
   "refresh": {
-    "url": "https://github.com/wiftax/wiftax/pull/84",
+    "url": "https://github.com/wiftax/wiftax/pull/92",
     "cards": [
+      "aws-iam",
       "baseten",
-      "coreweave-forge",
+      "clearfeed",
+      "cyberark-conjur-cloud",
+      "defakto-mint",
+      "delinea-secret-server",
+      "digitalocean-api",
+      "docontrol",
       "doppler-secrets",
-      "elastic-agent-fleet",
       "flagsmith",
-      "nebius-ai-cloud",
+      "gitguardian-platform",
+      "granola",
+      "kentik-platform",
+      "knowbe4-ksat",
+      "material-security",
+      "okta-management-api",
+      "oleria-identity-governance",
       "opal-security",
-      "paloalto-cortex-xsiam",
-      "proofpoint-tap",
-      "trendmicro-vision-one",
-      "upwind"
+      "panther-siem",
+      "paperspace",
+      "pingone-platform",
+      "pure-storage-pure1",
+      "rapid7-insight-platform",
+      "rewind-backups",
+      "statsig",
+      "tensorwave",
+      "tines",
+      "webflow"
     ]
   },
   "issues": [],
   "unreachable_issues": {
-    "opened": [
-      "https://github.com/wiftax/wiftax/issues/85",
-      "https://github.com/wiftax/wiftax/issues/86"
-    ],
+    "opened": [],
     "updated": [
       "https://github.com/wiftax/wiftax/issues/61",
       "https://github.com/wiftax/wiftax/issues/62",
@@ -136,36 +179,18 @@
       "https://github.com/wiftax/wiftax/issues/66",
       "https://github.com/wiftax/wiftax/issues/67",
       "https://github.com/wiftax/wiftax/issues/68",
+      "https://github.com/wiftax/wiftax/issues/85",
+      "https://github.com/wiftax/wiftax/issues/86",
       "https://github.com/wiftax/wiftax/issues/70",
       "https://github.com/wiftax/wiftax/issues/74"
     ],
     "closed": [
-      "https://github.com/wiftax/wiftax/issues/65",
-      "https://github.com/wiftax/wiftax/issues/72",
-      "https://github.com/wiftax/wiftax/issues/69",
-      "https://github.com/wiftax/wiftax/issues/59",
-      "https://github.com/wiftax/wiftax/issues/64",
-      "https://github.com/wiftax/wiftax/issues/71",
-      "https://github.com/wiftax/wiftax/issues/60"
+      "https://github.com/wiftax/wiftax/issues/73"
     ]
   },
   "outcomes": [
     {
       "id": "1password-secrets-automation",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "abnormal-security",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "aembit-workload-iam",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -179,6 +204,13 @@
       "error": false
     },
     {
+      "id": "anecdotes",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
       "id": "anthropic-api",
       "drifted": 0,
       "unreachable": 0,
@@ -186,63 +218,49 @@
       "error": false
     },
     {
-      "id": "aws-iam",
+      "id": "apple-business-manager",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "axonius",
+      "id": "asana",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "azure-entra-workload-identity",
+      "id": "atlassian-cloud",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "beyondtrust-password-safe",
+      "id": "bynder",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "britive-cloud-pam",
+      "id": "cisco-catalyst-sd-wan-manager",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "c1-identity-platform",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "skipped: same drift already assessed on 2026-11-15 (no change)",
-      "error": false
-    },
-    {
-      "id": "chainguard-platform",
+      "id": "cisco-meraki-dashboard",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "checkpoint-infinity",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "cisco-duo-admin-api",
+      "id": "cisco-webex",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -256,63 +274,28 @@
       "error": false
     },
     {
-      "id": "coreweave-api",
+      "id": "cognition-devin",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "coreweave-cks",
+      "id": "coreweave-forge",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "coreweave-object-storage",
+      "id": "coupa-core-platform",
       "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "crowdstrike-falcon-api",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "crusoe-cloud",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "cudo-compute",
-      "drifted": 0,
-      "unreachable": 15,
+      "unreachable": 4,
       "action": "no drift (some receipts unreachable)",
       "error": false
     },
     {
-      "id": "cyberark-conjur-cloud",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "cyberark-identity-platform",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "cyera-data-security",
+      "id": "customer-io",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -326,35 +309,7 @@
       "error": false
     },
     {
-      "id": "defakto-mint",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "delinea-secret-server",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "denvr-cloud",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "descope-agentic-identity-hub",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "drata",
+      "id": "docusign-esignature",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -363,8 +318,8 @@
     {
       "id": "elastic-agent-fleet",
       "drifted": 0,
-      "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "unreachable": 2,
+      "action": "no drift (some receipts unreachable)",
       "error": false
     },
     {
@@ -389,28 +344,49 @@
       "error": false
     },
     {
-      "id": "fluidstack",
+      "id": "elevenlabs",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "fortinet-fortigate",
+      "id": "ema",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "genesis-cloud",
+      "id": "everbridge-suite",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "gitguardian-platform",
+      "id": "figma",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "floqast",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "freshworks-freshdesk",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "freshworks-freshservice",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -424,7 +400,35 @@
       "error": false
     },
     {
-      "id": "google-cloud-iam",
+      "id": "gitlab-api",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "gong-platform",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "google-threat-intelligence",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "greenhouse-recruiting",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "hackerone",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -438,35 +442,21 @@
       "error": false
     },
     {
-      "id": "hot-aisle",
+      "id": "hubspot-platform",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "hyperbolic",
+      "id": "ironclad-clm",
       "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
+      "unreachable": 4,
+      "action": "no drift (some receipts unreachable)",
       "error": false
     },
     {
-      "id": "infisical-secrets",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "island-enterprise-browser",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "keycard-agent-identity",
+      "id": "jumpcloud",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -480,94 +470,80 @@
       "error": false
     },
     {
-      "id": "lambda-cloud",
+      "id": "kisi",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "lumos-identity-platform",
+      "id": "kyriba",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "material-security",
+      "id": "lucid-suite",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "modal",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "skipped: same drift already assessed on 2026-11-15 (no change)",
-      "error": false
-    },
-    {
-      "id": "nebius-ai-studio",
+      "id": "metronome",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "nightfall-dlp",
+      "id": "monte-carlo",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "nscale-nks",
+      "id": "netbox-labs-netbox-cloud",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "nscale",
+      "id": "ninjaone-platform",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "nudge-security",
+      "id": "notion",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "obsidian-security",
+      "id": "openai-chatgpt-enterprise",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "okta-management-api",
+      "id": "oracle-netsuite",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "oleria-identity-governance",
+      "id": "outreach",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "orca-security",
-      "drifted": 0,
-      "unreachable": 1,
-      "action": "no drift (some receipts unreachable)",
       "error": false
     },
     {
@@ -578,105 +554,56 @@
       "error": false
     },
     {
-      "id": "paloalto-prisma-cloud",
+      "id": "pagerduty-operations-cloud",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "panther-siem",
+      "id": "parsec",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "paperspace",
+      "id": "perplexity-enterprise",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "pingone-platform",
+      "id": "ramp-developer-api",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "push-security",
+      "id": "rippling-platform",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "qualys-cloud-platform",
+      "id": "rubrik-security-cloud",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
       "error": false
     },
     {
-      "id": "rapid7-insight-platform",
+      "id": "secoda",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "reco-saas-security",
-      "drifted": 0,
-      "unreachable": 1,
-      "action": "no drift (some receipts unreachable)",
-      "error": false
-    },
-    {
-      "id": "semgrep-appsec-platform",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "sentinelone-singularity",
-      "drifted": 0,
-      "unreachable": 2,
-      "action": "no drift (some receipts unreachable)",
-      "error": false
-    },
-    {
-      "id": "sf-compute-object-storage",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "sf-compute",
-      "drifted": 0,
-      "unreachable": 1,
-      "action": "no drift (some receipts unreachable)",
       "error": false
     },
     {
       "id": "snowflake",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "snyk-platform",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "socket-dev",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -690,63 +617,7 @@
       "error": false
     },
     {
-      "id": "splunk-cloud-platform",
-      "drifted": 0,
-      "unreachable": 16,
-      "action": "no drift (some receipts unreachable)",
-      "error": false
-    },
-    {
-      "id": "strongdm",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "sysdig-secure",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "teleport",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
       "id": "temporal",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "tenable-vulnerability-management",
-      "drifted": 0,
-      "unreachable": 1,
-      "action": "no drift (some receipts unreachable)",
-      "error": false
-    },
-    {
-      "id": "tensorwave",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "tines",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "torq",
       "drifted": 0,
       "unreachable": 0,
       "action": "no drift",
@@ -760,193 +631,788 @@
       "error": false
     },
     {
-      "id": "upwind",
+      "id": "twilio-segment",
       "drifted": 0,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "no drift",
       "error": false
     },
     {
-      "id": "vanta",
+      "id": "twilio-sendgrid",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "workiva-platform",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "zapier",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "zendesk",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "zoom-api",
+      "drifted": 0,
+      "unreachable": 0,
+      "action": "no drift",
+      "error": false
+    },
+    {
+      "id": "abnormal-security",
       "drifted": 1,
       "unreachable": 0,
-      "action": "skipped: same drift already assessed on 2026-11-15 (no change)",
+      "action": "drift noted, no change proposed: The GitHub secret scanning list cited for the leak_revocation check was reorganized, but the supplied excerpt stops befo",
       "error": false
     },
     {
-      "id": "vast-ai",
-      "drifted": 0,
+      "id": "aembit-workload-iam",
+      "drifted": 1,
       "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "veza",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "voltage-park-kubernetes",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "voltage-park",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "vultr-cloud",
-      "drifted": 0,
-      "unreachable": 1,
-      "action": "no drift (some receipts unreachable)",
-      "error": false
-    },
-    {
-      "id": "vultr-object-storage",
-      "drifted": 0,
-      "unreachable": 1,
-      "action": "no drift (some receipts unreachable)",
-      "error": false
-    },
-    {
-      "id": "wiz-platform",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "zluri-identity-governance",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
-      "error": false
-    },
-    {
-      "id": "zscaler-oneapi",
-      "drifted": 0,
-      "unreachable": 0,
-      "action": "no drift",
+      "action": "drift noted, no change proposed: The GitHub secret scanning patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/suppor",
       "error": false
     },
     {
       "id": "arcade-dev",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "drift noted, no change proposed: The page at https://docs.arcade.dev/en/references/changelog, fetched 2026-11-16, now serves the Arcade 1.13.0 preview re",
-      "error": false
-    },
-    {
-      "id": "digitalocean-api",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "drift noted, no change proposed: The page cited for the last_used check (https://docs.digitalocean.com/reference/api/create-personal-access-token/index.h",
-      "error": false
-    },
-    {
-      "id": "runpod",
-      "drifted": 1,
-      "unreachable": 1,
-      "action": "drift noted, no change proposed: The page at https://docs.runpod.io/llms-full.txt changed, but no quote is cited on it. The excerpt supplied for 2026-11-",
-      "error": false
-    },
-    {
-      "id": "sailpoint-identity-security-cloud",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "drift noted, no change proposed: The page cited for the Entra ID client secret, https://documentation.sailpoint.com/connectors/saas/msentraid/help/saas_c",
-      "error": false
-    },
-    {
-      "id": "together-ai",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "drift noted, no change proposed: The OpenAPI spec cited in support of the rotation_api check (https://docs.together.ai/openapi.yaml, checked 2026-11-16) ",
-      "error": false
-    },
-    {
-      "id": "zenity-ai-agent-security",
-      "drifted": 1,
-      "unreachable": 0,
-      "action": "drift noted, no change proposed: The archive at https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz was fetched on 2026-11-16. It c",
-      "error": false
-    },
-    {
-      "id": "baseten",
       "drifted": 2,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The changelog at https://docs.arcade.dev/en/references/changelog now shows only the 1.13.0 preview release notes. The ci",
       "error": false
     },
     {
-      "id": "coreweave-forge",
+      "id": "axonius",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The GitHub supported secret scanning patterns page at https://docs.github.com/en/code-security/secret-scanning/introduct",
       "error": false
     },
     {
-      "id": "doppler-secrets",
+      "id": "azure-entra-workload-identity",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
       "error": false
     },
     {
-      "id": "flagsmith",
+      "id": "beyondtrust-password-safe",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "britive-cloud-pam",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub secret scanning patterns page cited for the leak_revocation check has changed, but the supplied text is trunc",
+      "error": false
+    },
+    {
+      "id": "c1-identity-platform",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page at https://www.c1.ai/docs/developer/c1-api now serves the Baton SDK API reference, and the cited sentence \"Conn",
+      "error": false
+    },
+    {
+      "id": "chainguard-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "checkpoint-infinity",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-",
+      "error": false
+    },
+    {
+      "id": "cisco-duo-admin-api",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "coreweave-api",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-se",
+      "error": false
+    },
+    {
+      "id": "coreweave-cks",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "coreweave-object-storage",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: Both drifted pages were cited without quotes, and neither change moves a grade. The index at https://docs.coreweave.com/",
+      "error": false
+    },
+    {
+      "id": "crowdstrike-falcon-api",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited in support of the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introdu",
+      "error": false
+    },
+    {
+      "id": "crusoe-cloud",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "cudo-compute",
+      "drifted": 1,
+      "unreachable": 15,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-",
+      "error": false
+    },
+    {
+      "id": "cyberark-identity-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "cyera-data-security",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "denvr-cloud",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported secret scanning patterns page (https://docs.github.com/en/code-security/secret-scanning/introductio",
+      "error": false
+    },
+    {
+      "id": "descope-agentic-identity-hub",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub secret scanning patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/suppor",
+      "error": false
+    },
+    {
+      "id": "drata",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "fluidstack",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-se",
+      "error": false
+    },
+    {
+      "id": "fortinet-fortigate",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "genesis-cloud",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "google-cloud-iam",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "hot-aisle",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The swagger schema at https://admin.hotaisle.app/api/docs/swagger.json no longer shows the cited sentence about entering",
+      "error": false
+    },
+    {
+      "id": "hyperbolic",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub list at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patte",
+      "error": false
+    },
+    {
+      "id": "infisical-secrets",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-",
+      "error": false
+    },
+    {
+      "id": "island-enterprise-browser",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "keycard-agent-identity",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "lambda-cloud",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introducti",
+      "error": false
+    },
+    {
+      "id": "lumos-identity-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "modal",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The cited sentence on https://modal.com/docs/sdk/py/latest/Image.md was not found in the supplied excerpt, which is trun",
       "error": false
     },
     {
       "id": "nebius-ai-cloud",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-se",
       "error": false
     },
     {
-      "id": "opal-security",
+      "id": "nebius-ai-studio",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "nightfall-dlp",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "nscale-nks",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scenning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "nscale",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "nudge-security",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-se",
+      "error": false
+    },
+    {
+      "id": "obsidian-security",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "orca-security",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The GitHub secret-scanning page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-",
       "error": false
     },
     {
       "id": "paloalto-cortex-xsiam",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The GitHub secret-scanning patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supporte",
+      "error": false
+    },
+    {
+      "id": "paloalto-prisma-cloud",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
       "error": false
     },
     {
       "id": "proofpoint-tap",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "push-security",
+      "drifted": 3,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: No change is proposed, because the replacement text for any vanished quote was not found and no grade can move without a",
+      "error": false
+    },
+    {
+      "id": "qualys-cloud-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "reco-saas-security",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The GitHub supported-patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "runpod",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The drifted page at https://docs.runpod.io/llms-full.txt carries no cited quote, and the supplied excerpt is truncated a",
+      "error": false
+    },
+    {
+      "id": "sailpoint-identity-security-cloud",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the Entra ID client secret (https://documentation.sailpoint.com/connectors/saas/msentraid/help/saas_c",
+      "error": false
+    },
+    {
+      "id": "semgrep-appsec-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub secret-scanning patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supporte",
+      "error": false
+    },
+    {
+      "id": "sentinelone-singularity",
+      "drifted": 1,
+      "unreachable": 2,
+      "action": "drift noted, no change proposed: The GitHub supported secret scanning patterns page (https://docs.github.com/en/code-security/secret-scanning/introductio",
+      "error": false
+    },
+    {
+      "id": "sf-compute-object-storage",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "sf-compute",
+      "drifted": 2,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: Neither drifted page moves any grade or check. https://docs.sfcompute.com/llms.txt, checked 2026-11-23, now lists new pa",
+      "error": false
+    },
+    {
+      "id": "slack",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The fetched copy of https://d34u8crftukxnk.cloudfront.net/slackpress/prod/sites/6/Slack-EKM-Implementation-Guide-2.pdf a",
+      "error": false
+    },
+    {
+      "id": "snyk-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "socket-dev",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "splunk-cloud-platform",
+      "drifted": 1,
+      "unreachable": 16,
+      "action": "drift noted, no change proposed: The secret-scanning partner page at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "strongdm",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "sysdig-secure",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub secret-scanning patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/suppor",
+      "error": false
+    },
+    {
+      "id": "teleport",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "tenable-vulnerability-management",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check changed, at https://docs.github.com/en/code-security/secret-scanning/introd",
+      "error": false
+    },
+    {
+      "id": "together-ai",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: Both drifted pages carry no cited quote, and the supplied excerpts of https://docs.together.ai/openapi.yaml (bearer auth",
+      "error": false
+    },
+    {
+      "id": "torq",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
       "error": false
     },
     {
       "id": "trendmicro-vision-one",
       "drifted": 1,
       "unreachable": 0,
-      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/84",
+      "action": "drift noted, no change proposed: The GitHub supported patterns page at https://docs.github.com/en/code-security/secret-scanning/introduction/supported-se",
+      "error": false
+    },
+    {
+      "id": "upwind",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check changed at https://docs.github.com/en/code-security/secret-scanning/introdu",
+      "error": false
+    },
+    {
+      "id": "vanta",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: No change to the card is proposed. The page at https://developer.vanta.com/llms.txt is now a bare index and no longer co",
+      "error": false
+    },
+    {
+      "id": "vast-ai",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "veza",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "voltage-park-kubernetes",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The GitHub supported secret scanning patterns page (https://docs.github.com/en/code-security/secret-scanning/introductio",
+      "error": false
+    },
+    {
+      "id": "voltage-park",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "vultr-cloud",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The GitHub supported patterns page (https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secr",
+      "error": false
+    },
+    {
+      "id": "vultr-object-storage",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The GitHub page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introducti",
+      "error": false
+    },
+    {
+      "id": "wiz-platform",
+      "drifted": 1,
+      "unreachable": 1,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check (https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "zenity-ai-agent-security",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: No change. The zenityctl archive at https://get.zenity.io/releases/v0.1.0/zenityctl_0.1.0_darwin_arm64.tar.gz came back ",
+      "error": false
+    },
+    {
+      "id": "zluri-identity-governance",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: The page cited for the leak_revocation check, https://docs.github.com/en/code-security/secret-scanning/introduction/supp",
+      "error": false
+    },
+    {
+      "id": "zscaler-oneapi",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "drift noted, no change proposed: No change is proposed, and a human should look. The bundle at https://automate.zscaler.com/assets/js/ca2fd3e7.fbadb37d.j",
+      "error": false
+    },
+    {
+      "id": "aws-iam",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "baseten",
+      "drifted": 5,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "clearfeed",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "cyberark-conjur-cloud",
+      "drifted": 3,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "defakto-mint",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "delinea-secret-server",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "digitalocean-api",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "docontrol",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "doppler-secrets",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "flagsmith",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "gitguardian-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "granola",
+      "drifted": 6,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "kentik-platform",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "knowbe4-ksat",
+      "drifted": 4,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "material-security",
+      "drifted": 3,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "okta-management-api",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "oleria-identity-governance",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "opal-security",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "panther-siem",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "paperspace",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "pingone-platform",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "pure-storage-pure1",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "rapid7-insight-platform",
+      "drifted": 3,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "rewind-backups",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "statsig",
+      "drifted": 1,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "tensorwave",
+      "drifted": 3,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "tines",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
+      "error": false
+    },
+    {
+      "id": "webflow",
+      "drifted": 2,
+      "unreachable": 0,
+      "action": "in receipts refresh https://github.com/wiftax/wiftax/pull/92",
       "error": false
     }
   ],
   "open_prs": [
     {
-      "number": 84,
-      "url": "https://github.com/wiftax/wiftax/pull/84",
-      "title": "Receipts refreshed: 11 cards (2026-11-16)"
+      "number": 92,
+      "url": "https://github.com/wiftax/wiftax/pull/92",
+      "title": "Receipts refreshed: 28 cards (2026-11-23)"
     }
   ],
   "history": [
@@ -977,6 +1443,16 @@
       "notices": 0,
       "refreshed": 11,
       "cost_usd": 1.78
+    },
+    {
+      "date": "2026-11-23",
+      "cards": 174,
+      "urls": 2127,
+      "drift_cards": 105,
+      "unreachable_urls": 53,
+      "notices": 0,
+      "refreshed": 28,
+      "cost_usd": 9.07
     }
   ]
 }

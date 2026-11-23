@@ -1,0 +1,94 @@
+{
+  "card": "lucid-suite",
+  "updated_at": "2026-11-23T20:59:35.997Z",
+  "urls": {
+    "https://developer.lucid.co/reference/authentication-methods.md": {
+      "hash": "4d9c825791302c034dc405db65bbb2370659513611c63d3a77f5ed9077f681f9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:20.411Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.lucid.co/reference/refreshing-the-access-token.md": {
+      "hash": "d1ec5498e2c6363dbfe6f775f3457685e52e9b929ecac787f86042d06729aab1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:21.411Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.lucid.co/reference/client-creation.md": {
+      "hash": "8403b98c0430591a8663018d3af420c363ced4e7cc71279cc1b1d703e14ed65d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:22.412Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.lucid.co/docs/admin-controls.md": {
+      "hash": "35fa3b17e44f551e5b9668ebe31e7c4b7e76284d91a693f2fc202bbcc9469888",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:23.412Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://help.lucid.co/hc/en-us/articles/15682358446868": {
+      "hash": "9d448437dc636abdb8382a5efc606ca680316f6dafc56e57cdb4d9374b513c4e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:21.410Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://help.lucid.co/hc/en-us/articles/16252835135508": {
+      "hash": "a3e4bc1dab557995aaa12ca782e59de92be6e058e83975b05aacf4dc7aa1ac07",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:22.411Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://help.lucid.co/hc/en-us/articles/16080061445908": {
+      "hash": "04b6299ef1da72fa4188742d66b696e60433c6657080a879e7249e831984ac83",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:23.411Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.lucid.co/docs/api-keys.md": {
+      "hash": "2015c2432a0ff1a980c10aa206fc8743a85126fce02a2ede9e40cf2adb05751f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:24.422Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.lucid.co/reference/api-key-grants.md": {
+      "hash": "d96142b5de2e091e1f81bddaeb04a329e8568db950308dfd2cecaf764a31e7fd",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:25.422Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.lucid.co/reference/keeping-your-api-credentials-secure.md": {
+      "hash": "0215af901d341a1824fa326a1807b03286bc7b29e10cf5bcdc0cc7260034d2f8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:51:26.422Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

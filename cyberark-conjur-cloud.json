@@ -1,174 +1,180 @@
 {
   "card": "cyberark-conjur-cloud",
-  "updated_at": "2026-11-16T19:17:06.424Z",
+  "updated_at": "2026-11-23T20:59:29.857Z",
   "urls": {
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-cloud.htm": {
-      "hash": "2c0ae8c1b831986cf9884b261e4d005e03d46c7d37850a1bed2d36dd1037e52a",
+      "hash": "ebac57f3c91562714e24d8b7dd5ac42ac2ff9c6f0ecd9d3761402385d92768d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:27.245Z",
+      "checked_at": "2026-11-23T20:46:48.095Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-appid.htm": {
-      "hash": "e3717b0357030949e5a355e8cf867a1569fedf698df399c20a6d0eb1724000b7",
+      "hash": "fa8ba08a439f04c82d1a4c91098f212da80d994804ac2ec63242452ccf043b0e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:28.245Z",
+      "checked_at": "2026-11-23T20:46:49.096Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-github-uc.htm": {
-      "hash": "0d1ff2504104c11358d0917afd0ce7aaceb79981439ed0eb08fb400cdf4ccd28",
+      "hash": "0e2999aa251907a307fbecbad1cc226525b0657667fe78fe98a0d083dad38ca1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:29.245Z",
+      "checked_at": "2026-11-23T20:46:50.095Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/services/cjr-authn-jwt-uc.htm": {
-      "hash": "5a36bdfef26116745b6dcd6d47d047a4bbc29bd3d94e71630cc4923a78adecac",
+      "hash": "7e89f4f93f1c085ccc0b4d3003c167407095663d3b8aabb9d07b46f1fa7d4926",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:30.246Z",
+      "checked_at": "2026-11-23T20:46:51.095Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-config.htm": {
-      "hash": "ba5cb02c43b0ae60af602aa56f2bd43101ce5a02cc771aae7e0eac0f72a27502",
+      "hash": "2b0dfd6223fc8b13be86d9d9458541f103861137fca78413a97532c89eeef0ba",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:31.247Z",
+      "checked_at": "2026-11-23T20:46:52.096Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-delegate-privileges-host-ex.htm": {
-      "hash": "0963f3faa8b6642b3f7db684649eb7355ee76775efdd706c8c1fdac229d93821",
+      "hash": "0074a9731809c87463c6dd353105678e10a65e6fe1637172492fa9f058c82a6b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:32.247Z",
+      "checked_at": "2026-11-23T20:46:53.096Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authenticate-awsiam-overview.htm": {
-      "hash": "f7941deadeb6e6c09bf0de3a1fb45e0af7a2103bdb05c513da8845813e1474ce",
+      "hash": "543e8f5085ae8453fcfb6430f530c5f1508de71d78452fe4cf8e97f641d6140d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:33.249Z",
+      "checked_at": "2026-11-23T20:46:54.097Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authenticate-azure-overview.htm": {
-      "hash": "f3d0c28cb1dcef9ba39a1821592066bf314edb3a4784db42b4127f1dc273fce8",
+      "hash": "5108fffde81f9f7514c104e4c0b0eefa0dacdb11df86fd9bd9c0cbda530c4c34",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:34.249Z",
+      "checked_at": "2026-11-23T20:46:55.098Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-authentication.htm": {
-      "hash": "502552d0ecb3986b4ca8ea795f3eb3e61a406912cded317eaafe11396cd03967",
+      "hash": "be1bb857258a59b3a0dc0fb3ecd3ca9f9dbe110cbd21fed517510db9ac71a37a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:35.248Z",
+      "checked_at": "2026-11-23T20:46:56.098Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/integrations/terraform_provider.htm": {
-      "hash": "1caf4aa137579fd50503ed45a51130b5b6ccecfb47d4fc7cd0dd4b54c4d0f8ae",
+      "hash": "215625efa78779fd7a94fbc7c5b029dbb11ec94e742a3cebb308f7d3e123dde7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:36.249Z",
+      "checked_at": "2026-11-23T20:46:57.099Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm": {
-      "hash": "eeae73c67dc159efae1611351bbdce803831c610d40126bb5599b721d379cd3b",
+      "hash": "1484ef57c1f465174b9f392a439204ca5ccf40faa03c54817882e8bf506432fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:37.249Z",
-      "quotes_found": 4,
+      "checked_at": "2026-11-23T20:46:58.099Z",
+      "quotes_found": 2,
       "quotes_total": 4
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-gcp.htm": {
-      "hash": "b98c2c5354c3bdb95edbbda93b48de95e46d734d17bb0a4ede3b66130e4fdb71",
+      "hash": "4fcc6291292adc9f93cad2e8788b8abbab7a3ca006fb14b6f42b3880f122441d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:38.250Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:46:59.099Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_issuer-ephemerals.htm": {
-      "hash": "d934bf2f18ea468e0aac01d0b5606b38b5fff6da2ec089ce56c194ebcaf639a2",
+      "hash": "aa0605e0aaa187893e32c36c6fe98df18d1b472f30fb8f8f4317aca5f13cb294",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:39.251Z",
+      "checked_at": "2026-11-23T20:47:00.100Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/conjur-cloud/venafi-cert-issuer.htm": {
-      "hash": "343076806474da1e43910299810bcdfa64bac4527791ea0a2754ccfd8d07e0b4",
+      "hash": "1c16fbc24597ba973748404a7928b4ca5df64b21735f551c45eef4927fdcaf31",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:40.252Z",
+      "checked_at": "2026-11-23T20:47:01.099Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/authn/authn-default.htm": {
-      "hash": "b1927023d5dce0e1bc10a1ee1fd14975e9ec346d2f44c54de33284637fe8b22d",
+      "hash": "c372d16c6e3e442fd7de923d31d838b5a89f585e831c64ee4f37d86d06ea08c6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:41.252Z",
+      "checked_at": "2026-11-23T20:47:02.100Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/policy/statement-ref-host.htm": {
-      "hash": "de6392144f008da0f04e0e203580a83ba623b025c2a1f84e8a7a61b45e3c1c1e",
+      "hash": "74d0a222674f952a989ba8623fab0a2c570a00f3c9db805ea852ae4898c85d2f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:42.253Z",
+      "checked_at": "2026-11-23T20:47:03.101Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_rotate_other_api_key.htm": {
-      "hash": "5fb6e6dfde161a0e01302f0589cce239ba5a144a457d5b886922b79e7e1fc6d0",
+      "hash": "1a5c8e6899b4eb6eb441fe8eae2e582e2b146ca0b218b66669065159827354d5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:43.254Z",
+      "checked_at": "2026-11-23T20:47:04.102Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/privilege-cloud-shared-services/latest/en/content/pasimp/plugin-conjur-cloud-keys.htm": {
-      "hash": "c862a5818f46735e9b20ebb894f31eb28fe26d3b1d5391eebbc51f9b4889e3a0",
+      "hash": "01b91b9989cf3df0a62ef336829355636e1956fda762a8d8338e352c0440b7fb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:44.254Z",
+      "checked_at": "2026-11-23T20:47:05.103Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_show_role.htm": {
-      "hash": "3ee4ed2f8f37189242cbcba69b52afca3bdec70c5ecf63726a0874014c0e7b20",
+      "hash": "f00c7e193330faf4462f0cc1e9222b2f722b8174441a92471eafcd5f20374e4d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:45.254Z",
+      "checked_at": "2026-11-23T20:47:06.104Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/conjur-cloud/latest/en/content/conjurcloud/ccl-audit-lp.htm": {
-      "hash": "0be5c4d3e29e0ce77887763e6b6e6cc5649a4dbf6fa451d0bd15a6ff0ffd94d9",
+      "hash": "6a63d43803c749dc0763253613891ba0e302ec165589bbf4090336cc0d2eb904",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:46.254Z",
+      "checked_at": "2026-11-23T20:47:07.104Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "6926ed3d205d56178514c71a0f194cf3855eaafe09f963f254e6f63244d43e09",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

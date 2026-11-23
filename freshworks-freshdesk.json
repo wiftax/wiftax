@@ -1,0 +1,54 @@
+{
+  "card": "freshworks-freshdesk",
+  "updated_at": "2026-11-23T20:59:32.511Z",
+  "urls": {
+    "https://developers.freshdesk.com/api/": {
+      "hash": "eb6b6b342d072df268741d35e758fabc35af333c8c06f1ea6bec8f6636244d25",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:39.444Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key": {
+      "hash": "7388b9ca2409ff8f9ada024704725ce3d900bd44f5c8b4f683ca6504dbb57da9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:40.769Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developers.freshworks.com/docs/app-sdk/v3.0/support_ticket/oauth-implementation-in-apps/": {
+      "hash": "eb37af1b73628f1fcb22e512f71b5a6f0acdae33d62127b6e59e069a4a83b8d0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:40.864Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.freshdesk.com/en/support/solutions/articles/195170": {
+      "hash": "dceef23b5bbdacde88e87a0b2ea98f9076fe31ff2b039051af1a754c450a9fa8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:43.789Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.freshdesk.com/support/solutions/articles/50000002985-reauthorization-of-custom-mailbox": {
+      "hash": "6013f05cb3c4381cdb5600ca45b08819eaeec315dd0c47bdca4b436ba2be19db",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:44.788Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

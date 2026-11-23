@@ -1,158 +1,163 @@
 {
   "card": "zluri-identity-governance",
-  "updated_at": "2026-11-16T19:17:17.761Z",
+  "updated_at": "2026-11-23T20:59:50.970Z",
   "urls": {
     "https://developers.zluri.com/reference/authentication-1": {
-      "hash": "5b530783f6a68d929fd70d0bed88f78387e9a56fb0a12202f0f3b2f3f6e63abc",
+      "hash": "e912befe963399bcf8c0d1b4b232b9fd496c2452bf036ff518457ad133ca9cb7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:43.226Z",
+      "checked_at": "2026-11-23T20:59:02.747Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://developers.zluri.com/reference/introduction": {
-      "hash": "7ce3defc3c6bdd72a9e62c94ac0c9fd3cd736ce1faa4106ca61652823517a680",
+      "hash": "4703c6f1f2edc1e280d1dc150440a24aa3cd4d021282253b3d993fde7288f736",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:44.227Z",
+      "checked_at": "2026-11-23T20:59:03.747Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://developers.zluri.com/docs/prerequisites": {
-      "hash": "0836aaa10803b752c4babc2964dba4ff25893cda69b6b1987a8404da17a48e74",
+      "hash": "f551d30db64ff59b81eaa17a01bd35f1b8e50b4c176b5b9d3dde262ee151911a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:45.228Z",
+      "checked_at": "2026-11-23T20:59:04.748Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://help.zluri.com/docs/connect-microsoft-active-directory-to-zluri": {
-      "hash": "89abdca3da3b9a60718f14c8caafa4e7ab72f469a48ecb4c93dd5ef67d636737",
+      "hash": "ebdf2ac9972220424fd73186f14eced7823dbe453355f59805350d170d6522de",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:44.207Z",
+      "checked_at": "2026-11-23T20:59:03.634Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/windows-agent-deployment-manual": {
-      "hash": "2d0ed7375e18ba5f1ce3df63c809ade743c0557b41334a92ebe243b43e24efa1",
+      "hash": "c287c511c8860250c5d9561bf8c888efe51c2b595fb14d2427ef884b77635931",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:45.207Z",
+      "checked_at": "2026-11-23T20:59:04.634Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/aws-management-console-connect": {
-      "hash": "9d4c933f75706432b762e5eaec4006f7b983ef11afe00afbfd20ccaee23c9f75",
+      "hash": "680b019ad2c91b34699951eca2b99f74bb92b44bbcb1162b5965da88b5ef3ef6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:46.286Z",
+      "checked_at": "2026-11-23T20:59:05.719Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/aws-identity-center-connect": {
-      "hash": "73e190eafc64b958612747ebf4b5e4276d187e78381c65b8e7711d22cd8e3faa",
+      "hash": "be248c272577c9a5e602bab5b3d6ab41f3bbb7f4d6c969a401ee4a2b24d61560",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:47.287Z",
+      "checked_at": "2026-11-23T20:59:06.775Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/gcp-connect": {
-      "hash": "4f0f451a62d0188bc49ef138019a9e796a3426e62024acbe4058d75ce6981809",
+      "hash": "539d723e45a9af7407641eaf25a3228d26ac90c4b305a0d0d593c07441c34a5e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:48.286Z",
+      "checked_at": "2026-11-23T20:59:07.906Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-azure-ad-to-zluri-oauth": {
-      "hash": "912a228f99fafe7afdaa6ba97cbaad1dcbbcfdd94667cdf08d52b20ae3e8d50e",
+      "hash": "d0576297a0726ce30254ff7f51d551f6ae03e6f67a0ce2cb604183bdf59f635f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:49.299Z",
+      "checked_at": "2026-11-23T20:59:09.011Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-azure-ad-m2m": {
-      "hash": "5e0b5f3dbc3588e75a92faa94bb365223fb13aa4aabf01f237eec079bc4c4a96",
+      "hash": "164c68105c9cf2f548387777d629ac7c9cddeda28ee2a944a0080a69416a096e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:50.301Z",
+      "checked_at": "2026-11-23T20:59:10.113Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-google-workspace-to-zluri-oauth": {
-      "hash": "3c86781221fb80d399f2bb6061dfaeeed7e22c49b685e25d80ddfa7748b2282c",
+      "hash": "e827bb08a4a89032f2b948afcca9868d43980a70ba602a6116c7955d56094d31",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:51.301Z",
+      "checked_at": "2026-11-23T20:59:11.113Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-github-to-zluri": {
-      "hash": "8a254e3d586f1b4a54e26a0a738751dd7c51aa478218d4eb71b94146846d0f0f",
+      "hash": "8b3d0787a0db53b37db435c888e877dcafa3ac6aa0c68ce7b15806d6a3851702",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:52.302Z",
+      "checked_at": "2026-11-23T20:59:12.205Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-github-enterprise": {
-      "hash": "14f748f4dae99217d323d9f2d24204bb996e1b3299514a4de5325f655e9d83d9",
+      "hash": "155bfe508fb8542efeefc286bf3d34be052aa55360b9968880411efe1a1eebbf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:53.328Z",
+      "checked_at": "2026-11-23T20:59:13.205Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connecting-okta-to-zluri": {
-      "hash": "23f511ef44c1d8ce6c0845b175bfe7b7715a355d54cb41f7d22a5418e1e1750a",
+      "hash": "e38fc3c18208091e2339ac058c5fab20dc95d3fed735ecc6a2e6ed87db7474b7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:54.329Z",
+      "checked_at": "2026-11-23T20:59:14.206Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-okta-m2m": {
-      "hash": "f19f882903bce11ede7167216b2b31935573d3f80261417a0de92cc7d33468ad",
+      "hash": "dbb6bafa81df08cceadf29ddff02cd2c84796eba7db1a59e468af481fe812c77",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:55.412Z",
+      "checked_at": "2026-11-23T20:59:15.205Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connect-salesforce-form-based-new": {
-      "hash": "86fe465c33ebb2f6aec7b757a6e08b51de87b3201faf8801ff203dcef6675570",
+      "hash": "c77c7ef8038eea36d670712bb3972d5f668edfb14e47441f31455036b4755a9e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:56.481Z",
+      "checked_at": "2026-11-23T20:59:16.205Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zluri.com/docs/connecting-slack-to-zluri": {
-      "hash": "17aaf0dfb9cfeea2cd8e2530554eff1488ccc351af4200391da744bebd0f3d6d",
+      "hash": "ea6d6b410f60efc54308b89cf4dd04e50d88050e67039ba8f757bc276bee22b6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:57.561Z",
+      "checked_at": "2026-11-23T20:59:17.206Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://developers.zluri.com/reference/rate-limits": {
-      "hash": "84ddbc87ae3cbad8815fa78c6d19ed79b9914c34f8bdc7f8faaf9e17469c36d1",
+      "hash": "8e42a58c62b1d23de7342d738fdfcf7b79505ac6328d848db81058d17a8321d8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:51.544Z",
+      "checked_at": "2026-11-23T20:59:11.384Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "263ca8e2315e9fe6a0dcfde35ca627df9d44ec1447879d5b6f9ea24ce0ac2759",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

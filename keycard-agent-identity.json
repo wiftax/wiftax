@@ -1,116 +1,115 @@
 {
   "card": "keycard-agent-identity",
-  "updated_at": "2026-11-16T19:17:09.551Z",
+  "updated_at": "2026-11-23T20:59:35.400Z",
   "urls": {
     "https://docs.keycard.ai/guides/authenticate-deployed-workloads/": {
-      "hash": "0ab7b17013eadedd4d252468f610e61e29b301b9cac1d5d043c0bf6d61584344",
+      "hash": "1e3c257ff36b60a5e21bbfb69c54d06d4613ef6eac4dfcae91d4451857bcbbd7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:41.648Z",
+      "checked_at": "2026-11-23T20:50:48.729Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.keycard.ai/use-cases/agent-with-its-own-identity/": {
-      "hash": "4abc81815b6d245374fc76473e0796684d7de2aeed3f84f814edffd818ecb84e",
+      "hash": "e70030a1fb63b50d4a9535687b67d8929668a963709b89ddb63ceea16e911cd9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:42.648Z",
+      "checked_at": "2026-11-23T20:50:49.729Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/reference/standards/": {
-      "hash": "9e9014e8ae5eed9cd2c0b6bb18fc4731b0e8ea86e3a5b881d77d94eca4287e42",
+      "hash": "34aae60d811eae9ea08118d131b6c5f7baf5d1f4c9aa3a1e42f17cdb622de3ff",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:43.648Z",
+      "checked_at": "2026-11-23T20:50:50.729Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/admin/service-accounts/": {
-      "hash": "4cb01fa1c3d9636f51343b29aa020398357135447cb05c09f814fc67291e6567",
+      "hash": "e9f07bde29ee26903c95327eb9ada67b84560aa10a4ea031f8053cc15c4d8614",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:44.649Z",
+      "checked_at": "2026-11-23T20:50:51.730Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
     "https://docs.keycard.ai/admin/configure-provider-apis/overview/": {
-      "hash": "31d69bbb65a5763e1ddb1f56ea33afa703107f29aa20f0935328b3ffec3a87ff",
+      "hash": "162e8691f9c0fdf9db29c1b9727eab5dae991fbad9f6d3dafb28cf73e345a1d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:45.651Z",
+      "checked_at": "2026-11-23T20:50:52.730Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/guides/access-snowflake/": {
-      "hash": "76456ddc180583c44f6128fb0dbf0c6f48a1c2c427c8f3c3af88ab54f2d891ea",
+      "hash": "903e5c5aae500d2af96ca61f23a91743bf46f3a0d13e337720c4f4917ac4c81e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:46.650Z",
+      "checked_at": "2026-11-23T20:50:53.731Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/admin/audit-log-export/": {
-      "hash": "b83d055a9c7d0cda5dd7a5c7d0ae7df28b0b60fe977893fcbbf4d7083ec8a354",
+      "hash": "4505c47440a83aa88da953ab9ccd270ee6b205a2465aa20f4a520254af7f8c04",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:47.651Z",
+      "checked_at": "2026-11-23T20:50:54.732Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/admin/catalog/": {
-      "hash": "d57fe888770ee6d7e99f7ea2a586cdcddafe00f4c26124ffce7d896a8649a2a3",
+      "hash": "dacf99370f187b7a3aa5d37d3527e72601ca99932109813d43788dae6ade41ee",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:48.652Z",
+      "checked_at": "2026-11-23T20:50:55.732Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.keycard.ai/guides/delegated-access/github/": {
-      "hash": "395a29d3bada7e325c5cfa21f842f38c5eb64bbb8b310acc1c2063a40534b5f2",
+      "hash": "7395badd0b469dcddf27a789c8d20395f8a1629021e603b2cc6b7f965b4db83e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:49.653Z",
+      "checked_at": "2026-11-23T20:50:56.733Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/guides/delegated-access/google/": {
-      "hash": "51ca081982e95d04fe1ad0042ae51a191eddd71706ae9af096cdbe9cd7b8b206",
+      "hash": "8c38cb2935576daf061d4c46ed5f1a9c1940789b72c6181772c64e8b4f5cc9a9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:50.654Z",
+      "checked_at": "2026-11-23T20:50:57.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/guides/add-custom-resource/": {
-      "hash": "37a0d176e031d4803c0274234821a7163703b7ce9ff29ffc065fd1bd287638a4",
+      "hash": "961331486af85fef945ed591bdb20f385415877e5f5981212f3b98da94e0eca2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:51.654Z",
+      "checked_at": "2026-11-23T20:50:58.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.keycard.ai/concepts/applications/": {
-      "hash": "3f21b4dc8d7937a129aebe67f6a06a86ba1b8194e9b86fd98d8414542af36476",
+      "hash": "87b41abd6c513111c90359adfafe512c15b1c372c4d891ac378edbbf09d21e79",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:52.654Z",
+      "checked_at": "2026-11-23T20:50:59.734Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "dc6448c8efbe9612fb21e12fc5749a21bd194a569409d8f6bc324fdd58b7603b",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "25cd06e5d8eae5444f5b1f471ff3e7a5ced5598dc8fe1f8884b9289465458301",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

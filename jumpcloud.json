@@ -1,0 +1,62 @@
+{
+  "card": "jumpcloud",
+  "updated_at": "2026-11-23T20:59:35.375Z",
+  "urls": {
+    "https://jumpcloud.com/support/service-account-for-apis": {
+      "hash": "27a122e9b5217797b03bf30c13b24602b10f926dcf66db0a2c0c70fb89478f54",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:44.889Z",
+      "quotes_found": 9,
+      "quotes_total": 9
+    },
+    "https://jumpcloud.com/support/siem-integration-in-directory-insights": {
+      "hash": "edefa2ed25c640469f93fd9667a7b55e40868ee52c1f2c1e30759593ad84786a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:45.890Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://jumpcloud.com/support/jumpcloud-apis": {
+      "hash": "d959e191b581a3266afbefbc4d661626fe16717a133e192f36ca3ad71fd9df05",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:46.890Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://jumpcloud.com/support/m365-sync": {
+      "hash": "3c6a9e26d579ef063d470e33949c9c71069999af92c8ad11d126e3ec7df699d1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:47.890Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://jumpcloud.com/support/google-workspace-integration-overview": {
+      "hash": "87342fd5542b10c7a34167c27b61f049c080574dbbfd27d53d80f98c16430801",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:48.890Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://jumpcloud.com/support/integrate-with-snowflake": {
+      "hash": "dfe40d2b7288a98cdc54738b2e6e6a328c5bd2fd48219ddf3cc3ed2a97e38d76",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:49.890Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

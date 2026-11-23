@@ -1,164 +1,164 @@
 {
   "card": "gitguardian-platform",
-  "updated_at": "2026-11-16T19:17:07.992Z",
+  "updated_at": "2026-11-23T20:59:32.902Z",
   "urls": {
     "https://docs.gitguardian.com/api-docs/authentication": {
-      "hash": "1be7473b1e7374161821c3284f425c1e93a086171c07ebafcdb811350c6e7950",
+      "hash": "d226b9d700ddadf870ca5ecd4fa051193cf494fee826df5587f1cf45ed501339",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:04.412Z",
+      "checked_at": "2026-11-23T20:49:47.154Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.gitguardian.com/ggshield-docs/integrations/cicd-integrations/github-actions": {
-      "hash": "98f255303b38a91fe0bbef5b5021cc67c8e66c316cdadd63d8b451ed60f6d6c1",
+      "hash": "13560d62c27cee7e9d0ff7fb244cd6086ddda88ff189e43aa4449f6091a1f5be",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:05.413Z",
+      "checked_at": "2026-11-23T20:49:48.294Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/api-docs/service-accounts": {
-      "hash": "4c420e9dbc398fada2025bc07952bd7820646dd2d973e9ec07eb2c105cb97c98",
+      "hash": "9bc68916892e39ac06befaa5db178dbf9d2487f6f1801cfc1d34262ded046e40",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:06.414Z",
+      "checked_at": "2026-11-23T20:49:49.295Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://api.gitguardian.com/v1/openapi.json": {
-      "hash": "58aa623b45b5f8e727bccddbe1cb769111bc4c691e73c37aaf1b722f3c377f2d",
+      "hash": "09a08795634f1825b9727b0140299092ac0f27a4f0608ec870058b84039709e1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:05.148Z",
+      "checked_at": "2026-11-23T20:49:47.705Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/file-storage-integrations/aws-s3": {
-      "hash": "dcf123221e3e6c07da7c39a45a2338b2e9eac71e5e6d228ed52292d660be233b",
+      "hash": "6d44d912056b76a33509f87c693e46dbe9494b287ceff11a9092a4119caf36fd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:07.415Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:49:50.295Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/nhi-governance/aws-iam-integration": {
-      "hash": "aad5616f9726179e44fbfe4ed061bb97d147367c630043c66956a7937cfe5682",
+      "hash": "bd9720062392fa2f9dbc102aca74efb578a8e8f0e9dd349c9b8deab557134e08",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:08.415Z",
+      "checked_at": "2026-11-23T20:49:51.295Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/amazon-ecr": {
-      "hash": "243346484c22bc0eea4a0d300f2b6b66fcd4e26923cf1920fc45b2444d2259b9",
+      "hash": "419c6a3b6de893373c1d6a0475e697215f38c10a4aad20b9e36ee6afb9473cf9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:09.415Z",
+      "checked_at": "2026-11-23T20:49:52.295Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/google-artifact-registry": {
-      "hash": "4f81414e9997309a8bf746c64bcb527df698dd7386e471687c2e4497d22dc848",
+      "hash": "e2daae3db7d7161c5b31c50870e32bac6fccb06c7efe7e9fb034414ca44135bf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:10.416Z",
+      "checked_at": "2026-11-23T20:49:53.296Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/nhi-governance/azure-entra-integration": {
-      "hash": "2d00a00d5b2991af50685ed316ff9d554049d9a3db33753b6bc7c7593581a670",
+      "hash": "ad38f75490063cf998124f0eae9112344b84b558e52be042be5d9a1af8e10260",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:11.417Z",
+      "checked_at": "2026-11-23T20:49:54.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/github": {
-      "hash": "faf7bcbdce3ac4bfd3b6bb3e46172688443bab60500b996e3e3e64681a58f2eb",
+      "hash": "362e43e7347ea9b1590ea13f06cb83ebb293049f449dc05fe0b8c062e75b34fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:12.418Z",
+      "checked_at": "2026-11-23T20:49:55.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/messaging-integrations/microsoft-teams": {
-      "hash": "3f4372044781914e46079ea9fa36f363bf99cb2d7312e246f9fdeef44c7514bf",
+      "hash": "87d2c13be2414dbd57202131c89dc98f545a508c02031583dc9e092a5666a3f1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:13.418Z",
+      "checked_at": "2026-11-23T20:49:56.296Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/messaging-integrations/slack": {
-      "hash": "449821cec4b4a5372c75e073ecbd71ecc4a245ce463f97ad23a9a9baf16b9fe8",
+      "hash": "d59a8c78586bcac14ac37c943659e6d13d9d02994fcd8ebc572313a8457c0c3f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:14.418Z",
+      "checked_at": "2026-11-23T20:49:57.297Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/gitlab": {
-      "hash": "f440973783a452b856ae6b7e515c02e646fa1136993ed54fe9610f246e7ae3fb",
+      "hash": "a4763dab7c9a1310fe4ad42baf90639334418697627a70db8833298b6f53c2d9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:15.418Z",
+      "checked_at": "2026-11-23T20:49:58.298Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/bitbucket-cloud": {
-      "hash": "e6eebde9c006614ffb616a65988d4000a64cdba1db4f2eee9f0046ae8eeba2f4",
+      "hash": "c3223702541a91713e05f24df85b1eb07a978b745bf1ab89ca6506540971f559",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:16.419Z",
+      "checked_at": "2026-11-23T20:49:59.299Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/azure-repos": {
-      "hash": "e3ca504c4aada9eccf2e8a66363a9d0b14ff61c401249b28157cfad038d3c39c",
+      "hash": "3b75fae0d724b90ccc1015e90b3dd91002e08a06c64c7ec949cd6045397eab70",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:17.419Z",
+      "checked_at": "2026-11-23T20:50:00.300Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/container-registries-integrations/docker-hub": {
-      "hash": "ea35e8571d8cb706fa484e19d4be5452be44afbaea76d754233a76c3c86aa522",
+      "hash": "1440afeb5982483b273a3e7b66d69896a2b70d43fac8a32c3b9949fd90ff08ca",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:18.420Z",
+      "checked_at": "2026-11-23T20:50:01.300Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/internal-monitoring/integrate-sources/vcs-integrations/github-enterprise": {
-      "hash": "3be3a7d75c669373d6669fb80d1a19f77da4d41348709449f095d23558488030",
+      "hash": "e89ab43962d48271922d38b9c1a99c47d09563f1ccd30add7ad337713fc01150",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:19.421Z",
+      "checked_at": "2026-11-23T20:50:02.301Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.gitguardian.com/platform/enterprise-administration/workspace-settings": {
-      "hash": "cd310632df0c1ddda6d899adf48d906c1e63aa59c2f05e576cc260ad43a20810",
+      "hash": "86275547aff60a64929bb777200ee0b4e1f8531069bc7ee5cca5e672f1f3c7f6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:20.421Z",
+      "checked_at": "2026-11-23T20:50:03.302Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
   },
   "last_assessment": {
-    "fingerprint": "eb761ea32c238b2efada09dfa1a6dc03d40d6eba3857baa105a396df694c6348",
+    "fingerprint": "b0bc9374b4828c1ca4f1ba8a8887df6c9b971839411ace804bff616f93aaec1d",
     "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

@@ -1,20 +1,20 @@
 {
   "card": "elastic-cloud-enterprise",
-  "updated_at": "2026-11-16T19:17:07.700Z",
+  "updated_at": "2026-11-23T20:59:31.969Z",
   "urls": {
     "https://www.elastic.co/docs/deploy-manage/api-keys/elastic-cloud-enterprise-api-keys": {
       "hash": "bc5935f3cf72078862cd2035ff1c7ef08dd26654c86dbeb2a6f4b960964a791a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:23.117Z",
+      "checked_at": "2026-11-23T20:48:48.322Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://www.elastic.co/docs/api/doc/cloud-enterprise.json": {
-      "hash": "e2ee2a605817f31b21babcedde0d5261209500c4bdab35a1a12e9c9e68a4ff45",
+      "hash": "afa49b9520592fef0496685c69f0bfd7324af0275f99584314df1c3d005e4fd8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:24.117Z",
+      "checked_at": "2026-11-23T20:48:49.322Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -22,7 +22,7 @@
       "hash": "2e811ef669143f585ec43df4e498eed050ccbed89203434507c26a48e96d0a50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:16.113Z",
+      "checked_at": "2026-11-23T20:48:41.317Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "a81c8f797288c0fe2e8ef511bceb95472af5ce95c4864f1843eae006cf6bec1a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:08.605Z",
+      "checked_at": "2026-11-23T20:48:34.422Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "9cbd58166c6dce75221f7aea43bc7167ed55b7ae5b081db98e641809b8b46060",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:25.118Z",
+      "checked_at": "2026-11-23T20:48:50.322Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "64aa32f6ac8a0e62d791d95aa67de48a182d4170665c25a5cb47d1437901f23c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:26.118Z",
+      "checked_at": "2026-11-23T20:48:51.324Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -54,7 +54,7 @@
       "hash": "23de8d8b167c8fb3efca6c5c1329e0ad580c0fb93f51b7747cfa59b5cb78f55f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:27.119Z",
+      "checked_at": "2026-11-23T20:48:52.324Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,15 +62,15 @@
       "hash": "90a94ce5450cb489c63aecf5d05ca5e2627bd0b8b12751c3915ee7bf2cd7e684",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:28.120Z",
+      "checked_at": "2026-11-23T20:48:53.326Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/ec-aws-custom-repository": {
-      "hash": "b503a9154cd9ea24ea07b81c2dd296ac08b03f73b331025c2c766f06c996ffbd",
+      "hash": "9fa57c0970c9e4ed0750f4ca9335ef656d8b4985d1bb1a814d451cabd54860ff",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:18.114Z",
+      "checked_at": "2026-11-23T20:48:43.318Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "aa4b3bf163e0688ec6c2d53914012ffa565d8e67e4a27248085cebba6a37c3d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:29.120Z",
+      "checked_at": "2026-11-23T20:48:54.326Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,15 +86,15 @@
       "hash": "8a4c238fc552b73911f26ddb846d76915016d4b75f624672631a90a8518a64fa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:08:30.121Z",
+      "checked_at": "2026-11-23T20:48:55.326Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

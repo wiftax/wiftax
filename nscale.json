@@ -1,12 +1,12 @@
 {
   "card": "nscale",
-  "updated_at": "2026-11-16T19:17:09.674Z",
+  "updated_at": "2026-11-23T20:59:37.776Z",
   "urls": {
     "https://docs.nscale.com/docs/manage/service-tokens.md": {
       "hash": "c6f038ad06363f68407e7898d97a4ea79f0f939c725458388cecde275fb07879",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:49.241Z",
+      "checked_at": "2026-11-23T20:52:27.261Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -14,7 +14,7 @@
       "hash": "d10fd3c5ea250c7db29933840a854d7a74c4b0f286cd1400434ca4442b450712",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:50.242Z",
+      "checked_at": "2026-11-23T20:52:28.262Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,7 +22,7 @@
       "hash": "3767f76db5b14cb88eab92440f00fe88d8201a84592e674ebf68070514d1f13b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:51.242Z",
+      "checked_at": "2026-11-23T20:52:29.261Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -30,7 +30,7 @@
       "hash": "427a582ce4b65c1cf68bd66f6086710688fedac95e8db3c5e3af75276f84094f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:52.242Z",
+      "checked_at": "2026-11-23T20:52:30.262Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "44deba45aa860f5a408edee87b996f522e0463ed57d3abb10e081ff88714c3d5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:53.243Z",
+      "checked_at": "2026-11-23T20:52:31.261Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "e2fb5b98e4545dcfc2e5c69e6f2432a769e580f2b08dfc4d1041aa2d5faa8773",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:46.746Z",
+      "checked_at": "2026-11-23T20:52:24.496Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
@@ -54,7 +54,7 @@
       "hash": "70f5af61d7e9ca3a4bc673b4c124067e5768d478b3d0aa1fb28f8372e5da37a0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:48.812Z",
+      "checked_at": "2026-11-23T20:52:26.496Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,15 +62,15 @@
       "hash": "33f075de03cfda134df6909db68d44efc8b30f39279842a5c46fda68c20dc421",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:54.243Z",
+      "checked_at": "2026-11-23T20:52:32.262Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://raw.githubusercontent.com/nscaledev/openapi/main/ims/main/openapi.yaml": {
-      "hash": "9fc88e9e2ba048274e584162ca27b2075a082979f6f916fb294d4c08a25eba0f",
+      "hash": "1b9aab0ee2e02e0419be2cee6866a3ff75d4a614c5655c359abbf731e6f3d18a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:49.813Z",
+      "checked_at": "2026-11-23T20:52:27.497Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -78,7 +78,7 @@
       "hash": "16ac616cb8c0d3935351c938ea0745f63ac6958975db0e5d1e9b6ebb8123abc0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:55.244Z",
+      "checked_at": "2026-11-23T20:52:33.262Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "c6e9f34e331f387654e539fe6ec1adf0398e22f6a6071112cf43a925ca085faf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:50.814Z",
+      "checked_at": "2026-11-23T20:52:28.497Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "b6b4cfea0a5757a8d72fb9a6e654e344982cffc8c1a8a8faa0205bbe4ef5420c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:47.813Z",
+      "checked_at": "2026-11-23T20:52:25.497Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "5c618f109c54e1ff66575ff0016a4b97e5089140bd4f743307614fb529e173f1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:51.815Z",
+      "checked_at": "2026-11-23T20:52:29.497Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -110,7 +110,7 @@
       "hash": "21cd7c3b8b985990ae50b39b95794f816856db991666e4ac191ce7caf90c3502",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:47.239Z",
+      "checked_at": "2026-11-23T20:52:25.260Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,17 +118,22 @@
       "hash": "667ea2f9fa8bc9ff790360ab0ef463b4c6a3496e05be8095f85840ab1ee70ce6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:48.240Z",
+      "checked_at": "2026-11-23T20:52:26.261Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "d441fefbc8f218b34caf4bb1792173ba28f07d3401db67d495fc614f9388f57b",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

@@ -1,12 +1,12 @@
 {
   "card": "wiz-platform",
-  "updated_at": "2026-11-16T19:17:16.961Z",
+  "updated_at": "2026-11-23T20:59:49.831Z",
   "urls": {
     "https://docs.databricks.com/aws/en/ingestion/lakeflow-connect/wiz-audit-logs-source-setup": {
       "hash": "b1a057cde59fd961faff4fb6a1b87ba627d847145ab62949c814e4badb6af08b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:29.462Z",
+      "checked_at": "2026-11-23T20:58:45.321Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -14,7 +14,7 @@
       "hash": "6cce7296ad11f1ae146ad62ff143bd9437511bd31b0bedfd97d6e9724f78513c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:29.778Z",
+      "checked_at": "2026-11-23T20:58:45.416Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -22,7 +22,7 @@
       "hash": "8e17260636f0b5430ef0d86fb561f576b50e48f4b08cbc37ac7dd6c3881caeba",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:30.076Z",
+      "checked_at": "2026-11-23T20:58:45.592Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -30,7 +30,7 @@
       "hash": "ea85da024015f980e7c5277b88a25aae27b07e0bf702565817c5869d85f91858",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:31.076Z",
+      "checked_at": "2026-11-23T20:58:46.592Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "412a1bcb825df56470f1e0f07fef675d483207d13b5dbd468099638550c1d5aa",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:32.076Z",
+      "checked_at": "2026-11-23T20:58:47.591Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "4d9c0bba04593cbbbe712a2c23352be79f3a6da28a0d01afa7a86878bad0cec0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:33.077Z",
+      "checked_at": "2026-11-23T20:58:48.592Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "8c548717f5a4322e917ca1d31519cddcf647c7816eaa4f3247cb39588240982c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:31.506Z",
+      "checked_at": "2026-11-23T20:58:46.465Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,15 +62,15 @@
       "hash": "117c286b6c2269c062824726dc9cfc46b4ef06882f93bce86e68f2094957dca2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:31.833Z",
+      "checked_at": "2026-11-23T20:58:46.642Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://wizio-public.s3.amazonaws.com/deployment-v2/aws/wiz-aws-standard.json": {
-      "hash": "abfd82eab5eb56664ffd38252bc51e6f23e9a099397b56a621c7328e467519eb",
+      "hash": "ecdd0864c5cecc6828568d47f8f845628b7bd82993aae3da02af60340fed4403",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:32.125Z",
+      "checked_at": "2026-11-23T20:58:46.867Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -78,7 +78,7 @@
       "hash": "efd57f0c78693a04140f04c15aa9abf6e73f7dac61e8650064feee146f422952",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:34.077Z",
+      "checked_at": "2026-11-23T20:58:49.592Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "221ef5f812df7bf08f8b1c2cdec10069bf24ba712f4c06a40742b118952f433d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:35.076Z",
+      "checked_at": "2026-11-23T20:58:50.593Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,23 +94,26 @@
       "hash": "a7a69a710af855b51608a27e3a6f9cbcfbf85401ce7093f625795cbb3c439a1c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:36.077Z",
+      "checked_at": "2026-11-23T20:58:51.594Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://raw.githubusercontent.com/Karthickramasamy007/lz/main/azure-landing-zone-main/wiz-connection/wiz_azure_connector.tf": {
       "hash": "819416888e44e2718c1649007fa05a2b80e013765de35e72190abc36a7ec4549",
-      "status": 200,
-      "ok": true,
-      "checked_at": "2026-11-16T19:16:37.076Z",
-      "quotes_found": 1,
+      "status": 404,
+      "ok": false,
+      "failure": "gone",
+      "fail_streak": 1,
+      "last_ok_at": "2026-11-16T19:16:37.076Z",
+      "checked_at": "2026-11-23T20:58:52.595Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://raw.githubusercontent.com/AxtonGrams/terraform-provider-wiz/main/docs/resources/connector_gcp.md": {
       "hash": "183dba3810be137c6252cf0837033b6c6030ec21b1714ae2e71b66334564ed84",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:38.076Z",
+      "checked_at": "2026-11-23T20:58:53.595Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,7 +121,7 @@
       "hash": "f41231aac9b838e4954fe26bc0da683eb66eea20f984c120090ce79910492395",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:39.076Z",
+      "checked_at": "2026-11-23T20:58:54.595Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +129,7 @@
       "hash": "ba2d02ebe0cfd05df9460b66ec12319378e8fa3206682d588c312e5d7b2356f3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:40.076Z",
+      "checked_at": "2026-11-23T20:58:55.595Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,7 +137,7 @@
       "hash": "dc2edb6502db107806ecb0984779a7ebb21c1a3338bbbddf585be4ee2cc45d8b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:41.077Z",
+      "checked_at": "2026-11-23T20:58:56.596Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -142,7 +145,7 @@
       "hash": "5a11a76191f869178126a740d3326137348f363bc37fe2ff04b6c13f7d606579",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:42.078Z",
+      "checked_at": "2026-11-23T20:58:57.596Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -150,7 +153,7 @@
       "hash": "0ed84ac8c08e12b399eb25004d605e33bb2665343d3c4d97afbd016384a4808e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:36.358Z",
+      "checked_at": "2026-11-23T20:58:50.692Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -158,7 +161,7 @@
       "hash": "84b8a2fad48afd80b2bc895f024546e3e2baa3f7ec9398f62500d4c8dcca7965",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:43.079Z",
+      "checked_at": "2026-11-23T20:58:58.597Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -166,7 +169,7 @@
       "hash": "74684e915706b91b50aa74996eff9432de27a346d1a7e7ce437acdcac4f75e4f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:44.078Z",
+      "checked_at": "2026-11-23T20:58:59.596Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -174,25 +177,30 @@
       "hash": "05ee1cab23a2130a62990a842bef12a8f884af3624f1ac262923b0584f3a873f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:45.079Z",
+      "checked_at": "2026-11-23T20:59:00.597Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/specifics/wiz_oauth_credentials": {
-      "hash": "63b7a821c2e772efce83d181a040a1cd485251a4713be0bcd7e64916388a972d",
+      "hash": "2edf0b44a576670e2dd2912a09eb4c1ef1eacde173cacedac7e2a692d91bfaf6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:38.212Z",
+      "checked_at": "2026-11-23T20:58:53.686Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
+  },
+  "last_assessment": {
+    "fingerprint": "20dceb9d9f5517bdfa5d36a2d5ef56dd2486f323c7190ec619465d6a2a570075",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

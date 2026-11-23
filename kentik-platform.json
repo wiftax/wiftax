@@ -1,0 +1,92 @@
+{
+  "card": "kentik-platform",
+  "updated_at": "2026-11-23T20:59:35.387Z",
+  "urls": {
+    "https://kb.kentik.com/docs/apis-overview.md": {
+      "hash": "522d645b26513427d1ca23fac4bc6bf951b9bcc1214d0f4486ac5bf57449cc84",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:45.591Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://kb.kentik.com/docs/user-profile.md": {
+      "hash": "8ac4e7b7c5f1a747428c9ae594ec4b7725bfeaa57d1003c0f0255d3d4dc92149",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:46.590Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://kb.kentik.com/docs/metadata-configuration-aws.md": {
+      "hash": "5722e831ec3ba3768b244d66791e21991bdca4545a34df57d745514c8bdb7d3e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:47.591Z",
+      "quotes_found": 1,
+      "quotes_total": 2
+    },
+    "https://kb.kentik.com/docs/kentik-for-gcp.md": {
+      "hash": "7fd8756379a7f6538fcca76224ba0c1dea8ca3085ec05cbcde427149251c2006",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:48.592Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://kb.kentik.com/docs/azure-prerequisites-roles.md": {
+      "hash": "8d4ec232edc9652f7cd73dc117b690b0f32283db0cf79f42601bc31ca4e189f0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:49.591Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://kb.kentik.com/docs/kentik-for-oci.md": {
+      "hash": "6a8ea92f83711cf1d6bb3588e4f1389ada37d351dfebb866648c7a54e438a0ba",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:50.592Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://kb.kentik.com/docs/kentik-export-configuration-azure.md": {
+      "hash": "af04b5126c1bf05d7907b588d8ce648b2fa86fd2f42101a4ec9c0e35f5e0d0a6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:51.592Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://kb.kentik.com/docs/user-apis.md": {
+      "hash": "35d4f5ac04c04df123850435cccab8100e39a59d95f97e4a3bbd03bf1dcfc9b8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:52.592Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://kb.kentik.com/docs/users.md": {
+      "hash": "1fc60d18f0cfcd8bc6b193eadbe753f4c6c5440f0eeb7a80947b57d94ef369ca",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:53.593Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "159f0ebc0392281341adc32ff47f81d2081b2d19669f0a4044c0417fcce8811a",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

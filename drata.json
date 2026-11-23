@@ -1,20 +1,20 @@
 {
   "card": "drata",
-  "updated_at": "2026-11-16T19:17:07.503Z",
+  "updated_at": "2026-11-23T20:59:31.641Z",
   "urls": {
     "https://help.drata.com/en/articles/13521519-set-up-oauth-for-the-drata-api": {
       "hash": "f50a25c15e68f211cb9138265c114e27b2120cf16feb350eb98f5a624859572d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:46.435Z",
+      "checked_at": "2026-11-23T20:48:11.935Z",
       "quotes_found": 7,
       "quotes_total": 7
     },
     "https://developers.drata.com/page-data/openapi/reference/v2/overview/page-data.json": {
-      "hash": "24f97c58e48363b4b0037c67e6dd0a934cd721f736414a39bd4683c9c2ae4301",
+      "hash": "f060443d76f936f7b5d5f0eb874a39eb0f8956cb8d205c191a23344aaddb764b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:46.958Z",
+      "checked_at": "2026-11-23T20:48:12.412Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -22,7 +22,7 @@
       "hash": "5dabea3352c5c183c45a3c626aec42894a6024f11052d256ead835ffcc893db8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:47.434Z",
+      "checked_at": "2026-11-23T20:48:12.934Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -30,7 +30,7 @@
       "hash": "1c6a149f747e0abf83cccfb12bcbb0c46dda764b618cf9ea064acd219ba0f03a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:47.959Z",
+      "checked_at": "2026-11-23T20:48:13.413Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "04f6b08f170dcc320de915d2acc7b22c74cac7b1e36e171a063c1b57108de63f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:48.435Z",
+      "checked_at": "2026-11-23T20:48:13.935Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -46,7 +46,7 @@
       "hash": "d7ab3faa5ff4c76945c36a3b2c399882fc85e679aeec4ca829d4eec2da2e6558",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:49.435Z",
+      "checked_at": "2026-11-23T20:48:14.935Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,15 +54,15 @@
       "hash": "6e91079e0b2722fde834b36abd3fea89a5cabf88102d988739535770bd3fdbfc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:50.435Z",
+      "checked_at": "2026-11-23T20:48:15.935Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.drata.com/en/articles/4663373-gcp-integration-guide-script-setup": {
-      "hash": "d52d2e016aaa37b1c581ec8dff61b647ac4d790f203d61a275c771d4ae2ea43c",
+      "hash": "5685fd5dcbdfed08caaa1f93a12b8d947f1cec6c9963cfb20a06e317d82c906b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:51.435Z",
+      "checked_at": "2026-11-23T20:48:16.936Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,15 +70,15 @@
       "hash": "4bd332e2c3670f803dc3b52e5bc9763f037725f6f9f8f9aa90cec76b4a061672",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:52.436Z",
+      "checked_at": "2026-11-23T20:48:17.937Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://help.drata.com/en/articles/4663377-github-integration-guide": {
-      "hash": "76d554c99a8f885d95ac97cf0e972de930d30ad03ef4f41a04ca5421701a0c37",
+      "hash": "b56bfff3d98a2becfc995aff37c54e9130cce3434342a2fab37c74ac1ae055ab",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:53.435Z",
+      "checked_at": "2026-11-23T20:48:18.938Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "4999cd89214de248f0340bd2606260fb5501eb94b572faf29be4ab8aa1d1eebc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:54.435Z",
+      "checked_at": "2026-11-23T20:48:19.938Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "44560cb3df315d5b986ac22a0840dd77456a0be89d4495f8f9d33e8aee9debd5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:55.435Z",
+      "checked_at": "2026-11-23T20:48:20.938Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "c470e95c2bd5ffdfa2cd97d081ad9e500831aedf1427cc64aa53e13077d128d0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:56.435Z",
+      "checked_at": "2026-11-23T20:48:21.938Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,15 +110,15 @@
       "hash": "0e4f91f12a48ada0f3caf219b18232a17fb3de4629bf4ec3ad5808fd699ba1ba",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:57.436Z",
+      "checked_at": "2026-11-23T20:48:22.938Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.drata.com/en/articles/8987822-snowflake-integration-guide": {
-      "hash": "f0e5aa90e299b7eee1e0af441e9367c2eb44dd0c6f8ebb29e81a49bc9aa73671",
+      "hash": "57eb6dc3a72310b455d731ccb55ddba14e409ee00e6f2b2ec57f858b3c8197fd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:58.436Z",
+      "checked_at": "2026-11-23T20:48:23.938Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,23 +126,22 @@
       "hash": "56b1a27be4b9eaaa0f9b283ed70c162b8aa9f227981adc70033a292fa6f85a99",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:53.052Z",
+      "checked_at": "2026-11-23T20:48:18.013Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "e6cd047b56a887c0c4ebb763abca5dd1ffea97ff47f3ffec9a6ac8bbd954ff9e",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "203e931575293190ba64fe80537007064f7bf82613ef3dd6448f814ee1cd74dc",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

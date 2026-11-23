@@ -1,0 +1,78 @@
+{
+  "card": "cisco-catalyst-sd-wan-manager",
+  "updated_at": "2026-11-23T20:59:29.321Z",
+  "urls": {
+    "https://developer.cisco.com/docs/sdwan/authentication/": {
+      "hash": "a43e66a610ba3d197f2052f30fcc20f5c0b70a3154714b999efaaa2a4a2ae36f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:40.709Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://developer.cisco.com/docs/sdwan/validate-account-add/": {
+      "hash": "c1d94a9e6a8a2a80dd5a6062d1f60f17e9e464ac5c8a9bc1169b839d33afa898",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:41.709Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developer.cisco.com/docs/sdwan/get-multicloud-external-id/": {
+      "hash": "aa11242de7b9d37561a6e46501a3c489d5745fd565a321a47e7c730531509a94",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:42.955Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/docs/sdwan/retrieve-password-policy-from-global-settings/": {
+      "hash": "a1df40480e21dd08f599d2c11040018083ef33730901580d1242dcbc2e093ab2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:44.288Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/docs/sdwan/create-user-administration-user-group-1104/": {
+      "hash": "c3b79d2e1391a52b4d1090f8919b0aecacbf19c1e8c95fc10823a992e75a9290",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:45.439Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/docs/sdwan/update-password-administration-user-group-3103/": {
+      "hash": "e958a9579093e358cff8940325ece38a93a7eee093f7b1f0228c24dbe213781d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:46.850Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/docs/sdwan/create-user-group/": {
+      "hash": "960e2d0ab3a45b36e2d7b24fa14ba522ee14ba292dce85c5a33597319795034a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:48.260Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/docs/sdwan/find-users-administration-user-group-1103/": {
+      "hash": "4ea7b2519fe716b4e223e1c2cd4d4055a2e390c31bce8d778697f39ee25f2421",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:49.261Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

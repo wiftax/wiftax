@@ -1,12 +1,12 @@
 {
   "card": "snyk-platform",
-  "updated_at": "2026-11-16T19:17:16.643Z",
+  "updated_at": "2026-11-23T20:59:49.273Z",
   "urls": {
     "https://docs.snyk.io/platform-administration/service-accounts/service-accounts-using-oauth-2.0.md": {
-      "hash": "3c0231819510ba07f5db6a23f7cb5fef5414817aac96be2292d9f3fcdbee147b",
+      "hash": "bf3b6931e3ab4ae2f250031a6a44b4628dec66dc5b151c79e10bea9524ce664f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:29.777Z",
+      "checked_at": "2026-11-23T20:55:27.835Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -14,193 +14,198 @@
       "hash": "0bbd4db1bd9167d483de9d7e60cb08e129fddabf60c20dc330213118dbe4570d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:29.940Z",
+      "checked_at": "2026-11-23T20:55:28.080Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/platform-administration/service-accounts/manage-service-accounts-using-the-snyk-api.md": {
-      "hash": "c38d664835238196fe8928ccd634c534b3ad078f8f53e5b94a9ce362545949d0",
+      "hash": "5b9e1ff2f64599e31b039186118ce4514a9f8ff0a5a693a4ffcdf2aaafc1cfa6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:30.777Z",
+      "checked_at": "2026-11-23T20:55:28.835Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.snyk.io/developer-tools/snyk-cli/authenticate-to-use-the-cli.md": {
-      "hash": "b821b3e8089be659f898eea8373b7df2de195340887918dd1ee98f555f6515c1",
+      "hash": "325904849809255927e562f9f1780654ccf693e73961fb225d1fa656e6bc3b82",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:31.778Z",
+      "checked_at": "2026-11-23T20:55:29.834Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/snyk-cli/commands/auth.md": {
-      "hash": "86a495b4a83517e76948500d22d14b0e41de2a8700ec537046b5077979eeb679",
+      "hash": "91cee36e60071075f07edc3fab530684e7f37bcd55cec3b646887cbc94425783",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:32.778Z",
+      "checked_at": "2026-11-23T20:55:30.835Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.snyk.io/developer-tools/integrations/snyk-ci-cd-integrations/github-actions-for-snyk-setup-and-checking-for-vulnerabilities.md": {
-      "hash": "0bc47bc7a88cf1d220beff63fb0fd4e62b95deffccdba6986151927071e2bc0f",
+      "hash": "8933ea57c23d1cdd5d926a1221b0db6a67f7e64f1be289896f363ec9c28df984",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:33.778Z",
+      "checked_at": "2026-11-23T20:55:31.834Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/snyk-api/authentication-for-api.md": {
-      "hash": "b6a5fd9cc30c35197bdeb6ab0fef74ab7fcbc20ede65afa758f429171c8f3b4e",
+      "hash": "4e8b1feee42cbf18ea670eb88a65ec077c176302e157cdc88be172f781c54527",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:34.777Z",
+      "checked_at": "2026-11-23T20:55:32.835Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-iac/cloud-platform-integrations/aws-integration/aws-integration-web-ui/step-2-create-the-snyk-iam-role.md": {
-      "hash": "6decb7f62101d7d57a7b43c7e9045ab48fbb58e2770b739a8d76a6aa9cb819ca",
+      "hash": "2f9a5fbda3e1b5d7e8135dadb7422f671d1402f50f45f471cda381ef6991f735",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:35.778Z",
+      "checked_at": "2026-11-23T20:55:33.836Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-iac/cloud-platform-integrations/azure-integration-for-cloud-configurations/azure-integration-web-ui/step-2-create-the-entra-id-app-registration.md": {
-      "hash": "1a2c33880e2814bb75b13b5d6e6dd7f4d84687de25dcfebd3a81e5a07fa81915",
+      "hash": "09de69b096e13adfaa82371b6c449b4f685c8c18af02d1a452fb76ec4850789d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:36.779Z",
+      "checked_at": "2026-11-23T20:55:34.836Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-iac/cloud-platform-integrations/google-cloud-integration/google-cloud-integration-web-ui/step-2-create-the-google-service-account-web-ui.md": {
-      "hash": "c41d82cd7dec25b430ff7f577286d47dc2bee771a4f3210274af78b3436c279f",
+      "hash": "b6ed6e1b4786e4a945bbba6ffd5617705a45c6cd45eee2968cf95c11d3723c33",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:37.778Z",
+      "checked_at": "2026-11-23T20:55:35.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-amazon-elastic-container-registry-ecr/add-more-organizations-to-your-aws-iam-role-for-snyk-authentication.md": {
-      "hash": "adf662d4e99fef7ad585a8448eafd36064fc0eee506ce9663c990e54e093de31",
+      "hash": "58ace6e4241ae6fd5389797ee6fd889634e8793fa30dfbde20c86226e0b66159",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:38.779Z",
+      "checked_at": "2026-11-23T20:55:36.836Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/github-cloud-app.md": {
-      "hash": "6d0a0f784d5c518ff388f44447d4b9595b7b6b77304b503ff8a1f7474eb25765",
+      "hash": "8ca813d971f17b374ba33f35ace235c0a69b3b51231f7116ce80993a94bc7775",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:39.778Z",
+      "checked_at": "2026-11-23T20:55:37.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/bitbucket-cloud-app.md": {
-      "hash": "b1a5f6ac50f2aa712b72423c0fa3e04b57a4afec8fc01654f70aaf808416997e",
+      "hash": "b74e321226a1d03264051c856b8ffb0428f189c1df70f2c76239017ce5e81228",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:40.779Z",
+      "checked_at": "2026-11-23T20:55:38.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/github-enterprise.md": {
-      "hash": "30856195f6e2c70a67f93a04ddee83b85149de8d27b50259ea4deaef6fdcaf2b",
+      "hash": "6afd957ea5623426b66eaa2825fdf1450e44525ea4d6f1f54cbbdd7033a6f328",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:41.778Z",
+      "checked_at": "2026-11-23T20:55:39.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/gitlab.md": {
-      "hash": "77dde31d3a4af49ba0541882d338d74546342cbbdf6cf88d211e734ef7e9d544",
+      "hash": "8252079ff077348c8b0820f74cc24c2a7abd80d33dd13aa4569d3e928dd2ca21",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:42.779Z",
+      "checked_at": "2026-11-23T20:55:40.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/integrations/scm-integrations/organization-level-integrations/azure-repositories-tfs.md": {
-      "hash": "03e4b50be9141ede5586603a704eaade27743c7248bf2caa59b4cdfbcba8a29a",
+      "hash": "07c3965ec84f711b41e86332c55352246c1bd25a71d01edd08bea1c2d72d33ad",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:43.778Z",
+      "checked_at": "2026-11-23T20:55:41.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-google-artifact-registry-gar.md": {
-      "hash": "b3ab276518f7b601baff5c78711341c8b2e2a99d12d442586dca16a2845ed4af",
+      "hash": "a7f630c8a67df33be124f3634ed4e6bd64803813daea398f3fcd90a8fe351aa4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:44.779Z",
+      "checked_at": "2026-11-23T20:55:42.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-microsoft-azure-container-registry-acr/configure-integration-for-acr.md": {
-      "hash": "2b9ee157e2e39dbff64dd81eec47a9955064bf19f8c3556ddd70bdd6b2e42313",
+      "hash": "ecc1c181fe1499bd1cc1e270b58a3710a85d3da1d449d171470cb21c4a883642",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:45.778Z",
+      "checked_at": "2026-11-23T20:55:43.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/scan-fix-and-prevent/scan-with-snyk/snyk-container/container-registry-integrations/integrate-with-docker-hub/configure-the-integration-with-docker-hub.md": {
-      "hash": "100e2176b73be9d721457c0f128bfbf7279b22d16beb4df0f5ad4e00ff73cff6",
+      "hash": "cf65cfde713837ed2071990c20b013edf65ad739992d9d85b751e174e82b2822",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:46.778Z",
+      "checked_at": "2026-11-23T20:55:44.837Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/platform-administration/snyk-broker/classic-broker/prepare-snyk-broker-for-deployment/obtain-the-tokens-required-to-set-up-snyk-broker.md": {
-      "hash": "8cd72e29a4bc63ee8f422f0bed9bed3465c1e0cdbc468d85644b30df94dc15d2",
+      "hash": "ff0e92ed4fef68b1eb26c7e74c55962119d28612d30b883e9c20bb0d26dcf378",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:47.779Z",
+      "checked_at": "2026-11-23T20:55:45.838Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/platform-administration/service-accounts/choose-a-service-account-type-to-use-with-snyk-apis.md": {
-      "hash": "1b6395f83fffec7cd93a4f436cf43ccf8ebe660dc6bd1e5a0cd0f2925a5ca796",
+      "hash": "6af85deecd55b4e8581018185bb594ca61d8b2b82bdeefdc183a7353146d1154",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:48.780Z",
+      "checked_at": "2026-11-23T20:55:46.838Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.snyk.io/developer-tools/snyk-api/authentication-for-api/personal-access-tokens-pats.md": {
-      "hash": "65f8a6931d4d24447853b435ed0f382cc00cf6d1f275576944f2d257eaf236d6",
+      "hash": "0c3069c1b325a440e035491866b03a737f2ba3696b05f546775290a1bd9e02e8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:49.781Z",
+      "checked_at": "2026-11-23T20:55:47.837Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.snyk.io/platform-administration/service-accounts/service-accounts.md": {
-      "hash": "bcd4e78e1801dcd623e19dd9a52d04dc904c49380e2a0b2c2a368c1b78897726",
+      "hash": "5f7e71694c6a0b8f0d884ff8e9bbed633ed5d6abdf275fbae4bfe0e08c3177ac",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:50.780Z",
+      "checked_at": "2026-11-23T20:55:48.838Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.snyk.io/llms.txt": {
-      "hash": "80591715d49dfdbc5a7b18a8b404d2961603bb88b60837142306a77529ba7456",
+      "hash": "5c7cbd4b15486723f70188a3a1a6d9441f8e7f2ce5958853c6ec01fbe072b5a3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:51.780Z",
+      "checked_at": "2026-11-23T20:55:49.838Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "6055c0e900b5d6b4cb71d586231300bec163d64734db0c2943511125f517fcc8",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

@@ -1,44 +1,44 @@
 {
   "card": "strongdm",
-  "updated_at": "2026-11-16T19:17:16.698Z",
+  "updated_at": "2026-11-23T20:59:49.373Z",
   "urls": {
     "https://docs.strongdm.com/references/api/api-keys.md": {
-      "hash": "51a1363d99cddb96c43a46cf7b74b275d9176b2262d597dfa9a3480c5ae63f60",
+      "hash": "374733094ed4fd4a0f218eb5f3680c9e5f6014c1ed1f6147dc1367f17b564c3e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:15.050Z",
+      "checked_at": "2026-11-23T20:56:16.553Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.strongdm.com/references/api.md": {
-      "hash": "4229bf4143514b85a011a8893b6a0ef1946f78e503a24024281be3095d29a23f",
+      "hash": "d84e46061bcaa0ca04eb667e025ce96200db8a4fe672b3d2b87193560daa0d96",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:16.050Z",
+      "checked_at": "2026-11-23T20:56:17.553Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.strongdm.com/admin/principals/service-accounts.md": {
-      "hash": "4025bb3643a1fac4c023848027211713899409b3cdf50ca29eaaedf580d0dfbc",
+      "hash": "363c30f9054cf0a34ea936495796c7518e1abb051975abc548de115563652123",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:17.050Z",
+      "checked_at": "2026-11-23T20:56:18.553Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.strongdm.com/admin/principals/admin-tokens.md": {
-      "hash": "f52d84f834a6cc1f605d251a4e9c40fdd012436cbb042a5824f8167f77fa4b49",
+      "hash": "de7c609ce73db9e811afa99afb5a88e7a3886221af6755e15e7b0962e491445a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:18.050Z",
+      "checked_at": "2026-11-23T20:56:19.554Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.strongdm.com/concepts/security/authentication-and-identity-federation.md": {
-      "hash": "e56e840a543b5267274229b5fc8b90007e684ed60cca66a110a84f915e974d98",
+      "hash": "443cbb7918deacb1afb76dc31656c89241013d8e3a1f9133c8fba7c26a979415",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:19.051Z",
+      "checked_at": "2026-11-23T20:56:20.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,95 +46,95 @@
       "hash": "be17881023fddc2b0ed805c35dda892d307d7ab66e16acd07af1a2b708b46a4c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:16.481Z",
+      "checked_at": "2026-11-23T20:56:18.882Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.strongdm.com/admin/resources/discovery.md": {
-      "hash": "b312a02984ae984eeb7bf90f2f6513bc8dbeb9e5a7b4760e1681d9ed9ce1e87e",
+      "hash": "9f9a5ed0a194dcffe20d6d7d80202553db613c5d5bffcb0dc774e9cae50a78be",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:20.052Z",
+      "checked_at": "2026-11-23T20:56:21.554Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.strongdm.com/admin/resources/clouds/aws-instance-profile.md": {
-      "hash": "d0233b6f6c8f4b47a3d08dc34f6dd420e10dda7b91b9039e1df78218d8e18b57",
+      "hash": "6eb45ad7ffe91d30c1d78b6d3b3b90655083d2bfd1df716d494c99838b467f22",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:21.053Z",
+      "checked_at": "2026-11-23T20:56:22.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/datasources/azure-postgresql-managed-identity.md": {
-      "hash": "b51ffdbf79d84f5ec92864636b6f3f87b6ea27521faa933d700329fc74297ebd",
+      "hash": "1e4571a1d80f4352c00a8fecc589e934a8724e36db56943e71ab48dda3dae85e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:22.052Z",
+      "checked_at": "2026-11-23T20:56:23.553Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/clusters/kubernetes-podidentity.md": {
-      "hash": "bde99cbd4205c54055d4ba001fb5342f6b66fcbe68fbad1a2a6e2876ba10fff8",
+      "hash": "29a1ee07fa2e0aae56002bb99b553fc321df58799156c91e9d37c6f02361096a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:23.052Z",
+      "checked_at": "2026-11-23T20:56:24.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/clouds/google-groups.md": {
-      "hash": "869f3528e754443507e70769da1ff94e1eeadb46df45afc5d35259b0a19340f5",
+      "hash": "0b902ed21c16fd37e9615f2cb2643f82e24d8ae5d6df2bc58f51039c1df4ae88",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:24.052Z",
+      "checked_at": "2026-11-23T20:56:25.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/clouds/azure.md": {
-      "hash": "6f2680d405e4c3c9ff2556fa82a60e59c3291f95a42d648920872746f5292e1f",
+      "hash": "526a1a6f0cc30cce1545acd40d594b4dcd39c5add56acbf066ed933af4cd3a2a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:25.053Z",
+      "checked_at": "2026-11-23T20:56:26.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/clouds/gcp.md": {
-      "hash": "f65bb6219f29356c4ebaacfb3dbe2023cba1e9f63e08b5e5b8cc785685bdfa8b",
+      "hash": "73c7d1d28623402fbf5ab2c124d81f30fe3ed6e7d96c754e651c352f808f5114",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:26.053Z",
+      "checked_at": "2026-11-23T20:56:27.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/clusters/gke.md": {
-      "hash": "85eb29bcb2158d6ca0d34e782d9db3e9ed1da8d748cfd51396ef42aa7ca6aa0a",
+      "hash": "039ccacde4464e2530629011ae3e2c94f485d240015ade3a63660468afb97380",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:27.052Z",
+      "checked_at": "2026-11-23T20:56:28.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/resources/clouds/aws.md": {
-      "hash": "e933f9a26ef14778ffcee066aa7c932a5dd8dac5bbac5fd33fc8ad32f192b2f9",
+      "hash": "96bfabcee80994f1e81cccfef5159a4d6656c0ae527a13e8368d13feae2d9827",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:28.052Z",
+      "checked_at": "2026-11-23T20:56:29.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/admin/access/secret-stores/aws-secrets-manager.md": {
-      "hash": "ec7fbc2d11965d0bd391e4ef0f7a740749c2f114c5b52336863d43267931d2b2",
+      "hash": "639369c1ae766c6a8b5b3c9f10785efe7779a568308d583e78d7db050c93bb02",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:29.052Z",
+      "checked_at": "2026-11-23T20:56:30.554Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/references/cli/admin/tokens/add.md": {
-      "hash": "f30a78119573624367f38b5f10c7b863196cf6beb67f57317ff9d3c651fccdd0",
+      "hash": "ae3e18b7ef76829438f9051375d787bc594ae0fd64d634d1c27cc9c9b5cf2a5f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:30.052Z",
+      "checked_at": "2026-11-23T20:56:31.555Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -142,31 +142,30 @@
       "hash": "5f21e96713e2cd71e4dac15c40ebd398b17076f057db77fdd0920c30ef4385d9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:23.525Z",
+      "checked_at": "2026-11-23T20:56:25.436Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.strongdm.com/references/cli/admin/tokens/delete.md": {
-      "hash": "30ffcb4158bd5bbb3972eb7c41f66b1bf299e5be83966952230a3cd2e4f0bfb4",
+      "hash": "2cdd6cfbe12085c35c78c286749c3b20a3f29cabc09ab7024b3fdc4be0135507",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:31.053Z",
+      "checked_at": "2026-11-23T20:56:32.556Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "9e570745ff96e3c8adea7fa2eb30b4f27d8933681bcd038cbb8343b784236e29",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "4529a858cf0aca8eca4a84abb3bf8efd03068a581d133e258da03c07b7b3af89",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

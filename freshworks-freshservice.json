@@ -1,0 +1,78 @@
+{
+  "card": "freshworks-freshservice",
+  "updated_at": "2026-11-23T20:59:32.608Z",
+  "urls": {
+    "https://api.freshservice.com/": {
+      "hash": "11e4cd49f96642af20127e9bb205ce468be66f3add19b1cc566faa5f75cbad13",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:41.320Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://community.freshworks.dev/t/freshworks-introduces-multi-oauth-functionality-for-app-developers-and-oauth-support-for-freshservice-apis/12798": {
+      "hash": "4f5db52f4f86cad741e6a0ee7ba2aec5bb4f4f6fcc38b8128ad9420aab7143f9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:43.785Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.freshservice.com/support/solutions/articles/50000014413-manage-integration-users-in-freshservice": {
+      "hash": "79dd5cd85b025a05d1062f96393f45ca7ef7c798cb6863ec7d40f6249f1c6630",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:43.882Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://support.freshservice.com/support/solutions/articles/211309-freshservice-integration-with-amazon-web-services-aws-": {
+      "hash": "ebe19b8d9cd4c9bbf96cfcd3bcf5a696c26a2a255c1acd6285353184a4ae4cd4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:44.883Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.freshservice.com/support/solutions/articles/50000012093-aws-autodiscovery": {
+      "hash": "041530467538a74896f3e7c7620538090be4d0d1a6ebcd45c85a044a08f5d71b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:45.883Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.freshservice.com/support/solutions/articles/50000011917-microsoft-azure-autodiscovery": {
+      "hash": "3a2508dde4e355de8207280b8cb4b42fe070eef5a32327c1c2f882d44f1cee83",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:46.884Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.freshservice.com/support/solutions/articles/50000009163-freshservice-cloud-discovery-gcp-integration": {
+      "hash": "599732cd628f19e38d1c1c98b21bb6f4ef4bee5f6fd9f5b8790a01612cbce920",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:47.884Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.freshservice.com/support/solutions/articles/50000000306-where-do-i-find-my-api-key-": {
+      "hash": "cd5ab28b9e3da964659375513ffaedbbc178eb9f9db63fabe6e4c5f782fe9d94",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:48.884Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

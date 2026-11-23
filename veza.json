@@ -1,156 +1,155 @@
 {
   "card": "veza",
-  "updated_at": "2026-11-16T19:17:16.932Z",
+  "updated_at": "2026-11-23T20:59:49.772Z",
   "urls": {
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication.md": {
-      "hash": "486b18038e5715833562ef86415379da87502c554407477debf9ad3187053e59",
+      "hash": "2b7bb3f07fee4baf97a1008d5b53fd0149942cb599ad2779f618e7e569c27d12",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:04.825Z",
+      "checked_at": "2026-11-23T20:58:17.016Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/api-tokens.md": {
-      "hash": "6d38afb4b62be28659afb01612302bdcedc5547d7838e3fe35c242cf692647e8",
+      "hash": "5aeba84bc0eb6d2d38028e396d27e74b070649079a84c09193a9a7ca49dd06a7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:05.824Z",
+      "checked_at": "2026-11-23T20:58:18.016Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth2-clients.md": {
-      "hash": "609b556f60a14142333a1837f977a3b6dd7ab4c29c5cddf91c7b6b2f83aa0f41",
+      "hash": "a691076a198d891ab21d350d01ed99d1fe6cbada22a2316c5296523f56783659",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:06.824Z",
+      "checked_at": "2026-11-23T20:58:19.015Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/authentication/oauth-scopes.md": {
-      "hash": "125b849b92b4df392af6178e8ccc1406b90fd4dd47e0c854d747ee9785c2a35c",
+      "hash": "4490a434cb5a6ab0f0da227e0e02005cc3c963fb1e62dbbfcb6e786ff78c13d0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:07.824Z",
+      "checked_at": "2026-11-23T20:58:20.016Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/security/security-faq-2.md": {
-      "hash": "8080936fb8508cc69e4f8a91478bbf11c41c7c7e7c05715db948e46fb6e6b7db",
+      "hash": "cd1d30a5f736948beac1a9c21ae637c83a5d46c4e52ea75a01e9dd32ec2b545a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:08.825Z",
+      "checked_at": "2026-11-23T20:58:21.016Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/insight-point.md": {
-      "hash": "f8c9ca1343cd2ca8ee7f592a5f31b9db5f60c7472beb40671cb5aa3a4faa0242",
+      "hash": "53f9052b86bc2820ad787c200a55e7031462121c9f195d85e768783499642814",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:09.826Z",
+      "checked_at": "2026-11-23T20:58:22.017Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/aws.md": {
-      "hash": "40da4f041c4aa784f4a4ba86be053fa407dc383dabbefa17aa9f0606db6c4d64",
+      "hash": "2dbb170d0192ead965a1189641b962885dcdc84d84240bfbe22036c2b2c9abfd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:10.826Z",
+      "checked_at": "2026-11-23T20:58:23.018Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/google.md": {
-      "hash": "5b065c0dce275f4af1c2aa50a1f6cd3f59e2ac896d56ef3c0cf24e0107f81fbc",
+      "hash": "eec7bccc5cdc2bb4c39af492c659a66d1a31f9ec1c62189344786f99ebe629bb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:11.826Z",
+      "checked_at": "2026-11-23T20:58:24.017Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/azure.md": {
-      "hash": "2d17f79a9916bedc970c8b68ae674203e4b1150aeb330462a037201f4ad16945",
+      "hash": "027d2346c087057e3436b6019ef4015aab85db542a6ca698fa115336cf3d51ee",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:12.826Z",
+      "checked_at": "2026-11-23T20:58:25.017Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/okta.md": {
-      "hash": "e4babd16c2abcfb81c11869884a90f764e528d504f312ba1391348984d8cfd72",
+      "hash": "4df21d72f90050b148dcd13537a068515b8dc5228a9b4114f31ad8111a42e057",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:13.825Z",
+      "checked_at": "2026-11-23T20:58:26.018Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/snowflake.md": {
-      "hash": "da92a18a092615a16203dd9ec0c6dced540d05f98708f31154d04ea523a8067e",
+      "hash": "165c21b21a45049c0197b1d9cc24c675f9e08519fbc4ed5de94604d58ecf9ab7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:14.826Z",
+      "checked_at": "2026-11-23T20:58:27.018Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/snowflake/export-to-snowflake.md": {
-      "hash": "e7483571ac757e870ea35e978e2e5f8522ccad6b08bb3c0682c86c04e1eb8008",
+      "hash": "025297723e24c18d51d5181eb19c4055023f3d61450d99fc78e21fe67ad93a2d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:15.830Z",
+      "checked_at": "2026-11-23T20:58:28.018Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/integrations/github.md": {
-      "hash": "d68f25a8f133bf1bb278ea43c3fc3b400756f2d51f582742c3177430cfd09bf7",
+      "hash": "15953dc99f4b234195c1085b4302b4213fe7fb6833588a954ec41a56c0987f1a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:16.829Z",
+      "checked_at": "2026-11-23T20:58:29.019Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/administration/administration/customer-managed-encryption-keys/customer-provided-keys-setup.md": {
-      "hash": "a32e3c3e72146adfd0b4c5ba0237f1c28c3de620256756e1716758abe9866762",
+      "hash": "5044955c511c06d3f488d4278394143a27cc9c8e471c8ac732ccf2420d3a7c6f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:17.829Z",
+      "checked_at": "2026-11-23T20:58:30.019Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/integrations/connectivity/secrets-vaults.md": {
-      "hash": "d9f19cef8227b167033d1ff9c64c8b71a357ff81fb8c98fbb5b605ce78ff717d",
+      "hash": "ac31682765671cc4d5e9657cb2261f2a7a39407c10042d03f9908bc766e572c9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:18.830Z",
+      "checked_at": "2026-11-23T20:58:31.029Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/developers/api/users-teams/team-api-keys.md": {
-      "hash": "a3e874551c36240e721bead2cfa5edf2de50dc6253222fb60057eefbf4a2ab74",
+      "hash": "af9cee2df0eea12e7cae3f79931a1acbf1968b508e2e9b2a9495f87e4ab4eaa8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:19.831Z",
+      "checked_at": "2026-11-23T20:58:32.029Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://docs.veza.com/4yItIzMvkpAvMVFAamTf/administration/administration/users/teams.md": {
-      "hash": "9511bdc46993909c09be3b70cb325515002825cec7b6f5b46071fa88702b607d",
+      "hash": "1f0fcf4b44e5273112abd8afba404a7e15823a4777edfb06f0b96863e81a396c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:20.832Z",
+      "checked_at": "2026-11-23T20:58:33.029Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "3fdfe9b74a684ab7aa7cbb448751cb9899842bcf6a4cfee0dc48a9b0a3164bda",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "c6c3ebca9f199676f0f945543e1cd68a5f7b5fb7ad51d893c27e269965475112",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

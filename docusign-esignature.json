@@ -1,0 +1,78 @@
+{
+  "card": "docusign-esignature",
+  "updated_at": "2026-11-23T20:59:31.617Z",
+  "urls": {
+    "https://developers.docusign.com/platform/auth/jwt/": {
+      "hash": "88a15bab507822635be997f1680e39eaaf65830fc606fde1cffde56c3df6eecd",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:57.767Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.docusign.com/platform/configure-app/": {
+      "hash": "25f03b3904b212c2d1180ec586e87e1c0ac72d1ef1a7caeb2cf51387bde5e964",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:58.767Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developers.docusign.com/docs/monitor-api/monitor101/auth/": {
+      "hash": "f557f45cb250b0a46d7b93bfb32564e5a47a634cf6416ae3f13174b12680ba6f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:47:59.767Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.docusign.com/platform/auth/": {
+      "hash": "0e1c6634030fcdf464299bffefa0c84bf9e8a51cae3dbb2909a9e020f91a478e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:00.767Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.docusign.com/platform/webhooks/connect/validation-and-security/oauth-connect/": {
+      "hash": "2062065b3ecedba913d405e437f8447316ce57577ced8ba518fc72351ade954f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:01.768Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.docusign.com/platform/webhooks/connect/validation-and-security/": {
+      "hash": "65e18539d092599738ce47a2971ac7b5e0bbca1f74b77aecfb4aaf37a94b1a11",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:02.769Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.docusign.com/platform/auth/jwt-get-token/": {
+      "hash": "c0ccfd78bcac5ac4efc37ca1ab8379c76f25bde6d7060df2efbbdbe8aa1cf092",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:03.770Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.docusign.com/platform/auth/consent/": {
+      "hash": "b5f8bee10180532a04f6d3846ff19637eee7cae515700d226dd6a0337049a4c2",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:48:04.770Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

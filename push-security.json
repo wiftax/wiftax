@@ -1,92 +1,91 @@
 {
   "card": "push-security",
-  "updated_at": "2026-11-16T19:17:10.162Z",
+  "updated_at": "2026-11-23T20:59:38.758Z",
   "urls": {
     "https://pushsecurity.com/help/audience/engineering/rest-v1/": {
-      "hash": "c2c3b39289f5374c2d39580f15d96cacb82c8ddc834e3468b8a4ef579389cce2",
+      "hash": "a9ecac4f0edb71953b1f11bc89f89b7d35bcc35bfeedde0ae55023e199975422",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:21.732Z",
+      "checked_at": "2026-11-23T20:54:08.596Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://pushsecurity.com/help/audience/administrators/docs/install-the-browser-extension/managed-deployment-using-microsoft-group-policy": {
-      "hash": "54d8c8e2db70c2a9e65fc671fdc2e2eb47d441653b4a9f7444f636fe27b211d1",
+      "hash": "44b9e44f28bc507aad54321e4699f54ce78290aaad1190eae808deaed1245870",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:22.733Z",
+      "checked_at": "2026-11-23T20:54:09.595Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://pushsecurity.com/help/audience/administrators/docs/install-the-browser-extension/managed-deployment-using-google-admin-console": {
-      "hash": "148166278a1c788bb929f7db7e0a08c5ce6cf609045b71f284abea2b018eff72",
+      "hash": "bb82caa59cb133036cdd0e3a793fea27cbecd4e5664733fa8c5d5ffc37cdb09b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:23.734Z",
+      "checked_at": "2026-11-23T20:54:10.596Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://pushsecurity.com/help/audience/administrators/docs/add-employees": {
-      "hash": "6684eb9c531921c989e0b1970e318ec0a8f58e49111fbe8dac1885b746b68863",
+      "hash": "5559542813ea3a80d7342cc9451670281b705a7fd82f4ea8f867bef17b08054e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:24.735Z",
-      "quotes_found": 4,
+      "checked_at": "2026-11-23T20:54:11.596Z",
+      "quotes_found": 0,
       "quotes_total": 4
     },
     "https://pushsecurity.com/help/audience/administrators/docs/connect-to-siem-or-soar/ingesting-events-using-datadog": {
-      "hash": "8026dc9f65cf716d44a9ca103a96fe371c9dcabe5950bc78b677cc05bd4607e5",
+      "hash": "d8c17f048de803ed93d47b2a4057525bac02ca36491991bbac61642ea21e507e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:25.736Z",
+      "checked_at": "2026-11-23T20:54:12.597Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://pushsecurity.com/help/audience/administrators/docs/connect-to-siem-or-soar/ingesting-events-using-splunk-cloud": {
-      "hash": "c99b43e330d7dec348e0093cd72c8aafca0023eb2748497c171108d45d486fc4",
+      "hash": "3b2b9cd51762f522e5b3bc0772111cc82a4f2df15c86b25972b6be6b669eef82",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:26.737Z",
+      "checked_at": "2026-11-23T20:54:13.597Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://pushsecurity.com/help/audience/administrators/docs/connect-to-siem-or-soar/ingesting-events-using-azure-monitor-and-microsoft-sentinel": {
-      "hash": "41bbf4a4df74e61a65f0e7adb991829c98a18dfff21e1ec0d44cdfc0b99536e1",
+      "hash": "360c3f5f621274a785694d2bed2c06816cc5aaf0754ca649d365f2e8c499ee66",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:27.738Z",
+      "checked_at": "2026-11-23T20:54:14.598Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://pushsecurity.com/help/audience/engineering/_bundle/rest-v1.yaml?download": {
-      "hash": "ae713d8bb598e3d777cbc51d0b72ec3fdff1e1e6927476db705cfc9a6dbc76a4",
+      "hash": "cdd3fc476de582dc23fe1cb06ce55055e55b49f625bd5df9532ba3b62e7d68af",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:28.739Z",
+      "checked_at": "2026-11-23T20:54:15.598Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://pushsecurity.com/help/audience/administrators/docs/administering-push": {
-      "hash": "7f08eee3670bb40e4254b3beed1ca0ccf1513c47326b91fb62da9e71bd0eb54a",
+      "hash": "e069c6519d29d59a80b92dc42a2b4ddd806d7dfb13ce625aa12104a9d5ce9520",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:29.739Z",
-      "quotes_found": 1,
+      "checked_at": "2026-11-23T20:54:16.598Z",
+      "quotes_found": 0,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "6ad6a18103b4d71217f82c3c2610c8a9b1b2d4484dbd4a0d113efaa8420eecce",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "65ec1534ddfef910fcf901e5441405c7030902c99939439b287b3bd4c1790250",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

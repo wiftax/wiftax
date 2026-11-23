@@ -1,76 +1,75 @@
 {
   "card": "nightfall-dlp",
-  "updated_at": "2026-11-16T19:17:09.655Z",
+  "updated_at": "2026-11-23T20:59:37.699Z",
   "urls": {
     "https://help.nightfall.ai/developer-api/introduction/authentication_security": {
-      "hash": "ee6ea0306d9ac6c406305169bf3a92aa433c73aa7cdaac0538c0ce9f54fb568d",
+      "hash": "7e550cedbb7acc510ba3c8e7a8c500aa0020ee813c14677f8f3258c75a2f9a5e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:42.420Z",
+      "checked_at": "2026-11-23T20:52:16.606Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://help.nightfall.ai/developer-api/key-concepts/setup/api_key": {
-      "hash": "e7ef3aeba4f5502826ea429bf3ee1da98f161c34b4ea33071100e1af475798bd",
+      "hash": "c4b6901294698bc728dddaa6fe4ed570b2b0ea56e1eb5f47d9a6141406f904cd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:43.420Z",
+      "checked_at": "2026-11-23T20:52:17.605Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/install-nightfall-ai-agent-for-windows-os/nightfall-windows-agent-deployment-msi": {
-      "hash": "5d1f29495c16327128b6d2c6d99a3d6c28b5eb943474ea867ab9b83c42c6fe38",
+      "hash": "042b143a156a533e734c1a521d80b6340024623fe47439db86913f5353ee404d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:44.421Z",
+      "checked_at": "2026-11-23T20:52:18.606Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.nightfall.ai/data-exfiltration-prevention/exfiltration_endpoint/policies/advanced_settings/automated_action/session-replay-and-bring-your-own-bucket": {
-      "hash": "155fa1a059738f832c3c446b63b193eb3eb652ec4a2e6320d4eebb4f332560aa",
+      "hash": "f6ee6ab7b22a68c5ba5f1ae8a721ccd95bc9e8e5cfe66f7d341858eb0fafaa43",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:45.421Z",
+      "checked_at": "2026-11-23T20:52:19.605Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://help.nightfall.ai/nightfall_integrations/saas-apps-authorization-authentication-and-best-practices": {
-      "hash": "a3a7a709cce23f386b93c05ba44e74dcb9dd12d3eb9bffa7ea65e1ee2d9b700f",
+      "hash": "163a86919552536a27098937fafb1765dea8f0ebd6b0bc3840dfcbe6540139bb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:46.421Z",
+      "checked_at": "2026-11-23T20:52:20.606Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://help.nightfall.ai/nightfall_settings/directory_sync/okta": {
-      "hash": "4218157be56afdf7ae55cc0ba5906ed6c651885e88172fd6e167315a65186fbd",
+      "hash": "845158c3626b7a99f6490d3f2542a5f79e223f4862b298660622678c860b6d44",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:47.421Z",
+      "checked_at": "2026-11-23T20:52:21.606Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.nightfall.ai/nightfall-for-anthropic-claude/install-nightfall-for-claude-enterprise": {
-      "hash": "ff1c0155c3dee130c88c33861e0c854522e9d283db12f3ccf31658661a3d1361",
+      "hash": "0b63f324baee6d62b29da4302d8d7f8e0880d6468a7abe3cee0a1ee5a221958e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:48.421Z",
+      "checked_at": "2026-11-23T20:52:22.606Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "0615c0c2f635e6068bb0d6b7985fefd75e791e3e37a28724c5d6e009579834da",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "b8f840684702245c3b6240fb2141ccd8089b0a5b8c3cf9b997b62988161c7d42",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

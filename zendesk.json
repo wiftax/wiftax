@@ -1,0 +1,78 @@
+{
+  "card": "zendesk",
+  "updated_at": "2026-11-23T20:59:49.892Z",
+  "urls": {
+    "https://developer.zendesk.com/api-reference/introduction/security-and-auth/": {
+      "hash": "09c3d35afdfe6b5b9cfb83d574e20e12fa222a1301360fa4ac4d38bf238f0e77",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:59.466Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.zendesk.com/api-reference/ticketing/oauth/grant_type_tokens/": {
+      "hash": "ddea79830735e210449d0b8730a01c398dfb701d65d90bdce8418383ad991ff5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:00.467Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://support.zendesk.com/hc/en-us/articles/4408889192858-Managing-access-to-the-Zendesk-API": {
+      "hash": "e0e52631998df1f79813b2322ae0ff9225965d9a5ca33bb3e06c2a1ba0fe856b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:58:59.774Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://support.zendesk.com/hc/en-us/articles/4408833756698-Understanding-and-installing-the-Slack-for-Zendesk-Support-integration": {
+      "hash": "dfc0d7b0bcfd2c07a4becdc3f08210744870a41ec5e62690b0ba83c39239b8ac",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:00.774Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.zendesk.com/documentation/webhooks/webhook-security-and-authentication/": {
+      "hash": "6716cb326308ec0e7888f2b395a2cc7ee9b4cfdfd49358966d57e79a30ce7077",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:01.467Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.zendesk.com/documentation/integration-services/developer-guide/understanding-connections/": {
+      "hash": "f63330e25108cf4e463d811a82047a2e2d864615827b7359c60261a0738f8f1d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:02.467Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_clients/": {
+      "hash": "6aee25960cd44886a9f81b3d81799e7cb385573727251c2e017cf8ff16064a94",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:03.468Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.zendesk.com/api-reference/ticketing/oauth/oauth_tokens/": {
+      "hash": "6e6b6857b1cc90cc5d66d09b54e3ad091b2623375b6b8cdfaa7d9ea1cd3f5390",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:59:04.484Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

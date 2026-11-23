@@ -1,0 +1,102 @@
+{
+  "card": "cognition-devin",
+  "updated_at": "2026-11-23T20:59:29.723Z",
+  "urls": {
+    "https://docs.devin.ai/api-reference/authentication.md": {
+      "hash": "37f4db41ffcdd6f44385309b4d94ba1574a22f109351212635ddc42a03bce8fd",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:01.430Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://docs.devin.ai/api-reference/v3/audit-logs/enterprise-audit-logs.md": {
+      "hash": "b559a85dbee341673e2faa8416900a31c121cdbd7eedabdd69a97c0242af79f5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:02.441Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/product-guides/oidc.md": {
+      "hash": "5ad697fbf4573f07a6d9da39049935e5f0fe1fc2f72333120464ce99ef2dec5e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:03.440Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.devin.ai/integrations/gh.md": {
+      "hash": "b71ddbc843148c782589522cf3cb8e355ad6d3e361cbacd550903e213894081f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:04.441Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/integrations/gitlab.md": {
+      "hash": "e8c12dbc658b6c7abc9760356713a1c431df662211aad6a0e1a87d4e1b84f47c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:05.442Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/integrations/bitbucket.md": {
+      "hash": "e80dbeb3690035ba0e5d14169ab45fe20693fbce106dccb33c916c08d0d76a03",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:06.441Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/product-guides/secrets.md": {
+      "hash": "305d5fbfa6aff8e5758e5374553315b36af3d494fc6b29d47cba22018f7a9f5b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:07.441Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/api-reference/personal-access-tokens.md": {
+      "hash": "47b2fe9af62f2ff38a376ea721ae23c1198a1d977fee1ad869a84ec37191dc92",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:08.442Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/api-reference/v3/service-users/post-enterprise-service-user-api-keys.md": {
+      "hash": "d8d090c883e57dd3a13e6c25ee1ec579b7bfe65c89bee2cf6e5a9739ed75198c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:09.442Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/api-reference/v3/service-users/rotate-enterprise-service-user-api-key.md": {
+      "hash": "ce2dd56020c9342847d28e6ce2e45c302b6bfa334079c8103f4539b4b433e393",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:10.566Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.devin.ai/api-reference/v3/service-users/get-enterprise-service-user-api-keys.md": {
+      "hash": "49cb10cce3a53f283454521ffd233d6bddb46e97a804f9db18cfc7d385b4abd9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:46:11.567Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

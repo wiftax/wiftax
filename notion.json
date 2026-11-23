@@ -1,0 +1,94 @@
+{
+  "card": "notion",
+  "updated_at": "2026-11-23T20:59:37.736Z",
+  "urls": {
+    "https://developers.notion.com/guides/connections-and-tokens/internal-connections.md": {
+      "hash": "6e053fcca5ab0fb4dc0509aa15cc16b376cd6409d61c0a54fbfd6ba57d670577",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:20.586Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.notion.com/guides/connections-and-tokens/personal-access-tokens.md": {
+      "hash": "8121db2c8e38163654fb8b05a15e9872d31e8a91e8abfef972acc9033a032574",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:21.586Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.notion.com/guides/authorization/credential-security.md": {
+      "hash": "cfd162db464d5df616eb79b4cf247d965afb620b94dcaf6555339546efffabc0",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:22.587Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.notion.com/guides/mcp/enterprise-managed-authorization.md": {
+      "hash": "1599d7c7b08422310fc887c2a0f619e4ebf0f5f5693681e3f042175490f80412",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:23.586Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.notion.com/reference/admin/intro.md": {
+      "hash": "fada2314baec998f5082e9526576a05bfda880cac55a4bbb26df6400ee4f794a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:24.587Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.notion.com/help/notion-ai-connectors-for-google-drive": {
+      "hash": "50f46ccb3980183110c9e5fdf241e929adf66ddcdc20ddc3aaa4e8f0e5318868",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:21.860Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.notion.com/help/notion-ai-connectors-for-slack": {
+      "hash": "432bcf9581479868f8ed8089d11b124e8b4ca5d17763be6e95d562c2cf372875",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:22.861Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://www.notion.com/help/add-security-and-compliance-integrations": {
+      "hash": "686d2adbe92de6bdc8398488f4e8d2add9b0f442b9442fa0477b7aa15399a4a4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:23.861Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.notion.com/reference/admin/list-personal-access-tokens.md": {
+      "hash": "29e3cc7f057944d758f2637970ed38c7a7c71aac2898456153d8a1620eb9fb76",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:25.588Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.notion.com/reference/capabilities.md": {
+      "hash": "2c87400ebf9cbe1fe371fb69635d239a02524f86fbb98557885a168a7643ea9e",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:52:26.590Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

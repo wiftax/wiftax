@@ -1,0 +1,70 @@
+{
+  "card": "asana",
+  "updated_at": "2026-11-23T20:59:28.966Z",
+  "urls": {
+    "https://developers.asana.com/docs/authentication.md": {
+      "hash": "14cd4e0b8773f9b04d40dd7f4d40a23d653657124b2fa9af4563670cf272231f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:10.465Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://developers.asana.com/reference/audit-log-api": {
+      "hash": "00de894692523e369d45bb5ec6be94e4d1b4eeb339ac2798f2868a531006407a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:11.465Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.asana.com/docs/oauth.md": {
+      "hash": "55bb3a363885f2727971aca891935cf5eb1aaa534d6086692a55f0785e47ce08",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:12.477Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://asana.com/apps/jira": {
+      "hash": "98636155277df7323ab8acafdf83616c45f96691909fe205e363fb292b6a61c9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:12.673Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://asana.com/apps/google-drive": {
+      "hash": "ccee87b6d667e4aa8435ebfa4e76d2ca5ff1068bf9f6bee1ada529c24a556bed",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:13.673Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.asana.com/docs/personal-access-token.md": {
+      "hash": "67da376afe1ff9dc63a7898237a48bd7c9b57442c22af855dba40b334130457b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:13.477Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.asana.com/docs/oauth-scopes.md": {
+      "hash": "0a408be918ebeeaee669e5a948a5928a5a8f1cbbab67b3756fe26e29e7a8ab6b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:44:14.478Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

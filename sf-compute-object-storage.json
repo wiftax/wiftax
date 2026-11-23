@@ -1,28 +1,27 @@
 {
   "card": "sf-compute-object-storage",
-  "updated_at": "2026-11-16T19:17:16.625Z",
+  "updated_at": "2026-11-23T20:59:49.186Z",
   "urls": {
     "https://docs.sfcompute.com/preview/object-storage.md": {
       "hash": "ccf51768257488fd2a65f17ce8bed20703b9e238d61c88957421e85f69d3d9d3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:13:23.009Z",
+      "checked_at": "2026-11-23T20:55:21.017Z",
       "quotes_found": 11,
       "quotes_total": 11
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "cbe2f70b53c6a064190d8d130283b31bfb0c1565bde6f5794f3f306a0e7a2678",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "a889378f890406893785e4acee2b123513ca6e6771b90c5c0334e94bea277c2f",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

@@ -1,44 +1,44 @@
 {
   "card": "c1-identity-platform",
-  "updated_at": "2026-11-16T19:17:06.065Z",
+  "updated_at": "2026-11-23T20:59:29.183Z",
   "urls": {
     "https://www.c1.ai/docs/product/admin/service-principals/workload-federation": {
-      "hash": "b08142c11d53d0e9773ac0dcb63d5a675dd25c4226c382500cfa59c3b5b9e351",
+      "hash": "4a1e7aa434ffb298a612eaf4dbef190913fba4693d037c7647a1c83ecfc0f2d6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:17.769Z",
+      "checked_at": "2026-11-23T20:45:17.825Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://www.c1.ai/docs/product/admin/service-principals/custom-oidc": {
-      "hash": "51474aff5d21d52ddbc4af13de5270d3f1b28ab9cf9673cd481e0d2aec49e789",
+      "hash": "5e44d61baaac1da1cb930cad55006bcd74b84f0c77e1b6263ab817563ffdad68",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:18.770Z",
+      "checked_at": "2026-11-23T20:45:18.825Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.c1.ai/docs/api-reference/workload-federation/create-provider": {
-      "hash": "6d2180eadc5fb8ace2261b30fd361f9800caf297a9494da179f8c873c92e7036",
+      "hash": "4b7a26d4578c6292013ce6a2e966e3c0aa366952f246f4c04962fb1772d84b60",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:19.771Z",
+      "checked_at": "2026-11-23T20:45:19.826Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.c1.ai/docs/product/admin/service-principals/overview": {
-      "hash": "bd9450005b4e54202012970d0654da9f2236358b5df114b74d76fc29677bb3b9",
+      "hash": "ff8bc7738c9f3a4e4a4169870b96941f25c51257b57cb204f7a359bffe77fc71",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:20.771Z",
+      "checked_at": "2026-11-23T20:45:20.827Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://www.c1.ai/docs/developer/api": {
-      "hash": "3cdffc0a33ed1b0fedffa78d84ea6323e77ddcb22cd98e655a7695fb86c45ec5",
+      "hash": "8d1dd77f233a11bfd2a511a9dffbdd1d1c0ba82fa73003e5ccfbeb0bce593d05",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:21.771Z",
+      "checked_at": "2026-11-23T20:45:21.827Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -46,7 +46,7 @@
       "hash": "5080d334e79dcfa26e1b0d43413220e58a38fc2c35a6c039a018dc8e723f5e92",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:22.772Z",
+      "checked_at": "2026-11-23T20:45:22.828Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "31470bc4f0c9132724ddcbb998513142a521c549d97c5c210286c33d782218f2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:23.773Z",
+      "checked_at": "2026-11-23T20:45:23.828Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,7 +62,7 @@
       "hash": "e7a2d9f4230ad5fe639a3dc73d74c1bdf32f75bfc75a52a77685661c89c4ac05",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:24.774Z",
+      "checked_at": "2026-11-23T20:45:24.828Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "2a569cfedb77a2bb5aa53597c90a54cb7154976f39aa0f78bef8c8a0645908df",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:25.774Z",
+      "checked_at": "2026-11-23T20:45:25.829Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "c7a3f1b614bbb4041140fe9361cb1719e8fa4216ccf322ae84f884b85db31ded",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:26.775Z",
+      "checked_at": "2026-11-23T20:45:26.829Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,15 +86,15 @@
       "hash": "22b51fd0f0c1ad258f617ccb6b6fe5eecbbddab54ece5124c7f485fa27f6529b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:27.777Z",
+      "checked_at": "2026-11-23T20:45:27.830Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.c1.ai/docs/baton/okta": {
-      "hash": "5addade4e2eb1ab64fece31010bd737baf8d60abc94411908c2d8b6dcad70fa3",
+      "hash": "ba5d5e69b48f709b075b537c40e010589faa6bf391d2f1867bbf48a93b880d5a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:28.776Z",
+      "checked_at": "2026-11-23T20:45:28.829Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "d50db3189dc743308f9c558c2824247f717c48adb4394e43a03c1ba9362fe089",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:29.777Z",
+      "checked_at": "2026-11-23T20:45:29.830Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,54 +110,54 @@
       "hash": "905c9ab55c9ef7748ea8bbdf765180396ce4a515afd74d2dfb61773657446e24",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:30.777Z",
+      "checked_at": "2026-11-23T20:45:30.830Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.c1.ai/docs/baton/azure": {
-      "hash": "fb453715163ba714c31fe9ca2e6da430d9f59321e21ead98140c97c22c2f74f3",
+      "hash": "87439894756855ddd7cf7a9859d6904a8162600a22a6c88946403077391f6a4c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:31.778Z",
+      "checked_at": "2026-11-23T20:45:31.831Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.c1.ai/docs/api-reference/service-principal/create-credential": {
-      "hash": "8d54758c2e7a920316015fa0643f19fad79271dce5512afc8284be05926d2ab4",
+      "hash": "315a55b4c38ca4433fe256fbc7165b98759d0189a08acbbda8965448875fe843",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:32.780Z",
+      "checked_at": "2026-11-23T20:45:32.831Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://www.c1.ai/docs/api-reference/service-principal/revoke-credential": {
-      "hash": "ef0b644132672cd3c76374d583fc040b0889b970c31b249977309d4e182fa6e5",
+      "hash": "e9277c3195ea535b5beab45e2ac6f2874db13377782157f3bd28eb48ff53c5cb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:33.781Z",
+      "checked_at": "2026-11-23T20:45:33.831Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.c1.ai/docs/product/admin/service-principals/security": {
-      "hash": "632a77ada9df2189e35339f6d7eacc4fd5d0f8ec745b74f1491ba084c4c18e35",
+      "hash": "ed06ede260a5165d112a6f697a246505c682acfdaf7bf057714897c676e38f05",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:34.780Z",
+      "checked_at": "2026-11-23T20:45:34.831Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "8ae6de7d4e5c4b5d4c1d139c012142bdbf893026a899c31d5605f1f9af2a2246",
+    "fingerprint": "3a6c7335048a7cec4a616d323568199ba74582d9e2322031066a5431354fb194",
     "outcome": "no_change",
-    "at": "2026-11-15T00:52:00.208Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

@@ -1,0 +1,86 @@
+{
+  "card": "hubspot-platform",
+  "updated_at": "2026-11-23T20:59:33.769Z",
+  "urls": {
+    "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/overview.md": {
+      "hash": "69ddbd18fbf7e2282ce238367e78017fcdadcb94c266648a9afe768c192812c5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:27.303Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.hubspot.com/docs/api-reference/latest/authentication/manage-oauth-tokens.md": {
+      "hash": "ce27f9bdc0b4657afaa6e160a3cc8c115b6ab96a9f9864bf53f67f8d118e4049",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:28.303Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.hubspot.com/docs/api-reference/latest/account/audit-logs/guide.md": {
+      "hash": "edb406ebb8c0f6875dac8977dc46daaa0655f92ec19150909ab84608d64db04b",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:29.302Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/account-service-keys.md": {
+      "hash": "fb3556dfca96e1716507f3f89169dc272bbace11a7aecee68c3a494ea780bf81",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:30.303Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://knowledge.hubspot.com/integrations/sync-hubspot-data-to-amazon-s3": {
+      "hash": "3ecc2d0038551b27350070565a1ef533720e13c5fc3c353591459fd6eeb749b3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:28.258Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://knowledge.hubspot.com/connected-email/connect-your-inbox-to-hubspot": {
+      "hash": "9cc1c81e1e5e7388e94b4b4189356c27597aa31cfb6082218c632282b9edd8cc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:29.275Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://knowledge.hubspot.com/integrations/data-sync-authentication": {
+      "hash": "c7748cc3cffef0538a0a881f6226eb3ada414f852a0c4464420000ee69e682e3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:30.275Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/manage-apps-in-hubspot.md": {
+      "hash": "ce431f00f47d823a17b6f90cfb74e27b5e93b65ec0a6745ee1150e25a8c8a2b4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:31.334Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview.md": {
+      "hash": "d4aced28a7120bd6c203ba7ffa5356f2437654ddb0c31e3ea8195ad9e6110503",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:32.335Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    }
+  }
+}

@@ -1,84 +1,84 @@
 {
   "card": "defakto-mint",
-  "updated_at": "2026-11-16T19:17:06.908Z",
+  "updated_at": "2026-11-23T20:59:30.722Z",
   "urls": {
     "https://d.defakto.security/iam/service-accounts": {
-      "hash": "0ee2938e0cb7515e625201efaa3c825d9d00f5c7b0b307b1c8514b898d6e4018",
+      "hash": "f7429697638e16daf9c9b17699caef5dc1c5c395691c83a3182e9f231f0963c1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:58.131Z",
+      "checked_at": "2026-11-23T20:47:18.070Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://d.defakto.security/iam/wif-issuers": {
-      "hash": "797386ae3383e672a3bf75e94316ab016635fe224012f197ad3ab8908b2dcb05",
+      "hash": "4fc41d8827a9ca00dbccf869c46218f5c4c069526d89c9e34d59983991214e84",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:59.143Z",
+      "checked_at": "2026-11-23T20:47:19.070Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://d.defakto.security/iam/terraform-wif": {
-      "hash": "ebd90f08fdf78d0926e2579a2bbe28afb513be2045033ed47969e8ab120073af",
+      "hash": "fd63c6ec1fdb9659abc0d6fcc0da8f9a88befb2d9024714b84fccdc6cfb023f6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:00.144Z",
+      "checked_at": "2026-11-23T20:47:20.070Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://d.defakto.security/cli/spirlctl/service-accounts": {
-      "hash": "b79f0f513965588714a76d6ecc74fea448b81539ee2ce47f766c1d53e3a0782e",
+      "hash": "cb2d2602a2efcf0818ca9adc98c81684cf92366350cc11046421f4191499628e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:01.144Z",
-      "quotes_found": 5,
+      "checked_at": "2026-11-23T20:47:21.070Z",
+      "quotes_found": 4,
       "quotes_total": 5
     },
     "https://d.defakto.security/cli/spirlctl/login-logout": {
-      "hash": "15413870b68c09b2f506619751b89fbffb6180af2c72aedaf052774452df0851",
+      "hash": "5a918632b8f829ef0437d7ef93a50e6339300dd1fefee199db527faefc749f0c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:02.146Z",
+      "checked_at": "2026-11-23T20:47:22.070Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://d.defakto.security/mint/configuration/server-configuration/trust-domain-server-attestation": {
-      "hash": "6db9786d4af9454f5401adfb3ddff0f5b755e4b07e36c9a33e67406163d7b3dc",
+      "hash": "f18e0640cf428de729f594a4aa59bbb7390c6ea98709c79f5904ee56021ece25",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:03.146Z",
+      "checked_at": "2026-11-23T20:47:23.071Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://d.defakto.security/mint/integration/tutorial-aws-federation": {
-      "hash": "37952cb86c1513a776460aaf8ad2b66e80c38f1e5c89f182d4ddc71b221f7730",
+      "hash": "096c7895d70b05b8ab87fec86586ecb9821de6095c722c1ff23999058131004e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:04.146Z",
+      "checked_at": "2026-11-23T20:47:24.072Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://d.defakto.security/mint/integration/gcp/tutorial-gcp-federation": {
-      "hash": "5d5f979f29b0d6283fef81d44e63f0aafed137e85c7e853126af2886872f90d4",
+      "hash": "5508c064d3e86138f2493f2705f2f9e132f39db0e0465cd3abefb6cf9e25bea5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:05.147Z",
+      "checked_at": "2026-11-23T20:47:25.072Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://d.defakto.security/mint/integration/azure/tutorial-azure-federation": {
-      "hash": "e42d861d5abdb6bca8f4094ba24b25d48b4fa40a91689c2f77d0cf26c31d0ec7",
+      "hash": "6857892a51e8f5dbeba32a75b24dbf23d00cf1b70a8cd8b8933c72244d4a11de",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:06.148Z",
+      "checked_at": "2026-11-23T20:47:26.073Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://d.defakto.security/mint/configuration/svid-issuance/key-manager/key-manager-aws-kms": {
-      "hash": "705dc4adce7480463a9d03675e0adc5a293f20fef2d98a6c516a7df90b109d70",
+      "hash": "3c01ba3dde576879dcc6441e55bddc4ff64c08f2b4da19bd09cedc92c3624cbf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:07.148Z",
+      "checked_at": "2026-11-23T20:47:27.074Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "89c91a4df21917d46b203f21c5860ed0239c67c32f739ad11fcfe504450b9138",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:08.149Z",
+      "checked_at": "2026-11-23T20:47:28.073Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,17 +94,23 @@
       "hash": "0079ba7cb879fd1a74e3c042efb210cb4511161d4df0104219801a912d87ab24",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:07:09.149Z",
+      "checked_at": "2026-11-23T20:47:29.074Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
+  },
+  "last_assessment": {
+    "fingerprint": "2d250be33a3761789faf2d80a4a0edfbd2ea2ee0cb24c66e8f41cc1851e68f9c",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

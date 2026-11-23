@@ -1,0 +1,86 @@
+{
+  "card": "google-threat-intelligence",
+  "updated_at": "2026-11-23T20:59:33.679Z",
+  "urls": {
+    "https://gtidocs.virustotal.com/docs/how-get-gti-api-keys.md": {
+      "hash": "b4c5c41632276aa9b7ead87fe6d1424164ceadb13881f33bd44e0deba0e3a96f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:10.253Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://gtidocs.virustotal.com/reference/create-a-new-service-account.md": {
+      "hash": "ee7e30710ba72126ed751d60f17879b2512368f0e75adcab446e9a9ca30c07d1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:11.253Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://gtidocs.virustotal.com/reference/get-activity-log.md": {
+      "hash": "864dc3c330372d3a498aa692010923d452840b301a104da8da9d11340e4ecaf9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:12.254Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://gtidocs.virustotal.com/docs/asm-aws-integration.md": {
+      "hash": "78b197cb2feec0a42b07cd13543c23d1e282b55351701fcb43af63f4a9404d22",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:13.254Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://gtidocs.virustotal.com/docs/asm-google-cloud-integration.md": {
+      "hash": "aa82036b4343a39d4f471cceb2545f11b069c9e1f743bcba56665a22d93ed8f5",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:14.254Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://gtidocs.virustotal.com/docs/asm-github-integration.md": {
+      "hash": "1006f79f96f713a7b6249a36363d662b70eba0e54245f9735050ec750a0979de",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:15.254Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://gtidocs.virustotal.com/docs/rotate-api-key.md": {
+      "hash": "e13c0c348a5517c7a3a7b52490f21d0d60ec7aa5dff6ffc594905b8e53baa5be",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:16.254Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://gtidocs.virustotal.com/docs/admins-guide.md": {
+      "hash": "d4df2176fe386c9d133a1f0bb608de79c5b04a7b675888d9d4b485fe0b029273",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:17.254Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://gtidocs.virustotal.com/docs/unified-user-service-account-management.md": {
+      "hash": "b44d875316d30ff072e59c98735942031e2fc504760ad8d781e27974786027b4",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:18.254Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

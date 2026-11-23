@@ -1,12 +1,12 @@
 {
   "card": "modal",
-  "updated_at": "2026-11-16T19:17:09.635Z",
+  "updated_at": "2026-11-23T20:59:36.032Z",
   "urls": {
     "https://modal.com/docs/reference/modal.config": {
       "hash": "e900e5d24b92657a6e950672a4b98568bf1e012aed671db0c3cc667291fb87dd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:15.504Z",
+      "checked_at": "2026-11-23T20:51:34.718Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,31 +14,31 @@
       "hash": "c4246ef7b2472ac1298a2a3df082b15328a6784b71a0c868cd970642a2b4d5f5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:16.524Z",
+      "checked_at": "2026-11-23T20:51:35.718Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/service-users": {
-      "hash": "badff58dd097b3be886039577b5cd9d647af2358b4a4acff6c897b8de6d177b8",
+      "hash": "6b60ec95e8b5e0e4eb2faefec90e78673073977c0358db91741f984647caa2c6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:17.525Z",
+      "checked_at": "2026-11-23T20:51:36.722Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
     "https://modal.com/docs/guide/continuous-deployment": {
-      "hash": "69b1d9c6ab659795cc3d5ed8f16e90c2d106de613e3068b6184fea41078f976a",
+      "hash": "6ad05cf2655a516e19ef7784e78e61d28623fe6090ac0edae00354316ebf83c2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:18.525Z",
+      "checked_at": "2026-11-23T20:51:37.721Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/workspaces": {
-      "hash": "0948e0f94b3e8b046e959e26aac06459cdd6baf5d58e1989a7d04b6c2b9a9cd5",
+      "hash": "815e495de38bf826ba4861c156585e61a6e12cec45e05b26be088fe30269f2d5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:19.529Z",
+      "checked_at": "2026-11-23T20:51:38.722Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,23 +46,23 @@
       "hash": "92fc27449c490bd19af2c27119cb10c6fa36cd23b085b26874b4a34c9ed807c8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:20.530Z",
+      "checked_at": "2026-11-23T20:51:39.723Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://modal.com/docs/guide/oidc-integration": {
-      "hash": "1329561cab100af79b954f2af972c4d3523913c2c452d1dedc732025a4be7728",
+      "hash": "069c1b6263bac981fcc30155c3aa93de9a2c764ad8546bb7c584633b29e1d0e7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:21.544Z",
+      "checked_at": "2026-11-23T20:51:40.723Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
     "https://modal.com/docs/guide/cloud-bucket-mounts": {
-      "hash": "a3469706a5c2c9421e85e5dcbf4b089b32b610f86cf50ff2974668c002ef9de8",
+      "hash": "f955e7e864813420c43f86ab68944a8652739c53225ee87b55f4b9ed9bdca0dd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:22.544Z",
+      "checked_at": "2026-11-23T20:51:41.723Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -70,15 +70,15 @@
       "hash": "70255553c47e9e211040eb2a07e46cbfcda35cd17be305c8b2be0b13c87f4e21",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:23.545Z",
+      "checked_at": "2026-11-23T20:51:42.724Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/private-registries": {
-      "hash": "1efd2e9b88e682da64938b60c93ab920697413ae1407cb4017fede7ac4baaf31",
+      "hash": "2d2d932f9d9bc1ea5e1bb732bbc60ce7efd059867cc5de1dabaa5588624dac52",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:24.545Z",
+      "checked_at": "2026-11-23T20:51:43.724Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -86,23 +86,23 @@
       "hash": "c1e016777253adc5e6b335ff7071d3643ba294d13afe8d64b8d131da2d2bc32f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:25.545Z",
+      "checked_at": "2026-11-23T20:51:44.724Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/datadog-integration": {
-      "hash": "6742cc7b7694dce237fb3ed47a6abe06f1055c1c712168011d3ec175291fe4c1",
+      "hash": "746e1c2d74cd819ee914c1e8743c3bf0ce6e44279d735cdaf12d27127d0b80ef",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:26.546Z",
+      "checked_at": "2026-11-23T20:51:45.724Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/otel-integration": {
-      "hash": "6f8fa7c13e4deec7ffec94663a464cb80bce67712834a37377db384165e395f1",
+      "hash": "4d7b6d228e6fda5168321661eca8c3e37fee21f3f1802f24d7887bb10c0ef3db",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:27.547Z",
+      "checked_at": "2026-11-23T20:51:46.725Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,23 +110,23 @@
       "hash": "9fc0e38a81b6f4e8ad4b3f75bfd383935131b2c57ee51d35f0dda355381d7b64",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:28.546Z",
+      "checked_at": "2026-11-23T20:51:47.726Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/audit-logs": {
-      "hash": "a9bf4056ac7dc23fec2bb3e893698946ed07318f558aaaf44ad703127be0a10f",
+      "hash": "840c00da5f6850b960e6ca8e99f1a6319981d59bf754246f84693f17b695c323",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:29.547Z",
+      "checked_at": "2026-11-23T20:51:57.247Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://modal.com/docs/guide/rbac": {
-      "hash": "bbe930da653852200afe3de49ea3aafc57c86b497d5ee7e3ee38a53b8b26130c",
+      "hash": "3db7f0fce0d33288333913ada8b11f46220da4152dfa8a5f9311fce9e1ac215f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:30.548Z",
+      "checked_at": "2026-11-23T20:51:58.247Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,7 +134,7 @@
       "hash": "24e3590dbd19565acb9e39761b8debbbb64b5e4c68843d0440544ac693140774",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:31.550Z",
+      "checked_at": "2026-11-23T20:51:59.248Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -142,22 +142,22 @@
       "hash": "3f4064423844d1fb2d26d80ac193e6e869f77ba2f719e4f0fd5b04f0435d649c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:10:32.549Z",
+      "checked_at": "2026-11-23T20:52:00.249Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "c56148763075024623ce05fa42a74cba5f426d309bc3795c41483629b228abd3",
+    "fingerprint": "50f896b6ac7fda3eeac7a1528f88ad8e4b1cf551533ed5b0cab2bb01979b5230",
     "outcome": "no_change",
-    "at": "2026-11-15T00:52:00.208Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

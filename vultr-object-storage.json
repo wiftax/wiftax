@@ -1,12 +1,12 @@
 {
   "card": "vultr-object-storage",
-  "updated_at": "2026-11-16T19:17:16.960Z",
+  "updated_at": "2026-11-23T20:59:49.823Z",
   "urls": {
     "https://docs.vultr.com/products/storage/object-storage/management/manage-credentials.md": {
       "hash": "b3246651ea9c4acb40e38557785514b4ba3a8ec32f73625496c9a812fd7b6e6b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:33.314Z",
+      "checked_at": "2026-11-23T20:58:45.176Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -14,7 +14,7 @@
       "hash": "62b706302ae805400966b31b4a1ccf1aef896cde544d47b366092a1eed2572b1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:34.315Z",
+      "checked_at": "2026-11-23T20:58:46.178Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -23,8 +23,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:16:18.296Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:58:30.043Z",
       "quotes_found": 0,
       "quotes_total": 4
     },
@@ -32,7 +32,7 @@
       "hash": "484bd3ee071c8bdb2c6b462aa6047cb6020c019388d915026a1b27965997d69f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:35.315Z",
+      "checked_at": "2026-11-23T20:58:47.178Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -40,17 +40,22 @@
       "hash": "2aa2417d79ff9a1aadb1ba86bdca1f7c3020f021c43581a5ff6947a9b91a68f5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:36.316Z",
+      "checked_at": "2026-11-23T20:58:48.179Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "7e6f4ed15b8d0a55077c003f3dd7ec50f524e846a50a5d0ddf1c084f3183e114",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

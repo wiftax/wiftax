@@ -1,12 +1,12 @@
 {
   "card": "proofpoint-tap",
-  "updated_at": "2026-11-16T19:17:10.138Z",
+  "updated_at": "2026-11-23T20:59:38.655Z",
   "urls": {
     "https://help.proofpoint.com/Threat_Insight_Dashboard/API_Documentation": {
       "hash": "49b376b7d1337b1f43ed5a398efab747341de1303a32f46c99486a8032fa3e3f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:16.245Z",
+      "checked_at": "2026-11-23T20:54:03.060Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -14,7 +14,7 @@
       "hash": "850b556e35a47d1c51c4e5d1b5d5d53abd50b0837aa879135fd847e92b72055b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:17.244Z",
+      "checked_at": "2026-11-23T20:54:04.061Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -22,7 +22,7 @@
       "hash": "65192bef039856d1a4cad3640c8d372eeb21f5a8c5263d3e95941bab438b1433",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:18.245Z",
+      "checked_at": "2026-11-23T20:54:05.063Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "459f0cfd9110a17cbfb8586a7d96217d8e52a2cd83519f1600384d311c833af5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:19.244Z",
+      "checked_at": "2026-11-23T20:54:06.063Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,7 +38,7 @@
       "hash": "e7081cd3dd28709cfb101271c7fe0718a25a04bac86706a752bc7114549467e9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:20.245Z",
+      "checked_at": "2026-11-23T20:54:07.064Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "1afdb57ae8332ab5d1c8da80d47effd7386bf9545adc3d7105c7fcc5094a3b71",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:21.245Z",
+      "checked_at": "2026-11-23T20:54:08.064Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "7b7e30955d59855b39bbb46b461ab438c25dafee66605ed856b0e97a1b55ffe9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:22.246Z",
+      "checked_at": "2026-11-23T20:54:09.065Z",
       "quotes_found": 4,
       "quotes_total": 4
     },
@@ -62,7 +62,7 @@
       "hash": "8982379103cd5cabd2850169de99329dec23e3856f7f852bca46a68a16258836",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:23.246Z",
+      "checked_at": "2026-11-23T20:54:10.066Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "2d314d77f98e62f655a180be0bbb5ec618ea455e7bfca5db571d392291134164",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:20.027Z",
+      "checked_at": "2026-11-23T20:54:06.838Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -78,7 +78,7 @@
       "hash": "386f1006a1c347d6de10b0d36c01534f6219cce083b1c8ea3730dde0b6c6b6f4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:24.247Z",
+      "checked_at": "2026-11-23T20:54:11.066Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -86,7 +86,7 @@
       "hash": "b6d6c720fae3647440226a25f995a850964b5f3a30fbe25b0afb23bc160fbda4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:21.026Z",
+      "checked_at": "2026-11-23T20:54:07.839Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,31 +94,30 @@
       "hash": "1e06486f7cf6929e38eb7c15baf73936b7d7b846d163f5794798133d0e2d71c6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:25.246Z",
+      "checked_at": "2026-11-23T20:54:12.066Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://posthog.com/docs/cdp/sources/proofpoint-tap.md": {
-      "hash": "92e73cfe460751c71cd69534f150764dbe09560faa744e0d6010f490d4ef74a5",
+      "hash": "06d2fa8863d55bcb4f6c58ff6ff8acb918dc52376a6d6053d1cd906dee3b5cd4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:21.310Z",
+      "checked_at": "2026-11-23T20:54:08.160Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "a1626caa1c9548234462096e9fbe156a433e8cb4f6c35e200dd688e29665625d",
-    "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "fingerprint": "d51ba83387c4946708253aaff5eaa3c0c374bdd9e8866740087f641ab9e2bf35",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

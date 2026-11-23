@@ -1,0 +1,54 @@
+{
+  "card": "rippling-platform",
+  "updated_at": "2026-11-23T20:59:38.856Z",
+  "urls": {
+    "https://developer.rippling.com/documentation/rest-api/essentials/api-tokens.md": {
+      "hash": "db95f32b2841af2bbb79e5c60622fe49d0ba2e6e0cf80799686dc66755732a90",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:52.094Z",
+      "quotes_found": 7,
+      "quotes_total": 7
+    },
+    "https://developer.rippling.com/llms.txt": {
+      "hash": "6910df349a7c16f4ec5a322961869a1ffcda6aa3bc5d7ce5b3e212c122264030",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:53.095Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.rippling.com/documentation/developer-portal/v2-guides/oauth.md": {
+      "hash": "93515ba2e046c1802823c3d8a71e5ad7ff975e578cb6c10b04516022d6b1d910",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:54.096Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.rippling.com/documentation/rippling-platform/mcp-gateway/setup.md": {
+      "hash": "8b15a4b4b29eed905a29502653a876b06f187df7ed3211444bb60c513cbde83c",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:55.096Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.rippling.com/documentation/rippling-platform/developer/custom-settings.md": {
+      "hash": "ed3a84a33dedf93e98dd309c2555f3b15743da729ff9ddbc6c92f61bb8d2ef12",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:56.096Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "card": "rubrik-security-cloud",
+  "updated_at": "2026-11-23T20:59:38.862Z",
+  "urls": {
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/authentication/": {
+      "hash": "8e64f87aebeb9594fbce80e9b2e7486a49b9c95eac0e82910e12d2b4bedd21c3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:53.810Z",
+      "quotes_found": 10,
+      "quotes_total": 10
+    },
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/Data-Protection/Cloud/AWS/": {
+      "hash": "f39cfa093a0d3001289994d9816d93bc9ec26d8587d6f8b904b2c4d0edbc5928",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:54.810Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/azureOauthConsentKickoff/": {
+      "hash": "6b1ce05ecef4549f8cda0e2b6653a718eccb9a46519b2fe5c8f0604d6be9632a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:55.810Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addAwsIamUserBasedCloudAccount/": {
+      "hash": "7cc83e40f1135f670f8e1012dcd7f4958e89b6746a0865d4a711600b62d1eec8",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:56.811Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/addGcpCloudAccountManualAuthProject/": {
+      "hash": "1029c2bed9d8a17721a5222ad0f3e79537d8a046844fc43d55111a8951681200",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:57.811Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/API-Reference/mutations/createAwsAccount/": {
+      "hash": "d8122e189941568bfb69d1708dc50d14cd1628f517689898e5f2b0be8f7b7072",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:58.811Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.rubrik.com/Rubrik-Security-Cloud-API/Observability/Events/": {
+      "hash": "0df32c301b78f7d3ee81bca9c762636a761972ec89ccb4525bb6468884a7c6e3",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:59.811Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

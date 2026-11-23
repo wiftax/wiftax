@@ -1,0 +1,62 @@
+{
+  "card": "ema",
+  "updated_at": "2026-11-23T20:59:32.141Z",
+  "urls": {
+    "https://builder.ema.ai/builder/v2/api-reference/authentication.md": {
+      "hash": "18630e445c0fc89b40c92b89afed0c43228689674e531ec0bfdb9d9101cc5dd7",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:08.419Z",
+      "quotes_found": 12,
+      "quotes_total": 12
+    },
+    "https://builder.ema.ai/builder/v2/integrations-data/data-connectors-box.md": {
+      "hash": "73f37272fa04e955b6abfbb814b7a7935bb610765fcd3cbec1d65d2f3298fa80",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:09.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://builder.ema.ai/builder/v2/integrations-data/data-connectors-google-drive.md": {
+      "hash": "1e84ebb879706c55f6625ca142d614df5a91f72b4b6dacc49c8f8657230307ec",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:10.419Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://builder.ema.ai/builder/v2/integrations-data/data-connectors-sharepoint.md": {
+      "hash": "8985c76ea480c50f973bcbf4155a972693035b4a929f4cead5e93b74bf74778d",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:11.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://builder.ema.ai/builder/v2/integrations-data/data-connectors-confluence.md": {
+      "hash": "4a5f4018e3dd4bfae728298a3cc1cb5b59c6a0752229a3f309e77f1a1fc860a1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:12.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://builder.ema.ai/builder/v2/integrations-data/integrations-hub.md": {
+      "hash": "c7b8edcd04977b3a7d9edc6489dfc8b0a22306e51eef2296c2e6ef218c8e8a59",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:13.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

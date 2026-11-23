@@ -1,12 +1,12 @@
 {
   "card": "azure-entra-workload-identity",
-  "updated_at": "2026-11-16T19:17:06.025Z",
+  "updated_at": "2026-11-23T20:59:29.103Z",
   "urls": {
     "https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation": {
       "hash": "1f017e03a58a9057cdd2a1af3e743f9cf62ac50a39addd647775ebad32558d17",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:26.206Z",
+      "checked_at": "2026-11-23T20:44:21.176Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "afcc283b5c58f2fcc147b34a56a98cef21026f2a76883877e1a9c36aae3ff33a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:37.796Z",
+      "checked_at": "2026-11-23T20:44:33.127Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -22,7 +22,7 @@
       "hash": "1c39ba420f06f111305685d6431b2b2d48cd99c0f566ceba99c04b982db01efc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:38.852Z",
+      "checked_at": "2026-11-23T20:44:34.298Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "85714d3ecffd1d4f8f89ea9aec2d16a9ec59251404e94689607a89a42955b306",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:39.851Z",
+      "checked_at": "2026-11-23T20:44:35.298Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,23 +38,23 @@
       "hash": "9357877f9e103f36517b1693d5368d0581c99aa3492eb443d743796c9338c50a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:40.879Z",
+      "checked_at": "2026-11-23T20:44:36.785Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds": {
-      "hash": "ab0385176b977b9677632458ca73954aad152043e5405fd45285d3b69732ef50",
+      "hash": "5f5e4b941bde2af4ebfd548a37e9f31ab87f9ba9053c27b5523ed9f7233f265c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:26.735Z",
+      "checked_at": "2026-11-23T20:44:21.709Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials": {
-      "hash": "b02017ee3ec48385a438c138c314198236dab79c7310c71530cc29920d738a0d",
+      "hash": "c81ce0a6f7958fac41cbfb05ceb7be5b4501f89a04e92f9e33b1f2e265ec09a6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:42.253Z",
+      "checked_at": "2026-11-23T20:44:37.785Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "198d929a0c08ced4a71f00ff5dae05dbdfee1cf295a111820e5437a2c70714ce",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:43.254Z",
+      "checked_at": "2026-11-23T20:44:38.784Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -70,7 +70,7 @@
       "hash": "26c1b095a1661e37bd9d2b12264553160a1882109a854f1339be6875e0707e36",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:44.254Z",
+      "checked_at": "2026-11-23T20:44:40.075Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -78,7 +78,7 @@
       "hash": "8d966fcb8e68040ee0a72aaa92cae6147422a79d54022e0f3ac8b570b709c595",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:45.255Z",
+      "checked_at": "2026-11-23T20:44:41.074Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "55a37d729922c67a31d0eada708cd4104ba1c5f0038291902ada5265593c2a76",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:46.256Z",
+      "checked_at": "2026-11-23T20:44:42.075Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -94,7 +94,7 @@
       "hash": "7b240969003ff9fc7f614228f97b8e340f4b41b9d626c0b96d31bf72ea1804cd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:47.257Z",
+      "checked_at": "2026-11-23T20:44:43.076Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,15 +102,15 @@
       "hash": "7cedc741bb317f9028e83279192828171dea4cfda5981706c721b14a75f53a82",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:48.258Z",
+      "checked_at": "2026-11-23T20:44:44.076Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -118,14 +118,14 @@
       "hash": "def76aec92bb088c66fbe57b85ea101bd3c454cd326db13ef9a83f12bb2fd3f7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:04:49.259Z",
+      "checked_at": "2026-11-23T20:44:45.077Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
   },
   "last_assessment": {
-    "fingerprint": "4f7e1433b5d1000aeea9351757a9132edd65d93033cd8b2942f427c387998463",
+    "fingerprint": "2cf9d6d23f7cc42da98f2382f31bb9cb8394a3c0c095b8bfc1477ce7be8b1714",
     "outcome": "no_change",
-    "at": "2026-11-15T00:52:00.208Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

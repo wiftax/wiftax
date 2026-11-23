@@ -1,12 +1,12 @@
 {
   "card": "cyberark-identity-platform",
-  "updated_at": "2026-11-16T19:17:06.446Z",
+  "updated_at": "2026-11-23T20:59:29.898Z",
   "urls": {
     "https://docs.cyberark.com/identity/latest/en/content/coreservices/getstarted/usersadd.htm": {
-      "hash": "33e10296c3e99cacb0e17c8c9210d9b3968a6a97879401e57695497bfa356a88",
+      "hash": "49ba36c724c3c726afb6b0c45007fc5cabff0bad3dd6fb98d8aa2462415876f2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:47.254Z",
+      "checked_at": "2026-11-23T20:47:08.105Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
@@ -14,15 +14,15 @@
       "hash": "19a1b02c7edbecbf65f3dd2101189e4ba41831668df0e0b742839c0238f622ae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:48.255Z",
+      "checked_at": "2026-11-23T20:47:09.106Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/identity/latest/en/content/coreservices/authenticate/oauth2-client.htm": {
-      "hash": "c7bcd6939a029836a1c44455949e64624ef5dec1dd0ede2d7414e330a23063cd",
+      "hash": "7beea24a0e605d575a20deaa7164d194f4d0fb414a2cb4766a94a89b06ef1ea5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:49.254Z",
+      "checked_at": "2026-11-23T20:47:10.107Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "dbd3a25e4a22c6e1449cbebedf49f17ffe9bb742b4d922d022d0d975a7f9aa88",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:50.254Z",
+      "checked_at": "2026-11-23T20:47:11.106Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,63 +38,63 @@
       "hash": "4424b8493aaaf5501fa9bd505ae56fe16701792d74a5b205b5b09162cd4ffbda",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:44.001Z",
+      "checked_at": "2026-11-23T20:47:04.125Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/setup/latest/en/content/ispss-deployment/ispss/ispss-api-authentication.htm": {
-      "hash": "55adaa5c5d3935b6e769eb3da08bd24a900202be01be15cc9b6025e1b3eeef05",
+      "hash": "7db33b29098ff0dc828e291f5f7f70e6937331fce8cf8e54678a4bb8da285cca",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:51.255Z",
+      "checked_at": "2026-11-23T20:47:12.107Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/aws-config/": {
-      "hash": "c34b573d01e6995e51a2f25adc7686b54b50bb4097063239ffacc41adc54b876",
+      "hash": "0880f49f7900d827fed31e9c011cfb941c82b11a2ecf069b92f3b777275c8818",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:52.256Z",
+      "checked_at": "2026-11-23T20:47:13.107Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-azure-federated-authentication/": {
-      "hash": "a9d02629267a4e9d4404fedee11fc43df9a120c07a909c15e366cba2c0c25a8d",
+      "hash": "3a5236f9fba4309e0a794314bda59f043d472d47769bd69ecc6835224af79766",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:53.305Z",
+      "checked_at": "2026-11-23T20:47:14.106Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-gcp-configure-role/": {
-      "hash": "6bdb7df0f32250f28d930378d3c21bc8ffdc8c9fec0e2a2e080cf54015d6ba99",
+      "hash": "71a842ccb556e020fcb53ed6b2d1f49f59513f33d5feb92ef5e30c17ee25cd67",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:54.304Z",
+      "checked_at": "2026-11-23T20:47:15.107Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/secretshubcontent/sh-hashi-config/": {
-      "hash": "ade6160f943a1a733d98aa3c8f76af1ba8ac6128fee94b245e3995ff13113610",
+      "hash": "c50e6daf309960dfd73999eecff383185063267f8b12d3149a121a27ffd84c82",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:55.305Z",
+      "checked_at": "2026-11-23T20:47:16.107Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/secrets-hub-privilege-cloud/latest/en/getstarted/sh-terms/": {
-      "hash": "9934a0476bab9f4f3d4893e71a3acd245154391bbb3eb5926dcd22418fd1cf6a",
+      "hash": "08a5db004d7151d31ce2488bb4a927fc7cce04d317f25c9c618044f97c4c1b55",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:56.305Z",
+      "checked_at": "2026-11-23T20:47:17.108Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.cyberark.com/identity/latest/en/content/coreservices/usersroles/password-requirements.htm": {
-      "hash": "0185fe10ca57ed64136c7dae5d4b502f41a116d69117a2610cd31992db9d9a55",
+      "hash": "df0e1aefa7b7e2865cf810284b6d7d538e6ada32e38b146d0e845ac8b6c32457",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:57.306Z",
+      "checked_at": "2026-11-23T20:47:18.108Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,17 +102,22 @@
       "hash": "c7e56fd450660bb062286d8dc87febd14f4b11a324bfe854cd587f921f0410dc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:58.306Z",
+      "checked_at": "2026-11-23T20:47:19.109Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "4f9e7e1ea69bda403fe97c036c29197f43b5716c6cde7f273792a3f9ae7d30aa",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

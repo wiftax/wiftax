@@ -1,0 +1,102 @@
+{
+  "card": "ironclad-clm",
+  "updated_at": "2026-11-23T20:59:35.339Z",
+  "urls": {
+    "https://developer.ironcladapp.com/reference/client-credentials-grant.md": {
+      "hash": "01890aeda7d6f4bfcb7d81926abf6fc3a2ce97ad080b7ca051e915186a4a6765",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:40.063Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developer.ironcladapp.com/reference/authentication-api.md": {
+      "hash": "cd2747f75adcfa76cc5286718e969488c901dd736212fb5162d01ef9352d4677",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:41.063Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.ironcladapp.com/reference/register-oauth-client.md": {
+      "hash": "e0f066a5e75d75e56c08434ddf7941c046685256ce0e209d05130015e3a3576f",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:42.096Z",
+      "quotes_found": 4,
+      "quotes_total": 4
+    },
+    "https://developer.ironcladapp.com/reference/legacy-access-token.md": {
+      "hash": "e0190608be4a04e234f8a69b27e982fda89fca7c46dc660a43774c9042535074",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:43.096Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/23134913235991.json": {
+      "hash": null,
+      "status": 404,
+      "ok": false,
+      "failure": "gone",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:50:41.332Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/12278303005591.json": {
+      "hash": null,
+      "status": 404,
+      "ok": false,
+      "failure": "gone",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:50:42.332Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/19145745771287.json": {
+      "hash": null,
+      "status": 404,
+      "ok": false,
+      "failure": "gone",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:50:43.332Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://developer.ironcladapp.com/reference/webhook-authentication.md": {
+      "hash": "f7734a827ea71b1939d3661fa6adbc00a9e6aa113458699a60970dc843130369",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:44.096Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.ironcladapp.com/reference/webhook-verification.md": {
+      "hash": "a86209b8a8eaf66a45a678db94b54bf4d88aea2d1e9805a26fb0aa14eb63fa8a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:50:45.177Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://support.ironcladapp.com/api/v2/help_center/en-us/articles/32989670632343.json": {
+      "hash": null,
+      "status": 404,
+      "ok": false,
+      "failure": "gone",
+      "fail_streak": 1,
+      "checked_at": "2026-11-23T20:50:44.332Z",
+      "quotes_found": 0,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}

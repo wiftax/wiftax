@@ -1,28 +1,28 @@
 {
   "card": "abnormal-security",
-  "updated_at": "2026-11-16T19:17:05.863Z",
+  "updated_at": "2026-11-23T20:59:28.767Z",
   "urls": {
     "https://api.swaggerhub.com/apis/abnormal-security/abx/1.6.0": {
       "hash": "3d072f69a323adf697e985125454c6fa37ed452b0de4df404017be5dcd63da46",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.938Z",
+      "checked_at": "2026-11-23T20:43:28.105Z",
       "quotes_found": 7,
       "quotes_total": 7
     },
     "https://abnormal.ai/platform/whats-new/rest-api-self-service-token-flexibility": {
-      "hash": "39c1c35fba1ffbfd14ab337e7690bde88950ccdec5cce55cd5077425cbb11ebc",
+      "hash": "c3981d1d6ae03472ecc9cbd64a01062b47f7a39965b7f18c0f8cc68207b5a7ce",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:47.351Z",
+      "checked_at": "2026-11-23T20:43:28.120Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.expel.io/connect-your-technology/a-c-integrations/abnormal-ai-setup-for-workbench": {
-      "hash": "280b8df4795e2de8066b61000811da98e5ae812b06548400bf2c8b7949845654",
+      "hash": "5addac7de1b984b3d6be2dd319893fd41bb46e4066bbbf92449a3b4bbafdff39",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:47.390Z",
+      "checked_at": "2026-11-23T20:43:28.234Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -30,15 +30,15 @@
       "hash": "f6bd8bd08da30b60f6f98e9db40bd4a52c0067cc6594d2691c632daafb25d505",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:47.914Z",
+      "checked_at": "2026-11-23T20:43:28.600Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://abnormal.ai/learning/api-based-email-security-features": {
-      "hash": "11addcbc63671a4211a8acc8cfcd83ef8ec467ed54c2fe0ecee954f801ae1857",
+      "hash": "6ecb57eae9e136130fc133817f89e6ae63114b2a0cd3b6632406dfd738d9d829",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:48.354Z",
+      "checked_at": "2026-11-23T20:43:29.121Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "0922b7d8d35e09a2224e5dbd249ae057c4239f41540365828350925f7fe915d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:49.354Z",
+      "checked_at": "2026-11-23T20:43:30.122Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "9c132ef5bb85b3aa251ecebf7e84d489a8355942fe33d319ad6548a1d541119f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:50.354Z",
+      "checked_at": "2026-11-23T20:43:31.122Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,7 +62,7 @@
       "hash": "e341c4092c533e2938dccd5c2ea01ea50ba8fbaeed9a9656acdbf2ef475bf78e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:51.353Z",
+      "checked_at": "2026-11-23T20:43:32.123Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,25 +70,30 @@
       "hash": "7654a716c62364458ff0ba9de2b082298b82fdf1cd1f5b9bef3841c22dae68db",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:52.353Z",
+      "checked_at": "2026-11-23T20:43:33.123Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://abnormal.ai/platform/whats-new/portal-enhancements-abnormal-app-store-deployment-overview-and-platform-integration": {
-      "hash": "0f3f955604045ee42c7dd4321e29e68cbd6fbb7fa0b5c21d63094e83c454a9a6",
+      "hash": "c58218f1127236d2d84a85613f363d23676087877980170b62d1bd0c20697183",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:53.354Z",
+      "checked_at": "2026-11-23T20:43:34.123Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "d03d9ce0926b6a477d2be496cb128346d6f4d9c302734cc43b20933e90ee1800",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

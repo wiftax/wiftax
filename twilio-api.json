@@ -1,44 +1,44 @@
 {
   "card": "twilio-api",
-  "updated_at": "2026-11-16T19:17:16.878Z",
+  "updated_at": "2026-11-23T20:59:49.667Z",
   "urls": {
     "https://www.twilio.com/en-us/changelog/oauth-public-beta": {
       "hash": "ad3bf03233a88813168c614b0aa96b6ae50b42a796022b9e0d2401ab60b15780",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:37.071Z",
+      "checked_at": "2026-11-23T20:57:36.697Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.twilio.com/docs/iam/oauth-apps/overview": {
-      "hash": "c34e752dd68c8e26fea3610f9310717bc5d2235a4865550fcc1ea6c3b496abe1",
+      "hash": "53df7811aa51e81ea55a1aa2d566d01d971dbedf72d0bfeddebc62b0f0ad81de",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:38.070Z",
+      "checked_at": "2026-11-23T20:57:37.702Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://www.twilio.com/docs/iam/api-keys": {
-      "hash": "cfe3be4e9337d6d325b799824c781d54da76c14892ef73da50dc62c177424aec",
+      "hash": "94c57d5f013e55790161b284c1463abf3ff477226b4440e389cbef6b9e5714d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:39.070Z",
+      "checked_at": "2026-11-23T20:57:38.702Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.twilio.com/docs/voice/recording-settings": {
-      "hash": "1e160ebc1d99aaf41952438030158b26089c8ada254747cd97beae7bed0d49e3",
+      "hash": "d25e695a487b27c58d4083534d70c2c9d43d1d12981cbe42ece9db0ef01ef147",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:40.070Z",
+      "checked_at": "2026-11-23T20:57:39.703Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.twilio.com/docs/iam/credentialaws-resource": {
-      "hash": "1db8ee8c41255df48aa462c4d4c60a11889dee65f61c6b0b1d58cf426c9e51f4",
+      "hash": "e929fa7b91648e291aad343b0b38c0d2e0c6faae2dac50034720aefe0c2683ae",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:41.071Z",
+      "checked_at": "2026-11-23T20:57:40.702Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,23 +46,23 @@
       "hash": "645a2ff0b362c5a1abcf2485f5c4b814f877075040ee6faa6c981be437966e0f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:42.071Z",
+      "checked_at": "2026-11-23T20:57:41.703Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.twilio.com/docs/usage/api/keys": {
-      "hash": "58c77e04f2041027ecee964ef41d1f7d63f8c5d4f268b34ed1d38ee4ca651596",
+      "hash": "9cabe1b5240d975f553772008850b1089089a1b5d8c55e2ada25292308833cf8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:43.073Z",
+      "checked_at": "2026-11-23T20:57:42.702Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.twilio.com/docs/iam/api-keys/keys-in-console": {
-      "hash": "f72cbd4dde281cd8c7b148ac98d3e5377b74c154540b641ff8a51539564e8636",
+      "hash": "1b3f98415a7e92a81e0548a945ce5c5354642ae42a37a96cca0a59b2ebf6c6ed",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:44.073Z",
+      "checked_at": "2026-11-23T20:57:43.703Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,23 +70,23 @@
       "hash": "4a69871f1f7091e5e86b16a45729f4ac2adfaa93b1d425ad9411c4352ee8290d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:45.073Z",
+      "checked_at": "2026-11-23T20:57:44.705Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.twilio.com/docs/iam/api-keys/restricted-api-keys": {
-      "hash": "d37be3cd2e94489c35c09fe7447db802e8e6ed6fd3346e5c75821676db45f7a7",
+      "hash": "187771b658d063d125eeb6150559bd7dbf6ff167ca66074a1d51a73872a4d971",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:46.108Z",
+      "checked_at": "2026-11-23T20:57:45.704Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

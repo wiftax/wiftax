@@ -1,0 +1,70 @@
+{
+  "card": "cisco-meraki-dashboard",
+  "updated_at": "2026-11-23T20:59:29.660Z",
+  "urls": {
+    "https://developer.cisco.com/meraki/api-v1/authorization/": {
+      "hash": "9a03514c1549fa3e78b2773595c76ffa88ab7a653fbeb14ef07298685b291e09",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:50.262Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/meraki/api-v1/oauth-overview/": {
+      "hash": "fced73461dcc6303904031e727356918c3e52fefd2de7f0ad76149cc260ed498",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:51.263Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Cisco_Meraki_Dashboard_API": {
+      "hash": "84352b61890d83fb73538ef3d48c8a23d22eb2a6297c3754ba0aaff5d15f436a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:50.567Z",
+      "quotes_found": 5,
+      "quotes_total": 5
+    },
+    "https://documentation.meraki.com/Platform_Management/Dashboard_Administration/Operate_and_Maintain/How-Tos/Manually_Integrating_Cisco_Umbrella_and_Secure_Access_with_Meraki_Networks": {
+      "hash": "e467a966f31668ab694b594dbf03f1b38b34f6d34d65a0212a86a5b187ae6568",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:51.619Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developer.cisco.com/meraki/api-v1/generate-administered-identities-me-api-keys/": {
+      "hash": "86cd11c562c666839929cfe004459b5c3ca955a0882d848e128a8e0d29894a33",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:52.263Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/meraki/api-v1/revoke-administered-identities-me-api-keys/": {
+      "hash": "caba1c02958a5bd5f6ac0502137b5f19062113c252910aa8d1babe9784d3edaf",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:53.264Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developer.cisco.com/meraki/api-v1/get-administered-identities-me-api-keys/": {
+      "hash": "6f959dd733853cb6ae40f49fc1dff2243ae1d25607ccd66b5b5649b094b424c1",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:45:54.264Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

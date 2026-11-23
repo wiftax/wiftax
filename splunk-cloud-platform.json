@@ -1,14 +1,14 @@
 {
   "card": "splunk-cloud-platform",
-  "updated_at": "2026-11-16T19:17:16.692Z",
+  "updated_at": "2026-11-23T20:59:49.355Z",
   "urls": {
     "https://docs.splunk.com/Documentation/SplunkCloud/latest/Security/Setupauthenticationwithtokens": {
       "hash": null,
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:08.895Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:06.303Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -17,8 +17,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:09.896Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:07.303Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -27,8 +27,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:10.896Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:08.303Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -36,7 +36,7 @@
       "hash": "e3718e3a3d605f3b432f675fcac207dcfba83d98637bdf36c43ee93344801c6a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:09.979Z",
+      "checked_at": "2026-11-23T20:56:07.485Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -45,8 +45,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:11.897Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:09.303Z",
       "quotes_found": 0,
       "quotes_total": 3
     },
@@ -55,8 +55,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:12.898Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:10.304Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
@@ -65,8 +65,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:13.899Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:11.304Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
@@ -75,8 +75,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:11.051Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:08.534Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
@@ -85,8 +85,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:12.051Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:09.535Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -95,8 +95,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:13.052Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:10.535Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -105,8 +105,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:14.052Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:11.535Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -115,8 +115,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:15.052Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:12.535Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -124,7 +124,7 @@
       "hash": "27f75887dbcc283888ac21718ff910dfac5075b5d9e80fff255b5be38fb9d1c4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:12.204Z",
+      "checked_at": "2026-11-23T20:56:09.697Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -132,7 +132,7 @@
       "hash": "26ad50beb65f5ca8a49a9b246013cc8c511fc78690b3a968243f496e1141f4e8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:13.204Z",
+      "checked_at": "2026-11-23T20:56:10.697Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -140,7 +140,7 @@
       "hash": "bbaf17089f99a03f551f6e2f2adb4cdbfa0c24a6c62d8e6af9ee8ef4388c009b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:14.205Z",
+      "checked_at": "2026-11-23T20:56:11.698Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -148,7 +148,7 @@
       "hash": "68c41460931b0db9ba925c6bf4eff8fa39b4047384f0da7fa775c508f89e1302",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:15.206Z",
+      "checked_at": "2026-11-23T20:56:12.698Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -156,7 +156,7 @@
       "hash": "40fb286eb217c82dabdbe76299b72d9c3d1583c10b0e5c1c220a7d0b0ff5fb58",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:16.207Z",
+      "checked_at": "2026-11-23T20:56:13.698Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -165,8 +165,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:14.898Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:12.304Z",
       "quotes_found": 0,
       "quotes_total": 4
     },
@@ -175,8 +175,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:15.898Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:13.304Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -185,8 +185,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:16.899Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:14.305Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -195,8 +195,8 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:17.898Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:15.305Z",
       "quotes_found": 0,
       "quotes_total": 1
     },
@@ -205,18 +205,23 @@
       "status": 403,
       "ok": false,
       "failure": "blocked",
-      "fail_streak": 3,
-      "checked_at": "2026-11-16T19:14:18.898Z",
+      "fail_streak": 4,
+      "checked_at": "2026-11-23T20:56:16.306Z",
       "quotes_found": 0,
       "quotes_total": 2
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "2fa3299c782d3a744aa30e431a5f815bb9982ad5991f731edee2be3b13653cdb",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

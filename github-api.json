@@ -1,12 +1,12 @@
 {
   "card": "github-api",
-  "updated_at": "2026-11-16T19:17:08.508Z",
+  "updated_at": "2026-11-23T20:59:33.609Z",
   "urls": {
     "https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-an-installation-access-token-for-a-github-app": {
       "hash": "8c55cc4ba5a3cec3f75038fbfbd2ae8368b4e605287b579a4f243056405c96b4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:13.492Z",
+      "checked_at": "2026-11-23T20:49:56.448Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -14,7 +14,7 @@
       "hash": "d02f90a81ba1092d246ba406d3897ee3d40e6f8f8a64c36f2d5bd5d0084fa163",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:14.493Z",
+      "checked_at": "2026-11-23T20:49:57.448Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "0bd403be512247c8e68f3f0deaeae2cbc24f24a5484e2d96da4094aa4aca2a0d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:15.500Z",
+      "checked_at": "2026-11-23T20:49:58.448Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -30,7 +30,7 @@
       "hash": "c63eca61c4edcb8033a7208ce9a21bd5bf523dab9eded6cce8d2285b41903fed",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:16.500Z",
+      "checked_at": "2026-11-23T20:49:59.449Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,23 +38,23 @@
       "hash": "2d41fea220541ec2705f8a32d9d563327ccda5dd66bcbc35473f1c8657676585",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:17.501Z",
+      "checked_at": "2026-11-23T20:50:00.449Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/rest/orgs/personal-access-tokens": {
-      "hash": "b0ebc03524f83355eecfec9adc4aa800bd770953740ae95a406354d52f746749",
+      "hash": "d8ce3eb5901bad2ffaca4080c3ac9c973814001341aed1fb44a285828b27d84a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:18.500Z",
+      "checked_at": "2026-11-23T20:50:01.450Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.github.com/en/rest/credentials/revoke": {
-      "hash": "f511c74f1f66c0009d9002d7ad2095bfdb8638dc085a81092526661ead76690b",
+      "hash": "185591f3b791e5f46190af3c76211290eeb8092665be30deb0edefc4a70c82d9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:19.501Z",
+      "checked_at": "2026-11-23T20:50:02.450Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,15 +62,15 @@
       "hash": "da4baeb8a3d96fcda59263ef3d0ce81257319ec82c6d326d4a37d558f234512a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:20.501Z",
+      "checked_at": "2026-11-23T20:50:03.451Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

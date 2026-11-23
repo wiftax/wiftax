@@ -1,148 +1,148 @@
 {
   "card": "opal-security",
-  "updated_at": "2026-11-16T19:17:10.079Z",
+  "updated_at": "2026-11-23T20:59:38.355Z",
   "urls": {
     "https://docs.opal.dev/reference/authentication": {
-      "hash": "f8d7cd32b666d9cb053b80a3ed207e47e0e424fdf7d195726302d780d18221ff",
+      "hash": "69265e89c04d8353849c4f46731bf5c4a26d580287cd4a14e51e853f5743dac1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:06.293Z",
+      "checked_at": "2026-11-23T20:52:43.317Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://raw.githubusercontent.com/opalsecurity/terraform-provider-opal/main/docs/index.md": {
-      "hash": "6bdda208bf1c957c59ec9e85403f63b4553263e68b48ad4285f46353e4e6c01e",
+      "hash": "079fb69b5b536fd21c424c1628c3f6730e96b84e37f6edbd8b77cbb092856da2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:06.524Z",
+      "checked_at": "2026-11-23T20:52:43.543Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/docs/mcp/overview": {
-      "hash": "a510cc414951b0314e11f91b335042a5870a5eadef8e921b78ee01948fdd775f",
+      "hash": "3fdb0bcb785b154c9f7883d53001014c7c051ac8208343c4c6eb8945467f740e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:07.313Z",
+      "checked_at": "2026-11-23T20:52:44.396Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/docs/mcp/okta-cross-app-access": {
-      "hash": "15e9421cf6bc426d36c255a72123584f09a42abd060c9a9e0a744180480a4ce7",
+      "hash": "ef7bc842a7a8d7ab775a05b5921c9085dfaecbb688416e6b6c09057438176774",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:08.338Z",
+      "checked_at": "2026-11-23T20:52:45.395Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.opal.dev/integrations/setting-up-your-aws-organization-in-opal": {
-      "hash": "4b7fa30388563a67220a457bda477a019a4293f28b662b28fb63a0a29b156f8a",
+      "hash": "a77709a0129ea01a5f089f3d08a00e1d0547f943a698f10f80d783ecc27572d4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:09.338Z",
+      "checked_at": "2026-11-23T20:52:46.395Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.opal.dev/integrations/aws-integration-on-prem-setup": {
-      "hash": "4ed117d4ce54d4c37d0ad447f6e41fa6c116376680a72f10bfdfbd75e8195d07",
+      "hash": "b485baad8ac349d0897195196d746c3686a76044ba3a0e4bb690efe68447c47d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:10.338Z",
+      "checked_at": "2026-11-23T20:52:47.396Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/google-cloud-platform": {
-      "hash": "0cb85d5cab9fa59eb525397b07414f908e99ff13b17c07b0a6e850e0d14eefba",
+      "hash": "71543145b1468a706b9213c1ad65cc20056b1b35e6b14636d3b9e286eeebeedb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:11.338Z",
+      "checked_at": "2026-11-23T20:52:48.396Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/google": {
-      "hash": "be0f0fecbe3008245a4d1339da4dabfb5e7791b249465232ce6f9ced6bcff2e0",
+      "hash": "b5c7eb124011f0f7752e664dbf1667c2b85a8c724f75d1fdb5ffc1a7e15f8aa2",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:12.339Z",
+      "checked_at": "2026-11-23T20:52:49.397Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/azure": {
-      "hash": "1db55e319dca65ece5c0e3332478eac88983dbf8d69112f93dc00b40c32b7aba",
+      "hash": "aad8fba0f4ebba3d0ab2cbb36aa25e064017a3c1f405a7528ca7c2c8136b9c85",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:13.339Z",
+      "checked_at": "2026-11-23T20:52:50.398Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/okta": {
-      "hash": "ffddd1cd2c9276de9d528198a9ca81d9ac55f2c73c5abc76c4def3e4fd83a065",
+      "hash": "f58ee464637803726c4bdb53938775ccf0c4a2ca43db055bcab4aa28e0343b6b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:14.340Z",
+      "checked_at": "2026-11-23T20:52:51.398Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.opal.dev/integrations/github": {
-      "hash": "2bd0d6b50d936bdc399c436dc133035c47b44b591e1bd7cd3cc7f442414630a0",
+      "hash": "96904af3b63667eee7bc7ff7753349dd701d67eb93cddc3db9c77cdca3ea1ab5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:15.340Z",
+      "checked_at": "2026-11-23T20:52:52.398Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/github-enterprise": {
-      "hash": "03e3ee2e49deec66c63ad3a9a1420e2acd89858bbc26c21d41b98fee9158afb8",
+      "hash": "8676ecc046a84d09a81a861b5fb1f67428dfb42cfbd988818c6c31731fd61be8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:16.339Z",
+      "checked_at": "2026-11-23T20:52:53.399Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/slack": {
-      "hash": "c9e59b1ea80066d085c37665b2a69aab2d148146153d4f1e9c4fa41757a083db",
+      "hash": "249f4e7871d220cfdf2dc6235b05190397e9b45b96324c2f44bde6176d44ed27",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:17.340Z",
+      "checked_at": "2026-11-23T20:52:54.399Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/integrations/salesforce": {
-      "hash": "d099de279b0b0d7ecf8217a47e73e78b3afd43fea4544f7b99906c855643e81f",
+      "hash": "7e8a53162c2cef2469341dafb65947a794fe27bc833a605ed59a6548feb60395",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:18.341Z",
+      "checked_at": "2026-11-23T20:52:55.400Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.opal.dev/api-reference/tokens/create-token": {
-      "hash": "30b51d48ed9934564644bb7572ab6efc4620a93a29be53557ad91ac7f27827f5",
+      "hash": "4c548e644bd85861c9f487bfd87c8788ed3d409dbb50f9ee9ff086d15fc92b55",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:19.339Z",
+      "checked_at": "2026-11-23T20:52:56.401Z",
       "quotes_found": 2,
       "quotes_total": 3
     },
     "https://docs.opal.dev/api-reference/tokens/delete-token": {
-      "hash": "31070ff11fa72caac65457177fdeb7dd8b0dee222f762f57212eef6339442fa4",
+      "hash": "a9c22f60a6143c923a0eb1acb3e36bed17d454de7c84f80a032f176513fcaa9c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:20.341Z",
+      "checked_at": "2026-11-23T20:52:57.402Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "f38348f2769cbce78afba44e2f9467d964ef764051870bcef275151f748dad78",
+    "fingerprint": "2c0264505620c2e72b8f50cac58baa71dd743ffe8c28fc2a3a6499a4cf908c33",
     "outcome": "refresh",
-    "at": "2026-11-16T19:03:37.140Z",
-    "url": "https://github.com/wiftax/wiftax/pull/84"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

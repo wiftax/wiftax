@@ -1,12 +1,12 @@
 {
   "card": "coreweave-cks",
-  "updated_at": "2026-11-16T19:17:06.366Z",
+  "updated_at": "2026-11-23T20:59:29.737Z",
   "urls": {
     "https://docs.coreweave.com/docs/products/cks/reference/cks-api": {
       "hash": "330c9125ba66a32303f59a23dfcf0649f140749d50340f327ed19e4ba7f6d38f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:53.621Z",
+      "checked_at": "2026-11-23T20:46:09.499Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -14,7 +14,7 @@
       "hash": "cc9e890147ba113fba7961376849c2c75ddda9c980c79e928a57986975deb99f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:56.624Z",
+      "checked_at": "2026-11-23T20:46:12.568Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "3e5872211eddc2e9f2f745b2a433e3281e4ee5541c5de142350dc216411c9588",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:57.624Z",
+      "checked_at": "2026-11-23T20:46:13.567Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "8aa585bf6527c1439235f7c94d10c6005e674fb56e3e10e69f835f96bb860e8a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:52.621Z",
+      "checked_at": "2026-11-23T20:46:08.499Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "0515f4185c54da6abdb1e803e29f36a45b08e4066251f84def7c5f94865e2942",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:58.624Z",
+      "checked_at": "2026-11-23T20:46:14.568Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -46,7 +46,7 @@
       "hash": "065c261af9365f592c656652e2f8394844ae8fe53e3c124521eacfb49230fdc8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:59.625Z",
+      "checked_at": "2026-11-23T20:46:15.568Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,7 +54,7 @@
       "hash": "1cf47034242bc81897dfc59da2ad9fe733a15235b43d7714dbf679c58119394a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:54.622Z",
+      "checked_at": "2026-11-23T20:46:10.567Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -62,7 +62,7 @@
       "hash": "41b61c918e2847fd39e41fa5184310d21e88c27ff59ce33ee7aadb40fd6acc6a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:51.621Z",
+      "checked_at": "2026-11-23T20:46:07.498Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -70,22 +70,22 @@
       "hash": "3de006a4e50652c90e8642a0217c7cb5bd4d1e18b45e12a539aafb71988bde2d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:55.623Z",
+      "checked_at": "2026-11-23T20:46:11.568Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "d2ed8018dfacb90330f81e019341b3dd3392965f8cecca52293043a920b072df",
+    "fingerprint": "dd44d19d368cf073ea00a63b85bf19c12b56d8dcaf6ad3051262b6dd62b0fba9",
     "outcome": "no_change",
-    "at": "2026-11-15T00:52:00.208Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

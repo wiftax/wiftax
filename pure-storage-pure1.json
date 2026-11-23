@@ -1,0 +1,36 @@
+{
+  "card": "pure-storage-pure1",
+  "updated_at": "2026-11-23T20:59:38.694Z",
+  "urls": {
+    "https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml": {
+      "hash": "b6369b97789e2d2165b7c0d8a37e8b0155fcaf79909c66cb2dd0fd306c140d30",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:08.432Z",
+      "quotes_found": 5,
+      "quotes_total": 7
+    },
+    "https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/": {
+      "hash": "3f6672714313941d23522251c4e767b5e91fe536ea5ae5e10d01f1fd817b2cd6",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:54:08.438Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  },
+  "last_assessment": {
+    "fingerprint": "0ea82a1824434fc1fbeea5b5e0820c4af98dbcd994fd0b2598126f319fc3ea8f",
+    "outcome": "refresh",
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
+  }
+}

@@ -1,12 +1,12 @@
 {
   "card": "island-enterprise-browser",
-  "updated_at": "2026-11-16T19:17:09.532Z",
+  "updated_at": "2026-11-23T20:59:35.343Z",
   "urls": {
     "https://www.applytosupply.digitalmarketplace.service.gov.uk/g-cloud/services/234060975999414": {
       "hash": "01ae75ee8b966edd5146023960f946ffd26ae48d1b5c528673a13931060202d6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:38.909Z",
+      "checked_at": "2026-11-23T20:50:43.362Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "f41404737c243a619b5b352d0fcfbd6c8adf5e36ce52ac0c056d1e5aaf73cdd4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:39.179Z",
+      "checked_at": "2026-11-23T20:50:43.449Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "6bbd49cd2c492d053c72fc4c9961174f20fc1b0008ff214ce98d06734e62a393",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:40.179Z",
+      "checked_at": "2026-11-23T20:50:44.450Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -30,7 +30,7 @@
       "hash": "24ae98918b1d2361f9bb86ec25680998383d3936234d4f3c8c21997a6536f241",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:41.189Z",
+      "checked_at": "2026-11-23T20:50:45.518Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "3c77dd44f2bc034ad8d61fd3a823981a944c6f0f420bf26f7b15fc8e62d599c9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:40.116Z",
+      "checked_at": "2026-11-23T20:50:44.301Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,65 +46,70 @@
       "hash": "1341fd434b4cd0eec616403cbd7a1468946e1492dac3985d0f20092c6c6723d1",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:40.323Z",
+      "checked_at": "2026-11-23T20:50:44.381Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.panther.com/data-onboarding/supported-logs/island-logs": {
-      "hash": "b2ceeaca8dd8d5341f35c8ca766492f54a2afdc354651bac6d164dc57a0f8649",
+      "hash": "958722bf98733a21a7c64e6d630847430af2596779734d2b90f54e4d6e26438d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:40.838Z",
+      "checked_at": "2026-11-23T20:50:44.434Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://www.island.io/blog/microsoft-purview-dlp-enterprise-browser": {
-      "hash": "abe6ce611deb46a27d872d531124199f690845f379d0eef7c16e9d8d4232fc00",
+      "hash": "b31cb193295cfcc727096eaa58cd2e32c03be7ebf7bf7cc431d0406ed32da465",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:40.875Z",
+      "checked_at": "2026-11-23T20:50:44.542Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.cloud.google.com/chronicle/docs/ingestion/default-parsers/island-browser": {
-      "hash": "a551a933d6fde5179afba80813b3c23fbb18e730935d303b8b939e0412886c9d",
+      "hash": "886a7960bfac25afedbbb8165874bfed758c854832cc7779b3f26c51de130d9f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:41.009Z",
+      "checked_at": "2026-11-23T20:50:44.558Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://www.island.io/blog/island-integrates-with-the-claude-compliance-api": {
-      "hash": "21f92c2c518690d96d07e30870e3d9559c357471955ea0f7f7293863b391c393",
+      "hash": "afb4dfc435666070b3b425a7c4d3f0b8af07da204fc64be560bedf2ffff5874e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:41.880Z",
+      "checked_at": "2026-11-23T20:50:45.543Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://platform.claude.com/docs/en/manage-claude/compliance-api-access.md": {
-      "hash": "036a3714234fbfeaeabca72a6d182332b1e5e010ff32939a3a765d9d9d7b7c40",
+      "hash": "68d4be9f2072a5a834ef501fb8adcccb1f0cbbfca81c5702358069aa3fbe99ed",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:41.354Z",
+      "checked_at": "2026-11-23T20:50:44.733Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://www.elastic.co/docs/reference/integrations/island_browser": {
-      "hash": "f1e9456c0fd54e70945ad1534b4994921bdb7fb65113e8e8daca5cc17546a6a1",
+      "hash": "b47a0442b4416a94f455871b10b01754b709bc533ee6b19818dd29dac2712663",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:09:41.432Z",
+      "checked_at": "2026-11-23T20:50:44.879Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "8f0ba9a0bb7d336163a2d93234a6dcf4b309047685563217dc59e0a974d1962a",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

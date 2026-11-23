@@ -1,12 +1,12 @@
 {
   "card": "coreweave-object-storage",
-  "updated_at": "2026-11-16T19:17:06.376Z",
+  "updated_at": "2026-11-23T20:59:29.755Z",
   "urls": {
     "https://docs.coreweave.com/docs/products/storage/object-storage/auth-access/workload-identity-federation/configure-wif-for-object-storage": {
       "hash": "c636d4e8a1449174b9910da4129a681edcf99ad0235225df7982f1a0221826fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:08.639Z",
+      "checked_at": "2026-11-23T20:46:24.574Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -14,7 +14,7 @@
       "hash": "c2f8460325b07c222c7c6b707bdf86b29ea6fa74570988483219fe61a6acfdbb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:09.639Z",
+      "checked_at": "2026-11-23T20:46:25.575Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -22,7 +22,7 @@
       "hash": "d9dbef6d336ff71e139546b155ac13efb4ffdf919c970053120ada9d99ddd668",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:10.639Z",
+      "checked_at": "2026-11-23T20:46:26.576Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -30,7 +30,7 @@
       "hash": "0c102d4e410330d70769526cb489d9a5895471666766d881b24084eaeb9263dc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:11.640Z",
+      "checked_at": "2026-11-23T20:46:27.577Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,7 +38,7 @@
       "hash": "065c261af9365f592c656652e2f8394844ae8fe53e3c124521eacfb49230fdc8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:05:59.625Z",
+      "checked_at": "2026-11-23T20:46:15.568Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,31 +46,30 @@
       "hash": "67aa367be3891258f9aa9dbe25bc507f465a979da7b54f0552ef8a6822520a2c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:12.639Z",
+      "checked_at": "2026-11-23T20:46:28.576Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.coreweave.com/llms.txt": {
-      "hash": "afb6856156e9a407c46d6e24b121f749669a1f269ebd43e9039f438a226d6065",
+      "hash": "305bae6602e13937cb8473c8f62f487d7a3a856ee1582127cd4e22ac5161c7d9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:06:13.639Z",
+      "checked_at": "2026-11-23T20:46:29.577Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "0e78f3f61135a2a5412af0e55c69fa62e1a5e1983f1952905a15c169ece672c1",
-    "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "fingerprint": "38d34187df05d4f44d1fae67fefa03eb0e851be2aba1b916ee81c772124c0d7e",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

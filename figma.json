@@ -1,0 +1,70 @@
+{
+  "card": "figma",
+  "updated_at": "2026-11-23T20:59:32.152Z",
+  "urls": {
+    "https://developers.figma.com/docs/rest-api/authentication/": {
+      "hash": "e3f54ea143e7302ea942a80a1fe74e4600ea9b2d14ea361d00e94a0caa556750",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:11.606Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.figma.com/docs/rest-api/plan-access-tokens/": {
+      "hash": "bb86d4aff7e01bd8d1b4db88223aa51f78f09ee184e7d9e59e3d869d2decd666",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:12.605Z",
+      "quotes_found": 7,
+      "quotes_total": 7
+    },
+    "https://developers.figma.com/docs/rest-api/personal-access-tokens/": {
+      "hash": "32f24e64c003ec3c2c5d38d4ee20dd243c42d5ad8df899667601a4e4cfa3b4ce",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:13.605Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://developers.figma.com/docs/rest-api/oauth-apps/": {
+      "hash": "1aa74cdb17b0d7599bbd8666b798a091b0a5542d17bb095a945c6c2e1e809e73",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:14.605Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.figma.com/docs/rest-api/activity-logs/": {
+      "hash": "54e9ecbb2bf833c19397e9ea4afe8a3a796cd0cdf2ed76f73ddffbc0925d9eec",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:15.608Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://developers.figma.com/docs/code-connect/code-connect-ui-github/": {
+      "hash": "7780803b9e520cd8e2e4c385c2deccf237951f4e3ea110ae3e7108290f2c5857",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:16.608Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://developers.figma.com/docs/code-connect/code-connect-ui-setup/": {
+      "hash": "87944790f7905693aef0865ec7cc90e8fd4e14214fce97faddd9ec10e26f7634",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:17.609Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    }
+  }
+}

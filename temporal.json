@@ -1,28 +1,28 @@
 {
   "card": "temporal",
-  "updated_at": "2026-11-16T19:17:16.809Z",
+  "updated_at": "2026-11-23T20:59:49.556Z",
   "urls": {
     "https://docs.temporal.io/cloud/api-keys": {
-      "hash": "31a192760c2b898fc50dfca034354baae1b2fdd80c47533034fa70107150de17",
+      "hash": "51ba2e53319c0c641fb22105890c0de380d93d845ed5d2f48689d478784d8d26",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:43.121Z",
+      "checked_at": "2026-11-23T20:56:44.373Z",
       "quotes_found": 6,
       "quotes_total": 6
     },
     "https://docs.temporal.io/cloud/manage-access/service-accounts": {
-      "hash": "7bac516b1c8ff9bbfa51dc33a73eb32d1acf9e58f363396ef372689082e6d9cd",
+      "hash": "65eeacc62b3b994742212c25158a17a568e76432083a485ca9974ebd88ed88da",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:44.122Z",
+      "checked_at": "2026-11-23T20:56:45.374Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.temporal.io/cloud/connectivity": {
-      "hash": "fbd71ef6961501496598228f3dc7935c9fc9895ab9402fc44dbc5a5a15b5a366",
+      "hash": "51f00f39c71daac2f11ba8157d637fd375b81279f7222f3c92104678ff69dfb6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:45.122Z",
+      "checked_at": "2026-11-23T20:56:46.374Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,7 +30,7 @@
       "hash": "024bbbd3c58c864729116afeaa3585394596e324b13e3926c5847418b53e0b10",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:46.123Z",
+      "checked_at": "2026-11-23T20:56:47.374Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -38,7 +38,7 @@
       "hash": "1ad642f0fba12becd20844947abd55d0fed6f88ee7552ac1c3fbdf1a173b3a60",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:47.122Z",
+      "checked_at": "2026-11-23T20:56:48.375Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,7 +46,7 @@
       "hash": "9474bbc5003d11c7ee4350b826195929c95af425e5113fa38529125cba749a3b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:48.122Z",
+      "checked_at": "2026-11-23T20:56:49.375Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -54,7 +54,7 @@
       "hash": "99e4019e20bf4309b08bd9bf1c0f4de327df2ce6f28a90ac0f8a81b8cc75e72f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:46.088Z",
+      "checked_at": "2026-11-23T20:56:47.358Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -62,7 +62,7 @@
       "hash": "4b71e65be033a73a75d5e082074bba0da36598f884f4f073a51e104c8853d7cf",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:49.122Z",
+      "checked_at": "2026-11-23T20:56:50.375Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,31 +70,31 @@
       "hash": "d82058b92858b77abfb726ef558d9c70765f3322e75db351fc3d7187e4b3a89c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:50.122Z",
+      "checked_at": "2026-11-23T20:56:51.376Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.temporal.io/cloud/audit-logs-aws": {
-      "hash": "abc4ae05ccce8142a3c72d306e00483e92a9401b84d1793e29e6b21fde5f59d4",
+      "hash": "7d955b79925e7ac0a6b2bf8143a70d498f6a7c7b2d4240f008afb27c20929eec",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:51.122Z",
+      "checked_at": "2026-11-23T20:56:52.376Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.temporal.io/cloud/audit-logs-gcp": {
-      "hash": "125a2f0c8c57fbe312a252819ca415db07c55676b7d2576e0de0709e553f5898",
+      "hash": "02164247285a7d0c33e1aa3a8bdb697271ccdc33f1be5ce357356b95ea3b1e59",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:52.123Z",
+      "checked_at": "2026-11-23T20:56:53.377Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.temporal.io/production-deployment/worker-deployments/serverless-workers/aws-lambda": {
-      "hash": "e7ec775002455f26764aea2664f1610f356839f8dec5fda22c295b2b97b3ff0f",
+      "hash": "19f71d61aa591a8b319f747d6c1b250348f22e9536b768890ee2000ee5beb471",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:53.122Z",
+      "checked_at": "2026-11-23T20:56:54.377Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,7 +102,7 @@
       "hash": "1b07cdd3b966089df12e807913d350522de96090424cb89a661abe610bbd55b0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:54.122Z",
+      "checked_at": "2026-11-23T20:56:55.378Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -110,7 +110,7 @@
       "hash": "4009cbb2248cb8f9b5911c60ac66b07b9d55fe7665f5ff8e06976771b08aed68",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:55.123Z",
+      "checked_at": "2026-11-23T20:56:56.378Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -118,7 +118,7 @@
       "hash": "d764cea3e0346fd50361087ea70e1c21ef7af22f0bed2411d267957124b1f9eb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:56.123Z",
+      "checked_at": "2026-11-23T20:56:57.380Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "1d20ff2a4e00ddc6bfc62afdb8a5f9e7ccb9c0b9553a08d7b97e764017a64415",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:50.186Z",
+      "checked_at": "2026-11-23T20:56:51.346Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -134,23 +134,23 @@
       "hash": "2dc70dbe3f7434ceb5dc8ba4c64f8305f0491703c4a090022a672b8fa97bf842",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:51.185Z",
+      "checked_at": "2026-11-23T20:56:52.346Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://raw.githubusercontent.com/temporalio/api-cloud/main/temporal/api/cloud/identity/v1/message.proto": {
-      "hash": "b2c9d10ebd3399fecae0ce8215604b9c5586d3b723a1cdcbf0607a406a52a778",
+      "hash": "6429050c4baf24c2b2689acbd8fa383672b6f4dd67f869275276fb66aea224f7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:52.187Z",
+      "checked_at": "2026-11-23T20:56:53.347Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

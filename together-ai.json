@@ -1,20 +1,20 @@
 {
   "card": "together-ai",
-  "updated_at": "2026-11-16T19:17:16.842Z",
+  "updated_at": "2026-11-23T20:59:49.610Z",
   "urls": {
     "https://docs.together.ai/docs/api-keys-authentication.md": {
       "hash": "26402e286b6ec3a4ab0a521fa401dc82a3b4008dca96d355746f965a1042071e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:09.723Z",
+      "checked_at": "2026-11-23T20:57:10.455Z",
       "quotes_found": 10,
       "quotes_total": 10
     },
     "https://docs.together.ai/reference/cli/getting-started.md": {
-      "hash": "415dfd9027d81612187652111901fc89fd67d5fe875a272c3d1012fb86e5c46a",
+      "hash": "66fec9bef4c95793df9e32ad0b75f8720fc05b3cf1554276b9ff04bcc8221657",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:10.723Z",
+      "checked_at": "2026-11-23T20:57:11.455Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,15 +22,15 @@
       "hash": "ef18d6a546458cd6cea164f3b3b1dd1e08dadb8ddb32bcb56e114cd0a45fbd49",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:11.722Z",
+      "checked_at": "2026-11-23T20:57:12.455Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.together.ai/reference/whoami.md": {
-      "hash": "b72acadc243767fca0428d66b05d9abc2284fc5c836960c4060dcf9d20e19527",
+      "hash": "7fe29dd9913a21d7eb3c43ffcc381f671507b4ef67795c9c4308740eb8e13f96",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:12.722Z",
+      "checked_at": "2026-11-23T20:57:13.455Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -38,15 +38,15 @@
       "hash": "83828f262e03039ef4ab9b6ffba460bbf5e9d96cf1fed0be86764883bf5af11e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:13.723Z",
+      "checked_at": "2026-11-23T20:57:14.454Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.together.ai/reference/cli/jig.md": {
-      "hash": "d0cfb3182cdabdd62c073fc428b289d03e8372532b0ee172ca6bc40ae4e78e8d",
+      "hash": "75dfc2ce56b3910fe69a73913882184c8908e1f145de11d22d580b5d46ac0640",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:14.723Z",
+      "checked_at": "2026-11-23T20:57:15.455Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -54,15 +54,15 @@
       "hash": "b080b778463ab0e9e805e56a742d2cada8065e643b3d251f4192de9c020f6b5c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:15.723Z",
+      "checked_at": "2026-11-23T20:57:16.456Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.together.ai/docs/gpu-clusters-management.md": {
-      "hash": "10dce0c949712df88548e2c27f10d46d6993e34b8a4bb6d1c50f9b8f606d55eb",
+      "hash": "d831e0a81dd2404bbe089b7989721afa7a65b0ff042f674d3d5d58e9795036a0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:16.723Z",
+      "checked_at": "2026-11-23T20:57:17.456Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "d235514a0ab8f93f9600bd8029f9fb801a3fa2c3466966c685f612694ed3dd94",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:17.723Z",
+      "checked_at": "2026-11-23T20:57:18.457Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -78,7 +78,7 @@
       "hash": "63daeeaed7c05623a56b5c8d9c7f607ba2714debfc92cef3427a9e37f17259e0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:18.724Z",
+      "checked_at": "2026-11-23T20:57:19.456Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -86,7 +86,7 @@
       "hash": "2f3f6ce32e742ec62a1050d33be07f3ee48e7967e0da2aea0d0d8f7340446c55",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:19.723Z",
+      "checked_at": "2026-11-23T20:57:20.457Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -94,7 +94,7 @@
       "hash": "9bba82a4ccf0fe1f7488dac2fdb99be3cfa1b8ca537704a99e3215ef7907d391",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:20.724Z",
+      "checked_at": "2026-11-23T20:57:21.457Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -102,15 +102,15 @@
       "hash": "e0753f3b970b746b1b63d19176f70e1aa15046e8f0a61b5cb3c5b6a83d0ac23b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:21.725Z",
+      "checked_at": "2026-11-23T20:57:22.457Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.together.ai/openapi.yaml": {
-      "hash": "c7afdcad7200738f5b611f658a4e48ccba9564a5d7ee9faa892f864dee22b71e",
+      "hash": "df3e22aa7ab58abd5df79ca6e4bf3603bab68922266dfc44ca2ddabd0603704f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:22.724Z",
+      "checked_at": "2026-11-23T20:57:23.458Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
@@ -118,30 +118,30 @@
       "hash": "a14075b26365a990c5ad6f9fc46ceeeda026486e7bb69b706ee22ca956d8b11e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:23.724Z",
+      "checked_at": "2026-11-23T20:57:24.458Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.together.ai/docs/billing-cost-analytics.md": {
-      "hash": "3837abf63cdacfdee73b8c33cfa5a4a4d71805a055133d568ef692629011edce",
+      "hash": "2eff8bca1275b6b18fb0fcbb7e63c6d00d3075dd003a4d76770a8cd3fa666b1c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:15:24.725Z",
+      "checked_at": "2026-11-23T20:57:25.458Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "11ed7e54502170b26ff2db8c0c6cb7a9abaf4ea9fc31dcab2d83d1ed2d8fca0e",
+    "fingerprint": "6ecd7bfb365c53df9739055085ec093441d5fd5873251d2c0b186085fadd71db",
     "outcome": "no_change",
-    "at": "2026-11-16T19:03:37.140Z"
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

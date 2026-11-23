@@ -1,180 +1,180 @@
 {
   "card": "panther-siem",
-  "updated_at": "2026-11-16T19:17:10.117Z",
+  "updated_at": "2026-11-23T20:59:38.599Z",
   "urls": {
     "https://docs.panther.com/panther-developer-workflows/api.md": {
-      "hash": "47c4ed0eaad1d86e6130b63ddbb1916cc6aad3876d62f47c7246531070be1465",
+      "hash": "7083f14c77353b39761674d8a2d3891070546a82ea997d33c0dfc4454557e5df",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:49.941Z",
+      "checked_at": "2026-11-23T20:53:35.153Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
     "https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md": {
-      "hash": "c3eae2923deb198a2081f4a3438758b1554aa80417a8f1d7d4664f6c63c11fef",
+      "hash": "c309d89c6f5241634db8a45981920532cbcabd2060fcc815f0df9b1c0f13bfad",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:50.941Z",
+      "checked_at": "2026-11-23T20:53:36.152Z",
       "quotes_found": 5,
       "quotes_total": 5
     },
     "https://docs.panther.com/panther-developer-workflows/api/graphql.md": {
-      "hash": "748ed7921225c37bed98d6492c1b34dad52df1c15ce395c29063e0e091112d67",
+      "hash": "bb40b9b2389e1144cdedb50d155e5d2ff057975ba2fdc83b9ce988cff89cb3bb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:51.941Z",
+      "checked_at": "2026-11-23T20:53:37.153Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/panther-developer-workflows/detections-repo/pat/install-configure-and-authenticate-with-pat.md": {
-      "hash": "2d2f83226d3373b1805f1a1b4c515157eb934b19d04cf06ad62ecfc722bc99df",
+      "hash": "5144b14cba7063ec4ebf21ffa37bfb92a15ff7fb9a93f4338b33bc8e6e319e6e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:52.941Z",
+      "checked_at": "2026-11-23T20:53:38.153Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.panther.com/panther-developer-workflows/terraform/s3.md": {
-      "hash": "2d588dd94d7a3204efc168d46a1dadbca8e52b5d620eef057fd55496ab715fb6",
+      "hash": "8f3019ffee8f9a9c27c3cdf379c03d78e920b2fe580b4297dd285db00d18df62",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:53.942Z",
+      "checked_at": "2026-11-23T20:53:39.153Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/data-transports/http.md": {
-      "hash": "43d14e16b5754d83c2099fdd4212c1a46fd98475f142447f2fb7706272acaab7",
+      "hash": "b2cd08dc512f25b4f693bff3d7e7cc1631d1dec15279187f2751c9a778bd77dc",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:54.942Z",
+      "checked_at": "2026-11-23T20:53:40.154Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/data-transports/aws/s3.md": {
-      "hash": "53326883814325069ad7f02a617397c5d93db4b1596ec91d2cb6f377e027c537",
+      "hash": "f89846a61c033e6457a32b33e72c1ddf05160e6e63f5260bac440290fbbe82fb",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:55.943Z",
+      "checked_at": "2026-11-23T20:53:41.155Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.panther.com/data-onboarding/data-transports/aws/cloudwatch.md": {
-      "hash": "b3b9f48ffc64b925007174b24c086f02434bc4d7ebbd62085e40981f7399f327",
+      "hash": "3037f1888c483af8faf5308d7fa03f70c3b5605b1a7b9a53013b3db9ffc9e378",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:56.943Z",
+      "checked_at": "2026-11-23T20:53:42.154Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/cloud-scanning.md": {
-      "hash": "f7284864004133d0e005e271dd23c704d4a1c4412d23dab8a946da5faeaabaf5",
+      "hash": "f34a2a77232f7004687c4fa7f7ca16224f224828d9cf496fe122678a32470339",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:57.943Z",
+      "checked_at": "2026-11-23T20:53:43.155Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md": {
-      "hash": "ce5596bd4363b7b624b4b9696d6dc4b59b16fb83e73a4454b14ccd2c483a09ba",
+      "hash": "5e754e4e822578c1b8a342ed4bdd2a74c62984326f66e1c6ca9097978c4f4b89",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:58.943Z",
+      "checked_at": "2026-11-23T20:53:44.155Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.panther.com/data-onboarding/data-transports/google/pubsub.md": {
-      "hash": "7a597d78578d9cb7350b127c9029e1386832f7b3b4701bc596ace5243b7ed534",
+      "hash": "08768a8a540b54c1c1bb0c51d1c49dedaff93d42930ef59a96ef9978afff15e4",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:59.942Z",
+      "checked_at": "2026-11-23T20:53:45.155Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/supported-logs/googleworkspace.md": {
-      "hash": "8c16327c00b244807d1f0715cd072bad40508fd83bd334e82a92502f720d57d9",
+      "hash": "ebfb9dc67333c795a427d306f7b77fb6569c70526aee280cfdf19de16f9b4e4d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:00.943Z",
+      "checked_at": "2026-11-23T20:53:46.156Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/data-transports/azure/blob-storage.md": {
-      "hash": "4fca8e0fc566a21ec1ce190fb86fdeb9214cd4fb03f46cf89cb7f257eac7bf6d",
+      "hash": "087f77ab4885989abe2f160f450753700be1feee59c3f228ccaacfbbbf729d06",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:01.942Z",
+      "checked_at": "2026-11-23T20:53:47.157Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/data-transports/azure/event-hub.md": {
-      "hash": "dfd6778031e46c5f2d0a99f5f5353afdd63e85b53ebc4c7098ccd0a67f1af342",
+      "hash": "8b36327ed4f580c97b4de0d2804c06a29e0e2de18d837b10551c160aa7f8ce8c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:02.943Z",
+      "checked_at": "2026-11-23T20:53:48.158Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/supported-logs/okta.md": {
-      "hash": "de957616ddf1df9d839fd5fc88c720c82f0064e0de031ad600bf5e9f4a5a44a5",
+      "hash": "ff9988aa0bd7143054923d0e57733617cf86e0d8f4f5a68b36a37d3ad8cf9b5f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:03.942Z",
+      "checked_at": "2026-11-23T20:53:49.159Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/supported-logs/microsoftgraph.md": {
-      "hash": "5ddedc26b50e07ddfea7f399f8a3071127fdadfa82c9b2fa5620b9481afc925a",
+      "hash": "f8d6390d9f8bb8a47fbcf21026efd37a26f51d84564040a1b3f7c24a0d5e7b0b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:04.942Z",
+      "checked_at": "2026-11-23T20:53:50.160Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/supported-logs/github.md": {
-      "hash": "cca203f50bff58150697fd91326c885ae5aa2f4e3d2feeb300649c274df3cb8e",
+      "hash": "69fd172ecc2641f2db804e504ec7b9aee7b8b170fe95d1228acf346855e66ede",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:05.943Z",
+      "checked_at": "2026-11-23T20:53:51.160Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/data-onboarding/supported-logs/wiz/api.md": {
-      "hash": "9ee101ab3075bcb47cb43130e1bf09065c9c6d01857a9faffd506ac280929b3c",
+      "hash": "e9a78982a90805d9a60c1bea1c98af65252a91ea616ecc382a4f79c7fb711211",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:06.944Z",
+      "checked_at": "2026-11-23T20:53:52.160Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.panther.com/panther-developer-workflows/api/graphql/token-rotation.md": {
-      "hash": "5646a5b196b1afa6345b7bae1b5e1ebe4dd11f41760ba8dd149f32b0366ef91b",
+      "hash": "ccb86d9a0221c120c82aacd0c2881708be9abc211c9b3c85335db8593c7a0363",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:07.944Z",
+      "checked_at": "2026-11-23T20:53:53.161Z",
       "quotes_found": 0,
       "quotes_total": 0
     },
     "https://docs.panther.com/system-configuration/rbac.md": {
-      "hash": "f6f7ca7b50da77160f1c44eb97ec87b4ba2999e420f827e92d7a034b386b3c25",
+      "hash": "19c477dba4182708cb6033aa3b49c92f20d6db490ffa3a0b1b1267e79ead4a47",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:12:08.944Z",
+      "checked_at": "2026-11-23T20:53:54.161Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
   },
   "last_assessment": {
-    "fingerprint": "6396b1b781c084737cf2bc0b09426d2985fa0a919d32893ed0b87160014a6890",
+    "fingerprint": "93bd03dc38584b6345768990c98e14f29c3200bac64c200cdf358023cc3df6d8",
     "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

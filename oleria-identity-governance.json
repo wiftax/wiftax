@@ -1,116 +1,116 @@
 {
   "card": "oleria-identity-governance",
-  "updated_at": "2026-11-16T19:17:10.073Z",
+  "updated_at": "2026-11-23T20:59:38.340Z",
   "urls": {
     "https://docs.oleria.com/developer-docs/api-reference/generate-token": {
-      "hash": "cc00d9f695830f6266586241c34441a2bde1d65b774ea3f3875b16d947e3fa11",
+      "hash": "2739351a1a61fb8518bfb3190ebc33535557a015ea8ad302ea5e2177692c6b9f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:01.158Z",
-      "quotes_found": 7,
+      "checked_at": "2026-11-23T20:52:38.204Z",
+      "quotes_found": 6,
       "quotes_total": 7
     },
     "https://docs.oleria.com/developer-docs/api-reference/overview": {
-      "hash": "70db2f6305cf8a1ab752be26cf81d442d2effa9b47b5936d30980dc211ce9a3a",
+      "hash": "4b3e51e17087c09a521a784de6f7552f10b091f3f4d9fa3092ad118dcae05bc6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:02.157Z",
+      "checked_at": "2026-11-23T20:52:39.204Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/aws-iam-and-s3": {
-      "hash": "269e30a8d02433890cb570ce16da83647106c14dc0bb67361c0141edf64956c5",
+      "hash": "f0b6b9cd890e304922761cb73e0740490524dd1c4f41e1d65ce52e7ec03865d8",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:03.158Z",
+      "checked_at": "2026-11-23T20:52:40.204Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/microsoft-entra-id": {
-      "hash": "d6ade6cad969f652e2c3a78c9dad7179863ded8cc7395548faf85e64757f48f1",
+      "hash": "aa3f8d3c7c7a1186f0b843b2db7155e4fa17520a39fba8dffbf958e3b398bb9d",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:04.158Z",
+      "checked_at": "2026-11-23T20:52:41.205Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/google-workspace": {
-      "hash": "8f5d721cd145486238b8ae15d70131ed6fdb8dc2dd11f1ece96d63b6b9f4adae",
+      "hash": "558f57a657df544d87d5d418139a4231f47f15489e6b480caa0dea23dd5a8d26",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:05.158Z",
+      "checked_at": "2026-11-23T20:52:42.206Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/github": {
-      "hash": "b15058c169ac89f08ebaf63f9eca31f0f0250f5f718b2cfb69923aaeea3e3ac2",
+      "hash": "cc7a27e65b8a582de8ff6b52b34da034f16810d48589237cb0c6ce7a38254138",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:06.159Z",
+      "checked_at": "2026-11-23T20:52:43.207Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/salesforce": {
-      "hash": "d41f644d98ce1beb0becedb4ad1aee2576c8ffd8e59b58583d0ae5f035111ce8",
+      "hash": "65c9c01dc0dcb34b89d16ae20f6cf24db75e1237e1fb3bb04628869aadb548e6",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:07.160Z",
+      "checked_at": "2026-11-23T20:52:44.208Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/gcp": {
-      "hash": "040f96b679b6c2b1de2c6c31b1be8885acf29e56ef6163e9254f5c9be23d02de",
+      "hash": "0a9db6fc27d42b53b832df84e23344f162943467912165c1129f7aea65d7bbde",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:08.161Z",
+      "checked_at": "2026-11-23T20:52:45.209Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/azure": {
-      "hash": "bb8961dcb204d4eeb8ee8837ac9936c0087876c6e8b2569fb49f688019ace0e9",
+      "hash": "2c435340c083db85295ca9f9c1951c886700f9bd1a8dbfea8b8bedd1e3923654",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:09.161Z",
+      "checked_at": "2026-11-23T20:52:46.210Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.oleria.com/integrations/okta": {
-      "hash": "00346f7444723c60a798583dc1840caa6b048c5281320d8b66c0fc883666f63c",
+      "hash": "d63c7293fca4cc4443fd3e6a68ec7b323b8a581bebf9c36dbe3e34fae030d07b",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:10.161Z",
+      "checked_at": "2026-11-23T20:52:47.211Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/integrations/slack": {
-      "hash": "64b8e534f69b057b1c58a85a473fecf2e823125f9307dd0a9af33b33dc76842f",
+      "hash": "93e013f40ba9dd9b0037891e9a23d6226dc0c6d0eae583c23493f75f4d5a46fd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:11.161Z",
+      "checked_at": "2026-11-23T20:52:48.211Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.oleria.com/api-reference/accounts/disable": {
-      "hash": "b367ca33963f6a8e5cef2cc2f472ae8ebd96b5c36d847f75e91fa1e4b9eb49c8",
+      "hash": "5a82a78cfbb268d312b43ddd7e810084ad0e469f649e18b5b10116e52cfc89d3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:11:12.162Z",
+      "checked_at": "2026-11-23T20:52:49.211Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }
   },
   "last_assessment": {
-    "fingerprint": "e6e78c3470d7770fea108800c235f0f07cd7c8874e5f452371eb401412e19d38",
+    "fingerprint": "ee4741786d33162e73b208bb9dc3a2451f034c8cbdf2a1ee51428cc820e45752",
     "outcome": "refresh",
-    "at": "2026-11-15T01:38:56.346Z",
-    "url": "https://github.com/wiftax/wiftax/pull/58"
+    "at": "2026-11-23T20:43:16.596Z",
+    "url": "https://github.com/wiftax/wiftax/pull/92"
   }
 }

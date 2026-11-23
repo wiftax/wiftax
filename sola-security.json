@@ -1,12 +1,12 @@
 {
   "card": "sola-security",
-  "updated_at": "2026-11-16T19:17:16.687Z",
+  "updated_at": "2026-11-23T20:59:49.347Z",
   "urls": {
     "https://docs.sola.security/getting-started/sola-ai/sola-mcp.md": {
-      "hash": "bf16ffba63198290fa20dae80b918dbd74f8a29dd17cc079904554f2f8f77dd4",
+      "hash": "e6e1db08dce65a943120d8294f2d7f6f085180d1ec3b13789c3aba2dd10dedfd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:02.823Z",
+      "checked_at": "2026-11-23T20:56:00.339Z",
       "quotes_found": 7,
       "quotes_total": 7
     },
@@ -14,103 +14,103 @@
       "hash": "f0375b47d69efdc8ab864fb7d188ffb836930d5e348d1c41672637072d9d636a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:03.355Z",
+      "checked_at": "2026-11-23T20:56:00.651Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/llms.txt": {
-      "hash": "c78d344fb1a4e454129338f25f8a604cabf59d74dc834ac51e284b731b523c61",
+      "hash": "e83679a4b2decad6d7aaaf72e3a8dc47e56959ff7ce48db154d9be51176935f5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:03.823Z",
+      "checked_at": "2026-11-23T20:56:01.340Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/aws.md": {
-      "hash": "38ee68632042576f52c0e764d6cb5adc4743b0d8630ed31f118c7add1549f55c",
+      "hash": "aa6d8424212c8e16ff3d127ee90d26ca2e66bf48f6170817e7c80a6889d16989",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:04.824Z",
+      "checked_at": "2026-11-23T20:56:02.340Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://docs.sola.security/integrations/data-sources/gcp.md": {
-      "hash": "e9a65e15e0fb574162428b2951dc9b8002b39c128555fd1fbe5e97b468fb6bf4",
+      "hash": "b5fe5273b1ffcd3a96071dd752bd5794ad87e06b931597493491d40a05fc157c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:05.825Z",
+      "checked_at": "2026-11-23T20:56:03.340Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/azure.md": {
-      "hash": "7ca557f6b023c6c399ef24f73c577f716ca34781645e6a6f420f336fca8658a0",
+      "hash": "387e191947ad3d5924715e89e26d1f7bd2eff752c43efbdb7a70ac3c94253816",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:06.825Z",
+      "checked_at": "2026-11-23T20:56:04.341Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/entra-id.md": {
-      "hash": "ba02b47a36d1faf827d0c94dbe2cf74dc795fb67a820d3ab068c5e5d2c7f9925",
+      "hash": "b4d6fe0ccf4ca01633c1bd484592f7540f195af3db019f7b75d89ec96635d095",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:07.825Z",
+      "checked_at": "2026-11-23T20:56:05.341Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/google-workspace.md": {
-      "hash": "f6c8744f392386e71bda1db97e673a23c63485b24e22a56bbb57f5cd54e57ebc",
+      "hash": "3e8e34627461266906a88562e9edecb9489a92efe8ea51751231a09c32fc7b7f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:08.825Z",
+      "checked_at": "2026-11-23T20:56:06.342Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/okta.md": {
-      "hash": "2dbe5a6ec7d40608a179b2254f562b654de3c5c98b042949a2f5f227b843a2e9",
+      "hash": "1a289dc0cbb89f61f1da5bb1cba85e67fc4e33ae828222dd391a8aa3df7c1586",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:09.825Z",
+      "checked_at": "2026-11-23T20:56:07.342Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/github.md": {
-      "hash": "67ba65616a13de38d6264ee3969c7811e63cd1329828a055210346d3eeae2b21",
+      "hash": "5ea3fbc0e13c9f992df2d03f65ae947d350bc512061f55032ee46a78ae1e1f96",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:10.825Z",
+      "checked_at": "2026-11-23T20:56:08.342Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/slack.md": {
-      "hash": "78dffb5c5a4732b8f9c72467c80a10c6a1e6330075c5fddb38607db15b728383",
+      "hash": "5cd3e1eedc03f0eacdc52b8d92a2f0e615e48e9b9037c960ac66a7b75820c57f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:11.825Z",
+      "checked_at": "2026-11-23T20:56:09.342Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/integrations/data-sources/salesforce.md": {
-      "hash": "43c8f9d85b34d07ac49ba8f994a5388010ddc3adec55b5ba72a2c6bac9a93601",
+      "hash": "46636cf799856457acd34780eeda0427591147afd9df5493ef0186867547182a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:12.825Z",
+      "checked_at": "2026-11-23T20:56:10.341Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.sola.security/system-management/settings.md": {
-      "hash": "c1c786580e9b287f43d88caaafc7007e3317a98e55f50501cdc0dc0e24717889",
+      "hash": "ac2906f5b147cb4562dffaed7afaa372b2b654fe3a59ec0642dc9f6cdcf2429c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:14:13.825Z",
+      "checked_at": "2026-11-23T20:56:11.342Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 1,
       "quotes_total": 1
     }

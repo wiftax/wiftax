@@ -1,20 +1,20 @@
 {
   "card": "zscaler-oneapi",
-  "updated_at": "2026-11-16T19:17:17.769Z",
+  "updated_at": "2026-11-23T20:59:50.998Z",
   "urls": {
     "https://automate.zscaler.com/assets/js/ca2fd3e7.fbadb37d.js": {
-      "hash": "79042f0e8d07f18d586b973f0ced66fc37e13daae5a83828ae91d88cd555ae22",
+      "hash": "48e2b54d6100e271e2af48d7a1c2645bdd0750e1f293eb73d6b61e1520e1e61e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:52.294Z",
-      "quotes_found": 5,
+      "checked_at": "2026-11-23T20:59:15.199Z",
+      "quotes_found": 0,
       "quotes_total": 5
     },
     "https://automate.zscaler.com/assets/js/15daa8db.25e2b5cd.js": {
       "hash": "76624402dcab4d638f59bd4fc349a80616fc6b587bd44bd2445a25e883b8657e",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:53.328Z",
+      "checked_at": "2026-11-23T20:59:16.199Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -22,7 +22,7 @@
       "hash": "e0301b498ba299997fef6724834f16b1322b01ee946be4a40b9463b1853980d7",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:52.407Z",
+      "checked_at": "2026-11-23T20:59:15.467Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -30,15 +30,15 @@
       "hash": "48468fa8914690fc67049fd22eee87d5f2135c318f02a16d975bfeb562102861",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:52.786Z",
+      "checked_at": "2026-11-23T20:59:15.809Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/zia/about-cloud-service-api-key&view_type=full&domain=help&_format=json": {
-      "hash": "613374db261902ae2f244b30518f3357221dc66bbe5998f3690494da5b948ef3",
+      "hash": "9e7f43609f1502df0828908792d057b86c8c42ce1fe74ee492d1de0155bc44e5",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:53.406Z",
+      "checked_at": "2026-11-23T20:59:16.467Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -46,23 +46,23 @@
       "hash": "4c97edd24185111e92acff48e99e657063d0b12905a87c0c99d41975a1357213",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:54.448Z",
+      "checked_at": "2026-11-23T20:59:17.468Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/zia/managing-oauth-2.0-authorization-servers&view_type=full&domain=help&_format=json": {
-      "hash": "3d2693891f62bf73c3cc13bc826b4286a8f9dae25a901f44c214c495845b9348",
+      "hash": "0e62553e52a4be77d6f37e17186cb5db2df1c436fd6f3edc6ee20d412816c056",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:55.449Z",
+      "checked_at": "2026-11-23T20:59:18.468Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/zia/about-oauth-2.0-authorization-servers&view_type=full&domain=help&_format=json": {
-      "hash": "a6d6c4a5fb8600231649752ea30a657cadff3dc0da86ef6e777ba1a95e2b6bf0",
+      "hash": "41afab51a54d85805782891feddd944cd264b1ff775360ffb44734e1949189a9",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:56.482Z",
+      "checked_at": "2026-11-23T20:59:19.468Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -70,7 +70,7 @@
       "hash": "982085c1a1cadbccfcb8495f11f4f8625196968734de83fad76036404ee6a72c",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:57.561Z",
+      "checked_at": "2026-11-23T20:59:20.468Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -78,39 +78,39 @@
       "hash": "9e48771a0a0070ea27befb776afd00a86f6c5cdbd7683266a5f625f0af1e9f05",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:58.561Z",
+      "checked_at": "2026-11-23T20:59:21.468Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/cloud-branch-connector/configuring-workload-discovery-service-microsoft-azure-accounts&view_type=full&domain=help&_format=json": {
-      "hash": "6e119b4665decc10ad40ba9e42395a7f949b6455dac932e1073e2853212f6ce2",
+      "hash": "1bb368a450dca57795e436ad1dca4d6add95a6828817d1371f46cb80f1b452fe",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:59.561Z",
+      "checked_at": "2026-11-23T20:59:22.469Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/cloud-branch-connector/about-microsoft-azure-accounts&view_type=full&domain=help&_format=json": {
-      "hash": "19445c1fe4380e3c442fc05a5bb5beb93f69bd9f236ae3ec6a0e7d1b1c6006ab",
+      "hash": "23abd88bba5c8f7df2aa70589a0cd1341df41e51a802ea86a45e0e874fd8a776",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:00.562Z",
+      "checked_at": "2026-11-23T20:59:23.469Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/zia/integrating-microsoft-cloud-app-security&view_type=full&domain=help&_format=json": {
-      "hash": "943b7eec8f26dcc82e77fc7a01c001cdc93fb75f1756fd431681a6a95a16563e",
+      "hash": "c944a1d9050990f4a1d8d49336b8d3cbae5e071251f69edb1b78889d405fbc2f",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:01.563Z",
+      "checked_at": "2026-11-23T20:59:24.469Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://help.zscaler.com/zapi/fetch-data?url_alias=/zia/adding-cloud-nss-feeds-web-logs&view_type=full&domain=help&_format=json": {
-      "hash": "7f9bfffebe0abdebdcee0f062d639b59d91e068a356b0de7d7b55453c0884ed4",
+      "hash": "b722813f57461a3fd5fa52b2eda1d0729eddde0cd5e70caf9ebd36e8d11a229a",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:02.564Z",
+      "checked_at": "2026-11-23T20:59:25.469Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -118,7 +118,7 @@
       "hash": "a4d1dbbc4146343d244eabcc87d4a514ace1cb99e9fc10c72523498946f8e6fd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:03.565Z",
+      "checked_at": "2026-11-23T20:59:26.470Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -126,7 +126,7 @@
       "hash": "a30af91711d62e87efef8d1049ed959a0014d87662ea17433e5f156e2c7679e3",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:04.565Z",
+      "checked_at": "2026-11-23T20:59:27.470Z",
       "quotes_found": 3,
       "quotes_total": 3
     },
@@ -134,7 +134,7 @@
       "hash": "606271179155358e11ce226410ce5422ca432cda446b6a4bb486056de60356e0",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:58.674Z",
+      "checked_at": "2026-11-23T20:59:20.799Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -142,7 +142,7 @@
       "hash": "9474cf380f9a3ce87a7ddee2739ed8787b93ad6a4991acdbf351face82adce79",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:16:59.674Z",
+      "checked_at": "2026-11-23T20:59:21.799Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
@@ -150,7 +150,7 @@
       "hash": "2a545b4a7df76b10bb34cd7b751a2014c5acd05cced9b5b6a09ae0ede4cad0bd",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:05.564Z",
+      "checked_at": "2026-11-23T20:59:28.470Z",
       "quotes_found": 2,
       "quotes_total": 2
     },
@@ -158,17 +158,22 @@
       "hash": "9ee2041768771ff1c2c3e2c785461d2210849f061ce711b627f4ecdd92e11843",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:17:00.675Z",
+      "checked_at": "2026-11-23T20:59:22.799Z",
       "quotes_found": 1,
       "quotes_total": 1
     },
     "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
-      "hash": "2c72696bc6315a75aeac411bc96f1d3eabd2459f73fd8d5409f717b08f5f6c7e",
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
       "status": 200,
       "ok": true,
-      "checked_at": "2026-11-16T19:03:46.284Z",
+      "checked_at": "2026-11-23T20:43:27.061Z",
       "quotes_found": 0,
       "quotes_total": 0
     }
+  },
+  "last_assessment": {
+    "fingerprint": "4a92efc592e633e602e8043dc267bd4b20c7b81f08cd925bc498e373669aece7",
+    "outcome": "no_change",
+    "at": "2026-11-23T20:43:16.596Z"
   }
 }

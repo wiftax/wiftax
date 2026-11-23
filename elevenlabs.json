@@ -1,0 +1,110 @@
+{
+  "card": "elevenlabs",
+  "updated_at": "2026-11-23T20:59:32.130Z",
+  "urls": {
+    "https://elevenlabs.io/docs/api-reference/authentication.md": {
+      "hash": "f42992149b4cc2ca3870c56c8feebbf2bca1723ab83c216cfda03cc3494fba82",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:02.418Z",
+      "quotes_found": 2,
+      "quotes_total": 2
+    },
+    "https://elevenlabs.io/docs/overview/administration/workspaces/api-keys.md": {
+      "hash": "e066ed50493efef8c8732b7a38fb34a5abbb191503895b88a826de92b0161aeb",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:03.419Z",
+      "quotes_found": 6,
+      "quotes_total": 6
+    },
+    "https://elevenlabs.io/docs/overview/administration/workspaces/audit-logs.md": {
+      "hash": "e46a37de8a92dd482cf69c8c5ff34ee7689ea924af7ea26d01facddc0a9bff28",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:04.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/eleven-agents/customization/integrations/slack.md": {
+      "hash": "6f0a9005b0d09370a28a8353abb43abf722f8d02aef68b455d86f7016fdcea35",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:05.421Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/eleven-agents/customization/integrations/google_drive.md": {
+      "hash": "55882c9a850278a76fcdb8f5e77e1c1fbf9e9d054908a6d02794b20e8f9f3344",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:06.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/eleven-agents/customization/integrations/zendesk.md": {
+      "hash": "5ebefee0195efb3b827fc72022efb7518df629cd9dc2e3c29ac9957caa473c54",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:07.421Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/native-integration.md": {
+      "hash": "45c017fdf40270a48865a459ac55e9fed5f6158801db8c71c88b8cc6aa33368a",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:08.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/eleven-agents/customization/integrations/salesforce.md": {
+      "hash": "caa54eaa6678c3505a103271bb8cc46983fe94b9b3b9a4ad2ba4345f71794f15",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:09.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/eleven-agents/customization/tools/webhook-tools.md": {
+      "hash": "6390278929349c7f739467ec12f436ba759534814eb6462dd5983ec2f2f18358",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:10.420Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/create.md": {
+      "hash": "35cebea201fb56bc695ac4f8800bbbb3af0204f890c96fa02376f99f76f894cc",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:11.420Z",
+      "quotes_found": 3,
+      "quotes_total": 3
+    },
+    "https://elevenlabs.io/docs/overview/administration/workspaces/service-accounts.md": {
+      "hash": "fc2aeb59b6a51331bb63a581093e4611f193ee507dc4894e8bdadf5046d3aa03",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:12.421Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/list.md": {
+      "hash": "fad3af0e43af3b59875cd877352457d606087a59f807232eda1f9a2ece29a1d9",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:49:13.421Z",
+      "quotes_found": 1,
+      "quotes_total": 1
+    },
+    "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns": {
+      "hash": "e08fe4e1091b2faf08b19caef26d0f1e1e7275f074fecec59dae96df5ec29e50",
+      "status": 200,
+      "ok": true,
+      "checked_at": "2026-11-23T20:43:27.061Z",
+      "quotes_found": 0,
+      "quotes_total": 0
+    }
+  }
+}
