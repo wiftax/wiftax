@@ -34,8 +34,8 @@ surfaces:
         checked_by: erikng
         quote: "The MCP server authenticates with the same API key as the REST API."
       - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Keys are organization-level, so one key works across all of your organization's accounts."
     notes: >-
       The authentication page lists the API key as the only method. No OAuth client, OIDC or
@@ -65,9 +65,9 @@ surfaces:
         checked_by: erikng
         quote: "you will need to input this secret in Rewind App to link your Okta’s instance."
       - url: https://help.rewind.com/api/v2/help_center/en-us/articles/49993169157531.json
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "This token is used specifically for Jira Automation access and needs to be refreshed every 365 days, which is the longest expiration period Atlassian allows."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "This token is used specifically for Jira Automation access, so you'll need to repeat these steps every 365 days to keep your Jira Automation backups running."
       - url: https://help.rewind.com/api/v2/help_center/en-us/articles/28786333674139.json
         checked_on: 2026-11-18
         checked_by: erikng
@@ -83,8 +83,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Keys expire after 90 days by default, and you can choose a longer period up to one year."
       - url: https://docs.developer.rewind.com/authentication
         checked_on: 2026-11-18
@@ -109,8 +109,8 @@ hygiene:
         checked_by: erikng
         quote: "API keys inherit the permissions of the user who created them and provide access to:"
       - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "A key is tied to the role of the person who created it."
     notes: >-
       A key covers the whole organization and inherits the owner or admin who created it. There are
@@ -119,9 +119,9 @@ hygiene:
     pass: true
     evidence:
       - url: https://help.rewind.com/api/v2/help_center/en-us/articles/55034361423771.json
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "The API Keys page lists each key's name, creation date, expiry date, and when it was last used."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "page lists each key's name, creation date, expiry date, and when it was last used."
   leak_revocation:
     pass: false
     evidence:

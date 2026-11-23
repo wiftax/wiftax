@@ -19,16 +19,16 @@ surfaces:
       usually lasts one hour.
     evidence:
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "The Oleria API uses the OAuth 2.0 Client Credentials grant: you exchange a client_id and client_secret for a short-lived JWT access token, then pass that token as a Bearer credential on every API call."
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Lifetime of the token in seconds (typically 3600, i.e. one hour)."
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Generate OAuth client credentials from the Oleria web app. The client secret is shown once, on the create (or rotate) success screen."
       - url: https://docs.oleria.com/developer-docs/api-reference/overview
         checked_on: 2026-10-13
@@ -97,8 +97,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Select Create API Key. Enter a descriptive name for your integration (for example, BI nightly export or internal access-graph viewer) and select Create."
     notes: >-
       Creating a key asks only for a name. No expiry, default lifetime or org policy is documented.
@@ -106,17 +106,17 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Go to Settings -> Manage API Keys and open the key you want to rotate."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Go to Platform -> API and open the key you want to rotate."
     notes: >-
       Keys are managed only in the web app. The API has no key endpoints.
   scoping:
     pass: false
     evidence:
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Contact Customer Success to confirm the credential has the right permissions."
       - url: https://docs.oleria.com/api-reference/accounts/disable
         checked_on: 2026-10-13
@@ -129,8 +129,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.oleria.com/developer-docs/api-reference/generate-token
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Open the new key from the list. The details panel shows the values you need besides the secret:"
     notes: >-
       No last-used time is documented.

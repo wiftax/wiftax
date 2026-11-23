@@ -13,7 +13,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | BeyondTrust | [Password Safe](data/products/beyondtrust-password-safe.yaml) | 🟠 C | 💀 F | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Cisco | [Catalyst SD-WAN Manager](data/products/cisco-catalyst-sd-wan-manager.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Cisco | [Meraki Dashboard](data/products/cisco-meraki-dashboard.yaml) | 🟠 C | 💀 F | `✗ ✓ ✗ ✗ ✓` | listed | 2026-11-18 |
-| **💀 F** | ClearFeed | [Helpdesk](data/products/clearfeed.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | ClearFeed | [Helpdesk](data/products/clearfeed.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-23 |
 | **💀 F** | CoreWeave | [Cloud API](data/products/coreweave-api.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **💀 F** | CoreWeave | [Forge](data/products/coreweave-forge.yaml) | 💀 F | — | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-16 |
 | **💀 F** | Crusoe | [Cloud](data/products/crusoe-cloud.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
@@ -22,7 +22,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Cyera | [Data Security Platform](data/products/cyera-data-security.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Denvr Dataworks | [AI Cloud](data/products/denvr-cloud.yaml) | 💀 F | 💀 F | `✓ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Descope | [Platform](data/products/descope-agentic-identity-hub.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | DigitalOcean | [Paperspace](data/products/paperspace.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-23 |
 | **💀 F** | Duo | [Admin API](data/products/cisco-duo-admin-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Elastic | [Elastic Agent and Fleet](data/products/elastic-agent-fleet.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **💀 F** | Elastic | [Cloud API](data/products/elastic-cloud-api.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-14 |
@@ -35,17 +35,17 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Freshworks | [Freshdesk](data/products/freshworks-freshdesk.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Genesis Cloud | [Platform](data/products/genesis-cloud.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Google | [Threat Intelligence](data/products/google-threat-intelligence.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
-| **💀 F** | Granola | [Granola](data/products/granola.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Granola | [Granola](data/products/granola.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **💀 F** | HackerOne | [Platform](data/products/hackerone.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Hot Aisle | [GPU Cloud](data/products/hot-aisle.yaml) | 💀 F | — | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Hyperbolic | [GPU Cloud and Inference API](data/products/hyperbolic.yaml) | 💀 F | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Island | [Enterprise Browser](data/products/island-enterprise-browser.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
-| **💀 F** | Kentik | [Platform](data/products/kentik-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-18 |
+| **💀 F** | Kentik | [Platform](data/products/kentik-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-23 |
 | **💀 F** | Kisi | [Access Control](data/products/kisi.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-11-18 |
-| **💀 F** | KnowBe4 | [KSAT](data/products/knowbe4-ksat.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | KnowBe4 | [KSAT](data/products/knowbe4-ksat.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **💀 F** | Kyriba | [Platform](data/products/kyriba.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Lumos | [Identity Platform](data/products/lumos-identity-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
-| **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
+| **💀 F** | Material Security | [Platform](data/products/material-security.yaml) | 💀 F | 🟡 B | `✓ ✗ ✓ ✗ ✗` | listed | 2026-11-23 |
 | **💀 F** | Metronome | [Billing Platform](data/products/metronome.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Nebius | [Token Factory](data/products/nebius-ai-studio.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | NetBox Labs | [NetBox Cloud](data/products/netbox-labs-netbox-cloud.yaml) | 🔴 D | 💀 F | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
@@ -59,9 +59,9 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Perplexity | [Enterprise](data/products/perplexity-enterprise.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Proofpoint | [Targeted Attack Protection](data/products/proofpoint-tap.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Push Security | [Platform](data/products/push-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **💀 F** | Rapid7 | [Command Platform](data/products/rapid7-insight-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | Rapid7 | [Command Platform](data/products/rapid7-insight-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-23 |
 | **💀 F** | Reco | [Dynamic SaaS Security](data/products/reco-saas-security.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-13 |
-| **💀 F** | Rewind | [Backups](data/products/rewind-backups.yaml) | 💀 F | 🟡 B | `✓ ✗ ✗ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Rewind | [Backups](data/products/rewind-backups.yaml) | 💀 F | 🟡 B | `✓ ✗ ✗ ✓ ✗` | listed | 2026-11-23 |
 | **💀 F** | Rippling | [Platform](data/products/rippling-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **💀 F** | Secoda | [Platform](data/products/secoda.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Semgrep | [AppSec Platform](data/products/semgrep-appsec-platform.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
@@ -70,40 +70,40 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **💀 F** | Splunk | [Cloud Platform](data/products/splunk-cloud-platform.yaml) | 💀 F | 🟡 B | `✗ ✓ ✗ ✓ ✗` | listed | 2026-10-22 |
 | **💀 F** | StrongDM | [API](data/products/strongdm.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Sysdig | [Sysdig Secure](data/products/sysdig-secure.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
-| **💀 F** | TensorWave | [GPU Cloud](data/products/tensorwave.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-20 |
-| **💀 F** | Tines | [Platform](data/products/tines.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-10-22 |
+| **💀 F** | TensorWave | [GPU Cloud](data/products/tensorwave.yaml) | 💀 F | 💀 F | `✗ ✗ ✗ ✗ ✗` | listed · docs not public | 2026-11-23 |
+| **💀 F** | Tines | [Platform](data/products/tines.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-23 |
 | **💀 F** | Together AI | [Platform](data/products/together-ai.yaml) | 💀 F | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Twilio | [API](data/products/twilio-api.yaml) | 🟠 C | 💀 F | `✗ ✓ ✓ ✗ ✓` | listed | 2026-10-05 |
 | **💀 F** | Vast.ai | [GPU Cloud](data/products/vast-ai.yaml) | 💀 F | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **💀 F** | Voltage Park | [GPU Cloud](data/products/voltage-park.yaml) | 💀 F | — | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-22 |
 | **💀 F** | Vultr | [Object Storage](data/products/vultr-object-storage.yaml) | 💀 F | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-10-22 |
-| **💀 F** | Webflow | [Platform](data/products/webflow.yaml) | 💀 F | 🟢 A | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **💀 F** | Webflow | [Platform](data/products/webflow.yaml) | 💀 F | 🟢 A | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **💀 F** | Workiva | [Platform](data/products/workiva-platform.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **💀 F** | Zenity | [AI Agent Security](data/products/zenity-ai-agent-security.yaml) | 🟠 C | 💀 F | `✗ ✗ ✓ ✗ ✗` | listed · docs not public | 2026-11-20 |
 | **💀 F** | Zluri | [Identity Governance](data/products/zluri-identity-governance.yaml) | 💀 F | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-10-13 |
 | **🔴 D** | 1Password | [Secrets Automation](data/products/1password-secrets-automation.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
+| **🔴 D** | Baseten | [Platform](data/products/baseten.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **🔴 D** | Check Point | [Infinity Portal and CloudGuard](data/products/checkpoint-infinity.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Cloudflare | [API](data/products/cloudflare-api.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | Cognition | [Devin](data/products/cognition-devin.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
-| **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🔴 D** | Delinea | [Secret Server Cloud](data/products/delinea-secret-server.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🔴 D** | DigitalOcean | [API](data/products/digitalocean-api.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
+| **🔴 D** | CyberArk | [Secrets Manager SaaS](data/products/cyberark-conjur-cloud.yaml) | 🟢 A | 🔴 D | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-23 |
+| **🔴 D** | Delinea | [Secret Server Cloud](data/products/delinea-secret-server.yaml) | 🟠 C | 🔴 D | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
+| **🔴 D** | DigitalOcean | [API](data/products/digitalocean-api.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-23 |
 | **🔴 D** | ElevenLabs | [Platform](data/products/elevenlabs.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✗ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Figma | [Platform](data/products/figma.yaml) | 🔴 D | 🟢 A | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
-| **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | GitGuardian | [Platform](data/products/gitguardian-platform.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **🔴 D** | GitLab | [API and CI/CD](data/products/gitlab-api.yaml) | 🔴 D | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
 | **🔴 D** | Lambda | [Cloud](data/products/lambda-cloud.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Modal | [Platform](data/products/modal.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Notion | [Notion](data/products/notion.yaml) | 🔴 D | 🟡 B | `✓ ✗ ✓ ✓ ✓` | listed | 2026-11-18 |
-| **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
+| **🔴 D** | Opal Security | [Platform](data/products/opal-security.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **🔴 D** | OpenAI | [ChatGPT Enterprise](data/products/openai-chatgpt-enterprise.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-18 |
 | **🔴 D** | Oracle | [NetSuite](data/products/oracle-netsuite.yaml) | 🟠 C | 🔴 D | `✓ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
-| **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
+| **🔴 D** | Panther | [SIEM](data/products/panther-siem.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **🔴 D** | Runpod | [GPU Cloud](data/products/runpod.yaml) | 🔴 D | 🟡 B | `✗ ✗ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🔴 D** | SF Compute | [GPU Cloud](data/products/sf-compute.yaml) | 🔴 D | — | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
 | **🔴 D** | Socket | [Platform](data/products/socket-dev.yaml) | 🔴 D | 🟢 A | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🔴 D** | Statsig | [Platform](data/products/statsig.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
+| **🔴 D** | Statsig | [Platform](data/products/statsig.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
 | **🔴 D** | Temporal | [Platform](data/products/temporal.yaml) | 🔴 D | 🟢 A | `✓ ✓ ✓ ✗ ✓` | listed | 2026-10-20 |
 | **🔴 D** | Tenable | [Vulnerability Management](data/products/tenable-vulnerability-management.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🔴 D** | Trend Micro | [Vision One](data/products/trendmicro-vision-one.yaml) | 🔴 D | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-16 |
@@ -118,7 +118,7 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Coupa | [Core Platform](data/products/coupa-core-platform.yaml) | 🟠 C | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | CrowdStrike | [Falcon API](data/products/crowdstrike-falcon-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | CyberArk | [Identity Security Platform](data/products/cyberark-identity-platform.yaml) | 🟠 C | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | DoControl | [Platform](data/products/docontrol.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | DoControl | [Platform](data/products/docontrol.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-23 |
 | **🟠 C** | Docusign | [eSignature](data/products/docusign-esignature.yaml) | 🟠 C | 🟠 C | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Drata | [Platform](data/products/drata.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟠 C** | Elastic | [Kibana](data/products/kibana.yaml) | 🟢 A | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
@@ -132,13 +132,13 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟠 C** | Lucid | [Visual Collaboration Suite](data/products/lucid-suite.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Monte Carlo | [Data Observability](data/products/monte-carlo.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | NinjaOne | [Platform](data/products/ninjaone-platform.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
-| **🟠 C** | Okta | [Management API](data/products/okta-management-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
-| **🟠 C** | Oleria | [Adaptive Identity Governance](data/products/oleria-identity-governance.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-15 |
+| **🟠 C** | Okta | [Management API](data/products/okta-management-api.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-23 |
+| **🟠 C** | Oleria | [Adaptive Identity Governance](data/products/oleria-identity-governance.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-23 |
 | **🟠 C** | Outreach | [Outreach](data/products/outreach.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | PagerDuty | [Operations Cloud](data/products/pagerduty-operations-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✗` | listed | 2026-11-18 |
 | **🟠 C** | Palo Alto Networks | [Prisma Cloud](data/products/paloalto-prisma-cloud.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Ping Identity | [PingOne](data/products/pingone-platform.yaml) | 🟠 C | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
-| **🟠 C** | Pure Storage | [Pure1](data/products/pure-storage-pure1.yaml) | 🟠 C | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-18 |
+| **🟠 C** | Ping Identity | [PingOne](data/products/pingone-platform.yaml) | 🟠 C | 🟠 C | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-23 |
+| **🟠 C** | Pure Storage | [Pure1](data/products/pure-storage-pure1.yaml) | 🟠 C | — | `✗ ✗ ✗ ✗ ✗` | listed | 2026-11-23 |
 | **🟠 C** | Qualys | [Cloud Platform](data/products/qualys-cloud-platform.yaml) | 🟠 C | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
 | **🟠 C** | Ramp | [Developer API](data/products/ramp-developer-api.yaml) | 🟠 C | 🟡 B | `✗ ✗ ✓ ✗ ✓` | listed | 2026-11-18 |
 | **🟠 C** | Rubrik | [Security Cloud](data/products/rubrik-security-cloud.yaml) | 🟠 C | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-18 |
@@ -161,20 +161,20 @@ Hygiene columns: expiry · rotation API · scoping · last-used · leak revocati
 | **🟡 B** | Britive | [Cloud PAM](data/products/britive-cloud-pam.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | C1 | [Identity Platform](data/products/c1-identity-platform.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✓ ✗` | listed | 2026-10-13 |
 | **🟡 B** | Datadog | [API](data/products/datadog-api.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-09-16 |
-| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-16 |
+| **🟡 B** | Doppler | [SecretOps Platform](data/products/doppler-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-23 |
 | **🟡 B** | Elastic | [Elasticsearch](data/products/elasticsearch.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
-| **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
+| **🟡 B** | Flagsmith | [Platform](data/products/flagsmith.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-23 |
 | **🟡 B** | HashiCorp | [Vault](data/products/hashicorp-vault.yaml) | 🟢 A | 🟡 B | `✓ ✓ ✓ ✗ ✗` | listed | 2026-09-16 |
 | **🟡 B** | Infisical | [Cloud](data/products/infisical-secrets.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Keycard | [Agent Identity](data/products/keycard-agent-identity.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Nebius | [AI Cloud](data/products/nebius-ai-cloud.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-16 |
 | **🟡 B** | P0 Security | [Platform](data/products/p0-security.yaml) | 🟡 B | 🟡 B | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
 | **🟡 B** | Teleport | [Platform](data/products/teleport.yaml) | 🟢 A | 🟡 B | `✗ ✓ ✓ ✓ ✗` | listed | 2026-10-22 |
-| **🟢 A** | AWS | [IAM and STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
+| **🟢 A** | AWS | [IAM and STS](data/products/aws-iam.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✓ ✓` | listed | 2026-11-23 |
 | **🟢 A** | Chainguard | [Platform](data/products/chainguard-platform.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-11-15 |
 | **🟢 A** | CoreWeave | [Kubernetes Service](data/products/coreweave-cks.yaml) | 🟢 A | 🟢 A | `✓ ✗ ✗ ✗ ✗` | listed | 2026-10-05 |
 | **🟢 A** | CoreWeave | [AI Object Storage](data/products/coreweave-object-storage.yaml) | 🟢 A | — | `✗ ✓ ✗ ✗ ✗` | listed | 2026-11-15 |
-| **🟢 A** | Defakto | [Mint](data/products/defakto-mint.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-10-13 |
+| **🟢 A** | Defakto | [Mint](data/products/defakto-mint.yaml) | 🟢 A | 🟢 A | `✗ ✓ ✓ ✗ ✗` | listed | 2026-11-23 |
 | **🟢 A** | Google Cloud | [IAM](data/products/google-cloud-iam.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-11-15 |
 | **🟢 A** | Microsoft Azure | [Entra Workload ID](data/products/azure-entra-workload-identity.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✓ ✓` | listed | 2026-10-05 |
 | **🟢 A** | Nscale | [Kubernetes Service](data/products/nscale-nks.yaml) | 🟢 A | 🟢 A | `✓ ✓ ✓ ✗ ✗` | listed | 2026-10-22 |
@@ -819,9 +819,9 @@ To read or manage vault items, your code needs a static service account token or
 
 ### 🔴 D Baseten Platform
 
-Every Baseten call, from CI to inference, uses a static API key. Keys can now carry an expiry, but nothing accepts a federated token. Baseten is itself an OIDC issuer, so it pulls weights and images from your AWS, GCP and Hugging Face sources without keys. Azure, R2, CoreWeave and other registries take static secrets.
+Every Baseten call, from CI to inference, uses a static API key. Keys can carry an expiry. Federation into the API is only a Private Preview, so it does not count. Baseten is an OIDC issuer and pulls from AWS, GCP and Hugging Face without keys. Azure, R2, CoreWeave and other registries take static secrets.
 
-- **Inbound D:** A static API key, personal or team-owned. Short-lived sandbox and volume tokens exist, but they are minted from that key. No federation path exists.
+- **Inbound D:** A static API key, personal or team-owned. Short-lived sandbox and volume tokens exist, but they are minted from that key. Workload identity federation into the API is documented only as a Private Preview. Its setup page was not part of this review.
 - **Outbound B:** You trust Baseten's OIDC issuer from an AWS role, a GCP pool or Hugging Face. Baseten then pulls from S3, ECR, GCS, Artifact Registry and Hugging Face with short-lived tokens. Other sources need static secrets.
 - **Receipts:** [docs.baseten.co](https://docs.baseten.co/organization/api-keys.md), [docs.baseten.co](https://docs.baseten.co/deployment/ci-cd.md), [docs.baseten.co](https://docs.baseten.co/reference/ci/github-action.md), [raw.githubusercontent.com](https://raw.githubusercontent.com/basetenlabs/terraform-provider-baseten/main/README.md), [docs.baseten.co](https://docs.baseten.co/sandboxes/authentication.md), [docs.baseten.co](https://docs.baseten.co/reference/management-api/volumes/create-a-volume-access-token.md), [docs.baseten.co](https://docs.baseten.co/reference/cli/truss/auth.md), [docs.baseten.co](https://docs.baseten.co/organization/oidc.md), [docs.baseten.co](https://docs.baseten.co/organization/aws-assume-role.md), [docs.baseten.co](https://docs.baseten.co/development/model/bdn.md), [docs.baseten.co](https://docs.baseten.co/engines/performance-concepts/cloud-storage-deployment.md), [docs.baseten.co](https://docs.baseten.co/development/model/dependencies.md), [docs.baseten.co](https://docs.baseten.co/development/volumes/sync.md), [docs.baseten.co](https://docs.baseten.co/organization/audit-logs.md)
 

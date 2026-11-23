@@ -21,20 +21,20 @@ surfaces:
       The legacy option is a static SSWS token with its creator's privileges.
     evidence:
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "To mint access tokens that contain Okta scopes, the Client Credentials flow is the only flow supported with an OAuth 2.0 service app."
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The private_key_jwt client authentication method is the only supported method for OAuth service apps that want to get access tokens with Okta scopes."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "OAuth service apps that want to get access tokens with Okta scopes can use the private_key_jwt or spiffe_jwt client authentication method."
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "iss: The issuer of the token. This value must be the same as the client_id."
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Note: The lifetime for this token is fixed at one hour."
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta/main/
         checked_on: 2026-10-22
@@ -74,7 +74,9 @@ surfaces:
       hold. A hosted JWKS URL eases rotation and DPoP binds the token, but neither removes the key.
       Okta's token exchange only works within one tenant and cannot mint Okta API scopes. Okta for
       AI Agents also ends in a private-key assertion. Okta Privileged Access accepts GitHub Actions
-      and cloud tokens, but it is a separate product.
+      and cloud tokens, but it is a separate product. The service app guide now also lists a SPIFFE
+      JWT-SVID client authentication method. Its setup page has not been read for this card, so it
+      does not lift the grade yet.
   outbound:
     grade: B
     mechanism: >-
@@ -161,8 +163,8 @@ hygiene:
         checked_by: tehreet
         quote: "summary: Deactivate an OAuth 2.0 client JSON Web Key"
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "By hosting the keys in a URL, you can conveniently rotate the keys without having to update the app configuration every time."
       - url: https://raw.githubusercontent.com/okta/okta-management-openapi-spec/master/dist/current/management-minimal.yaml
         checked_on: 2026-10-22
@@ -175,8 +177,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Service apps with assigned admin roles are constrained to the permissions and resources that are included in the role."
       - url: https://raw.githubusercontent.com/okta/okta-management-openapi-spec/master/dist/current/management-minimal.yaml
         checked_on: 2026-10-22
@@ -208,8 +210,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Okta is not in GitHub's secret-scanning table, so leaked SSWS tokens are neither reported nor
       flagged.

@@ -1,192 +1,190 @@
-id: panther-siem
-vendor: Panther
-product: SIEM
-aliases: ["Panther Labs"]
-website: https://panther.com
-docs: https://docs.panther.com/panther-developer-workflows/api
-category: security
-status: listed
-summary: >-
-  To call Panther's APIs, PAT or Terraform, your code needs a static API token. There is no OIDC
-  login. Panther reaches into AWS and GCP without keys, but Azure sources and most SaaS pullers want
-  secrets you paste in.
-
+id: "panther-siem"
+vendor: "Panther"
+product: "SIEM"
+aliases:
+  - "Panther Labs"
+website: "https://panther.com"
+docs: "https://docs.panther.com/panther-developer-workflows/api"
+category: "security"
+status: "listed"
+summary: "To call Panther's APIs, PAT or Terraform, your code needs a static API token. There is no
+  OIDC login. Panther reaches into AWS and GCP without keys, but Azure sources and most SaaS pullers
+  want secrets you paste in."
 surfaces:
   inbound:
-    grade: D
-    mechanism: >-
-      A static API token in the X-API-Key header, created with its own permission list and an
-      optional IP allowlist. HTTP log sources take static shared secrets.
+    grade: "D"
+    mechanism: "A static API token in the X-API-Key header, created with its own permission list and an
+      optional IP allowlist. HTTP log sources take static shared secrets."
     evidence:
-      - url: https://docs.panther.com/panther-developer-workflows/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "API tokens are used to authenticate against and authorize access to Panther’s public API."
-      - url: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: '"securitySchemes":{"ApiKeyAuth":{"type":"apiKey","name":"X-API-Key","in":"header"}}'
-      - url: https://docs.panther.com/panther-developer-workflows/api/graphql.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: 'curl -H "X-API-Key: <API_KEY>" -d <INTROSPECTION_QUERY> <YOUR_PANTHER_API_URL>'
-      - url: https://docs.panther.com/panther-developer-workflows/detections-repo/pat/install-configure-and-authenticate-with-pat.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
+        quote: "\"securitySchemes\":{\"ApiKeyAuth\":{\"type\":\"apiKey\",\"name\":\"X-API-Key\",\"in\":\"he\
+          ader\"}}"
+      - url: "https://docs.panther.com/panther-developer-workflows/api/graphql.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
+        quote: "curl -H \"X-API-Key: <API_KEY>\" -d <INTROSPECTION_QUERY> <YOUR_PANTHER_API_URL>"
+      - url: "https://docs.panther.com/panther-developer-workflows/detections-repo/pat/install-configure-an\
+          d-authenticate-with-pat.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Most PAT commands require authentication against your Panther instance using an API token."
-      - url: https://docs.panther.com/panther-developer-workflows/terraform/s3.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/terraform/s3.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "token = var.panther_api_token"
-      - url: https://docs.panther.com/data-onboarding/data-transports/http.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/http.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "With bearer authentication, you define a bearer token value during source setup."
-    notes: >-
-      Every automation path uses the same static token: REST, GraphQL, PAT in CI and Terraform. The
-      docs describe no OIDC, cloud workload identity or token exchange, and tell you to store the
-      token as a CI secret. SAML and SCIM are for humans. The Workload Identity Federation Panther
-      documents is outbound, Panther calling into your GCP. Three of five hygiene checks pass, so D
-      rather than F.
+    notes: "Every automation path uses the same static token: REST, GraphQL, PAT in CI and Terraform.
+      The docs describe no OIDC, cloud workload identity or token exchange, and tell you to store
+      the token as a CI secret. SAML and SCIM are for humans. The Workload Identity Federation
+      Panther documents is outbound, Panther calling into your GCP. Three of five hygiene checks
+      pass, so D rather than F."
   outbound:
-    grade: B
-    mechanism: >-
-      Panther assumes an IAM role you create in AWS and uses Workload Identity Federation into GCP.
-      Azure and most SaaS pullers want client secrets, connection strings or API tokens.
+    grade: "B"
+    mechanism: "Panther assumes an IAM role you create in AWS and uses Workload Identity Federation into
+      GCP. Azure and most SaaS pullers want client secrets, connection strings or API tokens."
     evidence:
-      - url: https://docs.panther.com/data-onboarding/data-transports/aws/s3.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/aws/s3.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "To read objects from your source, Panther needs an AWS IAM role with certain permissions."
-      - url: https://docs.panther.com/data-onboarding/data-transports/aws/s3.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: '"arn:<aws-partition>:iam::<panther-master-account-id>:root"'
-      - url: https://docs.panther.com/data-onboarding/data-transports/aws/cloudwatch.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The CloudFormation stack will create an AWS IAM role with the minimum required permissions to read objects from your source."
-      - url: https://docs.panther.com/cloud-scanning.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/aws/s3.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
+        quote: "\"arn:<aws-partition>:iam::<panther-master-account-id>:root\""
+      - url: "https://docs.panther.com/data-onboarding/data-transports/aws/cloudwatch.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
+        quote: "The CloudFormation stack will create an AWS IAM role with the minimum required permissions
+          to read objects from your source."
+      - url: "https://docs.panther.com/cloud-scanning.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "This works by using an assumable IAM Role with ReadOnly permissions."
-      - url: https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md
-        checked_on: 2026-11-15
-        checked_by: sisyphus
-        quote: "You may use Common Expression Language (CEL) expressions to transform or combine attributes from the token issued by AWS."
-      - url: https://docs.panther.com/data-onboarding/data-transports/google/pubsub.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md"
+        checked_on: "2026-11-15"
+        checked_by: "sisyphus"
+        quote: "You may use Common Expression Language (CEL) expressions to transform or combine attributes
+          from the token issued by AWS."
+      - url: "https://docs.panther.com/data-onboarding/data-transports/google/pubsub.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Configure Workload Identity Federation with AWS by following the"
-      - url: https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md
-        checked_on: 2026-11-15
-        checked_by: sisyphus
-        quote: "for the service account, which will be used in Panther to authenticate to the GCP infrastructure."
-      - url: https://docs.panther.com/data-onboarding/supported-logs/googleworkspace.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/google/cloud-storage.md"
+        checked_on: "2026-11-15"
+        checked_by: "sisyphus"
+        quote: "for the service account, which will be used in Panther to authenticate to the GCP
+          infrastructure."
+      - url: "https://docs.panther.com/data-onboarding/supported-logs/googleworkspace.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Configure Workload Identity Federation with AWS by following the"
-      - url: https://docs.panther.com/data-onboarding/data-transports/azure/blob-storage.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/azure/blob-storage.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "The client secret value will be redacted in your terminal."
-      - url: https://docs.panther.com/data-onboarding/data-transports/azure/event-hub.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/data-transports/azure/event-hub.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Copy the **Primary connection string** value and store it in a secure location"
-      - url: https://docs.panther.com/data-onboarding/supported-logs/okta.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "In order for Panther to access the API you need to create a new API token or use an existing one."
-      - url: https://docs.panther.com/data-onboarding/supported-logs/microsoftgraph.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/supported-logs/okta.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
+        quote: "In order for Panther to access the API you need to create a new API token or use an existing
+          one."
+      - url: "https://docs.panther.com/data-onboarding/supported-logs/microsoftgraph.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "The Client Secret is hidden after you navigate away from this page"
-      - url: https://docs.panther.com/data-onboarding/supported-logs/github.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/supported-logs/github.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Generate a Personal Access Token** in GitHub and provide credentials to Panther"
-      - url: https://docs.panther.com/data-onboarding/supported-logs/wiz/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/data-onboarding/supported-logs/wiz/api.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "and store it in a secure location, as you will need it in a following step."
-    notes: >-
-      AWS log sources and Cloud Security Scanning assume a role you create. GCS, Pub/Sub and Google
-      Workspace use Workload Identity Federation from Panther's AWS identity. Azure Blob Storage
-      wants an Entra app client secret and Event Hub a connection string, with no federated option.
-      SaaS pullers such as Okta, Microsoft Graph and GitHub take API tokens or client secrets. The
-      AWS trust policy names your Panther instance's account with no External ID. That account is
-      your instance's own or yours, so the risk is lower than with a shared vendor account. B
-      because Azure has no keyless path.
-
+    notes: "AWS log sources and Cloud Security Scanning assume a role you create. GCS, Pub/Sub and
+      Google Workspace use Workload Identity Federation from Panther's AWS identity. Azure Blob
+      Storage wants an Entra app client secret and Event Hub a connection string, with no federated
+      option. SaaS pullers such as Okta, Microsoft Graph and GitHub take API tokens or client
+      secrets. The AWS trust policy names your Panther instance's account with no External ID. That
+      account is your instance's own or yours, so the risk is lower than with a shared vendor
+      account. B because Azure has no keyless path."
 hygiene:
   expiry:
     pass: false
     evidence:
-      - url: https://docs.panther.com/panther-developer-workflows/detections-repo/pat/install-configure-and-authenticate-with-pat.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/detections-repo/pat/install-configure-an\
+          d-authenticate-with-pat.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "The token does not expire."
-      - url: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Time when the API token will expire. Will be null if the token is non-expiring"
-    notes: >-
-      Tokens cannot be given an expiry when created or updated, and no org policy caps their
-      lifetime. The 90-day rotation advice is not enforced. Same call as elastic-cloud-api.
+    notes: "Tokens cannot be given an expiry when created or updated, and no org policy caps their
+      lifetime. The 90-day rotation advice is not enforced. Same call as elastic-cloud-api."
   rotation_api:
     pass: true
     evidence:
-      - url: https://docs.panther.com/panther-developer-workflows/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "You can rotate an API token in your Panther Console or by calling Panther's API itself."
-      - url: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "Rotate an api token. If self is provided the current token will be rotated"
-      - url: https://docs.panther.com/panther-developer-workflows/api/graphql/token-rotation.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-    notes: >-
-      The REST and GraphQL APIs can create, delete and rotate tokens. A token can rotate itself, and
-      the old value stops working at once.
+      - url: "https://docs.panther.com/panther-developer-workflows/api/graphql/token-rotation.md"
+        checked_on: "2026-11-23"
+        checked_by: "sisyphus"
+        quote: "You can rotate your Panther API token by calling the rotateAPIToken GraphQL API endpoint."
+    notes: "The REST and GraphQL APIs can create, delete and rotate tokens. A token can rotate itself,
+      and the old value stops working at once."
   scoping:
     pass: true
     evidence:
-      - url: https://docs.panther.com/panther-developer-workflows/api.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "If no IP addresses are specified, the token will be usable by any IP address."
-      - url: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The set of CIDR blocks that are allowed to use this API token. If empty, all CIDR blocks are allowed"
-      - url: https://docs.panther.com/system-configuration/rbac.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
+        quote: "The set of CIDR blocks that are allowed to use this API token. If empty, all CIDR blocks are
+          allowed"
+      - url: "https://docs.panther.com/system-configuration/rbac.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "All API tokens have full access to the data lake and Saved Searches."
-    notes: >-
-      Each token has its own permission list and optional IP allowlist, not tied to a user.
-      Data-lake access rules do not apply to tokens, so any token that can query sees all log data.
+    notes: "Each token has its own permission list and optional IP allowlist, not tied to a user.
+      Data-lake access rules do not apply to tokens, so any token that can query sees all log data."
   last_used:
     pass: true
     evidence:
-      - url: https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+      - url: "https://docs.panther.com/panther-developer-workflows/api/rest/api-tokens.md"
+        checked_on: "2026-10-22"
+        checked_by: "tehreet"
         quote: "The last time this token was used to authenticate"
-    notes: >-
-      The token list API returns a last-used timestamp.
+    notes: "The token list API returns a last-used timestamp."
   leak_revocation:
     pass: false
     evidence:
-      - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
-    notes: >-
-      Panther is not in GitHub's secret-scanning patterns, so a leaked token is neither detected nor
-      reported.
-
-notes: >-
-  Covers SaaS and Cloud Connected deployments, which share the API and tokens. Outbound moves to A with a keyless Azure option.
+      - url: "https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanni\
+          ng-patterns"
+        checked_on: "2026-11-23"
+        checked_by: "sisyphus"
+    notes: "Panther is not in GitHub's secret-scanning patterns, so a leaked token is neither detected
+      nor reported."
+notes: "Covers SaaS and Cloud Connected deployments, which share the API and tokens. Outbound moves
+  to A with a keyless Azure option."

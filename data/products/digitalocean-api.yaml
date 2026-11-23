@@ -149,8 +149,8 @@ hygiene:
         checked_by: tehreet
         quote: In the … menu for a token, you can rename, regenerate, or delete the token.
       - url: https://docs.digitalocean.com/reference/api/reference/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
       - url: https://docs.digitalocean.com/reference/api/reference/spaces-keys/index.html.md
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -185,7 +185,7 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.digitalocean.com/reference/api/create-personal-access-token/index.html.md
-        checked_on: 2026-11-15
+        checked_on: 2026-11-23
         checked_by: sisyphus
         quote: >-
           Personal access tokens table showing token name, number of scopes, creation time, last

@@ -97,8 +97,8 @@ hygiene:
         checked_by: sisyphus
         quote: You can revoke your API keys by clicking revoke in the console.
       - url: https://docs.digitalocean.com/reference/paperspace/api-reference/teams/index.html.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Keys are created and revoked only in the console. The API has no key endpoints.
   scoping:
@@ -133,8 +133,8 @@ hygiene:
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Paperspace is not in GitHub's secret-scanning patterns. The DigitalOcean entries cover
       DigitalOcean tokens, not Paperspace keys.
