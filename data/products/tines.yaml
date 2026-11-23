@@ -147,8 +147,8 @@ hygiene:
         checked_by: tehreet
         quote: "To generate an API key in Tines, use the Tines connect flow."
       - url: https://www.tines.com/stories/docs/api/llms.txt
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Keys are created in the UI. The API reference has no endpoint to create, list or revoke API
       keys.
@@ -185,8 +185,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Tines is not in GitHub's secret-scanning table, so a leaked API key is not reported to Tines.
 

@@ -45,13 +45,13 @@ surfaces:
       Oracle Cloud a cross-tenancy policy.
     evidence:
       - url: https://kb.kentik.com/docs/metadata-configuration-aws.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Replace the editor content with a trust policy that sets the Principal to Kentik’s AWS Account"
       - url: https://kb.kentik.com/docs/metadata-configuration-aws.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "In the `sts:ExternalId` field, you must replace `<your_Company_ID>` with your specific Kentik company ID"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "In the Condition block for sts:ExternalId, replace the placeholder with your Kentik Company ID (found in the portal under Settings » Licenses)."
       - url: https://kb.kentik.com/docs/kentik-for-gcp.md
         checked_on: 2026-11-18
         checked_by: erikng

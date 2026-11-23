@@ -26,12 +26,12 @@ surfaces:
         checked_by: erikng
         quote: "All requests must include a Console API key in the `STATSIG-API-KEY` header."
       - url: https://docs.statsig.com/access-management/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "There are three main types of API keys:"
       - url: https://docs.statsig.com/access-management/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Console API keys (Statsig CAPI keys) are the most powerful keys in your project."
       - url: https://docs.statsig.com/integrations/mcp/automation-examples.md
         checked_on: 2026-11-18
@@ -95,8 +95,8 @@ hygiene:
         checked_by: erikng
         quote: "| description | string | Yes | — | Constraints: max length: 1000 |"
       - url: https://docs.statsig.com/access-management/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Generate API keys in the Statsig Console by going to"
     notes: >-
       The create-key request takes a description, type, scopes and environments. No expiry field,
@@ -121,9 +121,9 @@ hygiene:
         checked_by: erikng
         quote: "Use a read-only API key for jobs that only read."
       - url: https://docs.statsig.com/access-management/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Use [target apps](https://docs.statsig.com/sdks/target-apps) with server secret keys and client keys to control which gates, configs, experiments, and layers each key can access."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Use target apps with server secret keys and client keys to control which gates, configs, experiments, and layers each key can access."
     notes: >-
       A narrow pass. A Console key can carry a read-only scope instead of read and write, and SDK
       keys can be limited to target apps. There is no per-resource limit on a Console key.

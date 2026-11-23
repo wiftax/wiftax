@@ -62,13 +62,13 @@ surfaces:
         checked_by: erikng
         quote: "Paste the API key copied from JumpCloud."
       - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/okta.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "should be entered on the Connection to Okta in ClearFeed."
       - url: https://docs.clearfeed.ai/clearfeed-help-center/integrations/okta.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Treat the PEM Private Key as a password."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Copy the PEM Private Key from here."
     notes: >-
       ClearFeed reaches into no cloud account, only other SaaS. Installed apps count as keyless.
       Graded B, not A, because several integrations still store a long-lived key. The Okta

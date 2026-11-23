@@ -88,25 +88,25 @@ surfaces:
       Certificate Manager username and password, kept as Secrets Manager secrets.
     evidence:
       - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "The issuer definition references the AWS access keys for an IAM user, that is, both the access key ID and the secret access key."
       - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "The IAM user must have the sts:GetFederationToken or sts:AssumeRole permission."
       - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "The access key ID and secret access key values must be stored in Secrets Manager, either as static secrets or synced from your PAM solution."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "The access key ID and secret access key values must be stored in Secrets Manager, either as managed secrets or synced from your PAM solution."
       - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-aws.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Optional: Provide an inline policy (AWS-policy-text) to limit the dynamic secret's permissions."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Optional: Under AWS inline policy, paste an AWS policy JSON to limit the secret's permissions."
       - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/operations/dynamic-secrets-gcp.htm
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Uses a key for account authentication, which must be stored in Secrets Manager, either as static secrets or synced from your PAM solution"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Uses a key for account authentication, which must be stored in Secrets Manager, either as managed secrets or synced from your PAM solution"
       - url: https://docs.cyberark.com/conjur-cloud/latest/en/content/developer/conjur_api_issuer-ephemerals.htm
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -187,8 +187,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       CyberArk and Conjur are not in GitHub's secret-scanning table. Conjur keys have no prefix,
       which makes them hard to detect.

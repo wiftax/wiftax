@@ -33,9 +33,9 @@ surfaces:
         checked_by: erikng
         quote: "Please note that Reporting APIs and User Event APIs do not share an API key."
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/4404258222099.json
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "You can create a Read Only access token or a Read/Write access token."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Then, KSAT will use the API token to authenticate your KnowBe4 account when making an API call or request."
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/115016090908.json
         checked_on: 2026-11-18
         checked_by: erikng
@@ -54,13 +54,17 @@ surfaces:
         checked_by: erikng
         quote: "To connect DMI to Google Workspace, you will need to add a client ID and scopes to your Google Workspace Admin console."
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675860417427.json
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "you'll need to create a read-only administrator account in Okta and create an API token"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "First, you'll need to create a read-only administrator account for Okta."
+      - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675860417427.json
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Make sure to copy this token and save it somewhere you can easily access later."
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6675763215379.json
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "You'll need this JSON file to set up the integration in Real-Time Coaching"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "The JSON file will automatically download to your device, and the private key will be saved"
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/6676053834131.json
         checked_on: 2026-11-18
         checked_by: erikng
@@ -75,8 +79,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Select the date when the API token should expire."
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/115016090908.json
         checked_on: 2026-11-18
@@ -89,8 +93,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "If you lose a token, you’ll need to create a new one."
     notes: >-
       Tokens are created, edited and deleted only in the Account Settings page of the console.
@@ -99,9 +103,9 @@ hygiene:
     pass: true
     evidence:
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Select whether you want your users to have Read Only access, or the ability to make edits with the Read/Write permission."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Select the product you'll use for this API token."
     notes: >-
       A Product API token is tied to one product and can be read-only. It is an account token,
       not a person's login. The Reporting API only pulls data.
@@ -109,8 +113,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://support.knowbe4.com/api/v2/help_center/en-us/articles/10495383627155.json
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "This column displayed the date that the API token was last used."
     notes: >-
       Only the Product API token list shows a last-used date. The Reporting API token list shows

@@ -15,8 +15,8 @@ surfaces:
     grade: F
     walled:
       url: https://docs.tensorwave.com/llms.txt
-      checked_on: 2026-11-20
-      checked_by: tehreet
+      checked_on: 2026-11-23
+      checked_by: sisyphus
     mechanism: >-
       Static credentials only: SSH keys and a kubeconfig downloaded by hand from the dashboard. No
       API, token, service account or federation is documented, nor how S3 keys are issued.
@@ -59,8 +59,8 @@ surfaces:
         checked_by: tehreet
         quote: S3 compatible object storage
       - url: https://docs.tensorwave.com/llms.txt
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Graded on the weakest path a workload must use, as on the CoreWeave cards. The docs have no
       API reference, token page, CLI or Terraform provider. Clusters appear to be provisioned
@@ -132,8 +132,8 @@ hygiene:
           Download your cluster's kubeconfig directly from the cluster header by clicking
           **Kubeconfig**.
       - url: https://docs.tensorwave.com/llms.txt
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       You fetch the kubeconfig by clicking a dashboard button, and no API mints or revokes
       credentials. SSH keys are rotated by hand on the node or in LDAP.
@@ -145,8 +145,8 @@ hygiene:
         checked_by: tehreet
         quote: All SSH keys you've initially provided will have root user access.
       - url: https://docs.tensorwave.com/user-and-team-management/managing-team-member-access.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       No machine identity is documented. The kubeconfig's scope is unstated, bare-metal keys are
       root, and Slurm keys belong to LDAP users. RBAC you set up yourself does not count.
@@ -163,8 +163,8 @@ hygiene:
     evidence:
       - url: >-
           https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       TensorWave is not in GitHub's secret-scanning table.
 

@@ -59,9 +59,9 @@ surfaces:
       Slack and Jira. GitLab, Bitbucket, Azure Repos and several registries want a token you create.
     evidence:
       - url: https://docs.gitguardian.com/internal-monitoring/integrate-sources/file-storage-integrations/aws-s3
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Rather than using long-lived credentials, GitGuardian's SaaS platform assumes a read-only IAM role in your own AWS account."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Rather than using long-lived credentials, GitGuardian assumes a read-only IAM role in your own AWS account."
       - url: https://docs.gitguardian.com/nhi-governance/aws-iam-integration
         checked_on: 2026-10-13
         checked_by: tehreet

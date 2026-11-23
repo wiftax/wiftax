@@ -44,12 +44,12 @@ surfaces:
         checked_by: tehreet
         quote: '"title" : "Must be USER, ORGANIZATION, USER_ENTERPRISE OR ADMIN_ENTERPRISE"'
       - url: https://docs.rapid7.com/insightcloudsec/api-documentation/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "API keys generated in the Rapid7 Command Platform (Insight Platform), including User API Keys and Organization API Keys, are not compatible with the Cloud Security (InsightCloudSec) API."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "API keys generated in the Rapid7 Command Platform (Insight Platform), including User API Keys and Organization API Keys, are not compatible with the Cloud Security API."
       - url: https://docs.rapid7.com/insightcloudsec/api-documentation/
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Once you have an API key, pass it in the Api-Key header with each request."
       - url: https://docs.rapid7.com/insightcloudsec/github-actions-integration/
         checked_on: 2026-10-22
@@ -92,9 +92,9 @@ surfaces:
         checked_by: tehreet
         quote: "In OCI, an API Key is an RSA key pair in PEM format used for signing API requests."
       - url: https://docs.rapid7.com/insightcloudsec/alibaba-cloud-onboarding/
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "Copy the Access Key ID and Access Key Secret for use in connecting the account in Cloud Security (InsightCloudSec)."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Copy the Access Key ID and Access Key Secret for use in connecting the account in Cloud Security."
       - url: https://docs.rapid7.com/insightidr/aws-cloudtrail-sqs/
         checked_on: 2026-10-22
         checked_by: tehreet
@@ -193,8 +193,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Rapid7 is not in GitHub's secret-scanning patterns, so leaked keys are neither detected nor
       reported.

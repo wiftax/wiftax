@@ -43,8 +43,8 @@ surfaces:
         checked_by: tehreet
         quote: "The session will always have an expiration less than or equal to the expiration of the OIDC token."
       - url: https://d.defakto.security/cli/spirlctl/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Either at least one --claim or --allow-any-bearer is required — they are mutually exclusive. Every listed claim must match exactly."
       - url: https://d.defakto.security/cli/spirlctl/login-logout
         checked_on: 2026-10-13
@@ -99,12 +99,12 @@ hygiene:
     pass: false
     evidence:
       - url: https://d.defakto.security/cli/spirlctl/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Initial key added successfully ID: sak-je6ybhhp53 Public Key: MCowBQYDK2VwAyEAmw4KSHa9tuYg8LhL/akNtl5PF6DgEYmgPjT/Cx25HLg= Enabled: true Created At: 2025-11-03T19:54:48Z"
       - url: https://d.defakto.security/cli/spirlctl/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Rotate keys regularly - Rotate service account keys every 90-180 days"
     notes: >-
       Service account keys and deployment keys have no expiry and no policy to force one. Rotation
@@ -117,12 +117,12 @@ hygiene:
         checked_by: tehreet
         quote: "Multiple keys per service account are supported to enable zero-downtime rotation: Once a new key is deployed and verified, the previous key can be disabled and deleted."
       - url: https://d.defakto.security/cli/spirlctl/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "spirlctl iam service-account key add --service-account ci-pipeline"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "defakto iam service-account key add --service-account ci-pipeline"
     notes: >-
-      spirlctl can add, disable and remove keys without a browser. There is no public REST API
-      reference, but the CLI and Terraform cover automation.
+      The defakto CLI can add, disable and remove keys without a browser. There is no public REST
+      API reference, but the CLI and Terraform cover automation.
   scoping:
     pass: true
     evidence:
@@ -141,8 +141,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://d.defakto.security/cli/spirlctl/service-accounts
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Service account Keys: ID Public Key Enabled Created At"
     notes: >-
       Keys show only ID, public key, status and creation time. Usage is traceable only through audit

@@ -27,8 +27,8 @@ surfaces:
         checked_by: erikng
         quote: "Use the **access token** to interact with the DoControl API."
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Click **Create**. A **refresh token** is shown, copy it and keep it in a safe place."
       - url: https://docs.docontrol.io/docontrol-user-guide/saas-data-monitoring/docontrol-mcp.md
         checked_on: 2026-11-18
@@ -75,8 +75,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "The **refresh token** is valid for 10 years."
     notes: >-
       Every refresh token gets a fixed ten-year life. The docs show no way to choose a shorter one
@@ -85,13 +85,13 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "You need at least **admin** permission to create API keys."
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Click **Add API key**."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Click Add API key."
     notes: >-
       The docs create keys only in the Settings page. No API call to create or revoke a key is
       documented. The GraphQL schema itself is behind a login and was not inspected.
@@ -99,12 +99,12 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "When you create an API key, you need to assign the relevant privilege level:"
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "**Viewer** - API key can only read data in DoControl, except for all data in Settings."
     notes: >-
       Each key gets its own privilege level, which can be lower than its creator's. The choice is
@@ -113,8 +113,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.docontrol.io/docontrol-user-guide/system-management/settings/api-keys.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "You can add up to 10 API keys."
     notes: The API keys page documents a name and a privilege level per key. It mentions no last-used time.
   leak_revocation:

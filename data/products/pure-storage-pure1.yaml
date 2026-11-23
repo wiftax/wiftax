@@ -22,24 +22,24 @@ surfaces:
       short-lived access token. The matching public key is registered as an application in Pure1.
     evidence:
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "The Pure1 REST API 1.latest offers one single form of authentication: OAuth 2.0 via the"
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "The token must be issued by a trusted identity provider which must be either a registered application in Pure1 or an enabled API client on the array."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "identity provider which must be either a registered application"
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Each token must also be signed with the private key that is paired with the API client's public key."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "also be signed with the private key that is paired with the"
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Exchanges an ID Token for an OAuth 2.0 access token."
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "The duration after which the access token will expire."
       - url: https://blog.everpuredata.com/products/introducing-the-pure1-rest-api/
         checked_on: 2026-11-18
@@ -61,8 +61,8 @@ surfaces:
         checked_by: erikng
         quote: "This is something we host, and all of your dial-home information gets fed into it."
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Provides information about FlashArray and FlashBlade appliances."
 
 hygiene:
@@ -84,8 +84,8 @@ hygiene:
         checked_by: erikng
         quote: "you must be an administrator in your Pure1 organization to be able to do this step."
       - url: https://static.pure1.purestorage.com/api-swagger/Pure1-1.latest.spec.yaml
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Handles authorization access to other API endpoints through OAuth 2.0 Token Exchange."
     notes: >-
       Keys are registered in the Pure1 web console by an administrator. The API spec has a token

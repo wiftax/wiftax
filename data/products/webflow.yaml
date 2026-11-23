@@ -26,12 +26,12 @@ surfaces:
         checked_by: erikng
         quote: "To access the Webflow API, you need to authenticate your requests using a bearer token, which must be included in the authorization header of each API request."
       - url: https://developers.webflow.com/data/reference/authentication/site-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Site tokens are valid until they're manually revoked or after 365 days of inactivity."
       - url: https://developers.webflow.com/data/reference/authentication/workspace-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Workspace tokens are valid until they're manually revoked or after 365 days of inactivity."
       - url: https://developers.webflow.com/data/reference/enterprise/workspace-audit-logs/get.md
         checked_on: 2026-11-18
@@ -72,12 +72,12 @@ hygiene:
     pass: false
     evidence:
       - url: https://developers.webflow.com/data/reference/authentication/site-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "API tokens expire after 365 consecutive days of inactivity."
       - url: https://developers.webflow.com/data/reference/authentication/site-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Any API call made with the token before expiry will reset the inactivity period."
     notes: >-
       The only expiry is for idle tokens. A token in use never expires, and the docs show no way to
@@ -86,8 +86,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://developers.webflow.com/data/reference/authentication/site-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Yes, you can generate a new token at any time from the API access section in your site settings."
       - url: https://developers.webflow.com/data/reference/authentication.md
         checked_on: 2026-11-18
@@ -100,13 +100,13 @@ hygiene:
     pass: true
     evidence:
       - url: https://developers.webflow.com/data/reference/authentication/site-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Enter a name for your token, and choose the [scopes](/data/reference/scopes) needed for your use case."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Enter a name for your token, and choose the scopes needed for your use case."
       - url: https://developers.webflow.com/data/reference/authentication/workspace-token.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "Choose the permissions you want the API token to have for each [scope](/data/reference/scopes)."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Choose the permissions you want the API token to have for each scope."
     notes: >-
       Each token is tied to one site or one workspace and carries only the scopes picked when it was
       created.

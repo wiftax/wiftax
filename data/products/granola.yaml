@@ -19,26 +19,31 @@ surfaces:
       and all are created in the app settings.
     evidence:
       - url: https://docs.granola.ai/introduction.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "takes an API key as a Bearer token"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "authenticates with an API key passed as a Bearer token"
       - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "unlike personal API keys they don't expire and aren't tied to anyone's account"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "they don't expire and keep working even if the admin who created them leaves"
       - url: https://docs.granola.ai/audit.md
         checked_on: 2026-11-18
         checked_by: erikng
         quote: "A workspace admin creates an Audit API key in"
       - url: https://docs.granola.ai/help-center/sharing/integrations/mcp.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "there is no API key or service account access method for MCP"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "MCP doesn't support API keys or service accounts"
+      - url: https://docs.granola.ai/help-center/sharing/integrations/mcp.md
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "You register Claude's issuer URL yourself in Granola"
     notes: >-
       Graded on the public API, which scripts and log collectors must use. The MCP server uses a
       browser OAuth sign-in for a person, not a workload. Its Enterprise-Managed Authorization
-      option lets an identity provider vouch for users, and Granola registers the issuer. Neither
-      is federation a workload can set up. Two of five hygiene checks pass, so inbound is F.
+      option lets Claude or an identity provider vouch for each user. An admin can register the
+      Claude issuer in Granola settings. Neither is federation a workload can set up. Two of five
+      hygiene checks pass, so inbound is F.
   outbound:
     grade: B
     mechanism: >-
@@ -46,17 +51,17 @@ surfaces:
       a personal API key pasted into Granola.
     evidence:
       - url: https://docs.granola.ai/help-center/sharing/integrations/slack.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "You'll be prompted via a webpage to connect your Slack workspace to Granola."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Click Connect and authorize your Slack workspace in the browser."
       - url: https://docs.granola.ai/help-center/sharing/notion.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "redirected to your browser to authorize Granola"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Click Connect Notion to open Notion authorization in your browser"
       - url: https://docs.granola.ai/help-center/sharing/integrations/hub-spot.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "This will launch a webpage for you to connect HubSpot to Granola."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "This launches a webpage for you to connect HubSpot to Granola."
       - url: https://docs.granola.ai/help-center/sharing/integrations/affinity.md
         checked_on: 2026-11-18
         checked_by: erikng
@@ -70,18 +75,18 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
-        checked_on: 2026-11-18
-        checked_by: erikng
-        quote: "unlike personal API keys they don't expire and aren't tied to anyone's account"
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "they don't expire and keep working even if the admin who created them leaves"
     notes: >-
-      Workspace keys never expire. The docs imply personal keys expire but give no lifetime, and
-      no setting or policy to enforce one is documented.
+      Workspace keys never expire. The docs give no lifetime for personal keys, and no setting or
+      policy to enforce one is documented.
   rotation_api:
     pass: false
     evidence:
       - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Find the key you want to revoke and click"
       - url: https://docs.granola.ai/audit.md
         checked_on: 2026-11-18
@@ -97,8 +102,8 @@ hygiene:
     pass: true
     evidence:
       - url: https://docs.granola.ai/help-center/sharing/integrations/granola-api.md
-        checked_on: 2026-11-18
-        checked_by: erikng
+        checked_on: 2026-11-23
+        checked_by: sisyphus
         quote: "Admins can instead limit a key to selected spaces."
       - url: https://docs.granola.ai/audit.md
         checked_on: 2026-11-18

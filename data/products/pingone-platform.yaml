@@ -112,9 +112,9 @@ surfaces:
         checked_by: tehreet
         quote: "An authorization token or the following JWT token details from your Snowflake account:"
       - url: https://docs.pingidentity.com/pingone/integrations/p1_create_webhook.md
-        checked_on: 2026-10-22
-        checked_by: tehreet
-        quote: "For example, you can define a custom authorization header with a token instead of using basic authentication."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "(Optional) To define a custom authorization header with a token instead of selecting a method in the Authentication Method list, select Add Custom HTTP Headers, then enter the Key and Value pair."
     notes: >-
       None of the checked connectors is keyless. Entra ID needs a client secret on an app you
       register, with no admin consent to a Ping app and no federated credential. Google Workspace
@@ -189,8 +189,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-22
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Ping Identity is not in GitHub's secret-scanning patterns, so a leaked secret is not revoked
       automatically.

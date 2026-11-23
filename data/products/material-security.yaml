@@ -65,13 +65,13 @@ surfaces:
         checked_by: tehreet
         quote: "In some cases it can take up to 30 minutes for your email tenant to reflect the changes and give Material access."
       - url: https://docs.material.security/integrations/integration-fundamentals/identity-integrations
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Copy your API token because you will only see it one time. Paste it into Material."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Copy your API token because you'll only see it once. Paste it into Material."
       - url: https://docs.material.security/integrations/integration-fundamentals/identity-integrations/okta-ssf
-        checked_on: 2026-10-13
-        checked_by: tehreet
-        quote: "Token: The token you created in step 4."
+        checked_on: 2026-11-23
+        checked_by: sisyphus
+        quote: "Token: The token you created in step 5."
       - url: https://docs.material.security/integrations/integration-fundamentals/messaging-and-ticketing-integrations
         checked_on: 2026-10-13
         checked_by: tehreet
@@ -155,8 +155,8 @@ hygiene:
     pass: false
     evidence:
       - url: https://docs.github.com/en/code-security/secret-scanning/introduction/supported-secret-scanning-patterns
-        checked_on: 2026-10-13
-        checked_by: tehreet
+        checked_on: 2026-11-23
+        checked_by: sisyphus
     notes: >-
       Material Security is not on GitHub's secret-scanning partner list.
 
